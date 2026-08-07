@@ -1,17 +1,32 @@
 ---
+// Section Script (s'exécute côté serveur au moment du build)
+import { directus } from '../lib/directus';
+import { readItems } from '@directus/sdk';
 
+// Exemple : récupération des données d'une collection "article" dans Directus
+const formations = await directus.request(
+  readItems('formations', {
+    fields: ['id', 'titre_de_la_formation', 'reference'],
+  })
+);
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
+<!-- Section HTML (Collez votre template HTML ici et injectez les données) -->
+<html lang="fr">
+  <head>
+    <meta charset="utf-8" />
+    <title>Mon Site Vitrine</title>
+  </head>
+  <body>
+    <h1>Bienvenue sur le site</h1>
+
+    <div class="articles-grid">
+      {formations.map((formation) => (
+        <article>
+          <h2>{formation.titre_de_la_formation}</h2>
+          <p>{formation.reference}</p>
+        </article>
+      ))}
+    </div>
+  </body>
 </html>
