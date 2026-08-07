@@ -1,0 +1,3580 @@
+---
+import { directus } from "../lib/directus";
+import { readItems } from "@directus/sdk";
+
+const formations = await directus.request(
+  readItems("formations", {
+    fields: ["id", "titre_de_la_formation", "reference"],
+  }),
+);
+---
+
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+    />
+    <meta name="color-scheme" content="dark" />
+    <meta name="theme-color" content="#0d0d0d" />
+    <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+    <meta
+      name="description"
+      content="Rejoignez JCD Groupe — 83 collaborateurs, 7 pôles d'expertise, 2 agences à Metz et Nancy. Découvrez nos offres d'emploi, la vie chez JCD (locaux, sport, team building, avantages) et envoyez votre candidature spontanée."
+    />
+    <link rel="canonical" href="https://www.jcd-groupe.fr/carrieres" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="JCD Groupe" />
+    <meta property="og:locale" content="fr_FR" />
+    <meta
+      property="og:title"
+      content="Carrières · JCD Groupe — Rejoignez un groupe qui avance"
+    />
+    <meta
+      property="og:description"
+      content="Rejoignez JCD Groupe — 83 collaborateurs, 7 pôles d'expertise, 2 agences à Metz et Nancy. Découvrez nos offres d'emploi, la vie chez JCD (locaux, sport, team building, avantages) et envoyez votre candidature spontanée."
+    />
+    <meta property="og:url" content="https://www.jcd-groupe.fr/carrieres" />
+    <meta name="twitter:card" content="summary" />
+    <title>Carrières · JCD Groupe — Rejoignez un groupe qui avance</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Hero : 1re image de la video disponible des l'arrivee sur la page, pour que le
+     cadre ne reste jamais noir en attendant les donnees video (11 Mo). -->
+    <link
+      rel="preload"
+      as="image"
+      href="assets/poster-carrieres.jpg"
+      fetchpriority="high"
+    />
+
+    <link rel="stylesheet" href="css/carrieres.css" />
+    <link rel="stylesheet" href="css/global.css" />
+    <link rel="stylesheet" href="css/carrieres-overrides.css" />
+    <script id="jcd-mpolish-js">
+      /* Mobile: force the reduced-motion code paths so the WebGL hero + typewriter never start
+   (real CPU/GPU/battery saving). /js/transition.js does NOT read this query, so page fades stay. */
+      (function () {
+        try {
+          if (window.innerWidth > 820) return;
+          var native = window.matchMedia;
+          if (typeof native !== "function") return;
+          window.matchMedia = function (q) {
+            if (
+              typeof q === "string" &&
+              q.indexOf("prefers-reduced-motion") !== -1 &&
+              q.indexOf("reduce") !== -1
+            ) {
+              return {
+                matches: true,
+                media: q,
+                onchange: null,
+                addListener: function () {},
+                removeListener: function () {},
+                addEventListener: function () {},
+                removeEventListener: function () {},
+                dispatchEvent: function () {
+                  return false;
+                },
+              };
+            }
+            return native.call(window, q);
+          };
+        } catch (e) {}
+      })();
+    </script>
+    <script id="jcd-touch-js">
+      (function () {
+        function run() {
+          try {
+            if (window.innerWidth > 820) return;
+            /* Regression : ressortir .sky-offer de l'illustration .skywatch masquee (info-cloud) */
+            var so = document.querySelector(".sky-offer");
+            if (so) {
+              var hidden = so.closest(".skywatch");
+              var head =
+                document.querySelector(".secblock .secblock-head") ||
+                document.querySelector(".secblock-head");
+              if (hidden && head) {
+                head.insertAdjacentElement("afterend", so);
+              }
+            }
+          } catch (e) {}
+        }
+        if (document.readyState === "loading") {
+          document.addEventListener("DOMContentLoaded", run);
+        } else {
+          run();
+        }
+      })();
+    </script>
+    <script id="jcd-mrefonte-shim">
+      /* Mobile <=820px : force les chemins reduced-motion du site (WebGL hero + typewriter off).
+   Les fallbacks statiques par pole prennent le relais. Identique au shim mpolish retire en juin. */
+      (function () {
+        try {
+          if (window.innerWidth > 820) return;
+          if (window.__jcdRmShim) return;
+          window.__jcdRmShim = 1;
+          var native = window.matchMedia;
+          if (typeof native !== "function") return;
+          window.matchMedia = function (q) {
+            if (
+              typeof q === "string" &&
+              q.indexOf("prefers-reduced-motion") !== -1 &&
+              q.indexOf("reduce") !== -1
+            ) {
+              return {
+                matches: true,
+                media: q,
+                onchange: null,
+                addListener: function () {},
+                removeListener: function () {},
+                addEventListener: function () {},
+                removeEventListener: function () {},
+                dispatchEvent: function () {
+                  return false;
+                },
+              };
+            }
+            return native.call(window, q);
+          };
+        } catch (e) {}
+      })();
+    </script>
+  </head>
+  <body>
+    <a class="jcd-skip" href="#contenu">Aller au contenu</a>
+
+    <!-- ====================================================================
+     NAVBAR v2 — Modal-like
+     Logo (g) · capsule centrale {Nos solutions ▾ · icône Carrières,
+     marquée page courante} · CTA Assistance + Contact (d).
+     Dropdown 7 expertises.
+     ==================================================================== -->
+    <header class="navbar" id="navbar" role="banner">
+      <div class="nav-inner">
+        <a href="/" class="logo" aria-label="JCD Groupe · Accueil">
+          <img
+            class="logo-img"
+            src="assets/logo_blanc.svg"
+            alt="JCD Groupe"
+            width="1530"
+            height="482"
+            decoding="async"
+            loading="eager"
+          />
+        </a>
+
+        <!-- Capsule centrale : trigger du dropdown "Nos solutions" -->
+        <nav class="nav-center" aria-label="Navigation principale">
+          <div class="nav-pill nav-pill--solo" id="nav-pill">
+            <button
+              type="button"
+              class="nav-pill__item nav-pill__trigger"
+              id="nav-expertises-trigger"
+              aria-haspopup="true"
+              aria-expanded="false"
+              aria-controls="nav-expertises-panel"
+            >
+              <span>Nos solutions</span>
+              <svg
+                class="nav-chevron"
+                width="10"
+                height="10"
+                viewBox="0 0 10 10"
+                fill="none"
+                aria-hidden="true"
+                focusable="false"
+              >
+                <path
+                  d="M2.5 4l2.5 2.5L7.5 4"
+                  stroke="currentColor"
+                  stroke-width="1.4"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"></path>
+              </svg>
+            </button>
+            <span class="nav-pill__sep" aria-hidden="true"></span>
+            <a
+              href="carrieres"
+              class="nav-pill__item nav-pill__careers is-current"
+              aria-current="page"
+              aria-label="Carrières — Rejoindre le groupe JCD"
+              title="Carrières"
+            >
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.7"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                aria-hidden="true"
+                focusable="false"
+              >
+                <circle cx="9" cy="8" r="3.2"></circle>
+                <circle cx="17" cy="9.5" r="2.4"></circle>
+                <path d="M3 19c0-3 2.7-5 6-5s6 2 6 5"></path>
+                <path d="M14.5 19c.2-2.2 1.8-4 4-4s3.5 1.5 3.5 3.5"></path>
+              </svg>
+            </a>
+          </div>
+        </nav>
+
+        <!-- Pillule droite : Assistance (blanc) + Contact (transparent) -->
+        <div class="nav-cta">
+          <div class="nav-pill nav-pill--actions">
+            <a
+              href="assistance"
+              class="nav-pill__item nav-pill__item--light"
+              aria-label="Assistance JCD"
+            >
+              Assistance
+            </a>
+            <a href="contact" class="nav-pill__item nav-pill__item--dark">
+              Contact
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- ============================================================
+       DROPDOWN PANEL v3 — Antimetal-like, 3 colonnes.
+       ============================================================ -->
+      <div
+        class="nav-panel nav-menu"
+        id="nav-expertises-panel"
+        role="menu"
+        aria-labelledby="nav-expertises-trigger"
+        aria-hidden="true"
+      >
+        <div class="nav-panel__shell">
+          <section
+            class="nm-zone nm-zone--expertises"
+            aria-label="Expertises JCD"
+          >
+            <span class="nm-eyebrow">Expertises</span>
+            <div class="nm-grid">
+              <ul class="nm-list" role="none">
+                <li class="nm-group" role="none">
+                  <a
+                    href="informatique"
+                    class="nm-item"
+                    data-c="info"
+                    role="menuitem"
+                    tabindex="-1"
+                  >
+                    <span class="nm-icon" aria-hidden="true">
+                      <svg
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="1.7"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      >
+                        <rect x="3" y="4" width="18" height="12" rx="2"></rect>
+                        <path d="M8 20h8M12 16v4"></path>
+                      </svg>
+                    </span>
+                    <span class="nm-text">
+                      <span class="nm-title">Informatique</span>
+                      <span class="nm-sub-label"
+                        >Parc, cloud et collaboration</span
+                      >
+                    </span>
+                  </a>
+                  <div class="nm-sub">
+                    <div class="nm-sub-wrap">
+                      <ul class="nm-sub-list" role="none">
+                        <li role="none">
+                          <a
+                            href="info-integration"
+                            class="nm-sub-item"
+                            role="menuitem"
+                            tabindex="-1"
+                            ><span class="nm-sub-ic" aria-hidden="true"
+                              ><svg
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="1.6"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                              >
+                                <path
+                                  d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"
+                                ></path></svg
+                              ></span
+                            ><span class="nm-sub-tx"
+                              >Service Intégration &amp; Support PC</span
+                            ></a
+                          >
+                        </li>
+                        <li role="none">
+                          <a
+                            href="info-reseaux"
+                            class="nm-sub-item"
+                            role="menuitem"
+                            tabindex="-1"
+                            ><span class="nm-sub-ic" aria-hidden="true"
+                              ><svg
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="1.6"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                              >
+                                <rect x="2" y="3" width="20" height="8" rx="2"
+                                ></rect>
+                                <rect x="2" y="13" width="20" height="8" rx="2"
+                                ></rect>
+                                <path d="M6 7h.01M6 17h.01"></path></svg
+                              ></span
+                            ><span class="nm-sub-tx"
+                              >Architectures systèmes &amp; réseaux</span
+                            ></a
+                          >
+                        </li>
+                        <li role="none">
+                          <a
+                            href="info-collaboratif"
+                            class="nm-sub-item"
+                            role="menuitem"
+                            tabindex="-1"
+                            ><span class="nm-sub-ic" aria-hidden="true"
+                              ><svg
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="1.6"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                              >
+                                <path d="m22 8-6 4 6 4V8Z"></path>
+                                <rect x="2" y="6" width="14" height="12" rx="2"
+                                ></rect></svg
+                              ></span
+                            ><span class="nm-sub-tx"
+                              >Solutions collaboratives &amp; audiovisuelles</span
+                            ></a
+                          >
+                        </li>
+                        <li role="none">
+                          <a
+                            href="info-cloud"
+                            class="nm-sub-item"
+                            role="menuitem"
+                            tabindex="-1"
+                            ><span class="nm-sub-ic" aria-hidden="true"
+                              ><svg
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="1.6"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                              >
+                                <path
+                                  d="M17.5 19H9a7 7 0 1 1 6.71-9h1.79a4.5 4.5 0 1 1 0 9Z"
+                                ></path></svg
+                              ></span
+                            ><span class="nm-sub-tx">Cloud Microsoft</span></a
+                          >
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </li>
+
+                <li class="nm-group" role="none">
+                  <a
+                    href="service"
+                    class="nm-item"
+                    data-c="service"
+                    role="menuitem"
+                    tabindex="-1"
+                  >
+                    <span class="nm-icon" aria-hidden="true">
+                      <svg
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="1.7"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      >
+                        <path d="M3 14v-2a9 9 0 0 1 18 0v2"></path>
+                        <path
+                          d="M21 14v3a2 2 0 0 1-2 2h-1v-7h1a2 2 0 0 1 2 2zM3 14v3a2 2 0 0 0 2 2h1v-7H5a2 2 0 0 0-2 2z"
+                        ></path>
+                      </svg>
+                    </span>
+                    <span class="nm-text">
+                      <span class="nm-title">Service</span>
+                      <span class="nm-sub-label">Support et proximité</span>
+                    </span>
+                  </a>
+                </li>
+
+                <li class="nm-group" role="none">
+                  <a
+                    href="developpement"
+                    class="nm-item"
+                    data-c="dev"
+                    role="menuitem"
+                    tabindex="-1"
+                  >
+                    <span class="nm-icon" aria-hidden="true">
+                      <svg
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="1.7"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      >
+                        <path d="m8 6-6 6 6 6M16 6l6 6-6 6M14 4l-4 16"></path>
+                      </svg>
+                    </span>
+                    <span class="nm-text">
+                      <span class="nm-title">Développement</span>
+                      <span class="nm-sub-label">Logiciels sur mesure</span>
+                    </span>
+                  </a>
+                </li>
+              </ul>
+
+              <ul class="nm-list" role="none">
+                <li class="nm-group" role="none">
+                  <a
+                    href="print"
+                    class="nm-item"
+                    data-c="print"
+                    role="menuitem"
+                    tabindex="-1"
+                  >
+                    <span class="nm-icon" aria-hidden="true">
+                      <svg
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="1.7"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      >
+                        <path d="M6 9V3h12v6"></path>
+                        <rect x="3" y="9" width="18" height="8" rx="2"></rect>
+                        <path d="M7 17h10v4H7z"></path>
+                        <circle cx="17" cy="13" r="0.8" fill="currentColor"
+                        ></circle>
+                      </svg>
+                    </span>
+                    <span class="nm-text">
+                      <span class="nm-title">Print</span>
+                      <span class="nm-sub-label"
+                        >Impression et reprographie</span
+                      >
+                    </span>
+                  </a>
+                </li>
+
+                <li class="nm-group" role="none">
+                  <a
+                    href="telecom"
+                    class="nm-item"
+                    data-c="telecom"
+                    role="menuitem"
+                    tabindex="-1"
+                  >
+                    <span class="nm-icon" aria-hidden="true">
+                      <svg
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="1.7"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      >
+                        <path
+                          d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.37 1.9.72 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.29a2 2 0 0 1 2.11-.45c.91.35 1.85.59 2.81.72A2 2 0 0 1 22 16.92z"
+                        ></path>
+                      </svg>
+                    </span>
+                    <span class="nm-text">
+                      <span class="nm-title">Télécom</span>
+                      <span class="nm-sub-label">Téléphonie d'entreprise</span>
+                    </span>
+                  </a>
+                </li>
+
+                <li class="nm-group" role="none">
+                  <a
+                    href="formation"
+                    class="nm-item"
+                    data-c="formation"
+                    role="menuitem"
+                    tabindex="-1"
+                  >
+                    <span class="nm-icon" aria-hidden="true">
+                      <svg
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="1.7"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      >
+                        <path d="M22 10 12 5 2 10l10 5 10-5z"></path>
+                        <path d="M6 12v5c2 2 4 3 6 3s4-1 6-3v-5"></path>
+                      </svg>
+                    </span>
+                    <span class="nm-text">
+                      <span class="nm-title">Formation</span>
+                      <span class="nm-sub-label">Faire grandir vos équipes</span
+                      >
+                    </span>
+                  </a>
+                </li>
+
+                <li class="nm-group" role="none">
+                  <a
+                    href="agencement"
+                    class="nm-item"
+                    data-c="agencement"
+                    role="menuitem"
+                    tabindex="-1"
+                  >
+                    <span class="nm-icon" aria-hidden="true">
+                      <svg
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="1.7"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      >
+                        <path
+                          d="M4 18v3M20 18v3M3 8h18v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2zM6 8V5a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v3"
+                        ></path>
+                      </svg>
+                    </span>
+                    <span class="nm-text">
+                      <span class="nm-title">Agencement</span>
+                      <span class="nm-sub-label">Espaces de travail</span>
+                    </span>
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </section>
+        </div>
+      </div>
+    </header>
+
+    <main id="contenu">
+      <!-- ================================
+     HERO — vidéo de présentation en arrière-plan + texte en surimpression
+     ================================ -->
+      <section class="hero" aria-labelledby="hero-title">
+        <div class="container">
+          <!-- Vidéo encadrée (double-cadre, coins arrondis) — lecture auto, muette, en boucle, décorative -->
+          <div class="hero-media reveal">
+            <div class="hero-screen">
+              <!-- preload="auto" : le scanner de preload du navigateur met le MP4 en file
+             des le debut du parsing (avant meme la feuille de style), au lieu
+             d'attendre un script. media="(min-width:821px)" sur la <source> garde
+             le mobile a 0 octet de video : la source ne matche pas, seul le poster
+             s'affiche. -->
+              <video
+                class="hero-video"
+                id="hero-video"
+                muted
+                loop
+                playsinline
+                preload="auto"
+                poster="assets/poster-carrieres.jpg"
+                aria-hidden="true"
+                tabindex="-1"
+              >
+                <source
+                  src="assets/JCD_interne_V2.mp4"
+                  type="video/mp4"
+                  media="(min-width: 821px)"
+                />
+              </video>
+              <script>
+                /* prefers-reduced-motion : on n'engage pas les 11 Mo, le poster suffit */
+                (function () {
+                  try {
+                    var v = document.getElementById("hero-video"),
+                      s = v && v.querySelector("source");
+                    if (
+                      v &&
+                      s &&
+                      window.matchMedia("(prefers-reduced-motion:reduce)")
+                        .matches
+                    ) {
+                      v.preload = "none";
+                      s.parentNode.removeChild(s);
+                      v.load();
+                    }
+                  } catch (e) {}
+                })();
+              </script>
+            </div>
+          </div>
+
+          <!-- Sous la vidéo : titre + CTA (gauche) · paragraphe (droite) -->
+          <div class="hero-row">
+            <div class="hero-headcol reveal delay-1">
+              <h1 class="hero-h1" id="hero-title">
+                Rejoignez un groupe qui <em>avance</em>
+              </h1>
+              <a href="#postuler" class="hero-apply">
+                <span>Postuler</span>
+                <span class="hero-apply-ic" aria-hidden="true">
+                  <svg
+                    viewBox="0 0 16 16"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="1.7"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <path d="M3 8h10M9 4l4 4-4 4"></path>
+                  </svg>
+                </span>
+              </a>
+            </div>
+            <p class="hero-lead reveal delay-2">
+              JCD Groupe réunit sept pôles d'expertise, de l'informatique à
+              l'agencement. Si vous aimez comprendre les enjeux de vos clients
+              et mettre votre expertise à leur service pour apporter des
+              réponses concrètes à leurs problématiques, alors c'est ici&nbsp;!
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================================
+     PRINCIPES / VALEURS — carrousel (titre · valeur active · pagination)
+     ================================ -->
+      <section
+        class="sec values-sec"
+        id="valeurs"
+        aria-labelledby="values-title"
+      >
+        <div class="container">
+          <div class="values-panel reveal">
+            <div class="values-head">
+              <h2 class="values-title" id="values-title">
+                Les valeurs qui nous guident, en interne comme avec nos clients
+              </h2>
+            </div>
+
+            <div class="values-stage" data-values>
+              <div class="values-viewport">
+                <ul class="values-track" id="values-track">
+                  <li class="value-slide is-active">
+                    <span class="value-visual" aria-hidden="true">
+                      <svg
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="1.5"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      >
+                        <path
+                          d="M12 21s-7-5.6-7-11a7 7 0 0 1 14 0c0 5.4-7 11-7 11z"
+                        ></path>
+                        <circle cx="12" cy="10" r="2.5"></circle>
+                      </svg>
+                    </span>
+                    <div class="value-body">
+                      <h3 class="value-name">Proximité</h3>
+                      <p class="value-text">
+                        On travaille au plus près du terrain et de nos clients.
+                        Un seul interlocuteur, des décisions rapides, pas de
+                        strates inutiles entre vous et l'action, pour nos
+                        clients comme pour nos équipes.
+                      </p>
+                    </div>
+                  </li>
+
+                  <li class="value-slide">
+                    <span class="value-visual" aria-hidden="true">
+                      <svg
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="1.5"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      >
+                        <circle cx="12" cy="12" r="9"></circle>
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <circle cx="12" cy="12" r="1.4"></circle>
+                      </svg>
+                    </span>
+                    <div class="value-body">
+                      <h3 class="value-name">Expertise</h3>
+                      <p class="value-text">
+                        Sept pôles, des spécialistes dans chacun. On forme, on
+                        certifie, on reste à la pointe, parce que c'est la
+                        maîtrise du métier qui fait la différence chez nos
+                        clients.
+                      </p>
+                    </div>
+                  </li>
+
+                  <li class="value-slide">
+                    <span class="value-visual" aria-hidden="true">
+                      <svg
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="1.5"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      >
+                        <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"
+                        ></path>
+                        <circle cx="9" cy="7" r="4"></circle>
+                        <path
+                          d="M22 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"
+                        ></path>
+                      </svg>
+                    </span>
+                    <div class="value-body">
+                      <h3 class="value-name">Esprit d'équipe</h3>
+                      <p class="value-text">
+                        On avance ensemble. Entraide entre pôles, transmission
+                        du savoir-faire, et des moments qui comptent hors du
+                        travail. Personne ne reste seul devant un problème.
+                      </p>
+                    </div>
+                  </li>
+
+                  <li class="value-slide">
+                    <span class="value-visual" aria-hidden="true">
+                      <svg
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="1.5"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      >
+                        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"
+                        ></path>
+                        <path d="m9 12 2 2 4-4"></path>
+                      </svg>
+                    </span>
+                    <div class="value-body">
+                      <h3 class="value-name">Fiabilité</h3>
+                      <p class="value-text">
+                        On tient ce qu'on promet. Nos clients nous confient leur
+                        informatique, leur télécom et leurs espaces de travail :
+                        la confiance se mérite, et elle se reconduit chaque
+                        jour.
+                      </p>
+                    </div>
+                  </li>
+
+                  <li class="value-slide">
+                    <span class="value-visual" aria-hidden="true">
+                      <svg
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="1.5"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      >
+                        <path
+                          d="M19 14c1.5-1.5 3-3.2 3-5.5A4.5 4.5 0 0 0 17.5 4c-1.8 0-3 .9-4 2.2L12 7.7l-1.5-1.5C9.5 4.9 8.3 4 6.5 4A4.5 4.5 0 0 0 2 8.5c0 2.3 1.5 4 3 5.5l7 7Z"
+                        ></path>
+                      </svg>
+                    </span>
+                    <div class="value-body">
+                      <h3 class="value-name">Engagement</h3>
+                      <p class="value-text">
+                        On s'investit pour nos clients, nos collaborateurs et
+                        notre région. Le travail bien fait, durablement, et la
+                        fierté d'un métier utile, au service du quotidien des
+                        entreprises.
+                      </p>
+                    </div>
+                  </li>
+                </ul>
+              </div>
+
+              <div class="values-foot">
+                <span class="values-count"
+                  ><b id="values-cur">01</b><span>&thinsp;/&thinsp;05</span
+                  ></span
+                >
+                <div class="values-nav">
+                  <button
+                    type="button"
+                    class="values-arrow"
+                    data-values-prev
+                    aria-label="Principe précédent"
+                  >
+                    <svg
+                      viewBox="0 0 16 16"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="1.7"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      aria-hidden="true"
+                    >
+                      <path d="M10 3 5 8l5 5"></path>
+                    </svg>
+                  </button>
+                  <button
+                    type="button"
+                    class="values-arrow"
+                    data-values-next
+                    aria-label="Principe suivant"
+                  >
+                    <svg
+                      viewBox="0 0 16 16"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="1.7"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      aria-hidden="true"
+                    >
+                      <path d="M6 3l5 5-5 5"></path>
+                    </svg>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================================
+     CE QU'ON VOUS OFFRE — intro (g) + accordéon avantages (d)
+     ================================ -->
+      <section
+        class="sec acc-sec"
+        id="avantages"
+        aria-labelledby="support-title"
+      >
+        <div class="container">
+          <div class="acc-grid">
+            <div class="acc-intro reveal">
+              <h2 class="acc-title" id="support-title">
+                On prend soin des équipes, au travail comme en dehors
+              </h2>
+              <p class="acc-text">
+                Le bien-être de nos salariés au premier plan : une rémunération
+                juste, des avantages concrets et un cadre pensé pour nos
+                équipes.
+              </p>
+            </div>
+            <div class="acc-list reveal delay-1">
+              <div class="acc-item">
+                <h3 class="acc-h">
+                  <button type="button" class="acc-q" aria-expanded="false">
+                    <span class="acc-q-tx"
+                      >Rémunération &amp; titres-restaurant</span
+                    >
+                    <span class="acc-icon" aria-hidden="true"></span>
+                  </button>
+                </h3>
+                <div class="acc-a">
+                  <div class="acc-a-in">
+                    <p>
+                      Un salaire à la hauteur de votre expertise, revu chaque
+                      année, et des titres-restaurant versés dès le 1ᵉʳ jour de
+                      travail, sans condition d'ancienneté, qui prennent en
+                      charge une partie de chaque déjeuner travaillé.
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="acc-item">
+                <h3 class="acc-h">
+                  <button type="button" class="acc-q" aria-expanded="false">
+                    <span class="acc-q-tx">Mutuelle &amp; prévoyance</span>
+                    <span class="acc-icon" aria-hidden="true"></span>
+                  </button>
+                </h3>
+                <div class="acc-a">
+                  <div class="acc-a-in">
+                    <p>
+                      60&nbsp;% de la cotisation mutuelle prise en charge par le
+                      groupe, pour vous et votre famille, avec une prévoyance
+                      pour les coups durs.
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="acc-item">
+                <h3 class="acc-h">
+                  <button type="button" class="acc-q" aria-expanded="false">
+                    <span class="acc-q-tx">Sport &amp; bien-être</span>
+                    <span class="acc-icon" aria-hidden="true"></span>
+                  </button>
+                </h3>
+                <div class="acc-a">
+                  <div class="acc-a-in">
+                    <p>
+                      Un gymnase et des créneaux sportifs réguliers entre
+                      collègues, sur le temps de travail. On s'y dépense, on
+                      décompresse, on se croise autrement.
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="acc-item">
+                <h3 class="acc-h">
+                  <button type="button" class="acc-q" aria-expanded="false">
+                    <span class="acc-q-tx">Vie d'équipe &amp; rendez-vous</span>
+                    <span class="acc-icon" aria-hidden="true"></span>
+                  </button>
+                </h3>
+                <div class="acc-a">
+                  <div class="acc-a-in">
+                    <p>
+                      JCD Day, fête de Noël, Beaujolais nouveau, afterworks,
+                      défis inter-pôles : des rendez-vous qui rythment l'année
+                      et soudent les équipes.
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="acc-item">
+                <h3 class="acc-h">
+                  <button type="button" class="acc-q" aria-expanded="false">
+                    <span class="acc-q-tx">Cadre &amp; locaux</span>
+                    <span class="acc-icon" aria-hidden="true"></span>
+                  </button>
+                </h3>
+                <div class="acc-a">
+                  <div class="acc-a-in">
+                    <p>
+                      3&nbsp;000&nbsp;m² à Metz et une agence à Nancy, équipés
+                      par nos propres pôles Agencement et Informatique :
+                      lumineux, et pensés pour bien travailler.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================================
+     COMMENT ON RECRUTE — intro (g) + accordéon process (d)
+     ================================ -->
+      <section
+        class="sec acc-sec"
+        id="recrutement"
+        aria-labelledby="hire-title"
+      >
+        <div class="container">
+          <div class="acc-grid">
+            <div class="acc-intro reveal">
+              <h2 class="acc-title" id="hire-title">
+                Un processus simple, humain et rapide
+              </h2>
+              <p class="acc-text">
+                On cherche des personnes curieuses et fiables, plus que des CV
+                parfaits. Voici à quoi vous attendre quand vous postulez chez
+                JCD.
+              </p>
+            </div>
+            <div class="acc-list reveal delay-1">
+              <div class="acc-item">
+                <h3 class="acc-h">
+                  <button type="button" class="acc-q" aria-expanded="false">
+                    <span class="acc-q-tx">Ce qu'on regarde</span>
+                    <span class="acc-icon" aria-hidden="true"></span>
+                  </button>
+                </h3>
+                <div class="acc-a">
+                  <div class="acc-a-in">
+                    <p>
+                      Votre savoir-faire, bien sûr, mais surtout votre envie
+                      d'apprendre et votre sens du service. La personnalité
+                      compte autant que le diplôme.
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="acc-item">
+                <h3 class="acc-h">
+                  <button type="button" class="acc-q" aria-expanded="false">
+                    <span class="acc-q-tx">Les étapes</span>
+                    <span class="acc-icon" aria-hidden="true"></span>
+                  </button>
+                </h3>
+                <div class="acc-a">
+                  <div class="acc-a-in">
+                    <p>
+                      Un premier échange téléphonique, un entretien avec
+                      l'équipe et le pôle concerné, parfois un cas pratique. Si
+                      votre profil est retenu, nous revenons vers vous
+                      rapidement.
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="acc-item">
+                <h3 class="acc-h">
+                  <button type="button" class="acc-q" aria-expanded="false">
+                    <span class="acc-q-tx">Un seul interlocuteur</span>
+                    <span class="acc-icon" aria-hidden="true"></span>
+                  </button>
+                </h3>
+                <div class="acc-a">
+                  <div class="acc-a-in">
+                    <p>
+                      Une personne vous suit de la candidature jusqu'à la
+                      réponse. Vous n'êtes jamais un numéro de dossier perdu
+                      dans une file d'attente.
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="acc-item">
+                <h3 class="acc-h">
+                  <button type="button" class="acc-q" aria-expanded="false">
+                    <span class="acc-q-tx">Confidentialité de vos données</span>
+                    <span class="acc-icon" aria-hidden="true"></span>
+                  </button>
+                </h3>
+                <div class="acc-a">
+                  <div class="acc-a-in">
+                    <p>
+                      Vos données ne servent qu'à votre candidature et restent
+                      confidentielles (RGPD). Les CV non retenus ne sont pas
+                      conservés au-delà du délai légal.
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="acc-item">
+                <h3 class="acc-h">
+                  <button type="button" class="acc-q" aria-expanded="false">
+                    <span class="acc-q-tx">Égalité des chances</span>
+                    <span class="acc-icon" aria-hidden="true"></span>
+                  </button>
+                </h3>
+                <div class="acc-a">
+                  <div class="acc-a-in">
+                    <p>
+                      On recrute sur les compétences et l'état d'esprit. Tous
+                      les profils sont les bienvenus, et des aménagements sont
+                      possibles : dites-le-nous.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================================
+     OFFRES DU MOMENT — carrousel de postes ouverts, description dépliable.
+     Source de données : tableau OFFRES dans le script en bas de page.
+     ================================ -->
+      <section
+        class="sec offers-sec"
+        id="offres"
+        aria-labelledby="offres-title"
+      >
+        <div class="container">
+          <div class="offers-head reveal">
+            <div>
+              <h2 class="sec-title" id="offres-title">
+                Nos offres du <em>moment</em>
+              </h2>
+              <p class="offers-count" id="offres-count" aria-live="polite"></p>
+            </div>
+            <div class="offers-ctrl">
+              <button
+                type="button"
+                class="offers-btn"
+                id="offers-prev"
+                aria-label="Offres précédentes"
+              >
+                <svg
+                  viewBox="0 0 16 16"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.7"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  aria-hidden="true"
+                >
+                  <path d="M13 8H3M7 4 3 8l4 4"></path>
+                </svg>
+              </button>
+              <button
+                type="button"
+                class="offers-btn"
+                id="offers-next"
+                aria-label="Offres suivantes"
+              >
+                <svg
+                  viewBox="0 0 16 16"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.7"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  aria-hidden="true"
+                >
+                  <path d="M3 8h10M9 4l4 4-4 4"></path>
+                </svg>
+              </button>
+            </div>
+          </div>
+          <div
+            class="offers-track reveal delay-1"
+            id="offers-list"
+            role="list"
+            aria-label="Offres d'emploi ouvertes"
+          >
+          </div>
+        </div>
+      </section>
+
+      <!-- ================================
+     FORMULAIRE DE CANDIDATURE
+     ================================ -->
+      <section
+        class="sec apply-sec"
+        id="postuler"
+        aria-labelledby="postuler-title"
+      >
+        <div class="container">
+          <div class="apply-grid">
+            <aside class="apply-aside reveal">
+              <h2 class="sec-title" id="postuler-title">
+                Et si c'était <em>vous</em>&nbsp;?
+              </h2>
+              <p class="sec-text">
+                Répondez à une offre ou tentez votre chance spontanément&nbsp;:
+                dans les deux cas, votre CV arrive directement à la bonne
+                équipe.
+              </p>
+              <ul class="apply-points">
+                <li class="apply-point">
+                  <span class="apply-point-tx"
+                    ><strong>Chaque dossier est lu</strong>Par l'équipe
+                    concernée, pas par un robot de tri.</span
+                  >
+                </li>
+                <li class="apply-point">
+                  <span class="apply-point-tx"
+                    ><strong>Un seul interlocuteur</strong>De votre candidature
+                    jusqu'à la réponse.</span
+                  >
+                </li>
+                <li class="apply-point">
+                  <span class="apply-point-tx"
+                    ><strong>Vos données restent confidentielles</strong>Elles
+                    ne servent qu'à votre candidature (RGPD).</span
+                  >
+                </li>
+              </ul>
+            </aside>
+
+            <div class="apply-main">
+              <form id="apply-form" class="q-shell reveal delay-1" novalidate>
+                <div class="q-shell-inner">
+                  <!-- Type de candidature -->
+                  <div
+                    class="q-intent"
+                    role="radiogroup"
+                    aria-label="Type de candidature"
+                  >
+                    <button
+                      type="button"
+                      class="q-intent-opt is-selected"
+                      data-intent="offre"
+                      role="radio"
+                      aria-checked="true"
+                    >
+                      Répondre à une offre
+                    </button>
+                    <button
+                      type="button"
+                      class="q-intent-opt"
+                      data-intent="spontanee"
+                      role="radio"
+                      aria-checked="false"
+                    >
+                      Candidature spontanée
+                    </button>
+                    <span class="q-intent-glider" aria-hidden="true"></span>
+                  </div>
+
+                  <p class="apply-lead" id="apply-lead">
+                    Sélectionnez l'offre qui vous intéresse, joignez votre CV :
+                    c'est tout.
+                  </p>
+
+                  <div class="q-fields">
+                    <div class="q-row">
+                      <div class="q-field">
+                        <label for="f-firstname"
+                          >Prénom <span aria-hidden="true">*</span></label
+                        >
+                        <input
+                          id="f-firstname"
+                          name="prenom"
+                          type="text"
+                          autocomplete="given-name"
+                          required
+                          placeholder="Jeanne"
+                        />
+                      </div>
+                      <div class="q-field">
+                        <label for="f-lastname"
+                          >Nom <span aria-hidden="true">*</span></label
+                        >
+                        <input
+                          id="f-lastname"
+                          name="nom"
+                          type="text"
+                          autocomplete="family-name"
+                          required
+                          placeholder="Dupont"
+                        />
+                      </div>
+                    </div>
+
+                    <div class="q-row">
+                      <div class="q-field">
+                        <label for="f-phone"
+                          >Numéro de téléphone
+                          <span aria-hidden="true">*</span></label
+                        >
+                        <input
+                          id="f-phone"
+                          name="telephone"
+                          type="tel"
+                          autocomplete="tel"
+                          inputmode="tel"
+                          required
+                          placeholder="06 12 34 56 78"
+                        />
+                      </div>
+                      <div class="q-field">
+                        <label for="f-email"
+                          >Email <span aria-hidden="true">*</span></label
+                        >
+                        <input
+                          id="f-email"
+                          name="email"
+                          type="email"
+                          autocomplete="email"
+                          required
+                          placeholder="jeanne.dupont@email.fr"
+                        />
+                      </div>
+                    </div>
+
+                    <!-- Visible en mode "Répondre à une offre" -->
+                    <div class="q-field" id="field-offre">
+                      <label for="f-offre"
+                        >Offre concernée
+                        <span aria-hidden="true">*</span></label
+                      >
+                      <select id="f-offre" name="offre" required>
+                        <option value="" disabled selected>
+                          Choisissez une offre…
+                        </option>
+                      </select>
+                    </div>
+
+                    <!-- Visible en mode "Candidature spontanée" -->
+                    <div class="q-field" id="field-poste" hidden>
+                      <label for="f-poste"
+                        >Poste recherché
+                        <span aria-hidden="true">*</span></label
+                      >
+                      <input
+                        id="f-poste"
+                        name="poste_recherche"
+                        type="text"
+                        placeholder="Ex. : technicien support, commercial, formateur…"
+                      />
+                    </div>
+
+                    <!-- CV : zone de dépôt drag & drop -->
+                    <div class="q-field">
+                      <label for="f-cv"
+                        >Votre CV <span aria-hidden="true">*</span></label
+                      >
+                      <div class="cv-drop" id="cv-drop">
+                        <span class="cv-drop-ico" aria-hidden="true">
+                          <svg
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="1.7"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                          >
+                            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"
+                            ></path>
+                            <path d="M17 8l-5-5-5 5"></path>
+                            <path d="M12 3v12"></path>
+                          </svg>
+                        </span>
+                        <span class="cv-drop-label"
+                          >Glissez votre CV ici, ou
+                          <em>parcourez vos fichiers</em></span
+                        >
+                        <span class="cv-drop-hint"
+                          >PDF, DOC ou DOCX · 5 Mo max</span
+                        >
+                        <input
+                          id="f-cv"
+                          name="attachment"
+                          type="file"
+                          accept=".pdf,.doc,.docx,application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+                          aria-describedby="cv-status"
+                        />
+                        <div class="cv-file" id="cv-file">
+                          <span class="cv-file-ico" aria-hidden="true">
+                            <svg
+                              viewBox="0 0 24 24"
+                              fill="none"
+                              stroke="currentColor"
+                              stroke-width="1.7"
+                              stroke-linecap="round"
+                              stroke-linejoin="round"
+                            >
+                              <path
+                                d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"
+                              ></path>
+                              <path d="M14 2v6h6"></path>
+                            </svg>
+                          </span>
+                          <span class="cv-file-tx">
+                            <span class="cv-file-name" id="cv-file-name"></span>
+                            <span class="cv-file-size" id="cv-file-size"></span>
+                          </span>
+                          <button
+                            type="button"
+                            class="cv-file-remove"
+                            id="cv-file-remove"
+                            aria-label="Retirer le fichier"
+                          >
+                            <svg
+                              viewBox="0 0 24 24"
+                              fill="none"
+                              stroke="currentColor"
+                              stroke-width="2"
+                              stroke-linecap="round"
+                              stroke-linejoin="round"
+                              aria-hidden="true"
+                            >
+                              <path d="M18 6 6 18M6 6l12 12"></path>
+                            </svg>
+                          </button>
+                        </div>
+                      </div>
+                      <span
+                        class="visually-hidden"
+                        id="cv-status"
+                        role="status"
+                        aria-live="polite"></span>
+                    </div>
+                  </div>
+
+                  <label class="q-rgpd">
+                    <input type="checkbox" id="f-consent" required />
+                    <span
+                      >J'accepte que les informations transmises soient
+                      utilisées par JCD Groupe pour traiter ma candidature,
+                      conformément à la
+                      <a
+                        href="politique-de-confidentialite"
+                        target="_blank"
+                        rel="noopener">politique de confidentialité</a
+                      >. Les CV non retenus ne sont pas conservés au-delà du
+                      délai légal. <span aria-hidden="true">*</span></span
+                    >
+                  </label>
+
+                  <p class="q-error" id="q-error" role="alert" hidden></p>
+
+                  <div class="q-actions">
+                    <button
+                      type="submit"
+                      class="q-btn q-btn--primary q-btn--send"
+                      id="q-submit"
+                    >
+                      Envoyer ma candidature
+                      <span class="q-btn-arrow" aria-hidden="true"
+                        ><svg
+                          viewBox="0 0 16 16"
+                          fill="none"
+                          stroke="currentColor"
+                          stroke-width="1.7"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                        >
+                          <path d="M3 8h10M9 4l4 4-4 4"></path></svg
+                        ></span
+                      >
+                    </button>
+                  </div>
+
+                  <!-- Champs cachés Web3Forms — REMPLACER la clé ci-dessous par votre
+             clé d'accès gratuite (https://web3forms.com → email destinataire
+             = recrutement@jcd-groupe.fr). Tant que la clé n'est pas renseignée,
+             l'envoi échoue volontairement (message d'erreur affiché).
+             NB : la pièce jointe (champ "attachment") nécessite un plan
+             Web3Forms Pro ; sinon, brancher le formulaire sur votre outil
+             RH ou une boîte mail dédiée. -->
+                  <input
+                    type="hidden"
+                    name="access_key"
+                    id="f-access-key"
+                    value="VOTRE_CLE_WEB3FORMS_ICI"
+                  />
+                  <input
+                    type="hidden"
+                    name="subject"
+                    id="f-subject"
+                    value="Nouvelle candidature — JCD Groupe"
+                  />
+                  <input
+                    type="hidden"
+                    name="from_name"
+                    value="Site JCD Groupe — Carrières"
+                  />
+                  <input
+                    type="checkbox"
+                    name="botcheck"
+                    id="f-botcheck"
+                    class="visually-hidden"
+                    tabindex="-1"
+                    autocomplete="off"
+                    aria-hidden="true"
+                  />
+                </div>
+              </form>
+
+              <!-- Écran de confirmation (affiché après envoi réussi) -->
+              <div
+                class="q-success"
+                id="q-success"
+                hidden
+                role="status"
+                aria-live="polite"
+              >
+                <span class="q-success-mark" aria-hidden="true">
+                  <svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <path d="M20 6 9 17l-5-5"></path>
+                  </svg>
+                </span>
+                <h2>Merci&nbsp;!</h2>
+                <div class="q-success-recap" id="q-success-recap"></div>
+                <p>
+                  Votre candidature a bien été reçue. Elle sera étudiée par nos
+                  équipes et nous vous recontacterons si votre profil est
+                  retenu. Sans retour de notre part sous 3&nbsp;semaines,
+                  veuillez considérer que votre candidature n'a pas été retenue.
+                  <strong
+                    >Merci pour votre intérêt envers JCD&nbsp;Groupe.</strong
+                  >
+                </p>
+                <div class="q-actions" style="justify-content: center">
+                  <a href="/" class="q-btn q-btn--ghost">Retour à l'accueil</a>
+                </div>
+              </div>
+
+              <noscript>
+                <p
+                  style="
+                    max-width: 760px;
+                    margin: 24px auto;
+                    color: var(--text-2);
+                    text-align: center;
+                    line-height: 1.6;
+                  "
+                >
+                  Le formulaire interactif nécessite JavaScript. Vous pouvez
+                  envoyer votre candidature (CV + poste visé) directement à
+                  <a
+                    href="mailto:recrutement@jcd-groupe.fr"
+                    style="color: var(--text-1)">recrutement@jcd-groupe.fr</a
+                  >
+                  ou nous appeler au
+                  <a href="tel:+33387184920" style="color: var(--text-1)"
+                    >03 87 18 49 20</a
+                  >.
+                </p>
+              </noscript>
+            </div>
+            <!-- /.apply-main -->
+          </div>
+          <!-- /.apply-grid -->
+        </div>
+      </section>
+    </main>
+
+    <footer role="contentinfo">
+      <div class="footer-grain" aria-hidden="true"></div>
+      <div class="container">
+        <div class="footer-bento">
+          <!-- Pôles -->
+          <div class="fcard fcard--poles reveal">
+            <div class="fcard-inner">
+              <h4 class="fcard-title">Pôles</h4>
+              <ul class="footer-links footer-links--cols">
+                <li>
+                  <a class="footer-link" href="informatique">Informatique</a>
+                </li>
+                <li><a class="footer-link" href="service">Service</a></li>
+                <li>
+                  <a class="footer-link" href="developpement">Développement</a>
+                </li>
+                <li><a class="footer-link" href="print">Print</a></li>
+                <li><a class="footer-link" href="telecom">Télécom</a></li>
+                <li>
+                  <a class="footer-link" href="formation">Formation</a>
+                </li>
+                <li>
+                  <a class="footer-link" href="agencement">Agencement</a>
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- Le groupe -->
+          <div class="fcard fcard--groupe reveal delay-1">
+            <div class="fcard-inner">
+              <h4 class="fcard-title">Le groupe</h4>
+              <ul class="footer-links">
+                <li>
+                  <a class="footer-link" href="index#histoire">Histoire</a>
+                </li>
+                <li>
+                  <a class="footer-link" href="index#valeurs">Valeurs</a>
+                </li>
+                <li>
+                  <a class="footer-link" href="index#chiffres">Chiffres clés</a>
+                </li>
+                <li>
+                  <a
+                    class="footer-link is-current"
+                    href="carrieres"
+                    aria-current="page">Nous rejoindre</a
+                  >
+                </li>
+                <li><a class="footer-link" href="contact">Contact</a></li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- Contact Metz + Nancy -->
+          <div class="fcard fcard--contact reveal delay-2">
+            <div class="fcard-inner">
+              <h4 class="fcard-title">Nous trouver</h4>
+              <div class="footer-contacts">
+                <div class="footer-contact-block">
+                  <span class="fc-city">Metz</span>
+                  <span class="fc-role">Siège social</span>
+                  <address>193 rue du Général Metman<br />57070 Metz</address>
+                  <a class="footer-link" href="tel:+33387184920"
+                    >03 87 18 49 20</a
+                  >
+                  <span class="fc-hours">Lun–Ven · 8h30–18h30</span>
+                </div>
+                <div class="footer-contact-block">
+                  <span class="fc-city">Nancy</span>
+                  <span class="fc-role">Agence</span>
+                  <address>96 boulevard d'Austrasie<br />54000 Nancy</address>
+                  <a class="footer-link" href="tel:+33387184920"
+                    >03 87 18 49 20</a
+                  >
+                  <span class="fc-hours">Lun–Ven · 8h30–18h30</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="footer-bottom reveal delay-3">
+          <span class="footer-copyright"
+            >&copy; <span id="year">2026</span> JCD Groupe &middot; Tous droits réservés.</span
+          >
+
+          <!-- Le groupe : societes soeurs de la holding, signature centrale de
+           la barre legale. La signification passe par la seule proximite
+           avec "JCD Groupe", jamais enoncee. (inject_footer_eco.py) -->
+          <div class="footer-eco">
+            <span class="footer-eco-label">Le groupe</span>
+            <a
+              class="footer-eco-link"
+              href="https://www.pclease.lu/"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="PC Lease — ingénierie informatique (nouvel onglet)"
+            >
+              <img
+                src="assets/pclease-blanc.svg"
+                alt="PC Lease"
+                height="14"
+                decoding="async"
+              />
+              <svg
+                class="footer-eco-arrow"
+                width="9"
+                height="9"
+                viewBox="0 0 9 9"
+                fill="none"
+                aria-hidden="true"
+              >
+                <path
+                  d="M1.5 7.5 7.5 1.5M7.5 1.5H2.9M7.5 1.5v4.6"
+                  stroke="currentColor"
+                  stroke-width="1.2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"></path>
+              </svg>
+            </a>
+            <a
+              class="footer-eco-link"
+              href="https://www.rsecure.lu/"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Rsecure — cybersécurité (nouvel onglet)"
+            >
+              <img
+                src="assets/rsecure-blanc.svg"
+                alt="Rsecure"
+                height="17"
+                decoding="async"
+              />
+              <svg
+                class="footer-eco-arrow"
+                width="9"
+                height="9"
+                viewBox="0 0 9 9"
+                fill="none"
+                aria-hidden="true"
+              >
+                <path
+                  d="M1.5 7.5 7.5 1.5M7.5 1.5H2.9M7.5 1.5v4.6"
+                  stroke="currentColor"
+                  stroke-width="1.2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"></path>
+              </svg>
+            </a>
+            <a
+              class="footer-eco-link"
+              href="https://digidocservices.com/"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Digidoc Services — gestion documentaire (nouvel onglet)"
+            >
+              <img
+                src="assets/digidoc-blanc.svg"
+                alt="Digidoc Services"
+                height="13"
+                decoding="async"
+              />
+              <svg
+                class="footer-eco-arrow"
+                width="9"
+                height="9"
+                viewBox="0 0 9 9"
+                fill="none"
+                aria-hidden="true"
+              >
+                <path
+                  d="M1.5 7.5 7.5 1.5M7.5 1.5H2.9M7.5 1.5v4.6"
+                  stroke="currentColor"
+                  stroke-width="1.2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"></path>
+              </svg>
+            </a>
+          </div>
+
+          <div class="footer-bottom-right">
+            <span class="footer-legal"
+              ><a class="footer-link" href="mentions-legales"
+                >Mentions légales</a
+              >
+              &middot;
+              <a class="footer-link" href="politique-de-confidentialite"
+                >Politique de confidentialité</a
+              ></span
+            >
+            <a
+              class="footer-linkedin"
+              href="https://www.linkedin.com/company/jcd-groupe/"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="JCD Groupe sur LinkedIn"
+            >
+              <svg
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                fill="currentColor"
+                aria-hidden="true"
+              >
+                <path
+                  d="M4.98 3.5C4.98 4.88 3.87 6 2.5 6S0 4.88 0 3.5 1.12 1 2.5 1s2.48 1.12 2.48 2.5zM.22 8h4.56v14H.22V8zm7.6 0h4.37v1.92h.06c.61-1.15 2.1-2.36 4.32-2.36 4.62 0 5.47 3.04 5.47 7v7.44h-4.56v-6.6c0-1.57-.03-3.6-2.2-3.6-2.2 0-2.54 1.72-2.54 3.49V22H7.82V8z"
+                ></path>
+              </svg>
+            </a>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <script>
+      (function setupRevealAnimations() {
+        var els = document.querySelectorAll(".reveal");
+        if (!("IntersectionObserver" in window)) {
+          els.forEach(function (el) {
+            el.classList.add("visible");
+          });
+          return;
+        }
+        var io = new IntersectionObserver(
+          function (entries) {
+            entries.forEach(function (e) {
+              if (e.isIntersecting) {
+                e.target.classList.add("visible");
+                io.unobserve(e.target);
+              }
+            });
+          },
+          { threshold: 0.1, rootMargin: "0px 0px -60px 0px" },
+        );
+        els.forEach(function (el) {
+          io.observe(el);
+        });
+      })();
+
+      (function setupYear() {
+        var y = document.getElementById("year");
+        if (y) y.textContent = String(new Date().getFullYear());
+      })();
+
+      /* ----------------------------------------------------
+     HERO — vidéo de fond : lecture auto, muette, en boucle.
+     On force play() (certains navigateurs l'exigent même en
+     muted) et on met en pause si prefers-reduced-motion.
+     ---------------------------------------------------- */
+      (function setupHeroVideo() {
+        var video = document.getElementById("hero-video");
+        if (!video) return;
+        var reduce = window.matchMedia("(prefers-reduced-motion: reduce)");
+        var EVTS = ["pointerdown", "keydown", "touchstart", "scroll"];
+
+        // Révélation premium : fondu + léger zoom. On n'attend PAS les données vidéo
+        // (11 Mo) — sinon le cadre reste noir ~1,4 s à l'arrivée sur la page. Dès que
+        // le poster (préchargé dans le <head>) est décodé, l'écran est rempli et la
+        // vidéo prend le relais dessous, sur la même image : aucun à-coup visible.
+        function revealVideo() {
+          video.classList.add("is-ready");
+        }
+        var posterSrc = video.getAttribute("poster");
+        if (posterSrc) {
+          var pre = new Image();
+          pre.src = posterSrc;
+          if (pre.decode) pre.decode().then(revealVideo, revealVideo);
+          else {
+            pre.onload = revealVideo;
+            pre.onerror = revealVideo;
+          }
+        }
+        if (video.readyState >= 2) revealVideo();
+        window.setTimeout(revealVideo, 700); // filet de sécurité si le poster traîne
+
+        function resumeOnGesture() {
+          function go() {
+            video.muted = true;
+            video.play().catch(function () {});
+            EVTS.forEach(function (e) {
+              window.removeEventListener(e, go);
+            });
+          }
+          EVTS.forEach(function (e) {
+            window.addEventListener(e, go, { once: true, passive: true });
+          });
+        }
+
+        function apply() {
+          if (reduce.matches) {
+            video.pause();
+            return;
+          }
+          video.muted = true; // obligatoire pour l'autoplay
+          var p = video.play();
+          // Si l'autoplay est refusé (politique navigateur), on relance au 1er geste.
+          if (p && p.catch) p.catch(resumeOnGesture);
+        }
+
+        if (video.readyState >= 1) apply();
+        else video.addEventListener("loadedmetadata", apply, { once: true });
+
+        // Relance si la lecture est interrompue (retour d'onglet, économie d'énergie…)
+        document.addEventListener("visibilitychange", function () {
+          if (!document.hidden && !reduce.matches && video.paused) apply();
+        });
+        if (reduce.addEventListener) reduce.addEventListener("change", apply);
+        else if (reduce.addListener) reduce.addListener(apply);
+      })();
+
+      (function setupNavbarScrolled() {
+        var navbar = document.getElementById("navbar");
+        if (!navbar) return;
+        function onScroll() {
+          navbar.classList.toggle("scrolled", window.scrollY > 8);
+        }
+        window.addEventListener("scroll", onScroll, { passive: true });
+        onScroll();
+      })();
+
+      /* ----------------------------------------------------
+     NAVBAR v2 — Dropdown "Expertises"
+     ---------------------------------------------------- */
+      (function setupNavDropdown() {
+        var trigger = document.getElementById("nav-expertises-trigger");
+        var panel = document.getElementById("nav-expertises-panel");
+        var pill = document.getElementById("nav-pill");
+        var navbar = document.getElementById("navbar");
+        if (!trigger || !panel || !pill || !navbar) return;
+
+        var items = panel.querySelectorAll(".nm-item, .nm-sub-item");
+        var groups = panel.querySelectorAll(".nm-group");
+        var openTimer = null;
+        var closeTimer = null;
+        var isOpen = false;
+
+        function clearTimers() {
+          if (openTimer) {
+            window.clearTimeout(openTimer);
+            openTimer = null;
+          }
+          if (closeTimer) {
+            window.clearTimeout(closeTimer);
+            closeTimer = null;
+          }
+        }
+
+        function openPanel() {
+          clearTimers();
+          if (isOpen) return;
+          isOpen = true;
+          trigger.setAttribute("aria-expanded", "true");
+          panel.setAttribute("aria-hidden", "false");
+          items.forEach(function (it) {
+            it.setAttribute("tabindex", "0");
+          });
+        }
+        function closePanel() {
+          clearTimers();
+          if (!isOpen) return;
+          isOpen = false;
+          trigger.setAttribute("aria-expanded", "false");
+          panel.setAttribute("aria-hidden", "true");
+          items.forEach(function (it) {
+            it.setAttribute("tabindex", "-1");
+          });
+          groups.forEach(function (g) {
+            g.setAttribute("data-expanded", "false");
+          });
+        }
+        function deferOpen() {
+          clearTimers();
+          openTimer = window.setTimeout(openPanel, 60);
+        }
+        function deferClose() {
+          clearTimers();
+          closeTimer = window.setTimeout(closePanel, 180);
+        }
+
+        [trigger, pill, panel].forEach(function (el) {
+          el.addEventListener("mouseenter", function () {
+            deferOpen();
+          });
+          el.addEventListener("mouseleave", function () {
+            deferClose();
+          });
+        });
+
+        trigger.addEventListener("click", function (e) {
+          e.preventDefault();
+          if (isOpen) closePanel();
+          else openPanel();
+        });
+
+        trigger.addEventListener("keydown", function (e) {
+          if (e.key === "ArrowDown" || e.key === "Enter" || e.key === " ") {
+            e.preventDefault();
+            openPanel();
+            if (items.length) items[0].focus();
+          } else if (e.key === "Escape" && isOpen) {
+            closePanel();
+            trigger.focus();
+          }
+        });
+
+        items.forEach(function (item, i) {
+          item.addEventListener("keydown", function (e) {
+            if (e.key === "ArrowDown") {
+              e.preventDefault();
+              items[(i + 1) % items.length].focus();
+            } else if (e.key === "ArrowUp") {
+              e.preventDefault();
+              items[(i - 1 + items.length) % items.length].focus();
+            } else if (e.key === "Escape") {
+              closePanel();
+              trigger.focus();
+            } else if (
+              e.key === "Tab" &&
+              !e.shiftKey &&
+              i === items.length - 1
+            ) {
+              closePanel();
+            } else if (e.key === "Tab" && e.shiftKey && i === 0) {
+              closePanel();
+            }
+          });
+        });
+
+        document.addEventListener("click", function (e) {
+          if (!isOpen) return;
+          if (navbar.contains(e.target)) return;
+          closePanel();
+        });
+
+        document.addEventListener("keydown", function (e) {
+          if (e.key === "Escape" && isOpen) {
+            closePanel();
+            trigger.focus();
+          }
+        });
+
+        var grpTimer = null;
+        function setExpanded(target) {
+          if (grpTimer) {
+            clearTimeout(grpTimer);
+            grpTimer = null;
+          }
+          groups.forEach(function (g) {
+            g.setAttribute("data-expanded", g === target ? "true" : "false");
+          });
+        }
+        groups.forEach(function (group) {
+          var hasSub = !!group.querySelector(".nm-sub");
+          group.addEventListener("mouseenter", function () {
+            if (grpTimer) {
+              clearTimeout(grpTimer);
+              grpTimer = null;
+            }
+            grpTimer = setTimeout(function () {
+              setExpanded(hasSub ? group : null);
+            }, 70);
+          });
+          group.addEventListener("focusin", function () {
+            setExpanded(hasSub ? group : null);
+          });
+        });
+
+        var here = (location.pathname.split("/").pop() || "").toLowerCase();
+        if (!here) here = "index";
+        panel
+          .querySelectorAll(".nm-zone--expertises .nm-item")
+          .forEach(function (a) {
+            var hrefAttr = a.getAttribute("href") || "";
+            if (hrefAttr.indexOf("#") !== -1) return;
+            var target = hrefAttr.split("/").pop().toLowerCase();
+            if (target && target === here) a.classList.add("is-current");
+          });
+        panel.querySelectorAll(".nm-sub-item").forEach(function (s) {
+          var st = (s.getAttribute("href") || "")
+            .split("/")
+            .pop()
+            .toLowerCase();
+          if (st && st === here) s.classList.add("is-current");
+        });
+      })();
+    </script>
+    <script>
+      /* ====================================================================
+     CARRIÈRES — moteur de la page.
+     · OFFRES : source de données unique des offres d'emploi. Pour
+       ajouter / retirer / modifier une offre, n'éditer que ce tableau.
+     · Rendu de la liste des offres + compteur du hero.
+     · Bascule "Répondre à une offre" / "Candidature spontanée".
+     · Pré-sélection via clic sur une offre ou via l'URL
+       (?offre=<id> ou ?type=spontanee).
+     · Dépôt de CV en drag & drop (PDF/DOC/DOCX, 5 Mo max).
+     · Validation côté client + envoi multipart vers Web3Forms.
+     ==================================================================== */
+      (function setupCarrieres() {
+        var form = document.getElementById("apply-form");
+        if (!form) return;
+
+        /* ---- OFFRES — À ÉDITER : remplacez par vos offres réelles ------- */
+        var OFFRES = [
+          {
+            id: "technicien-support-informatique",
+            titre: "Technicien support informatique N1/N2",
+            pole: "informatique",
+            poleName: "Informatique",
+            lieu: "Metz",
+            contrat: "CDI",
+            temps: "Temps plein",
+            desc: "Au sein de l’équipe support, vous prenez en charge les demandes de nos clients PME et collectivités : diagnostic, dépannage à distance ou sur site, suivi des tickets jusqu’à la résolution. Vous êtes leur premier contact — votre sens du service compte autant que votre technique.",
+          },
+          {
+            id: "ingenieur-systemes-reseaux",
+            titre: "Ingénieur systèmes & réseaux",
+            pole: "informatique",
+            poleName: "Informatique",
+            lieu: "Metz",
+            contrat: "CDI",
+            temps: "Temps plein",
+            desc: "Vous concevez, déployez et faites évoluer les infrastructures de nos clients : serveurs, virtualisation, réseau, sauvegarde et sécurité. Des projets variés, menés en autonomie, avec l’appui d’une équipe expérimentée.",
+          },
+          {
+            id: "developpeur-fullstack",
+            titre: "Développeur full-stack",
+            pole: "developpement",
+            poleName: "Développement",
+            lieu: "Metz",
+            contrat: "CDI",
+            temps: "Temps plein",
+            desc: "Vous développez des applications métier sur mesure pour nos clients, du cahier des charges à la mise en production. Des projets courts et concrets, une stack moderne et un contact direct avec les utilisateurs.",
+          },
+          {
+            id: "technicien-telecom-toip",
+            titre: "Technicien télécom & ToIP",
+            pole: "telecom",
+            poleName: "Télécom",
+            lieu: "Nancy",
+            contrat: "CDI",
+            temps: "Temps plein",
+            desc: "Vous installez et maintenez les solutions de téléphonie d’entreprise de nos clients : ToIP, Centrex, liens opérateurs. Des interventions sur site dans toute la Lorraine et une formation continue sur les solutions de nos partenaires.",
+          },
+          {
+            id: "commercial-print",
+            titre: "Commercial solutions d’impression",
+            pole: "print",
+            poleName: "Print",
+            lieu: "Metz / Nancy",
+            contrat: "CDI",
+            temps: "Temps plein",
+            desc: "Vous développez et fidélisez un portefeuille de clients professionnels autour de nos solutions d’impression et de gestion documentaire. Prospection terrain, accompagnement d’un parc existant et une vraie culture du service.",
+          },
+        ];
+        /* Couleurs par pôle — mêmes tokens que le méga-menu. */
+        var POLE_COLORS = {
+          informatique: "#2E72BA",
+          service: "#E51D29",
+          developpement: "#F9D605",
+          print: "#F3941D",
+          telecom: "#B063AC",
+          formation: "#8EC041",
+          agencement: "#A78D75",
+        };
+        /* ------------------------------------------------------------------ */
+
+        var OFFRE_BY_ID = {};
+        OFFRES.forEach(function (o) {
+          OFFRE_BY_ID[o.id] = o;
+        });
+
+        var ARROW =
+          '<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h10M9 4l4 4-4 4"/></svg>';
+        var MAX_CV_BYTES = 5 * 1024 * 1024;
+        var CV_EXTENSIONS = ["pdf", "doc", "docx"];
+
+        function esc(s) {
+          return String(s).replace(/[&<>"']/g, function (c) {
+            return {
+              "&": "&amp;",
+              "<": "&lt;",
+              ">": "&gt;",
+              '"': "&quot;",
+              "'": "&#39;",
+            }[c];
+          });
+        }
+
+        /* ---- Références DOM ---- */
+        var listEl = document.getElementById("offers-list");
+        var heroCount = document.getElementById("offres-count");
+        var leadEl = document.getElementById("apply-lead");
+        var fieldOffre = document.getElementById("field-offre");
+        var fieldPoste = document.getElementById("field-poste");
+        var selOffre = document.getElementById("f-offre");
+        var inpPoste = document.getElementById("f-poste");
+        var errorEl = document.getElementById("q-error");
+        var submitBtn = document.getElementById("q-submit");
+        var successEl = document.getElementById("q-success");
+        var intentOpts = form.querySelectorAll(".q-intent-opt");
+        var glider = form.querySelector(".q-intent-glider");
+
+        var drop = document.getElementById("cv-drop");
+        var fileInput = document.getElementById("f-cv");
+        var fileNameEl = document.getElementById("cv-file-name");
+        var fileSizeEl = document.getElementById("cv-file-size");
+        var fileRemove = document.getElementById("cv-file-remove");
+        var cvStatus = document.getElementById("cv-status");
+
+        var prefersReduced = window.matchMedia(
+          "(prefers-reduced-motion: reduce)",
+        ).matches;
+        var currentIntent = "offre";
+
+        /* ---- 1. Rendu des offres (cartes du carrousel) + compteur ---- */
+        function renderOffers() {
+          if (!listEl) return;
+          if (OFFRES.length === 0) {
+            listEl.innerHTML =
+              '<div class="offers-empty" role="listitem">Aucune offre ouverte pour le moment, ' +
+              "les candidatures spontanées restent les bienvenues.</div>";
+            return;
+          }
+          listEl.innerHTML = OFFRES.map(function (o) {
+            return (
+              '<article class="offer-card" role="listitem"' +
+              ' style="--pc: ' +
+              (POLE_COLORS[o.pole] || "var(--accent)") +
+              '">' +
+              '<span class="offer-pole">' +
+              esc(o.poleName) +
+              "</span>" +
+              '<h3 class="offer-title">' +
+              esc(o.titre) +
+              "</h3>" +
+              '<span class="offer-meta">' +
+              '<span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>' +
+              esc(o.lieu) +
+              "</span>" +
+              '<span class="meta-sep" aria-hidden="true"></span>' +
+              "<span>" +
+              esc(o.contrat) +
+              "</span>" +
+              '<span class="meta-sep" aria-hidden="true"></span>' +
+              "<span>" +
+              esc(o.temps) +
+              "</span>" +
+              "</span>" +
+              '<button type="button" class="offer-toggle" aria-expanded="false">Le poste en détail' +
+              '<svg viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2.5 4l2.5 2.5L7.5 4"/></svg>' +
+              "</button>" +
+              '<div class="offer-desc"><div><p>' +
+              esc(o.desc || "") +
+              "</p></div></div>" +
+              '<div class="offer-foot">' +
+              '<a class="offer-apply" href="#postuler" data-offre="' +
+              esc(o.id) +
+              '"' +
+              ' aria-label="Postuler — ' +
+              esc(o.titre) +
+              ", " +
+              esc(o.lieu) +
+              ", " +
+              esc(o.contrat) +
+              '">Postuler' +
+              '<span class="offer-apply-arrow" aria-hidden="true">' +
+              ARROW +
+              "</span>" +
+              "</a>" +
+              "</div>" +
+              "</article>"
+            );
+          }).join("");
+
+          /* Clic "Postuler" : pré-sélectionne l'offre dans le formulaire. */
+          listEl.querySelectorAll(".offer-apply").forEach(function (link) {
+            link.addEventListener("click", function () {
+              selectOffer(link.getAttribute("data-offre"));
+            });
+          });
+
+          /* Dépliage de la description. */
+          listEl.querySelectorAll(".offer-toggle").forEach(function (btn) {
+            btn.addEventListener("click", function () {
+              var card = btn.closest(".offer-card");
+              var open = card.classList.toggle("is-open");
+              btn.setAttribute("aria-expanded", open ? "true" : "false");
+            });
+          });
+        }
+
+        /* ---- 1bis. Flèches du carrousel : défilement carte par carte ---- */
+        function setupOffersCarousel() {
+          var prev = document.getElementById("offers-prev");
+          var next = document.getElementById("offers-next");
+          if (!listEl || !prev || !next) return;
+          function step() {
+            var card = listEl.querySelector(".offer-card");
+            return card ? card.offsetWidth + 14 : 320;
+          }
+          function updateArrows() {
+            var max = listEl.scrollWidth - listEl.clientWidth - 2;
+            prev.disabled = listEl.scrollLeft <= 2;
+            next.disabled = listEl.scrollLeft >= max;
+          }
+          prev.addEventListener("click", function () {
+            listEl.scrollBy({
+              left: -step(),
+              behavior: prefersReduced ? "auto" : "smooth",
+            });
+          });
+          next.addEventListener("click", function () {
+            listEl.scrollBy({
+              left: step(),
+              behavior: prefersReduced ? "auto" : "smooth",
+            });
+          });
+          listEl.addEventListener("scroll", updateArrows, { passive: true });
+          window.addEventListener("resize", updateArrows);
+          updateArrows();
+        }
+
+        function renderHeroCount() {
+          if (!heroCount) return;
+          var n = OFFRES.length;
+          heroCount.textContent =
+            n === 0
+              ? "Candidatures spontanées bienvenues"
+              : n +
+                (n === 1 ? " poste ouvert" : " postes ouverts") +
+                " à Metz & Nancy";
+        }
+
+        function renderSelect() {
+          if (!selOffre) return;
+          var opts =
+            '<option value="" disabled selected>Choisissez une offre…</option>';
+          opts += OFFRES.map(function (o) {
+            return (
+              '<option value="' +
+              esc(o.id) +
+              '">' +
+              esc(o.titre) +
+              ", " +
+              esc(o.lieu) +
+              " (" +
+              esc(o.contrat) +
+              ")</option>"
+            );
+          }).join("");
+          opts += '<option value="__autre__">Autre / offre non listée</option>';
+          selOffre.innerHTML = opts;
+        }
+
+        /* ---- 2. Bascule offre / spontanée ---- */
+        function moveGlider() {
+          var active = form.querySelector(".q-intent-opt.is-selected");
+          if (!active || !glider) return;
+          glider.style.width = active.offsetWidth + "px";
+          glider.style.transform =
+            "translateX(" + (active.offsetLeft - 4) + "px)";
+        }
+        function setIntent(intent) {
+          currentIntent = intent;
+          intentOpts.forEach(function (o) {
+            var on = o.getAttribute("data-intent") === intent;
+            o.classList.toggle("is-selected", on);
+            o.setAttribute("aria-checked", on ? "true" : "false");
+          });
+          var spont = intent === "spontanee";
+          fieldOffre.hidden = spont;
+          fieldPoste.hidden = !spont;
+          selOffre.required = !spont;
+          inpPoste.required = spont;
+          if (leadEl) {
+            leadEl.innerHTML = spont
+              ? "Pas d’offre correspondante&nbsp;? Dites-nous <strong>le poste que vous recherchez</strong>, on saura à qui transmettre."
+              : "Sélectionnez l’offre qui vous intéresse, joignez votre CV, c’est tout.";
+          }
+          moveGlider();
+        }
+        intentOpts.forEach(function (o) {
+          o.addEventListener("click", function () {
+            setIntent(o.getAttribute("data-intent"));
+          });
+        });
+        window.addEventListener("resize", moveGlider);
+
+        /* ---- 3. Pré-sélection : clic sur une offre / liens / URL ---- */
+        function selectOffer(id) {
+          if (!OFFRE_BY_ID[id]) return;
+          setIntent("offre");
+          selOffre.value = id;
+          setFieldError("f-offre", false);
+        }
+        document
+          .querySelectorAll('[data-intent-link="spontanee"]')
+          .forEach(function (a) {
+            a.addEventListener("click", function () {
+              setIntent("spontanee");
+            });
+          });
+        (function applyURLParams() {
+          var params = new URLSearchParams(window.location.search);
+          var offreParam = params.get("offre");
+          var typeParam = params.get("type");
+          if (offreParam && OFFRE_BY_ID[offreParam]) {
+            selectOffer(offreParam);
+          } else if (typeParam === "spontanee") {
+            setIntent("spontanee");
+          }
+        })();
+
+        /* ---- 4. Dépôt de CV (drag & drop) ---- */
+        function fmtSize(bytes) {
+          if (bytes < 1024) return bytes + " o";
+          if (bytes < 1024 * 1024) return (bytes / 1024).toFixed(0) + " Ko";
+          return (bytes / (1024 * 1024)).toFixed(1) + " Mo";
+        }
+        function cvError(msg) {
+          drop.classList.add("has-error");
+          errorEl.textContent = msg;
+          errorEl.hidden = false;
+          if (cvStatus) cvStatus.textContent = msg;
+        }
+        function clearCvError() {
+          drop.classList.remove("has-error");
+        }
+        function setFile(file) {
+          clearCvError();
+          if (!file) return;
+          var ext = (file.name.split(".").pop() || "").toLowerCase();
+          if (CV_EXTENSIONS.indexOf(ext) === -1) {
+            fileInput.value = "";
+            cvError(
+              "Format non pris en charge : merci de joindre un PDF, DOC ou DOCX.",
+            );
+            return;
+          }
+          if (file.size > MAX_CV_BYTES) {
+            fileInput.value = "";
+            cvError(
+              "Fichier trop lourd (" +
+                fmtSize(file.size) +
+                ") : la limite est de 5 Mo.",
+            );
+            return;
+          }
+          errorEl.hidden = true;
+          fileNameEl.textContent = file.name;
+          fileSizeEl.textContent =
+            fmtSize(file.size) + " · " + ext.toUpperCase();
+          drop.classList.add("has-file");
+          if (cvStatus) cvStatus.textContent = "Fichier joint : " + file.name;
+        }
+        function clearFile() {
+          fileInput.value = "";
+          drop.classList.remove("has-file");
+          clearCvError();
+          if (cvStatus) cvStatus.textContent = "Aucun fichier joint.";
+        }
+        fileInput.addEventListener("change", function () {
+          setFile(fileInput.files && fileInput.files[0]);
+        });
+        fileRemove.addEventListener("click", function (e) {
+          e.preventDefault();
+          e.stopPropagation();
+          clearFile();
+        });
+        ["dragenter", "dragover"].forEach(function (evt) {
+          drop.addEventListener(evt, function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+            drop.classList.add("is-drag");
+          });
+        });
+        ["dragleave", "drop"].forEach(function (evt) {
+          drop.addEventListener(evt, function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+            drop.classList.remove("is-drag");
+          });
+        });
+        drop.addEventListener("drop", function (e) {
+          var files = e.dataTransfer && e.dataTransfer.files;
+          if (files && files.length) {
+            try {
+              fileInput.files = files;
+            } catch (err) {
+              /* anciens navigateurs : on garde la sélection manuelle */
+            }
+            setFile(files[0]);
+          }
+        });
+
+        /* ---- 5. Validation ---- */
+        var EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        var PHONE_RE = /^[+0-9 ().\-]{6,20}$/;
+        function setFieldError(id, on) {
+          var field = document.getElementById(id);
+          if (field && field.closest(".q-field"))
+            field.closest(".q-field").classList.toggle("has-error", on);
+        }
+        function validate() {
+          var firstname = document.getElementById("f-firstname");
+          var lastname = document.getElementById("f-lastname");
+          var phone = document.getElementById("f-phone");
+          var email = document.getElementById("f-email");
+          var consent = document.getElementById("f-consent");
+          var problems = [];
+          var firstBad = null;
+
+          var fnOk = firstname.value.trim().length > 0;
+          var lnOk = lastname.value.trim().length > 0;
+          var phOk = PHONE_RE.test(phone.value.trim());
+          var emOk = EMAIL_RE.test(email.value.trim());
+          setFieldError("f-firstname", !fnOk);
+          setFieldError("f-lastname", !lnOk);
+          setFieldError("f-phone", !phOk);
+          setFieldError("f-email", !emOk);
+          if (!fnOk) {
+            problems.push("votre prénom");
+            firstBad = firstBad || firstname;
+          }
+          if (!lnOk) {
+            problems.push("votre nom");
+            firstBad = firstBad || lastname;
+          }
+          if (!phOk) {
+            problems.push("un numéro de téléphone valide");
+            firstBad = firstBad || phone;
+          }
+          if (!emOk) {
+            problems.push("un email valide");
+            firstBad = firstBad || email;
+          }
+
+          if (currentIntent === "offre") {
+            var ofOk = !!selOffre.value;
+            setFieldError("f-offre", !ofOk);
+            if (!ofOk) {
+              problems.push("l’offre concernée");
+              firstBad = firstBad || selOffre;
+            }
+          } else {
+            var poOk = inpPoste.value.trim().length > 0;
+            setFieldError("f-poste", !poOk);
+            if (!poOk) {
+              problems.push("le poste recherché");
+              firstBad = firstBad || inpPoste;
+            }
+          }
+
+          var cvOk = !!(fileInput.files && fileInput.files.length);
+          drop.classList.toggle("has-error", !cvOk);
+          if (!cvOk) {
+            problems.push("votre CV");
+            firstBad = firstBad || fileInput;
+          }
+
+          if (!consent.checked) {
+            problems.push("votre consentement");
+            firstBad = firstBad || consent;
+          }
+
+          if (problems.length) {
+            errorEl.textContent =
+              "Merci de renseigner : " + problems.join(", ") + ".";
+            errorEl.hidden = false;
+            if (firstBad && firstBad.focus) firstBad.focus();
+            return false;
+          }
+          errorEl.hidden = true;
+          return true;
+        }
+
+        /* ---- 6. Envoi Web3Forms (multipart : la pièce jointe suit) ---- */
+        function postLabel() {
+          if (currentIntent === "spontanee") return inpPoste.value.trim();
+          if (selOffre.value === "__autre__") return "Autre offre (non listée)";
+          var o = OFFRE_BY_ID[selOffre.value];
+          return o ? o.titre + ", " + o.lieu : "";
+        }
+        function buildSubject() {
+          var who =
+            document.getElementById("f-firstname").value.trim() +
+            " " +
+            document.getElementById("f-lastname").value.trim();
+          return (
+            (currentIntent === "spontanee"
+              ? "[CANDIDATURE SPONTANÉE] "
+              : "[CANDIDATURE OFFRE] ") +
+            postLabel() +
+            " — " +
+            who
+          );
+        }
+        function setLoading(on) {
+          if (on) {
+            submitBtn.classList.add("is-loading");
+            submitBtn.setAttribute("aria-busy", "true");
+            var arrow = submitBtn.querySelector(".q-btn-arrow");
+            if (arrow) arrow.innerHTML = '<span class="q-spinner"></span>';
+          } else {
+            submitBtn.classList.remove("is-loading");
+            submitBtn.removeAttribute("aria-busy");
+            var arrow2 = submitBtn.querySelector(".q-btn-arrow");
+            if (arrow2) arrow2.innerHTML = ARROW;
+          }
+        }
+        function showSuccess() {
+          form.hidden = true;
+          var recap = document.getElementById("q-success-recap");
+          if (recap) {
+            recap.textContent =
+              (currentIntent === "spontanee"
+                ? "Candidature spontanée : "
+                : "") + postLabel();
+          }
+          successEl.hidden = false;
+          try {
+            successEl.scrollIntoView({
+              behavior: prefersReduced ? "auto" : "smooth",
+              block: "center",
+            });
+          } catch (e) {}
+        }
+
+        form.addEventListener("submit", function (e) {
+          e.preventDefault();
+          if (!validate()) return;
+
+          var accessKey = document.getElementById("f-access-key").value;
+          if (!accessKey || accessKey.indexOf("VOTRE_CLE") === 0) {
+            errorEl.textContent =
+              "Le formulaire n’est pas encore relié à Web3Forms (clé d’accès manquante). En attendant, envoyez votre CV à recrutement@jcd-groupe.fr ou appelez le 03 87 18 49 20.";
+            errorEl.hidden = false;
+            return;
+          }
+
+          document.getElementById("f-subject").value = buildSubject();
+
+          var fd = new FormData();
+          fd.append("access_key", accessKey);
+          fd.append("subject", buildSubject());
+          fd.append("from_name", "Site JCD Groupe — Carrières");
+          fd.append(
+            "botcheck",
+            document.getElementById("f-botcheck").checked ? "on" : "",
+          );
+          fd.append(
+            "type_candidature",
+            currentIntent === "spontanee"
+              ? "Candidature spontanée"
+              : "Réponse à une offre",
+          );
+          fd.append("poste", postLabel());
+          fd.append(
+            "prenom",
+            document.getElementById("f-firstname").value.trim(),
+          );
+          fd.append("nom", document.getElementById("f-lastname").value.trim());
+          fd.append(
+            "telephone",
+            document.getElementById("f-phone").value.trim(),
+          );
+          fd.append("email", document.getElementById("f-email").value.trim());
+          fd.append("origine", document.referrer || window.location.href);
+          if (fileInput.files && fileInput.files[0]) {
+            fd.append(
+              "attachment",
+              fileInput.files[0],
+              fileInput.files[0].name,
+            );
+          }
+
+          setLoading(true);
+          errorEl.hidden = true;
+
+          fetch("https://api.web3forms.com/submit", {
+            method: "POST",
+            body: fd,
+          })
+            .then(function (res) {
+              return res.json();
+            })
+            .then(function (json) {
+              setLoading(false);
+              if (json && json.success) {
+                showSuccess();
+              } else {
+                errorEl.textContent =
+                  json && json.message
+                    ? json.message
+                    : "L’envoi a échoué. Réessayez ou écrivez à recrutement@jcd-groupe.fr.";
+                errorEl.hidden = false;
+              }
+            })
+            .catch(function () {
+              setLoading(false);
+              errorEl.textContent =
+                "Connexion impossible. Réessayez ou écrivez à recrutement@jcd-groupe.fr.";
+              errorEl.hidden = false;
+            });
+        });
+
+        /* ---- Init ---- */
+        renderOffers();
+        setupOffersCarousel();
+        renderHeroCount();
+        renderSelect();
+        /* Re-applique les params URL après le remplissage du select
+       (l'option doit exister avant d'être sélectionnée). */
+        (function reapplyOffre() {
+          var params = new URLSearchParams(window.location.search);
+          var offreParam = params.get("offre");
+          if (offreParam && OFFRE_BY_ID[offreParam])
+            selOffre.value = offreParam;
+        })();
+        setIntent(currentIntent);
+        requestAnimationFrame(moveGlider);
+      })();
+    </script>
+    <script>
+      /* Voile givré : cale body::after sur le rect du panneau de menu ouvert
+     (le blur ne peut pas vivre dans la navbar fixed — bug Chromium). */
+      (function setupMenuFrost() {
+        var panels = Array.prototype.slice.call(
+          document.querySelectorAll(".nav-panel"),
+        );
+        if (!panels.length || !window.MutationObserver) return;
+        var current = null;
+        function place(panel) {
+          var r = panel.getBoundingClientRect();
+          var s = document.body.style;
+          s.setProperty("--menu-x", r.left + "px");
+          s.setProperty("--menu-y", r.top + "px");
+          s.setProperty("--menu-w", r.width + "px");
+          s.setProperty("--menu-h", r.height + "px");
+        }
+        var ro = window.ResizeObserver
+          ? new ResizeObserver(function () {
+              if (current) place(current);
+            })
+          : null;
+        var mo = new MutationObserver(function (muts) {
+          muts.forEach(function (m) {
+            var p = m.target;
+            if (p.getAttribute("aria-hidden") === "false") {
+              current = p;
+              place(p);
+              if (ro) {
+                ro.disconnect();
+                ro.observe(p);
+                var sh = p.querySelector(".nav-panel__shell");
+                if (sh) ro.observe(sh);
+              }
+            } else if (current === p) {
+              current = null;
+              if (ro) ro.disconnect();
+            }
+          });
+        });
+        panels.forEach(function (p) {
+          mo.observe(p, { attributes: true, attributeFilter: ["aria-hidden"] });
+        });
+        window.addEventListener("resize", function () {
+          if (current) place(current);
+        });
+      })();
+    </script>
+    <!-- ================================
+     REFONTE CLAIRE — carrousel de principes + accordéons
+     ================================ -->
+    <script>
+      (function () {
+        "use strict";
+
+        /* ---- Carrousel de principes ---- */
+        var stage = document.querySelector("[data-values]");
+        if (stage) {
+          var track = stage.querySelector(".values-track");
+          var slides = track ? track.children : [];
+          var prev = stage.querySelector("[data-values-prev]");
+          var next = stage.querySelector("[data-values-next]");
+          var curEl = document.getElementById("values-cur");
+          var n = slides.length,
+            idx = 0;
+          var pad = function (x) {
+            return (x < 10 ? "0" : "") + x;
+          };
+          var update = function () {
+            track.style.transform = "translateX(" + -idx * 100 + "%)";
+            for (var i = 0; i < n; i++)
+              slides[i].classList.toggle("is-active", i === idx);
+            if (curEl) curEl.textContent = pad(idx + 1);
+            if (prev) prev.disabled = idx === 0;
+            if (next) next.disabled = idx === n - 1;
+          };
+          if (prev)
+            prev.addEventListener("click", function () {
+              if (idx > 0) {
+                idx--;
+                update();
+              }
+            });
+          if (next)
+            next.addEventListener("click", function () {
+              if (idx < n - 1) {
+                idx++;
+                update();
+              }
+            });
+          if (n) update();
+        }
+
+        /* ---- Accordéons (avantages · recrutement · FAQ) ---- */
+        var questions = document.querySelectorAll(".acc-q");
+        Array.prototype.forEach.call(questions, function (q) {
+          var item = q.closest(".acc-item");
+          var panel = item ? item.querySelector(".acc-a") : null;
+          if (!panel) return;
+          q.addEventListener("click", function () {
+            var isOpen = q.getAttribute("aria-expanded") === "true";
+            if (isOpen) {
+              panel.style.height = panel.scrollHeight + "px";
+              void panel.offsetHeight;
+              panel.style.height = "0px";
+              q.setAttribute("aria-expanded", "false");
+            } else {
+              q.setAttribute("aria-expanded", "true");
+              panel.style.height = panel.scrollHeight + "px";
+              var done = function () {
+                if (q.getAttribute("aria-expanded") === "true")
+                  panel.style.height = "auto";
+                panel.removeEventListener("transitionend", done);
+              };
+              panel.addEventListener("transitionend", done);
+            }
+          });
+        });
+      })();
+    </script>
+
+    <!-- jcd-mobile-nav (injected) -->
+    <button
+      class="jcd-burger"
+      id="jcdBurger"
+      type="button"
+      aria-label="Ouvrir le menu"
+      aria-expanded="false"
+      aria-controls="jcdMnav"
+    >
+      <span class="jcd-burger__box" aria-hidden="true"
+        ><i></i><i></i><i></i></span
+      >
+    </button>
+    <div
+      class="jcd-mnav"
+      id="jcdMnav"
+      role="dialog"
+      aria-modal="true"
+      aria-label="Menu de navigation"
+      aria-hidden="true"
+    >
+      <div class="jcd-mnav__scroll">
+        <div class="jcd-mnav__inner">
+          <p
+            class="jcd-mnav__eyebrow jcd-mnav__reveal"
+            style="transition-delay: 0.04s"
+          >
+            Expertises
+          </p>
+
+          <div class="jcd-mnav__reveal" style="transition-delay: 0.07s">
+            <div class="jcd-mnav__item" style="--mnav-c: #2e72ba">
+              <a class="jcd-mnav__link" href="informatique"
+                ><span class="jcd-mnav__dot"></span><span
+                  class="jcd-mnav__label">Informatique</span
+                ></a
+              >
+              <button
+                class="jcd-acc__toggle"
+                type="button"
+                aria-expanded="false"
+                aria-controls="jcdAccInfo"
+                aria-label="Afficher les sous-pages Informatique"
+              >
+                <svg
+                  viewBox="0 0 14 14"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.6"
+                  stroke-linecap="round"
+                >
+                  <path d="M7 2v10M2 7h10"></path>
+                </svg>
+              </button>
+            </div>
+            <div class="jcd-acc__panel" id="jcdAccInfo">
+              <a class="jcd-mnav__sub" href="info-cloud">Cloud Microsoft</a>
+              <a class="jcd-mnav__sub" href="info-collaboratif"
+                >Solutions collaboratives &amp; audiovisuelles</a
+              >
+              <a class="jcd-mnav__sub" href="info-reseaux"
+                >Architectures syst&egrave;mes &amp; r&eacute;seaux</a
+              >
+              <a class="jcd-mnav__sub" href="info-integration"
+                >Int&eacute;gration &amp; Support PC</a
+              >
+            </div>
+          </div>
+
+          <a
+            class="jcd-mnav__item jcd-mnav__reveal"
+            style="--mnav-c: #e51d29; transition-delay: 0.1s"
+            href="service"
+            ><span class="jcd-mnav__dot"></span><span class="jcd-mnav__label"
+              >Service</span
+            ></a
+          >
+          <a
+            class="jcd-mnav__item jcd-mnav__reveal"
+            style="--mnav-c: #f9d605; transition-delay: 0.13s"
+            href="developpement"
+            ><span class="jcd-mnav__dot"></span><span class="jcd-mnav__label"
+              >D&eacute;veloppement</span
+            ></a
+          >
+          <a
+            class="jcd-mnav__item jcd-mnav__reveal"
+            style="--mnav-c: #f3941d; transition-delay: 0.16s"
+            href="print"
+            ><span class="jcd-mnav__dot"></span><span class="jcd-mnav__label"
+              >Print</span
+            ></a
+          >
+          <a
+            class="jcd-mnav__item jcd-mnav__reveal"
+            style="--mnav-c: #b063ac; transition-delay: 0.19s"
+            href="telecom"
+            ><span class="jcd-mnav__dot"></span><span class="jcd-mnav__label"
+              >T&eacute;l&eacute;com</span
+            ></a
+          >
+          <div class="jcd-mnav__reveal" style="transition-delay: 0.22s">
+            <div class="jcd-mnav__item" style="--mnav-c: #8ec041">
+              <a class="jcd-mnav__link" href="formation"
+                ><span class="jcd-mnav__dot"></span><span
+                  class="jcd-mnav__label">Formation</span
+                ></a
+              >
+              <button
+                class="jcd-acc__toggle"
+                type="button"
+                aria-expanded="false"
+                aria-controls="jcdAccForm"
+                aria-label="Afficher les catégories de formation"
+              >
+                <svg
+                  viewBox="0 0 14 14"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.6"
+                  stroke-linecap="round"
+                >
+                  <path d="M7 2v10M2 7h10"></path>
+                </svg>
+              </button>
+            </div>
+            <div class="jcd-acc__panel" id="jcdAccForm">
+              <a class="jcd-mnav__sub" href="formation-bureautique"
+                >Bureautique</a
+              >
+              <a
+                class="jcd-mnav__sub"
+                href="formation-intelligence-artificielle"
+                >Intelligence artificielle</a
+              >
+              <a class="jcd-mnav__sub" href="formation-informatique"
+                >Informatique</a
+              >
+              <a class="jcd-mnav__sub" href="formation-communication-marketing"
+                >Communication - Marketing</a
+              >
+              <a class="jcd-mnav__sub" href="formation-management">Management</a
+              >
+              <a class="jcd-mnav__sub" href="formation-commerce-relation-client"
+                >Commerce - Relation client</a
+              >
+              <a class="jcd-mnav__sub" href="formation-comptabilite-gestion"
+                >Comptabilit&eacute; - Gestion</a
+              >
+              <a class="jcd-mnav__sub" href="formation-ressources-humaines"
+                >Ressources humaines</a
+              >
+              <a class="jcd-mnav__sub" href="formation-developpement-personnel"
+                >D&eacute;veloppement personnel</a
+              >
+              <a class="jcd-mnav__sub" href="formation-graphisme-pao"
+                >Graphisme - PAO</a
+              >
+              <a
+                class="jcd-mnav__sub"
+                href="formation-administratif-secretariat-accueil"
+                >Administratif - Secr&eacute;tariat</a
+              >
+              <a class="jcd-mnav__sub" href="formation-securite"
+                >S&eacute;curit&eacute;</a
+              >
+              <a class="jcd-mnav__sub" href="formation-langues">Langues</a>
+            </div>
+          </div>
+          <a
+            class="jcd-mnav__item jcd-mnav__reveal"
+            style="--mnav-c: #a78d75; transition-delay: 0.25s"
+            href="agencement"
+            ><span class="jcd-mnav__dot"></span><span class="jcd-mnav__label"
+              >Agencement</span
+            ></a
+          >
+
+          <p
+            class="jcd-mnav__eyebrow jcd-mnav__sec2 jcd-mnav__reveal"
+            style="transition-delay: 0.3s"
+          >
+            D&eacute;couvrir
+          </p>
+          <a
+            class="jcd-mnav__item jcd-mnav__reveal"
+            style="--mnav-c: #9a9a9a; transition-delay: 0.33s"
+            href="assistance"
+            ><span class="jcd-mnav__dot"></span><span
+              class="jcd-mnav__label"
+              style="font-size: 19px">Assistance</span
+            ></a
+          >
+          <a
+            class="jcd-mnav__item jcd-mnav__reveal"
+            style="--mnav-c: #9a9a9a; transition-delay: 0.36s"
+            href="carrieres"
+            ><span class="jcd-mnav__dot"></span><span
+              class="jcd-mnav__label"
+              style="font-size: 19px">Carri&egrave;res</span
+            ></a
+          >
+
+          <div
+            class="jcd-mnav__cta jcd-mnav__reveal"
+            style="transition-delay: 0.4s"
+          >
+            <a class="jcd-mnav__btn jcd-mnav__btn--primary" href="contact"
+              >Contacter un expert
+              <span class="jcd-mnav__btn-ic"
+                ><svg
+                  viewBox="0 0 16 16"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.7"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path d="M3 8h10M9 4l4 4-4 4"></path></svg
+                ></span
+              ></a
+            >
+            <a
+              class="jcd-mnav__btn jcd-mnav__btn--ghost"
+              href="tel:+33387184920"
+              >03 87 18 49 20
+              <span class="jcd-mnav__btn-ic"
+                ><svg
+                  viewBox="0 0 18 18"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.5"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path
+                    d="M2.5 3.5a1 1 0 011-1h2.4a1 1 0 01.95.68l.86 2.4a1 1 0 01-.24 1l-1.2 1.2a11 11 0 004.6 4.6l1.2-1.2a1 1 0 011-.24l2.4.86a1 1 0 01.68.95V15a1 1 0 01-1 1A13.5 13.5 0 012.5 3.5z"
+                  ></path></svg
+                ></span
+              ></a
+            >
+          </div>
+        </div>
+      </div>
+    </div>
+    <script>
+      (function () {
+        var body = document.body,
+          burger = document.getElementById("jcdBurger"),
+          mnav = document.getElementById("jcdMnav"),
+          hroot = document.documentElement;
+        if (!burger || !mnav) return;
+        var lastFocus = null;
+        function focusables() {
+          return mnav.querySelectorAll("a[href],button:not([disabled])");
+        }
+        function open() {
+          lastFocus = document.activeElement;
+          body.classList.add("jcd-mnav-open");
+          burger.setAttribute("aria-expanded", "true");
+          burger.setAttribute("aria-label", "Fermer le menu");
+          mnav.setAttribute("aria-hidden", "false");
+          body.style.overflow = "hidden";
+          hroot.style.overflow = "hidden";
+        }
+        function close() {
+          body.classList.remove("jcd-mnav-open");
+          burger.setAttribute("aria-expanded", "false");
+          burger.setAttribute("aria-label", "Ouvrir le menu");
+          mnav.setAttribute("aria-hidden", "true");
+          body.style.overflow = "";
+          hroot.style.overflow = "";
+          if (lastFocus && lastFocus.focus)
+            try {
+              lastFocus.focus();
+            } catch (e) {}
+        }
+        function toggle() {
+          body.classList.contains("jcd-mnav-open") ? close() : open();
+        }
+        burger.addEventListener("click", toggle);
+        mnav.addEventListener("click", function (e) {
+          var a = e.target.closest("a");
+          if (a) close();
+        });
+        document.addEventListener("keydown", function (e) {
+          if (!body.classList.contains("jcd-mnav-open")) return;
+          if (e.key === "Escape") {
+            close();
+            return;
+          }
+          if (e.key === "Tab") {
+            var f = focusables();
+            if (!f.length) return;
+            var first = f[0],
+              last = f[f.length - 1];
+            if (e.shiftKey && document.activeElement === first) {
+              e.preventDefault();
+              last.focus();
+            } else if (!e.shiftKey && document.activeElement === last) {
+              e.preventDefault();
+              first.focus();
+            }
+          }
+        });
+        Array.prototype.forEach.call(
+          mnav.querySelectorAll(".jcd-acc__toggle"),
+          function (btn) {
+            btn.addEventListener("click", function () {
+              var p = document.getElementById(
+                btn.getAttribute("aria-controls"),
+              );
+              if (!p) return;
+              var isOpen = p.style.maxHeight && p.style.maxHeight !== "0px";
+              if (isOpen) {
+                p.style.maxHeight = "0px";
+                btn.setAttribute("aria-expanded", "false");
+              } else {
+                p.style.maxHeight = p.scrollHeight + "px";
+                btn.setAttribute("aria-expanded", "true");
+              }
+            });
+          },
+        );
+        window.addEventListener("resize", function () {
+          if (
+            window.innerWidth > 820 &&
+            body.classList.contains("jcd-mnav-open")
+          )
+            close();
+        });
+      })();
+    </script>
+    <!-- jcd-a11y (Lot 5) -->
+    <div class="jcd-fab-wrap" id="jcd-fab">
+      <button
+        class="jcd-fab jcd-fab--top"
+        id="jcdToTop"
+        type="button"
+        aria-label="Remonter en haut"
+      >
+        <svg
+          viewBox="0 0 20 20"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="1.8"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          aria-hidden="true"
+        >
+          <path d="M10 16V5M5 10l5-5 5 5"></path>
+        </svg>
+      </button>
+      <a
+        class="jcd-fab jcd-fab--contact"
+        id="jcdFabContact"
+        href="contact"
+        aria-label="Nous contacter"
+      >
+        <svg
+          viewBox="0 0 20 20"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="1.6"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          aria-hidden="true"
+        >
+          <rect x="2.5" y="4.5" width="15" height="11" rx="2.3"></rect>
+          <path d="M3 6.7 L10 10.7 L17 6.7"></path>
+        </svg>
+      </a>
+    </div>
+    <script id="jcd-a11y-js">
+      (function () {
+        var d = document,
+          body = d.body;
+        /* 1) inert collapsed accordion panels (skip the overlay itself) */
+        function sync(btn) {
+          var id = btn.getAttribute("aria-controls");
+          if (!id || id === "jcdMnav") return;
+          var p = d.getElementById(id);
+          if (!p) return;
+          if (btn.getAttribute("aria-expanded") === "true") {
+            p.removeAttribute("inert");
+          } else {
+            p.setAttribute("inert", "");
+          }
+        }
+        Array.prototype.forEach.call(
+          d.querySelectorAll("[aria-controls][aria-expanded]"),
+          function (b) {
+            sync(b);
+            try {
+              new MutationObserver(function () {
+                sync(b);
+              }).observe(b, {
+                attributes: true,
+                attributeFilter: ["aria-expanded"],
+              });
+            } catch (e) {}
+          },
+        );
+        /* 2) inert the page behind the open overlay */
+        var mnav = d.getElementById("jcdMnav"),
+          burger = d.getElementById("jcdBurger"),
+          fab = d.getElementById("jcd-fab");
+        if (mnav) {
+          try {
+            new MutationObserver(function () {
+              var open = body.classList.contains("jcd-mnav-open");
+              Array.prototype.forEach.call(body.children, function (el) {
+                if (
+                  el === mnav ||
+                  el === burger ||
+                  el.tagName === "SCRIPT" ||
+                  el.tagName === "STYLE"
+                ) {
+                  return;
+                }
+                if (open) {
+                  el.setAttribute("inert", "");
+                } else {
+                  el.removeAttribute("inert");
+                }
+              });
+            }).observe(body, { attributes: true, attributeFilter: ["class"] });
+          } catch (e) {}
+        }
+        /* 3) floating cluster on long pages */
+        var toTop = d.getElementById("jcdToTop");
+        if (fab) {
+          var update = function () {
+            var y = window.pageYOffset || d.documentElement.scrollTop || 0;
+            var docH = d.documentElement.scrollHeight,
+              vh = window.innerHeight || 0;
+            var nearBottom = y + vh > docH - 200;
+            if (y > 520 && !nearBottom) {
+              fab.classList.add("is-shown");
+            } else {
+              fab.classList.remove("is-shown");
+            }
+            if (toTop) {
+              if (y > 520) {
+                toTop.classList.add("is-on");
+              } else {
+                toTop.classList.remove("is-on");
+              }
+            }
+          };
+          window.addEventListener("scroll", update, { passive: true });
+          window.addEventListener("resize", update, { passive: true });
+          update();
+        }
+        if (toTop) {
+          toTop.addEventListener("click", function () {
+            var rm = window.matchMedia(
+              "(prefers-reduced-motion:reduce)",
+            ).matches;
+            try {
+              window.scrollTo({ top: 0, behavior: rm ? "auto" : "smooth" });
+            } catch (e) {
+              window.scrollTo(0, 0);
+            }
+          });
+        }
+        /* 4) hide the contact shortcut on the contact page itself */
+        var cf = d.getElementById("jcdFabContact");
+        if (cf && /contact\(\?|$)/.test(location.pathname + location.search)) {
+          if (cf.parentNode) {
+            cf.parentNode.removeChild(cf);
+          }
+        }
+        /* 5) mobile keyboard refinements */
+        try {
+          Array.prototype.forEach.call(
+            d.querySelectorAll('input[type="email"]'),
+            function (i) {
+              i.setAttribute("inputmode", "email");
+              i.setAttribute("enterkeyhint", "next");
+            },
+          );
+          Array.prototype.forEach.call(
+            d.querySelectorAll('input[type="tel"]'),
+            function (i) {
+              i.setAttribute("inputmode", "tel");
+            },
+          );
+          Array.prototype.forEach.call(
+            d.querySelectorAll("textarea"),
+            function (t) {
+              t.setAttribute("enterkeyhint", "enter");
+            },
+          );
+        } catch (e) {}
+      })();
+    </script>
+    <script id="jcd-micons-js">
+      (function () {
+        var M = {
+          informatique:
+            '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="12" rx="2"/><path d="M8 20h8M12 16v4"/></svg>',
+          service:
+            '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 14v-2a9 9 0 0 1 18 0v2"/><path d="M21 14v3a2 2 0 0 1-2 2h-1v-7h1a2 2 0 0 1 2 2zM3 14v3a2 2 0 0 0 2 2h1v-7H5a2 2 0 0 0-2 2z"/></svg>',
+          developpement:
+            '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="m8 6-6 6 6 6M16 6l6 6-6 6M14 4l-4 16"/></svg>',
+          print:
+            '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9V3h12v6"/><rect x="3" y="9" width="18" height="8" rx="2"/><path d="M7 17h10v4H7z"/><circle cx="17" cy="13" r="0.8" fill="currentColor"/></svg>',
+          telecom:
+            '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.37 1.9.72 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.29a2 2 0 0 1 2.11-.45c.91.35 1.85.59 2.81.72A2 2 0 0 1 22 16.92z"/></svg>',
+          formation:
+            '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10 12 5 2 10l10 5 10-5z"/><path d="M6 12v5c2 2 4 3 6 3s4-1 6-3v-5"/></svg>',
+          agencement:
+            '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 18v3M20 18v3M3 8h18v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2zM6 8V5a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v3"/></svg>',
+          assistance:
+            '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="4"/><path d="m4.93 4.93 4.24 4.24M14.83 14.83l4.24 4.24M14.83 9.17l4.24-4.24M9.17 14.83l-4.24 4.24"/></svg>',
+          carrieres:
+            '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>',
+        };
+        function run() {
+          var n = document.getElementById("jcdMnav");
+          if (!n) return;
+          n.querySelectorAll(".jcd-mnav__dot").forEach(function (d) {
+            var a = d.closest("a");
+            if (!a) return;
+            var h = (a.getAttribute("href") || "")
+              .split("/")
+              .pop()
+              .split("#")[0];
+            var s = M[h];
+            if (!s) return;
+            var ic = document.createElement("span");
+            ic.className = "jcd-mnav__ico";
+            ic.setAttribute("aria-hidden", "true");
+            ic.innerHTML = s;
+            d.replaceWith(ic);
+          });
+        }
+        if (document.readyState === "loading")
+          document.addEventListener("DOMContentLoaded", run);
+        else run();
+      })();
+    </script>
+    <script id="jcd-mrefonte-js">
+      (function () {
+        function run() {
+          try {
+            if (document.getElementById("jcd-mbar")) return;
+            var body = document.body;
+            var mkIcon = function (d) {
+              return (
+                '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' +
+                d +
+                "</svg>"
+              );
+            };
+            /* Barre d'actions fixe en bas */
+            var bar = document.createElement("nav");
+            bar.id = "jcd-mbar";
+            bar.setAttribute("aria-label", "Actions rapides");
+            var menuBtn = document.createElement("button");
+            menuBtn.type = "button";
+            menuBtn.className = "jcd-mbar-menu";
+            menuBtn.setAttribute("aria-controls", "jcdMnav");
+            menuBtn.innerHTML =
+              mkIcon(
+                '<line x1="4" y1="7" x2="20" y2="7"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="17" x2="20" y2="17"/>',
+              ) + "<span>Menu</span>";
+            menuBtn.addEventListener("click", function () {
+              var b = document.getElementById("jcdBurger");
+              if (b) b.click();
+            });
+            var tel = document.createElement("a");
+            tel.href = "tel:+33387184920";
+            tel.innerHTML =
+              mkIcon(
+                '<path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.79 19.79 0 0 1 2.12 4.18 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/>',
+              ) + "<span>Appeler</span>";
+            var cta = document.createElement("a");
+            cta.className = "jcd-mbar-cta";
+            cta.href = "contact";
+            cta.innerHTML =
+              mkIcon('<path d="M4 4h16v12H7l-3 3z"/>') + "<span>Contact</span>";
+            if (/contact\$/i.test(location.pathname))
+              cta.setAttribute("aria-current", "page");
+            bar.appendChild(menuBtn);
+            bar.appendChild(tel);
+            bar.appendChild(cta);
+            body.appendChild(bar);
+            body.classList.add("jcd-has-mbar");
+            /* Label Menu <-> Fermer suit l'etat de l'overlay (classe body posee par le script mnav) */
+            var lab = menuBtn.querySelector("span");
+            var sync = function () {
+              var open = body.classList.contains("jcd-mnav-open");
+              lab.textContent = open ? "Fermer" : "Menu";
+              menuBtn.setAttribute("aria-expanded", open ? "true" : "false");
+            };
+            sync();
+            if (window.MutationObserver) {
+              new MutationObserver(sync).observe(body, {
+                attributes: true,
+                attributeFilter: ["class"],
+              });
+            }
+            /* Competences + methode : plus d'accordeon sur mobile -> retire les roles/tabindex poses par xpcompact */
+            if (window.innerWidth <= 820) {
+              Array.prototype.forEach.call(
+                document.querySelectorAll(
+                  ".prest-item, .pf-vcard, .fp-step, .bp-step, .regie-steps .clip, .atelier-steps .station",
+                ),
+                function (it) {
+                  it.removeAttribute("role");
+                  it.removeAttribute("tabindex");
+                  it.removeAttribute("aria-expanded");
+                },
+              );
+            }
+            /* Sommaire d'ancres (chips) : SUPPRIME sur demande user 2026-07-15 \u2014 retire ceux du DOM (xpcompact) */
+            Array.prototype.forEach.call(
+              document.querySelectorAll(".jcd-xpnav"),
+              function (nav) {
+                if (nav.parentNode) nav.parentNode.removeChild(nav);
+              },
+            );
+            /* Murs de logos -> bande unique : retire les doublons (sets dupliques pour la boucle marquee) */
+            if (window.innerWidth <= 820) {
+              var seen = {};
+              Array.prototype.forEach.call(
+                document.querySelectorAll(
+                  ".logo-marquee-item, .clients-row__item",
+                ),
+                function (it) {
+                  var img = it.querySelector("img");
+                  if (!img) return;
+                  var key =
+                    img.getAttribute("src") || img.getAttribute("title") || "";
+                  if (seen[key]) {
+                    it.style.display = "none";
+                  } else {
+                    seen[key] = 1;
+                  }
+                },
+              );
+            }
+          } catch (e) {}
+        }
+        if (document.readyState === "loading") {
+          document.addEventListener("DOMContentLoaded", run);
+        } else {
+          run();
+        }
+      })();
+    </script>
+    <script id="jcd-mtap-swipe">
+      (function () {
+        var vp = document.querySelector(".values-viewport");
+        if (!vp) return;
+        var x0 = null;
+        vp.addEventListener(
+          "touchstart",
+          function (e) {
+            x0 = e.touches[0].clientX;
+          },
+          { passive: true },
+        );
+        vp.addEventListener(
+          "touchend",
+          function (e) {
+            if (x0 == null) return;
+            var dx = e.changedTouches[0].clientX - x0;
+            x0 = null;
+            if (Math.abs(dx) < 40) return;
+            var b = document.querySelector(
+              dx < 0 ? "[data-values-next]" : "[data-values-prev]",
+            );
+            if (b && !b.disabled) b.click();
+          },
+          { passive: true },
+        );
+      })();
+    </script>
+    <script id="jcd-moffers-js">
+      (function () {
+        function init() {
+          try {
+            var track = document.getElementById("offers-list");
+            if (!track || document.querySelector(".jcd-moffers-dots")) return;
+            var dots = document.createElement("div");
+            dots.className = "jcd-moffers-dots";
+            track.insertAdjacentElement("afterend", dots);
+            var cards = [];
+            function cardLeft(i) {
+              return cards[i] ? cards[i].offsetLeft - cards[0].offsetLeft : 0;
+            }
+            function current() {
+              var x = track.scrollLeft,
+                best = 0,
+                bd = Infinity;
+              for (var i = 0; i < cards.length; i++) {
+                var d = Math.abs(cardLeft(i) - x);
+                if (d < bd) {
+                  bd = d;
+                  best = i;
+                }
+              }
+              return best;
+            }
+            function update() {
+              var cur = current();
+              Array.prototype.forEach.call(dots.children, function (b, i) {
+                b.classList.toggle("is-on", i === cur);
+              });
+            }
+            function rebuild() {
+              cards = Array.prototype.slice.call(
+                track.querySelectorAll(".offer-card"),
+              );
+              dots.innerHTML = "";
+              if (cards.length < 2) {
+                dots.style.display = "none";
+                return;
+              }
+              dots.style.display = "";
+              cards.forEach(function (c, i) {
+                var b = document.createElement("button");
+                b.type = "button";
+                b.setAttribute(
+                  "aria-label",
+                  "Aller \u00e0 l\u2019offre " +
+                    (i + 1) +
+                    " sur " +
+                    cards.length,
+                );
+                /* defilement instantane : snap-stop always + smooth bloquent les sauts multi-cartes */
+                b.addEventListener("click", function () {
+                  track.scrollTo({ left: cardLeft(i) });
+                });
+                dots.appendChild(b);
+              });
+              update();
+            }
+            var raf = null;
+            track.addEventListener(
+              "scroll",
+              function () {
+                if (raf) return;
+                raf = requestAnimationFrame(function () {
+                  raf = null;
+                  update();
+                });
+              },
+              { passive: true },
+            );
+            /* fallback : certains contextes ne dispatchent pas 'scroll' -> poll leger, update seulement si ca a bouge */
+            var lastX = -1;
+            setInterval(function () {
+              if (track.scrollLeft !== lastX) {
+                lastX = track.scrollLeft;
+                update();
+              }
+            }, 150);
+            window.addEventListener("resize", update);
+            new MutationObserver(rebuild).observe(track, { childList: true });
+            rebuild();
+          } catch (e) {}
+        }
+        if (document.readyState === "loading") {
+          document.addEventListener("DOMContentLoaded", init);
+        } else {
+          init();
+        }
+      })();
+    </script>
+  </body>
+</html>

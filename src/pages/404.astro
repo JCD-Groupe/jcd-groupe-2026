@@ -1,0 +1,129 @@
+---
+import { directus } from "../lib/directus";
+import { readItems } from "@directus/sdk";
+
+const formations = await directus.request(
+  readItems("formations", {
+    fields: ["id", "titre_de_la_formation", "reference"],
+  }),
+);
+---
+
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Page introuvable · JCD Groupe</title>
+    <meta
+      name="description"
+      content="Erreur 404 — la page demandée n'existe pas ou a été déplacée. Retrouvez les sept pôles d'expertise de JCD Groupe depuis l'accueil."
+    />
+    <meta name="robots" content="noindex, follow" />
+    <meta name="theme-color" content="#0d0d0d" />
+    <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/404.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <a href="/" aria-label="JCD Groupe · Accueil">
+        <img
+          src="assets/logo_V2.svg"
+          alt="JCD Groupe"
+          width="120"
+          height="30"
+        />
+      </a>
+    </header>
+
+    <main id="contenu">
+      <div class="nf">
+        <span class="nf-code"
+          ><span class="accent">Erreur 404</span> · Page introuvable</span
+        >
+        <h1>Cette page n'existe pas.</h1>
+        <p class="nf-sub">
+          L'adresse demandée a peut-être été déplacée ou n'a jamais existé.
+          Reprenez depuis l'accueil, ou contactez-nous directement.
+        </p>
+        <div class="nf-actions">
+          <a class="nf-btn nf-btn--primary" href="/">
+            Retour à l'accueil
+            <svg
+              viewBox="0 0 16 16"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.6"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              aria-hidden="true"
+            >
+              <path d="M3 8h10M9 4l4 4-4 4"></path>
+            </svg>
+          </a>
+          <a class="nf-btn nf-btn--ghost" href="contact">Nous contacter</a>
+        </div>
+        <nav class="nf-poles" aria-label="Nos pôles d'expertise">
+          <p class="nf-poles-label">Ou explorez nos pôles</p>
+          <ul>
+            <li>
+              <a
+                class="nf-pole"
+                style="--dot: var(--c-informatique)"
+                href="informatique">Informatique</a
+              >
+            </li>
+            <li>
+              <a
+                class="nf-pole"
+                style="--dot: var(--c-developpement)"
+                href="developpement">Développement</a
+              >
+            </li>
+            <li>
+              <a class="nf-pole" style="--dot: var(--c-print)" href="print"
+                >Print</a
+              >
+            </li>
+            <li>
+              <a class="nf-pole" style="--dot: var(--c-service)" href="service"
+                >Service</a
+              >
+            </li>
+            <li>
+              <a class="nf-pole" style="--dot: var(--c-telecom)" href="telecom"
+                >Télécom</a
+              >
+            </li>
+            <li>
+              <a
+                class="nf-pole"
+                style="--dot: var(--c-formation)"
+                href="formation">Formation</a
+              >
+            </li>
+            <li>
+              <a
+                class="nf-pole"
+                style="--dot: var(--c-agencement)"
+                href="agencement">Agencement</a
+              >
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </main>
+
+    <footer class="site-footer">
+      <p>
+        JCD Groupe — <a href="/">jcd-groupe.fr</a> ·
+        <a href="mentions-legales">Mentions légales</a>
+      </p>
+    </footer>
+  </body>
+</html>

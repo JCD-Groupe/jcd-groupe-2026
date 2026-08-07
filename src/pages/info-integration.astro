@@ -1,0 +1,2942 @@
+---
+import { directus } from "../lib/directus";
+import { readItems } from "@directus/sdk";
+
+const formations = await directus.request(
+  readItems("formations", {
+    fields: ["id", "titre_de_la_formation", "reference"],
+  }),
+);
+---
+
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+    />
+    <meta name="color-scheme" content="dark" />
+    <meta name="theme-color" content="#0d0d0d" />
+    <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+    <meta
+      name="description"
+      content="JCD Groupe · Pôle Informatique. Service Intégration & Support PC : déploiement, maintenance et support du parc utilisateur."
+    />
+    <link rel="canonical" href="https://www.jcd-groupe.fr/info-integration" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="JCD Groupe" />
+    <meta property="og:locale" content="fr_FR" />
+    <meta
+      property="og:title"
+      content="Intégration & Support PC · Informatique · JCD Groupe"
+    />
+    <meta
+      property="og:description"
+      content="JCD Groupe · Pôle Informatique. Service Intégration & Support PC : déploiement, maintenance et support du parc utilisateur."
+    />
+    <meta
+      property="og:url"
+      content="https://www.jcd-groupe.fr/info-integration"
+    />
+    <meta name="twitter:card" content="summary" />
+    <title>Intégration &amp; Support PC · Informatique · JCD Groupe</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Instrument+Serif:ital@0;1&display=swap"
+      rel="stylesheet"
+    />
+
+    <link rel="stylesheet" href="css/info-integration.css" />
+    <link rel="stylesheet" href="css/global.css" />
+    <link rel="stylesheet" href="css/info-integration-overrides.css" />
+    <link rel="stylesheet" href="css/transition.css" />
+    <script is:inline src="/js/transition.js"></script>
+    <script id="jcd-xpcompact-js">
+      (function () {
+        function run() {
+          try {
+            var isMobile = window.innerWidth <= 820;
+            var defs = [
+              ["Prestations", "#prestations"],
+              ["M\u00e9thode", "#process"],
+              ["Contact", "#contact"],
+            ];
+            var links = defs.filter(function (d) {
+              return document.querySelector(d[1]);
+            });
+            if (links.length && !document.querySelector(".jcd-xpnav")) {
+              var nav = document.createElement("nav");
+              nav.className = "jcd-xpnav";
+              nav.setAttribute("aria-label", "Sections de la page");
+              links.forEach(function (d) {
+                var a = document.createElement("a");
+                a.href = d[1];
+                var dot = document.createElement("span");
+                dot.className = "jcd-xpdot";
+                dot.setAttribute("aria-hidden", "true");
+                a.appendChild(dot);
+                a.appendChild(document.createTextNode(d[0]));
+                nav.appendChild(a);
+              });
+              var main = document.querySelector("main") || document.body;
+              var hero = main.querySelector("section");
+              if (hero) {
+                hero.insertAdjacentElement("afterend", nav);
+              } else {
+                main.insertBefore(nav, main.firstChild);
+              }
+            }
+            if (isMobile) {
+              var partners = document.querySelector(".prest-aside-partners");
+              var layout = document.querySelector(".prest-layout");
+              if (partners && layout) {
+                layout.appendChild(partners);
+              }
+              var wire = function (sel, descSel) {
+                Array.prototype.forEach.call(
+                  document.querySelectorAll(sel),
+                  function (it) {
+                    var desc = it.querySelector(descSel);
+                    if (!desc) return;
+                    it.setAttribute("role", "button");
+                    it.setAttribute("tabindex", "0");
+                    it.setAttribute("aria-expanded", "false");
+                    var toggle = function () {
+                      var open = it.classList.toggle("jcd-open");
+                      it.setAttribute("aria-expanded", open ? "true" : "false");
+                      desc.style.maxHeight = open
+                        ? desc.scrollHeight + "px"
+                        : "0px";
+                    };
+                    it.addEventListener("click", toggle);
+                    it.addEventListener("keydown", function (e) {
+                      if (e.key === "Enter" || e.key === " ") {
+                        e.preventDefault();
+                        toggle();
+                      }
+                    });
+                  },
+                );
+              };
+              wire(".prest-item", ".prest-item-desc");
+              wire(".pf-vcard", ".pf-vcard-desc");
+            }
+          } catch (e) {}
+        }
+        if (document.readyState === "loading") {
+          document.addEventListener("DOMContentLoaded", run);
+        } else {
+          run();
+        }
+      })();
+    </script>
+    <script id="jcd-infocompact-js">
+      (function () {
+        function run() {
+          try {
+            if (window.innerWidth > 820) return;
+            var items = document.querySelectorAll(
+              ".fp-step, .bp-step, .regie-steps .clip, .atelier-steps .station",
+            );
+            Array.prototype.forEach.call(items, function (it) {
+              var desc = it.querySelector("p");
+              if (!desc) return;
+              it.setAttribute("role", "button");
+              it.setAttribute("tabindex", "0");
+              it.setAttribute("aria-expanded", "false");
+              var toggle = function () {
+                var open = it.classList.toggle("jcd-iopen");
+                it.setAttribute("aria-expanded", open ? "true" : "false");
+                desc.style.maxHeight = open ? desc.scrollHeight + "px" : "0px";
+              };
+              it.addEventListener("click", toggle);
+              it.addEventListener("keydown", function (e) {
+                if (e.key === "Enter" || e.key === " ") {
+                  e.preventDefault();
+                  toggle();
+                }
+              });
+            });
+          } catch (e) {}
+        }
+        if (document.readyState === "loading") {
+          document.addEventListener("DOMContentLoaded", run);
+        } else {
+          run();
+        }
+      })();
+    </script>
+    <script id="jcd-touch-js">
+      (function () {
+        function run() {
+          try {
+            if (window.innerWidth > 820) return;
+            /* Regression : ressortir .sky-offer de l'illustration .skywatch masquee (info-cloud) */
+            var so = document.querySelector(".sky-offer");
+            if (so) {
+              var hidden = so.closest(".skywatch");
+              var head =
+                document.querySelector(".secblock .secblock-head") ||
+                document.querySelector(".secblock-head");
+              if (hidden && head) {
+                head.insertAdjacentElement("afterend", so);
+              }
+            }
+          } catch (e) {}
+        }
+        if (document.readyState === "loading") {
+          document.addEventListener("DOMContentLoaded", run);
+        } else {
+          run();
+        }
+      })();
+    </script>
+    <script>
+      (function () {
+        var d = document,
+          root = d.documentElement,
+          reduce = false;
+        try {
+          if (sessionStorage.getItem("jcdFadeIn")) {
+            sessionStorage.removeItem("jcdFadeIn");
+            root.classList.add("jcd-nav-in");
+          }
+        } catch (e) {}
+        try {
+          reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+        } catch (e) {}
+        function veil() {
+          return d.getElementById("jcd-pagefade");
+        }
+        function isInfo(p) {
+          var f = (p.split("/").pop() || "").toLowerCase();
+          return f === "informatique" || /^info-[a-z]+\$/.test(f);
+        }
+        d.addEventListener("animationend", function (e) {
+          if (e.animationName === "jcd-pagefade-reveal")
+            root.classList.remove("jcd-nav-in");
+        });
+        d.addEventListener("click", function (e) {
+          if (
+            e.defaultPrevented ||
+            e.button !== 0 ||
+            e.metaKey ||
+            e.ctrlKey ||
+            e.shiftKey ||
+            e.altKey
+          )
+            return;
+          var a = e.target.closest ? e.target.closest("a[href]") : null;
+          if (
+            !a ||
+            (a.target && a.target !== "_self") ||
+            a.hasAttribute("download")
+          )
+            return;
+          var raw = a.getAttribute("href");
+          if (!raw || raw.charAt(0) === "#") return;
+          var url;
+          try {
+            url = new URL(raw, location.href);
+          } catch (x) {
+            return;
+          }
+          if (url.origin !== location.origin || url.href === location.href)
+            return;
+          if (url.pathname === location.pathname && url.hash) return;
+          var v = veil();
+          if (!v) return;
+          e.preventDefault();
+          try {
+            if (isInfo(url.pathname)) sessionStorage.setItem("jcdFadeIn", "1");
+          } catch (x) {}
+          var go = function () {
+            window.location.href = url.href;
+          };
+          if (reduce) {
+            v.style.setProperty("opacity", "1", "important");
+            go();
+            return;
+          }
+          var done = false,
+            fire = function () {
+              if (!done) {
+                done = true;
+                go();
+              }
+            };
+          v.style.transition = "opacity 180ms var(--ease-out)";
+          v.addEventListener("transitionend", fire, { once: true });
+          setTimeout(fire, 240);
+          requestAnimationFrame(function () {
+            v.style.setProperty("opacity", "1", "important");
+          });
+        });
+        addEventListener("pageshow", function (e) {
+          if (e.persisted) {
+            root.classList.remove("jcd-nav-in");
+            var v = veil();
+            if (v) {
+              v.style.transition = "none";
+              v.style.setProperty("opacity", "0", "important");
+            }
+          }
+        });
+      })();
+    </script>
+    <script id="jcd-mrefonte-shim">
+      /* Mobile <=820px : force les chemins reduced-motion du site (WebGL hero + typewriter off).
+   Les fallbacks statiques par pole prennent le relais. Identique au shim mpolish retire en juin. */
+      (function () {
+        try {
+          if (window.innerWidth > 820) return;
+          if (window.__jcdRmShim) return;
+          window.__jcdRmShim = 1;
+          var native = window.matchMedia;
+          if (typeof native !== "function") return;
+          window.matchMedia = function (q) {
+            if (
+              typeof q === "string" &&
+              q.indexOf("prefers-reduced-motion") !== -1 &&
+              q.indexOf("reduce") !== -1
+            ) {
+              return {
+                matches: true,
+                media: q,
+                onchange: null,
+                addListener: function () {},
+                removeListener: function () {},
+                addEventListener: function () {},
+                removeEventListener: function () {},
+                dispatchEvent: function () {
+                  return false;
+                },
+              };
+            }
+            return native.call(window, q);
+          };
+        } catch (e) {}
+      })();
+    </script>
+  </head>
+  <body>
+    <div id="jcd-pagefade" aria-hidden="true"></div>
+    <a class="jcd-skip" href="#contenu">Aller au contenu</a>
+
+    <!-- ====================================================================
+     NAVBAR v2 — Modal-like
+     Logo (g) · capsule centrale {Expertises ▾ · Contact · Carrières}
+     · CTA Assistance (d). Bande pleine largeur, fade gauche/droite,
+     dropdown "Expertises" avec 7 SVG 3D isométriques colorés.
+     ==================================================================== -->
+    <header class="navbar" id="navbar" role="banner">
+      <div class="nav-inner">
+        <a href="/" class="logo" aria-label="JCD Groupe · Accueil">
+          <img
+            class="logo-img"
+            src="assets/logo_V2.svg"
+            alt="JCD Groupe"
+            width="1530"
+            height="482"
+            decoding="async"
+            loading="eager"
+            fetchpriority="high"
+          />
+        </a>
+
+        <!-- Capsule centrale : trigger du dropdown "Nos solutions" -->
+        <nav class="nav-center" aria-label="Navigation principale">
+          <div class="nav-pill nav-pill--solo" id="nav-pill">
+            <button
+              type="button"
+              class="nav-pill__item nav-pill__trigger"
+              id="nav-expertises-trigger"
+              aria-haspopup="true"
+              aria-expanded="false"
+              aria-controls="nav-expertises-panel"
+            >
+              <span>Nos solutions</span>
+              <svg
+                class="nav-chevron"
+                width="10"
+                height="10"
+                viewBox="0 0 10 10"
+                fill="none"
+                aria-hidden="true"
+                focusable="false"
+              >
+                <path
+                  d="M2.5 4l2.5 2.5L7.5 4"
+                  stroke="currentColor"
+                  stroke-width="1.4"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"></path>
+              </svg>
+            </button>
+            <span class="nav-pill__sep" aria-hidden="true"></span>
+            <a
+              href="carrieres"
+              class="nav-pill__item nav-pill__careers"
+              aria-label="Carrières — Rejoindre le groupe JCD"
+              title="Carrières"
+            >
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.7"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                aria-hidden="true"
+                focusable="false"
+              >
+                <circle cx="9" cy="8" r="3.2"></circle>
+                <circle cx="17" cy="9.5" r="2.4"></circle>
+                <path d="M3 19c0-3 2.7-5 6-5s6 2 6 5"></path>
+                <path d="M14.5 19c.2-2.2 1.8-4 4-4s3.5 1.5 3.5 3.5"></path>
+              </svg>
+            </a>
+          </div>
+        </nav>
+
+        <!-- Pillule droite : Assistance (blanc) + Contact (transparent) -->
+        <div class="nav-cta">
+          <div class="nav-pill nav-pill--actions">
+            <a
+              href="assistance"
+              class="nav-pill__item nav-pill__item--light"
+              aria-label="Assistance JCD"
+            >
+              Assistance
+            </a>
+            <a href="contact" class="nav-pill__item nav-pill__item--dark">
+              Contact
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- ============================================================
+       DROPDOWN PANEL v3 — Antimetal-like, 3 colonnes.
+       Zone Expertises : 2 sous-colonnes (3 + 4 items), icones JCD.
+       Zone Decouvrir : monochrome blanc/gris.
+       Informatique : sous-items inline en accordeon maitrise.
+       ============================================================ -->
+      <div
+        class="nav-panel nav-menu"
+        id="nav-expertises-panel"
+        role="menu"
+        aria-labelledby="nav-expertises-trigger"
+        aria-hidden="true"
+      >
+        <div class="nav-panel__shell">
+          <section
+            class="nm-zone nm-zone--expertises"
+            aria-label="Expertises JCD"
+          >
+            <span class="nm-eyebrow">Expertises</span>
+            <div class="nm-grid">
+              <ul class="nm-list" role="none">
+                <li class="nm-group" role="none">
+                  <a
+                    href="informatique"
+                    class="nm-item"
+                    data-c="info"
+                    role="menuitem"
+                    tabindex="-1"
+                  >
+                    <span class="nm-icon" aria-hidden="true">
+                      <svg
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="1.7"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      >
+                        <rect x="3" y="4" width="18" height="12" rx="2"></rect>
+                        <path d="M8 20h8M12 16v4"></path>
+                      </svg>
+                    </span>
+                    <span class="nm-text">
+                      <span class="nm-title">Informatique</span>
+                      <span class="nm-sub-label"
+                        >Parc, cloud et collaboration</span
+                      >
+                    </span>
+                  </a>
+                  <div class="nm-sub">
+                    <div class="nm-sub-wrap">
+                      <ul class="nm-sub-list" role="none">
+                        <li role="none">
+                          <a
+                            href="info-integration"
+                            class="nm-sub-item"
+                            role="menuitem"
+                            tabindex="-1"
+                            ><span class="nm-sub-ic" aria-hidden="true"
+                              ><svg
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="1.6"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                              >
+                                <path
+                                  d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"
+                                ></path></svg
+                              ></span
+                            ><span class="nm-sub-tx"
+                              >Service Intégration &amp; Support PC</span
+                            ></a
+                          >
+                        </li>
+                        <li role="none">
+                          <a
+                            href="info-reseaux"
+                            class="nm-sub-item"
+                            role="menuitem"
+                            tabindex="-1"
+                            ><span class="nm-sub-ic" aria-hidden="true"
+                              ><svg
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="1.6"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                              >
+                                <rect x="2" y="3" width="20" height="8" rx="2"
+                                ></rect>
+                                <rect x="2" y="13" width="20" height="8" rx="2"
+                                ></rect>
+                                <path d="M6 7h.01M6 17h.01"></path></svg
+                              ></span
+                            ><span class="nm-sub-tx"
+                              >Architectures systèmes &amp; réseaux</span
+                            ></a
+                          >
+                        </li>
+                        <li role="none">
+                          <a
+                            href="info-collaboratif"
+                            class="nm-sub-item"
+                            role="menuitem"
+                            tabindex="-1"
+                            ><span class="nm-sub-ic" aria-hidden="true"
+                              ><svg
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="1.6"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                              >
+                                <path d="m22 8-6 4 6 4V8Z"></path>
+                                <rect x="2" y="6" width="14" height="12" rx="2"
+                                ></rect></svg
+                              ></span
+                            ><span class="nm-sub-tx"
+                              >Solutions collaboratives &amp; audiovisuelles</span
+                            ></a
+                          >
+                        </li>
+                        <li role="none">
+                          <a
+                            href="info-cloud"
+                            class="nm-sub-item"
+                            role="menuitem"
+                            tabindex="-1"
+                            ><span class="nm-sub-ic" aria-hidden="true"
+                              ><svg
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="1.6"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                              >
+                                <path
+                                  d="M17.5 19H9a7 7 0 1 1 6.71-9h1.79a4.5 4.5 0 1 1 0 9Z"
+                                ></path></svg
+                              ></span
+                            ><span class="nm-sub-tx">Cloud Microsoft</span></a
+                          >
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </li>
+
+                <li class="nm-group" role="none">
+                  <a
+                    href="service"
+                    class="nm-item"
+                    data-c="service"
+                    role="menuitem"
+                    tabindex="-1"
+                  >
+                    <span class="nm-icon" aria-hidden="true">
+                      <svg
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="1.7"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      >
+                        <path d="M3 14v-2a9 9 0 0 1 18 0v2"></path>
+                        <path
+                          d="M21 14v3a2 2 0 0 1-2 2h-1v-7h1a2 2 0 0 1 2 2zM3 14v3a2 2 0 0 0 2 2h1v-7H5a2 2 0 0 0-2 2z"
+                        ></path>
+                      </svg>
+                    </span>
+                    <span class="nm-text">
+                      <span class="nm-title">Service</span>
+                      <span class="nm-sub-label">Support et proximité</span>
+                    </span>
+                  </a>
+                </li>
+
+                <li class="nm-group" role="none">
+                  <a
+                    href="developpement"
+                    class="nm-item"
+                    data-c="dev"
+                    role="menuitem"
+                    tabindex="-1"
+                  >
+                    <span class="nm-icon" aria-hidden="true">
+                      <svg
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="1.7"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      >
+                        <path d="m8 6-6 6 6 6M16 6l6 6-6 6M14 4l-4 16"></path>
+                      </svg>
+                    </span>
+                    <span class="nm-text">
+                      <span class="nm-title">Développement</span>
+                      <span class="nm-sub-label">Logiciels sur mesure</span>
+                    </span>
+                  </a>
+                </li>
+              </ul>
+
+              <ul class="nm-list" role="none">
+                <li class="nm-group" role="none">
+                  <a
+                    href="print"
+                    class="nm-item"
+                    data-c="print"
+                    role="menuitem"
+                    tabindex="-1"
+                  >
+                    <span class="nm-icon" aria-hidden="true">
+                      <svg
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="1.7"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      >
+                        <path d="M6 9V3h12v6"></path>
+                        <rect x="3" y="9" width="18" height="8" rx="2"></rect>
+                        <path d="M7 17h10v4H7z"></path>
+                        <circle cx="17" cy="13" r="0.8" fill="currentColor"
+                        ></circle>
+                      </svg>
+                    </span>
+                    <span class="nm-text">
+                      <span class="nm-title">Print</span>
+                      <span class="nm-sub-label"
+                        >Impression et reprographie</span
+                      >
+                    </span>
+                  </a>
+                </li>
+
+                <li class="nm-group" role="none">
+                  <a
+                    href="telecom"
+                    class="nm-item"
+                    data-c="telecom"
+                    role="menuitem"
+                    tabindex="-1"
+                  >
+                    <span class="nm-icon" aria-hidden="true">
+                      <svg
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="1.7"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      >
+                        <path
+                          d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.37 1.9.72 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.29a2 2 0 0 1 2.11-.45c.91.35 1.85.59 2.81.72A2 2 0 0 1 22 16.92z"
+                        ></path>
+                      </svg>
+                    </span>
+                    <span class="nm-text">
+                      <span class="nm-title">Télécom</span>
+                      <span class="nm-sub-label">Téléphonie d'entreprise</span>
+                    </span>
+                  </a>
+                </li>
+
+                <li class="nm-group" role="none">
+                  <a
+                    href="formation"
+                    class="nm-item"
+                    data-c="formation"
+                    role="menuitem"
+                    tabindex="-1"
+                  >
+                    <span class="nm-icon" aria-hidden="true">
+                      <svg
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="1.7"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      >
+                        <path d="M22 10 12 5 2 10l10 5 10-5z"></path>
+                        <path d="M6 12v5c2 2 4 3 6 3s4-1 6-3v-5"></path>
+                      </svg>
+                    </span>
+                    <span class="nm-text">
+                      <span class="nm-title">Formation</span>
+                      <span class="nm-sub-label">Faire grandir vos équipes</span
+                      >
+                    </span>
+                  </a>
+                </li>
+
+                <li class="nm-group" role="none">
+                  <a
+                    href="agencement"
+                    class="nm-item"
+                    data-c="agencement"
+                    role="menuitem"
+                    tabindex="-1"
+                  >
+                    <span class="nm-icon" aria-hidden="true">
+                      <svg
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="1.7"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      >
+                        <path
+                          d="M4 18v3M20 18v3M3 8h18v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2zM6 8V5a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v3"
+                        ></path>
+                      </svg>
+                    </span>
+                    <span class="nm-text">
+                      <span class="nm-title">Agencement</span>
+                      <span class="nm-sub-label">Espaces de travail</span>
+                    </span>
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </section>
+        </div>
+      </div>
+    </header>
+
+    <!-- ====================================================================
+     RAIL DE SOUS-NAVIGATION — écosystème Informatique
+     Ancré en permanence sous le navbar. Libellés complets, page active
+     en bleu JCD. Permet de naviguer entre la vue d'ensemble et les 4
+     domaines du pôle.
+     ==================================================================== -->
+    <nav
+      class="info-subnav"
+      aria-label="Navigation du pôle Informatique"
+      role="menubar"
+    >
+      <div class="info-subnav__inner">
+        <a
+          href="informatique"
+          class="info-subnav__home"
+          role="menuitem"
+          aria-label="Vue d'ensemble, Pôle Informatique"
+          title="Vue d'ensemble"
+        >
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.7"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            aria-hidden="true"
+          >
+            <rect x="3" y="3" width="7" height="7" rx="1.6"></rect>
+            <rect x="14" y="3" width="7" height="7" rx="1.6"></rect>
+            <rect x="3" y="14" width="7" height="7" rx="1.6"></rect>
+            <rect x="14" y="14" width="7" height="7" rx="1.6"></rect>
+          </svg>
+        </a>
+        <span class="info-subnav__sep" aria-hidden="true"></span>
+        <ul class="info-subnav__list">
+          <li role="none">
+            <a
+              href="info-integration"
+              class="info-subnav__link is-active"
+              aria-current="page"
+              role="menuitem"
+              ><span class="info-subnav__ic" aria-hidden="true"
+                ><svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.7"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path
+                    d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"
+                  ></path></svg
+                ></span
+              >Service Intégration &amp; Support PC</a
+            >
+          </li>
+          <li role="none">
+            <a href="info-reseaux" class="info-subnav__link" role="menuitem"
+              ><span class="info-subnav__ic" aria-hidden="true"
+                ><svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.7"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <rect x="2" y="3" width="20" height="8" rx="2"></rect>
+                  <rect x="2" y="13" width="20" height="8" rx="2"></rect>
+                  <path d="M6 7h.01M6 17h.01"></path></svg
+                ></span
+              >Architectures systèmes &amp; réseaux</a
+            >
+          </li>
+          <li role="none">
+            <a
+              href="info-collaboratif"
+              class="info-subnav__link"
+              role="menuitem"
+              ><span class="info-subnav__ic" aria-hidden="true"
+                ><svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.7"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path d="m22 8-6 4 6 4V8Z"></path>
+                  <rect x="2" y="6" width="14" height="12" rx="2"></rect></svg
+                ></span
+              >Solutions collaboratives &amp; audiovisuelles</a
+            >
+          </li>
+          <li role="none">
+            <a href="info-cloud" class="info-subnav__link" role="menuitem"
+              ><span class="info-subnav__ic" aria-hidden="true"
+                ><svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.7"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path d="M17.5 19H9a7 7 0 1 1 6.71-9h1.79a4.5 4.5 0 1 1 0 9Z"
+                  ></path></svg
+                ></span
+              >Cloud Microsoft</a
+            >
+          </li>
+        </ul>
+      </div>
+    </nav>
+
+    <main id="contenu">
+      <div class="hero-pin-zone">
+        <!-- ====================================================================
+     HERO — épinglé (sticky), fond animé. Couche WebGL (.hero-mesh) à
+     brancher plus tard ; le fallback CSS reste visible d'ici là.
+     ==================================================================== -->
+        <section class="print-hero" aria-labelledby="hero-title">
+          <div class="hero-mesh-fallback" aria-hidden="true"></div>
+          <canvas class="hero-mesh" id="heroMesh" aria-hidden="true"></canvas>
+          <div class="hero-texture" aria-hidden="true"></div>
+          <div class="hero-grain" aria-hidden="true"></div>
+
+          <div class="container">
+            <h1 id="hero-title" class="hero-title reveal delay-1">
+              Un parc informatique <span class="accent-grad">complet</span> et support&eacute;.
+            </h1>
+
+            <p class="hero-sub reveal delay-2">
+              Préparation, déploiement et support de votre parc utilisateur.
+            </p>
+
+            <div class="hero-actions reveal delay-3">
+              <a
+                href="contact?pole=informatique"
+                class="btn-cta btn-cta--ghost"
+              >
+                Demander un diagnostic
+                <span class="btn-cta-arrow"
+                  ><svg
+                    viewBox="0 0 16 16"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="1.6"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <path d="M3 8h10M9 4l4 4-4 4"></path></svg
+                  ></span
+                >
+              </a>
+            </div>
+          </div>
+        </section>
+
+        <!-- ====================================================================
+     MANIFESTE — feuille sticky (JetBrains Mono) qui glisse par-dessus le
+     hero épinglé. Personnalisable par section.
+     ==================================================================== -->
+        <section class="manifesto" aria-labelledby="manifesto-title">
+          <div class="info-sheet">
+            <div class="container">
+              <header class="mf-head reveal">
+                <span class="mf-head-side">
+                  <span class="mf-caret" aria-hidden="true">&#9656;</span>
+                  <span class="mf-id">PARC&middot;01</span>
+                  <span class="mf-rule" aria-hidden="true"></span>
+                  <span>Manifeste</span>
+                </span>
+                <span class="mf-head-side">
+                  <span>Pôle Informatique</span>
+                </span>
+              </header>
+
+              <div class="mf-cols">
+                <blockquote
+                  class="manifesto-quote reveal delay-1"
+                  id="manifesto-title"
+                >
+                  Un poste de travail, &ccedil;a n'est pas juste
+                  <em>un ordinateur, un clavier et une souris</em> : il faut le composer
+                  selon vos besoins. Nous
+                  <span class="accent"
+                    >masterisons, d&eacute;ployons et supportons</span
+                  >
+                  votre parc (de la fourniture du mat&eacute;riel au SAV) pour que
+                  vos collaborateurs puissent
+                  <span class="q-soft"
+                    >travailler dans des conditions optimales.</span
+                  ><span class="mf-cursor" aria-hidden="true"></span>
+                </blockquote>
+                <figure class="mf-brand reveal delay-2">
+                  <img
+                    src="logos%20INFORMATIQUE/hp.png"
+                    alt="HP"
+                    width="840"
+                    height="840"
+                    decoding="async"
+                  />
+                  <figcaption>
+                    <span class="accent">//</span> Nous sommes certifi&eacute;s HP
+                  </figcaption>
+                </figure>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+      <!-- /hero-pin-zone : hero sticky + manifeste qui glisse par-dessus -->
+
+      <!-- ====================================================================
+     PRESTATIONS
+     ==================================================================== -->
+      <section
+        class="prestations"
+        id="prestations"
+        aria-labelledby="prest-title"
+      >
+        <div class="container">
+          <div class="sec-head reveal">
+            <h2 id="prest-title">Le poste de travail, <em>de A à Z</em>.</h2>
+            <p>
+              De la préparation en atelier au support quotidien, en passant par
+              le déploiement.
+            </p>
+          </div>
+
+          <div class="prest-grid reveal delay-1">
+            <article class="prest-item">
+              <div class="prest-item-head">
+                <span class="prest-item-glyph" aria-hidden="true"
+                  ><svg
+                    viewBox="0 0 40 40"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="1.3"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <rect x="8" y="8" width="24" height="17" rx="2"></rect>
+                    <path d="M15 30h10M20 25v5"></path>
+                    <path d="M13 14h14M13 18h9"></path></svg
+                  ></span
+                >
+              </div>
+              <h3 class="prest-item-title">Préparation &amp; intégration</h3>
+              <p class="prest-item-desc">
+                Masterisation et image système, installation, configuration et
+                mise en conformité des équipements avant livraison.
+              </p>
+            </article>
+
+            <article class="prest-item">
+              <div class="prest-item-head">
+                <span class="prest-item-glyph" aria-hidden="true"
+                  ><svg
+                    viewBox="0 0 40 40"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="1.3"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <rect x="9" y="18" width="22" height="14" rx="2"></rect>
+                    <path d="M20 14V5M15 10l5-5 5 5"></path>
+                    <path d="M14 25h12"></path></svg
+                  ></span
+                >
+              </div>
+              <h3 class="prest-item-title">Déploiement</h3>
+              <p class="prest-item-desc">
+                Déploiement de masse et industrialisation des projets
+                multi-sites ou grands volumes. Mise en service sur site ou à
+                distance.
+              </p>
+            </article>
+
+            <article class="prest-item">
+              <div class="prest-item-head">
+                <span class="prest-item-glyph" aria-hidden="true"
+                  ><svg
+                    viewBox="0 0 40 40"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="1.3"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <path
+                      d="M27 11a5 5 0 01-6.5 6.5L11 27l-2 2-3-3 2-2 9.5-9.5A5 5 0 0124 8l-3 3 3 3 3-3z"
+                    ></path></svg
+                  ></span
+                >
+              </div>
+              <h3 class="prest-item-title">Support &amp; SAV</h3>
+              <p class="prest-item-desc">
+                Diagnostic et dépannage, gestion des retours SAV, prise en
+                charge des équipements défectueux et suivi des réparations.
+              </p>
+            </article>
+
+            <article class="prest-item">
+              <div class="prest-item-head">
+                <span class="prest-item-glyph" aria-hidden="true"
+                  ><svg
+                    viewBox="0 0 40 40"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="1.3"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <path d="M31 20a11 11 0 11-3.2-7.8"></path>
+                    <path d="M28 6v6h-6"></path>
+                    <path d="M16 19l3 3 6-6"></path></svg
+                  ></span
+                >
+              </div>
+              <h3 class="prest-item-title">Services complémentaires</h3>
+              <p class="prest-item-desc">
+                Enrôlement MDM, effacement sécurisé certifié des données et
+                reconditionnement de postes pour une réutilisation interne.
+              </p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <!-- ====================================================================
+     SÉCURITÉ BY DESIGN — cybersécurité distillée (accent cyan)
+     ==================================================================== -->
+      <section class="secblock" aria-labelledby="sec-title">
+        <div class="container">
+          <div class="seclife-grid">
+            <div class="seclife-art reveal" aria-hidden="true">
+              <div class="cycle">
+                <div class="cycle-ring">
+                  <svg viewBox="0 0 320 320" fill="none">
+                    <defs>
+                      <linearGradient
+                        id="lcArc"
+                        x1="0"
+                        y1="0"
+                        x2="0"
+                        y2="320"
+                        gradientUnits="userSpaceOnUse"
+                      >
+                        <stop
+                          offset="0"
+                          stop-color="#4FC9E2"
+                          stop-opacity="0.55"></stop>
+                        <stop
+                          offset="1"
+                          stop-color="#4FC9E2"
+                          stop-opacity="0.08"></stop>
+                      </linearGradient>
+                    </defs>
+                    <circle
+                      cx="160"
+                      cy="160"
+                      r="158"
+                      stroke="rgba(79,201,226,0.13)"
+                      stroke-width="1"></circle>
+                    <circle
+                      class="lc-arc"
+                      cx="160"
+                      cy="160"
+                      r="158"
+                      stroke="url(#lcArc)"
+                      stroke-width="1.4"
+                      stroke-linecap="round"
+                      stroke-dasharray="740 253"
+                      transform="rotate(-90 160 160)"></circle>
+                    <g class="lc-chevrons">
+                      <path
+                        class="lc-chev"
+                        d="M-5 -3.5 L2 0 L-5 3.5"
+                        stroke="rgba(79,201,226,0.55)"
+                        stroke-width="1.4"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        transform="translate(271.7 48.3) rotate(45)"></path>
+                      <path
+                        class="lc-chev"
+                        d="M-5 -3.5 L2 0 L-5 3.5"
+                        stroke="rgba(79,201,226,0.55)"
+                        stroke-width="1.4"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        transform="translate(271.7 271.7) rotate(135)"></path>
+                      <path
+                        class="lc-chev"
+                        d="M-5 -3.5 L2 0 L-5 3.5"
+                        stroke="rgba(79,201,226,0.55)"
+                        stroke-width="1.4"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        transform="translate(48.3 271.7) rotate(225)"></path>
+                      <path
+                        class="lc-chev"
+                        d="M-5 -3.5 L2 0 L-5 3.5"
+                        stroke="rgba(79,201,226,0.40)"
+                        stroke-width="1.4"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        transform="translate(48.3 48.3) rotate(315)"></path>
+                    </g>
+                  </svg>
+                </div>
+                <div class="cycle-core">
+                  <svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="1.5"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <path
+                      d="M12 3 L19 5.8 V11 c0 4.6-3.1 7.8-7 9-3.9-1.2-7-4.4-7-9 V5.8 Z"
+                    ></path>
+                    <path d="M8.8 11.4 l2.3 2.3 4.1-4.5"></path>
+                  </svg>
+                </div>
+                <span class="cycle-dot cycle-dot--1"></span>
+                <span class="cycle-dot cycle-dot--2"></span>
+                <span class="cycle-dot cycle-dot--3"></span>
+                <span class="cycle-dot cycle-dot--4"></span>
+                <span class="cycle-lab cycle-lab--1"
+                  ><span class="cycle-num">01</span><b>Préparation durcie</b
+                  ></span
+                >
+                <span class="cycle-lab cycle-lab--2"
+                  ><span class="cycle-num">02</span><b>Déploiement</b></span
+                >
+                <span class="cycle-lab cycle-lab--3"
+                  ><span class="cycle-num">03</span><b>Gestion MDM</b></span
+                >
+                <span class="cycle-lab cycle-lab--4"
+                  ><span class="cycle-num">04</span><b>Effacement certifié</b
+                  ></span
+                >
+              </div>
+            </div>
+
+            <div class="seclife-copy">
+              <div class="secblock-head reveal">
+                <h2 id="sec-title">
+                  Le poste, <em>sécurisé</em> dès la préparation.
+                </h2>
+                <p>
+                  La sécurité du parc commence à l'atelier et ne s'arrête jamais
+                  : durcissement, conformité et maîtrise sur tout le cycle de
+                  vie, jusqu'à l'effacement certifié.
+                </p>
+                <a href="informatique#cybersecurite" class="secblock-link">
+                  Découvrir notre expertise Cybersécurité
+                  <svg
+                    viewBox="0 0 16 16"
+                    width="15"
+                    height="15"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="1.6"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    aria-hidden="true"
+                  >
+                    <path d="M3 8h10M9 4l4 4-4 4"></path>
+                  </svg>
+                </a>
+              </div>
+
+              <div class="seclife-points reveal delay-1">
+                <div class="lifepoint">
+                  <div>
+                    <h4>Postes durcis &amp; conformes</h4>
+                    <p>Masters durcis et chiffrés, prêts à l'emploi.</p>
+                  </div>
+                </div>
+                <div class="lifepoint">
+                  <div>
+                    <h4>Déploiement maîtrisé</h4>
+                    <p>Mise en service sur site et raccordement au SI.</p>
+                  </div>
+                </div>
+                <div class="lifepoint">
+                  <div>
+                    <h4>Gestion moderne (MDM)</h4>
+                    <p>Enrôlement MDM et administration centralisée du parc.</p>
+                  </div>
+                </div>
+                <div class="lifepoint">
+                  <div>
+                    <h4>Effacement sécurisé certifié</h4>
+                    <p>Effacement certifié des données, sans résidu.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ====================================================================
+     PROCESS
+     ==================================================================== -->
+      <section class="process" id="process" aria-labelledby="process-title">
+        <div class="container">
+          <div class="sec-head reveal">
+            <h2 id="process-title">Un service <em>de bout en bout</em>.</h2>
+            <p>
+              De l'atelier au cycle de vie du poste, une cha&icirc;ne
+              ma&icirc;tris&eacute;e et industrialis&eacute;e gr&acirc;ce
+              &agrave; nos experts.
+            </p>
+          </div>
+
+          <div class="atelier reveal delay-1">
+            <div class="atelier-belt" aria-hidden="true"></div>
+
+            <div class="atelier-steps">
+              <div class="station">
+                <div class="station-art" aria-hidden="true">
+                  <svg viewBox="0 0 132 142" fill="none">
+                    <ellipse
+                      cx="66"
+                      cy="123"
+                      rx="36"
+                      ry="3"
+                      fill="rgba(0,0,0,0.38)"></ellipse>
+                    <path
+                      d="M24 120 H108"
+                      stroke="rgba(255,255,255,0.15)"
+                      stroke-width="1.5"
+                      stroke-linecap="round"></path>
+                    <rect
+                      class="st-build"
+                      x="40"
+                      y="63"
+                      width="52"
+                      height="43"
+                      rx="4.5"
+                      stroke="currentColor"
+                      stroke-width="1.4"
+                      pathLength="120"
+                      stroke-dasharray="3 3"
+                      stroke-linecap="round"
+                      opacity="0.8"></rect>
+                    <path
+                      class="st-build"
+                      d="M32 106 L100 106 L106.5 114.6 Q107.5 117 104.5 117 L27.5 117 Q24.5 117 25.5 114.6 Z"
+                      stroke="currentColor"
+                      stroke-width="1.4"
+                      pathLength="120"
+                      stroke-dasharray="3 3"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      opacity="0.8"></path>
+                    <rect
+                      x="52"
+                      y="82"
+                      width="28"
+                      height="3"
+                      rx="1.5"
+                      fill="currentColor"
+                      fill-opacity="0.16"></rect>
+                    <rect
+                      x="52"
+                      y="82"
+                      width="13"
+                      height="3"
+                      rx="1.5"
+                      fill="currentColor"
+                      fill-opacity="0.5"></rect>
+                  </svg>
+                </div>
+                <div class="station-tag">
+                  <h3>Atelier</h3>
+                  <p>
+                    Masterisation, installation et mise en conformité avant
+                    livraison.
+                  </p>
+                </div>
+              </div>
+
+              <div class="station">
+                <div class="station-art" aria-hidden="true">
+                  <svg viewBox="0 0 132 142" fill="none">
+                    <ellipse
+                      cx="66"
+                      cy="123"
+                      rx="36"
+                      ry="3"
+                      fill="rgba(0,0,0,0.42)"></ellipse>
+                    <path
+                      d="M24 120 H108"
+                      stroke="rgba(255,255,255,0.15)"
+                      stroke-width="1.5"
+                      stroke-linecap="round"></path>
+                    <path
+                      class="st-arrow"
+                      d="M66 30 V47 M59 40 L66 47 L73 40"
+                      stroke="currentColor"
+                      stroke-width="1.5"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"></path>
+                    <rect
+                      x="40"
+                      y="63"
+                      width="52"
+                      height="43"
+                      rx="4.5"
+                      stroke="currentColor"
+                      stroke-width="1.4"></rect>
+                    <path
+                      d="M50 78 H82 M50 86 H71"
+                      stroke="currentColor"
+                      stroke-width="1.2"
+                      stroke-linecap="round"
+                      opacity="0.45"></path>
+                    <path
+                      d="M32 106 L100 106 L106.5 114.6 Q107.5 117 104.5 117 L27.5 117 Q24.5 117 25.5 114.6 Z"
+                      stroke="currentColor"
+                      stroke-width="1.4"
+                      stroke-linejoin="round"></path>
+                    <path
+                      d="M58 112.5 H74"
+                      stroke="currentColor"
+                      stroke-width="1"
+                      stroke-linecap="round"
+                      opacity="0.30"></path>
+                  </svg>
+                </div>
+                <div class="station-tag">
+                  <h3>Mise en service</h3>
+                  <p>
+                    Sur site ou à distance, industrialisée pour les grands
+                    volumes et le multi-sites.
+                  </p>
+                </div>
+              </div>
+
+              <div class="station">
+                <div class="station-art" aria-hidden="true">
+                  <svg viewBox="0 0 132 142" fill="none">
+                    <ellipse
+                      cx="66"
+                      cy="123"
+                      rx="36"
+                      ry="3"
+                      fill="rgba(0,0,0,0.42)"></ellipse>
+                    <path
+                      d="M24 120 H108"
+                      stroke="rgba(255,255,255,0.15)"
+                      stroke-width="1.5"
+                      stroke-linecap="round"></path>
+                    <rect
+                      x="40"
+                      y="63"
+                      width="52"
+                      height="43"
+                      rx="4.5"
+                      stroke="currentColor"
+                      stroke-width="1.4"></rect>
+                    <path
+                      class="st-trace"
+                      d="M48 85 H57 L62 74 L69 95 L74 85 H84"
+                      stroke="currentColor"
+                      stroke-width="1.5"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      pathLength="100"></path>
+                    <path
+                      d="M32 106 L100 106 L106.5 114.6 Q107.5 117 104.5 117 L27.5 117 Q24.5 117 25.5 114.6 Z"
+                      stroke="currentColor"
+                      stroke-width="1.4"
+                      stroke-linejoin="round"></path>
+                    <path
+                      d="M58 112.5 H74"
+                      stroke="currentColor"
+                      stroke-width="1"
+                      stroke-linecap="round"
+                      opacity="0.30"></path>
+                  </svg>
+                </div>
+                <div class="station-tag">
+                  <h3>SAV &amp; dépannage</h3>
+                  <p>
+                    Diagnostic, réparations et gestion des retours : un parc qui
+                    reste opérationnel.
+                  </p>
+                </div>
+              </div>
+
+              <div class="station">
+                <div class="station-art" aria-hidden="true">
+                  <svg viewBox="0 0 132 142" fill="none">
+                    <ellipse
+                      cx="66"
+                      cy="123"
+                      rx="36"
+                      ry="3"
+                      fill="rgba(0,0,0,0.42)"></ellipse>
+                    <path
+                      d="M24 120 H108"
+                      stroke="rgba(255,255,255,0.15)"
+                      stroke-width="1.5"
+                      stroke-linecap="round"></path>
+                    <rect
+                      x="40"
+                      y="63"
+                      width="52"
+                      height="43"
+                      rx="4.5"
+                      stroke="currentColor"
+                      stroke-width="1.4"></rect>
+                    <path
+                      d="M57 85 L64.5 92.5 L77 76"
+                      stroke="currentColor"
+                      stroke-width="1.5"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"></path>
+                    <path
+                      d="M32 106 L100 106 L106.5 114.6 Q107.5 117 104.5 117 L27.5 117 Q24.5 117 25.5 114.6 Z"
+                      stroke="currentColor"
+                      stroke-width="1.4"
+                      stroke-linejoin="round"></path>
+                    <path
+                      d="M58 112.5 H74"
+                      stroke="currentColor"
+                      stroke-width="1"
+                      stroke-linecap="round"
+                      opacity="0.30"></path>
+                    <circle
+                      cx="94"
+                      cy="62"
+                      r="11.5"
+                      fill="#131313"
+                      stroke="currentColor"
+                      stroke-width="1.3"></circle>
+                    <g transform="translate(88.6 56.6) scale(0.45)">
+                      <g
+                        class="st-spin"
+                        stroke="currentColor"
+                        stroke-width="3.2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      >
+                        <path d="M21 12a9 9 0 1 1-2.64-6.36"></path>
+                        <path d="M21 3v5h-5"></path>
+                      </g>
+                    </g>
+                  </svg>
+                </div>
+                <div class="station-tag">
+                  <h3>Cycle de vie</h3>
+                  <p>
+                    Gestion moderne (MDM), effacement sécurisé et
+                    reconditionnement en fin de vie.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ====================================================================
+     CTA — style maison (icône + corps + téléphone), commun aux pôles
+     ==================================================================== -->
+      <section class="cta-section" id="contact" aria-labelledby="cta-title">
+        <div class="container">
+          <div class="cta-frame">
+            <div class="cta-inner">
+              <svg
+                class="cta-icon reveal"
+                viewBox="0 0 120 120"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+                aria-hidden="true"
+                focusable="false"
+              >
+                <g
+                  stroke="currentColor"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <rect
+                    x="18"
+                    y="26"
+                    width="84"
+                    height="54"
+                    rx="5"
+                    stroke-width="2"></rect>
+                  <path d="M46 92h28M60 80v12" stroke-width="2"></path>
+                  <path
+                    d="M32 42h40M32 52h28M32 62h34"
+                    stroke-width="1.5"
+                    opacity="0.45"></path>
+                </g>
+                <circle cx="60" cy="53" r="5" fill="currentColor"></circle>
+              </svg>
+
+              <div class="cta-body">
+                <h2 class="cta-title reveal delay-1" id="cta-title">
+                  Un besoin
+                  <em>li&eacute; &agrave; vos installations&thinsp;?</em>
+                </h2>
+                <p class="cta-sub reveal delay-2">
+                  Préparation, déploiement, support : un seul service pour tout
+                  gérer. Diagnostic et devis gratuit.
+                </p>
+                <div class="cta-actions reveal delay-3">
+                  <a
+                    href="contact?pole=informatique"
+                    class="btn-cta btn-cta--primary"
+                  >
+                    Contacter le pôle Informatique
+                    <span class="btn-cta-arrow"
+                      ><svg
+                        viewBox="0 0 16 16"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="1.6"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      >
+                        <path d="M3 8h10M9 4l4 4-4 4"></path></svg
+                      ></span
+                    >
+                  </a>
+                  <span class="cta-actions-divider" aria-hidden="true"></span>
+                  <span class="cta-phone">
+                    <svg
+                      viewBox="0 0 20 20"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="1.4"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      width="14"
+                      height="14"
+                    >
+                      <path
+                        d="M2 3a1 1 0 011-1h3.28a1 1 0 01.95.68l1.07 3.21a1 1 0 01-.25 1L6.54 8.4a12.06 12.06 0 005.06 5.06l1.51-1.51a1 1 0 011-.25l3.21 1.07a1 1 0 01.68.95V17a1 1 0 01-1 1A15 15 0 012 3z"
+                      ></path>
+                    </svg>
+                    <a href="tel:+33387184920" class="cta-phone-num"
+                      >03 87 18 49 20</a
+                    >
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer role="contentinfo">
+      <div class="footer-grain" aria-hidden="true"></div>
+      <div class="container">
+        <div class="footer-bento">
+          <!-- Pôles -->
+          <div class="fcard fcard--poles reveal">
+            <div class="fcard-inner">
+              <h4 class="fcard-title">Pôles</h4>
+              <ul class="footer-links footer-links--cols">
+                <li>
+                  <a class="footer-link" href="informatique">Informatique</a>
+                </li>
+                <li><a class="footer-link" href="service">Service</a></li>
+                <li>
+                  <a class="footer-link" href="developpement">Développement</a>
+                </li>
+                <li><a class="footer-link" href="print">Print</a></li>
+                <li><a class="footer-link" href="telecom">Télécom</a></li>
+                <li>
+                  <a class="footer-link" href="formation">Formation</a>
+                </li>
+                <li>
+                  <a class="footer-link" href="agencement">Agencement</a>
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- Le groupe -->
+          <div class="fcard fcard--groupe reveal delay-1">
+            <div class="fcard-inner">
+              <h4 class="fcard-title">Le groupe</h4>
+              <ul class="footer-links">
+                <li>
+                  <a class="footer-link" href="index#histoire">Histoire</a>
+                </li>
+                <li>
+                  <a class="footer-link" href="index#valeurs">Valeurs</a>
+                </li>
+                <li>
+                  <a class="footer-link" href="index#chiffres">Chiffres clés</a>
+                </li>
+                <li>
+                  <a class="footer-link" href="carrieres">Nous rejoindre</a>
+                </li>
+                <li><a class="footer-link" href="contact">Contact</a></li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- Contact Metz + Nancy -->
+          <div class="fcard fcard--contact reveal delay-2">
+            <div class="fcard-inner">
+              <h4 class="fcard-title">Nous trouver</h4>
+              <div class="footer-contacts">
+                <div class="footer-contact-block">
+                  <span class="fc-city">Metz</span>
+                  <span class="fc-role">Siège social</span>
+                  <address>193 rue du Général Metman<br />57070 Metz</address>
+                  <a class="footer-link" href="tel:+33387184920"
+                    >03 87 18 49 20</a
+                  >
+                  <span class="fc-hours">Lun–Ven · 8h30–18h30</span>
+                </div>
+                <div class="footer-contact-block">
+                  <span class="fc-city">Nancy</span>
+                  <span class="fc-role">Agence</span>
+                  <address>96 boulevard d'Austrasie<br />54000 Nancy</address>
+                  <a class="footer-link" href="tel:+33387184920"
+                    >03 87 18 49 20</a
+                  >
+                  <span class="fc-hours">Lun–Ven · 8h30–18h30</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="footer-bottom reveal delay-3">
+          <span class="footer-copyright"
+            >&copy; <span id="year">2026</span> JCD Groupe &middot; Tous droits réservés.</span
+          >
+
+          <!-- Le groupe : societes soeurs de la holding, signature centrale de
+           la barre legale. La signification passe par la seule proximite
+           avec "JCD Groupe", jamais enoncee. (inject_footer_eco.py) -->
+          <div class="footer-eco">
+            <span class="footer-eco-label">Le groupe</span>
+            <a
+              class="footer-eco-link"
+              href="https://www.pclease.lu/"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="PC Lease — ingénierie informatique (nouvel onglet)"
+            >
+              <img
+                src="assets/pclease-blanc.svg"
+                alt="PC Lease"
+                height="14"
+                decoding="async"
+              />
+              <svg
+                class="footer-eco-arrow"
+                width="9"
+                height="9"
+                viewBox="0 0 9 9"
+                fill="none"
+                aria-hidden="true"
+              >
+                <path
+                  d="M1.5 7.5 7.5 1.5M7.5 1.5H2.9M7.5 1.5v4.6"
+                  stroke="currentColor"
+                  stroke-width="1.2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"></path>
+              </svg>
+            </a>
+            <a
+              class="footer-eco-link"
+              href="https://www.rsecure.lu/"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Rsecure — cybersécurité (nouvel onglet)"
+            >
+              <img
+                src="assets/rsecure-blanc.svg"
+                alt="Rsecure"
+                height="17"
+                decoding="async"
+              />
+              <svg
+                class="footer-eco-arrow"
+                width="9"
+                height="9"
+                viewBox="0 0 9 9"
+                fill="none"
+                aria-hidden="true"
+              >
+                <path
+                  d="M1.5 7.5 7.5 1.5M7.5 1.5H2.9M7.5 1.5v4.6"
+                  stroke="currentColor"
+                  stroke-width="1.2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"></path>
+              </svg>
+            </a>
+            <a
+              class="footer-eco-link"
+              href="https://digidocservices.com/"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Digidoc Services — gestion documentaire (nouvel onglet)"
+            >
+              <img
+                src="assets/digidoc-blanc.svg"
+                alt="Digidoc Services"
+                height="13"
+                decoding="async"
+              />
+              <svg
+                class="footer-eco-arrow"
+                width="9"
+                height="9"
+                viewBox="0 0 9 9"
+                fill="none"
+                aria-hidden="true"
+              >
+                <path
+                  d="M1.5 7.5 7.5 1.5M7.5 1.5H2.9M7.5 1.5v4.6"
+                  stroke="currentColor"
+                  stroke-width="1.2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"></path>
+              </svg>
+            </a>
+          </div>
+
+          <div class="footer-bottom-right">
+            <span class="footer-legal"
+              ><a class="footer-link" href="mentions-legales"
+                >Mentions légales</a
+              >
+              &middot;
+              <a class="footer-link" href="politique-de-confidentialite"
+                >Politique de confidentialité</a
+              ></span
+            >
+            <a
+              class="footer-linkedin"
+              href="https://www.linkedin.com/company/jcd-groupe/"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="JCD Groupe sur LinkedIn"
+            >
+              <svg
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                fill="currentColor"
+                aria-hidden="true"
+              >
+                <path
+                  d="M4.98 3.5C4.98 4.88 3.87 6 2.5 6S0 4.88 0 3.5 1.12 1 2.5 1s2.48 1.12 2.48 2.5zM.22 8h4.56v14H.22V8zm7.6 0h4.37v1.92h.06c.61-1.15 2.1-2.36 4.32-2.36 4.62 0 5.47 3.04 5.47 7v7.44h-4.56v-6.6c0-1.57-.03-3.6-2.2-3.6-2.2 0-2.54 1.72-2.54 3.49V22H7.82V8z"
+                ></path>
+              </svg>
+            </a>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <script>
+      /* Hero WebGL — Assemblage isométrique : composants en éclaté qui s'aimantent
+     et s'emboîtent en un poste, puis se redéploient (boucle). */
+      (function heroMesh() {
+        var canvas = document.getElementById("heroMesh");
+        if (!canvas) return;
+        if (window.matchMedia("(prefers-reduced-motion: reduce)").matches)
+          return;
+        var gl = null;
+        try {
+          var opts = {
+            antialias: false,
+            alpha: false,
+            premultipliedAlpha: false,
+            depth: false,
+            stencil: false,
+            preserveDrawingBuffer: false,
+            powerPreference: "low-power",
+          };
+          gl =
+            canvas.getContext("webgl", opts) ||
+            canvas.getContext("experimental-webgl", opts);
+        } catch (e) {}
+        if (!gl) return;
+        var VERT = "attribute vec2 p;void main(){gl_Position=vec4(p,0.,1.);}";
+        var FRAG = `precision highp float;
+uniform vec2 u_res; uniform float u_t;
+uniform vec3 u_c1; uniform vec3 u_c2; uniform vec3 u_c3; uniform vec3 u_c4;
+float hash(vec2 p){return fract(sin(dot(p,vec2(127.1,311.7)))*43758.5453);}
+float sdRB(vec2 q, vec2 b, float r){vec2 d=abs(q)-b+r;return min(max(d.x,d.y),0.)+length(max(d,0.))-r;}
+void main(){
+  vec2 uv=gl_FragCoord.xy/u_res.xy;
+  float ar=u_res.x/u_res.y;
+  vec2 cells=vec2(floor(7.0*ar),7.0);
+  float pw=cells.y/u_res.y;
+  vec2 g=uv*cells;
+  vec2 id=floor(g);
+  vec2 f=fract(g)-0.5;
+  vec2 dir=normalize(vec2(1.0,0.55));
+  float proj=dot((id+0.5)/cells,dir);
+  float jit=hash(id)*0.06;
+  float h2=hash(id+7.31);
+  float h3=hash(id+3.77);
+  float band=proj+jit;
+  // Onde cyclique continue : age = temps ecoule depuis le passage du front (0 = vient d etre allume).
+  // Le front revient par anticipation (pre) -> plus aucun clignotement global au rebouclage.
+  float age=mod(u_t*0.11-band,1.7);
+  float pre=exp(-pow((1.7-age)*6.0,2.0))*0.5;
+  float act=clamp(pre+exp(-age*age*40.0)*0.9+exp(-age*2.4)*0.5,0.0,1.0);
+  float box=sdRB(f,vec2(0.34,0.34),0.07);
+  // Contour fin anti-alias (~1.5 px) + lueur gaussienne le long du bord
+  float edge=1.0-smoothstep(0.0,pw*1.8,abs(box)-pw*0.5);
+  float glow=exp(-box*box*900.0);
+  float fill=smoothstep(0.0,-0.10,box);
+  float core=exp(-dot(f,f)*52.0);
+  // Couche de profondeur : trame 2x plus large, tres faible, derriere le mur
+  vec2 f2=fract(uv*cells*0.5+vec2(0.27,0.31))-0.5;
+  float box2=sdRB(f2,vec2(0.36,0.36),0.08);
+  float edge2=1.0-smoothstep(0.0,pw*3.5,abs(box2)-pw*0.5);
+  vec3 col=u_c1;
+  col+=u_c3*edge2*0.022;
+  col+=u_c3*edge*(0.030+h2*0.050);
+  float lit=mix(0.62,1.0,h2);
+  float flick=0.90+0.10*sin(u_t*(1.2+h2*2.4)+h3*40.0);
+  col=mix(col,u_c2,edge*act*0.55*lit);
+  col+=u_c2*glow*act*0.06*lit;
+  col+=u_c4*fill*act*0.06*lit;
+  col+=mix(u_c2,u_c4,0.4+h3*0.6)*core*act*0.34*lit*flick;
+  float dn=(hash(gl_FragCoord.xy+vec2(u_t,0.0))+hash(gl_FragCoord.xy+vec2(0.0,-u_t))-1.0)*(1.6/255.0);
+  col+=dn;
+  vec2 gd=(uv-vec2(0.30,0.52))*vec2(1.5,2.0);
+  col*=1.0-exp(-dot(gd,gd)*2.4)*0.20;
+  vec2 q=uv*2.0-1.0; q.x*=ar;
+  float vig=1.0-smoothstep(0.45,1.45,length(q*vec2(0.62,0.8)));
+  col*=mix(0.55,1.0,vig);
+  col=pow(max(col,0.0),vec3(0.96));
+  gl_FragColor=vec4(col,1.0);
+}`;
+        function compile(t, s) {
+          var sh = gl.createShader(t);
+          gl.shaderSource(sh, s);
+          gl.compileShader(sh);
+          if (!gl.getShaderParameter(sh, gl.COMPILE_STATUS)) {
+            gl.deleteShader(sh);
+            return null;
+          }
+          return sh;
+        }
+        var vs = compile(gl.VERTEX_SHADER, VERT),
+          fs = compile(gl.FRAGMENT_SHADER, FRAG);
+        if (!vs || !fs) return;
+        var prog = gl.createProgram();
+        gl.attachShader(prog, vs);
+        gl.attachShader(prog, fs);
+        gl.linkProgram(prog);
+        if (!gl.getProgramParameter(prog, gl.LINK_STATUS)) return;
+        gl.useProgram(prog);
+        var buf = gl.createBuffer();
+        gl.bindBuffer(gl.ARRAY_BUFFER, buf);
+        gl.bufferData(
+          gl.ARRAY_BUFFER,
+          new Float32Array([-1, -1, 1, -1, -1, 1, 1, 1]),
+          gl.STATIC_DRAW,
+        );
+        var aLoc = gl.getAttribLocation(prog, "p");
+        gl.enableVertexAttribArray(aLoc);
+        gl.vertexAttribPointer(aLoc, 2, gl.FLOAT, false, 0, 0);
+        var uRes = gl.getUniformLocation(prog, "u_res"),
+          uT = gl.getUniformLocation(prog, "u_t");
+        var uC1 = gl.getUniformLocation(prog, "u_c1"),
+          uC2 = gl.getUniformLocation(prog, "u_c2"),
+          uC3 = gl.getUniformLocation(prog, "u_c3"),
+          uC4 = gl.getUniformLocation(prog, "u_c4");
+        function readMeshColor(host, name, fb) {
+          var raw = getComputedStyle(host)
+            .getPropertyValue("--mesh-" + name)
+            .trim();
+          if (!raw) return fb;
+          var parts = raw.split(",").map(function (n) {
+            return parseFloat(n) / 255;
+          });
+          if (
+            parts.length !== 3 ||
+            parts.some(function (v) {
+              return isNaN(v);
+            })
+          )
+            return fb;
+          return parts;
+        }
+        var host = canvas.closest(".print-hero") || canvas.parentElement;
+        gl.uniform3fv(uC1, readMeshColor(host, "c1", [0.051, 0.051, 0.051]));
+        gl.uniform3fv(uC2, readMeshColor(host, "c2", [0.18, 0.447, 0.729]));
+        gl.uniform3fv(uC3, readMeshColor(host, "c3", [0.118, 0.353, 0.58]));
+        gl.uniform3fv(uC4, readMeshColor(host, "c4", [0.322, 0.565, 0.796]));
+        function resize() {
+          var dpr = Math.min(window.devicePixelRatio || 1, 2);
+          var w = Math.max(1, Math.floor(canvas.clientWidth * dpr)),
+            h = Math.max(1, Math.floor(canvas.clientHeight * dpr));
+          if (canvas.width !== w || canvas.height !== h) {
+            canvas.width = w;
+            canvas.height = h;
+            gl.viewport(0, 0, w, h);
+            gl.uniform2f(uRes, w, h);
+          }
+        }
+        resize();
+        if (window.ResizeObserver) {
+          new ResizeObserver(resize).observe(canvas);
+        } else {
+          window.addEventListener("resize", resize, { passive: true });
+        }
+        var running = true;
+        if ("IntersectionObserver" in window) {
+          new IntersectionObserver(
+            function (en) {
+              running = en[0].isIntersecting;
+            },
+            { threshold: 0 },
+          ).observe(canvas);
+        }
+        canvas.classList.add("is-ready");
+        var start = performance.now();
+        function frame(now) {
+          if (running) {
+            gl.uniform1f(uT, (now - start) / 1000);
+            gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
+          }
+          requestAnimationFrame(frame);
+        }
+        requestAnimationFrame(frame);
+      })();
+
+      (function setupRevealAnimations() {
+        var els = document.querySelectorAll(".reveal");
+        if (!("IntersectionObserver" in window)) {
+          els.forEach(function (el) {
+            el.classList.add("visible");
+          });
+          return;
+        }
+        var io = new IntersectionObserver(
+          function (entries) {
+            entries.forEach(function (e) {
+              if (e.isIntersecting) {
+                e.target.classList.add("visible");
+                io.unobserve(e.target);
+              }
+            });
+          },
+          { threshold: 0.1, rootMargin: "0px 0px -60px 0px" },
+        );
+        els.forEach(function (el) {
+          io.observe(el);
+        });
+      })();
+
+      (function setupYear() {
+        var y = document.getElementById("year");
+        if (y) y.textContent = String(new Date().getFullYear());
+      })();
+
+      /* ----------------------------------------------------
+     NAVBAR v2 — Dropdown "Expertises"
+     Ouverture sur hover (zone trigger + zone pill + zone
+     panel, sans gap mort), focus clavier, clic, Esc, clic
+     extérieur. Pilote aria-expanded + aria-hidden + classe
+     .is-open pour les transitions CSS. Synchronisé pour le
+     tab navigation entre items du panel.
+     ---------------------------------------------------- */
+      (function setupNavDropdown() {
+        var trigger = document.getElementById("nav-expertises-trigger");
+        var panel = document.getElementById("nav-expertises-panel");
+        var pill = document.getElementById("nav-pill");
+        var navbar = document.getElementById("navbar");
+        if (!trigger || !panel || !pill || !navbar) return;
+
+        var items = panel.querySelectorAll(".nm-item, .nm-sub-item");
+        var groups = panel.querySelectorAll(".nm-group");
+        var openTimer = null;
+        var closeTimer = null;
+        var isOpen = false;
+
+        function clearTimers() {
+          if (openTimer) {
+            window.clearTimeout(openTimer);
+            openTimer = null;
+          }
+          if (closeTimer) {
+            window.clearTimeout(closeTimer);
+            closeTimer = null;
+          }
+        }
+
+        function openPanel() {
+          clearTimers();
+          if (isOpen) return;
+          isOpen = true;
+          trigger.setAttribute("aria-expanded", "true");
+          panel.setAttribute("aria-hidden", "false");
+          items.forEach(function (it) {
+            it.setAttribute("tabindex", "0");
+          });
+        }
+        function closePanel() {
+          clearTimers();
+          if (!isOpen) return;
+          isOpen = false;
+          trigger.setAttribute("aria-expanded", "false");
+          panel.setAttribute("aria-hidden", "true");
+          items.forEach(function (it) {
+            it.setAttribute("tabindex", "-1");
+          });
+          groups.forEach(function (g) {
+            g.setAttribute("data-expanded", "false");
+          });
+        }
+        function deferOpen() {
+          clearTimers();
+          openTimer = window.setTimeout(openPanel, 60);
+        }
+        function deferClose() {
+          clearTimers();
+          closeTimer = window.setTimeout(closePanel, 180);
+        }
+
+        [trigger, pill, panel].forEach(function (el) {
+          el.addEventListener("mouseenter", function () {
+            deferOpen();
+          });
+          el.addEventListener("mouseleave", function () {
+            deferClose();
+          });
+        });
+
+        trigger.addEventListener("click", function (e) {
+          e.preventDefault();
+          if (isOpen) closePanel();
+          else openPanel();
+        });
+
+        trigger.addEventListener("keydown", function (e) {
+          if (e.key === "ArrowDown" || e.key === "Enter" || e.key === " ") {
+            e.preventDefault();
+            openPanel();
+            if (items.length) items[0].focus();
+          } else if (e.key === "Escape" && isOpen) {
+            closePanel();
+            trigger.focus();
+          }
+        });
+
+        items.forEach(function (item, i) {
+          item.addEventListener("keydown", function (e) {
+            if (e.key === "ArrowDown") {
+              e.preventDefault();
+              items[(i + 1) % items.length].focus();
+            } else if (e.key === "ArrowUp") {
+              e.preventDefault();
+              items[(i - 1 + items.length) % items.length].focus();
+            } else if (e.key === "Escape") {
+              closePanel();
+              trigger.focus();
+            } else if (
+              e.key === "Tab" &&
+              !e.shiftKey &&
+              i === items.length - 1
+            ) {
+              closePanel();
+            } else if (e.key === "Tab" && e.shiftKey && i === 0) {
+              closePanel();
+            }
+          });
+        });
+
+        document.addEventListener("click", function (e) {
+          if (!isOpen) return;
+          if (navbar.contains(e.target)) return;
+          closePanel();
+        });
+
+        document.addEventListener("keydown", function (e) {
+          if (e.key === "Escape" && isOpen) {
+            closePanel();
+            trigger.focus();
+          }
+        });
+
+        /* === Accordeon : sous-items d'Informatique (et tout groupe qui
+           contient un .nm-sub). Hoverer un autre groupe replie le
+           precedent. Reset complet a la fermeture du panneau. === */
+        var grpTimer = null;
+        function setExpanded(target) {
+          if (grpTimer) {
+            clearTimeout(grpTimer);
+            grpTimer = null;
+          }
+          groups.forEach(function (g) {
+            g.setAttribute("data-expanded", g === target ? "true" : "false");
+          });
+        }
+        groups.forEach(function (group) {
+          var hasSub = !!group.querySelector(".nm-sub");
+          group.addEventListener("mouseenter", function () {
+            if (grpTimer) {
+              clearTimeout(grpTimer);
+              grpTimer = null;
+            }
+            grpTimer = setTimeout(function () {
+              setExpanded(hasSub ? group : null);
+            }, 70);
+          });
+          group.addEventListener("focusin", function () {
+            setExpanded(hasSub ? group : null);
+          });
+        });
+
+        /* === Marqueur de page courante : ajoute .is-current sur l'item
+           expertise dont le href pointe vers le fichier courant.
+           Les items de la zone Decouvrir (anchors) ne sont jamais
+           marques courants. === */
+        var here = (location.pathname.split("/").pop() || "").toLowerCase();
+        if (!here) here = "index";
+        panel
+          .querySelectorAll(".nm-zone--expertises .nm-item")
+          .forEach(function (a) {
+            var hrefAttr = a.getAttribute("href") || "";
+            if (hrefAttr.indexOf("#") !== -1) return;
+            var target = hrefAttr.split("/").pop().toLowerCase();
+            if (target && target === here) a.classList.add("is-current");
+          });
+        panel.querySelectorAll(".nm-sub-item").forEach(function (s) {
+          var st = (s.getAttribute("href") || "")
+            .split("/")
+            .pop()
+            .toLowerCase();
+          if (st && st === here) s.classList.add("is-current");
+        });
+      })();
+
+      (function setupInfoSubnav() {
+        var el =
+          document.querySelector(".info-subnav__link.is-active") ||
+          document.querySelector(".info-subnav__home.is-active");
+        var rail = document.querySelector(".info-subnav__inner");
+        if (!el || !rail) return;
+        /* Centrage horizontal manuel : seul le rail défile (scrollIntoView
+       pouvait faire défiler la page elle-même → tressaillement à l'arrivée). */
+        var r = el.getBoundingClientRect(),
+          rr = rail.getBoundingClientRect();
+        rail.scrollLeft += r.left + r.width / 2 - (rr.left + rr.width / 2);
+      })();
+
+      /* Smooth scroll activé après le premier rendu seulement (cf. html.is-loaded) :
+     les sauts d'ancre au chargement restent instantanés, sans défilement parasite. */
+      requestAnimationFrame(function () {
+        requestAnimationFrame(function () {
+          document.documentElement.classList.add("is-loaded");
+        });
+      });
+    </script>
+    <script>
+      /* Voile givré : cale body::after sur le rect du panneau de menu ouvert
+     (le blur ne peut pas vivre dans la navbar fixed — bug Chromium). */
+      (function setupMenuFrost() {
+        var panels = Array.prototype.slice.call(
+          document.querySelectorAll(".nav-panel"),
+        );
+        if (!panels.length || !window.MutationObserver) return;
+        var current = null;
+        function place(panel) {
+          var r = panel.getBoundingClientRect();
+          var s = document.body.style;
+          s.setProperty("--menu-x", r.left + "px");
+          s.setProperty("--menu-y", r.top + "px");
+          s.setProperty("--menu-w", r.width + "px");
+          s.setProperty("--menu-h", r.height + "px");
+        }
+        /* Suit la croissance du panneau (sous-sections qui se deplient) :
+       le voile est recale en continu tant que le menu est ouvert. */
+        var ro = window.ResizeObserver
+          ? new ResizeObserver(function () {
+              if (current) place(current);
+            })
+          : null;
+        var mo = new MutationObserver(function (muts) {
+          muts.forEach(function (m) {
+            var p = m.target;
+            if (p.getAttribute("aria-hidden") === "false") {
+              current = p;
+              place(p);
+              if (ro) {
+                ro.disconnect();
+                ro.observe(p);
+                var sh = p.querySelector(".nav-panel__shell");
+                if (sh) ro.observe(sh);
+              }
+            } else if (current === p) {
+              current = null;
+              if (ro) ro.disconnect();
+            }
+          });
+        });
+        panels.forEach(function (p) {
+          mo.observe(p, { attributes: true, attributeFilter: ["aria-hidden"] });
+        });
+        window.addEventListener("resize", function () {
+          if (current) place(current);
+        });
+      })();
+    </script>
+    <!-- jcd-mobile-nav (injected) -->
+    <button
+      class="jcd-burger"
+      id="jcdBurger"
+      type="button"
+      aria-label="Ouvrir le menu"
+      aria-expanded="false"
+      aria-controls="jcdMnav"
+    >
+      <span class="jcd-burger__box" aria-hidden="true"
+        ><i></i><i></i><i></i></span
+      >
+    </button>
+    <div
+      class="jcd-mnav"
+      id="jcdMnav"
+      role="dialog"
+      aria-modal="true"
+      aria-label="Menu de navigation"
+      aria-hidden="true"
+    >
+      <div class="jcd-mnav__scroll">
+        <div class="jcd-mnav__inner">
+          <p
+            class="jcd-mnav__eyebrow jcd-mnav__reveal"
+            style="transition-delay: 0.04s"
+          >
+            Expertises
+          </p>
+
+          <div class="jcd-mnav__reveal" style="transition-delay: 0.07s">
+            <div class="jcd-mnav__item" style="--mnav-c: #2e72ba">
+              <a class="jcd-mnav__link" href="informatique"
+                ><span class="jcd-mnav__dot"></span><span
+                  class="jcd-mnav__label">Informatique</span
+                ></a
+              >
+              <button
+                class="jcd-acc__toggle"
+                type="button"
+                aria-expanded="false"
+                aria-controls="jcdAccInfo"
+                aria-label="Afficher les sous-pages Informatique"
+              >
+                <svg
+                  viewBox="0 0 14 14"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.6"
+                  stroke-linecap="round"
+                >
+                  <path d="M7 2v10M2 7h10"></path>
+                </svg>
+              </button>
+            </div>
+            <div class="jcd-acc__panel" id="jcdAccInfo">
+              <a class="jcd-mnav__sub" href="info-cloud">Cloud Microsoft</a>
+              <a class="jcd-mnav__sub" href="info-collaboratif"
+                >Solutions collaboratives &amp; audiovisuelles</a
+              >
+              <a class="jcd-mnav__sub" href="info-reseaux"
+                >Architectures syst&egrave;mes &amp; r&eacute;seaux</a
+              >
+              <a class="jcd-mnav__sub" href="info-integration"
+                >Int&eacute;gration &amp; Support PC</a
+              >
+            </div>
+          </div>
+
+          <a
+            class="jcd-mnav__item jcd-mnav__reveal"
+            style="--mnav-c: #e51d29; transition-delay: 0.1s"
+            href="service"
+            ><span class="jcd-mnav__dot"></span><span class="jcd-mnav__label"
+              >Service</span
+            ></a
+          >
+          <a
+            class="jcd-mnav__item jcd-mnav__reveal"
+            style="--mnav-c: #f9d605; transition-delay: 0.13s"
+            href="developpement"
+            ><span class="jcd-mnav__dot"></span><span class="jcd-mnav__label"
+              >D&eacute;veloppement</span
+            ></a
+          >
+          <a
+            class="jcd-mnav__item jcd-mnav__reveal"
+            style="--mnav-c: #f3941d; transition-delay: 0.16s"
+            href="print"
+            ><span class="jcd-mnav__dot"></span><span class="jcd-mnav__label"
+              >Print</span
+            ></a
+          >
+          <a
+            class="jcd-mnav__item jcd-mnav__reveal"
+            style="--mnav-c: #b063ac; transition-delay: 0.19s"
+            href="telecom"
+            ><span class="jcd-mnav__dot"></span><span class="jcd-mnav__label"
+              >T&eacute;l&eacute;com</span
+            ></a
+          >
+          <div class="jcd-mnav__reveal" style="transition-delay: 0.22s">
+            <div class="jcd-mnav__item" style="--mnav-c: #8ec041">
+              <a class="jcd-mnav__link" href="formation"
+                ><span class="jcd-mnav__dot"></span><span
+                  class="jcd-mnav__label">Formation</span
+                ></a
+              >
+              <button
+                class="jcd-acc__toggle"
+                type="button"
+                aria-expanded="false"
+                aria-controls="jcdAccForm"
+                aria-label="Afficher les catégories de formation"
+              >
+                <svg
+                  viewBox="0 0 14 14"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.6"
+                  stroke-linecap="round"
+                >
+                  <path d="M7 2v10M2 7h10"></path>
+                </svg>
+              </button>
+            </div>
+            <div class="jcd-acc__panel" id="jcdAccForm">
+              <a class="jcd-mnav__sub" href="formation-bureautique"
+                >Bureautique</a
+              >
+              <a
+                class="jcd-mnav__sub"
+                href="formation-intelligence-artificielle"
+                >Intelligence artificielle</a
+              >
+              <a class="jcd-mnav__sub" href="formation-informatique"
+                >Informatique</a
+              >
+              <a class="jcd-mnav__sub" href="formation-communication-marketing"
+                >Communication - Marketing</a
+              >
+              <a class="jcd-mnav__sub" href="formation-management">Management</a
+              >
+              <a class="jcd-mnav__sub" href="formation-commerce-relation-client"
+                >Commerce - Relation client</a
+              >
+              <a class="jcd-mnav__sub" href="formation-comptabilite-gestion"
+                >Comptabilit&eacute; - Gestion</a
+              >
+              <a class="jcd-mnav__sub" href="formation-ressources-humaines"
+                >Ressources humaines</a
+              >
+              <a class="jcd-mnav__sub" href="formation-developpement-personnel"
+                >D&eacute;veloppement personnel</a
+              >
+              <a class="jcd-mnav__sub" href="formation-graphisme-pao"
+                >Graphisme - PAO</a
+              >
+              <a
+                class="jcd-mnav__sub"
+                href="formation-administratif-secretariat-accueil"
+                >Administratif - Secr&eacute;tariat</a
+              >
+              <a class="jcd-mnav__sub" href="formation-securite"
+                >S&eacute;curit&eacute;</a
+              >
+              <a class="jcd-mnav__sub" href="formation-langues">Langues</a>
+            </div>
+          </div>
+          <a
+            class="jcd-mnav__item jcd-mnav__reveal"
+            style="--mnav-c: #a78d75; transition-delay: 0.25s"
+            href="agencement"
+            ><span class="jcd-mnav__dot"></span><span class="jcd-mnav__label"
+              >Agencement</span
+            ></a
+          >
+
+          <p
+            class="jcd-mnav__eyebrow jcd-mnav__sec2 jcd-mnav__reveal"
+            style="transition-delay: 0.3s"
+          >
+            D&eacute;couvrir
+          </p>
+          <a
+            class="jcd-mnav__item jcd-mnav__reveal"
+            style="--mnav-c: #9a9a9a; transition-delay: 0.33s"
+            href="assistance"
+            ><span class="jcd-mnav__dot"></span><span
+              class="jcd-mnav__label"
+              style="font-size: 19px">Assistance</span
+            ></a
+          >
+          <a
+            class="jcd-mnav__item jcd-mnav__reveal"
+            style="--mnav-c: #9a9a9a; transition-delay: 0.36s"
+            href="carrieres"
+            ><span class="jcd-mnav__dot"></span><span
+              class="jcd-mnav__label"
+              style="font-size: 19px">Carri&egrave;res</span
+            ></a
+          >
+
+          <div
+            class="jcd-mnav__cta jcd-mnav__reveal"
+            style="transition-delay: 0.4s"
+          >
+            <a class="jcd-mnav__btn jcd-mnav__btn--primary" href="contact"
+              >Contacter un expert
+              <span class="jcd-mnav__btn-ic"
+                ><svg
+                  viewBox="0 0 16 16"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.7"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path d="M3 8h10M9 4l4 4-4 4"></path></svg
+                ></span
+              ></a
+            >
+            <a
+              class="jcd-mnav__btn jcd-mnav__btn--ghost"
+              href="tel:+33387184920"
+              >03 87 18 49 20
+              <span class="jcd-mnav__btn-ic"
+                ><svg
+                  viewBox="0 0 18 18"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.5"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path
+                    d="M2.5 3.5a1 1 0 011-1h2.4a1 1 0 01.95.68l.86 2.4a1 1 0 01-.24 1l-1.2 1.2a11 11 0 004.6 4.6l1.2-1.2a1 1 0 011-.24l2.4.86a1 1 0 01.68.95V15a1 1 0 01-1 1A13.5 13.5 0 012.5 3.5z"
+                  ></path></svg
+                ></span
+              ></a
+            >
+          </div>
+        </div>
+      </div>
+    </div>
+    <script>
+      (function () {
+        var body = document.body,
+          burger = document.getElementById("jcdBurger"),
+          mnav = document.getElementById("jcdMnav"),
+          hroot = document.documentElement;
+        if (!burger || !mnav) return;
+        var lastFocus = null;
+        function focusables() {
+          return mnav.querySelectorAll("a[href],button:not([disabled])");
+        }
+        function open() {
+          lastFocus = document.activeElement;
+          body.classList.add("jcd-mnav-open");
+          burger.setAttribute("aria-expanded", "true");
+          burger.setAttribute("aria-label", "Fermer le menu");
+          mnav.setAttribute("aria-hidden", "false");
+          body.style.overflow = "hidden";
+          hroot.style.overflow = "hidden";
+        }
+        function close() {
+          body.classList.remove("jcd-mnav-open");
+          burger.setAttribute("aria-expanded", "false");
+          burger.setAttribute("aria-label", "Ouvrir le menu");
+          mnav.setAttribute("aria-hidden", "true");
+          body.style.overflow = "";
+          hroot.style.overflow = "";
+          if (lastFocus && lastFocus.focus)
+            try {
+              lastFocus.focus();
+            } catch (e) {}
+        }
+        function toggle() {
+          body.classList.contains("jcd-mnav-open") ? close() : open();
+        }
+        burger.addEventListener("click", toggle);
+        mnav.addEventListener("click", function (e) {
+          var a = e.target.closest("a");
+          if (a) close();
+        });
+        document.addEventListener("keydown", function (e) {
+          if (!body.classList.contains("jcd-mnav-open")) return;
+          if (e.key === "Escape") {
+            close();
+            return;
+          }
+          if (e.key === "Tab") {
+            var f = focusables();
+            if (!f.length) return;
+            var first = f[0],
+              last = f[f.length - 1];
+            if (e.shiftKey && document.activeElement === first) {
+              e.preventDefault();
+              last.focus();
+            } else if (!e.shiftKey && document.activeElement === last) {
+              e.preventDefault();
+              first.focus();
+            }
+          }
+        });
+        Array.prototype.forEach.call(
+          mnav.querySelectorAll(".jcd-acc__toggle"),
+          function (btn) {
+            btn.addEventListener("click", function () {
+              var p = document.getElementById(
+                btn.getAttribute("aria-controls"),
+              );
+              if (!p) return;
+              var isOpen = p.style.maxHeight && p.style.maxHeight !== "0px";
+              if (isOpen) {
+                p.style.maxHeight = "0px";
+                btn.setAttribute("aria-expanded", "false");
+              } else {
+                p.style.maxHeight = p.scrollHeight + "px";
+                btn.setAttribute("aria-expanded", "true");
+              }
+            });
+          },
+        );
+        window.addEventListener("resize", function () {
+          if (
+            window.innerWidth > 820 &&
+            body.classList.contains("jcd-mnav-open")
+          )
+            close();
+        });
+      })();
+    </script>
+    <!-- jcd-a11y (Lot 5) -->
+    <div class="jcd-fab-wrap" id="jcd-fab">
+      <button
+        class="jcd-fab jcd-fab--top"
+        id="jcdToTop"
+        type="button"
+        aria-label="Remonter en haut"
+      >
+        <svg
+          viewBox="0 0 20 20"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="1.8"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          aria-hidden="true"
+        >
+          <path d="M10 16V5M5 10l5-5 5 5"></path>
+        </svg>
+      </button>
+      <a
+        class="jcd-fab jcd-fab--contact"
+        id="jcdFabContact"
+        href="contact"
+        aria-label="Nous contacter"
+      >
+        <svg
+          viewBox="0 0 20 20"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="1.6"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          aria-hidden="true"
+        >
+          <rect x="2.5" y="4.5" width="15" height="11" rx="2.3"></rect>
+          <path d="M3 6.7 L10 10.7 L17 6.7"></path>
+        </svg>
+      </a>
+    </div>
+    <script id="jcd-a11y-js">
+      (function () {
+        var d = document,
+          body = d.body;
+        /* 1) inert collapsed accordion panels (skip the overlay itself) */
+        function sync(btn) {
+          var id = btn.getAttribute("aria-controls");
+          if (!id || id === "jcdMnav") return;
+          var p = d.getElementById(id);
+          if (!p) return;
+          if (btn.getAttribute("aria-expanded") === "true") {
+            p.removeAttribute("inert");
+          } else {
+            p.setAttribute("inert", "");
+          }
+        }
+        Array.prototype.forEach.call(
+          d.querySelectorAll("[aria-controls][aria-expanded]"),
+          function (b) {
+            sync(b);
+            try {
+              new MutationObserver(function () {
+                sync(b);
+              }).observe(b, {
+                attributes: true,
+                attributeFilter: ["aria-expanded"],
+              });
+            } catch (e) {}
+          },
+        );
+        /* 2) inert the page behind the open overlay */
+        var mnav = d.getElementById("jcdMnav"),
+          burger = d.getElementById("jcdBurger"),
+          fab = d.getElementById("jcd-fab");
+        if (mnav) {
+          try {
+            new MutationObserver(function () {
+              var open = body.classList.contains("jcd-mnav-open");
+              Array.prototype.forEach.call(body.children, function (el) {
+                if (
+                  el === mnav ||
+                  el === burger ||
+                  el.tagName === "SCRIPT" ||
+                  el.tagName === "STYLE"
+                ) {
+                  return;
+                }
+                if (open) {
+                  el.setAttribute("inert", "");
+                } else {
+                  el.removeAttribute("inert");
+                }
+              });
+            }).observe(body, { attributes: true, attributeFilter: ["class"] });
+          } catch (e) {}
+        }
+        /* 3) floating cluster on long pages */
+        var toTop = d.getElementById("jcdToTop");
+        if (fab) {
+          var update = function () {
+            var y = window.pageYOffset || d.documentElement.scrollTop || 0;
+            var docH = d.documentElement.scrollHeight,
+              vh = window.innerHeight || 0;
+            var nearBottom = y + vh > docH - 200;
+            if (y > 520 && !nearBottom) {
+              fab.classList.add("is-shown");
+            } else {
+              fab.classList.remove("is-shown");
+            }
+            if (toTop) {
+              if (y > 520) {
+                toTop.classList.add("is-on");
+              } else {
+                toTop.classList.remove("is-on");
+              }
+            }
+          };
+          window.addEventListener("scroll", update, { passive: true });
+          window.addEventListener("resize", update, { passive: true });
+          update();
+        }
+        if (toTop) {
+          toTop.addEventListener("click", function () {
+            var rm = window.matchMedia(
+              "(prefers-reduced-motion:reduce)",
+            ).matches;
+            try {
+              window.scrollTo({ top: 0, behavior: rm ? "auto" : "smooth" });
+            } catch (e) {
+              window.scrollTo(0, 0);
+            }
+          });
+        }
+        /* 4) hide the contact shortcut on the contact page itself */
+        var cf = d.getElementById("jcdFabContact");
+        if (cf && /contact\(\?|$)/.test(location.pathname + location.search)) {
+          if (cf.parentNode) {
+            cf.parentNode.removeChild(cf);
+          }
+        }
+        /* 5) mobile keyboard refinements */
+        try {
+          Array.prototype.forEach.call(
+            d.querySelectorAll('input[type="email"]'),
+            function (i) {
+              i.setAttribute("inputmode", "email");
+              i.setAttribute("enterkeyhint", "next");
+            },
+          );
+          Array.prototype.forEach.call(
+            d.querySelectorAll('input[type="tel"]'),
+            function (i) {
+              i.setAttribute("inputmode", "tel");
+            },
+          );
+          Array.prototype.forEach.call(
+            d.querySelectorAll("textarea"),
+            function (t) {
+              t.setAttribute("enterkeyhint", "enter");
+            },
+          );
+        } catch (e) {}
+      })();
+    </script>
+    <script id="jcd-micons-js">
+      (function () {
+        var M = {
+          informatique:
+            '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="12" rx="2"/><path d="M8 20h8M12 16v4"/></svg>',
+          service:
+            '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 14v-2a9 9 0 0 1 18 0v2"/><path d="M21 14v3a2 2 0 0 1-2 2h-1v-7h1a2 2 0 0 1 2 2zM3 14v3a2 2 0 0 0 2 2h1v-7H5a2 2 0 0 0-2 2z"/></svg>',
+          developpement:
+            '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="m8 6-6 6 6 6M16 6l6 6-6 6M14 4l-4 16"/></svg>',
+          print:
+            '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9V3h12v6"/><rect x="3" y="9" width="18" height="8" rx="2"/><path d="M7 17h10v4H7z"/><circle cx="17" cy="13" r="0.8" fill="currentColor"/></svg>',
+          telecom:
+            '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.37 1.9.72 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.29a2 2 0 0 1 2.11-.45c.91.35 1.85.59 2.81.72A2 2 0 0 1 22 16.92z"/></svg>',
+          formation:
+            '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10 12 5 2 10l10 5 10-5z"/><path d="M6 12v5c2 2 4 3 6 3s4-1 6-3v-5"/></svg>',
+          agencement:
+            '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 18v3M20 18v3M3 8h18v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2zM6 8V5a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v3"/></svg>',
+          assistance:
+            '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="4"/><path d="m4.93 4.93 4.24 4.24M14.83 14.83l4.24 4.24M14.83 9.17l4.24-4.24M9.17 14.83l-4.24 4.24"/></svg>',
+          carrieres:
+            '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>',
+        };
+        function run() {
+          var n = document.getElementById("jcdMnav");
+          if (!n) return;
+          n.querySelectorAll(".jcd-mnav__dot").forEach(function (d) {
+            var a = d.closest("a");
+            if (!a) return;
+            var h = (a.getAttribute("href") || "")
+              .split("/")
+              .pop()
+              .split("#")[0];
+            var s = M[h];
+            if (!s) return;
+            var ic = document.createElement("span");
+            ic.className = "jcd-mnav__ico";
+            ic.setAttribute("aria-hidden", "true");
+            ic.innerHTML = s;
+            d.replaceWith(ic);
+          });
+        }
+        if (document.readyState === "loading")
+          document.addEventListener("DOMContentLoaded", run);
+        else run();
+      })();
+    </script>
+    <script id="jcd-mrefonte-js">
+      (function () {
+        function run() {
+          try {
+            if (document.getElementById("jcd-mbar")) return;
+            var body = document.body;
+            var mkIcon = function (d) {
+              return (
+                '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' +
+                d +
+                "</svg>"
+              );
+            };
+            /* Barre d'actions fixe en bas */
+            var bar = document.createElement("nav");
+            bar.id = "jcd-mbar";
+            bar.setAttribute("aria-label", "Actions rapides");
+            var menuBtn = document.createElement("button");
+            menuBtn.type = "button";
+            menuBtn.className = "jcd-mbar-menu";
+            menuBtn.setAttribute("aria-controls", "jcdMnav");
+            menuBtn.innerHTML =
+              mkIcon(
+                '<line x1="4" y1="7" x2="20" y2="7"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="17" x2="20" y2="17"/>',
+              ) + "<span>Menu</span>";
+            menuBtn.addEventListener("click", function () {
+              var b = document.getElementById("jcdBurger");
+              if (b) b.click();
+            });
+            var tel = document.createElement("a");
+            tel.href = "tel:+33387184920";
+            tel.innerHTML =
+              mkIcon(
+                '<path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.79 19.79 0 0 1 2.12 4.18 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/>',
+              ) + "<span>Appeler</span>";
+            var cta = document.createElement("a");
+            cta.className = "jcd-mbar-cta";
+            cta.href = "contact";
+            cta.innerHTML =
+              mkIcon('<path d="M4 4h16v12H7l-3 3z"/>') + "<span>Contact</span>";
+            if (/contact\$/i.test(location.pathname))
+              cta.setAttribute("aria-current", "page");
+            bar.appendChild(menuBtn);
+            bar.appendChild(tel);
+            bar.appendChild(cta);
+            body.appendChild(bar);
+            body.classList.add("jcd-has-mbar");
+            /* Label Menu <-> Fermer suit l'etat de l'overlay (classe body posee par le script mnav) */
+            var lab = menuBtn.querySelector("span");
+            var sync = function () {
+              var open = body.classList.contains("jcd-mnav-open");
+              lab.textContent = open ? "Fermer" : "Menu";
+              menuBtn.setAttribute("aria-expanded", open ? "true" : "false");
+            };
+            sync();
+            if (window.MutationObserver) {
+              new MutationObserver(sync).observe(body, {
+                attributes: true,
+                attributeFilter: ["class"],
+              });
+            }
+            /* Competences + methode : plus d'accordeon sur mobile -> retire les roles/tabindex poses par xpcompact */
+            if (window.innerWidth <= 820) {
+              Array.prototype.forEach.call(
+                document.querySelectorAll(
+                  ".prest-item, .pf-vcard, .fp-step, .bp-step, .regie-steps .clip, .atelier-steps .station",
+                ),
+                function (it) {
+                  it.removeAttribute("role");
+                  it.removeAttribute("tabindex");
+                  it.removeAttribute("aria-expanded");
+                },
+              );
+            }
+            /* Sommaire d'ancres (chips) : SUPPRIME sur demande user 2026-07-15 \u2014 retire ceux du DOM (xpcompact) */
+            Array.prototype.forEach.call(
+              document.querySelectorAll(".jcd-xpnav"),
+              function (nav) {
+                if (nav.parentNode) nav.parentNode.removeChild(nav);
+              },
+            );
+            /* Murs de logos -> bande unique : retire les doublons (sets dupliques pour la boucle marquee) */
+            if (window.innerWidth <= 820) {
+              var seen = {};
+              Array.prototype.forEach.call(
+                document.querySelectorAll(
+                  ".logo-marquee-item, .clients-row__item",
+                ),
+                function (it) {
+                  var img = it.querySelector("img");
+                  if (!img) return;
+                  var key =
+                    img.getAttribute("src") || img.getAttribute("title") || "";
+                  if (seen[key]) {
+                    it.style.display = "none";
+                  } else {
+                    seen[key] = 1;
+                  }
+                },
+              );
+            }
+          } catch (e) {}
+        }
+        if (document.readyState === "loading") {
+          document.addEventListener("DOMContentLoaded", run);
+        } else {
+          run();
+        }
+      })();
+    </script>
+  </body>
+</html>
