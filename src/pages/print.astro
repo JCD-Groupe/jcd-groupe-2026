@@ -1,2819 +1,589 @@
 ---
-import { directus } from "../lib/directus";
-import { readItems } from "@directus/sdk";
-
-const formations = await directus.request(
-  readItems("formations", {
-    fields: ["id", "titre_de_la_formation", "reference"],
-  }),
-);
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
 ---
-
+<!DOCTYPE html>
 <html lang="fr">
-  <head>
-    <meta charset="UTF-8" />
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1.0, viewport-fit=cover"
-    />
-    <meta name="color-scheme" content="dark" />
-    <meta name="theme-color" content="#0d0d0d" />
-    <link rel="icon" href="favicon.svg" type="image/svg+xml" />
-    <meta
-      name="description"
-      content="JCD Groupe · Pôle Print. Fourniture, maintenance et gestion de vos solutions d'impression. Expertise terrain en Grand Est. Certifié PAPERCUT, HP, Toshiba."
-    />
-    <link rel="canonical" href="https://www.jcd-groupe.fr/print" />
-    <meta property="og:type" content="website" />
-    <meta property="og:site_name" content="JCD Groupe" />
-    <meta property="og:locale" content="fr_FR" />
-    <meta
-      property="og:title"
-      content="Print · Impression & gestion documentaire · JCD Groupe"
-    />
-    <meta
-      property="og:description"
-      content="JCD Groupe · Pôle Print. Fourniture, maintenance et gestion de vos solutions d'impression. Expertise terrain en Grand Est. Certifié PAPERCUT, HP, Toshiba."
-    />
-    <meta property="og:url" content="https://www.jcd-groupe.fr/print" />
-    <meta name="twitter:card" content="summary" />
-    <title>Print · Impression &amp; gestion documentaire · JCD Groupe</title>
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+<meta name="color-scheme" content="dark" />
+<meta name="theme-color" content="#0d0d0d" />
+<link rel="icon" href="favicon.svg" type="image/svg+xml" />
+<meta name="description" content="JCD Groupe · Pôle Print. Fourniture, maintenance et gestion de vos solutions d'impression. Expertise terrain en Grand Est. Certifié PAPERCUT, HP, Toshiba." />
+<link rel="canonical" href="https://www.jcd-groupe.fr/print.html" />
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="JCD Groupe" />
+<meta property="og:locale" content="fr_FR" />
+<meta property="og:title" content="Print · Impression &amp; gestion documentaire · JCD Groupe" />
+<meta property="og:description" content="JCD Groupe · Pôle Print. Fourniture, maintenance et gestion de vos solutions d'impression. Expertise terrain en Grand Est. Certifié PAPERCUT, HP, Toshiba." />
+<meta property="og:url" content="https://www.jcd-groupe.fr/print.html" />
+<meta name="twitter:card" content="summary" />
+<title>Print · Impression &amp; gestion documentaire · JCD Groupe</title>
 
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Instrument+Serif:ital@0;1&display=swap"
-      rel="stylesheet"
-    />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
 
-    <link rel="stylesheet" href="css/print.css" />
-    <link rel="stylesheet" href="css/global.css" />
-    <link rel="stylesheet" href="css/print-overrides.css" />
-    <link rel="stylesheet" href="css/transition.css" />
-    <script is:inline src="/js/transition.js"></script>
-    <script id="jcd-xpcompact-js">
-      (function () {
-        function run() {
-          try {
-            var isMobile = window.innerWidth <= 820;
-            var defs = [
-              ["Prestations", "#prestations"],
-              ["M\u00e9thode", "#process"],
-              ["Contact", "#contact"],
-            ];
-            var links = defs.filter(function (d) {
-              return document.querySelector(d[1]);
-            });
-            if (links.length && !document.querySelector(".jcd-xpnav")) {
-              var nav = document.createElement("nav");
-              nav.className = "jcd-xpnav";
-              nav.setAttribute("aria-label", "Sections de la page");
-              links.forEach(function (d) {
-                var a = document.createElement("a");
-                a.href = d[1];
-                var dot = document.createElement("span");
-                dot.className = "jcd-xpdot";
-                dot.setAttribute("aria-hidden", "true");
-                a.appendChild(dot);
-                a.appendChild(document.createTextNode(d[0]));
-                nav.appendChild(a);
-              });
-              var main = document.querySelector("main") || document.body;
-              var hero = main.querySelector("section");
-              if (hero) {
-                hero.insertAdjacentElement("afterend", nav);
-              } else {
-                main.insertBefore(nav, main.firstChild);
-              }
-            }
-            if (isMobile) {
-              var partners = document.querySelector(".prest-aside-partners");
-              var layout = document.querySelector(".prest-layout");
-              if (partners && layout) {
-                layout.appendChild(partners);
-              }
-              var wire = function (sel, descSel) {
-                Array.prototype.forEach.call(
-                  document.querySelectorAll(sel),
-                  function (it) {
-                    var desc = it.querySelector(descSel);
-                    if (!desc) return;
-                    it.setAttribute("role", "button");
-                    it.setAttribute("tabindex", "0");
-                    it.setAttribute("aria-expanded", "false");
-                    var toggle = function () {
-                      var open = it.classList.toggle("jcd-open");
-                      it.setAttribute("aria-expanded", open ? "true" : "false");
-                      desc.style.maxHeight = open
-                        ? desc.scrollHeight + "px"
-                        : "0px";
-                    };
-                    it.addEventListener("click", toggle);
-                    it.addEventListener("keydown", function (e) {
-                      if (e.key === "Enter" || e.key === " ") {
-                        e.preventDefault();
-                        toggle();
-                      }
-                    });
-                  },
-                );
-              };
-              wire(".prest-item", ".prest-item-desc");
-              wire(".pf-vcard", ".pf-vcard-desc");
-            }
-          } catch (e) {}
-        }
-        if (document.readyState === "loading") {
-          document.addEventListener("DOMContentLoaded", run);
-        } else {
-          run();
-        }
-      })();
-    </script>
-    <script id="jcd-touch-js">
-      (function () {
-        function run() {
-          try {
-            if (window.innerWidth > 820) return;
-            /* Regression : ressortir .sky-offer de l'illustration .skywatch masquee (info-cloud) */
-            var so = document.querySelector(".sky-offer");
-            if (so) {
-              var hidden = so.closest(".skywatch");
-              var head =
-                document.querySelector(".secblock .secblock-head") ||
-                document.querySelector(".secblock-head");
-              if (hidden && head) {
-                head.insertAdjacentElement("afterend", so);
-              }
-            }
-          } catch (e) {}
-        }
-        if (document.readyState === "loading") {
-          document.addEventListener("DOMContentLoaded", run);
-        } else {
-          run();
-        }
-      })();
-    </script>
-    <script id="jcd-mrefonte-shim">
-      /* Mobile <=820px : force les chemins reduced-motion du site (WebGL hero + typewriter off).
-   Les fallbacks statiques par pole prennent le relais. Identique au shim mpolish retire en juin. */
-      (function () {
-        try {
-          if (window.innerWidth > 820) return;
-          if (window.__jcdRmShim) return;
-          window.__jcdRmShim = 1;
-          var native = window.matchMedia;
-          if (typeof native !== "function") return;
-          window.matchMedia = function (q) {
-            if (
-              typeof q === "string" &&
-              q.indexOf("prefers-reduced-motion") !== -1 &&
-              q.indexOf("reduce") !== -1
-            ) {
-              return {
-                matches: true,
-                media: q,
-                onchange: null,
-                addListener: function () {},
-                removeListener: function () {},
-                addEventListener: function () {},
-                removeEventListener: function () {},
-                dispatchEvent: function () {
-                  return false;
-                },
-              };
-            }
-            return native.call(window, q);
-          };
-        } catch (e) {}
-      })();
-    </script>
-  </head>
-  <body>
-    <a class="jcd-skip" href="#contenu">Aller au contenu</a>
+<link rel="stylesheet" href="css/print.css">
+<link rel="stylesheet" href="css/global.css">
+<link rel="stylesheet" href="css/print-overrides.css">
+  <link rel="stylesheet" href="transition.css">
+  <script is:inline src="transition.js"></script>
+<script is:inline src="js/shared/xpcompact.js" id="jcd-xpcompact-js"></script>
+<script is:inline src="js/shared/touch.js" id="jcd-touch-js"></script>
+<script is:inline src="js/shared/mrefonte-shim.js" id="jcd-mrefonte-shim"></script>
+</head>
+<body>
+<a class="jcd-skip" href="#contenu">Aller au contenu</a>
 
-    <!-- ====================================================================
+<!-- ====================================================================
      NAVBAR v2 — Modal-like
      Logo (g) · capsule centrale {Expertises ▾ · Contact · Carrières}
      · CTA Assistance (d). Bande pleine largeur, fade gauche/droite,
      dropdown "Expertises" avec 7 SVG 3D isométriques colorés.
      ==================================================================== -->
-    <header class="navbar" id="navbar" role="banner">
-      <div class="nav-inner">
-        <a href="/" class="logo" aria-label="JCD Groupe · Accueil">
-          <img
-            class="logo-img"
-            src="assets/logo_V2.svg"
-            alt="JCD Groupe"
-            width="1530"
-            height="482"
-            decoding="async"
-            loading="eager"
-            fetchpriority="high"
-          />
-        </a>
+<Header />
 
-        <!-- Capsule centrale : trigger du dropdown "Nos solutions" -->
-        <nav class="nav-center" aria-label="Navigation principale">
-          <div class="nav-pill nav-pill--solo" id="nav-pill">
-            <button
-              type="button"
-              class="nav-pill__item nav-pill__trigger"
-              id="nav-expertises-trigger"
-              aria-haspopup="true"
-              aria-expanded="false"
-              aria-controls="nav-expertises-panel"
-            >
-              <span>Nos solutions</span>
-              <svg
-                class="nav-chevron"
-                width="10"
-                height="10"
-                viewBox="0 0 10 10"
-                fill="none"
-                aria-hidden="true"
-                focusable="false"
-              >
-                <path
-                  d="M2.5 4l2.5 2.5L7.5 4"
-                  stroke="currentColor"
-                  stroke-width="1.4"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"></path>
-              </svg>
-            </button>
-            <span class="nav-pill__sep" aria-hidden="true"></span>
-            <a
-              href="carrieres"
-              class="nav-pill__item nav-pill__careers"
-              aria-label="Carrières — Rejoindre le groupe JCD"
-              title="Carrières"
-            >
-              <svg
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="1.7"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                aria-hidden="true"
-                focusable="false"
-              >
-                <circle cx="9" cy="8" r="3.2"></circle>
-                <circle cx="17" cy="9.5" r="2.4"></circle>
-                <path d="M3 19c0-3 2.7-5 6-5s6 2 6 5"></path>
-                <path d="M14.5 19c.2-2.2 1.8-4 4-4s3.5 1.5 3.5 3.5"></path>
-              </svg>
-            </a>
-          </div>
-        </nav>
 
-        <!-- Pillule droite : Assistance (blanc) + Contact (transparent) -->
-        <div class="nav-cta">
-          <div class="nav-pill nav-pill--actions">
-            <a
-              href="assistance"
-              class="nav-pill__item nav-pill__item--light"
-              aria-label="Assistance JCD"
-            >
-              Assistance
-            </a>
-            <a href="contact" class="nav-pill__item nav-pill__item--dark">
-              Contact
-            </a>
-          </div>
-        </div>
-      </div>
+<main id="contenu">
 
-      <!-- ============================================================
-       DROPDOWN PANEL v3 — Antimetal-like, 3 colonnes.
-       Zone Expertises : 2 sous-colonnes (3 + 4 items), icones JCD.
-       Zone Decouvrir : monochrome blanc/gris.
-       Informatique : sous-items inline en accordeon maitrise.
-       ============================================================ -->
-      <div
-        class="nav-panel nav-menu"
-        id="nav-expertises-panel"
-        role="menu"
-        aria-labelledby="nav-expertises-trigger"
-        aria-hidden="true"
-      >
-        <div class="nav-panel__shell">
-          <section
-            class="nm-zone nm-zone--expertises"
-            aria-label="Expertises JCD"
-          >
-            <span class="nm-eyebrow">Expertises</span>
-            <div class="nm-grid">
-              <ul class="nm-list" role="none">
-                <li class="nm-group" role="none">
-                  <a
-                    href="informatique"
-                    class="nm-item"
-                    data-c="info"
-                    role="menuitem"
-                    tabindex="-1"
-                  >
-                    <span class="nm-icon" aria-hidden="true">
-                      <svg
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        stroke-width="1.7"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                      >
-                        <rect x="3" y="4" width="18" height="12" rx="2"></rect>
-                        <path d="M8 20h8M12 16v4"></path>
-                      </svg>
-                    </span>
-                    <span class="nm-text">
-                      <span class="nm-title">Informatique</span>
-                      <span class="nm-sub-label"
-                        >Parc, cloud et collaboration</span
-                      >
-                    </span>
-                  </a>
-                  <div class="nm-sub">
-                    <div class="nm-sub-wrap">
-                      <ul class="nm-sub-list" role="none">
-                        <li role="none">
-                          <a
-                            href="info-integration"
-                            class="nm-sub-item"
-                            role="menuitem"
-                            tabindex="-1"
-                            ><span class="nm-sub-ic" aria-hidden="true"
-                              ><svg
-                                viewBox="0 0 24 24"
-                                fill="none"
-                                stroke="currentColor"
-                                stroke-width="1.6"
-                                stroke-linecap="round"
-                                stroke-linejoin="round"
-                              >
-                                <path
-                                  d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"
-                                ></path></svg
-                              ></span
-                            ><span class="nm-sub-tx"
-                              >Service Intégration &amp; Support PC</span
-                            ></a
-                          >
-                        </li>
-                        <li role="none">
-                          <a
-                            href="info-reseaux"
-                            class="nm-sub-item"
-                            role="menuitem"
-                            tabindex="-1"
-                            ><span class="nm-sub-ic" aria-hidden="true"
-                              ><svg
-                                viewBox="0 0 24 24"
-                                fill="none"
-                                stroke="currentColor"
-                                stroke-width="1.6"
-                                stroke-linecap="round"
-                                stroke-linejoin="round"
-                              >
-                                <rect x="2" y="3" width="20" height="8" rx="2"
-                                ></rect>
-                                <rect x="2" y="13" width="20" height="8" rx="2"
-                                ></rect>
-                                <path d="M6 7h.01M6 17h.01"></path></svg
-                              ></span
-                            ><span class="nm-sub-tx"
-                              >Architectures systèmes &amp; réseaux</span
-                            ></a
-                          >
-                        </li>
-                        <li role="none">
-                          <a
-                            href="info-collaboratif"
-                            class="nm-sub-item"
-                            role="menuitem"
-                            tabindex="-1"
-                            ><span class="nm-sub-ic" aria-hidden="true"
-                              ><svg
-                                viewBox="0 0 24 24"
-                                fill="none"
-                                stroke="currentColor"
-                                stroke-width="1.6"
-                                stroke-linecap="round"
-                                stroke-linejoin="round"
-                              >
-                                <path d="m22 8-6 4 6 4V8Z"></path>
-                                <rect x="2" y="6" width="14" height="12" rx="2"
-                                ></rect></svg
-                              ></span
-                            ><span class="nm-sub-tx"
-                              >Solutions collaboratives &amp; audiovisuelles</span
-                            ></a
-                          >
-                        </li>
-                        <li role="none">
-                          <a
-                            href="info-cloud"
-                            class="nm-sub-item"
-                            role="menuitem"
-                            tabindex="-1"
-                            ><span class="nm-sub-ic" aria-hidden="true"
-                              ><svg
-                                viewBox="0 0 24 24"
-                                fill="none"
-                                stroke="currentColor"
-                                stroke-width="1.6"
-                                stroke-linecap="round"
-                                stroke-linejoin="round"
-                              >
-                                <path
-                                  d="M17.5 19H9a7 7 0 1 1 6.71-9h1.79a4.5 4.5 0 1 1 0 9Z"
-                                ></path></svg
-                              ></span
-                            ><span class="nm-sub-tx">Cloud Microsoft</span></a
-                          >
-                        </li>
-                      </ul>
-                    </div>
-                  </div>
-                </li>
+<div class="hero-pin-zone">
 
-                <li class="nm-group" role="none">
-                  <a
-                    href="service"
-                    class="nm-item"
-                    data-c="service"
-                    role="menuitem"
-                    tabindex="-1"
-                  >
-                    <span class="nm-icon" aria-hidden="true">
-                      <svg
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        stroke-width="1.7"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                      >
-                        <path d="M3 14v-2a9 9 0 0 1 18 0v2"></path>
-                        <path
-                          d="M21 14v3a2 2 0 0 1-2 2h-1v-7h1a2 2 0 0 1 2 2zM3 14v3a2 2 0 0 0 2 2h1v-7H5a2 2 0 0 0-2 2z"
-                        ></path>
-                      </svg>
-                    </span>
-                    <span class="nm-text">
-                      <span class="nm-title">Service</span>
-                      <span class="nm-sub-label">Support et proximité</span>
-                    </span>
-                  </a>
-                </li>
-
-                <li class="nm-group" role="none">
-                  <a
-                    href="developpement"
-                    class="nm-item"
-                    data-c="dev"
-                    role="menuitem"
-                    tabindex="-1"
-                  >
-                    <span class="nm-icon" aria-hidden="true">
-                      <svg
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        stroke-width="1.7"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                      >
-                        <path d="m8 6-6 6 6 6M16 6l6 6-6 6M14 4l-4 16"></path>
-                      </svg>
-                    </span>
-                    <span class="nm-text">
-                      <span class="nm-title">Développement</span>
-                      <span class="nm-sub-label">Logiciels sur mesure</span>
-                    </span>
-                  </a>
-                </li>
-              </ul>
-
-              <ul class="nm-list" role="none">
-                <li class="nm-group" role="none">
-                  <a
-                    href="print"
-                    class="nm-item"
-                    data-c="print"
-                    role="menuitem"
-                    tabindex="-1"
-                  >
-                    <span class="nm-icon" aria-hidden="true">
-                      <svg
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        stroke-width="1.7"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                      >
-                        <path d="M6 9V3h12v6"></path>
-                        <rect x="3" y="9" width="18" height="8" rx="2"></rect>
-                        <path d="M7 17h10v4H7z"></path>
-                        <circle cx="17" cy="13" r="0.8" fill="currentColor"
-                        ></circle>
-                      </svg>
-                    </span>
-                    <span class="nm-text">
-                      <span class="nm-title">Print</span>
-                      <span class="nm-sub-label"
-                        >Impression et reprographie</span
-                      >
-                    </span>
-                  </a>
-                </li>
-
-                <li class="nm-group" role="none">
-                  <a
-                    href="telecom"
-                    class="nm-item"
-                    data-c="telecom"
-                    role="menuitem"
-                    tabindex="-1"
-                  >
-                    <span class="nm-icon" aria-hidden="true">
-                      <svg
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        stroke-width="1.7"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                      >
-                        <path
-                          d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.37 1.9.72 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.29a2 2 0 0 1 2.11-.45c.91.35 1.85.59 2.81.72A2 2 0 0 1 22 16.92z"
-                        ></path>
-                      </svg>
-                    </span>
-                    <span class="nm-text">
-                      <span class="nm-title">Télécom</span>
-                      <span class="nm-sub-label">Téléphonie d'entreprise</span>
-                    </span>
-                  </a>
-                </li>
-
-                <li class="nm-group" role="none">
-                  <a
-                    href="formation"
-                    class="nm-item"
-                    data-c="formation"
-                    role="menuitem"
-                    tabindex="-1"
-                  >
-                    <span class="nm-icon" aria-hidden="true">
-                      <svg
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        stroke-width="1.7"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                      >
-                        <path d="M22 10 12 5 2 10l10 5 10-5z"></path>
-                        <path d="M6 12v5c2 2 4 3 6 3s4-1 6-3v-5"></path>
-                      </svg>
-                    </span>
-                    <span class="nm-text">
-                      <span class="nm-title">Formation</span>
-                      <span class="nm-sub-label">Faire grandir vos équipes</span
-                      >
-                    </span>
-                  </a>
-                </li>
-
-                <li class="nm-group" role="none">
-                  <a
-                    href="agencement"
-                    class="nm-item"
-                    data-c="agencement"
-                    role="menuitem"
-                    tabindex="-1"
-                  >
-                    <span class="nm-icon" aria-hidden="true">
-                      <svg
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        stroke-width="1.7"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                      >
-                        <path
-                          d="M4 18v3M20 18v3M3 8h18v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2zM6 8V5a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v3"
-                        ></path>
-                      </svg>
-                    </span>
-                    <span class="nm-text">
-                      <span class="nm-title">Agencement</span>
-                      <span class="nm-sub-label">Espaces de travail</span>
-                    </span>
-                  </a>
-                </li>
-              </ul>
-            </div>
-          </section>
-        </div>
-      </div>
-    </header>
-
-    <main id="contenu">
-      <div class="hero-pin-zone">
-        <!-- ================================
+<!-- ================================
      HERO — Mesh WebGL fluide + texture pôle (pattern universel)
      ================================ -->
-        <section class="print-hero" aria-labelledby="print-hero-title">
-          <!-- Couche 0 : fallback CSS si WebGL indisponible / fade-in -->
-          <div class="hero-mesh-fallback" aria-hidden="true"></div>
+<section class="print-hero" aria-labelledby="print-hero-title">
 
-          <!-- Couche 1 : canvas WebGL animé (mesh gradient fluide) -->
-          <canvas class="hero-mesh" id="heroMesh" aria-hidden="true"></canvas>
+  <!-- Couche 0 : fallback CSS si WebGL indisponible / fade-in -->
+  <div class="hero-mesh-fallback" aria-hidden="true"></div>
 
-          <!-- Couche 2 : texture pôle — print = halftone -->
-          <div class="hero-texture hero-texture--paper" aria-hidden="true">
-          </div>
+  <!-- Couche 1 : canvas WebGL animé (mesh gradient fluide) -->
+  <canvas class="hero-mesh" id="heroMesh" aria-hidden="true"></canvas>
 
-          <!-- Couche 3 : grain léger -->
-          <div class="hero-grain" aria-hidden="true"></div>
+  <!-- Couche 2 : texture pôle — print = halftone -->
+  <div class="hero-texture hero-texture--paper" aria-hidden="true"></div>
 
-          <div class="container">
-            <h1 id="print-hero-title" class="hero-title reveal delay-1">
-              L'<span class="accent-grad">impression</span> au service de votre productivité.
-            </h1>
+  <!-- Couche 3 : grain léger -->
+  <div class="hero-grain" aria-hidden="true"></div>
 
-            <p class="hero-sub reveal delay-2">
-              Photocopieurs, traceurs, codes-barres et gestion
-              documentaire&nbsp;: un interlocuteur dédié, une équipe terrain.
-            </p>
+  <div class="container">
+    <h1 id="print-hero-title" class="hero-title reveal delay-1">
+      L'<span class="accent-grad">impression</span> au service de votre productivité.
+    </h1>
 
-            <div class="hero-actions reveal delay-3">
-              <a href="contact?pole=print" class="btn-cta btn-cta--ghost">
-                Demander un devis
-                <span class="btn-cta-arrow"
-                  ><svg
-                    viewBox="0 0 16 16"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="1.6"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                  >
-                    <path d="M3 8h10M9 4l4 4-4 4"></path></svg
-                  ></span
-                >
-              </a>
-            </div>
-          </div>
-        </section>
+    <p class="hero-sub reveal delay-2">
+      Photocopieurs, traceurs, codes-barres et gestion documentaire&nbsp;: un interlocuteur dédié, une équipe terrain.
+    </p>
 
-        <!-- ================================
-     MANIFESTO — Paper sheet inversion
-     ================================ -->
-        <section class="manifesto" aria-labelledby="manifesto-title">
-          <div class="paper-sheet">
-            <div class="container">
-              <header class="paper-header">
-                <div class="paper-header-left">
-                  <span class="paper-mark-num">N° 01</span>
-                  <span class="paper-header-rule" aria-hidden="true"></span>
-                  <span>Pôle Print &middot; Manifeste</span>
-                </div>
-                <span>JCD Groupe &middot; Édition 04 / 2026</span>
-              </header>
-
-              <blockquote class="manifesto-quote reveal" id="manifesto-title">
-                <em>Imprimer,</em> ce n'est pas <em>livrer une machine</em>.
-                C'est tenir une chaîne complète, du
-                <span class="accent">premier audit</span> à la dernière feuille.
-                <span class="ink-muted"
-                  >Sans intermédiaire, sans surprise, sans dépendance.</span
-                >
-              </blockquote>
-
-              <div class="manifesto-pull reveal delay-2">
-                <div class="manifesto-sig">
-                  <div class="manifesto-sig-mark">
-                    <span>L'équipe Print</span>
-                    <span class="manifesto-sig-rule" aria-hidden="true"></span>
-                  </div>
-                  <span class="manifesto-sig-name">JCD Groupe</span>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-      </div>
-      <!-- /hero-pin-zone : hero sticky + manifesto scrolling-over -->
-
-      <!-- ================================
-     PRESTATIONS — Catalog avec monogram glyphs
-     ================================ -->
-      <section
-        class="prestations"
-        id="prestations"
-        aria-labelledby="prestations-title"
-      >
-        <div class="container">
-          <div class="prest-layout">
-            <aside class="prest-aside reveal">
-              <h2 class="prest-aside-title" id="prestations-title">
-                <span class="accent">Quatre savoir-faire</span>, une seule
-                chaîne de service.
-              </h2>
-              <p class="prest-aside-sub">
-                Équipements, maintenance et logiciels.
-              </p>
-
-              <div class="prest-aside-partners">
-                <div class="prest-aside-partners-head">
-                  <span class="prest-aside-partners-label">Partenaires</span>
-                  <span class="prest-aside-partners-rule" aria-hidden="true"
-                  ></span>
-                  <span class="prest-aside-partners-count">06</span>
-                </div>
-                <div class="prest-aside-partners-grid">
-                  <div class="logo-tile logo-tile--mini" data-brand="hp">
-                    <img
-                      class="logo-tile-img"
-                      loading="lazy"
-                      decoding="async"
-                      src="logos%20PRINT/logo_HP_Electric_Blue_keyline%201.webp"
-                      alt=""
-                      aria-hidden="true"
-                    />
-                    <span class="logo-tile-name">HP</span>
-                  </div>
-                  <div class="logo-tile logo-tile--mini" data-brand="toshiba">
-                    <img
-                      class="logo-tile-img"
-                      loading="lazy"
-                      decoding="async"
-                      src="logos%20PRINT/Toshiba_logo.svg.png"
-                      alt=""
-                      aria-hidden="true"
-                    />
-                    <span class="logo-tile-name">Toshiba</span>
-                  </div>
-                  <div class="logo-tile logo-tile--mini" data-brand="papercut">
-                    <img
-                      class="logo-tile-img"
-                      loading="lazy"
-                      decoding="async"
-                      src="logos%20PRINT/papercut.png"
-                      alt=""
-                      aria-hidden="true"
-                    />
-                    <span class="logo-tile-name">PaperCut</span>
-                  </div>
-                  <div class="logo-tile logo-tile--mini" data-brand="brother">
-                    <img
-                      class="logo-tile-img"
-                      loading="lazy"
-                      decoding="async"
-                      src="logos%20PRINT/LOGO%20BROTHER.png"
-                      alt=""
-                      aria-hidden="true"
-                    />
-                    <span class="logo-tile-name">Brother</span>
-                  </div>
-                  <div class="logo-tile logo-tile--mini" data-brand="gespage">
-                    <img
-                      class="logo-tile-img"
-                      loading="lazy"
-                      decoding="async"
-                      src="logos%20PRINT/gespage%201.webp"
-                      alt=""
-                      aria-hidden="true"
-                    />
-                    <span class="logo-tile-name">Gespage</span>
-                  </div>
-                  <div class="logo-tile logo-tile--mini" data-brand="zebra">
-                    <img
-                      class="logo-tile-img"
-                      loading="lazy"
-                      decoding="async"
-                      src="logos%20PRINT/zebra-technologies-logo.svg"
-                      alt=""
-                      aria-hidden="true"
-                    />
-                    <span class="logo-tile-name">Zebra</span>
-                  </div>
-                </div>
-              </div>
-            </aside>
-
-            <div class="prest-menu reveal delay-1">
-              <article class="prest-item">
-                <div class="prest-item-head">
-                  <span class="prest-item-glyph" aria-hidden="true">
-                    <svg
-                      viewBox="0 0 40 40"
-                      fill="none"
-                      stroke="currentColor"
-                      stroke-width="1.2"
-                      stroke-linejoin="round"
-                    >
-                      <rect x="6" y="14" width="28" height="14" rx="0.5"></rect>
-                      <rect
-                        x="10"
-                        y="6"
-                        width="20"
-                        height="8"
-                        rx="0.5"
-                        opacity="0.5"></rect>
-                      <rect
-                        x="10"
-                        y="28"
-                        width="20"
-                        height="6"
-                        rx="0.5"
-                        opacity="0.7"></rect>
-                      <circle
-                        cx="28"
-                        cy="21"
-                        r="1.4"
-                        fill="currentColor"
-                        opacity="0.7"></circle>
-                    </svg>
-                  </span>
-                </div>
-                <h3 class="prest-item-title">
-                  Photocopieurs &amp; imprimantes
-                </h3>
-                <p class="prest-item-desc">
-                  Achat ou location, avec maintenance préventive et curative.
-                </p>
-              </article>
-
-              <article class="prest-item">
-                <div class="prest-item-head">
-                  <span class="prest-item-glyph" aria-hidden="true">
-                    <svg
-                      viewBox="0 0 40 40"
-                      fill="none"
-                      stroke="currentColor"
-                      stroke-width="1.2"
-                      stroke-linejoin="round"
-                    >
-                      <circle
-                        cx="20"
-                        cy="20"
-                        r="3.4"
-                        fill="currentColor"
-                        opacity="0.6"></circle>
-                      <circle cx="9" cy="9" r="2.4"></circle>
-                      <circle cx="31" cy="9" r="2.4"></circle>
-                      <circle cx="9" cy="31" r="2.4"></circle>
-                      <circle cx="31" cy="31" r="2.4"></circle>
-                      <line x1="11" y1="11" x2="17.5" y2="17.5" opacity="0.4"
-                      ></line>
-                      <line x1="29" y1="11" x2="22.5" y2="17.5" opacity="0.4"
-                      ></line>
-                      <line x1="11" y1="29" x2="17.5" y2="22.5" opacity="0.4"
-                      ></line>
-                      <line x1="29" y1="29" x2="22.5" y2="22.5" opacity="0.4"
-                      ></line>
-                    </svg>
-                  </span>
-                </div>
-                <h3 class="prest-item-title">Gestion des impressions</h3>
-                <p class="prest-item-desc">
-                  Contrôle des volumes, sécurisation des flux et traçabilité.
-                </p>
-              </article>
-
-              <article class="prest-item">
-                <div class="prest-item-head">
-                  <span class="prest-item-glyph" aria-hidden="true">
-                    <svg viewBox="0 0 40 40" fill="currentColor" stroke="none">
-                      <rect x="6" y="10" width="2" height="20"></rect>
-                      <rect x="10" y="10" width="1" height="20"></rect>
-                      <rect x="13" y="10" width="2.5" height="20"></rect>
-                      <rect x="17" y="10" width="1" height="20"></rect>
-                      <rect x="20" y="10" width="3" height="20"></rect>
-                      <rect x="25" y="10" width="1" height="20"></rect>
-                      <rect x="28" y="10" width="2" height="20"></rect>
-                      <rect x="32" y="10" width="2.5" height="20"></rect>
-                    </svg>
-                  </span>
-                </div>
-                <h3 class="prest-item-title">
-                  Codes-barres &amp; étiqueteuses
-                </h3>
-                <p class="prest-item-desc">
-                  Pour la logistique, l'inventaire et la traçabilité produit.
-                </p>
-              </article>
-
-              <article class="prest-item">
-                <div class="prest-item-head">
-                  <span class="prest-item-glyph" aria-hidden="true">
-                    <svg
-                      viewBox="0 0 40 40"
-                      fill="none"
-                      stroke="currentColor"
-                      stroke-width="1.2"
-                      stroke-linejoin="round"
-                    >
-                      <rect x="3" y="14" width="34" height="10" rx="0.5"></rect>
-                      <circle cx="9" cy="19" r="2.5" opacity="0.6"></circle>
-                      <line x1="13" y1="19" x2="32" y2="19" opacity="0.3"
-                      ></line>
-                      <rect
-                        x="3"
-                        y="24"
-                        width="34"
-                        height="13"
-                        rx="0.5"
-                        opacity="0.35"></rect>
-                      <line
-                        x1="7"
-                        y1="29"
-                        x2="33"
-                        y2="29"
-                        stroke-dasharray="2 2"
-                        opacity="0.5"></line>
-                    </svg>
-                  </span>
-                </div>
-                <h3 class="prest-item-title">Traceurs grand format</h3>
-                <p class="prest-item-desc">
-                  Conçus pour le bâtiment, l'architecture et les bureaux
-                  d'études.
-                </p>
-              </article>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- ================================
-     SECTION DIVIDER — Compétences → Méthode (hairline monochrome)
-     ================================ -->
-      <div class="section-divider" aria-hidden="true">
-        <div class="container">
-          <span class="section-divider-line"></span>
-        </div>
-      </div>
-
-      <!-- ================================
-     PROCESS — Étapes (épuré, sans détails techniques)
-     ================================ -->
-      <section class="process" id="process" aria-labelledby="process-title">
-        <div class="container">
-          <div class="section-head reveal">
-            <h2 class="section-title" id="process-title">
-              Quatre étapes, <span class="accent">un seul interlocuteur</span>.
-              <span class="text-muted"
-                >De la première visite à la supervision au quotidien.</span
-              >
-            </h2>
-          </div>
-
-          <div class="pf-vflow reveal">
-            <!-- ====== SVG Fountain : HUB top center → 4 branches Bezier orange divergent vers les 4 cards ====== -->
-            <svg
-              class="pf-vsvg"
-              viewBox="0 0 900 350"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-              aria-hidden="true"
-              preserveAspectRatio="xMidYMid meet"
-            >
-              <defs>
-                <filter
-                  id="pf-glow"
-                  x="-20%"
-                  y="-20%"
-                  width="140%"
-                  height="140%"
-                >
-                  <feGaussianBlur
-                    in="SourceGraphic"
-                    stdDeviation="4"
-                    result="blur"></feGaussianBlur>
-                  <feMerge>
-                    <feMergeNode in="blur"></feMergeNode>
-                    <feMergeNode in="SourceGraphic"></feMergeNode>
-                  </feMerge>
-                </filter>
-                <radialGradient id="pf-hub-aura" cx="50%" cy="50%" r="50%">
-                  <stop offset="0%" stop-color="#F3941D" stop-opacity="0.18"
-                  ></stop>
-                  <stop offset="60%" stop-color="#F3941D" stop-opacity="0.04"
-                  ></stop>
-                  <stop offset="100%" stop-color="#F3941D" stop-opacity="0"
-                  ></stop>
-                </radialGradient>
-              </defs>
-
-              <!-- Hub aura (halo subtil, derrière les branches) -->
-              <circle cx="450" cy="48" r="60" fill="url(#pf-hub-aura)"></circle>
-
-              <!-- ===== GLOW LAYERS (blurred wide stroke derrière) ===== -->
-              <path
-                class="pf-glow-line"
-                style="--d: 0.5s"
-                d="M 450,54 L 450,72 C 450,210 113,265 113,350"
-                stroke="#FFB877"
-                stroke-width="6"
-                stroke-linecap="round"
-                filter="url(#pf-glow)"></path>
-              <path
-                class="pf-glow-line"
-                style="--d: 0.6s"
-                d="M 450,54 L 450,72 C 450,200 338,265 338,350"
-                stroke="#F7A23F"
-                stroke-width="6"
-                stroke-linecap="round"
-                filter="url(#pf-glow)"></path>
-              <path
-                class="pf-glow-line"
-                style="--d: 0.7s"
-                d="M 450,54 L 450,72 C 450,200 562,265 562,350"
-                stroke="#F3941D"
-                stroke-width="6"
-                stroke-linecap="round"
-                filter="url(#pf-glow)"></path>
-              <path
-                class="pf-glow-line"
-                style="--d: 0.8s"
-                d="M 450,54 L 450,72 C 450,210 787,265 787,350"
-                stroke="#C47816"
-                stroke-width="6"
-                stroke-linecap="round"
-                filter="url(#pf-glow)"></path>
-
-              <!-- ===== ECHO BEZIER ULTRA-FINS (renfort visuel discret, statique) ===== -->
-              <g aria-hidden="true">
-                <path
-                  d="M 450,54 L 450,72 C 450,210 113,265 113,350"
-                  stroke="#FFB877"
-                  stroke-width="0.6"
-                  stroke-opacity="0.14"
-                  stroke-linecap="round"
-                  transform="translate(-4, 3)"
-                  fill="none"></path>
-                <path
-                  d="M 450,54 L 450,72 C 450,200 338,265 338,350"
-                  stroke="#F7A23F"
-                  stroke-width="0.6"
-                  stroke-opacity="0.14"
-                  stroke-linecap="round"
-                  transform="translate(-2, 3)"
-                  fill="none"></path>
-                <path
-                  d="M 450,54 L 450,72 C 450,200 562,265 562,350"
-                  stroke="#F3941D"
-                  stroke-width="0.6"
-                  stroke-opacity="0.14"
-                  stroke-linecap="round"
-                  transform="translate(2, 3)"
-                  fill="none"></path>
-                <path
-                  d="M 450,54 L 450,72 C 450,210 787,265 787,350"
-                  stroke="#C47816"
-                  stroke-width="0.6"
-                  stroke-opacity="0.14"
-                  stroke-linecap="round"
-                  transform="translate(4, 3)"
-                  fill="none"></path>
-              </g>
-
-              <!-- ===== SHARP CURVES (4 branches Bezier élégantes jusqu'au bord inférieur SVG) ===== -->
-              <path
-                class="pf-anim-line"
-                pathLength="100"
-                style="--dur: 1.4s; --d: 0.5s"
-                d="M 450,54 L 450,72 C 450,210 113,265 113,350"
-                stroke="#FFB877"
-                stroke-width="1.5"
-                stroke-linecap="round"></path>
-              <path
-                class="pf-anim-line"
-                pathLength="100"
-                style="--dur: 1.4s; --d: 0.6s"
-                d="M 450,54 L 450,72 C 450,200 338,265 338,350"
-                stroke="#F7A23F"
-                stroke-width="1.5"
-                stroke-linecap="round"></path>
-              <path
-                class="pf-anim-line"
-                pathLength="100"
-                style="--dur: 1.4s; --d: 0.7s"
-                d="M 450,54 L 450,72 C 450,200 562,265 562,350"
-                stroke="#F3941D"
-                stroke-width="1.5"
-                stroke-linecap="round"></path>
-              <path
-                class="pf-anim-line"
-                pathLength="100"
-                style="--dur: 1.4s; --d: 0.8s"
-                d="M 450,54 L 450,72 C 450,210 787,265 787,350"
-                stroke="#C47816"
-                stroke-width="1.5"
-                stroke-linecap="round"></path>
-
-              <!-- HUB : circle + printer icon — dessiné PAR-DESSUS les branches
-             pour masquer proprement leur point de convergence (connexion nette) -->
-              <g class="pf-anim-node" style="--d: 0s">
-                <circle
-                  cx="450"
-                  cy="48"
-                  r="24"
-                  fill="#0d0d0d"
-                  stroke="rgba(243,148,29,0.38)"
-                  stroke-width="1"></circle>
-                <g
-                  stroke="#F3941D"
-                  stroke-width="1.3"
-                  stroke-linejoin="round"
-                  stroke-linecap="round"
-                  fill="none"
-                >
-                  <!-- ADF (top scanner unit) -->
-                  <rect
-                    x="442"
-                    y="37"
-                    width="16"
-                    height="3.4"
-                    rx="0.5"
-                    opacity="0.7"></rect>
-                  <!-- Main body -->
-                  <rect x="440" y="40.6" width="20" height="9" rx="1"></rect>
-                  <!-- Output paper (sheet) -->
-                  <rect x="444.5" y="49.6" width="11" height="6.2" rx="0.6"
-                  ></rect>
-                  <!-- Print lines on paper -->
-                  <line
-                    x1="446.5"
-                    y1="52"
-                    x2="453"
-                    y2="52"
-                    stroke-width="0.65"
-                    opacity="0.55"></line>
-                  <line
-                    x1="446.5"
-                    y1="53.6"
-                    x2="451"
-                    y2="53.6"
-                    stroke-width="0.6"
-                    opacity="0.45"></line>
-                  <!-- Status LED -->
-                  <circle
-                    cx="455.5"
-                    cy="44.7"
-                    r="0.9"
-                    fill="#F3941D"
-                    stroke="none"></circle>
-                </g>
-              </g>
-
-              <!-- "VOTRE PARC" label au-dessus du hub -->
-              <g class="pf-anim-node" style="--d: 0.15s">
-                <text
-                  x="450"
-                  y="12"
-                  text-anchor="middle"
-                  font-family="JetBrains Mono, ui-monospace, monospace"
-                  font-size="9.5"
-                  fill="rgba(255,255,255,0.42)"
-                  letter-spacing="3.5"
-                >
-                  VOTRE PARC
-                </text>
-              </g>
-
-              <!-- ===== ENDPOINT DOTS — au bord inférieur SVG (cy=350) pour se brancher directement sur la card ===== -->
-              <g class="pf-anim-node pf-vdot pf-vdot--1" style="--d: 1.1s">
-                <circle cx="113" cy="350" r="8" fill="#FFB877" opacity="0.20"
-                ></circle>
-                <circle cx="113" cy="350" r="4" fill="#FFB877"></circle>
-              </g>
-              <g class="pf-anim-node pf-vdot pf-vdot--2" style="--d: 1.2s">
-                <circle cx="338" cy="350" r="8" fill="#F7A23F" opacity="0.20"
-                ></circle>
-                <circle cx="338" cy="350" r="4" fill="#F7A23F"></circle>
-              </g>
-              <g class="pf-anim-node pf-vdot pf-vdot--3" style="--d: 1.3s">
-                <circle cx="562" cy="350" r="8" fill="#F3941D" opacity="0.20"
-                ></circle>
-                <circle cx="562" cy="350" r="4" fill="#F3941D"></circle>
-              </g>
-              <g class="pf-anim-node pf-vdot pf-vdot--4" style="--d: 1.4s">
-                <circle cx="787" cy="350" r="8" fill="#C47816" opacity="0.20"
-                ></circle>
-                <circle cx="787" cy="350" r="4" fill="#C47816"></circle>
-              </g>
-            </svg>
-
-            <!-- ====== 4 CARDS alignées avec les endpoints des branches ====== -->
-            <div class="pf-vcards">
-              <article
-                class="pf-vcard"
-                style="--c: #ffb877; --c-rgb: 255, 184, 119"
-              >
-                <div class="pf-vcard-shade" aria-hidden="true"></div>
-                <div class="pf-vcard-head">
-                  <span class="pf-vcard-glyph" aria-hidden="true">
-                    <svg
-                      viewBox="0 0 40 40"
-                      fill="none"
-                      stroke="currentColor"
-                      stroke-width="1.3"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                    >
-                      <circle cx="17" cy="17" r="9.5"></circle>
-                      <path d="M23.9 23.9 L31 31"></path>
-                      <circle
-                        cx="13.6"
-                        cy="13.8"
-                        r="1.15"
-                        fill="currentColor"
-                        stroke="none"
-                        opacity="0.85"></circle>
-                      <circle
-                        cx="20.4"
-                        cy="13.8"
-                        r="1.15"
-                        fill="currentColor"
-                        stroke="none"
-                        opacity="0.85"></circle>
-                      <circle
-                        cx="13.6"
-                        cy="20.2"
-                        r="1.15"
-                        fill="currentColor"
-                        stroke="none"
-                        opacity="0.85"></circle>
-                      <circle
-                        cx="20.4"
-                        cy="20.2"
-                        r="1.15"
-                        fill="currentColor"
-                        stroke="none"
-                        opacity="0.85"></circle>
-                    </svg>
-                  </span>
-                </div>
-                <h3 class="pf-vcard-title">Audit du parc</h3>
-                <p class="pf-vcard-desc">
-                  Visite sur site et cartographie de vos équipements et de vos
-                  usages réels.
-                </p>
-              </article>
-
-              <article
-                class="pf-vcard"
-                style="--c: #f7a23f; --c-rgb: 247, 162, 63"
-              >
-                <div class="pf-vcard-shade" aria-hidden="true"></div>
-                <div class="pf-vcard-head">
-                  <span class="pf-vcard-glyph" aria-hidden="true">
-                    <svg
-                      viewBox="0 0 40 40"
-                      fill="none"
-                      stroke="currentColor"
-                      stroke-width="1.3"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                    >
-                      <rect x="10.5" y="9" width="19" height="24" rx="2.6"
-                      ></rect>
-                      <rect
-                        x="15.5"
-                        y="6.4"
-                        width="9"
-                        height="4.8"
-                        rx="1.5"
-                        opacity="0.55"></rect>
-                      <path d="M14.8 20.4 L17.9 23.5 L24.6 16.4" opacity="0.95"
-                      ></path>
-                      <line x1="15" y1="28.2" x2="25" y2="28.2" opacity="0.4"
-                      ></line>
-                    </svg>
-                  </span>
-                </div>
-                <h3 class="pf-vcard-title">Préconisation</h3>
-                <p class="pf-vcard-desc">
-                  Sélection des équipements, choix achat ou location et
-                  dimensionnement adapté.
-                </p>
-              </article>
-
-              <article
-                class="pf-vcard"
-                style="--c: #f3941d; --c-rgb: 243, 148, 29"
-              >
-                <div class="pf-vcard-shade" aria-hidden="true"></div>
-                <div class="pf-vcard-head">
-                  <span class="pf-vcard-glyph" aria-hidden="true">
-                    <svg
-                      viewBox="0 0 40 40"
-                      fill="none"
-                      stroke="currentColor"
-                      stroke-width="1.3"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                    >
-                      <path d="M20 7 V21.5"></path>
-                      <path d="M14 15.5 L20 21.5 L26 15.5"></path>
-                      <path
-                        d="M10.5 24.5 V31 a2 2 0 0 0 2 2 H27.5 a2 2 0 0 0 2 -2 V24.5"
-                        opacity="0.85"></path>
-                    </svg>
-                  </span>
-                </div>
-                <h3 class="pf-vcard-title">Déploiement</h3>
-                <p class="pf-vcard-desc">
-                  Installation, paramétrage et formation des utilisateurs, sur
-                  site.
-                </p>
-              </article>
-
-              <article
-                class="pf-vcard"
-                style="--c: #c47816; --c-rgb: 196, 120, 22"
-              >
-                <div class="pf-vcard-shade" aria-hidden="true"></div>
-                <div class="pf-vcard-head">
-                  <span class="pf-vcard-glyph" aria-hidden="true">
-                    <svg
-                      viewBox="0 0 40 40"
-                      fill="none"
-                      stroke="currentColor"
-                      stroke-width="1.3"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                    >
-                      <circle cx="20" cy="20" r="4.6"></circle>
-                      <circle cx="20" cy="20" r="10.5" opacity="0.26"></circle>
-                      <path
-                        d="M20 5.7 V9.4 M20 30.6 V34.3 M34.3 20 H30.6 M9.4 20 H5.7 M30.1 9.9 L27.5 12.5 M12.5 27.5 L9.9 30.1 M30.1 30.1 L27.5 27.5 M12.5 12.5 L9.9 9.9"
-                        opacity="0.7"></path>
-                    </svg>
-                  </span>
-                </div>
-                <h3 class="pf-vcard-title">Maintenance</h3>
-                <p class="pf-vcard-desc">
-                  Suivi, supervision et interventions, sur site comme à
-                  distance.
-                </p>
-              </article>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- ================================
-     CTA — Bandeau compact centré, esperluette serif comme accent
-     ================================ -->
-      <section class="cta-section" id="contact" aria-labelledby="cta-title">
-        <div class="container">
-          <div class="cta-frame">
-            <div class="cta-inner">
-              <span class="cta-amp reveal" aria-hidden="true">&amp;</span>
-
-              <div class="cta-body">
-                <h2 class="cta-title reveal delay-1" id="cta-title">
-                  Un projet <em>d'impression&thinsp;?</em>
-                </h2>
-
-                <p class="cta-sub reveal delay-2">
-                  Un devis sur mesure ou une visite sur site, sans engagement.
-                </p>
-
-                <div class="cta-actions reveal delay-3">
-                  <a href="contact?pole=print" class="btn-cta btn-cta--primary">
-                    Contacter le pôle Print
-                    <span class="btn-cta-arrow"
-                      ><svg
-                        viewBox="0 0 16 16"
-                        fill="none"
-                        stroke="currentColor"
-                        stroke-width="1.6"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                      >
-                        <path d="M3 8h10M9 4l4 4-4 4"></path></svg
-                      ></span
-                    >
-                  </a>
-                  <span class="cta-actions-divider" aria-hidden="true"></span>
-                  <span class="cta-phone">
-                    <svg
-                      viewBox="0 0 20 20"
-                      fill="none"
-                      stroke="currentColor"
-                      stroke-width="1.4"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      width="14"
-                      height="14"
-                    >
-                      <path
-                        d="M2 3a1 1 0 011-1h3.28a1 1 0 01.95.68l1.07 3.21a1 1 0 01-.25 1L6.54 8.4a12.06 12.06 0 005.06 5.06l1.51-1.51a1 1 0 011-.25l3.21 1.07a1 1 0 01.68.95V17a1 1 0 01-1 1A15 15 0 012 3z"
-                      ></path>
-                    </svg>
-                    <a href="tel:+33383183030" class="cta-phone-num"
-                      >03 83 18 30 30</a
-                    >
-                  </span>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-    </main>
-
-    <!-- ================================
-     FOOTER
-     ================================ -->
-    <footer role="contentinfo">
-      <div class="footer-grain" aria-hidden="true"></div>
-      <div class="container">
-        <div class="footer-bento">
-          <!-- Pôles -->
-          <div class="fcard fcard--poles reveal">
-            <div class="fcard-inner">
-              <h4 class="fcard-title">Pôles</h4>
-              <ul class="footer-links footer-links--cols">
-                <li>
-                  <a class="footer-link" href="informatique">Informatique</a>
-                </li>
-                <li><a class="footer-link" href="service">Service</a></li>
-                <li>
-                  <a class="footer-link" href="developpement">Développement</a>
-                </li>
-                <li><a class="footer-link" href="print">Print</a></li>
-                <li><a class="footer-link" href="telecom">Télécom</a></li>
-                <li>
-                  <a class="footer-link" href="formation">Formation</a>
-                </li>
-                <li>
-                  <a class="footer-link" href="agencement">Agencement</a>
-                </li>
-              </ul>
-            </div>
-          </div>
-
-          <!-- Le groupe -->
-          <div class="fcard fcard--groupe reveal delay-1">
-            <div class="fcard-inner">
-              <h4 class="fcard-title">Le groupe</h4>
-              <ul class="footer-links">
-                <li>
-                  <a class="footer-link" href="index#histoire">Histoire</a>
-                </li>
-                <li>
-                  <a class="footer-link" href="index#valeurs">Valeurs</a>
-                </li>
-                <li>
-                  <a class="footer-link" href="index#chiffres">Chiffres clés</a>
-                </li>
-                <li>
-                  <a class="footer-link" href="carrieres">Nous rejoindre</a>
-                </li>
-                <li><a class="footer-link" href="contact">Contact</a></li>
-              </ul>
-            </div>
-          </div>
-
-          <!-- Contact Metz + Nancy -->
-          <div class="fcard fcard--contact reveal delay-2">
-            <div class="fcard-inner">
-              <h4 class="fcard-title">Nous trouver</h4>
-              <div class="footer-contacts">
-                <div class="footer-contact-block">
-                  <span class="fc-city">Metz</span>
-                  <span class="fc-role">Siège social</span>
-                  <address>193 rue du Général Metman<br />57070 Metz</address>
-                  <a class="footer-link" href="tel:+33387184920"
-                    >03 87 18 49 20</a
-                  >
-                  <span class="fc-hours">Lun–Ven · 8h30–18h30</span>
-                </div>
-                <div class="footer-contact-block">
-                  <span class="fc-city">Nancy</span>
-                  <span class="fc-role">Agence</span>
-                  <address>96 boulevard d'Austrasie<br />54000 Nancy</address>
-                  <a class="footer-link" href="tel:+33387184920"
-                    >03 87 18 49 20</a
-                  >
-                  <span class="fc-hours">Lun–Ven · 8h30–18h30</span>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="footer-bottom reveal delay-3">
-          <span class="footer-copyright"
-            >&copy; <span id="year">2026</span> JCD Groupe &middot; Tous droits réservés.</span
-          >
-
-          <!-- Le groupe : societes soeurs de la holding, signature centrale de
-           la barre legale. La signification passe par la seule proximite
-           avec "JCD Groupe", jamais enoncee. (inject_footer_eco.py) -->
-          <div class="footer-eco">
-            <span class="footer-eco-label">Le groupe</span>
-            <a
-              class="footer-eco-link"
-              href="https://www.pclease.lu/"
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="PC Lease — ingénierie informatique (nouvel onglet)"
-            >
-              <img
-                src="assets/pclease-blanc.svg"
-                alt="PC Lease"
-                height="14"
-                decoding="async"
-              />
-              <svg
-                class="footer-eco-arrow"
-                width="9"
-                height="9"
-                viewBox="0 0 9 9"
-                fill="none"
-                aria-hidden="true"
-              >
-                <path
-                  d="M1.5 7.5 7.5 1.5M7.5 1.5H2.9M7.5 1.5v4.6"
-                  stroke="currentColor"
-                  stroke-width="1.2"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"></path>
-              </svg>
-            </a>
-            <a
-              class="footer-eco-link"
-              href="https://www.rsecure.lu/"
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="Rsecure — cybersécurité (nouvel onglet)"
-            >
-              <img
-                src="assets/rsecure-blanc.svg"
-                alt="Rsecure"
-                height="17"
-                decoding="async"
-              />
-              <svg
-                class="footer-eco-arrow"
-                width="9"
-                height="9"
-                viewBox="0 0 9 9"
-                fill="none"
-                aria-hidden="true"
-              >
-                <path
-                  d="M1.5 7.5 7.5 1.5M7.5 1.5H2.9M7.5 1.5v4.6"
-                  stroke="currentColor"
-                  stroke-width="1.2"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"></path>
-              </svg>
-            </a>
-            <a
-              class="footer-eco-link"
-              href="https://digidocservices.com/"
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="Digidoc Services — gestion documentaire (nouvel onglet)"
-            >
-              <img
-                src="assets/digidoc-blanc.svg"
-                alt="Digidoc Services"
-                height="13"
-                decoding="async"
-              />
-              <svg
-                class="footer-eco-arrow"
-                width="9"
-                height="9"
-                viewBox="0 0 9 9"
-                fill="none"
-                aria-hidden="true"
-              >
-                <path
-                  d="M1.5 7.5 7.5 1.5M7.5 1.5H2.9M7.5 1.5v4.6"
-                  stroke="currentColor"
-                  stroke-width="1.2"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"></path>
-              </svg>
-            </a>
-          </div>
-
-          <div class="footer-bottom-right">
-            <span class="footer-legal"
-              ><a class="footer-link" href="mentions-legales"
-                >Mentions légales</a
-              >
-              &middot;
-              <a class="footer-link" href="politique-de-confidentialite"
-                >Politique de confidentialité</a
-              ></span
-            >
-            <a
-              class="footer-linkedin"
-              href="https://www.linkedin.com/company/jcd-groupe/"
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="JCD Groupe sur LinkedIn"
-            >
-              <svg
-                width="16"
-                height="16"
-                viewBox="0 0 24 24"
-                fill="currentColor"
-                aria-hidden="true"
-              >
-                <path
-                  d="M4.98 3.5C4.98 4.88 3.87 6 2.5 6S0 4.88 0 3.5 1.12 1 2.5 1s2.48 1.12 2.48 2.5zM.22 8h4.56v14H.22V8zm7.6 0h4.37v1.92h.06c.61-1.15 2.1-2.36 4.32-2.36 4.62 0 5.47 3.04 5.47 7v7.44h-4.56v-6.6c0-1.57-.03-3.6-2.2-3.6-2.2 0-2.54 1.72-2.54 3.49V22H7.82V8z"
-                ></path>
-              </svg>
-            </a>
-          </div>
-        </div>
-      </div>
-    </footer>
-
-    <!-- ================================
-     SCRIPTS
-     ================================ -->
-    <script>
-      // Reveal animations
-      (function setupRevealAnimations() {
-        var els = document.querySelectorAll(".reveal");
-        if (!("IntersectionObserver" in window)) {
-          els.forEach(function (el) {
-            el.classList.add("visible");
-          });
-          return;
-        }
-        var io = new IntersectionObserver(
-          function (entries) {
-            entries.forEach(function (e) {
-              if (e.isIntersecting) {
-                e.target.classList.add("visible");
-                io.unobserve(e.target);
-              }
-            });
-          },
-          { threshold: 0.1, rootMargin: "0px 0px -60px 0px" },
-        );
-        els.forEach(function (el) {
-          io.observe(el);
-        });
-      })();
-
-      /* ----------------------------------------------------
-     HERO MESH — Gradient WebGL fluide, piloté par les
-     variables CSS --mesh-c1..c4 du .print-hero (RGB 0-255).
-     Pattern universel : à dupliquer tel quel sur les autres
-     pages expertises, seules les valeurs --mesh-* changent.
-     ---------------------------------------------------- */
-      (function setupHeroMesh() {
-        var canvas = document.getElementById("heroMesh");
-        if (!canvas) return;
-        if (window.matchMedia("(prefers-reduced-motion: reduce)").matches)
-          return;
-
-        var gl = null;
-        try {
-          var opts = {
-            antialias: false,
-            alpha: false,
-            premultipliedAlpha: false,
-            depth: false,
-            stencil: false,
-            preserveDrawingBuffer: false,
-            powerPreference: "low-power",
-          };
-          gl =
-            canvas.getContext("webgl", opts) ||
-            canvas.getContext("experimental-webgl", opts);
-        } catch (e) {}
-        if (!gl) return;
-
-        var VERT = "attribute vec2 p;void main(){gl_Position=vec4(p,0.,1.);}";
-
-        var FRAG = [
-          "precision highp float;",
-          "uniform vec2  u_res;",
-          "uniform float u_t;",
-          "uniform vec3  u_c1;",
-          "uniform vec3  u_c2;",
-          "uniform vec3  u_c3;",
-          "uniform vec3  u_c4;",
-          // Simplex 2D noise (Ashima Arts — domaine public)
-          "vec3 perm(vec3 x){return mod(((x*34.)+1.)*x,289.);}",
-          "float snoise(vec2 v){",
-          "  const vec4 C=vec4(.211324865405187,.366025403784439,-.577350269189626,.024390243902439);",
-          "  vec2 i=floor(v+dot(v,C.yy));",
-          "  vec2 x0=v-i+dot(i,C.xx);",
-          "  vec2 i1=(x0.x>x0.y)?vec2(1.,0.):vec2(0.,1.);",
-          "  vec4 x12=x0.xyxy+C.xxzz;",
-          "  x12.xy-=i1;",
-          "  i=mod(i,289.);",
-          "  vec3 p=perm(perm(i.y+vec3(0.,i1.y,1.))+i.x+vec3(0.,i1.x,1.));",
-          "  vec3 m=max(.5-vec3(dot(x0,x0),dot(x12.xy,x12.xy),dot(x12.zw,x12.zw)),0.);",
-          "  m=m*m;m=m*m;",
-          "  vec3 x=2.*fract(p*C.www)-1.;",
-          "  vec3 h=abs(x)-.5;",
-          "  vec3 ox=floor(x+.5);",
-          "  vec3 a0=x-ox;",
-          "  m*=1.79284291400159-.85373472095314*(a0*a0+h*h);",
-          "  vec3 g;g.x=a0.x*x0.x+h.x*x0.y;",
-          "  g.yz=a0.yz*x12.xz+h.yz*x12.yw;",
-          "  return 130.*dot(m,g);",
-          "}",
-          "void main(){",
-          "  vec2 uv=gl_FragCoord.xy/u_res.xy;",
-          "  vec2 p=uv*2.-1.;",
-          "  p.x*=u_res.x/u_res.y;",
-          "  float t=u_t*.045;",
-          // Champ de distorsion (warp les coords avant les blobs)
-          "  vec2 d=vec2(",
-          "    snoise(p*.65+vec2(t*1.1,t*.8)),",
-          "    snoise(p*.65+vec2(-t*.9,t*1.3))",
-          "  )*.36;",
-          // Trois blobs sur les coords distordues
-          "  float n1=snoise((p+d)*.62+vec2(t,0.));",
-          "  float n2=snoise((p-d*.7)*1.05+vec2(0.,t*.7));",
-          "  float n3=snoise((p*1.35+d*.5)+vec2(-t*.5,t*.3));",
-          "  float b1=smoothstep(.05,1.,n1);",
-          "  float b2=smoothstep(-.05,.9,n2);",
-          "  float b3=smoothstep(-.2,.8,n3);",
-          // Mélange : base sombre + 3 nuances d'accent (intensité réduite pour rester premium/dark)
-          "  vec3 col=u_c1;",
-          "  col=mix(col,u_c2,b1*.30);",
-          "  col=mix(col,u_c4,b2*.18);",
-          "  col=mix(col,u_c3*.85,b3*.12);",
-          // Highlight subtil pour casser la planéité
-          "  float streak=smoothstep(.6,1.,n1*.65+.3)*smoothstep(0.,.5,b2);",
-          "  col+=u_c4*streak*.08;",
-          // Vignette intégrée — plus prononcée pour focus contenu
-          "  float vig=1.-smoothstep(.3,1.4,length(p*vec2(.6,.75)));",
-          "  col*=mix(.42,1.,vig);",
-          // Léger gamma pour densifier
-          "  col=pow(max(col,0.),vec3(.96));",
-          "  gl_FragColor=vec4(col,1.);",
-          "}",
-        ].join("\n");
-
-        function compile(type, src) {
-          var s = gl.createShader(type);
-          gl.shaderSource(s, src);
-          gl.compileShader(s);
-          if (!gl.getShaderParameter(s, gl.COMPILE_STATUS)) {
-            gl.deleteShader(s);
-            return null;
-          }
-          return s;
-        }
-
-        var vs = compile(gl.VERTEX_SHADER, VERT);
-        var fs = compile(gl.FRAGMENT_SHADER, FRAG);
-        if (!vs || !fs) return;
-
-        var prog = gl.createProgram();
-        gl.attachShader(prog, vs);
-        gl.attachShader(prog, fs);
-        gl.linkProgram(prog);
-        if (!gl.getProgramParameter(prog, gl.LINK_STATUS)) return;
-        gl.useProgram(prog);
-
-        var buf = gl.createBuffer();
-        gl.bindBuffer(gl.ARRAY_BUFFER, buf);
-        gl.bufferData(
-          gl.ARRAY_BUFFER,
-          new Float32Array([-1, -1, 1, -1, -1, 1, 1, 1]),
-          gl.STATIC_DRAW,
-        );
-        var aLoc = gl.getAttribLocation(prog, "p");
-        gl.enableVertexAttribArray(aLoc);
-        gl.vertexAttribPointer(aLoc, 2, gl.FLOAT, false, 0, 0);
-
-        var uRes = gl.getUniformLocation(prog, "u_res");
-        var uT = gl.getUniformLocation(prog, "u_t");
-        var uC1 = gl.getUniformLocation(prog, "u_c1");
-        var uC2 = gl.getUniformLocation(prog, "u_c2");
-        var uC3 = gl.getUniformLocation(prog, "u_c3");
-        var uC4 = gl.getUniformLocation(prog, "u_c4");
-
-        /* Lit une variable CSS RGB "243, 148, 29" et la normalise [0..1] */
-        function readMeshColor(host, name, fallback) {
-          var raw = getComputedStyle(host)
-            .getPropertyValue("--mesh-" + name)
-            .trim();
-          if (!raw) return fallback;
-          var parts = raw.split(",").map(function (n) {
-            return parseFloat(n) / 255;
-          });
-          if (
-            parts.length !== 3 ||
-            parts.some(function (v) {
-              return isNaN(v);
-            })
-          )
-            return fallback;
-          return parts;
-        }
-
-        var host = canvas.closest(".print-hero") || canvas.parentElement;
-        gl.uniform3fv(uC1, readMeshColor(host, "c1", [0.05, 0.05, 0.05]));
-        gl.uniform3fv(uC2, readMeshColor(host, "c2", [0.95, 0.58, 0.11]));
-        gl.uniform3fv(uC3, readMeshColor(host, "c3", [0.77, 0.47, 0.09]));
-        gl.uniform3fv(uC4, readMeshColor(host, "c4", [0.97, 0.63, 0.25]));
-
-        function resize() {
-          var dpr = Math.min(window.devicePixelRatio || 1, 1.5);
-          var w = Math.max(1, Math.floor(canvas.clientWidth * dpr));
-          var h = Math.max(1, Math.floor(canvas.clientHeight * dpr));
-          if (canvas.width !== w || canvas.height !== h) {
-            canvas.width = w;
-            canvas.height = h;
-            gl.viewport(0, 0, w, h);
-            gl.uniform2f(uRes, w, h);
-          }
-        }
-        resize();
-
-        if (window.ResizeObserver) {
-          new ResizeObserver(resize).observe(canvas);
-        } else {
-          window.addEventListener("resize", resize, { passive: true });
-        }
-
-        /* Pause quand le hero sort de l'écran (économie CPU/GPU sur le manifesto) */
-        var running = true;
-        if ("IntersectionObserver" in window) {
-          new IntersectionObserver(
-            function (entries) {
-              running = entries[0].isIntersecting;
-            },
-            { threshold: 0 },
-          ).observe(canvas);
-        }
-
-        canvas.classList.add("is-ready");
-
-        var start = performance.now();
-        function frame(now) {
-          if (running) {
-            gl.uniform1f(uT, (now - start) / 1000);
-            gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
-          }
-          requestAnimationFrame(frame);
-        }
-        requestAnimationFrame(frame);
-      })();
-
-      // Footer year
-      (function setupYear() {
-        var y = document.getElementById("year");
-        if (y) y.textContent = String(new Date().getFullYear());
-      })();
-
-      // Process flow — déclenche l'animation au scroll
-      (function setupProcessFlow() {
-        var flow = document.querySelector(".pf-vflow");
-        if (!flow) return;
-        if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-          flow.classList.add("visible");
-          return;
-        }
-        if (!("IntersectionObserver" in window)) {
-          flow.classList.add("visible");
-          return;
-        }
-        var io = new IntersectionObserver(
-          function (entries) {
-            entries.forEach(function (e) {
-              if (e.isIntersecting) {
-                flow.classList.add("visible");
-                io.unobserve(e.target);
-              }
-            });
-          },
-          { threshold: 0.25 },
-        );
-        io.observe(flow);
-      })();
-
-      // Logo wall — bascule en mode "has-logo" si le fichier image existe et se charge
-      (function setupLogoTiles() {
-        var imgs = document.querySelectorAll(".logo-tile-img");
-        imgs.forEach(function (img) {
-          var tile = img.closest(".logo-tile");
-          if (!tile) return;
-          var markLoaded = function () {
-            if (img.naturalWidth > 0) tile.classList.add("has-logo");
-            else img.style.display = "none";
-          };
-          var markMissing = function () {
-            img.style.display = "none";
-          };
-          if (img.complete) markLoaded();
-          else {
-            img.addEventListener("load", markLoaded, { once: true });
-            img.addEventListener("error", markMissing, { once: true });
-          }
-        });
-      })();
-
-      /* ----------------------------------------------------
-     NAVBAR v2 — Dropdown "Expertises"
-     Ouverture sur hover (zone trigger + zone pill + zone
-     panel, sans gap mort), focus clavier, clic, Esc, clic
-     extérieur. Pilote aria-expanded + aria-hidden + classe
-     .is-open pour les transitions CSS. Synchronisé pour le
-     tab navigation entre items du panel.
-     ---------------------------------------------------- */
-      (function setupNavDropdown() {
-        var trigger = document.getElementById("nav-expertises-trigger");
-        var panel = document.getElementById("nav-expertises-panel");
-        var pill = document.getElementById("nav-pill");
-        var navbar = document.getElementById("navbar");
-        if (!trigger || !panel || !pill || !navbar) return;
-
-        var items = panel.querySelectorAll(".nm-item, .nm-sub-item");
-        var groups = panel.querySelectorAll(".nm-group");
-        var openTimer = null;
-        var closeTimer = null;
-        var isOpen = false;
-
-        function clearTimers() {
-          if (openTimer) {
-            window.clearTimeout(openTimer);
-            openTimer = null;
-          }
-          if (closeTimer) {
-            window.clearTimeout(closeTimer);
-            closeTimer = null;
-          }
-        }
-
-        function openPanel() {
-          clearTimers();
-          if (isOpen) return;
-          isOpen = true;
-          trigger.setAttribute("aria-expanded", "true");
-          panel.setAttribute("aria-hidden", "false");
-          items.forEach(function (it) {
-            it.setAttribute("tabindex", "0");
-          });
-        }
-        function closePanel() {
-          clearTimers();
-          if (!isOpen) return;
-          isOpen = false;
-          trigger.setAttribute("aria-expanded", "false");
-          panel.setAttribute("aria-hidden", "true");
-          items.forEach(function (it) {
-            it.setAttribute("tabindex", "-1");
-          });
-          groups.forEach(function (g) {
-            g.setAttribute("data-expanded", "false");
-          });
-        }
-        function deferOpen() {
-          clearTimers();
-          openTimer = window.setTimeout(openPanel, 60);
-        }
-        function deferClose() {
-          clearTimers();
-          closeTimer = window.setTimeout(closePanel, 180);
-        }
-
-        [trigger, pill, panel].forEach(function (el) {
-          el.addEventListener("mouseenter", function () {
-            deferOpen();
-          });
-          el.addEventListener("mouseleave", function () {
-            deferClose();
-          });
-        });
-
-        trigger.addEventListener("click", function (e) {
-          e.preventDefault();
-          if (isOpen) closePanel();
-          else openPanel();
-        });
-
-        trigger.addEventListener("keydown", function (e) {
-          if (e.key === "ArrowDown" || e.key === "Enter" || e.key === " ") {
-            e.preventDefault();
-            openPanel();
-            if (items.length) items[0].focus();
-          } else if (e.key === "Escape" && isOpen) {
-            closePanel();
-            trigger.focus();
-          }
-        });
-
-        items.forEach(function (item, i) {
-          item.addEventListener("keydown", function (e) {
-            if (e.key === "ArrowDown") {
-              e.preventDefault();
-              items[(i + 1) % items.length].focus();
-            } else if (e.key === "ArrowUp") {
-              e.preventDefault();
-              items[(i - 1 + items.length) % items.length].focus();
-            } else if (e.key === "Escape") {
-              closePanel();
-              trigger.focus();
-            } else if (
-              e.key === "Tab" &&
-              !e.shiftKey &&
-              i === items.length - 1
-            ) {
-              closePanel();
-            } else if (e.key === "Tab" && e.shiftKey && i === 0) {
-              closePanel();
-            }
-          });
-        });
-
-        document.addEventListener("click", function (e) {
-          if (!isOpen) return;
-          if (navbar.contains(e.target)) return;
-          closePanel();
-        });
-
-        document.addEventListener("keydown", function (e) {
-          if (e.key === "Escape" && isOpen) {
-            closePanel();
-            trigger.focus();
-          }
-        });
-
-        /* === Accordeon : sous-items d'Informatique (et tout groupe qui
-           contient un .nm-sub). Hoverer un autre groupe replie le
-           precedent. Reset complet a la fermeture du panneau. === */
-        var grpTimer = null;
-        function setExpanded(target) {
-          if (grpTimer) {
-            clearTimeout(grpTimer);
-            grpTimer = null;
-          }
-          groups.forEach(function (g) {
-            g.setAttribute("data-expanded", g === target ? "true" : "false");
-          });
-        }
-        groups.forEach(function (group) {
-          var hasSub = !!group.querySelector(".nm-sub");
-          group.addEventListener("mouseenter", function () {
-            if (grpTimer) {
-              clearTimeout(grpTimer);
-              grpTimer = null;
-            }
-            grpTimer = setTimeout(function () {
-              setExpanded(hasSub ? group : null);
-            }, 70);
-          });
-          group.addEventListener("focusin", function () {
-            setExpanded(hasSub ? group : null);
-          });
-        });
-
-        /* === Marqueur de page courante : ajoute .is-current sur l'item
-           expertise dont le href pointe vers le fichier courant.
-           Les items de la zone Decouvrir (anchors) ne sont jamais
-           marques courants. === */
-        var here = (location.pathname.split("/").pop() || "").toLowerCase();
-        if (!here) here = "index";
-        panel
-          .querySelectorAll(".nm-zone--expertises .nm-item")
-          .forEach(function (a) {
-            var hrefAttr = a.getAttribute("href") || "";
-            if (hrefAttr.indexOf("#") !== -1) return;
-            var target = hrefAttr.split("/").pop().toLowerCase();
-            if (target && target === here) a.classList.add("is-current");
-          });
-        panel.querySelectorAll(".nm-sub-item").forEach(function (s) {
-          var st = (s.getAttribute("href") || "")
-            .split("/")
-            .pop()
-            .toLowerCase();
-          if (st && st === here) s.classList.add("is-current");
-        });
-      })();
-    </script>
-    <script>
-      /* Voile givré : cale body::after sur le rect du panneau de menu ouvert
-     (le blur ne peut pas vivre dans la navbar fixed — bug Chromium). */
-      (function setupMenuFrost() {
-        var panels = Array.prototype.slice.call(
-          document.querySelectorAll(".nav-panel"),
-        );
-        if (!panels.length || !window.MutationObserver) return;
-        var current = null;
-        function place(panel) {
-          var r = panel.getBoundingClientRect();
-          var s = document.body.style;
-          s.setProperty("--menu-x", r.left + "px");
-          s.setProperty("--menu-y", r.top + "px");
-          s.setProperty("--menu-w", r.width + "px");
-          s.setProperty("--menu-h", r.height + "px");
-        }
-        /* Suit la croissance du panneau (sous-sections qui se deplient) :
-       le voile est recale en continu tant que le menu est ouvert. */
-        var ro = window.ResizeObserver
-          ? new ResizeObserver(function () {
-              if (current) place(current);
-            })
-          : null;
-        var mo = new MutationObserver(function (muts) {
-          muts.forEach(function (m) {
-            var p = m.target;
-            if (p.getAttribute("aria-hidden") === "false") {
-              current = p;
-              place(p);
-              if (ro) {
-                ro.disconnect();
-                ro.observe(p);
-                var sh = p.querySelector(".nav-panel__shell");
-                if (sh) ro.observe(sh);
-              }
-            } else if (current === p) {
-              current = null;
-              if (ro) ro.disconnect();
-            }
-          });
-        });
-        panels.forEach(function (p) {
-          mo.observe(p, { attributes: true, attributeFilter: ["aria-hidden"] });
-        });
-        window.addEventListener("resize", function () {
-          if (current) place(current);
-        });
-      })();
-    </script>
-    <!-- jcd-mobile-nav (injected) -->
-    <button
-      class="jcd-burger"
-      id="jcdBurger"
-      type="button"
-      aria-label="Ouvrir le menu"
-      aria-expanded="false"
-      aria-controls="jcdMnav"
-    >
-      <span class="jcd-burger__box" aria-hidden="true"
-        ><i></i><i></i><i></i></span
-      >
-    </button>
-    <div
-      class="jcd-mnav"
-      id="jcdMnav"
-      role="dialog"
-      aria-modal="true"
-      aria-label="Menu de navigation"
-      aria-hidden="true"
-    >
-      <div class="jcd-mnav__scroll">
-        <div class="jcd-mnav__inner">
-          <p
-            class="jcd-mnav__eyebrow jcd-mnav__reveal"
-            style="transition-delay: 0.04s"
-          >
-            Expertises
-          </p>
-
-          <div class="jcd-mnav__reveal" style="transition-delay: 0.07s">
-            <div class="jcd-mnav__item" style="--mnav-c: #2e72ba">
-              <a class="jcd-mnav__link" href="informatique"
-                ><span class="jcd-mnav__dot"></span><span
-                  class="jcd-mnav__label">Informatique</span
-                ></a
-              >
-              <button
-                class="jcd-acc__toggle"
-                type="button"
-                aria-expanded="false"
-                aria-controls="jcdAccInfo"
-                aria-label="Afficher les sous-pages Informatique"
-              >
-                <svg
-                  viewBox="0 0 14 14"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="1.6"
-                  stroke-linecap="round"
-                >
-                  <path d="M7 2v10M2 7h10"></path>
-                </svg>
-              </button>
-            </div>
-            <div class="jcd-acc__panel" id="jcdAccInfo">
-              <a class="jcd-mnav__sub" href="info-cloud">Cloud Microsoft</a>
-              <a class="jcd-mnav__sub" href="info-collaboratif"
-                >Solutions collaboratives &amp; audiovisuelles</a
-              >
-              <a class="jcd-mnav__sub" href="info-reseaux"
-                >Architectures syst&egrave;mes &amp; r&eacute;seaux</a
-              >
-              <a class="jcd-mnav__sub" href="info-integration"
-                >Int&eacute;gration &amp; Support PC</a
-              >
-            </div>
-          </div>
-
-          <a
-            class="jcd-mnav__item jcd-mnav__reveal"
-            style="--mnav-c: #e51d29; transition-delay: 0.1s"
-            href="service"
-            ><span class="jcd-mnav__dot"></span><span class="jcd-mnav__label"
-              >Service</span
-            ></a
-          >
-          <a
-            class="jcd-mnav__item jcd-mnav__reveal"
-            style="--mnav-c: #f9d605; transition-delay: 0.13s"
-            href="developpement"
-            ><span class="jcd-mnav__dot"></span><span class="jcd-mnav__label"
-              >D&eacute;veloppement</span
-            ></a
-          >
-          <a
-            class="jcd-mnav__item jcd-mnav__reveal"
-            style="--mnav-c: #f3941d; transition-delay: 0.16s"
-            href="print"
-            ><span class="jcd-mnav__dot"></span><span class="jcd-mnav__label"
-              >Print</span
-            ></a
-          >
-          <a
-            class="jcd-mnav__item jcd-mnav__reveal"
-            style="--mnav-c: #b063ac; transition-delay: 0.19s"
-            href="telecom"
-            ><span class="jcd-mnav__dot"></span><span class="jcd-mnav__label"
-              >T&eacute;l&eacute;com</span
-            ></a
-          >
-          <div class="jcd-mnav__reveal" style="transition-delay: 0.22s">
-            <div class="jcd-mnav__item" style="--mnav-c: #8ec041">
-              <a class="jcd-mnav__link" href="formation"
-                ><span class="jcd-mnav__dot"></span><span
-                  class="jcd-mnav__label">Formation</span
-                ></a
-              >
-              <button
-                class="jcd-acc__toggle"
-                type="button"
-                aria-expanded="false"
-                aria-controls="jcdAccForm"
-                aria-label="Afficher les catégories de formation"
-              >
-                <svg
-                  viewBox="0 0 14 14"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="1.6"
-                  stroke-linecap="round"
-                >
-                  <path d="M7 2v10M2 7h10"></path>
-                </svg>
-              </button>
-            </div>
-            <div class="jcd-acc__panel" id="jcdAccForm">
-              <a class="jcd-mnav__sub" href="formation-bureautique"
-                >Bureautique</a
-              >
-              <a
-                class="jcd-mnav__sub"
-                href="formation-intelligence-artificielle"
-                >Intelligence artificielle</a
-              >
-              <a class="jcd-mnav__sub" href="formation-informatique"
-                >Informatique</a
-              >
-              <a class="jcd-mnav__sub" href="formation-communication-marketing"
-                >Communication - Marketing</a
-              >
-              <a class="jcd-mnav__sub" href="formation-management">Management</a
-              >
-              <a class="jcd-mnav__sub" href="formation-commerce-relation-client"
-                >Commerce - Relation client</a
-              >
-              <a class="jcd-mnav__sub" href="formation-comptabilite-gestion"
-                >Comptabilit&eacute; - Gestion</a
-              >
-              <a class="jcd-mnav__sub" href="formation-ressources-humaines"
-                >Ressources humaines</a
-              >
-              <a class="jcd-mnav__sub" href="formation-developpement-personnel"
-                >D&eacute;veloppement personnel</a
-              >
-              <a class="jcd-mnav__sub" href="formation-graphisme-pao"
-                >Graphisme - PAO</a
-              >
-              <a
-                class="jcd-mnav__sub"
-                href="formation-administratif-secretariat-accueil"
-                >Administratif - Secr&eacute;tariat</a
-              >
-              <a class="jcd-mnav__sub" href="formation-securite"
-                >S&eacute;curit&eacute;</a
-              >
-              <a class="jcd-mnav__sub" href="formation-langues">Langues</a>
-            </div>
-          </div>
-          <a
-            class="jcd-mnav__item jcd-mnav__reveal"
-            style="--mnav-c: #a78d75; transition-delay: 0.25s"
-            href="agencement"
-            ><span class="jcd-mnav__dot"></span><span class="jcd-mnav__label"
-              >Agencement</span
-            ></a
-          >
-
-          <p
-            class="jcd-mnav__eyebrow jcd-mnav__sec2 jcd-mnav__reveal"
-            style="transition-delay: 0.3s"
-          >
-            D&eacute;couvrir
-          </p>
-          <a
-            class="jcd-mnav__item jcd-mnav__reveal"
-            style="--mnav-c: #9a9a9a; transition-delay: 0.33s"
-            href="assistance"
-            ><span class="jcd-mnav__dot"></span><span
-              class="jcd-mnav__label"
-              style="font-size: 19px">Assistance</span
-            ></a
-          >
-          <a
-            class="jcd-mnav__item jcd-mnav__reveal"
-            style="--mnav-c: #9a9a9a; transition-delay: 0.36s"
-            href="carrieres"
-            ><span class="jcd-mnav__dot"></span><span
-              class="jcd-mnav__label"
-              style="font-size: 19px">Carri&egrave;res</span
-            ></a
-          >
-
-          <div
-            class="jcd-mnav__cta jcd-mnav__reveal"
-            style="transition-delay: 0.4s"
-          >
-            <a class="jcd-mnav__btn jcd-mnav__btn--primary" href="contact"
-              >Contacter un expert
-              <span class="jcd-mnav__btn-ic"
-                ><svg
-                  viewBox="0 0 16 16"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="1.7"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                >
-                  <path d="M3 8h10M9 4l4 4-4 4"></path></svg
-                ></span
-              ></a
-            >
-            <a
-              class="jcd-mnav__btn jcd-mnav__btn--ghost"
-              href="tel:+33387184920"
-              >03 87 18 49 20
-              <span class="jcd-mnav__btn-ic"
-                ><svg
-                  viewBox="0 0 18 18"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="1.5"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                >
-                  <path
-                    d="M2.5 3.5a1 1 0 011-1h2.4a1 1 0 01.95.68l.86 2.4a1 1 0 01-.24 1l-1.2 1.2a11 11 0 004.6 4.6l1.2-1.2a1 1 0 011-.24l2.4.86a1 1 0 01.68.95V15a1 1 0 01-1 1A13.5 13.5 0 012.5 3.5z"
-                  ></path></svg
-                ></span
-              ></a
-            >
-          </div>
-        </div>
-      </div>
-    </div>
-    <script>
-      (function () {
-        var body = document.body,
-          burger = document.getElementById("jcdBurger"),
-          mnav = document.getElementById("jcdMnav"),
-          hroot = document.documentElement;
-        if (!burger || !mnav) return;
-        var lastFocus = null;
-        function focusables() {
-          return mnav.querySelectorAll("a[href],button:not([disabled])");
-        }
-        function open() {
-          lastFocus = document.activeElement;
-          body.classList.add("jcd-mnav-open");
-          burger.setAttribute("aria-expanded", "true");
-          burger.setAttribute("aria-label", "Fermer le menu");
-          mnav.setAttribute("aria-hidden", "false");
-          body.style.overflow = "hidden";
-          hroot.style.overflow = "hidden";
-        }
-        function close() {
-          body.classList.remove("jcd-mnav-open");
-          burger.setAttribute("aria-expanded", "false");
-          burger.setAttribute("aria-label", "Ouvrir le menu");
-          mnav.setAttribute("aria-hidden", "true");
-          body.style.overflow = "";
-          hroot.style.overflow = "";
-          if (lastFocus && lastFocus.focus)
-            try {
-              lastFocus.focus();
-            } catch (e) {}
-        }
-        function toggle() {
-          body.classList.contains("jcd-mnav-open") ? close() : open();
-        }
-        burger.addEventListener("click", toggle);
-        mnav.addEventListener("click", function (e) {
-          var a = e.target.closest("a");
-          if (a) close();
-        });
-        document.addEventListener("keydown", function (e) {
-          if (!body.classList.contains("jcd-mnav-open")) return;
-          if (e.key === "Escape") {
-            close();
-            return;
-          }
-          if (e.key === "Tab") {
-            var f = focusables();
-            if (!f.length) return;
-            var first = f[0],
-              last = f[f.length - 1];
-            if (e.shiftKey && document.activeElement === first) {
-              e.preventDefault();
-              last.focus();
-            } else if (!e.shiftKey && document.activeElement === last) {
-              e.preventDefault();
-              first.focus();
-            }
-          }
-        });
-        Array.prototype.forEach.call(
-          mnav.querySelectorAll(".jcd-acc__toggle"),
-          function (btn) {
-            btn.addEventListener("click", function () {
-              var p = document.getElementById(
-                btn.getAttribute("aria-controls"),
-              );
-              if (!p) return;
-              var isOpen = p.style.maxHeight && p.style.maxHeight !== "0px";
-              if (isOpen) {
-                p.style.maxHeight = "0px";
-                btn.setAttribute("aria-expanded", "false");
-              } else {
-                p.style.maxHeight = p.scrollHeight + "px";
-                btn.setAttribute("aria-expanded", "true");
-              }
-            });
-          },
-        );
-        window.addEventListener("resize", function () {
-          if (
-            window.innerWidth > 820 &&
-            body.classList.contains("jcd-mnav-open")
-          )
-            close();
-        });
-      })();
-    </script>
-    <!-- jcd-a11y (Lot 5) -->
-    <div class="jcd-fab-wrap" id="jcd-fab">
-      <button
-        class="jcd-fab jcd-fab--top"
-        id="jcdToTop"
-        type="button"
-        aria-label="Remonter en haut"
-      >
-        <svg
-          viewBox="0 0 20 20"
-          fill="none"
-          stroke="currentColor"
-          stroke-width="1.8"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          aria-hidden="true"
-        >
-          <path d="M10 16V5M5 10l5-5 5 5"></path>
-        </svg>
-      </button>
-      <a
-        class="jcd-fab jcd-fab--contact"
-        id="jcdFabContact"
-        href="contact"
-        aria-label="Nous contacter"
-      >
-        <svg
-          viewBox="0 0 20 20"
-          fill="none"
-          stroke="currentColor"
-          stroke-width="1.6"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          aria-hidden="true"
-        >
-          <rect x="2.5" y="4.5" width="15" height="11" rx="2.3"></rect>
-          <path d="M3 6.7 L10 10.7 L17 6.7"></path>
-        </svg>
+    <div class="hero-actions reveal delay-3">
+      <a href="contact.html?pole=print" class="btn-cta btn-cta--ghost">
+        Demander un devis
+        <span class="btn-cta-arrow"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h10M9 4l4 4-4 4"/></svg></span>
       </a>
     </div>
-    <script id="jcd-a11y-js">
-      (function () {
-        var d = document,
-          body = d.body;
-        /* 1) inert collapsed accordion panels (skip the overlay itself) */
-        function sync(btn) {
-          var id = btn.getAttribute("aria-controls");
-          if (!id || id === "jcdMnav") return;
-          var p = d.getElementById(id);
-          if (!p) return;
-          if (btn.getAttribute("aria-expanded") === "true") {
-            p.removeAttribute("inert");
-          } else {
-            p.setAttribute("inert", "");
-          }
-        }
-        Array.prototype.forEach.call(
-          d.querySelectorAll("[aria-controls][aria-expanded]"),
-          function (b) {
-            sync(b);
-            try {
-              new MutationObserver(function () {
-                sync(b);
-              }).observe(b, {
-                attributes: true,
-                attributeFilter: ["aria-expanded"],
-              });
-            } catch (e) {}
-          },
-        );
-        /* 2) inert the page behind the open overlay */
-        var mnav = d.getElementById("jcdMnav"),
-          burger = d.getElementById("jcdBurger"),
-          fab = d.getElementById("jcd-fab");
-        if (mnav) {
-          try {
-            new MutationObserver(function () {
-              var open = body.classList.contains("jcd-mnav-open");
-              Array.prototype.forEach.call(body.children, function (el) {
-                if (
-                  el === mnav ||
-                  el === burger ||
-                  el.tagName === "SCRIPT" ||
-                  el.tagName === "STYLE"
-                ) {
-                  return;
-                }
-                if (open) {
-                  el.setAttribute("inert", "");
-                } else {
-                  el.removeAttribute("inert");
-                }
-              });
-            }).observe(body, { attributes: true, attributeFilter: ["class"] });
-          } catch (e) {}
-        }
-        /* 3) floating cluster on long pages */
-        var toTop = d.getElementById("jcdToTop");
-        if (fab) {
-          var update = function () {
-            var y = window.pageYOffset || d.documentElement.scrollTop || 0;
-            var docH = d.documentElement.scrollHeight,
-              vh = window.innerHeight || 0;
-            var nearBottom = y + vh > docH - 200;
-            if (y > 520 && !nearBottom) {
-              fab.classList.add("is-shown");
-            } else {
-              fab.classList.remove("is-shown");
-            }
-            if (toTop) {
-              if (y > 520) {
-                toTop.classList.add("is-on");
-              } else {
-                toTop.classList.remove("is-on");
-              }
-            }
-          };
-          window.addEventListener("scroll", update, { passive: true });
-          window.addEventListener("resize", update, { passive: true });
-          update();
-        }
-        if (toTop) {
-          toTop.addEventListener("click", function () {
-            var rm = window.matchMedia(
-              "(prefers-reduced-motion:reduce)",
-            ).matches;
-            try {
-              window.scrollTo({ top: 0, behavior: rm ? "auto" : "smooth" });
-            } catch (e) {
-              window.scrollTo(0, 0);
-            }
-          });
-        }
-        /* 4) hide the contact shortcut on the contact page itself */
-        var cf = d.getElementById("jcdFabContact");
-        if (cf && /contact\(\?|$)/.test(location.pathname + location.search)) {
-          if (cf.parentNode) {
-            cf.parentNode.removeChild(cf);
-          }
-        }
-        /* 5) mobile keyboard refinements */
-        try {
-          Array.prototype.forEach.call(
-            d.querySelectorAll('input[type="email"]'),
-            function (i) {
-              i.setAttribute("inputmode", "email");
-              i.setAttribute("enterkeyhint", "next");
-            },
-          );
-          Array.prototype.forEach.call(
-            d.querySelectorAll('input[type="tel"]'),
-            function (i) {
-              i.setAttribute("inputmode", "tel");
-            },
-          );
-          Array.prototype.forEach.call(
-            d.querySelectorAll("textarea"),
-            function (t) {
-              t.setAttribute("enterkeyhint", "enter");
-            },
-          );
-        } catch (e) {}
-      })();
-    </script>
-    <script id="jcd-micons-js">
-      (function () {
-        var M = {
-          informatique:
-            '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="12" rx="2"/><path d="M8 20h8M12 16v4"/></svg>',
-          service:
-            '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 14v-2a9 9 0 0 1 18 0v2"/><path d="M21 14v3a2 2 0 0 1-2 2h-1v-7h1a2 2 0 0 1 2 2zM3 14v3a2 2 0 0 0 2 2h1v-7H5a2 2 0 0 0-2 2z"/></svg>',
-          developpement:
-            '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="m8 6-6 6 6 6M16 6l6 6-6 6M14 4l-4 16"/></svg>',
-          print:
-            '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9V3h12v6"/><rect x="3" y="9" width="18" height="8" rx="2"/><path d="M7 17h10v4H7z"/><circle cx="17" cy="13" r="0.8" fill="currentColor"/></svg>',
-          telecom:
-            '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.37 1.9.72 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.29a2 2 0 0 1 2.11-.45c.91.35 1.85.59 2.81.72A2 2 0 0 1 22 16.92z"/></svg>',
-          formation:
-            '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10 12 5 2 10l10 5 10-5z"/><path d="M6 12v5c2 2 4 3 6 3s4-1 6-3v-5"/></svg>',
-          agencement:
-            '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 18v3M20 18v3M3 8h18v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2zM6 8V5a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v3"/></svg>',
-          assistance:
-            '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="4"/><path d="m4.93 4.93 4.24 4.24M14.83 14.83l4.24 4.24M14.83 9.17l4.24-4.24M9.17 14.83l-4.24 4.24"/></svg>',
-          carrieres:
-            '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>',
-        };
-        function run() {
-          var n = document.getElementById("jcdMnav");
-          if (!n) return;
-          n.querySelectorAll(".jcd-mnav__dot").forEach(function (d) {
-            var a = d.closest("a");
-            if (!a) return;
-            var h = (a.getAttribute("href") || "")
-              .split("/")
-              .pop()
-              .split("#")[0];
-            var s = M[h];
-            if (!s) return;
-            var ic = document.createElement("span");
-            ic.className = "jcd-mnav__ico";
-            ic.setAttribute("aria-hidden", "true");
-            ic.innerHTML = s;
-            d.replaceWith(ic);
-          });
-        }
-        if (document.readyState === "loading")
-          document.addEventListener("DOMContentLoaded", run);
-        else run();
-      })();
-    </script>
-    <script id="jcd-mrefonte-js">
-      (function () {
-        function run() {
-          try {
-            if (document.getElementById("jcd-mbar")) return;
-            var body = document.body;
-            var mkIcon = function (d) {
-              return (
-                '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' +
-                d +
-                "</svg>"
-              );
-            };
-            /* Barre d'actions fixe en bas */
-            var bar = document.createElement("nav");
-            bar.id = "jcd-mbar";
-            bar.setAttribute("aria-label", "Actions rapides");
-            var menuBtn = document.createElement("button");
-            menuBtn.type = "button";
-            menuBtn.className = "jcd-mbar-menu";
-            menuBtn.setAttribute("aria-controls", "jcdMnav");
-            menuBtn.innerHTML =
-              mkIcon(
-                '<line x1="4" y1="7" x2="20" y2="7"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="17" x2="20" y2="17"/>',
-              ) + "<span>Menu</span>";
-            menuBtn.addEventListener("click", function () {
-              var b = document.getElementById("jcdBurger");
-              if (b) b.click();
-            });
-            var tel = document.createElement("a");
-            tel.href = "tel:+33387184920";
-            tel.innerHTML =
-              mkIcon(
-                '<path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.79 19.79 0 0 1 2.12 4.18 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/>',
-              ) + "<span>Appeler</span>";
-            var cta = document.createElement("a");
-            cta.className = "jcd-mbar-cta";
-            cta.href = "contact";
-            cta.innerHTML =
-              mkIcon('<path d="M4 4h16v12H7l-3 3z"/>') + "<span>Contact</span>";
-            if (/contact\$/i.test(location.pathname))
-              cta.setAttribute("aria-current", "page");
-            bar.appendChild(menuBtn);
-            bar.appendChild(tel);
-            bar.appendChild(cta);
-            body.appendChild(bar);
-            body.classList.add("jcd-has-mbar");
-            /* Label Menu <-> Fermer suit l'etat de l'overlay (classe body posee par le script mnav) */
-            var lab = menuBtn.querySelector("span");
-            var sync = function () {
-              var open = body.classList.contains("jcd-mnav-open");
-              lab.textContent = open ? "Fermer" : "Menu";
-              menuBtn.setAttribute("aria-expanded", open ? "true" : "false");
-            };
-            sync();
-            if (window.MutationObserver) {
-              new MutationObserver(sync).observe(body, {
-                attributes: true,
-                attributeFilter: ["class"],
-              });
-            }
-            /* Competences + methode : plus d'accordeon sur mobile -> retire les roles/tabindex poses par xpcompact */
-            if (window.innerWidth <= 820) {
-              Array.prototype.forEach.call(
-                document.querySelectorAll(
-                  ".prest-item, .pf-vcard, .fp-step, .bp-step, .regie-steps .clip, .atelier-steps .station",
-                ),
-                function (it) {
-                  it.removeAttribute("role");
-                  it.removeAttribute("tabindex");
-                  it.removeAttribute("aria-expanded");
-                },
-              );
-            }
-            /* Sommaire d'ancres (chips) : SUPPRIME sur demande user 2026-07-15 \u2014 retire ceux du DOM (xpcompact) */
-            Array.prototype.forEach.call(
-              document.querySelectorAll(".jcd-xpnav"),
-              function (nav) {
-                if (nav.parentNode) nav.parentNode.removeChild(nav);
-              },
-            );
-            /* Murs de logos -> bande unique : retire les doublons (sets dupliques pour la boucle marquee) */
-            if (window.innerWidth <= 820) {
-              var seen = {};
-              Array.prototype.forEach.call(
-                document.querySelectorAll(
-                  ".logo-marquee-item, .clients-row__item",
-                ),
-                function (it) {
-                  var img = it.querySelector("img");
-                  if (!img) return;
-                  var key =
-                    img.getAttribute("src") || img.getAttribute("title") || "";
-                  if (seen[key]) {
-                    it.style.display = "none";
-                  } else {
-                    seen[key] = 1;
-                  }
-                },
-              );
-            }
-          } catch (e) {}
-        }
-        if (document.readyState === "loading") {
-          document.addEventListener("DOMContentLoaded", run);
-        } else {
-          run();
-        }
-      })();
-    </script>
-  </body>
+  </div>
+</section>
+
+
+<!-- ================================
+     MANIFESTO — Paper sheet inversion
+     ================================ -->
+<section class="manifesto" aria-labelledby="manifesto-title">
+  <div class="paper-sheet">
+    <div class="container">
+
+      <header class="paper-header">
+        <div class="paper-header-left">
+          <span class="paper-mark-num">N° 01</span>
+          <span class="paper-header-rule" aria-hidden="true"></span>
+          <span>Pôle Print &middot; Manifeste</span>
+        </div>
+        <span>JCD Groupe &middot; Édition 04 / 2026</span>
+      </header>
+
+      <blockquote class="manifesto-quote reveal" id="manifesto-title">
+        <em>Imprimer,</em> ce n'est pas <em>livrer une machine</em>. C'est tenir une chaîne complète, du <span class="accent">premier audit</span> à la dernière feuille. <span class="ink-muted">Sans intermédiaire, sans surprise, sans dépendance.</span>
+      </blockquote>
+
+      <div class="manifesto-pull reveal delay-2">
+        <div class="manifesto-sig">
+          <div class="manifesto-sig-mark">
+            <span>L'équipe Print</span>
+            <span class="manifesto-sig-rule" aria-hidden="true"></span>
+          </div>
+          <span class="manifesto-sig-name">JCD Groupe</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+</div><!-- /hero-pin-zone : hero sticky + manifesto scrolling-over -->
+
+<!-- ================================
+     PRESTATIONS — Catalog avec monogram glyphs
+     ================================ -->
+<section class="prestations" id="prestations" aria-labelledby="prestations-title">
+  <div class="container">
+    <div class="prest-layout">
+
+      <aside class="prest-aside reveal">
+        <h2 class="prest-aside-title" id="prestations-title">
+          <span class="accent">Quatre savoir-faire</span>, une seule chaîne de service.
+        </h2>
+        <p class="prest-aside-sub">
+          Équipements, maintenance et logiciels.
+        </p>
+
+        <div class="prest-aside-partners">
+          <div class="prest-aside-partners-head">
+            <span class="prest-aside-partners-label">Partenaires</span>
+            <span class="prest-aside-partners-rule" aria-hidden="true"></span>
+            <span class="prest-aside-partners-count">06</span>
+          </div>
+          <div class="prest-aside-partners-grid">
+            <div class="logo-tile logo-tile--mini" data-brand="hp">
+              <img class="logo-tile-img" loading="lazy" decoding="async" src="logos%20PRINT/logo_HP_Electric_Blue_keyline%201.webp" alt="" aria-hidden="true">
+              <span class="logo-tile-name">HP</span>
+            </div>
+            <div class="logo-tile logo-tile--mini" data-brand="toshiba">
+              <img class="logo-tile-img" loading="lazy" decoding="async" src="logos%20PRINT/Toshiba_logo.svg.png" alt="" aria-hidden="true">
+              <span class="logo-tile-name">Toshiba</span>
+            </div>
+            <div class="logo-tile logo-tile--mini" data-brand="papercut">
+              <img class="logo-tile-img" loading="lazy" decoding="async" src="logos%20PRINT/papercut.png" alt="" aria-hidden="true">
+              <span class="logo-tile-name">PaperCut</span>
+            </div>
+            <div class="logo-tile logo-tile--mini" data-brand="brother">
+              <img class="logo-tile-img" loading="lazy" decoding="async" src="logos%20PRINT/LOGO%20BROTHER.png" alt="" aria-hidden="true">
+              <span class="logo-tile-name">Brother</span>
+            </div>
+            <div class="logo-tile logo-tile--mini" data-brand="gespage">
+              <img class="logo-tile-img" loading="lazy" decoding="async" src="logos%20PRINT/gespage%201.webp" alt="" aria-hidden="true">
+              <span class="logo-tile-name">Gespage</span>
+            </div>
+            <div class="logo-tile logo-tile--mini" data-brand="zebra">
+              <img class="logo-tile-img" loading="lazy" decoding="async" src="logos%20PRINT/zebra-technologies-logo.svg" alt="" aria-hidden="true">
+              <span class="logo-tile-name">Zebra</span>
+            </div>
+          </div>
+        </div>
+      </aside>
+
+      <div class="prest-menu reveal delay-1">
+
+        <article class="prest-item">
+          <div class="prest-item-head">
+            <span class="prest-item-glyph" aria-hidden="true">
+              <svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round">
+                <rect x="6" y="14" width="28" height="14" rx="0.5"/>
+                <rect x="10" y="6" width="20" height="8" rx="0.5" opacity="0.5"/>
+                <rect x="10" y="28" width="20" height="6" rx="0.5" opacity="0.7"/>
+                <circle cx="28" cy="21" r="1.4" fill="currentColor" opacity="0.7"/>
+              </svg>
+            </span>
+          </div>
+          <h3 class="prest-item-title">Photocopieurs &amp; imprimantes</h3>
+          <p class="prest-item-desc">Achat ou location, avec maintenance préventive et curative.</p>
+        </article>
+
+        <article class="prest-item">
+          <div class="prest-item-head">
+            <span class="prest-item-glyph" aria-hidden="true">
+              <svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round">
+                <circle cx="20" cy="20" r="3.4" fill="currentColor" opacity="0.6"/>
+                <circle cx="9" cy="9" r="2.4"/>
+                <circle cx="31" cy="9" r="2.4"/>
+                <circle cx="9" cy="31" r="2.4"/>
+                <circle cx="31" cy="31" r="2.4"/>
+                <line x1="11" y1="11" x2="17.5" y2="17.5" opacity="0.4"/>
+                <line x1="29" y1="11" x2="22.5" y2="17.5" opacity="0.4"/>
+                <line x1="11" y1="29" x2="17.5" y2="22.5" opacity="0.4"/>
+                <line x1="29" y1="29" x2="22.5" y2="22.5" opacity="0.4"/>
+              </svg>
+            </span>
+          </div>
+          <h3 class="prest-item-title">Gestion des impressions</h3>
+          <p class="prest-item-desc">Contrôle des volumes, sécurisation des flux et traçabilité.</p>
+        </article>
+
+        <article class="prest-item">
+          <div class="prest-item-head">
+            <span class="prest-item-glyph" aria-hidden="true">
+              <svg viewBox="0 0 40 40" fill="currentColor" stroke="none">
+                <rect x="6" y="10" width="2" height="20"/>
+                <rect x="10" y="10" width="1" height="20"/>
+                <rect x="13" y="10" width="2.5" height="20"/>
+                <rect x="17" y="10" width="1" height="20"/>
+                <rect x="20" y="10" width="3" height="20"/>
+                <rect x="25" y="10" width="1" height="20"/>
+                <rect x="28" y="10" width="2" height="20"/>
+                <rect x="32" y="10" width="2.5" height="20"/>
+              </svg>
+            </span>
+          </div>
+          <h3 class="prest-item-title">Codes-barres &amp; étiqueteuses</h3>
+          <p class="prest-item-desc">Pour la logistique, l'inventaire et la traçabilité produit.</p>
+        </article>
+
+        <article class="prest-item">
+          <div class="prest-item-head">
+            <span class="prest-item-glyph" aria-hidden="true">
+              <svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round">
+                <rect x="3" y="14" width="34" height="10" rx="0.5"/>
+                <circle cx="9" cy="19" r="2.5" opacity="0.6"/>
+                <line x1="13" y1="19" x2="32" y2="19" opacity="0.3"/>
+                <rect x="3" y="24" width="34" height="13" rx="0.5" opacity="0.35"/>
+                <line x1="7" y1="29" x2="33" y2="29" stroke-dasharray="2 2" opacity="0.5"/>
+              </svg>
+            </span>
+          </div>
+          <h3 class="prest-item-title">Traceurs grand format</h3>
+          <p class="prest-item-desc">Conçus pour le bâtiment, l'architecture et les bureaux d'études.</p>
+        </article>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================================
+     SECTION DIVIDER — Compétences → Méthode (hairline monochrome)
+     ================================ -->
+<div class="section-divider" aria-hidden="true">
+  <div class="container">
+    <span class="section-divider-line"></span>
+  </div>
+</div>
+
+<!-- ================================
+     PROCESS — Étapes (épuré, sans détails techniques)
+     ================================ -->
+<section class="process" id="process" aria-labelledby="process-title">
+  <div class="container">
+    <div class="section-head reveal">
+      <h2 class="section-title" id="process-title">
+        Quatre étapes, <span class="accent">un seul interlocuteur</span>.
+        <span class="text-muted">De la première visite à la supervision au quotidien.</span>
+      </h2>
+    </div>
+
+    <div class="pf-vflow reveal">
+
+      <!-- ====== SVG Fountain : HUB top center → 4 branches Bezier orange divergent vers les 4 cards ====== -->
+      <svg class="pf-vsvg" viewBox="0 0 900 350" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" preserveAspectRatio="xMidYMid meet">
+        <defs>
+          <filter id="pf-glow" x="-20%" y="-20%" width="140%" height="140%">
+            <feGaussianBlur in="SourceGraphic" stdDeviation="4" result="blur"/>
+            <feMerge>
+              <feMergeNode in="blur"/>
+              <feMergeNode in="SourceGraphic"/>
+            </feMerge>
+          </filter>
+          <radialGradient id="pf-hub-aura" cx="50%" cy="50%" r="50%">
+            <stop offset="0%" stop-color="#F3941D" stop-opacity="0.18"/>
+            <stop offset="60%" stop-color="#F3941D" stop-opacity="0.04"/>
+            <stop offset="100%" stop-color="#F3941D" stop-opacity="0"/>
+          </radialGradient>
+        </defs>
+
+        <!-- Hub aura (halo subtil, derrière les branches) -->
+        <circle cx="450" cy="48" r="60" fill="url(#pf-hub-aura)"/>
+
+        <!-- ===== GLOW LAYERS (blurred wide stroke derrière) ===== -->
+        <path class="pf-glow-line" style="--d: 0.5s"
+              d="M 450,54 L 450,72 C 450,210 113,265 113,350"
+              stroke="#FFB877" stroke-width="6" stroke-linecap="round" filter="url(#pf-glow)"/>
+        <path class="pf-glow-line" style="--d: 0.6s"
+              d="M 450,54 L 450,72 C 450,200 338,265 338,350"
+              stroke="#F7A23F" stroke-width="6" stroke-linecap="round" filter="url(#pf-glow)"/>
+        <path class="pf-glow-line" style="--d: 0.7s"
+              d="M 450,54 L 450,72 C 450,200 562,265 562,350"
+              stroke="#F3941D" stroke-width="6" stroke-linecap="round" filter="url(#pf-glow)"/>
+        <path class="pf-glow-line" style="--d: 0.8s"
+              d="M 450,54 L 450,72 C 450,210 787,265 787,350"
+              stroke="#C47816" stroke-width="6" stroke-linecap="round" filter="url(#pf-glow)"/>
+
+        <!-- ===== ECHO BEZIER ULTRA-FINS (renfort visuel discret, statique) ===== -->
+        <g aria-hidden="true">
+          <path d="M 450,54 L 450,72 C 450,210 113,265 113,350"
+                stroke="#FFB877" stroke-width="0.6" stroke-opacity="0.14" stroke-linecap="round"
+                transform="translate(-4, 3)" fill="none"/>
+          <path d="M 450,54 L 450,72 C 450,200 338,265 338,350"
+                stroke="#F7A23F" stroke-width="0.6" stroke-opacity="0.14" stroke-linecap="round"
+                transform="translate(-2, 3)" fill="none"/>
+          <path d="M 450,54 L 450,72 C 450,200 562,265 562,350"
+                stroke="#F3941D" stroke-width="0.6" stroke-opacity="0.14" stroke-linecap="round"
+                transform="translate(2, 3)" fill="none"/>
+          <path d="M 450,54 L 450,72 C 450,210 787,265 787,350"
+                stroke="#C47816" stroke-width="0.6" stroke-opacity="0.14" stroke-linecap="round"
+                transform="translate(4, 3)" fill="none"/>
+        </g>
+
+        <!-- ===== SHARP CURVES (4 branches Bezier élégantes jusqu'au bord inférieur SVG) ===== -->
+        <path class="pf-anim-line" pathLength="100" style="--dur: 1.4s; --d: 0.5s"
+              d="M 450,54 L 450,72 C 450,210 113,265 113,350"
+              stroke="#FFB877" stroke-width="1.5" stroke-linecap="round"/>
+        <path class="pf-anim-line" pathLength="100" style="--dur: 1.4s; --d: 0.6s"
+              d="M 450,54 L 450,72 C 450,200 338,265 338,350"
+              stroke="#F7A23F" stroke-width="1.5" stroke-linecap="round"/>
+        <path class="pf-anim-line" pathLength="100" style="--dur: 1.4s; --d: 0.7s"
+              d="M 450,54 L 450,72 C 450,200 562,265 562,350"
+              stroke="#F3941D" stroke-width="1.5" stroke-linecap="round"/>
+        <path class="pf-anim-line" pathLength="100" style="--dur: 1.4s; --d: 0.8s"
+              d="M 450,54 L 450,72 C 450,210 787,265 787,350"
+              stroke="#C47816" stroke-width="1.5" stroke-linecap="round"/>
+
+        <!-- HUB : circle + printer icon — dessiné PAR-DESSUS les branches
+             pour masquer proprement leur point de convergence (connexion nette) -->
+        <g class="pf-anim-node" style="--d: 0s">
+          <circle cx="450" cy="48" r="24" fill="#0d0d0d" stroke="rgba(243,148,29,0.38)" stroke-width="1"/>
+          <g stroke="#F3941D" stroke-width="1.3" stroke-linejoin="round" stroke-linecap="round" fill="none">
+            <!-- ADF (top scanner unit) -->
+            <rect x="442" y="37" width="16" height="3.4" rx="0.5" opacity="0.7"/>
+            <!-- Main body -->
+            <rect x="440" y="40.6" width="20" height="9" rx="1"/>
+            <!-- Output paper (sheet) -->
+            <rect x="444.5" y="49.6" width="11" height="6.2" rx="0.6"/>
+            <!-- Print lines on paper -->
+            <line x1="446.5" y1="52" x2="453" y2="52" stroke-width="0.65" opacity="0.55"/>
+            <line x1="446.5" y1="53.6" x2="451" y2="53.6" stroke-width="0.6" opacity="0.45"/>
+            <!-- Status LED -->
+            <circle cx="455.5" cy="44.7" r="0.9" fill="#F3941D" stroke="none"/>
+          </g>
+        </g>
+
+        <!-- "VOTRE PARC" label au-dessus du hub -->
+        <g class="pf-anim-node" style="--d: 0.15s">
+          <text x="450" y="12" text-anchor="middle" font-family="JetBrains Mono, ui-monospace, monospace" font-size="9.5" fill="rgba(255,255,255,0.42)" letter-spacing="3.5">VOTRE PARC</text>
+        </g>
+
+        <!-- ===== ENDPOINT DOTS — au bord inférieur SVG (cy=350) pour se brancher directement sur la card ===== -->
+        <g class="pf-anim-node pf-vdot pf-vdot--1" style="--d: 1.1s">
+          <circle cx="113" cy="350" r="8" fill="#FFB877" opacity="0.20"/>
+          <circle cx="113" cy="350" r="4" fill="#FFB877"/>
+        </g>
+        <g class="pf-anim-node pf-vdot pf-vdot--2" style="--d: 1.2s">
+          <circle cx="338" cy="350" r="8" fill="#F7A23F" opacity="0.20"/>
+          <circle cx="338" cy="350" r="4" fill="#F7A23F"/>
+        </g>
+        <g class="pf-anim-node pf-vdot pf-vdot--3" style="--d: 1.3s">
+          <circle cx="562" cy="350" r="8" fill="#F3941D" opacity="0.20"/>
+          <circle cx="562" cy="350" r="4" fill="#F3941D"/>
+        </g>
+        <g class="pf-anim-node pf-vdot pf-vdot--4" style="--d: 1.4s">
+          <circle cx="787" cy="350" r="8" fill="#C47816" opacity="0.20"/>
+          <circle cx="787" cy="350" r="4" fill="#C47816"/>
+        </g>
+      </svg>
+
+      <!-- ====== 4 CARDS alignées avec les endpoints des branches ====== -->
+      <div class="pf-vcards">
+
+        <article class="pf-vcard" style="--c: #FFB877; --c-rgb: 255,184,119;">
+          <div class="pf-vcard-shade" aria-hidden="true"></div>
+          <div class="pf-vcard-head">
+            <span class="pf-vcard-glyph" aria-hidden="true">
+              <svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="17" cy="17" r="9.5"/>
+                <path d="M23.9 23.9 L31 31"/>
+                <circle cx="13.6" cy="13.8" r="1.15" fill="currentColor" stroke="none" opacity="0.85"/>
+                <circle cx="20.4" cy="13.8" r="1.15" fill="currentColor" stroke="none" opacity="0.85"/>
+                <circle cx="13.6" cy="20.2" r="1.15" fill="currentColor" stroke="none" opacity="0.85"/>
+                <circle cx="20.4" cy="20.2" r="1.15" fill="currentColor" stroke="none" opacity="0.85"/>
+              </svg>
+            </span>
+          </div>
+          <h3 class="pf-vcard-title">Audit du parc</h3>
+          <p class="pf-vcard-desc">Visite sur site et cartographie de vos équipements et de vos usages réels.</p>
+        </article>
+
+        <article class="pf-vcard" style="--c: #F7A23F; --c-rgb: 247,162,63;">
+          <div class="pf-vcard-shade" aria-hidden="true"></div>
+          <div class="pf-vcard-head">
+            <span class="pf-vcard-glyph" aria-hidden="true">
+              <svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="10.5" y="9" width="19" height="24" rx="2.6"/>
+                <rect x="15.5" y="6.4" width="9" height="4.8" rx="1.5" opacity="0.55"/>
+                <path d="M14.8 20.4 L17.9 23.5 L24.6 16.4" opacity="0.95"/>
+                <line x1="15" y1="28.2" x2="25" y2="28.2" opacity="0.4"/>
+              </svg>
+            </span>
+          </div>
+          <h3 class="pf-vcard-title">Préconisation</h3>
+          <p class="pf-vcard-desc">Sélection des équipements, choix achat ou location et dimensionnement adapté.</p>
+        </article>
+
+        <article class="pf-vcard" style="--c: #F3941D; --c-rgb: 243,148,29;">
+          <div class="pf-vcard-shade" aria-hidden="true"></div>
+          <div class="pf-vcard-head">
+            <span class="pf-vcard-glyph" aria-hidden="true">
+              <svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M20 7 V21.5"/>
+                <path d="M14 15.5 L20 21.5 L26 15.5"/>
+                <path d="M10.5 24.5 V31 a2 2 0 0 0 2 2 H27.5 a2 2 0 0 0 2 -2 V24.5" opacity="0.85"/>
+              </svg>
+            </span>
+          </div>
+          <h3 class="pf-vcard-title">Déploiement</h3>
+          <p class="pf-vcard-desc">Installation, paramétrage et formation des utilisateurs, sur site.</p>
+        </article>
+
+        <article class="pf-vcard" style="--c: #C47816; --c-rgb: 196,120,22;">
+          <div class="pf-vcard-shade" aria-hidden="true"></div>
+          <div class="pf-vcard-head">
+            <span class="pf-vcard-glyph" aria-hidden="true">
+              <svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="20" cy="20" r="4.6"/>
+                <circle cx="20" cy="20" r="10.5" opacity="0.26"/>
+                <path d="M20 5.7 V9.4 M20 30.6 V34.3 M34.3 20 H30.6 M9.4 20 H5.7 M30.1 9.9 L27.5 12.5 M12.5 27.5 L9.9 30.1 M30.1 30.1 L27.5 27.5 M12.5 12.5 L9.9 9.9" opacity="0.7"/>
+              </svg>
+            </span>
+          </div>
+          <h3 class="pf-vcard-title">Maintenance</h3>
+          <p class="pf-vcard-desc">Suivi, supervision et interventions, sur site comme à distance.</p>
+        </article>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+
+<!-- ================================
+     CTA — Bandeau compact centré, esperluette serif comme accent
+     ================================ -->
+<section class="cta-section" id="contact" aria-labelledby="cta-title">
+  <div class="container">
+    <div class="cta-frame">
+
+      <div class="cta-inner">
+        <span class="cta-amp reveal" aria-hidden="true">&amp;</span>
+
+        <div class="cta-body">
+          <h2 class="cta-title reveal delay-1" id="cta-title">
+            Un projet <em>d'impression&thinsp;?</em>
+          </h2>
+
+          <p class="cta-sub reveal delay-2">
+            Un devis sur mesure ou une visite sur site, sans engagement.
+          </p>
+
+          <div class="cta-actions reveal delay-3">
+            <a href="contact.html?pole=print" class="btn-cta btn-cta--primary">
+              Contacter le pôle Print
+              <span class="btn-cta-arrow"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h10M9 4l4 4-4 4"/></svg></span>
+            </a>
+            <span class="cta-actions-divider" aria-hidden="true"></span>
+            <span class="cta-phone">
+              <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" width="14" height="14"><path d="M2 3a1 1 0 011-1h3.28a1 1 0 01.95.68l1.07 3.21a1 1 0 01-.25 1L6.54 8.4a12.06 12.06 0 005.06 5.06l1.51-1.51a1 1 0 011-.25l3.21 1.07a1 1 0 01.68.95V17a1 1 0 01-1 1A15 15 0 012 3z"/></svg>
+              <a href="tel:+33383183030" class="cta-phone-num">03 83 18 30 30</a>
+            </span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- ================================
+     FOOTER
+     ================================ -->
+<Footer />
+
+
+<!-- ================================
+     SCRIPTS
+     ================================ -->
+<script is:inline src="js/pages/print-1.js"></script>
+<script is:inline src="js/shared/menu-frost.js"></script>
+<!-- jcd-mobile-nav (injected) -->
+<button class="jcd-burger" id="jcdBurger" type="button" aria-label="Ouvrir le menu" aria-expanded="false" aria-controls="jcdMnav">
+  <span class="jcd-burger__box" aria-hidden="true"><i></i><i></i><i></i></span>
+</button>
+<div class="jcd-mnav" id="jcdMnav" role="dialog" aria-modal="true" aria-label="Menu de navigation" aria-hidden="true">
+  <div class="jcd-mnav__scroll">
+    <div class="jcd-mnav__inner">
+      <p class="jcd-mnav__eyebrow jcd-mnav__reveal" style="transition-delay:.04s">Expertises</p>
+
+      <div class="jcd-mnav__reveal" style="transition-delay:.07s">
+        <div class="jcd-mnav__item" style="--mnav-c:#2E72BA">
+          <a class="jcd-mnav__link" href="informatique.html"><span class="jcd-mnav__dot"></span><span class="jcd-mnav__label">Informatique</span></a>
+          <button class="jcd-acc__toggle" type="button" aria-expanded="false" aria-controls="jcdAccInfo" aria-label="Afficher les sous-pages Informatique">
+            <svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M7 2v10M2 7h10"/></svg>
+          </button>
+        </div>
+        <div class="jcd-acc__panel" id="jcdAccInfo">
+          <a class="jcd-mnav__sub" href="info-cloud.html">Cloud Microsoft</a>
+          <a class="jcd-mnav__sub" href="info-collaboratif.html">Solutions collaboratives &amp; audiovisuelles</a>
+          <a class="jcd-mnav__sub" href="info-reseaux.html">Architectures syst&egrave;mes &amp; r&eacute;seaux</a>
+          <a class="jcd-mnav__sub" href="info-integration.html">Int&eacute;gration &amp; Support PC</a>
+        </div>
+      </div>
+
+      <a class="jcd-mnav__item jcd-mnav__reveal" style="--mnav-c:#E51D29;transition-delay:.10s" href="service.html"><span class="jcd-mnav__dot"></span><span class="jcd-mnav__label">Service</span></a>
+      <a class="jcd-mnav__item jcd-mnav__reveal" style="--mnav-c:#F9D605;transition-delay:.13s" href="developpement.html"><span class="jcd-mnav__dot"></span><span class="jcd-mnav__label">D&eacute;veloppement</span></a>
+      <a class="jcd-mnav__item jcd-mnav__reveal" style="--mnav-c:#F3941D;transition-delay:.16s" href="print.html"><span class="jcd-mnav__dot"></span><span class="jcd-mnav__label">Print</span></a>
+      <a class="jcd-mnav__item jcd-mnav__reveal" style="--mnav-c:#B063AC;transition-delay:.19s" href="telecom.html"><span class="jcd-mnav__dot"></span><span class="jcd-mnav__label">T&eacute;l&eacute;com</span></a>
+      <div class="jcd-mnav__reveal" style="transition-delay:.22s">
+        <div class="jcd-mnav__item" style="--mnav-c:#8EC041">
+          <a class="jcd-mnav__link" href="formation.html"><span class="jcd-mnav__dot"></span><span class="jcd-mnav__label">Formation</span></a>
+          <button class="jcd-acc__toggle" type="button" aria-expanded="false" aria-controls="jcdAccForm" aria-label="Afficher les cat&eacute;gories de formation">
+            <svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M7 2v10M2 7h10"/></svg>
+          </button>
+        </div>
+        <div class="jcd-acc__panel" id="jcdAccForm">
+          <a class="jcd-mnav__sub" href="formation-bureautique.html">Bureautique</a>
+          <a class="jcd-mnav__sub" href="formation-intelligence-artificielle.html">Intelligence artificielle</a>
+          <a class="jcd-mnav__sub" href="formation-informatique.html">Informatique</a>
+          <a class="jcd-mnav__sub" href="formation-communication-marketing.html">Communication - Marketing</a>
+          <a class="jcd-mnav__sub" href="formation-management.html">Management</a>
+          <a class="jcd-mnav__sub" href="formation-commerce-relation-client.html">Commerce - Relation client</a>
+          <a class="jcd-mnav__sub" href="formation-comptabilite-gestion.html">Comptabilit&eacute; - Gestion</a>
+          <a class="jcd-mnav__sub" href="formation-ressources-humaines.html">Ressources humaines</a>
+          <a class="jcd-mnav__sub" href="formation-developpement-personnel.html">D&eacute;veloppement personnel</a>
+          <a class="jcd-mnav__sub" href="formation-graphisme-pao.html">Graphisme - PAO</a>
+          <a class="jcd-mnav__sub" href="formation-administratif-secretariat-accueil.html">Administratif - Secr&eacute;tariat</a>
+          <a class="jcd-mnav__sub" href="formation-securite.html">S&eacute;curit&eacute;</a>
+          <a class="jcd-mnav__sub" href="formation-langues.html">Langues</a>
+        </div>
+      </div>
+      <a class="jcd-mnav__item jcd-mnav__reveal" style="--mnav-c:#A78D75;transition-delay:.25s" href="agencement.html"><span class="jcd-mnav__dot"></span><span class="jcd-mnav__label">Agencement</span></a>
+
+      <p class="jcd-mnav__eyebrow jcd-mnav__sec2 jcd-mnav__reveal" style="transition-delay:.30s">D&eacute;couvrir</p>
+      <a class="jcd-mnav__item jcd-mnav__reveal" style="--mnav-c:#9a9a9a;transition-delay:.33s" href="assistance.html"><span class="jcd-mnav__dot"></span><span class="jcd-mnav__label" style="font-size:19px">Assistance</span></a>
+      <a class="jcd-mnav__item jcd-mnav__reveal" style="--mnav-c:#9a9a9a;transition-delay:.36s" href="carrieres.html"><span class="jcd-mnav__dot"></span><span class="jcd-mnav__label" style="font-size:19px">Carri&egrave;res</span></a>
+
+      <div class="jcd-mnav__cta jcd-mnav__reveal" style="transition-delay:.40s">
+        <a class="jcd-mnav__btn jcd-mnav__btn--primary" href="contact.html">Contacter un expert
+          <span class="jcd-mnav__btn-ic"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h10M9 4l4 4-4 4"/></svg></span></a>
+        <a class="jcd-mnav__btn jcd-mnav__btn--ghost" href="tel:+33387184920">03 87 18 49 20
+          <span class="jcd-mnav__btn-ic"><svg viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2.5 3.5a1 1 0 011-1h2.4a1 1 0 01.95.68l.86 2.4a1 1 0 01-.24 1l-1.2 1.2a11 11 0 004.6 4.6l1.2-1.2a1 1 0 011-.24l2.4.86a1 1 0 01.68.95V15a1 1 0 01-1 1A13.5 13.5 0 012.5 3.5z"/></svg></span></a>
+      </div>
+    </div>
+  </div>
+</div>
+<script is:inline src="js/shared/mobile-nav.js"></script>
+<!-- jcd-a11y (Lot 5) -->
+<div class="jcd-fab-wrap" id="jcd-fab">
+  <button class="jcd-fab jcd-fab--top" id="jcdToTop" type="button" aria-label="Remonter en haut">
+    <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 16V5M5 10l5-5 5 5"/></svg>
+  </button>
+  <a class="jcd-fab jcd-fab--contact" id="jcdFabContact" href="contact.html" aria-label="Nous contacter">
+    <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2.5" y="4.5" width="15" height="11" rx="2.3"/><path d="M3 6.7 L10 10.7 L17 6.7"/></svg>
+  </a>
+</div>
+<script is:inline src="js/shared/a11y.js" id="jcd-a11y-js"></script>
+<script is:inline src="js/shared/micons.js" id="jcd-micons-js"></script>
+<script is:inline src="js/shared/mrefonte.js" id="jcd-mrefonte-js"></script>
+
+
+</body>
 </html>

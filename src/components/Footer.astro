@@ -1,0 +1,223 @@
+---
+// Pied de page commun (toutes pages sauf 404, qui garde le sien).
+// Props :
+//   current 'carrieres' | null -> aria-current sur "Nous rejoindre"
+//   home    true sur index     -> ancres nues (#histoire) au lieu de index.html#histoire
+const { current = null, home = false } = Astro.props;
+---
+
+<footer role="contentinfo">
+  <div class="footer-grain" aria-hidden="true"></div>
+  <div class="container">
+    <div class="footer-bento">
+      <!-- Pôles -->
+      <div class="fcard fcard--poles reveal">
+        <div class="fcard-inner">
+          <h4 class="fcard-title">Pôles</h4>
+          <ul class="footer-links footer-links--cols">
+            <li>
+              <a class="footer-link" href="informatique.html">Informatique</a>
+            </li>
+            <li><a class="footer-link" href="service.html">Service</a></li>
+            <li>
+              <a class="footer-link" href="developpement.html">Développement</a>
+            </li>
+            <li><a class="footer-link" href="print.html">Print</a></li>
+            <li><a class="footer-link" href="telecom.html">Télécom</a></li>
+            <li><a class="footer-link" href="formation.html">Formation</a></li>
+            <li>
+              <a class="footer-link" href="agencement.html">Agencement</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Le groupe -->
+      <div class="fcard fcard--groupe reveal delay-1">
+        <div class="fcard-inner">
+          <h4 class="fcard-title">Le groupe</h4>
+          <ul class="footer-links">
+            <li>
+              <a
+                class="footer-link"
+                href={(home ? "" : "index.html") + "#histoire"}>Histoire</a
+              >
+            </li>
+            <li>
+              <a
+                class="footer-link"
+                href={(home ? "" : "index.html") + "#valeurs"}>Valeurs</a
+              >
+            </li>
+            <li>
+              <a
+                class="footer-link"
+                href={(home ? "" : "index.html") + "#chiffres"}>Chiffres clés</a
+              >
+            </li>
+            <li>
+              <a
+                class={"footer-link" +
+                  (current === "carrieres" ? " is-current" : "")}
+                href="carrieres.html"
+                aria-current={current === "carrieres" ? "page" : undefined}
+                >Nous rejoindre</a
+              >
+            </li>
+            <li><a class="footer-link" href="contact.html">Contact</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Contact Metz + Nancy -->
+      <div class="fcard fcard--contact reveal delay-2">
+        <div class="fcard-inner">
+          <h4 class="fcard-title">Nous trouver</h4>
+          <div class="footer-contacts">
+            <div class="footer-contact-block">
+              <span class="fc-city">Metz</span>
+              <span class="fc-role">Siège social</span>
+              <address>193 rue du Général Metman<br />57070 Metz</address>
+              <a class="footer-link" href="tel:+33387184920">03 87 18 49 20</a>
+              <span class="fc-hours">Lun–Ven · 8h30–18h30</span>
+            </div>
+            <div class="footer-contact-block">
+              <span class="fc-city">Nancy</span>
+              <span class="fc-role">Agence</span>
+              <address>96 boulevard d'Austrasie<br />54000 Nancy</address>
+              <a class="footer-link" href="tel:+33387184920">03 87 18 49 20</a>
+              <span class="fc-hours">Lun–Ven · 8h30–18h30</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-bottom reveal delay-3">
+      <span class="footer-copyright"
+        >&copy; <span id="year">2026</span> JCD Groupe &middot; Tous droits réservés.</span
+      >
+
+      <!-- Le groupe : societes soeurs de la holding, signature centrale de
+           la barre legale. La signification passe par la seule proximite
+           avec "JCD Groupe", jamais enoncee. (inject_footer_eco.py) -->
+      <div class="footer-eco">
+        <span class="footer-eco-label">Le groupe</span>
+        <a
+          class="footer-eco-link"
+          href="https://www.pclease.lu/"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="PC Lease — ingénierie informatique (nouvel onglet)"
+        >
+          <img
+            src="assets/pclease-blanc.svg"
+            alt="PC Lease"
+            height="14"
+            decoding="async"
+          />
+          <svg
+            class="footer-eco-arrow"
+            width="9"
+            height="9"
+            viewBox="0 0 9 9"
+            fill="none"
+            aria-hidden="true"
+            ><path
+              d="M1.5 7.5 7.5 1.5M7.5 1.5H2.9M7.5 1.5v4.6"
+              stroke="currentColor"
+              stroke-width="1.2"
+              stroke-linecap="round"
+              stroke-linejoin="round"></path></svg
+          >
+        </a>
+        <a
+          class="footer-eco-link"
+          href="https://www.rsecure.lu/"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="Rsecure — cybersécurité (nouvel onglet)"
+        >
+          <img
+            src="assets/rsecure-blanc.svg"
+            alt="Rsecure"
+            height="17"
+            decoding="async"
+          />
+          <svg
+            class="footer-eco-arrow"
+            width="9"
+            height="9"
+            viewBox="0 0 9 9"
+            fill="none"
+            aria-hidden="true"
+            ><path
+              d="M1.5 7.5 7.5 1.5M7.5 1.5H2.9M7.5 1.5v4.6"
+              stroke="currentColor"
+              stroke-width="1.2"
+              stroke-linecap="round"
+              stroke-linejoin="round"></path></svg
+          >
+        </a>
+        <a
+          class="footer-eco-link"
+          href="https://digidocservices.com/"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="Digidoc Services — gestion documentaire (nouvel onglet)"
+        >
+          <img
+            src="assets/digidoc-blanc.svg"
+            alt="Digidoc Services"
+            height="13"
+            decoding="async"
+          />
+          <svg
+            class="footer-eco-arrow"
+            width="9"
+            height="9"
+            viewBox="0 0 9 9"
+            fill="none"
+            aria-hidden="true"
+            ><path
+              d="M1.5 7.5 7.5 1.5M7.5 1.5H2.9M7.5 1.5v4.6"
+              stroke="currentColor"
+              stroke-width="1.2"
+              stroke-linecap="round"
+              stroke-linejoin="round"></path></svg
+          >
+        </a>
+      </div>
+
+      <div class="footer-bottom-right">
+        <span class="footer-legal"
+          ><a class="footer-link" href="mentions-legales.html"
+            >Mentions légales</a
+          > &middot; <a
+            class="footer-link"
+            href="politique-de-confidentialite.html"
+            >Politique de confidentialité</a
+          ></span
+        >
+        <a
+          class="footer-linkedin"
+          href="https://www.linkedin.com/company/jcd-groupe/"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="JCD Groupe sur LinkedIn"
+        >
+          <svg
+            width="16"
+            height="16"
+            viewBox="0 0 24 24"
+            fill="currentColor"
+            aria-hidden="true"
+            ><path
+              d="M4.98 3.5C4.98 4.88 3.87 6 2.5 6S0 4.88 0 3.5 1.12 1 2.5 1s2.48 1.12 2.48 2.5zM.22 8h4.56v14H.22V8zm7.6 0h4.37v1.92h.06c.61-1.15 2.1-2.36 4.32-2.36 4.62 0 5.47 3.04 5.47 7v7.44h-4.56v-6.6c0-1.57-.03-3.6-2.2-3.6-2.2 0-2.54 1.72-2.54 3.49V22H7.82V8z"
+            ></path></svg
+          >
+        </a>
+      </div>
+    </div>
+  </div>
+</footer>

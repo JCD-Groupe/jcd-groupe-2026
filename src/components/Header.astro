@@ -1,0 +1,494 @@
+---
+// Barre de navigation commune (32 pages sauf 404).
+// Props :
+//   current   'carrieres' | 'contact' | null  -> aria-current sur le lien vise
+//   logo      'v2' (defaut) | 'blanc'         -> assets/logo_V2.svg / assets/logo_blanc.svg (carrieres)
+//   catalogue true sur les 15 pages formation -> pill + mega-menu Catalogue
+//   labels    surcharges des sous-libelles du menu Expertises
+//             (index et service portent des libelles plus recents que les
+//              autres pages ; drift conserve tel quel, voir rapport migration)
+import CatalogueMenu from "./CatalogueMenu.astro";
+const {
+  current = null,
+  logo = "v2",
+  catalogue = false,
+  labels = {},
+} = Astro.props;
+const L = {
+  informatique: "Parc, cloud et collaboration",
+  service: "Support et proximité",
+  developpement: "Logiciels sur mesure",
+  print: "Impression et reprographie",
+  telecom: "Téléphonie d'entreprise",
+  formation: "Faire grandir vos équipes",
+  agencement: "Espaces de travail",
+  ...labels,
+};
+const logoSrc =
+  logo === "blanc" ? "assets/logo_blanc.svg" : "assets/logo_V2.svg";
+---
+
+<header class="navbar" id="navbar" role="banner">
+  <div class="nav-inner">
+    <a href="index.html" class="logo" aria-label="JCD Groupe · Accueil">
+      <img
+        class="logo-img"
+        src={logoSrc}
+        alt="JCD Groupe"
+        width="1530"
+        height="482"
+        decoding="async"
+        loading="eager"
+        fetchpriority={logo === "blanc" ? undefined : "high"}
+      />
+    </a>
+
+    <!-- Capsule centrale : trigger du dropdown "Nos solutions" + Catalogue (formation.html uniquement) -->
+    <nav class="nav-center" aria-label="Navigation principale">
+      <div class="nav-pill nav-pill--solo" id="nav-pill">
+        <button
+          type="button"
+          class="nav-pill__item nav-pill__trigger"
+          id="nav-expertises-trigger"
+          aria-haspopup="true"
+          aria-expanded="false"
+          aria-controls="nav-expertises-panel"
+        >
+          <span>Nos solutions</span>
+          <svg
+            class="nav-chevron"
+            width="10"
+            height="10"
+            viewBox="0 0 10 10"
+            fill="none"
+            aria-hidden="true"
+            focusable="false"
+          >
+            <path
+              d="M2.5 4l2.5 2.5L7.5 4"
+              stroke="currentColor"
+              stroke-width="1.4"
+              stroke-linecap="round"
+              stroke-linejoin="round"></path>
+          </svg>
+        </button>
+        <span class="nav-pill__sep" aria-hidden="true"></span>
+        <a
+          href="carrieres.html"
+          class={"nav-pill__item nav-pill__careers" +
+            (current === "carrieres" ? " is-current" : "")}
+          aria-current={current === "carrieres" ? "page" : undefined}
+          aria-label="Carrières — Rejoindre le groupe JCD"
+          title="Carrières"
+        >
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.7"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            aria-hidden="true"
+            focusable="false"
+            ><circle cx="9" cy="8" r="3.2"></circle><circle
+              cx="17"
+              cy="9.5"
+              r="2.4"></circle><path d="M3 19c0-3 2.7-5 6-5s6 2 6 5"
+            ></path><path d="M14.5 19c.2-2.2 1.8-4 4-4s3.5 1.5 3.5 3.5"
+            ></path></svg
+          >
+        </a>
+      </div>
+      {
+        catalogue && (
+          <div class="nav-pill nav-pill--catalogue" id="nav-catalogue-pill">
+            <button
+              type="button"
+              class="nav-pill__item nav-pill__item--catalogue nav-pill__trigger"
+              id="nav-catalogue-trigger"
+              aria-haspopup="true"
+              aria-expanded="false"
+              aria-controls="nav-catalogue-panel"
+              aria-label="Catalogue des formations"
+            >
+              Catalogue
+              <svg
+                class="nav-chevron"
+                width="10"
+                height="10"
+                viewBox="0 0 10 10"
+                fill="none"
+                aria-hidden="true"
+                focusable="false"
+              >
+                <path
+                  d="M2.5 4l2.5 2.5L7.5 4"
+                  stroke="currentColor"
+                  stroke-width="1.4"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+            </button>
+          </div>
+        )
+      }
+    </nav>
+
+    <!-- Pillule droite : Assistance (blanc) + Contact (transparent) -->
+    <div class="nav-cta">
+      <div class="nav-pill nav-pill--actions">
+        <a
+          href="assistance.html"
+          class="nav-pill__item nav-pill__item--light"
+          aria-label="Assistance JCD"
+        >
+          Assistance
+        </a>
+        <a
+          href="contact.html"
+          class="nav-pill__item nav-pill__item--dark"
+          aria-current={current === "contact" ? "page" : undefined}
+        >
+          Contact
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============================================================
+       DROPDOWN PANEL v3 — Antimetal-like, 3 colonnes.
+       Zone Expertises : 2 sous-colonnes (3 + 4 items), icones JCD.
+       Zone Decouvrir : monochrome blanc/gris.
+       Informatique : sous-items inline en accordeon maitrise.
+       ============================================================ -->
+  <div
+    class="nav-panel nav-menu"
+    id="nav-expertises-panel"
+    role="menu"
+    aria-labelledby="nav-expertises-trigger"
+    aria-hidden="true"
+  >
+    <div class="nav-panel__shell">
+      <section class="nm-zone nm-zone--expertises" aria-label="Expertises JCD">
+        <span class="nm-eyebrow">Expertises</span>
+        <div class="nm-grid">
+          <ul class="nm-list" role="none">
+            <li class="nm-group" role="none">
+              <a
+                href="informatique.html"
+                class="nm-item"
+                data-c="info"
+                role="menuitem"
+                tabindex="-1"
+              >
+                <span class="nm-icon" aria-hidden="true">
+                  <svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="1.7"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    ><rect x="3" y="4" width="18" height="12" rx="2"
+                    ></rect><path d="M8 20h8M12 16v4"></path></svg
+                  >
+                </span>
+                <span class="nm-text">
+                  <span class="nm-title">Informatique</span>
+                  <span class="nm-sub-label">{L.informatique}</span>
+                </span>
+              </a>
+              <div class="nm-sub">
+                <div class="nm-sub-wrap">
+                  <ul class="nm-sub-list" role="none">
+                    <li role="none">
+                      <a
+                        href="info-integration.html"
+                        class="nm-sub-item"
+                        role="menuitem"
+                        tabindex="-1"
+                        ><span class="nm-sub-ic" aria-hidden="true"
+                          ><svg
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="1.6"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            ><path
+                              d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"
+                            ></path></svg
+                          ></span
+                        ><span class="nm-sub-tx"
+                          >Service Intégration &amp; Support PC</span
+                        ></a
+                      >
+                    </li>
+                    <li role="none">
+                      <a
+                        href="info-reseaux.html"
+                        class="nm-sub-item"
+                        role="menuitem"
+                        tabindex="-1"
+                        ><span class="nm-sub-ic" aria-hidden="true"
+                          ><svg
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="1.6"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            ><rect x="2" y="3" width="20" height="8" rx="2"
+                            ></rect><rect
+                              x="2"
+                              y="13"
+                              width="20"
+                              height="8"
+                              rx="2"></rect><path d="M6 7h.01M6 17h.01"
+                            ></path></svg
+                          ></span
+                        ><span class="nm-sub-tx"
+                          >Architectures systèmes &amp; réseaux</span
+                        ></a
+                      >
+                    </li>
+                    <li role="none">
+                      <a
+                        href="info-collaboratif.html"
+                        class="nm-sub-item"
+                        role="menuitem"
+                        tabindex="-1"
+                        ><span class="nm-sub-ic" aria-hidden="true"
+                          ><svg
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="1.6"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            ><path d="m22 8-6 4 6 4V8Z"></path><rect
+                              x="2"
+                              y="6"
+                              width="14"
+                              height="12"
+                              rx="2"></rect></svg
+                          ></span
+                        ><span class="nm-sub-tx"
+                          >Solutions collaboratives &amp; audiovisuelles</span
+                        ></a
+                      >
+                    </li>
+                    <li role="none">
+                      <a
+                        href="info-cloud.html"
+                        class="nm-sub-item"
+                        role="menuitem"
+                        tabindex="-1"
+                        ><span class="nm-sub-ic" aria-hidden="true"
+                          ><svg
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="1.6"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            ><path
+                              d="M17.5 19H9a7 7 0 1 1 6.71-9h1.79a4.5 4.5 0 1 1 0 9Z"
+                            ></path></svg
+                          ></span
+                        ><span class="nm-sub-tx">Cloud Microsoft</span></a
+                      >
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </li>
+
+            <li class="nm-group" role="none">
+              <a
+                href="service.html"
+                class="nm-item"
+                data-c="service"
+                role="menuitem"
+                tabindex="-1"
+              >
+                <span class="nm-icon" aria-hidden="true">
+                  <svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="1.7"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    ><path d="M3 14v-2a9 9 0 0 1 18 0v2"></path><path
+                      d="M21 14v3a2 2 0 0 1-2 2h-1v-7h1a2 2 0 0 1 2 2zM3 14v3a2 2 0 0 0 2 2h1v-7H5a2 2 0 0 0-2 2z"
+                    ></path></svg
+                  >
+                </span>
+                <span class="nm-text">
+                  <span class="nm-title">Service</span>
+                  <span class="nm-sub-label">{L.service}</span>
+                </span>
+              </a>
+            </li>
+
+            <li class="nm-group" role="none">
+              <a
+                href="developpement.html"
+                class="nm-item"
+                data-c="dev"
+                role="menuitem"
+                tabindex="-1"
+              >
+                <span class="nm-icon" aria-hidden="true">
+                  <svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="1.7"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    ><path d="m8 6-6 6 6 6M16 6l6 6-6 6M14 4l-4 16"></path></svg
+                  >
+                </span>
+                <span class="nm-text">
+                  <span class="nm-title">Développement</span>
+                  <span class="nm-sub-label">{L.developpement}</span>
+                </span>
+              </a>
+            </li>
+          </ul>
+
+          <ul class="nm-list" role="none">
+            <li class="nm-group" role="none">
+              <a
+                href="print.html"
+                class="nm-item"
+                data-c="print"
+                role="menuitem"
+                tabindex="-1"
+              >
+                <span class="nm-icon" aria-hidden="true">
+                  <svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="1.7"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    ><path d="M6 9V3h12v6"></path><rect
+                      x="3"
+                      y="9"
+                      width="18"
+                      height="8"
+                      rx="2"></rect><path d="M7 17h10v4H7z"></path><circle
+                      cx="17"
+                      cy="13"
+                      r="0.8"
+                      fill="currentColor"></circle></svg
+                  >
+                </span>
+                <span class="nm-text">
+                  <span class="nm-title">Print</span>
+                  <span class="nm-sub-label">{L.print}</span>
+                </span>
+              </a>
+            </li>
+
+            <li class="nm-group" role="none">
+              <a
+                href="telecom.html"
+                class="nm-item"
+                data-c="telecom"
+                role="menuitem"
+                tabindex="-1"
+              >
+                <span class="nm-icon" aria-hidden="true">
+                  <svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="1.7"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    ><path
+                      d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.37 1.9.72 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.29a2 2 0 0 1 2.11-.45c.91.35 1.85.59 2.81.72A2 2 0 0 1 22 16.92z"
+                    ></path></svg
+                  >
+                </span>
+                <span class="nm-text">
+                  <span class="nm-title">Télécom</span>
+                  <span class="nm-sub-label">{L.telecom}</span>
+                </span>
+              </a>
+            </li>
+
+            <li class="nm-group" role="none">
+              <a
+                href="formation.html"
+                class="nm-item"
+                data-c="formation"
+                role="menuitem"
+                tabindex="-1"
+              >
+                <span class="nm-icon" aria-hidden="true">
+                  <svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="1.7"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    ><path d="M22 10 12 5 2 10l10 5 10-5z"></path><path
+                      d="M6 12v5c2 2 4 3 6 3s4-1 6-3v-5"></path></svg
+                  >
+                </span>
+                <span class="nm-text">
+                  <span class="nm-title">Formation</span>
+                  <span class="nm-sub-label">{L.formation}</span>
+                </span>
+              </a>
+            </li>
+
+            <li class="nm-group" role="none">
+              <a
+                href="agencement.html"
+                class="nm-item"
+                data-c="agencement"
+                role="menuitem"
+                tabindex="-1"
+              >
+                <span class="nm-icon" aria-hidden="true">
+                  <svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="1.7"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    ><path
+                      d="M4 18v3M20 18v3M3 8h18v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2zM6 8V5a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v3"
+                    ></path></svg
+                  >
+                </span>
+                <span class="nm-text">
+                  <span class="nm-title">Agencement</span>
+                  <span class="nm-sub-label">{L.agencement}</span>
+                </span>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </section>
+    </div>
+  </div>
+
+  <!-- ============================================================
+       MEGA MENU CATALOGUE — bloc généré par
+       _catalogue/build_catalogue.py depuis catalogue-data.json.
+       Ne pas éditer entre les marqueurs : modifier le JSON puis
+       relancer le script.
+       ============================================================ -->
+  {catalogue && <CatalogueMenu />}
+</header>

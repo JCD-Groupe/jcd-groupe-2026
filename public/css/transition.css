@@ -9,12 +9,10 @@
      supportée (Firefox, anciens navigateurs).
    · Respecte prefers-reduced-motion.
 
-   Le type « jcd-theme » est posé par /js/transition.js, selon que la page
+   Le type « jcd-theme » est posé par transition.js, selon que la page
    Carrières soit l'origine OU la destination de la navigation.
    ============================================================ */
-@view-transition {
-  navigation: auto;
-}
+@view-transition { navigation: auto; }
 
 /* ~1200 ms, fondu enchaîné cinématique. Les DEUX plans bougent :
    · la nouvelle page « monte » en fondu avec un lent travelling avant
@@ -35,30 +33,14 @@ html:active-view-transition-type(jcd-theme)::view-transition-new(root) {
   transform-origin: 50% 50%;
 }
 @keyframes jcd-theme-in {
-  0% {
-    opacity: 0;
-    transform: scale(1.05);
-  }
-  60% {
-    opacity: 1;
-  }
-  100% {
-    opacity: 1;
-    transform: scale(1);
-  }
+  0%   { opacity: 0; transform: scale(1.05); }
+  60%  { opacity: 1; }
+  100% { opacity: 1; transform: scale(1); }
 }
 @keyframes jcd-theme-out {
-  0% {
-    opacity: 1;
-    transform: scale(1);
-  }
-  40% {
-    opacity: 1;
-  }
-  100% {
-    opacity: 0;
-    transform: scale(0.99);
-  }
+  0%   { opacity: 1; transform: scale(1); }
+  40%  { opacity: 1; }
+  100% { opacity: 0; transform: scale(0.99); }
 }
 
 /* Accessibilité : navigation instantanée pour qui réduit les animations
@@ -75,10 +57,8 @@ html:active-view-transition-type(jcd-theme)::view-transition-new(root) {
    JCD — Pôle courant dans le footer.
    Sur une page de pôle (ou sa sous-page), le lien du pôle dans la
    colonne « Nos pôles » prend la couleur d'accent du pôle (--accent).
-   La classe .is-current est posée par /js/transition.js. Sert de repère
+   La classe .is-current est posée par transition.js. Sert de repère
    de navigation, dans la lignée du marqueur .is-current de la méga-nav.
    Spécificité 0,3,0 → l'emporte sur .footer-link et .footer-link:hover.
    ============================================================ */
-.footer-links--cols .footer-link.is-current {
-  color: var(--accent);
-}
+.footer-links--cols .footer-link.is-current { color: var(--accent); }

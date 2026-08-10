@@ -1,14 +1,4 @@
----
-import { directus } from "../lib/directus";
-import { readItems } from "@directus/sdk";
-
-const formations = await directus.request(
-  readItems("formations", {
-    fields: ["id", "titre_de_la_formation", "reference"],
-  }),
-);
----
-
+<!doctype html>
 <html lang="fr">
   <head>
     <meta charset="UTF-8" />
@@ -31,7 +21,7 @@ const formations = await directus.request(
   </head>
   <body>
     <header class="site-header">
-      <a href="/" aria-label="JCD Groupe · Accueil">
+      <a href="index.html" aria-label="JCD Groupe · Accueil">
         <img
           src="assets/logo_V2.svg"
           alt="JCD Groupe"
@@ -52,7 +42,7 @@ const formations = await directus.request(
           Reprenez depuis l'accueil, ou contactez-nous directement.
         </p>
         <div class="nf-actions">
-          <a class="nf-btn nf-btn--primary" href="/">
+          <a class="nf-btn nf-btn--primary" href="index.html">
             Retour à l'accueil
             <svg
               viewBox="0 0 16 16"
@@ -61,12 +51,10 @@ const formations = await directus.request(
               stroke-width="1.6"
               stroke-linecap="round"
               stroke-linejoin="round"
-              aria-hidden="true"
+              aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4"></path></svg
             >
-              <path d="M3 8h10M9 4l4 4-4 4"></path>
-            </svg>
           </a>
-          <a class="nf-btn nf-btn--ghost" href="contact">Nous contacter</a>
+          <a class="nf-btn nf-btn--ghost" href="contact.html">Nous contacter</a>
         </div>
         <nav class="nf-poles" aria-label="Nos pôles d'expertise">
           <p class="nf-poles-label">Ou explorez nos pôles</p>
@@ -75,43 +63,47 @@ const formations = await directus.request(
               <a
                 class="nf-pole"
                 style="--dot: var(--c-informatique)"
-                href="informatique">Informatique</a
+                href="informatique.html">Informatique</a
               >
             </li>
             <li>
               <a
                 class="nf-pole"
                 style="--dot: var(--c-developpement)"
-                href="developpement">Développement</a
+                href="developpement.html">Développement</a
               >
             </li>
             <li>
-              <a class="nf-pole" style="--dot: var(--c-print)" href="print"
+              <a class="nf-pole" style="--dot: var(--c-print)" href="print.html"
                 >Print</a
               >
             </li>
             <li>
-              <a class="nf-pole" style="--dot: var(--c-service)" href="service"
-                >Service</a
+              <a
+                class="nf-pole"
+                style="--dot: var(--c-service)"
+                href="service.html">Service</a
               >
             </li>
             <li>
-              <a class="nf-pole" style="--dot: var(--c-telecom)" href="telecom"
-                >Télécom</a
+              <a
+                class="nf-pole"
+                style="--dot: var(--c-telecom)"
+                href="telecom.html">Télécom</a
               >
             </li>
             <li>
               <a
                 class="nf-pole"
                 style="--dot: var(--c-formation)"
-                href="formation">Formation</a
+                href="formation.html">Formation</a
               >
             </li>
             <li>
               <a
                 class="nf-pole"
                 style="--dot: var(--c-agencement)"
-                href="agencement">Agencement</a
+                href="agencement.html">Agencement</a
               >
             </li>
           </ul>
@@ -121,8 +113,9 @@ const formations = await directus.request(
 
     <footer class="site-footer">
       <p>
-        JCD Groupe — <a href="/">jcd-groupe.fr</a> ·
-        <a href="mentions-legales">Mentions légales</a>
+        JCD Groupe — <a href="index.html">jcd-groupe.fr</a> · <a
+          href="mentions-legales.html">Mentions légales</a
+        >
       </p>
     </footer>
   </body>
