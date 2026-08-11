@@ -11,6 +11,14 @@ accueil = await directus.request(
     fields: ["*", { logos_clients: ["*"] }],
   }),
 );
+
+const logos = accueil.logos_clients || [];
+const totalLogos = logos.length;
+const third = Math.ceil(totalLogos / 3);
+
+const logos1 = logos.slice(0, third);
+const logos2 = logos.slice(third, third * 2);
+const logos3 = logos.slice(third * 2);
 ---
 
 <!doctype html>
@@ -415,26 +423,136 @@ accueil = await directus.request(
               aria-label="Logos de nos clients et partenaires"
             >
               <div class="clients-row" style="--dur: 78s">
-                {
-                  Array.isArray(accueil.logos_clients) &&
-                    [...Array(2)].map(() => (
-                      <ul class="clients-row__track">
-                        {accueil.logos_clients.map(
-                          (logo: { id: string; title?: string }) => (
-                            <li class="clients-row__item">
-                              <img
-                                src={`${import.meta.env.PUBLIC_DIRECTUS_URL}/assets/${logo.directus_files_id}`}
-                                alt={logo.title || ""}
-                                title={logo.title || ""}
-                                loading="lazy"
-                                decoding="async"
-                              />
-                            </li>
-                          ),
-                        )}
-                      </ul>
-                    ))
-                }
+                <ul class="clients-row__track">
+                  {
+                    logos1.map(
+                      (logo: {
+                        id: string;
+                        title?: string;
+                        directus_files_id: string;
+                      }) => (
+                        <li class="clients-row__item">
+                          <img
+                            src={`${import.meta.env.PUBLIC_DIRECTUS_URL}/assets/${logo.directus_files_id}`}
+                            alt={logo.title || ""}
+                            title={logo.title || ""}
+                            loading="lazy"
+                            decoding="async"
+                          />
+                        </li>
+                      ),
+                    )
+                  }
+                </ul>
+                <ul class="clients-row__track" aria-hidden="true">
+                  {
+                    logos1.map(
+                      (logo: {
+                        id: string;
+                        title?: string;
+                        directus_files_id: string;
+                      }) => (
+                        <li class="clients-row__item">
+                          <img
+                            src={`${import.meta.env.PUBLIC_DIRECTUS_URL}/assets/${logo.directus_files_id}`}
+                            alt={logo.title || ""}
+                            title={logo.title || ""}
+                            loading="lazy"
+                            decoding="async"
+                          />
+                        </li>
+                      ),
+                    )
+                  }
+                </ul>
+              </div>
+              <div class="clients-row clients-row--reverse" style="--dur: 92s">
+                <ul class="clients-row__track">
+                  {
+                    logos2.map(
+                      (logo: {
+                        id: string;
+                        title?: string;
+                        directus_files_id: string;
+                      }) => (
+                        <li class="clients-row__item">
+                          <img
+                            src={`${import.meta.env.PUBLIC_DIRECTUS_URL}/assets/${logo.directus_files_id}`}
+                            alt={logo.title || ""}
+                            title={logo.title || ""}
+                            loading="lazy"
+                            decoding="async"
+                          />
+                        </li>
+                      ),
+                    )
+                  }
+                </ul>
+                <ul class="clients-row__track" aria-hidden="true">
+                  {
+                    logos2.map(
+                      (logo: {
+                        id: string;
+                        title?: string;
+                        directus_files_id: string;
+                      }) => (
+                        <li class="clients-row__item">
+                          <img
+                            src={`${import.meta.env.PUBLIC_DIRECTUS_URL}/assets/${logo.directus_files_id}`}
+                            alt={logo.title || ""}
+                            title={logo.title || ""}
+                            loading="lazy"
+                            decoding="async"
+                          />
+                        </li>
+                      ),
+                    )
+                  }
+                </ul>
+              </div>
+              <div class="clients-row" style="--dur: 68s">
+                <ul class="clients-row__track">
+                  {
+                    logos3.map(
+                      (logo: {
+                        id: string;
+                        title?: string;
+                        directus_files_id: string;
+                      }) => (
+                        <li class="clients-row__item">
+                          <img
+                            src={`${import.meta.env.PUBLIC_DIRECTUS_URL}/assets/${logo.directus_files_id}`}
+                            alt={logo.title || ""}
+                            title={logo.title || ""}
+                            loading="lazy"
+                            decoding="async"
+                          />
+                        </li>
+                      ),
+                    )
+                  }
+                </ul>
+                <ul class="clients-row__track" aria-hidden="true">
+                  {
+                    logos3.map(
+                      (logo: {
+                        id: string;
+                        title?: string;
+                        directus_files_id: string;
+                      }) => (
+                        <li class="clients-row__item">
+                          <img
+                            src={`${import.meta.env.PUBLIC_DIRECTUS_URL}/assets/${logo.directus_files_id}`}
+                            alt={logo.title || ""}
+                            title={logo.title || ""}
+                            loading="lazy"
+                            decoding="async"
+                          />
+                        </li>
+                      ),
+                    )
+                  }
+                </ul>
               </div>
             </div>
           </div>
@@ -447,8 +565,8 @@ accueil = await directus.request(
       <section class="valeurs" id="valeurs" aria-labelledby="valeurs-title">
         <div class="container">
           <div class="section-head reveal">
-            <h2 id="valeurs-title">{accueil.titre_methode}</h2>
-            <p>{accueil.sous_titre_methode}<br /></p>
+            <h2 id="valeurs-title">{accueil.titre_methode_valeurs}</h2>
+            <p>{accueil.sous_titre_methode_valeurs}<br /></p>
           </div>
 
           <!-- ============================================================
@@ -899,7 +1017,8 @@ accueil = await directus.request(
                   font-size="8.5"
                   letter-spacing="0.16em"
                   fill="#6BB5E8"
-                  fill-opacity="0.78">{accueil.diag_methode_valeur1_label}</text
+                  text-transform="capitalize"
+                  fill-opacity="0.78">{accueil.titre_valeur_1}</text
                 >
               </g>
               <g class="vd-anim-node" style="--d: 1.6s">
@@ -910,7 +1029,8 @@ accueil = await directus.request(
                   font-size="8.5"
                   letter-spacing="0.16em"
                   fill="#2E72BA"
-                  fill-opacity="0.88">{accueil.diag_methode_valeur2_label}</text
+                  text-transform="capitalize"
+                  fill-opacity="0.88">{accueil.titre_valeur_2}</text
                 >
               </g>
               <g class="vd-anim-node" style="--d: 1.7s">
@@ -921,7 +1041,8 @@ accueil = await directus.request(
                   font-size="8.5"
                   letter-spacing="0.16em"
                   fill="#1E5A94"
-                  fill-opacity="1">{accueil.diag_methode_valeur3_label}</text
+                  text-transform="capitalize"
+                  fill-opacity="1">{accueil.titre_valeur_3}</text
                 >
               </g>
 
@@ -1082,24 +1203,24 @@ accueil = await directus.request(
                   <span class="vd-mobile-branch-dot" style="background: #6BB5E8"
                   ></span>
                   <div>
-                    <h3>{accueil.titre_valeur_01}</h3>
-                    <p>{accueil.texte_valeur_01_mobile}</p>
+                    <h3>{accueil.titre_valeur_1}</h3>
+                    <p>{accueil.description_valeur_1}</p>
                   </div>
                 </div>
                 <div class="vd-mobile-branch">
                   <span class="vd-mobile-branch-dot" style="background: #2E72BA"
                   ></span>
                   <div>
-                    <h3>{accueil.titre_valeur_02}</h3>
-                    <p>{accueil.texte_valeur_02_mobile}</p>
+                    <h3>{accueil.titre_valeur_2}</h3>
+                    <p>{accueil.description_valeur_2}</p>
                   </div>
                 </div>
                 <div class="vd-mobile-branch">
                   <span class="vd-mobile-branch-dot" style="background: #1E5A94"
                   ></span>
                   <div>
-                    <h3>{accueil.titre_valeur_03}</h3>
-                    <p>{accueil.texte_valeur_03_mobile}</p>
+                    <h3>{accueil.titre_valeur_3}</h3>
+                    <p>{accueil.description_valeur_3}</p>
                   </div>
                 </div>
               </div>
@@ -1108,16 +1229,16 @@ accueil = await directus.request(
             <!-- === LEGEND: Value descriptions (desktop) === -->
             <div class="vd-legend reveal delay-2">
               <div class="vd-legend-item" style="--dot-c: #6BB5E8">
-                <h3>{accueil.titre_valeur_01}</h3>
-                <p>{accueil.texte_valeur_01}</p>
+                <h3>{accueil.titre_valeur_1}</h3>
+                <p>{accueil.description_valeur_1}</p>
               </div>
               <div class="vd-legend-item" style="--dot-c: #2E72BA">
-                <h3>{accueil.titre_valeur_02}</h3>
-                <p>{accueil.texte_valeur_02}</p>
+                <h3>{accueil.titre_valeur_2}</h3>
+                <p>{accueil.description_valeur_2}</p>
               </div>
               <div class="vd-legend-item" style="--dot-c: #1E5A94">
-                <h3>{accueil.titre_valeur_03}</h3>
-                <p>{accueil.texte_valeur_03}</p>
+                <h3>{accueil.titre_valeur_3}</h3>
+                <p>{accueil.description_valeur_3}</p>
               </div>
             </div>
           </div>
@@ -1131,7 +1252,12 @@ accueil = await directus.request(
         <div class="container hist-container">
           <!-- Overture : tete editoriale compacte (titre + range Playfair italic) -->
           <div class="hist-overture reveal">
-            <div class="hist-overture-text" set:html={accueil.titre_histoire} />
+            <div class="hist-overture-text">
+              <h2 id="histoire-title">{accueil.titre_histoire}</h2>
+              <p>
+                {accueil.sous_titre_histoire}
+              </p>
+            </div>
           </div>
 
           <!-- SVG defs partagé pour le gradient des branches (fade dim → bright
@@ -1195,9 +1321,9 @@ accueil = await directus.request(
               </svg>
               <span class="hist-node-dot" aria-hidden="true"></span>
               <div class="hist-entry-content">
-                <span class="hist-year">{accueil.annee_date_01}</span>
-                <h3 class="hist-title">{accueil.titre_date_01}</h3>
-                <p class="hist-body">{accueil.texte_date_01}</p>
+                <span class="hist-year">{accueil.annee_date_1}</span>
+                <h3 class="hist-title">{accueil.titre_date_1}</h3>
+                <p class="hist-body">{accueil.description_date_1}</p>
               </div>
             </li>
 
@@ -1226,9 +1352,9 @@ accueil = await directus.request(
               </svg>
               <span class="hist-node-dot" aria-hidden="true"></span>
               <div class="hist-entry-content">
-                <span class="hist-year">{accueil.annee_date_02}</span>
-                <h3 class="hist-title">{accueil.titre_date_02}</h3>
-                <p class="hist-body">{accueil.texte_date_02}</p>
+                <span class="hist-year">{accueil.annee_date_2}</span>
+                <h3 class="hist-title">{accueil.titre_date_2}</h3>
+                <p class="hist-body">{accueil.description_date_2}</p>
               </div>
             </li>
 
@@ -1263,9 +1389,9 @@ accueil = await directus.request(
               </svg>
               <span class="hist-node-dot" aria-hidden="true"></span>
               <div class="hist-entry-content">
-                <span class="hist-year">{accueil.annee_date_03}</span>
-                <h3 class="hist-title">{accueil.titre_date_03}</h3>
-                <p class="hist-body">{accueil.texte_date_03}</p>
+                <span class="hist-year">{accueil.annee_date_3}</span>
+                <h3 class="hist-title">{accueil.titre_date_3}</h3>
+                <p class="hist-body">{accueil.description_date_3}</p>
               </div>
             </li>
 
@@ -1300,9 +1426,9 @@ accueil = await directus.request(
               </svg>
               <span class="hist-node-dot" aria-hidden="true"></span>
               <div class="hist-entry-content">
-                <span class="hist-year">{accueil.annee_date_04}</span>
-                <h3 class="hist-title">{accueil.titre_date_04}</h3>
-                <p class="hist-body">{accueil.texte_date_04}</p>
+                <span class="hist-year">{accueil.annee_date_4}</span>
+                <h3 class="hist-title">{accueil.titre_date_4}</h3>
+                <p class="hist-body">{accueil.description_date_4}</p>
               </div>
             </li>
 
@@ -1331,9 +1457,9 @@ accueil = await directus.request(
               </svg>
               <span class="hist-node-dot" aria-hidden="true"></span>
               <div class="hist-entry-content">
-                <span class="hist-year">{accueil.annee_date_05}</span>
-                <h3 class="hist-title">{accueil.titre_date_05}</h3>
-                <p class="hist-body">{accueil.texte_date_05}</p>
+                <span class="hist-year">{accueil.annee_date_5}</span>
+                <h3 class="hist-title">{accueil.titre_date_5}</h3>
+                <p class="hist-body">{accueil.description_date_5}</p>
               </div>
             </li>
 
@@ -1362,9 +1488,9 @@ accueil = await directus.request(
               </svg>
               <span class="hist-node-dot" aria-hidden="true"></span>
               <div class="hist-entry-content">
-                <span class="hist-year">{accueil.annee_date_06}</span>
-                <h3 class="hist-title">{accueil.titre_date_06}</h3>
-                <p class="hist-body">{accueil.texte_date_06}</p>
+                <span class="hist-year">{accueil.annee_date_6}</span>
+                <h3 class="hist-title">{accueil.titre_date_6}</h3>
+                <p class="hist-body">{accueil.description_date_6}</p>
               </div>
             </li>
           </ol>
@@ -1816,7 +1942,7 @@ accueil = await directus.request(
           <h2 id="cta-title" class="reveal delay-1">
             {accueil.titre_cta}
           </h2>
-          <p class="reveal delay-2">{accueil.texte_cta}</p>
+          <p class="reveal delay-2">{accueil.sous_titre_cta}</p>
           <div
             class="hero-cta reveal delay-3"
             style="margin-bottom:0; justify-content:center;"
