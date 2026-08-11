@@ -1,471 +1,1226 @@
 ---
-import Header from '../components/Header.astro';
-import Footer from '../components/Footer.astro';
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
 ---
-<!DOCTYPE html>
+
 <html lang="fr">
-<head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-<meta name="color-scheme" content="dark" />
-<meta name="theme-color" content="#0d0d0d" />
-<link rel="icon" href="favicon.svg" type="image/svg+xml" />
-<meta name="description" content="JCD Groupe · Pôle Informatique. Parc maîtrisé, supervisé par un interlocuteur dédié." />
-<link rel="canonical" href="https://www.jcd-groupe.fr/informatique.html" />
-<meta property="og:type" content="website" />
-<meta property="og:site_name" content="JCD Groupe" />
-<meta property="og:locale" content="fr_FR" />
-<meta property="og:title" content="Informatique · JCD Groupe" />
-<meta property="og:description" content="JCD Groupe · Pôle Informatique. Parc maîtrisé, supervisé par un interlocuteur dédié." />
-<meta property="og:url" content="https://www.jcd-groupe.fr/informatique.html" />
-<meta name="twitter:card" content="summary" />
-<title>Informatique · JCD Groupe</title>
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+    />
+    <meta name="color-scheme" content="dark" />
+    <meta name="theme-color" content="#0d0d0d" />
+    <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+    <meta
+      name="description"
+      content="JCD Groupe · Pôle Informatique. Parc maîtrisé, supervisé par un interlocuteur dédié."
+    />
+    <link rel="canonical" href="https://www.jcd-groupe.fr/informatique.html" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="JCD Groupe" />
+    <meta property="og:locale" content="fr_FR" />
+    <meta property="og:title" content="Informatique · JCD Groupe" />
+    <meta
+      property="og:description"
+      content="JCD Groupe · Pôle Informatique. Parc maîtrisé, supervisé par un interlocuteur dédié."
+    />
+    <meta
+      property="og:url"
+      content="https://www.jcd-groupe.fr/informatique.html"
+    />
+    <meta name="twitter:card" content="summary" />
+    <title>Informatique · JCD Groupe</title>
 
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Instrument+Serif:ital@0;1&display=swap"
+      rel="stylesheet"
+    />
 
-<link rel="stylesheet" href="css/informatique.css">
-<link rel="stylesheet" href="css/global.css">
-<link rel="stylesheet" href="css/informatique-overrides.css">
-  <link rel="stylesheet" href="transition.css">
-  <script is:inline src="transition.js"></script>
-<script is:inline src="js/shared/mpolish.js" id="jcd-mpolish-js"></script>
-<script is:inline src="js/shared/touch.js" id="jcd-touch-js"></script>
-<script is:inline src="js/shared/page-boot.js"></script>
-<script is:inline src="js/shared/mrefonte-shim.js" id="jcd-mrefonte-shim"></script>
-</head>
-<body>
-<div id="jcd-pagefade" aria-hidden="true"></div>
-<a class="jcd-skip" href="#contenu">Aller au contenu</a>
+    <link rel="stylesheet" href="css/informatique.css" />
+    <link rel="stylesheet" href="css/global.css" />
+    <link rel="stylesheet" href="css/informatique-overrides.css" />
+    <link rel="stylesheet" href="transition.css" />
+    <script is:inline src="transition.js"></script>
+    <script is:inline src="js/shared/mpolish.js" id="jcd-mpolish-js"></script>
+    <script is:inline src="js/shared/touch.js" id="jcd-touch-js"></script>
+    <script is:inline src="js/shared/page-boot.js"></script>
+    <script is:inline src="js/shared/mrefonte-shim.js" id="jcd-mrefonte-shim"
+    ></script>
+  </head>
+  <body>
+    <div id="jcd-pagefade" aria-hidden="true"></div>
+    <a class="jcd-skip" href="#contenu">Aller au contenu</a>
 
-<!-- ====================================================================
+    <!-- ====================================================================
      NAVBAR v2 — Modal-like
      Logo (g) · capsule centrale {Expertises ▾ · Contact · Carrières}
      · CTA Assistance (d). Bande pleine largeur, fade gauche/droite,
      dropdown "Expertises" avec 7 SVG 3D isométriques colorés.
      ==================================================================== -->
-<Header />
+    <Header />
 
-<!-- ====================================================================
+    <!-- ====================================================================
      RAIL DE SOUS-NAVIGATION — écosystème Informatique
      Ancré en permanence sous le navbar. Libellés complets, page active
      en bleu JCD. Permet de naviguer entre la vue d'ensemble et les 4
      domaines du pôle.
      ==================================================================== -->
-<nav class="info-subnav" aria-label="Navigation du pôle Informatique" role="menubar">
-  <div class="info-subnav__inner">
-    <a href="informatique.html" class="info-subnav__home is-active" aria-current="page" role="menuitem" aria-label="Vue d'ensemble, Pôle Informatique" title="Vue d'ensemble">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="7" height="7" rx="1.6"/><rect x="14" y="3" width="7" height="7" rx="1.6"/><rect x="3" y="14" width="7" height="7" rx="1.6"/><rect x="14" y="14" width="7" height="7" rx="1.6"/></svg>
-    </a>
-    <span class="info-subnav__sep" aria-hidden="true"></span>
-    <ul class="info-subnav__list">
-        <li role="none"><a href="info-integration.html" class="info-subnav__link" role="menuitem"><span class="info-subnav__ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg></span>Service Intégration &amp; Support PC</a></li>
-        <li role="none"><a href="info-reseaux.html" class="info-subnav__link" role="menuitem"><span class="info-subnav__ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="8" rx="2"/><rect x="2" y="13" width="20" height="8" rx="2"/><path d="M6 7h.01M6 17h.01"/></svg></span>Architectures systèmes &amp; réseaux</a></li>
-        <li role="none"><a href="info-collaboratif.html" class="info-subnav__link" role="menuitem"><span class="info-subnav__ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="m22 8-6 4 6 4V8Z"/><rect x="2" y="6" width="14" height="12" rx="2"/></svg></span>Solutions collaboratives &amp; audiovisuelles</a></li>
-        <li role="none"><a href="info-cloud.html" class="info-subnav__link" role="menuitem"><span class="info-subnav__ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M17.5 19H9a7 7 0 1 1 6.71-9h1.79a4.5 4.5 0 1 1 0 9Z"/></svg></span>Cloud Microsoft</a></li>
-    </ul>
-  </div>
-</nav>
+    <nav
+      class="info-subnav"
+      aria-label="Navigation du pôle Informatique"
+      role="menubar"
+    >
+      <div class="info-subnav__inner">
+        <a
+          href="informatique.html"
+          class="info-subnav__home is-active"
+          aria-current="page"
+          role="menuitem"
+          aria-label="Vue d'ensemble, Pôle Informatique"
+          title="Vue d'ensemble"
+        >
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.7"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            aria-hidden="true"
+            ><rect x="3" y="3" width="7" height="7" rx="1.6"></rect><rect
+              x="14"
+              y="3"
+              width="7"
+              height="7"
+              rx="1.6"></rect><rect x="3" y="14" width="7" height="7" rx="1.6"
+            ></rect><rect x="14" y="14" width="7" height="7" rx="1.6"
+            ></rect></svg
+          >
+        </a>
+        <span class="info-subnav__sep" aria-hidden="true"></span>
+        <ul class="info-subnav__list">
+          <li role="none">
+            <a
+              href="info-integration.html"
+              class="info-subnav__link"
+              role="menuitem"
+              ><span class="info-subnav__ic" aria-hidden="true"
+                ><svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.7"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  ><path
+                    d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"
+                  ></path></svg
+                ></span
+              >Service Intégration &amp; Support PC</a>
+          </li>
+          <li role="none">
+            <a
+              href="info-reseaux.html"
+              class="info-subnav__link"
+              role="menuitem"
+              ><span class="info-subnav__ic" aria-hidden="true"
+                ><svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.7"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  ><rect x="2" y="3" width="20" height="8" rx="2"></rect><rect
+                    x="2"
+                    y="13"
+                    width="20"
+                    height="8"
+                    rx="2"></rect><path d="M6 7h.01M6 17h.01"></path></svg
+                ></span
+              >Architectures systèmes &amp; réseaux</a>
+          </li>
+          <li role="none">
+            <a
+              href="info-collaboratif.html"
+              class="info-subnav__link"
+              role="menuitem"
+              ><span class="info-subnav__ic" aria-hidden="true"
+                ><svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.7"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  ><path d="m22 8-6 4 6 4V8Z"></path><rect
+                    x="2"
+                    y="6"
+                    width="14"
+                    height="12"
+                    rx="2"></rect></svg
+                ></span
+              >Solutions collaboratives &amp; audiovisuelles</a>
+          </li>
+          <li role="none">
+            <a href="info-cloud.html" class="info-subnav__link" role="menuitem"
+              ><span class="info-subnav__ic" aria-hidden="true"
+                ><svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.7"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  ><path d="M17.5 19H9a7 7 0 1 1 6.71-9h1.79a4.5 4.5 0 1 1 0 9Z"
+                  ></path></svg
+                ></span
+              >Cloud Microsoft</a>
+          </li>
+        </ul>
+      </div>
+    </nav>
 
-
-<main id="contenu">
-
-<!-- ====================================================================
+    <main id="contenu">
+      <!-- ====================================================================
      ACCÈS — intro + les 4 domaines (cards, display repris de la home)
      ==================================================================== -->
-<section class="hub-intro" aria-labelledby="hub-title">
-  <div class="container">
-    <h1 id="hub-title" class="reveal delay-1">Votre informatique <span class="accent-grad">de proximité</span></h1>
-    <p class="reveal delay-2">&nbsp;Du hardware au cloud, en passant par la cybersécurité.</p>
-  </div>
-</section>
-
-<section class="poles" aria-label="Les domaines du pôle Informatique">
-  <div class="container">
-    <div class="pole-cards reveal">
-
-      <a class="pole-card" href="info-integration.html" aria-label="Service Intégration &amp; Support PC">
-        <div class="pole-card-top">
-          <span class="pole-card-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg></span>
-          <span class="pole-card-num">01 / 04</span>
+      <section class="hub-intro" aria-labelledby="hub-title">
+        <div class="container">
+          <h1 id="hub-title" class="reveal delay-1">
+            Votre informatique <span class="accent-grad">de proximité</span>
+          </h1>
+          <p class="reveal delay-2">
+            &nbsp;Du hardware au cloud, en passant par la cybersécurité.
+          </p>
         </div>
-        <h3>Service Intégration &amp; Support PC</h3>
-        <p>Postes prêts à l'emploi : préparation, déploiement et support de votre parc utilisateur.</p>      </a>
+      </section>
 
-      <a class="pole-card" href="info-reseaux.html" aria-label="Architectures systèmes &amp; réseaux">
-        <div class="pole-card-top">
-          <span class="pole-card-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="8" rx="2"/><rect x="2" y="13" width="20" height="8" rx="2"/><path d="M6 7h.01M6 17h.01"/></svg></span>
-          <span class="pole-card-num">02 / 04</span>
+      <section class="poles" aria-label="Les domaines du pôle Informatique">
+        <div class="container">
+          <div class="pole-cards reveal">
+            <a
+              class="pole-card"
+              href="info-integration.html"
+              aria-label="Service Intégration & Support PC"
+            >
+              <div class="pole-card-top">
+                <span class="pole-card-icon" aria-hidden="true"
+                  ><svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="1.6"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    ><path
+                      d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"
+                    ></path></svg
+                  ></span
+                >
+                <span class="pole-card-num">01 / 04</span>
+              </div>
+              <h3>Service Intégration &amp; Support PC</h3>
+              <p>
+                Postes prêts à l'emploi : préparation, déploiement et support de
+                votre parc utilisateur.
+              </p>
+            </a>
+
+            <a
+              class="pole-card"
+              href="info-reseaux.html"
+              aria-label="Architectures systèmes & réseaux"
+            >
+              <div class="pole-card-top">
+                <span class="pole-card-icon" aria-hidden="true"
+                  ><svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="1.6"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    ><rect x="2" y="3" width="20" height="8" rx="2"></rect><rect
+                      x="2"
+                      y="13"
+                      width="20"
+                      height="8"
+                      rx="2"></rect><path d="M6 7h.01M6 17h.01"></path></svg
+                  ></span
+                >
+                <span class="pole-card-num">02 / 04</span>
+              </div>
+              <h3>Architectures systèmes &amp; réseaux</h3>
+              <p>
+                Serveurs, virtualisation, réseau et sécurité : une
+                infrastructure solide.
+              </p>
+            </a>
+
+            <a
+              class="pole-card"
+              href="info-collaboratif.html"
+              aria-label="Solutions collaboratives & audiovisuelles"
+            >
+              <div class="pole-card-top">
+                <span class="pole-card-icon" aria-hidden="true"
+                  ><svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="1.6"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    ><path d="m22 8-6 4 6 4V8Z"></path><rect
+                      x="2"
+                      y="6"
+                      width="14"
+                      height="12"
+                      rx="2"></rect></svg
+                  ></span
+                >
+                <span class="pole-card-num">03 / 04</span>
+              </div>
+              <h3>Solutions collaboratives &amp; audiovisuelles</h3>
+              <p>
+                Visioconférence et salles équipées, conçues et intégrées sur
+                mesure.
+              </p>
+            </a>
+
+            <a
+              class="pole-card"
+              href="info-cloud.html"
+              aria-label="Cloud Microsoft"
+            >
+              <div class="pole-card-top">
+                <span class="pole-card-icon" aria-hidden="true"
+                  ><svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="1.6"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    ><path
+                      d="M17.5 19H9a7 7 0 1 1 6.71-9h1.79a4.5 4.5 0 1 1 0 9Z"
+                    ></path></svg
+                  ></span
+                >
+                <span class="pole-card-num">04 / 04</span>
+              </div>
+              <h3>Cloud Microsoft</h3>
+              <p>Microsoft 365, Azure, infrastructures hybrides.</p>
+            </a>
+          </div>
         </div>
-        <h3>Architectures systèmes &amp; réseaux</h3>
-        <p>Serveurs, virtualisation, réseau et sécurité : une infrastructure solide.</p>      </a>
+      </section>
 
-      <a class="pole-card" href="info-collaboratif.html" aria-label="Solutions collaboratives &amp; audiovisuelles">
-        <div class="pole-card-top">
-          <span class="pole-card-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="m22 8-6 4 6 4V8Z"/><rect x="2" y="6" width="14" height="12" rx="2"/></svg></span>
-          <span class="pole-card-num">03 / 04</span>
-        </div>
-        <h3>Solutions collaboratives &amp; audiovisuelles</h3>
-        <p>Visioconférence et salles équipées, conçues et intégrées sur mesure.</p>      </a>
-
-      <a class="pole-card" href="info-cloud.html" aria-label="Cloud Microsoft">
-        <div class="pole-card-top">
-          <span class="pole-card-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M17.5 19H9a7 7 0 1 1 6.71-9h1.79a4.5 4.5 0 1 1 0 9Z"/></svg></span>
-          <span class="pole-card-num">04 / 04</span>
-        </div>
-        <h3>Cloud Microsoft</h3>
-        <p>Microsoft 365, Azure, infrastructures hybrides.</p>      </a>
-
-    </div>
-  </div>
-</section>
-
-<!-- ====================================================================
+      <!-- ====================================================================
      CYBERSÉCURITÉ — transversale (CYAN), id="cybersecurite"
      ==================================================================== -->
-<section class="cyber" id="cybersecurite" aria-labelledby="cyber-title">
-  <div class="container">
-    <div class="hub-sechead reveal">
-      <h2 id="cyber-title">La cybersécurité, <em>à tous les étages</em>.</h2>
-      <p>Renforcer durablement la cybersécurité de vos infrastructures.</p>
-    </div>
+      <section class="cyber" id="cybersecurite" aria-labelledby="cyber-title">
+        <div class="container">
+          <div class="hub-sechead reveal">
+            <h2 id="cyber-title">
+              La cybersécurité, <em>à tous les étages</em>.
+            </h2>
+            <p>
+              Renforcer durablement la cybersécurité de vos infrastructures.
+            </p>
+          </div>
 
-    <div class="cyber-diagram reveal delay-1">
-      <!-- Bouclier fine-line : double liseré + check tracé au reveal -->
-      <div class="cyber-shield">
-        <svg class="cyber-orbits" viewBox="0 0 340 340" fill="none" aria-hidden="true">
-          <circle cx="170" cy="170" r="118" stroke="rgba(79,201,226,0.09)"/>
-          <circle cx="170" cy="170" r="160" stroke="rgba(79,201,226,0.06)" stroke-dasharray="2 7"/>
-        </svg>
-        <div class="cyber-shield-art">
-          <svg class="cyber-shield-svg" viewBox="0 0 146 152" fill="none" aria-hidden="true">
-            <defs>
-              <linearGradient id="cyberRim" x1="0" y1="0" x2="0" y2="152" gradientUnits="userSpaceOnUse">
-                <stop offset="0" stop-color="#ffffff" stop-opacity="0.5"/>
-                <stop offset="0.4" stop-color="#4FC9E2" stop-opacity="0.5"/>
-                <stop offset="1" stop-color="#4FC9E2" stop-opacity="0.14"/>
-              </linearGradient>
-              <linearGradient id="cyberFill" x1="0" y1="0" x2="0" y2="152" gradientUnits="userSpaceOnUse">
-                <stop offset="0" stop-color="#4FC9E2" stop-opacity="0.07"/>
-                <stop offset="1" stop-color="#4FC9E2" stop-opacity="0.015"/>
-              </linearGradient>
-            </defs>
-            <path class="cyber-shield-fill" d="M73 8 L120 25 Q126 28 126 34 L126 86 C126 118 104 136 73 148 C42 136 20 118 20 86 L20 34 Q20 28 26 25 Z"/>
-            <path class="cyber-shield-rim" d="M73 8 L120 25 Q126 28 126 34 L126 86 C126 118 104 136 73 148 C42 136 20 118 20 86 L20 34 Q20 28 26 25 Z"/>
-            <path class="cyber-shield-rim2" d="M73 8 L120 25 Q126 28 126 34 L126 86 C126 118 104 136 73 148 C42 136 20 118 20 86 L20 34 Q20 28 26 25 Z" transform="translate(8.76 9.12) scale(0.88)"/>
-            <path class="cyber-shield-check" d="M54 82 L68 95 L94 62" pathLength="100"/>
-          </svg>
+          <div class="cyber-diagram reveal delay-1">
+            <!-- Bouclier fine-line : double liseré + check tracé au reveal -->
+            <div class="cyber-shield">
+              <svg
+                class="cyber-orbits"
+                viewBox="0 0 340 340"
+                fill="none"
+                aria-hidden="true"
+              >
+                <circle cx="170" cy="170" r="118" stroke="rgba(79,201,226,0.09)"
+                ></circle>
+                <circle
+                  cx="170"
+                  cy="170"
+                  r="160"
+                  stroke="rgba(79,201,226,0.06)"
+                  stroke-dasharray="2 7"></circle>
+              </svg>
+              <div class="cyber-shield-art">
+                <svg
+                  class="cyber-shield-svg"
+                  viewBox="0 0 146 152"
+                  fill="none"
+                  aria-hidden="true"
+                >
+                  <defs>
+                    <linearGradient
+                      id="cyberRim"
+                      x1="0"
+                      y1="0"
+                      x2="0"
+                      y2="152"
+                      gradientUnits="userSpaceOnUse"
+                    >
+                      <stop offset="0" stop-color="#ffffff" stop-opacity="0.5"
+                      ></stop>
+                      <stop offset="0.4" stop-color="#4FC9E2" stop-opacity="0.5"
+                      ></stop>
+                      <stop offset="1" stop-color="#4FC9E2" stop-opacity="0.14"
+                      ></stop>
+                    </linearGradient>
+                    <linearGradient
+                      id="cyberFill"
+                      x1="0"
+                      y1="0"
+                      x2="0"
+                      y2="152"
+                      gradientUnits="userSpaceOnUse"
+                    >
+                      <stop offset="0" stop-color="#4FC9E2" stop-opacity="0.07"
+                      ></stop>
+                      <stop offset="1" stop-color="#4FC9E2" stop-opacity="0.015"
+                      ></stop>
+                    </linearGradient>
+                  </defs>
+                  <path
+                    class="cyber-shield-fill"
+                    d="M73 8 L120 25 Q126 28 126 34 L126 86 C126 118 104 136 73 148 C42 136 20 118 20 86 L20 34 Q20 28 26 25 Z"
+                  ></path>
+                  <path
+                    class="cyber-shield-rim"
+                    d="M73 8 L120 25 Q126 28 126 34 L126 86 C126 118 104 136 73 148 C42 136 20 118 20 86 L20 34 Q20 28 26 25 Z"
+                  ></path>
+                  <path
+                    class="cyber-shield-rim2"
+                    d="M73 8 L120 25 Q126 28 126 34 L126 86 C126 118 104 136 73 148 C42 136 20 118 20 86 L20 34 Q20 28 26 25 Z"
+                    transform="translate(8.76 9.12) scale(0.88)"></path>
+                  <path
+                    class="cyber-shield-check"
+                    d="M54 82 L68 95 L94 62"
+                    pathLength="100"></path>
+                </svg>
+              </div>
+            </div>
+
+            <!-- 3 branches hairline (bouclier → piliers), tracées au reveal -->
+            <svg
+              class="cyber-branches"
+              viewBox="0 0 1000 120"
+              preserveAspectRatio="none"
+              aria-hidden="true"
+            >
+              <defs>
+                <linearGradient
+                  id="cyberWire"
+                  x1="0"
+                  y1="0"
+                  x2="0"
+                  y2="120"
+                  gradientUnits="userSpaceOnUse"
+                >
+                  <stop offset="0" stop-color="#4FC9E2" stop-opacity="0.5"
+                  ></stop>
+                  <stop offset="1" stop-color="#4FC9E2" stop-opacity="0.25"
+                  ></stop>
+                </linearGradient>
+              </defs>
+              <path
+                class="cyber-wire cyber-wire--1"
+                pathLength="1000"
+                d="M500 2 C500 62 161 58 161 120"></path>
+              <path
+                class="cyber-wire cyber-wire--2"
+                pathLength="1000"
+                d="M500 2 L500 120"></path>
+              <path
+                class="cyber-wire cyber-wire--3"
+                pathLength="1000"
+                d="M500 2 C500 62 838 58 838 120"></path>
+            </svg>
+
+            <!-- 3 piliers reliés (contenu existant réutilisé) -->
+            <div class="cyber-piliers">
+              <div class="cyber-pilier">
+                <span class="cyber-node" aria-hidden="true"></span>
+                <span class="cyber-pilier-ic" aria-hidden="true"
+                  ><svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="1.6"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    ><path
+                      d="M12 2 4 5v6c0 5 3.4 8.5 8 10 4.6-1.5 8-5 8-10V5l-8-3z"
+                    ></path><path d="M9 12l2 2 4-4"></path></svg
+                  ></span
+                >
+                <h3>Gouvernance &amp; Audit · NIS2</h3>
+                <p>
+                  Des audits pour identifier les faiblesses techniques,
+                  administratives ou de processus, avec recommandations et une
+                  feuille de route NIS 2 adaptée à votre structure.
+                </p>
+              </div>
+              <div class="cyber-pilier">
+                <span class="cyber-node" aria-hidden="true"></span>
+                <span class="cyber-pilier-ic" aria-hidden="true"
+                  ><svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="1.6"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    ><circle cx="12" cy="12" r="9"></circle><circle
+                      cx="12"
+                      cy="12"
+                      r="3.5"></circle><path d="M12 12 18 8.5"></path></svg
+                  ></span
+                >
+                <h3>SOC &amp; MicroSOC</h3>
+                <p>
+                  Détection et réponse aux menaces 24/7 : on vous conseille, on
+                  vous rassure et on vous défend, en continu.
+                </p>
+              </div>
+              <div class="cyber-pilier">
+                <span class="cyber-node" aria-hidden="true"></span>
+                <span class="cyber-pilier-ic" aria-hidden="true"
+                  ><svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="1.6"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    ><path d="M22 10 12 5 2 10l10 5 10-5z"></path><path
+                      d="M6 12v5c2 2 4 3 6 3s4-1 6-3v-5"></path></svg
+                  ></span
+                >
+                <h3>Formation &amp; sensibilisation</h3>
+                <p>
+                  On teste vos défenses, on vérifie que vos protections sont
+                  correctes et on maintient le niveau de compétence de vos
+                  équipes.
+                </p>
+                <a class="cyber-pilier-link" href="formation-informatique.html"
+                  >Nos formations cybers&eacute;curit&eacute;<svg
+                    viewBox="0 0 16 16"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="1.6"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    aria-hidden="true"
+                    ><path d="M3 8h10M9 4l4 4-4 4"></path></svg
+                  ></a
+                >
+              </div>
+            </div>
+          </div>
+
+          <div class="cyber-band reveal delay-2">
+            <span class="cyber-stats">
+              <span class="cyber-stat"
+                ><span class="cyber-stat-num">400</span> clients</span
+              >
+              <span class="cyber-stat"
+                ><span class="cyber-stat-num">100</span> interventions/an</span
+              >
+              <span class="cyber-stat"
+                ><span class="cyber-stat-num">10</span> ans d'expertise</span
+              >
+            </span>
+            <span class="cyber-partner">
+              <span class="cyber-partner-label"
+                ><span class="cyber-partner-slash">//</span> Partenaire cybers&eacute;curit&eacute;</span
+              >
+              <img
+                src="logos%20INFORMATIQUE/rsecure-white.png"
+                alt="Rsecure France"
+                width="1000"
+                height="290"
+                loading="lazy"
+                decoding="async"
+              />
+            </span>
+            <a
+              class="cyber-audit"
+              href="contact.html?pole=informatique"
+              aria-label="Contacter un expert cybersécurité"
+              >Audit cyber <strong
+                >co-financé par la Région Grand Est jusqu'à 50 %</strong
+              >.<span class="cyber-audit-path" aria-hidden="true"
+                >info &rsaquo; cybers&eacute;curit&eacute;</span
+              ></a
+            >
+          </div>
         </div>
-      </div>
+      </section>
 
-      <!-- 3 branches hairline (bouclier → piliers), tracées au reveal -->
-      <svg class="cyber-branches" viewBox="0 0 1000 120" preserveAspectRatio="none" aria-hidden="true">
-        <defs>
-          <linearGradient id="cyberWire" x1="0" y1="0" x2="0" y2="120" gradientUnits="userSpaceOnUse">
-            <stop offset="0" stop-color="#4FC9E2" stop-opacity="0.5"/>
-            <stop offset="1" stop-color="#4FC9E2" stop-opacity="0.25"/>
-          </linearGradient>
-        </defs>
-        <path class="cyber-wire cyber-wire--1" pathLength="1000" d="M500 2 C500 62 161 58 161 120"/>
-        <path class="cyber-wire cyber-wire--2" pathLength="1000" d="M500 2 L500 120"/>
-        <path class="cyber-wire cyber-wire--3" pathLength="1000" d="M500 2 C500 62 838 58 838 120"/>
-      </svg>
-
-      <!-- 3 piliers reliés (contenu existant réutilisé) -->
-      <div class="cyber-piliers">
-        <div class="cyber-pilier">
-          <span class="cyber-node" aria-hidden="true"></span>
-          <span class="cyber-pilier-ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 4 5v6c0 5 3.4 8.5 8 10 4.6-1.5 8-5 8-10V5l-8-3z"/><path d="M9 12l2 2 4-4"/></svg></span>
-          <h3>Gouvernance &amp; Audit · NIS2</h3>
-          <p>Des audits pour identifier les faiblesses techniques, administratives ou de processus, avec recommandations et une feuille de route NIS 2 adaptée à votre structure.</p>
-        </div>
-        <div class="cyber-pilier">
-          <span class="cyber-node" aria-hidden="true"></span>
-          <span class="cyber-pilier-ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="3.5"/><path d="M12 12 18 8.5"/></svg></span>
-          <h3>SOC &amp; MicroSOC</h3>
-          <p>Détection et réponse aux menaces 24/7 : on vous conseille, on vous rassure et on vous défend, en continu.</p>
-        </div>
-        <div class="cyber-pilier">
-          <span class="cyber-node" aria-hidden="true"></span>
-          <span class="cyber-pilier-ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10 12 5 2 10l10 5 10-5z"/><path d="M6 12v5c2 2 4 3 6 3s4-1 6-3v-5"/></svg></span>
-          <h3>Formation &amp; sensibilisation</h3>
-          <p>On teste vos défenses, on vérifie que vos protections sont correctes et on maintient le niveau de compétence de vos équipes.</p>
-          <a class="cyber-pilier-link" href="formation-informatique.html">Nos formations cybers&eacute;curit&eacute;<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a>
-        </div>
-      </div>
-    </div>
-
-    <div class="cyber-band reveal delay-2">
-      <span class="cyber-stats">
-        <span class="cyber-stat"><span class="cyber-stat-num">400</span> clients</span>
-        <span class="cyber-stat"><span class="cyber-stat-num">100</span> interventions/an</span>
-        <span class="cyber-stat"><span class="cyber-stat-num">10</span> ans d'expertise</span>
-      </span>
-      <span class="cyber-partner">
-        <span class="cyber-partner-label"><span class="cyber-partner-slash">//</span> Partenaire cybers&eacute;curit&eacute;</span>
-        <img src="logos%20INFORMATIQUE/rsecure-white.png" alt="Rsecure France" width="1000" height="290" loading="lazy" decoding="async">
-      </span>
-      <a class="cyber-audit" href="contact.html?pole=informatique" aria-label="Contacter un expert cybers&eacute;curit&eacute;">Audit cyber <strong>co-financé par la Région Grand Est jusqu'à 50 %</strong>.<span class="cyber-audit-path" aria-hidden="true">info &rsaquo; cybers&eacute;curit&eacute;</span></a>
-    </div>
-  </div>
-</section>
-
-<!-- ====================================================================
+      <!-- ====================================================================
      PARTENAIRES & TECHNOLOGIES — global (regroupe les 4 domaines)
      ==================================================================== -->
-<section class="partners" aria-labelledby="partners-title">
-  <div class="container">
-    <div class="hub-sechead reveal">
-      <h2 id="partners-title">Les meilleures technologies, <em>intégrées</em>.</h2>
-    </div>
-    <div class="eco-net reveal delay-1">
+      <section class="partners" aria-labelledby="partners-title">
+        <div class="container">
+          <div class="hub-sechead reveal">
+            <h2 id="partners-title">
+              Les meilleures technologies, <em>intégrées</em>.
+            </h2>
+          </div>
+          <div class="eco-net reveal delay-1">
+            <!-- Séparateurs « réseau » : tracés bleus fondus + nœuds de jonction pulsants -->
+            <div class="eco-net-traces" aria-hidden="true">
+              <span class="net-line net-v-top"></span>
+              <span class="net-line net-h-mid"></span>
+              <span class="net-line net-v-bot"></span>
+            </div>
 
-      <!-- Séparateurs « réseau » : tracés bleus fondus + nœuds de jonction pulsants -->
-      <div class="eco-net-traces" aria-hidden="true">
-        <span class="net-line net-v-top"></span>
-        <span class="net-line net-h-mid"></span>
-        <span class="net-line net-v-bot"></span>
-      </div>
+            <!-- Haut-gauche : Collaboratif & audiovisuel (6 · 3×2) -->
+            <section
+              class="eco-quad q-collab"
+              aria-label="Collaboratif et audiovisuel"
+            >
+              <span class="eco-quad-label"
+                ><span class="eco-quad-dot" aria-hidden="true"
+                ></span>Collaboratif &amp; audiovisuel</span
+              >
+              <div class="eco-quad-grid g-3x2">
+                <div class="eco-tile has-logo" data-brand="maxhub">
+                  <img
+                    class="eco-tile-img"
+                    src="logos%20INFORMATIQUE/maxhub.png"
+                    alt="Maxhub"
+                    loading="lazy"
+                    decoding="async"
+                  /><span class="eco-tile-name">Maxhub</span>
+                </div>
+                <div class="eco-tile has-logo" data-brand="aver">
+                  <img
+                    class="eco-tile-img"
+                    src="logos%20INFORMATIQUE/aver.png"
+                    alt="AVer"
+                    loading="lazy"
+                    decoding="async"
+                  /><span class="eco-tile-name">AVer</span>
+                </div>
+                <div class="eco-tile has-logo" data-brand="bose">
+                  <img
+                    class="eco-tile-img"
+                    src="logos%20INFORMATIQUE/bose.png"
+                    alt="Bose"
+                    loading="lazy"
+                    decoding="async"
+                  /><span class="eco-tile-name">Bose</span>
+                </div>
+                <div class="eco-tile has-logo" data-brand="shure">
+                  <img
+                    class="eco-tile-img"
+                    src="logos%20INFORMATIQUE/shure.png"
+                    alt="Shure"
+                    loading="lazy"
+                    decoding="async"
+                  /><span class="eco-tile-name">Shure</span>
+                </div>
+                <div class="eco-tile has-logo" data-brand="sennheiser">
+                  <img
+                    class="eco-tile-img"
+                    src="logos%20INFORMATIQUE/sennheiser.png"
+                    alt="Sennheiser"
+                    loading="lazy"
+                    decoding="async"
+                  /><span class="eco-tile-name">Sennheiser</span>
+                </div>
+                <div class="eco-tile has-logo" data-brand="yealink">
+                  <img
+                    class="eco-tile-img"
+                    src="logos%20INFORMATIQUE/yealink.png"
+                    alt="Yealink"
+                    loading="lazy"
+                    decoding="async"
+                  /><span class="eco-tile-name">Yealink</span>
+                </div>
+              </div>
+            </section>
 
-      <!-- Haut-gauche : Collaboratif & audiovisuel (6 · 3×2) -->
-      <section class="eco-quad q-collab" aria-label="Collaboratif et audiovisuel">
-        <span class="eco-quad-label"><span class="eco-quad-dot" aria-hidden="true"></span>Collaboratif &amp; audiovisuel</span>
-        <div class="eco-quad-grid g-3x2">
-          <div class="eco-tile has-logo" data-brand="maxhub"><img class="eco-tile-img" src="logos%20INFORMATIQUE/maxhub.png" alt="Maxhub" loading="lazy" decoding="async"><span class="eco-tile-name">Maxhub</span></div>
-          <div class="eco-tile has-logo" data-brand="aver"><img class="eco-tile-img" src="logos%20INFORMATIQUE/aver.png" alt="AVer" loading="lazy" decoding="async"><span class="eco-tile-name">AVer</span></div>
-          <div class="eco-tile has-logo" data-brand="bose"><img class="eco-tile-img" src="logos%20INFORMATIQUE/bose.png" alt="Bose" loading="lazy" decoding="async"><span class="eco-tile-name">Bose</span></div>
-          <div class="eco-tile has-logo" data-brand="shure"><img class="eco-tile-img" src="logos%20INFORMATIQUE/shure.png" alt="Shure" loading="lazy" decoding="async"><span class="eco-tile-name">Shure</span></div>
-          <div class="eco-tile has-logo" data-brand="sennheiser"><img class="eco-tile-img" src="logos%20INFORMATIQUE/sennheiser.png" alt="Sennheiser" loading="lazy" decoding="async"><span class="eco-tile-name">Sennheiser</span></div>
-          <div class="eco-tile has-logo" data-brand="yealink"><img class="eco-tile-img" src="logos%20INFORMATIQUE/yealink.png" alt="Yealink" loading="lazy" decoding="async"><span class="eco-tile-name">Yealink</span></div>
+            <!-- Haut-droite : Cloud (2 · 1×2) -->
+            <section class="eco-quad q-cloud" aria-label="Cloud">
+              <span class="eco-quad-label"
+                ><span class="eco-quad-dot" aria-hidden="true"
+                ></span>Cloud</span
+              >
+              <div class="eco-quad-grid g-1x2">
+                <div class="eco-tile has-logo" data-brand="m365">
+                  <img
+                    class="eco-tile-img"
+                    src="logos%20INFORMATIQUE/microsoft365.webp"
+                    alt="Microsoft 365"
+                    loading="lazy"
+                    decoding="async"
+                  /><span class="eco-tile-name">Microsoft 365</span>
+                </div>
+                <div class="eco-tile has-logo" data-brand="azure">
+                  <img
+                    class="eco-tile-img"
+                    src="logos%20INFORMATIQUE/azure.png"
+                    alt="Microsoft Azure"
+                    loading="lazy"
+                    decoding="async"
+                  /><span class="eco-tile-name">Azure</span>
+                </div>
+              </div>
+            </section>
+
+            <!-- Bas-gauche : Postes & matériel (4 · 2×2) -->
+            <section class="eco-quad q-postes" aria-label="Postes et matériel">
+              <span class="eco-quad-label"
+                ><span class="eco-quad-dot" aria-hidden="true"></span>Postes
+                &amp; matériel</span
+              >
+              <div class="eco-quad-grid g-2x2">
+                <div class="eco-tile has-logo" data-brand="hp">
+                  <img
+                    class="eco-tile-img"
+                    src="logos%20INFORMATIQUE/hp.png"
+                    alt="HP"
+                    loading="lazy"
+                    decoding="async"
+                  /><span class="eco-tile-name">HP</span>
+                </div>
+                <div class="eco-tile has-logo" data-brand="hpe">
+                  <img
+                    class="eco-tile-img"
+                    src="logos%20INFORMATIQUE/hpe.png"
+                    alt="HPE"
+                    loading="lazy"
+                    decoding="async"
+                  /><span class="eco-tile-name">HPE</span>
+                </div>
+                <div class="eco-tile has-logo" data-brand="lenovo">
+                  <img
+                    class="eco-tile-img"
+                    src="logos%20INFORMATIQUE/lenovo.png"
+                    alt="Lenovo"
+                    loading="lazy"
+                    decoding="async"
+                  /><span class="eco-tile-name">Lenovo</span>
+                </div>
+                <div class="eco-tile has-logo" data-brand="terra">
+                  <img
+                    class="eco-tile-img"
+                    src="logos%20INFORMATIQUE/terra.png"
+                    alt="Terra"
+                    loading="lazy"
+                    decoding="async"
+                  /><span class="eco-tile-name">Terra</span>
+                </div>
+              </div>
+            </section>
+
+            <!-- Bas-droite : Infrastructure & sécurité (4 · 2×2) -->
+            <section
+              class="eco-quad q-infra"
+              aria-label="Infrastructure et sécurité"
+            >
+              <span class="eco-quad-label"
+                ><span class="eco-quad-dot" aria-hidden="true"
+                ></span>Infrastructure &amp; sécurité</span
+              >
+              <div class="eco-quad-grid g-2x2">
+                <div class="eco-tile eco-tile--ph" data-brand="hpe-silver">
+                  <span class="eco-tile-name">HPE Silver Partner</span>
+                </div>
+                <div class="eco-tile has-logo" data-brand="microsoft">
+                  <img
+                    class="eco-tile-img"
+                    src="logos%20INFORMATIQUE/microsoft.png"
+                    alt="Microsoft"
+                    loading="lazy"
+                    decoding="async"
+                  /><span class="eco-tile-name">Microsoft</span>
+                </div>
+                <div class="eco-tile has-logo" data-brand="veeam">
+                  <img
+                    class="eco-tile-img"
+                    src="logos%20INFORMATIQUE/veeam.png"
+                    alt="Veeam"
+                    loading="lazy"
+                    decoding="async"
+                  /><span class="eco-tile-name">Veeam</span>
+                </div>
+                <div class="eco-tile has-logo" data-brand="watchguard">
+                  <img
+                    class="eco-tile-img"
+                    src="logos%20INFORMATIQUE/watchguard.png"
+                    alt="WatchGuard"
+                    loading="lazy"
+                    decoding="async"
+                  /><span class="eco-tile-name">WatchGuard</span>
+                </div>
+              </div>
+            </section>
+          </div>
         </div>
       </section>
 
-      <!-- Haut-droite : Cloud (2 · 1×2) -->
-      <section class="eco-quad q-cloud" aria-label="Cloud">
-        <span class="eco-quad-label"><span class="eco-quad-dot" aria-hidden="true"></span>Cloud</span>
-        <div class="eco-quad-grid g-1x2">
-          <div class="eco-tile has-logo" data-brand="m365"><img class="eco-tile-img" src="logos%20INFORMATIQUE/microsoft365.webp" alt="Microsoft 365" loading="lazy" decoding="async"><span class="eco-tile-name">Microsoft 365</span></div>
-          <div class="eco-tile has-logo" data-brand="azure"><img class="eco-tile-img" src="logos%20INFORMATIQUE/azure.png" alt="Microsoft Azure" loading="lazy" decoding="async"><span class="eco-tile-name">Azure</span></div>
-        </div>
-      </section>
-
-      <!-- Bas-gauche : Postes & matériel (4 · 2×2) -->
-      <section class="eco-quad q-postes" aria-label="Postes et matériel">
-        <span class="eco-quad-label"><span class="eco-quad-dot" aria-hidden="true"></span>Postes &amp; matériel</span>
-        <div class="eco-quad-grid g-2x2">
-          <div class="eco-tile has-logo" data-brand="hp"><img class="eco-tile-img" src="logos%20INFORMATIQUE/hp.png" alt="HP" loading="lazy" decoding="async"><span class="eco-tile-name">HP</span></div>
-          <div class="eco-tile has-logo" data-brand="hpe"><img class="eco-tile-img" src="logos%20INFORMATIQUE/hpe.png" alt="HPE" loading="lazy" decoding="async"><span class="eco-tile-name">HPE</span></div>
-          <div class="eco-tile has-logo" data-brand="lenovo"><img class="eco-tile-img" src="logos%20INFORMATIQUE/lenovo.png" alt="Lenovo" loading="lazy" decoding="async"><span class="eco-tile-name">Lenovo</span></div>
-          <div class="eco-tile has-logo" data-brand="terra"><img class="eco-tile-img" src="logos%20INFORMATIQUE/terra.png" alt="Terra" loading="lazy" decoding="async"><span class="eco-tile-name">Terra</span></div>
-        </div>
-      </section>
-
-      <!-- Bas-droite : Infrastructure & sécurité (4 · 2×2) -->
-      <section class="eco-quad q-infra" aria-label="Infrastructure et sécurité">
-        <span class="eco-quad-label"><span class="eco-quad-dot" aria-hidden="true"></span>Infrastructure &amp; sécurité</span>
-        <div class="eco-quad-grid g-2x2">
-          <div class="eco-tile eco-tile--ph" data-brand="hpe-silver"><span class="eco-tile-name">HPE Silver Partner</span></div>
-          <div class="eco-tile has-logo" data-brand="microsoft"><img class="eco-tile-img" src="logos%20INFORMATIQUE/microsoft.png" alt="Microsoft" loading="lazy" decoding="async"><span class="eco-tile-name">Microsoft</span></div>
-          <div class="eco-tile has-logo" data-brand="veeam"><img class="eco-tile-img" src="logos%20INFORMATIQUE/veeam.png" alt="Veeam" loading="lazy" decoding="async"><span class="eco-tile-name">Veeam</span></div>
-          <div class="eco-tile has-logo" data-brand="watchguard"><img class="eco-tile-img" src="logos%20INFORMATIQUE/watchguard.png" alt="WatchGuard" loading="lazy" decoding="async"><span class="eco-tile-name">WatchGuard</span></div>
-        </div>
-      </section>
-
-    </div>
-  </div>
-</section>
-
-<!-- ====================================================================
+      <!-- ====================================================================
      POURQUOI JCD
      ==================================================================== -->
-<section class="why" aria-labelledby="why-title">
-  <div class="container">
-    <div class="why-tree reveal">
+      <section class="why" aria-labelledby="why-title">
+        <div class="container">
+          <div class="why-tree reveal">
+            <!-- Corridor du tronc : prolonge la verticale de l'écosystème jusqu'au distributeur -->
+            <div class="wt-head">
+              <span class="wt-trunk" aria-hidden="true"></span>
+              <span class="wt-elbow-h" aria-hidden="true"></span>
+              <span class="wt-elbow-v" aria-hidden="true"></span>
+              <span class="wt-trunk-node" aria-hidden="true"></span>
+              <div class="hub-sechead">
+                <h2 id="why-title">
+                  Plus qu'un prestataire, <em>un v&eacute;ritable partenaire</em
+                  >.
+                </h2>
+              </div>
+            </div>
 
-      <!-- Corridor du tronc : prolonge la verticale de l'écosystème jusqu'au distributeur -->
-      <div class="wt-head">
-        <span class="wt-trunk" aria-hidden="true"></span>
-        <span class="wt-elbow-h" aria-hidden="true"></span>
-        <span class="wt-elbow-v" aria-hidden="true"></span>
-        <span class="wt-trunk-node" aria-hidden="true"></span>
-        <div class="hub-sechead">
-          <h2 id="why-title">Plus qu'un prestataire, <em>un v&eacute;ritable partenaire</em>.</h2>
+            <!-- Distributeur → 4 cartes-raisons suspendues à hauteurs décalées (réf. croquis) -->
+            <div class="wt-body">
+              <span class="wt-dist" aria-hidden="true"></span>
+              <ol class="wt-items">
+                <li class="wt-item">
+                  <span class="wt-branch" aria-hidden="true"></span>
+                  <span class="wt-node" aria-hidden="true"></span>
+                  <div class="wt-card-box">
+                    <h3>Interlocuteur unique</h3>
+                    <p>Un seul partenaire pour tout votre IT.</p>
+                  </div>
+                </li>
+                <li class="wt-item">
+                  <span class="wt-branch" aria-hidden="true"></span>
+                  <span class="wt-node" aria-hidden="true"></span>
+                  <div class="wt-card-box">
+                    <h3>Service de proximit&eacute;</h3>
+                    <p>
+                      Proche de vous depuis 1996 sur les territoires de Metz et
+                      de Nancy.
+                    </p>
+                  </div>
+                </li>
+                <li class="wt-item">
+                  <span class="wt-branch" aria-hidden="true"></span>
+                  <span class="wt-node" aria-hidden="true"></span>
+                  <div class="wt-card-box">
+                    <h3>Internalisation compl&egrave;te</h3>
+                    <p>Préparation, déploiement, support, sécurité.</p>
+                  </div>
+                </li>
+                <li class="wt-item">
+                  <span class="wt-branch" aria-hidden="true"></span>
+                  <span class="wt-node" aria-hidden="true"></span>
+                  <div class="wt-card-box">
+                    <h3>La sécurité par défaut</h3>
+                    <p>
+                      La cybers&eacute;curit&eacute; int&eacute;gr&eacute;e dans
+                      toutes nos solutions.
+                    </p>
+                  </div>
+                </li>
+              </ol>
+            </div>
+          </div>
         </div>
-      </div>
+      </section>
 
-      <!-- Distributeur → 4 cartes-raisons suspendues à hauteurs décalées (réf. croquis) -->
-      <div class="wt-body">
-        <span class="wt-dist" aria-hidden="true"></span>
-        <ol class="wt-items">
-          <li class="wt-item">
-            <span class="wt-branch" aria-hidden="true"></span>
-            <span class="wt-node" aria-hidden="true"></span>
-            <div class="wt-card-box">
-              <h3>Interlocuteur unique</h3>
-              <p>Un seul partenaire pour tout votre IT.</p>
-            </div>
-          </li>
-          <li class="wt-item">
-            <span class="wt-branch" aria-hidden="true"></span>
-            <span class="wt-node" aria-hidden="true"></span>
-            <div class="wt-card-box">
-              <h3>Service de proximit&eacute;</h3>
-              <p>Proche de vous depuis 1996 sur les territoires de Metz et de Nancy.</p>
-            </div>
-          </li>
-          <li class="wt-item">
-            <span class="wt-branch" aria-hidden="true"></span>
-            <span class="wt-node" aria-hidden="true"></span>
-            <div class="wt-card-box">
-              <h3>Internalisation compl&egrave;te</h3>
-              <p>Préparation, déploiement, support, sécurité.</p>
-            </div>
-          </li>
-          <li class="wt-item">
-            <span class="wt-branch" aria-hidden="true"></span>
-            <span class="wt-node" aria-hidden="true"></span>
-            <div class="wt-card-box">
-              <h3>La sécurité par défaut</h3>
-              <p>La cybers&eacute;curit&eacute; int&eacute;gr&eacute;e dans toutes nos solutions.</p>
-            </div>
-          </li>
-        </ol>
-      </div>
-
-    </div>
-  </div>
-</section>
-
-<!-- ====================================================================
+      <!-- ====================================================================
      CTA — style maison (icône + corps + téléphone)
      ==================================================================== -->
-<section class="cta-section" id="contact" aria-labelledby="cta-title">
-  <div class="container">
-    <div class="cta-frame">
-      <div class="cta-inner">
-        <svg class="cta-icon reveal" viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
-          <g stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
-            <rect x="20" y="20" width="34" height="34" rx="7"/>
-            <rect x="66" y="20" width="34" height="34" rx="7"/>
-            <rect x="20" y="66" width="34" height="34" rx="7"/>
-            <rect x="66" y="66" width="34" height="34" rx="7"/>
-          </g>
-          <path d="M54 37h12M54 83h12M37 54v12M83 54v12" stroke="currentColor" stroke-width="1.5" opacity="0.45" stroke-linecap="round"/>
-        </svg>
+      <section class="cta-section" id="contact" aria-labelledby="cta-title">
+        <div class="container">
+          <div class="cta-frame">
+            <div class="cta-inner">
+              <svg
+                class="cta-icon reveal"
+                viewBox="0 0 120 120"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+                aria-hidden="true"
+                focusable="false"
+              >
+                <g
+                  stroke="currentColor"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                >
+                  <rect x="20" y="20" width="34" height="34" rx="7"></rect>
+                  <rect x="66" y="20" width="34" height="34" rx="7"></rect>
+                  <rect x="20" y="66" width="34" height="34" rx="7"></rect>
+                  <rect x="66" y="66" width="34" height="34" rx="7"></rect>
+                </g>
+                <path
+                  d="M54 37h12M54 83h12M37 54v12M83 54v12"
+                  stroke="currentColor"
+                  stroke-width="1.5"
+                  opacity="0.45"
+                  stroke-linecap="round"></path>
+              </svg>
 
-        <div class="cta-body">
-          <h2 class="cta-title reveal delay-1" id="cta-title">
-            Un projet <em>informatique&thinsp;?</em>
-          </h2>
-          <p class="cta-sub reveal delay-2">
-            Notre &eacute;quipe se tient &agrave; votre disposition pour toute demande.
+              <div class="cta-body">
+                <h2 class="cta-title reveal delay-1" id="cta-title">
+                  Un projet <em>informatique&thinsp;?</em>
+                </h2>
+                <p class="cta-sub reveal delay-2">
+                  Notre &eacute;quipe se tient &agrave; votre disposition pour
+                  toute demande.
+                </p>
+                <div class="cta-actions reveal delay-3">
+                  <a
+                    href="contact.html?pole=informatique"
+                    class="btn-cta btn-cta--primary"
+                  >
+                    Contacter le pôle Informatique
+                    <span class="btn-cta-arrow"
+                      ><svg
+                        viewBox="0 0 16 16"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="1.6"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        ><path d="M3 8h10M9 4l4 4-4 4"></path></svg
+                      ></span
+                    >
+                  </a>
+                  <span class="cta-actions-divider" aria-hidden="true"></span>
+                  <span class="cta-phone">
+                    <svg
+                      viewBox="0 0 20 20"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="1.4"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      width="14"
+                      height="14"
+                      ><path
+                        d="M2 3a1 1 0 011-1h3.28a1 1 0 01.95.68l1.07 3.21a1 1 0 01-.25 1L6.54 8.4a12.06 12.06 0 005.06 5.06l1.51-1.51a1 1 0 011-.25l3.21 1.07a1 1 0 01.68.95V17a1 1 0 01-1 1A15 15 0 012 3z"
+                      ></path></svg
+                    >
+                    <a href="tel:+33387184920" class="cta-phone-num"
+                      >03 87 18 49 20</a
+                    >
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <Footer />
+
+    <script is:inline src="js/pages/informatique-1.js"></script>
+    <script is:inline src="js/shared/menu-frost.js"></script>
+    <!-- jcd-mobile-nav (injected) -->
+    <button
+      class="jcd-burger"
+      id="jcdBurger"
+      type="button"
+      aria-label="Ouvrir le menu"
+      aria-expanded="false"
+      aria-controls="jcdMnav"
+    >
+      <span class="jcd-burger__box" aria-hidden="true"
+        ><i></i><i></i><i></i></span
+      >
+    </button>
+    <div
+      class="jcd-mnav"
+      id="jcdMnav"
+      role="dialog"
+      aria-modal="true"
+      aria-label="Menu de navigation"
+      aria-hidden="true"
+    >
+      <div class="jcd-mnav__scroll">
+        <div class="jcd-mnav__inner">
+          <p
+            class="jcd-mnav__eyebrow jcd-mnav__reveal"
+            style="transition-delay:.04s"
+          >
+            Expertises
           </p>
-          <div class="cta-actions reveal delay-3">
-            <a href="contact.html?pole=informatique" class="btn-cta btn-cta--primary">
-              Contacter le pôle Informatique
-              <span class="btn-cta-arrow"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h10M9 4l4 4-4 4"/></svg></span>
-            </a>
-            <span class="cta-actions-divider" aria-hidden="true"></span>
-            <span class="cta-phone">
-              <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" width="14" height="14"><path d="M2 3a1 1 0 011-1h3.28a1 1 0 01.95.68l1.07 3.21a1 1 0 01-.25 1L6.54 8.4a12.06 12.06 0 005.06 5.06l1.51-1.51a1 1 0 011-.25l3.21 1.07a1 1 0 01.68.95V17a1 1 0 01-1 1A15 15 0 012 3z"/></svg>
-              <a href="tel:+33387184920" class="cta-phone-num">03 87 18 49 20</a>
-            </span>
+
+          <div class="jcd-mnav__reveal" style="transition-delay:.07s">
+            <div class="jcd-mnav__item" style="--mnav-c:#2E72BA">
+              <a class="jcd-mnav__link" href="informatique.html"
+                ><span class="jcd-mnav__dot"></span><span
+                  class="jcd-mnav__label">Informatique</span
+                ></a
+              >
+              <button
+                class="jcd-acc__toggle"
+                type="button"
+                aria-expanded="false"
+                aria-controls="jcdAccInfo"
+                aria-label="Afficher les sous-pages Informatique"
+              >
+                <svg
+                  viewBox="0 0 14 14"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.6"
+                  stroke-linecap="round"><path d="M7 2v10M2 7h10"></path></svg
+                >
+              </button>
+            </div>
+            <div class="jcd-acc__panel" id="jcdAccInfo">
+              <a class="jcd-mnav__sub" href="info-cloud.html">Cloud Microsoft</a
+              >
+              <a class="jcd-mnav__sub" href="info-collaboratif.html"
+                >Solutions collaboratives &amp; audiovisuelles</a
+              >
+              <a class="jcd-mnav__sub" href="info-reseaux.html"
+                >Architectures syst&egrave;mes &amp; r&eacute;seaux</a
+              >
+              <a class="jcd-mnav__sub" href="info-integration.html"
+                >Int&eacute;gration &amp; Support PC</a
+              >
+            </div>
+          </div>
+
+          <a
+            class="jcd-mnav__item jcd-mnav__reveal"
+            style="--mnav-c:#E51D29;transition-delay:.10s"
+            href="service.html"
+            ><span class="jcd-mnav__dot"></span><span class="jcd-mnav__label"
+              >Service</span
+            ></a
+          >
+          <a
+            class="jcd-mnav__item jcd-mnav__reveal"
+            style="--mnav-c:#F9D605;transition-delay:.13s"
+            href="developpement.html"
+            ><span class="jcd-mnav__dot"></span><span class="jcd-mnav__label"
+              >D&eacute;veloppement</span
+            ></a
+          >
+          <a
+            class="jcd-mnav__item jcd-mnav__reveal"
+            style="--mnav-c:#F3941D;transition-delay:.16s"
+            href="print.html"
+            ><span class="jcd-mnav__dot"></span><span class="jcd-mnav__label"
+              >Print</span
+            ></a
+          >
+          <a
+            class="jcd-mnav__item jcd-mnav__reveal"
+            style="--mnav-c:#B063AC;transition-delay:.19s"
+            href="telecom.html"
+            ><span class="jcd-mnav__dot"></span><span class="jcd-mnav__label"
+              >T&eacute;l&eacute;com</span
+            ></a
+          >
+          <div class="jcd-mnav__reveal" style="transition-delay:.22s">
+            <div class="jcd-mnav__item" style="--mnav-c:#8EC041">
+              <a class="jcd-mnav__link" href="formation.html"
+                ><span class="jcd-mnav__dot"></span><span
+                  class="jcd-mnav__label">Formation</span
+                ></a
+              >
+              <button
+                class="jcd-acc__toggle"
+                type="button"
+                aria-expanded="false"
+                aria-controls="jcdAccForm"
+                aria-label="Afficher les catégories de formation"
+              >
+                <svg
+                  viewBox="0 0 14 14"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.6"
+                  stroke-linecap="round"><path d="M7 2v10M2 7h10"></path></svg
+                >
+              </button>
+            </div>
+            <div class="jcd-acc__panel" id="jcdAccForm">
+              <a class="jcd-mnav__sub" href="formation-bureautique.html"
+                >Bureautique</a
+              >
+              <a
+                class="jcd-mnav__sub"
+                href="formation-intelligence-artificielle.html"
+                >Intelligence artificielle</a
+              >
+              <a class="jcd-mnav__sub" href="formation-informatique.html"
+                >Informatique</a
+              >
+              <a
+                class="jcd-mnav__sub"
+                href="formation-communication-marketing.html"
+                >Communication - Marketing</a
+              >
+              <a class="jcd-mnav__sub" href="formation-management.html"
+                >Management</a
+              >
+              <a
+                class="jcd-mnav__sub"
+                href="formation-commerce-relation-client.html"
+                >Commerce - Relation client</a
+              >
+              <a
+                class="jcd-mnav__sub"
+                href="formation-comptabilite-gestion.html"
+                >Comptabilit&eacute; - Gestion</a
+              >
+              <a class="jcd-mnav__sub" href="formation-ressources-humaines.html"
+                >Ressources humaines</a
+              >
+              <a
+                class="jcd-mnav__sub"
+                href="formation-developpement-personnel.html"
+                >D&eacute;veloppement personnel</a
+              >
+              <a class="jcd-mnav__sub" href="formation-graphisme-pao.html"
+                >Graphisme - PAO</a
+              >
+              <a
+                class="jcd-mnav__sub"
+                href="formation-administratif-secretariat-accueil.html"
+                >Administratif - Secr&eacute;tariat</a
+              >
+              <a class="jcd-mnav__sub" href="formation-securite.html"
+                >S&eacute;curit&eacute;</a
+              >
+              <a class="jcd-mnav__sub" href="formation-langues.html">Langues</a>
+            </div>
+          </div>
+          <a
+            class="jcd-mnav__item jcd-mnav__reveal"
+            style="--mnav-c:#A78D75;transition-delay:.25s"
+            href="agencement.html"
+            ><span class="jcd-mnav__dot"></span><span class="jcd-mnav__label"
+              >Agencement</span
+            ></a
+          >
+
+          <p
+            class="jcd-mnav__eyebrow jcd-mnav__sec2 jcd-mnav__reveal"
+            style="transition-delay:.30s"
+          >
+            D&eacute;couvrir
+          </p>
+          <a
+            class="jcd-mnav__item jcd-mnav__reveal"
+            style="--mnav-c:#9a9a9a;transition-delay:.33s"
+            href="assistance.html"
+            ><span class="jcd-mnav__dot"></span><span
+              class="jcd-mnav__label"
+              style="font-size:19px">Assistance</span
+            ></a
+          >
+          <a
+            class="jcd-mnav__item jcd-mnav__reveal"
+            style="--mnav-c:#9a9a9a;transition-delay:.36s"
+            href="carrieres.html"
+            ><span class="jcd-mnav__dot"></span><span
+              class="jcd-mnav__label"
+              style="font-size:19px">Carri&egrave;res</span
+            ></a
+          >
+
+          <div
+            class="jcd-mnav__cta jcd-mnav__reveal"
+            style="transition-delay:.40s"
+          >
+            <a class="jcd-mnav__btn jcd-mnav__btn--primary" href="contact.html"
+              >Contacter un expert
+              <span class="jcd-mnav__btn-ic"
+                ><svg
+                  viewBox="0 0 16 16"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.7"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  ><path d="M3 8h10M9 4l4 4-4 4"></path></svg
+                ></span
+              ></a
+            >
+            <a
+              class="jcd-mnav__btn jcd-mnav__btn--ghost"
+              href="tel:+33387184920"
+              >03 87 18 49 20
+              <span class="jcd-mnav__btn-ic"
+                ><svg
+                  viewBox="0 0 18 18"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.5"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  ><path
+                    d="M2.5 3.5a1 1 0 011-1h2.4a1 1 0 01.95.68l.86 2.4a1 1 0 01-.24 1l-1.2 1.2a11 11 0 004.6 4.6l1.2-1.2a1 1 0 011-.24l2.4.86a1 1 0 01.68.95V15a1 1 0 01-1 1A13.5 13.5 0 012.5 3.5z"
+                  ></path></svg
+                ></span
+              ></a
+            >
           </div>
         </div>
       </div>
     </div>
-  </div>
-</section>
-
-</main>
-
-<Footer />
-
-
-<script is:inline src="js/pages/informatique-1.js"></script>
-<script is:inline src="js/shared/menu-frost.js"></script>
-<!-- jcd-mobile-nav (injected) -->
-<button class="jcd-burger" id="jcdBurger" type="button" aria-label="Ouvrir le menu" aria-expanded="false" aria-controls="jcdMnav">
-  <span class="jcd-burger__box" aria-hidden="true"><i></i><i></i><i></i></span>
-</button>
-<div class="jcd-mnav" id="jcdMnav" role="dialog" aria-modal="true" aria-label="Menu de navigation" aria-hidden="true">
-  <div class="jcd-mnav__scroll">
-    <div class="jcd-mnav__inner">
-      <p class="jcd-mnav__eyebrow jcd-mnav__reveal" style="transition-delay:.04s">Expertises</p>
-
-      <div class="jcd-mnav__reveal" style="transition-delay:.07s">
-        <div class="jcd-mnav__item" style="--mnav-c:#2E72BA">
-          <a class="jcd-mnav__link" href="informatique.html"><span class="jcd-mnav__dot"></span><span class="jcd-mnav__label">Informatique</span></a>
-          <button class="jcd-acc__toggle" type="button" aria-expanded="false" aria-controls="jcdAccInfo" aria-label="Afficher les sous-pages Informatique">
-            <svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M7 2v10M2 7h10"/></svg>
-          </button>
-        </div>
-        <div class="jcd-acc__panel" id="jcdAccInfo">
-          <a class="jcd-mnav__sub" href="info-cloud.html">Cloud Microsoft</a>
-          <a class="jcd-mnav__sub" href="info-collaboratif.html">Solutions collaboratives &amp; audiovisuelles</a>
-          <a class="jcd-mnav__sub" href="info-reseaux.html">Architectures syst&egrave;mes &amp; r&eacute;seaux</a>
-          <a class="jcd-mnav__sub" href="info-integration.html">Int&eacute;gration &amp; Support PC</a>
-        </div>
-      </div>
-
-      <a class="jcd-mnav__item jcd-mnav__reveal" style="--mnav-c:#E51D29;transition-delay:.10s" href="service.html"><span class="jcd-mnav__dot"></span><span class="jcd-mnav__label">Service</span></a>
-      <a class="jcd-mnav__item jcd-mnav__reveal" style="--mnav-c:#F9D605;transition-delay:.13s" href="developpement.html"><span class="jcd-mnav__dot"></span><span class="jcd-mnav__label">D&eacute;veloppement</span></a>
-      <a class="jcd-mnav__item jcd-mnav__reveal" style="--mnav-c:#F3941D;transition-delay:.16s" href="print.html"><span class="jcd-mnav__dot"></span><span class="jcd-mnav__label">Print</span></a>
-      <a class="jcd-mnav__item jcd-mnav__reveal" style="--mnav-c:#B063AC;transition-delay:.19s" href="telecom.html"><span class="jcd-mnav__dot"></span><span class="jcd-mnav__label">T&eacute;l&eacute;com</span></a>
-      <div class="jcd-mnav__reveal" style="transition-delay:.22s">
-        <div class="jcd-mnav__item" style="--mnav-c:#8EC041">
-          <a class="jcd-mnav__link" href="formation.html"><span class="jcd-mnav__dot"></span><span class="jcd-mnav__label">Formation</span></a>
-          <button class="jcd-acc__toggle" type="button" aria-expanded="false" aria-controls="jcdAccForm" aria-label="Afficher les cat&eacute;gories de formation">
-            <svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M7 2v10M2 7h10"/></svg>
-          </button>
-        </div>
-        <div class="jcd-acc__panel" id="jcdAccForm">
-          <a class="jcd-mnav__sub" href="formation-bureautique.html">Bureautique</a>
-          <a class="jcd-mnav__sub" href="formation-intelligence-artificielle.html">Intelligence artificielle</a>
-          <a class="jcd-mnav__sub" href="formation-informatique.html">Informatique</a>
-          <a class="jcd-mnav__sub" href="formation-communication-marketing.html">Communication - Marketing</a>
-          <a class="jcd-mnav__sub" href="formation-management.html">Management</a>
-          <a class="jcd-mnav__sub" href="formation-commerce-relation-client.html">Commerce - Relation client</a>
-          <a class="jcd-mnav__sub" href="formation-comptabilite-gestion.html">Comptabilit&eacute; - Gestion</a>
-          <a class="jcd-mnav__sub" href="formation-ressources-humaines.html">Ressources humaines</a>
-          <a class="jcd-mnav__sub" href="formation-developpement-personnel.html">D&eacute;veloppement personnel</a>
-          <a class="jcd-mnav__sub" href="formation-graphisme-pao.html">Graphisme - PAO</a>
-          <a class="jcd-mnav__sub" href="formation-administratif-secretariat-accueil.html">Administratif - Secr&eacute;tariat</a>
-          <a class="jcd-mnav__sub" href="formation-securite.html">S&eacute;curit&eacute;</a>
-          <a class="jcd-mnav__sub" href="formation-langues.html">Langues</a>
-        </div>
-      </div>
-      <a class="jcd-mnav__item jcd-mnav__reveal" style="--mnav-c:#A78D75;transition-delay:.25s" href="agencement.html"><span class="jcd-mnav__dot"></span><span class="jcd-mnav__label">Agencement</span></a>
-
-      <p class="jcd-mnav__eyebrow jcd-mnav__sec2 jcd-mnav__reveal" style="transition-delay:.30s">D&eacute;couvrir</p>
-      <a class="jcd-mnav__item jcd-mnav__reveal" style="--mnav-c:#9a9a9a;transition-delay:.33s" href="assistance.html"><span class="jcd-mnav__dot"></span><span class="jcd-mnav__label" style="font-size:19px">Assistance</span></a>
-      <a class="jcd-mnav__item jcd-mnav__reveal" style="--mnav-c:#9a9a9a;transition-delay:.36s" href="carrieres.html"><span class="jcd-mnav__dot"></span><span class="jcd-mnav__label" style="font-size:19px">Carri&egrave;res</span></a>
-
-      <div class="jcd-mnav__cta jcd-mnav__reveal" style="transition-delay:.40s">
-        <a class="jcd-mnav__btn jcd-mnav__btn--primary" href="contact.html">Contacter un expert
-          <span class="jcd-mnav__btn-ic"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h10M9 4l4 4-4 4"/></svg></span></a>
-        <a class="jcd-mnav__btn jcd-mnav__btn--ghost" href="tel:+33387184920">03 87 18 49 20
-          <span class="jcd-mnav__btn-ic"><svg viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2.5 3.5a1 1 0 011-1h2.4a1 1 0 01.95.68l.86 2.4a1 1 0 01-.24 1l-1.2 1.2a11 11 0 004.6 4.6l1.2-1.2a1 1 0 011-.24l2.4.86a1 1 0 01.68.95V15a1 1 0 01-1 1A13.5 13.5 0 012.5 3.5z"/></svg></span></a>
-      </div>
+    <script is:inline src="js/shared/mobile-nav.js"></script>
+    <!-- jcd-a11y (Lot 5) -->
+    <div class="jcd-fab-wrap" id="jcd-fab">
+      <button
+        class="jcd-fab jcd-fab--top"
+        id="jcdToTop"
+        type="button"
+        aria-label="Remonter en haut"
+      >
+        <svg
+          viewBox="0 0 20 20"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="1.8"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          aria-hidden="true"><path d="M10 16V5M5 10l5-5 5 5"></path></svg
+        >
+      </button>
+      <a
+        class="jcd-fab jcd-fab--contact"
+        id="jcdFabContact"
+        href="contact.html"
+        aria-label="Nous contacter"
+      >
+        <svg
+          viewBox="0 0 20 20"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="1.6"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          aria-hidden="true"
+          ><rect x="2.5" y="4.5" width="15" height="11" rx="2.3"></rect><path
+            d="M3 6.7 L10 10.7 L17 6.7"></path></svg
+        >
+      </a>
     </div>
-  </div>
-</div>
-<script is:inline src="js/shared/mobile-nav.js"></script>
-<!-- jcd-a11y (Lot 5) -->
-<div class="jcd-fab-wrap" id="jcd-fab">
-  <button class="jcd-fab jcd-fab--top" id="jcdToTop" type="button" aria-label="Remonter en haut">
-    <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 16V5M5 10l5-5 5 5"/></svg>
-  </button>
-  <a class="jcd-fab jcd-fab--contact" id="jcdFabContact" href="contact.html" aria-label="Nous contacter">
-    <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2.5" y="4.5" width="15" height="11" rx="2.3"/><path d="M3 6.7 L10 10.7 L17 6.7"/></svg>
-  </a>
-</div>
-<script is:inline src="js/shared/a11y.js" id="jcd-a11y-js"></script>
-<script is:inline src="js/pages/informatique-2.js"></script>
-<script is:inline src="js/shared/micons.js" id="jcd-micons-js"></script>
-<script is:inline src="js/shared/mrefonte.js" id="jcd-mrefonte-js"></script>
-
-
-</body>
+    <script is:inline src="js/shared/a11y.js" id="jcd-a11y-js"></script>
+    <script is:inline src="js/pages/informatique-2.js"></script>
+    <script is:inline src="js/shared/micons.js" id="jcd-micons-js"></script>
+    <script is:inline src="js/shared/mrefonte.js" id="jcd-mrefonte-js"></script>
+  </body>
 </html>

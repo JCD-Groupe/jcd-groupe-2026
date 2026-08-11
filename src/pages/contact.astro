@@ -1,268 +1,648 @@
 ---
-import Header from '../components/Header.astro';
-import Footer from '../components/Footer.astro';
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
 ---
-<!DOCTYPE html>
+
 <html lang="fr">
-<head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-<meta name="color-scheme" content="dark" />
-<meta name="theme-color" content="#0d0d0d" />
-<link rel="icon" href="favicon.svg" type="image/svg+xml" />
-<meta name="description" content="Contactez JCD Groupe en une seule demande. Sélectionnez un ou plusieurs pôles — Informatique, Service, Développement, Print, Télécom, Formation, Agencement — votre besoin est transmis directement aux bonnes équipes à Metz et Nancy." />
-<link rel="canonical" href="https://www.jcd-groupe.fr/contact.html" />
-<meta property="og:type" content="website" />
-<meta property="og:site_name" content="JCD Groupe" />
-<meta property="og:locale" content="fr_FR" />
-<meta property="og:title" content="Contact · JCD Groupe — Parlons de votre projet" />
-<meta property="og:description" content="Contactez JCD Groupe en une seule demande. Sélectionnez un ou plusieurs pôles — Informatique, Service, Développement, Print, Télécom, Formation, Agencement — votre besoin est transmis directement aux bonnes équipes à Metz et Nancy." />
-<meta property="og:url" content="https://www.jcd-groupe.fr/contact.html" />
-<meta name="twitter:card" content="summary" />
-<title>Contact · JCD Groupe — Parlons de votre projet</title>
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+    />
+    <meta name="color-scheme" content="dark" />
+    <meta name="theme-color" content="#0d0d0d" />
+    <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+    <meta
+      name="description"
+      content="Contactez JCD Groupe en une seule demande. Sélectionnez un ou plusieurs pôles — Informatique, Service, Développement, Print, Télécom, Formation, Agencement — votre besoin est transmis directement aux bonnes équipes à Metz et Nancy."
+    />
+    <link rel="canonical" href="https://www.jcd-groupe.fr/contact.html" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="JCD Groupe" />
+    <meta property="og:locale" content="fr_FR" />
+    <meta
+      property="og:title"
+      content="Contact · JCD Groupe — Parlons de votre projet"
+    />
+    <meta
+      property="og:description"
+      content="Contactez JCD Groupe en une seule demande. Sélectionnez un ou plusieurs pôles — Informatique, Service, Développement, Print, Télécom, Formation, Agencement — votre besoin est transmis directement aux bonnes équipes à Metz et Nancy."
+    />
+    <meta property="og:url" content="https://www.jcd-groupe.fr/contact.html" />
+    <meta name="twitter:card" content="summary" />
+    <title>Contact · JCD Groupe — Parlons de votre projet</title>
 
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Instrument+Serif:ital@0;1&display=swap"
+      rel="stylesheet"
+    />
 
-<link rel="stylesheet" href="css/contact.css">
-<link rel="stylesheet" href="css/global.css">
-<link rel="stylesheet" href="css/contact-overrides.css">
-  <link rel="stylesheet" href="transition.css">
-  <script is:inline src="transition.js"></script>
-<script is:inline src="js/shared/mpolish.js" id="jcd-mpolish-js"></script>
-<script is:inline src="js/shared/touch.js" id="jcd-touch-js"></script>
-<script is:inline src="js/shared/mrefonte-shim.js" id="jcd-mrefonte-shim"></script>
-</head>
-<body>
-<a class="jcd-skip" href="#contenu">Aller au contenu</a>
+    <link rel="stylesheet" href="css/contact.css" />
+    <link rel="stylesheet" href="css/global.css" />
+    <link rel="stylesheet" href="css/contact-overrides.css" />
+    <link rel="stylesheet" href="transition.css" />
+    <script is:inline src="transition.js"></script>
+    <script is:inline src="js/shared/mpolish.js" id="jcd-mpolish-js"></script>
+    <script is:inline src="js/shared/touch.js" id="jcd-touch-js"></script>
+    <script is:inline src="js/shared/mrefonte-shim.js" id="jcd-mrefonte-shim"
+    ></script>
+  </head>
+  <body>
+    <a class="jcd-skip" href="#contenu">Aller au contenu</a>
 
-<!-- ====================================================================
+    <!-- ====================================================================
      NAVBAR v2 — Modal-like
      Logo (g) · capsule centrale {Expertises ▾ · Contact · Carrières}
      · CTA Assistance (d). Bande pleine largeur, fade gauche/droite,
      dropdown "Expertises" avec 7 SVG 3D isométriques colorés.
      ==================================================================== -->
-<Header current="contact" />
+    <Header current="contact" />
 
+    <main id="contenu">
+      <h1 class="visually-hidden">Contact — JCD Groupe</h1>
 
-<main id="contenu">
-<h1 class="visually-hidden">Contact — JCD Groupe</h1>
-
-<section class="q-section" aria-label="Formulaire de contact">
-  <div class="container">
-
-    <form id="contact-form" class="q-shell reveal" novalidate>
-      <div class="q-shell-inner">
-
-        <!-- Barre de progression (3 étapes) -->
-        <div class="q-progress" aria-hidden="true">
-          <div class="q-progress-track"><div class="q-progress-fill" id="q-progress-fill"></div></div>
-          <ol class="q-progress-steps">
-            <li class="q-progress-step is-active" data-pstep="1"><span class="q-progress-num">1</span><span class="q-progress-label">Vos besoins</span></li>
-            <li class="q-progress-step" data-pstep="2"><span class="q-progress-num">2</span><span class="q-progress-label">Coordonnées</span></li>
-          </ol>
-        </div>
-
-        <!-- ÉTAPE 1 — Sélection des pôles -->
-        <section class="q-step" id="q-step-1" aria-labelledby="q-step1-title">
-          <div class="q-intent" role="radiogroup" aria-label="Type de demande">
-            <button type="button" class="q-intent-opt is-selected" data-intent="projet" role="radio" aria-checked="true">Nouveau projet</button>
-            <button type="button" class="q-intent-opt" data-intent="assistance" role="radio" aria-checked="false">Assistance client</button>
-            <span class="q-intent-glider" aria-hidden="true"></span>
-          </div>
-
-          <h2 id="q-step1-title" class="q-step-title" tabindex="-1">Quels pôles souhaitez-vous solliciter&nbsp;?</h2>
-          <p class="q-step-hint">Sélectionnez les pôles concernés, ou passez directement à vos coordonnées. <span class="q-count" id="q-pole-count">Aucun pôle sélectionné</span></p>
-
-          <fieldset class="pole-fieldset">
-            <legend class="visually-hidden">Pôles d'expertise JCD</legend>
-            <div class="pole-grid" id="pole-grid"></div>
-          </fieldset>
-
-          <div class="q-actions">
-            <span aria-hidden="true"></span>
-            <button type="button" class="q-btn q-btn--primary" id="to-step-2">
-              Continuer
-              <span class="q-btn-arrow"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h10M9 4l4 4-4 4"/></svg></span>
-            </button>
-          </div>
-        </section>
-
-        <!-- ÉTAPE 2 — Coordonnées + envoi -->
-        <section class="q-step" id="q-step-2" aria-labelledby="q-step2-title" hidden>
-          <h2 id="q-step2-title" class="q-step-title" tabindex="-1">Vos coordonnées</h2>
-          <p class="q-step-hint">Vous contactez&nbsp;:</p>
-          <div class="q-recap" id="q-recap" aria-live="polite"></div>
-
-          <div class="q-fields">
-            <div class="q-row">
-              <div class="q-field">
-                <label for="f-name">Nom et prénom <span aria-hidden="true">*</span></label>
-                <input id="f-name" name="name" type="text" autocomplete="name" required placeholder="Jean Dupont">
+      <section class="q-section" aria-label="Formulaire de contact">
+        <div class="container">
+          <form id="contact-form" class="q-shell reveal" novalidate>
+            <div class="q-shell-inner">
+              <!-- Barre de progression (3 étapes) -->
+              <div class="q-progress" aria-hidden="true">
+                <div class="q-progress-track">
+                  <div class="q-progress-fill" id="q-progress-fill"></div>
+                </div>
+                <ol class="q-progress-steps">
+                  <li class="q-progress-step is-active" data-pstep="1">
+                    <span class="q-progress-num">1</span><span
+                      class="q-progress-label">Vos besoins</span>
+                  </li>
+                  <li class="q-progress-step" data-pstep="2">
+                    <span class="q-progress-num">2</span><span
+                      class="q-progress-label">Coordonnées</span>
+                  </li>
+                </ol>
               </div>
-              <div class="q-field">
-                <label for="f-company">Société</label>
-                <input id="f-company" name="company" type="text" autocomplete="organization" placeholder="Nom de votre entreprise">
-              </div>
-            </div>
-            <div class="q-row">
-              <div class="q-field">
-                <label for="f-email">Email <span aria-hidden="true">*</span></label>
-                <input id="f-email" name="email" type="email" autocomplete="email" required placeholder="jean.dupont@societe.fr">
-              </div>
-              <div class="q-field">
-                <label for="f-phone">Téléphone</label>
-                <input id="f-phone" name="phone" type="tel" autocomplete="tel" placeholder="06 12 34 56 78">
-              </div>
-            </div>
-            <div class="q-field">
-              <label for="f-message">Votre message <span aria-hidden="true">*</span></label>
-              <textarea id="f-message" name="message" rows="3" required placeholder="Décrivez votre contexte, vos objectifs, vos contraintes…"></textarea>
-            </div>
-          </div>
 
-          <label class="q-rgpd">
-            <input type="checkbox" id="f-consent" required>
-            <span>J'accepte que les informations transmises soient utilisées par JCD Groupe pour traiter ma demande, conformément à la <a href="politique-de-confidentialite.html" target="_blank" rel="noopener">politique de confidentialité</a>. <span aria-hidden="true">*</span></span>
-          </label>
+              <!-- ÉTAPE 1 — Sélection des pôles -->
+              <section
+                class="q-step"
+                id="q-step-1"
+                aria-labelledby="q-step1-title"
+              >
+                <div
+                  class="q-intent"
+                  role="radiogroup"
+                  aria-label="Type de demande"
+                >
+                  <button
+                    type="button"
+                    class="q-intent-opt is-selected"
+                    data-intent="projet"
+                    role="radio"
+                    aria-checked="true">Nouveau projet</button
+                  >
+                  <button
+                    type="button"
+                    class="q-intent-opt"
+                    data-intent="assistance"
+                    role="radio"
+                    aria-checked="false">Assistance client</button
+                  >
+                  <span class="q-intent-glider" aria-hidden="true"></span>
+                </div>
 
-          <p class="q-error" id="q-error" role="alert" hidden></p>
+                <h2 id="q-step1-title" class="q-step-title" tabindex="-1">
+                  Quels pôles souhaitez-vous solliciter&nbsp;?
+                </h2>
+                <p class="q-step-hint">
+                  Sélectionnez les pôles concernés, ou passez directement à vos
+                  coordonnées. <span class="q-count" id="q-pole-count"
+                    >Aucun pôle sélectionné</span>
+                </p>
 
-          <div class="q-actions">
-            <button type="button" class="q-btn q-btn--ghost" data-back="1">Retour</button>
-            <button type="submit" class="q-btn q-btn--primary q-btn--send" id="q-submit">
-              Recevoir une réponse de nos experts
-              <span class="q-btn-arrow"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h10M9 4l4 4-4 4"/></svg></span>
-            </button>
-          </div>
-        </section>
+                <fieldset class="pole-fieldset">
+                  <legend class="visually-hidden">Pôles d'expertise JCD</legend>
+                  <div class="pole-grid" id="pole-grid"></div>
+                </fieldset>
 
-        <!-- Champs cachés Web3Forms — REMPLACER la clé ci-dessous par votre
+                <div class="q-actions">
+                  <span aria-hidden="true"></span>
+                  <button
+                    type="button"
+                    class="q-btn q-btn--primary"
+                    id="to-step-2"
+                  >
+                    Continuer
+                    <span class="q-btn-arrow"
+                      ><svg
+                        viewBox="0 0 16 16"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="1.7"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        ><path d="M3 8h10M9 4l4 4-4 4"></path></svg
+                      ></span
+                    >
+                  </button>
+                </div>
+              </section>
+
+              <!-- ÉTAPE 2 — Coordonnées + envoi -->
+              <section
+                class="q-step"
+                id="q-step-2"
+                aria-labelledby="q-step2-title"
+                hidden
+              >
+                <h2 id="q-step2-title" class="q-step-title" tabindex="-1">
+                  Vos coordonnées
+                </h2>
+                <p class="q-step-hint">Vous contactez&nbsp;:</p>
+                <div class="q-recap" id="q-recap" aria-live="polite"></div>
+
+                <div class="q-fields">
+                  <div class="q-row">
+                    <div class="q-field">
+                      <label for="f-name"
+                        >Nom et prénom <span aria-hidden="true">*</span></label
+                      >
+                      <input
+                        id="f-name"
+                        name="name"
+                        type="text"
+                        autocomplete="name"
+                        required
+                        placeholder="Jean Dupont"
+                      />
+                    </div>
+                    <div class="q-field">
+                      <label for="f-company">Société</label>
+                      <input
+                        id="f-company"
+                        name="company"
+                        type="text"
+                        autocomplete="organization"
+                        placeholder="Nom de votre entreprise"
+                      />
+                    </div>
+                  </div>
+                  <div class="q-row">
+                    <div class="q-field">
+                      <label for="f-email"
+                        >Email <span aria-hidden="true">*</span></label
+                      >
+                      <input
+                        id="f-email"
+                        name="email"
+                        type="email"
+                        autocomplete="email"
+                        required
+                        placeholder="jean.dupont@societe.fr"
+                      />
+                    </div>
+                    <div class="q-field">
+                      <label for="f-phone">Téléphone</label>
+                      <input
+                        id="f-phone"
+                        name="phone"
+                        type="tel"
+                        autocomplete="tel"
+                        placeholder="06 12 34 56 78"
+                      />
+                    </div>
+                  </div>
+                  <div class="q-field">
+                    <label for="f-message"
+                      >Votre message <span aria-hidden="true">*</span></label
+                    >
+                    <textarea
+                      id="f-message"
+                      name="message"
+                      rows="3"
+                      required
+                      placeholder="Décrivez votre contexte, vos objectifs, vos contraintes…"
+                    ></textarea>
+                  </div>
+                </div>
+
+                <label class="q-rgpd">
+                  <input type="checkbox" id="f-consent" required />
+                  <span
+                    >J'accepte que les informations transmises soient utilisées
+                    par JCD Groupe pour traiter ma demande, conformément à la <a
+                      href="politique-de-confidentialite.html"
+                      target="_blank"
+                      rel="noopener">politique de confidentialité</a
+                    >. <span aria-hidden="true">*</span></span
+                  >
+                </label>
+
+                <p class="q-error" id="q-error" role="alert" hidden></p>
+
+                <div class="q-actions">
+                  <button type="button" class="q-btn q-btn--ghost" data-back="1"
+                    >Retour</button
+                  >
+                  <button
+                    type="submit"
+                    class="q-btn q-btn--primary q-btn--send"
+                    id="q-submit"
+                  >
+                    Recevoir une réponse de nos experts
+                    <span class="q-btn-arrow"
+                      ><svg
+                        viewBox="0 0 16 16"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="1.7"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        ><path d="M3 8h10M9 4l4 4-4 4"></path></svg
+                      ></span
+                    >
+                  </button>
+                </div>
+              </section>
+
+              <!-- Champs cachés Web3Forms — REMPLACER la clé ci-dessous par votre
              clé d'accès gratuite (https://web3forms.com → email destinataire
              = contact@jcd-groupe.fr). Tant que la clé n'est pas renseignée,
              l'envoi échoue volontairement (message d'erreur affiché). -->
-        <input type="hidden" name="access_key" id="f-access-key" value="VOTRE_CLE_WEB3FORMS_ICI">
-        <input type="hidden" name="subject" id="f-subject" value="Nouvelle demande de contact — JCD Groupe">
-        <input type="hidden" name="from_name" value="Site JCD Groupe">
-        <input type="checkbox" name="botcheck" id="f-botcheck" class="visually-hidden" tabindex="-1" autocomplete="off" aria-hidden="true">
+              <input
+                type="hidden"
+                name="access_key"
+                id="f-access-key"
+                value="VOTRE_CLE_WEB3FORMS_ICI"
+              />
+              <input
+                type="hidden"
+                name="subject"
+                id="f-subject"
+                value="Nouvelle demande de contact — JCD Groupe"
+              />
+              <input type="hidden" name="from_name" value="Site JCD Groupe" />
+              <input
+                type="checkbox"
+                name="botcheck"
+                id="f-botcheck"
+                class="visually-hidden"
+                tabindex="-1"
+                autocomplete="off"
+                aria-hidden="true"
+              />
+            </div>
+          </form>
 
-      </div>
-    </form>
+          <!-- Écran de confirmation (affiché après envoi réussi) -->
+          <div
+            class="q-success"
+            id="q-success"
+            hidden
+            role="status"
+            aria-live="polite"
+          >
+            <span class="q-success-mark" aria-hidden="true">
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"><path d="M20 6 9 17l-5-5"></path></svg
+              >
+            </span>
+            <h2>Votre demande est partie.</h2>
+            <p>
+              Merci&nbsp;! Nos équipes <strong id="q-success-poles"
+                >concernées</strong
+              > reviennent vers vous sous 24&nbsp;h ouvrées. Pour une urgence, appelez
+              le <a href="tel:+33387184920">03 87 18 49 20</a>.
+            </p>
+            <div class="q-recap" id="q-success-recap" aria-hidden="true"></div>
+            <div class="q-actions" style="justify-content: center;">
+              <a href="index.html" class="q-btn q-btn--ghost"
+                >Retour à l'accueil</a
+              >
+            </div>
+          </div>
 
-    <!-- Écran de confirmation (affiché après envoi réussi) -->
-    <div class="q-success" id="q-success" hidden role="status" aria-live="polite">
-      <span class="q-success-mark" aria-hidden="true">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
-      </span>
-      <h2>Votre demande est partie.</h2>
-      <p>Merci&nbsp;! Nos équipes <strong id="q-success-poles">concernées</strong> reviennent vers vous sous 24&nbsp;h ouvrées. Pour une urgence, appelez le <a href="tel:+33387184920">03 87 18 49 20</a>.</p>
-      <div class="q-recap" id="q-success-recap" aria-hidden="true"></div>
-      <div class="q-actions" style="justify-content: center;">
-        <a href="index.html" class="q-btn q-btn--ghost">Retour à l'accueil</a>
+          <noscript>
+            <p
+              style="max-width: 820px; margin: 24px auto; color: var(--text-2); text-align: center; line-height: 1.6;"
+            >
+              Le formulaire interactif nécessite JavaScript. Vous pouvez nous
+              joindre directement au
+              <a href="tel:+33387184920" style="color: var(--text-1);"
+                >03 87 18 49 20</a
+              > ou par email à
+              <a
+                href="mailto:contact@jcd-groupe.fr"
+                style="color: var(--text-1);">contact@jcd-groupe.fr</a
+              >.
+            </p>
+          </noscript>
+        </div>
+      </section>
+    </main>
+
+    <Footer />
+
+    <script is:inline src="js/pages/contact-1.js"></script>
+
+    <script is:inline src="js/pages/contact-2.js"></script>
+    <script is:inline src="js/shared/menu-frost.js"></script>
+    <!-- jcd-mobile-nav (injected) -->
+    <button
+      class="jcd-burger"
+      id="jcdBurger"
+      type="button"
+      aria-label="Ouvrir le menu"
+      aria-expanded="false"
+      aria-controls="jcdMnav"
+    >
+      <span class="jcd-burger__box" aria-hidden="true"
+        ><i></i><i></i><i></i></span
+      >
+    </button>
+    <div
+      class="jcd-mnav"
+      id="jcdMnav"
+      role="dialog"
+      aria-modal="true"
+      aria-label="Menu de navigation"
+      aria-hidden="true"
+    >
+      <div class="jcd-mnav__scroll">
+        <div class="jcd-mnav__inner">
+          <p
+            class="jcd-mnav__eyebrow jcd-mnav__reveal"
+            style="transition-delay:.04s"
+          >
+            Expertises
+          </p>
+
+          <div class="jcd-mnav__reveal" style="transition-delay:.07s">
+            <div class="jcd-mnav__item" style="--mnav-c:#2E72BA">
+              <a class="jcd-mnav__link" href="informatique.html"
+                ><span class="jcd-mnav__dot"></span><span
+                  class="jcd-mnav__label">Informatique</span
+                ></a
+              >
+              <button
+                class="jcd-acc__toggle"
+                type="button"
+                aria-expanded="false"
+                aria-controls="jcdAccInfo"
+                aria-label="Afficher les sous-pages Informatique"
+              >
+                <svg
+                  viewBox="0 0 14 14"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.6"
+                  stroke-linecap="round"><path d="M7 2v10M2 7h10"></path></svg
+                >
+              </button>
+            </div>
+            <div class="jcd-acc__panel" id="jcdAccInfo">
+              <a class="jcd-mnav__sub" href="info-cloud.html">Cloud Microsoft</a
+              >
+              <a class="jcd-mnav__sub" href="info-collaboratif.html"
+                >Solutions collaboratives &amp; audiovisuelles</a
+              >
+              <a class="jcd-mnav__sub" href="info-reseaux.html"
+                >Architectures syst&egrave;mes &amp; r&eacute;seaux</a
+              >
+              <a class="jcd-mnav__sub" href="info-integration.html"
+                >Int&eacute;gration &amp; Support PC</a
+              >
+            </div>
+          </div>
+
+          <a
+            class="jcd-mnav__item jcd-mnav__reveal"
+            style="--mnav-c:#E51D29;transition-delay:.10s"
+            href="service.html"
+            ><span class="jcd-mnav__dot"></span><span class="jcd-mnav__label"
+              >Service</span
+            ></a
+          >
+          <a
+            class="jcd-mnav__item jcd-mnav__reveal"
+            style="--mnav-c:#F9D605;transition-delay:.13s"
+            href="developpement.html"
+            ><span class="jcd-mnav__dot"></span><span class="jcd-mnav__label"
+              >D&eacute;veloppement</span
+            ></a
+          >
+          <a
+            class="jcd-mnav__item jcd-mnav__reveal"
+            style="--mnav-c:#F3941D;transition-delay:.16s"
+            href="print.html"
+            ><span class="jcd-mnav__dot"></span><span class="jcd-mnav__label"
+              >Print</span
+            ></a
+          >
+          <a
+            class="jcd-mnav__item jcd-mnav__reveal"
+            style="--mnav-c:#B063AC;transition-delay:.19s"
+            href="telecom.html"
+            ><span class="jcd-mnav__dot"></span><span class="jcd-mnav__label"
+              >T&eacute;l&eacute;com</span
+            ></a
+          >
+          <div class="jcd-mnav__reveal" style="transition-delay:.22s">
+            <div class="jcd-mnav__item" style="--mnav-c:#8EC041">
+              <a class="jcd-mnav__link" href="formation.html"
+                ><span class="jcd-mnav__dot"></span><span
+                  class="jcd-mnav__label">Formation</span
+                ></a
+              >
+              <button
+                class="jcd-acc__toggle"
+                type="button"
+                aria-expanded="false"
+                aria-controls="jcdAccForm"
+                aria-label="Afficher les catégories de formation"
+              >
+                <svg
+                  viewBox="0 0 14 14"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.6"
+                  stroke-linecap="round"><path d="M7 2v10M2 7h10"></path></svg
+                >
+              </button>
+            </div>
+            <div class="jcd-acc__panel" id="jcdAccForm">
+              <a class="jcd-mnav__sub" href="formation-bureautique.html"
+                >Bureautique</a
+              >
+              <a
+                class="jcd-mnav__sub"
+                href="formation-intelligence-artificielle.html"
+                >Intelligence artificielle</a
+              >
+              <a class="jcd-mnav__sub" href="formation-informatique.html"
+                >Informatique</a
+              >
+              <a
+                class="jcd-mnav__sub"
+                href="formation-communication-marketing.html"
+                >Communication - Marketing</a
+              >
+              <a class="jcd-mnav__sub" href="formation-management.html"
+                >Management</a
+              >
+              <a
+                class="jcd-mnav__sub"
+                href="formation-commerce-relation-client.html"
+                >Commerce - Relation client</a
+              >
+              <a
+                class="jcd-mnav__sub"
+                href="formation-comptabilite-gestion.html"
+                >Comptabilit&eacute; - Gestion</a
+              >
+              <a class="jcd-mnav__sub" href="formation-ressources-humaines.html"
+                >Ressources humaines</a
+              >
+              <a
+                class="jcd-mnav__sub"
+                href="formation-developpement-personnel.html"
+                >D&eacute;veloppement personnel</a
+              >
+              <a class="jcd-mnav__sub" href="formation-graphisme-pao.html"
+                >Graphisme - PAO</a
+              >
+              <a
+                class="jcd-mnav__sub"
+                href="formation-administratif-secretariat-accueil.html"
+                >Administratif - Secr&eacute;tariat</a
+              >
+              <a class="jcd-mnav__sub" href="formation-securite.html"
+                >S&eacute;curit&eacute;</a
+              >
+              <a class="jcd-mnav__sub" href="formation-langues.html">Langues</a>
+            </div>
+          </div>
+          <a
+            class="jcd-mnav__item jcd-mnav__reveal"
+            style="--mnav-c:#A78D75;transition-delay:.25s"
+            href="agencement.html"
+            ><span class="jcd-mnav__dot"></span><span class="jcd-mnav__label"
+              >Agencement</span
+            ></a
+          >
+
+          <p
+            class="jcd-mnav__eyebrow jcd-mnav__sec2 jcd-mnav__reveal"
+            style="transition-delay:.30s"
+          >
+            D&eacute;couvrir
+          </p>
+          <a
+            class="jcd-mnav__item jcd-mnav__reveal"
+            style="--mnav-c:#9a9a9a;transition-delay:.33s"
+            href="assistance.html"
+            ><span class="jcd-mnav__dot"></span><span
+              class="jcd-mnav__label"
+              style="font-size:19px">Assistance</span
+            ></a
+          >
+          <a
+            class="jcd-mnav__item jcd-mnav__reveal"
+            style="--mnav-c:#9a9a9a;transition-delay:.36s"
+            href="carrieres.html"
+            ><span class="jcd-mnav__dot"></span><span
+              class="jcd-mnav__label"
+              style="font-size:19px">Carri&egrave;res</span
+            ></a
+          >
+
+          <div
+            class="jcd-mnav__cta jcd-mnav__reveal"
+            style="transition-delay:.40s"
+          >
+            <a class="jcd-mnav__btn jcd-mnav__btn--primary" href="contact.html"
+              >Contacter un expert
+              <span class="jcd-mnav__btn-ic"
+                ><svg
+                  viewBox="0 0 16 16"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.7"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  ><path d="M3 8h10M9 4l4 4-4 4"></path></svg
+                ></span
+              ></a
+            >
+            <a
+              class="jcd-mnav__btn jcd-mnav__btn--ghost"
+              href="tel:+33387184920"
+              >03 87 18 49 20
+              <span class="jcd-mnav__btn-ic"
+                ><svg
+                  viewBox="0 0 18 18"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.5"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  ><path
+                    d="M2.5 3.5a1 1 0 011-1h2.4a1 1 0 01.95.68l.86 2.4a1 1 0 01-.24 1l-1.2 1.2a11 11 0 004.6 4.6l1.2-1.2a1 1 0 011-.24l2.4.86a1 1 0 01.68.95V15a1 1 0 01-1 1A13.5 13.5 0 012.5 3.5z"
+                  ></path></svg
+                ></span
+              ></a
+            >
+          </div>
+        </div>
       </div>
     </div>
-
-    <noscript>
-      <p style="max-width: 820px; margin: 24px auto; color: var(--text-2); text-align: center; line-height: 1.6;">
-        Le formulaire interactif nécessite JavaScript. Vous pouvez nous joindre directement au
-        <a href="tel:+33387184920" style="color: var(--text-1);">03 87 18 49 20</a> ou par email à
-        <a href="mailto:contact@jcd-groupe.fr" style="color: var(--text-1);">contact@jcd-groupe.fr</a>.
-      </p>
-    </noscript>
-
-  </div>
-</section>
-
-</main>
-
-<Footer />
-
-
-<script is:inline src="js/pages/contact-1.js"></script>
-
-<script is:inline src="js/pages/contact-2.js"></script>
-<script is:inline src="js/shared/menu-frost.js"></script>
-<!-- jcd-mobile-nav (injected) -->
-<button class="jcd-burger" id="jcdBurger" type="button" aria-label="Ouvrir le menu" aria-expanded="false" aria-controls="jcdMnav">
-  <span class="jcd-burger__box" aria-hidden="true"><i></i><i></i><i></i></span>
-</button>
-<div class="jcd-mnav" id="jcdMnav" role="dialog" aria-modal="true" aria-label="Menu de navigation" aria-hidden="true">
-  <div class="jcd-mnav__scroll">
-    <div class="jcd-mnav__inner">
-      <p class="jcd-mnav__eyebrow jcd-mnav__reveal" style="transition-delay:.04s">Expertises</p>
-
-      <div class="jcd-mnav__reveal" style="transition-delay:.07s">
-        <div class="jcd-mnav__item" style="--mnav-c:#2E72BA">
-          <a class="jcd-mnav__link" href="informatique.html"><span class="jcd-mnav__dot"></span><span class="jcd-mnav__label">Informatique</span></a>
-          <button class="jcd-acc__toggle" type="button" aria-expanded="false" aria-controls="jcdAccInfo" aria-label="Afficher les sous-pages Informatique">
-            <svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M7 2v10M2 7h10"/></svg>
-          </button>
-        </div>
-        <div class="jcd-acc__panel" id="jcdAccInfo">
-          <a class="jcd-mnav__sub" href="info-cloud.html">Cloud Microsoft</a>
-          <a class="jcd-mnav__sub" href="info-collaboratif.html">Solutions collaboratives &amp; audiovisuelles</a>
-          <a class="jcd-mnav__sub" href="info-reseaux.html">Architectures syst&egrave;mes &amp; r&eacute;seaux</a>
-          <a class="jcd-mnav__sub" href="info-integration.html">Int&eacute;gration &amp; Support PC</a>
-        </div>
-      </div>
-
-      <a class="jcd-mnav__item jcd-mnav__reveal" style="--mnav-c:#E51D29;transition-delay:.10s" href="service.html"><span class="jcd-mnav__dot"></span><span class="jcd-mnav__label">Service</span></a>
-      <a class="jcd-mnav__item jcd-mnav__reveal" style="--mnav-c:#F9D605;transition-delay:.13s" href="developpement.html"><span class="jcd-mnav__dot"></span><span class="jcd-mnav__label">D&eacute;veloppement</span></a>
-      <a class="jcd-mnav__item jcd-mnav__reveal" style="--mnav-c:#F3941D;transition-delay:.16s" href="print.html"><span class="jcd-mnav__dot"></span><span class="jcd-mnav__label">Print</span></a>
-      <a class="jcd-mnav__item jcd-mnav__reveal" style="--mnav-c:#B063AC;transition-delay:.19s" href="telecom.html"><span class="jcd-mnav__dot"></span><span class="jcd-mnav__label">T&eacute;l&eacute;com</span></a>
-      <div class="jcd-mnav__reveal" style="transition-delay:.22s">
-        <div class="jcd-mnav__item" style="--mnav-c:#8EC041">
-          <a class="jcd-mnav__link" href="formation.html"><span class="jcd-mnav__dot"></span><span class="jcd-mnav__label">Formation</span></a>
-          <button class="jcd-acc__toggle" type="button" aria-expanded="false" aria-controls="jcdAccForm" aria-label="Afficher les cat&eacute;gories de formation">
-            <svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M7 2v10M2 7h10"/></svg>
-          </button>
-        </div>
-        <div class="jcd-acc__panel" id="jcdAccForm">
-          <a class="jcd-mnav__sub" href="formation-bureautique.html">Bureautique</a>
-          <a class="jcd-mnav__sub" href="formation-intelligence-artificielle.html">Intelligence artificielle</a>
-          <a class="jcd-mnav__sub" href="formation-informatique.html">Informatique</a>
-          <a class="jcd-mnav__sub" href="formation-communication-marketing.html">Communication - Marketing</a>
-          <a class="jcd-mnav__sub" href="formation-management.html">Management</a>
-          <a class="jcd-mnav__sub" href="formation-commerce-relation-client.html">Commerce - Relation client</a>
-          <a class="jcd-mnav__sub" href="formation-comptabilite-gestion.html">Comptabilit&eacute; - Gestion</a>
-          <a class="jcd-mnav__sub" href="formation-ressources-humaines.html">Ressources humaines</a>
-          <a class="jcd-mnav__sub" href="formation-developpement-personnel.html">D&eacute;veloppement personnel</a>
-          <a class="jcd-mnav__sub" href="formation-graphisme-pao.html">Graphisme - PAO</a>
-          <a class="jcd-mnav__sub" href="formation-administratif-secretariat-accueil.html">Administratif - Secr&eacute;tariat</a>
-          <a class="jcd-mnav__sub" href="formation-securite.html">S&eacute;curit&eacute;</a>
-          <a class="jcd-mnav__sub" href="formation-langues.html">Langues</a>
-        </div>
-      </div>
-      <a class="jcd-mnav__item jcd-mnav__reveal" style="--mnav-c:#A78D75;transition-delay:.25s" href="agencement.html"><span class="jcd-mnav__dot"></span><span class="jcd-mnav__label">Agencement</span></a>
-
-      <p class="jcd-mnav__eyebrow jcd-mnav__sec2 jcd-mnav__reveal" style="transition-delay:.30s">D&eacute;couvrir</p>
-      <a class="jcd-mnav__item jcd-mnav__reveal" style="--mnav-c:#9a9a9a;transition-delay:.33s" href="assistance.html"><span class="jcd-mnav__dot"></span><span class="jcd-mnav__label" style="font-size:19px">Assistance</span></a>
-      <a class="jcd-mnav__item jcd-mnav__reveal" style="--mnav-c:#9a9a9a;transition-delay:.36s" href="carrieres.html"><span class="jcd-mnav__dot"></span><span class="jcd-mnav__label" style="font-size:19px">Carri&egrave;res</span></a>
-
-      <div class="jcd-mnav__cta jcd-mnav__reveal" style="transition-delay:.40s">
-        <a class="jcd-mnav__btn jcd-mnav__btn--primary" href="contact.html">Contacter un expert
-          <span class="jcd-mnav__btn-ic"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h10M9 4l4 4-4 4"/></svg></span></a>
-        <a class="jcd-mnav__btn jcd-mnav__btn--ghost" href="tel:+33387184920">03 87 18 49 20
-          <span class="jcd-mnav__btn-ic"><svg viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2.5 3.5a1 1 0 011-1h2.4a1 1 0 01.95.68l.86 2.4a1 1 0 01-.24 1l-1.2 1.2a11 11 0 004.6 4.6l1.2-1.2a1 1 0 011-.24l2.4.86a1 1 0 01.68.95V15a1 1 0 01-1 1A13.5 13.5 0 012.5 3.5z"/></svg></span></a>
-      </div>
+    <script is:inline src="js/shared/mobile-nav.js"></script>
+    <!-- jcd-a11y (Lot 5) -->
+    <div class="jcd-fab-wrap" id="jcd-fab">
+      <button
+        class="jcd-fab jcd-fab--top"
+        id="jcdToTop"
+        type="button"
+        aria-label="Remonter en haut"
+      >
+        <svg
+          viewBox="0 0 20 20"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="1.8"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          aria-hidden="true"><path d="M10 16V5M5 10l5-5 5 5"></path></svg
+        >
+      </button>
+      <a
+        class="jcd-fab jcd-fab--contact"
+        id="jcdFabContact"
+        href="contact.html"
+        aria-label="Nous contacter"
+      >
+        <svg
+          viewBox="0 0 20 20"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="1.6"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          aria-hidden="true"
+          ><rect x="2.5" y="4.5" width="15" height="11" rx="2.3"></rect><path
+            d="M3 6.7 L10 10.7 L17 6.7"></path></svg
+        >
+      </a>
     </div>
-  </div>
-</div>
-<script is:inline src="js/shared/mobile-nav.js"></script>
-<!-- jcd-a11y (Lot 5) -->
-<div class="jcd-fab-wrap" id="jcd-fab">
-  <button class="jcd-fab jcd-fab--top" id="jcdToTop" type="button" aria-label="Remonter en haut">
-    <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 16V5M5 10l5-5 5 5"/></svg>
-  </button>
-  <a class="jcd-fab jcd-fab--contact" id="jcdFabContact" href="contact.html" aria-label="Nous contacter">
-    <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2.5" y="4.5" width="15" height="11" rx="2.3"/><path d="M3 6.7 L10 10.7 L17 6.7"/></svg>
-  </a>
-</div>
-<script is:inline src="js/shared/a11y.js" id="jcd-a11y-js"></script>
-<script is:inline src="js/shared/micons.js" id="jcd-micons-js"></script>
-<script is:inline src="js/shared/mrefonte.js" id="jcd-mrefonte-js"></script>
-
-
-</body>
+    <script is:inline src="js/shared/a11y.js" id="jcd-a11y-js"></script>
+    <script is:inline src="js/shared/micons.js" id="jcd-micons-js"></script>
+    <script is:inline src="js/shared/mrefonte.js" id="jcd-mrefonte-js"></script>
+  </body>
 </html>

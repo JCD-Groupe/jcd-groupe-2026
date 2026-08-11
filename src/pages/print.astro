@@ -1,589 +1,1174 @@
 ---
-import Header from '../components/Header.astro';
-import Footer from '../components/Footer.astro';
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
 ---
-<!DOCTYPE html>
+
 <html lang="fr">
-<head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-<meta name="color-scheme" content="dark" />
-<meta name="theme-color" content="#0d0d0d" />
-<link rel="icon" href="favicon.svg" type="image/svg+xml" />
-<meta name="description" content="JCD Groupe · Pôle Print. Fourniture, maintenance et gestion de vos solutions d'impression. Expertise terrain en Grand Est. Certifié PAPERCUT, HP, Toshiba." />
-<link rel="canonical" href="https://www.jcd-groupe.fr/print.html" />
-<meta property="og:type" content="website" />
-<meta property="og:site_name" content="JCD Groupe" />
-<meta property="og:locale" content="fr_FR" />
-<meta property="og:title" content="Print · Impression &amp; gestion documentaire · JCD Groupe" />
-<meta property="og:description" content="JCD Groupe · Pôle Print. Fourniture, maintenance et gestion de vos solutions d'impression. Expertise terrain en Grand Est. Certifié PAPERCUT, HP, Toshiba." />
-<meta property="og:url" content="https://www.jcd-groupe.fr/print.html" />
-<meta name="twitter:card" content="summary" />
-<title>Print · Impression &amp; gestion documentaire · JCD Groupe</title>
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+    />
+    <meta name="color-scheme" content="dark" />
+    <meta name="theme-color" content="#0d0d0d" />
+    <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+    <meta
+      name="description"
+      content="JCD Groupe · Pôle Print. Fourniture, maintenance et gestion de vos solutions d'impression. Expertise terrain en Grand Est. Certifié PAPERCUT, HP, Toshiba."
+    />
+    <link rel="canonical" href="https://www.jcd-groupe.fr/print.html" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="JCD Groupe" />
+    <meta property="og:locale" content="fr_FR" />
+    <meta
+      property="og:title"
+      content="Print · Impression & gestion documentaire · JCD Groupe"
+    />
+    <meta
+      property="og:description"
+      content="JCD Groupe · Pôle Print. Fourniture, maintenance et gestion de vos solutions d'impression. Expertise terrain en Grand Est. Certifié PAPERCUT, HP, Toshiba."
+    />
+    <meta property="og:url" content="https://www.jcd-groupe.fr/print.html" />
+    <meta name="twitter:card" content="summary" />
+    <title>Print · Impression &amp; gestion documentaire · JCD Groupe</title>
 
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Instrument+Serif:ital@0;1&display=swap"
+      rel="stylesheet"
+    />
 
-<link rel="stylesheet" href="css/print.css">
-<link rel="stylesheet" href="css/global.css">
-<link rel="stylesheet" href="css/print-overrides.css">
-  <link rel="stylesheet" href="transition.css">
-  <script is:inline src="transition.js"></script>
-<script is:inline src="js/shared/xpcompact.js" id="jcd-xpcompact-js"></script>
-<script is:inline src="js/shared/touch.js" id="jcd-touch-js"></script>
-<script is:inline src="js/shared/mrefonte-shim.js" id="jcd-mrefonte-shim"></script>
-</head>
-<body>
-<a class="jcd-skip" href="#contenu">Aller au contenu</a>
+    <link rel="stylesheet" href="css/print.css" />
+    <link rel="stylesheet" href="css/global.css" />
+    <link rel="stylesheet" href="css/print-overrides.css" />
+    <link rel="stylesheet" href="transition.css" />
+    <script is:inline src="transition.js"></script>
+    <script is:inline src="js/shared/xpcompact.js" id="jcd-xpcompact-js"
+    ></script>
+    <script is:inline src="js/shared/touch.js" id="jcd-touch-js"></script>
+    <script is:inline src="js/shared/mrefonte-shim.js" id="jcd-mrefonte-shim"
+    ></script>
+  </head>
+  <body>
+    <a class="jcd-skip" href="#contenu">Aller au contenu</a>
 
-<!-- ====================================================================
+    <!-- ====================================================================
      NAVBAR v2 — Modal-like
      Logo (g) · capsule centrale {Expertises ▾ · Contact · Carrières}
      · CTA Assistance (d). Bande pleine largeur, fade gauche/droite,
      dropdown "Expertises" avec 7 SVG 3D isométriques colorés.
      ==================================================================== -->
-<Header />
+    <Header />
 
-
-<main id="contenu">
-
-<div class="hero-pin-zone">
-
-<!-- ================================
+    <main id="contenu">
+      <div class="hero-pin-zone">
+        <!-- ================================
      HERO — Mesh WebGL fluide + texture pôle (pattern universel)
      ================================ -->
-<section class="print-hero" aria-labelledby="print-hero-title">
+        <section class="print-hero" aria-labelledby="print-hero-title">
+          <!-- Couche 0 : fallback CSS si WebGL indisponible / fade-in -->
+          <div class="hero-mesh-fallback" aria-hidden="true"></div>
 
-  <!-- Couche 0 : fallback CSS si WebGL indisponible / fade-in -->
-  <div class="hero-mesh-fallback" aria-hidden="true"></div>
+          <!-- Couche 1 : canvas WebGL animé (mesh gradient fluide) -->
+          <canvas class="hero-mesh" id="heroMesh" aria-hidden="true"></canvas>
 
-  <!-- Couche 1 : canvas WebGL animé (mesh gradient fluide) -->
-  <canvas class="hero-mesh" id="heroMesh" aria-hidden="true"></canvas>
+          <!-- Couche 2 : texture pôle — print = halftone -->
+          <div class="hero-texture hero-texture--paper" aria-hidden="true">
+          </div>
 
-  <!-- Couche 2 : texture pôle — print = halftone -->
-  <div class="hero-texture hero-texture--paper" aria-hidden="true"></div>
+          <!-- Couche 3 : grain léger -->
+          <div class="hero-grain" aria-hidden="true"></div>
 
-  <!-- Couche 3 : grain léger -->
-  <div class="hero-grain" aria-hidden="true"></div>
+          <div class="container">
+            <h1 id="print-hero-title" class="hero-title reveal delay-1">
+              L'<span class="accent-grad">impression</span> au service de votre productivité.
+            </h1>
 
-  <div class="container">
-    <h1 id="print-hero-title" class="hero-title reveal delay-1">
-      L'<span class="accent-grad">impression</span> au service de votre productivité.
-    </h1>
+            <p class="hero-sub reveal delay-2">
+              Photocopieurs, traceurs, codes-barres et gestion
+              documentaire&nbsp;: un interlocuteur dédié, une équipe terrain.
+            </p>
 
-    <p class="hero-sub reveal delay-2">
-      Photocopieurs, traceurs, codes-barres et gestion documentaire&nbsp;: un interlocuteur dédié, une équipe terrain.
-    </p>
+            <div class="hero-actions reveal delay-3">
+              <a href="contact.html?pole=print" class="btn-cta btn-cta--ghost">
+                Demander un devis
+                <span class="btn-cta-arrow"
+                  ><svg
+                    viewBox="0 0 16 16"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="1.6"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    ><path d="M3 8h10M9 4l4 4-4 4"></path></svg
+                  ></span
+                >
+              </a>
+            </div>
+          </div>
+        </section>
 
-    <div class="hero-actions reveal delay-3">
-      <a href="contact.html?pole=print" class="btn-cta btn-cta--ghost">
-        Demander un devis
-        <span class="btn-cta-arrow"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h10M9 4l4 4-4 4"/></svg></span>
-      </a>
-    </div>
-  </div>
-</section>
-
-
-<!-- ================================
+        <!-- ================================
      MANIFESTO — Paper sheet inversion
      ================================ -->
-<section class="manifesto" aria-labelledby="manifesto-title">
-  <div class="paper-sheet">
-    <div class="container">
+        <section class="manifesto" aria-labelledby="manifesto-title">
+          <div class="paper-sheet">
+            <div class="container">
+              <header class="paper-header">
+                <div class="paper-header-left">
+                  <span class="paper-mark-num">N° 01</span>
+                  <span class="paper-header-rule" aria-hidden="true"></span>
+                  <span>Pôle Print &middot; Manifeste</span>
+                </div>
+                <span>JCD Groupe &middot; Édition 04 / 2026</span>
+              </header>
 
-      <header class="paper-header">
-        <div class="paper-header-left">
-          <span class="paper-mark-num">N° 01</span>
-          <span class="paper-header-rule" aria-hidden="true"></span>
-          <span>Pôle Print &middot; Manifeste</span>
-        </div>
-        <span>JCD Groupe &middot; Édition 04 / 2026</span>
-      </header>
+              <blockquote class="manifesto-quote reveal" id="manifesto-title">
+                <em>Imprimer,</em> ce n'est pas <em>livrer une machine</em>.
+                C'est tenir une chaîne complète, du <span class="accent"
+                  >premier audit</span
+                > à la dernière feuille. <span class="ink-muted"
+                  >Sans intermédiaire, sans surprise, sans dépendance.</span
+                >
+              </blockquote>
 
-      <blockquote class="manifesto-quote reveal" id="manifesto-title">
-        <em>Imprimer,</em> ce n'est pas <em>livrer une machine</em>. C'est tenir une chaîne complète, du <span class="accent">premier audit</span> à la dernière feuille. <span class="ink-muted">Sans intermédiaire, sans surprise, sans dépendance.</span>
-      </blockquote>
-
-      <div class="manifesto-pull reveal delay-2">
-        <div class="manifesto-sig">
-          <div class="manifesto-sig-mark">
-            <span>L'équipe Print</span>
-            <span class="manifesto-sig-rule" aria-hidden="true"></span>
+              <div class="manifesto-pull reveal delay-2">
+                <div class="manifesto-sig">
+                  <div class="manifesto-sig-mark">
+                    <span>L'équipe Print</span>
+                    <span class="manifesto-sig-rule" aria-hidden="true"></span>
+                  </div>
+                  <span class="manifesto-sig-name">JCD Groupe</span>
+                </div>
+              </div>
+            </div>
           </div>
-          <span class="manifesto-sig-name">JCD Groupe</span>
-        </div>
-      </div>
+        </section>
+      </div><!-- /hero-pin-zone : hero sticky + manifesto scrolling-over -->
 
-    </div>
-  </div>
-</section>
-
-</div><!-- /hero-pin-zone : hero sticky + manifesto scrolling-over -->
-
-<!-- ================================
+      <!-- ================================
      PRESTATIONS — Catalog avec monogram glyphs
      ================================ -->
-<section class="prestations" id="prestations" aria-labelledby="prestations-title">
-  <div class="container">
-    <div class="prest-layout">
+      <section
+        class="prestations"
+        id="prestations"
+        aria-labelledby="prestations-title"
+      >
+        <div class="container">
+          <div class="prest-layout">
+            <aside class="prest-aside reveal">
+              <h2 class="prest-aside-title" id="prestations-title">
+                <span class="accent">Quatre savoir-faire</span>, une seule
+                chaîne de service.
+              </h2>
+              <p class="prest-aside-sub">
+                Équipements, maintenance et logiciels.
+              </p>
 
-      <aside class="prest-aside reveal">
-        <h2 class="prest-aside-title" id="prestations-title">
-          <span class="accent">Quatre savoir-faire</span>, une seule chaîne de service.
-        </h2>
-        <p class="prest-aside-sub">
-          Équipements, maintenance et logiciels.
-        </p>
+              <div class="prest-aside-partners">
+                <div class="prest-aside-partners-head">
+                  <span class="prest-aside-partners-label">Partenaires</span>
+                  <span class="prest-aside-partners-rule" aria-hidden="true"
+                  ></span>
+                  <span class="prest-aside-partners-count">06</span>
+                </div>
+                <div class="prest-aside-partners-grid">
+                  <div class="logo-tile logo-tile--mini" data-brand="hp">
+                    <img
+                      class="logo-tile-img"
+                      loading="lazy"
+                      decoding="async"
+                      src="logos%20PRINT/logo_HP_Electric_Blue_keyline%201.webp"
+                      alt=""
+                      aria-hidden="true"
+                    />
+                    <span class="logo-tile-name">HP</span>
+                  </div>
+                  <div class="logo-tile logo-tile--mini" data-brand="toshiba">
+                    <img
+                      class="logo-tile-img"
+                      loading="lazy"
+                      decoding="async"
+                      src="logos%20PRINT/Toshiba_logo.svg.png"
+                      alt=""
+                      aria-hidden="true"
+                    />
+                    <span class="logo-tile-name">Toshiba</span>
+                  </div>
+                  <div class="logo-tile logo-tile--mini" data-brand="papercut">
+                    <img
+                      class="logo-tile-img"
+                      loading="lazy"
+                      decoding="async"
+                      src="logos%20PRINT/papercut.png"
+                      alt=""
+                      aria-hidden="true"
+                    />
+                    <span class="logo-tile-name">PaperCut</span>
+                  </div>
+                  <div class="logo-tile logo-tile--mini" data-brand="brother">
+                    <img
+                      class="logo-tile-img"
+                      loading="lazy"
+                      decoding="async"
+                      src="logos%20PRINT/LOGO%20BROTHER.png"
+                      alt=""
+                      aria-hidden="true"
+                    />
+                    <span class="logo-tile-name">Brother</span>
+                  </div>
+                  <div class="logo-tile logo-tile--mini" data-brand="gespage">
+                    <img
+                      class="logo-tile-img"
+                      loading="lazy"
+                      decoding="async"
+                      src="logos%20PRINT/gespage%201.webp"
+                      alt=""
+                      aria-hidden="true"
+                    />
+                    <span class="logo-tile-name">Gespage</span>
+                  </div>
+                  <div class="logo-tile logo-tile--mini" data-brand="zebra">
+                    <img
+                      class="logo-tile-img"
+                      loading="lazy"
+                      decoding="async"
+                      src="logos%20PRINT/zebra-technologies-logo.svg"
+                      alt=""
+                      aria-hidden="true"
+                    />
+                    <span class="logo-tile-name">Zebra</span>
+                  </div>
+                </div>
+              </div>
+            </aside>
 
-        <div class="prest-aside-partners">
-          <div class="prest-aside-partners-head">
-            <span class="prest-aside-partners-label">Partenaires</span>
-            <span class="prest-aside-partners-rule" aria-hidden="true"></span>
-            <span class="prest-aside-partners-count">06</span>
-          </div>
-          <div class="prest-aside-partners-grid">
-            <div class="logo-tile logo-tile--mini" data-brand="hp">
-              <img class="logo-tile-img" loading="lazy" decoding="async" src="logos%20PRINT/logo_HP_Electric_Blue_keyline%201.webp" alt="" aria-hidden="true">
-              <span class="logo-tile-name">HP</span>
-            </div>
-            <div class="logo-tile logo-tile--mini" data-brand="toshiba">
-              <img class="logo-tile-img" loading="lazy" decoding="async" src="logos%20PRINT/Toshiba_logo.svg.png" alt="" aria-hidden="true">
-              <span class="logo-tile-name">Toshiba</span>
-            </div>
-            <div class="logo-tile logo-tile--mini" data-brand="papercut">
-              <img class="logo-tile-img" loading="lazy" decoding="async" src="logos%20PRINT/papercut.png" alt="" aria-hidden="true">
-              <span class="logo-tile-name">PaperCut</span>
-            </div>
-            <div class="logo-tile logo-tile--mini" data-brand="brother">
-              <img class="logo-tile-img" loading="lazy" decoding="async" src="logos%20PRINT/LOGO%20BROTHER.png" alt="" aria-hidden="true">
-              <span class="logo-tile-name">Brother</span>
-            </div>
-            <div class="logo-tile logo-tile--mini" data-brand="gespage">
-              <img class="logo-tile-img" loading="lazy" decoding="async" src="logos%20PRINT/gespage%201.webp" alt="" aria-hidden="true">
-              <span class="logo-tile-name">Gespage</span>
-            </div>
-            <div class="logo-tile logo-tile--mini" data-brand="zebra">
-              <img class="logo-tile-img" loading="lazy" decoding="async" src="logos%20PRINT/zebra-technologies-logo.svg" alt="" aria-hidden="true">
-              <span class="logo-tile-name">Zebra</span>
+            <div class="prest-menu reveal delay-1">
+              <article class="prest-item">
+                <div class="prest-item-head">
+                  <span class="prest-item-glyph" aria-hidden="true">
+                    <svg
+                      viewBox="0 0 40 40"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="1.2"
+                      stroke-linejoin="round"
+                    >
+                      <rect x="6" y="14" width="28" height="14" rx="0.5"></rect>
+                      <rect
+                        x="10"
+                        y="6"
+                        width="20"
+                        height="8"
+                        rx="0.5"
+                        opacity="0.5"></rect>
+                      <rect
+                        x="10"
+                        y="28"
+                        width="20"
+                        height="6"
+                        rx="0.5"
+                        opacity="0.7"></rect>
+                      <circle
+                        cx="28"
+                        cy="21"
+                        r="1.4"
+                        fill="currentColor"
+                        opacity="0.7"></circle>
+                    </svg>
+                  </span>
+                </div>
+                <h3 class="prest-item-title">
+                  Photocopieurs &amp; imprimantes
+                </h3>
+                <p class="prest-item-desc">
+                  Achat ou location, avec maintenance préventive et curative.
+                </p>
+              </article>
+
+              <article class="prest-item">
+                <div class="prest-item-head">
+                  <span class="prest-item-glyph" aria-hidden="true">
+                    <svg
+                      viewBox="0 0 40 40"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="1.2"
+                      stroke-linejoin="round"
+                    >
+                      <circle
+                        cx="20"
+                        cy="20"
+                        r="3.4"
+                        fill="currentColor"
+                        opacity="0.6"></circle>
+                      <circle cx="9" cy="9" r="2.4"></circle>
+                      <circle cx="31" cy="9" r="2.4"></circle>
+                      <circle cx="9" cy="31" r="2.4"></circle>
+                      <circle cx="31" cy="31" r="2.4"></circle>
+                      <line x1="11" y1="11" x2="17.5" y2="17.5" opacity="0.4"
+                      ></line>
+                      <line x1="29" y1="11" x2="22.5" y2="17.5" opacity="0.4"
+                      ></line>
+                      <line x1="11" y1="29" x2="17.5" y2="22.5" opacity="0.4"
+                      ></line>
+                      <line x1="29" y1="29" x2="22.5" y2="22.5" opacity="0.4"
+                      ></line>
+                    </svg>
+                  </span>
+                </div>
+                <h3 class="prest-item-title">Gestion des impressions</h3>
+                <p class="prest-item-desc">
+                  Contrôle des volumes, sécurisation des flux et traçabilité.
+                </p>
+              </article>
+
+              <article class="prest-item">
+                <div class="prest-item-head">
+                  <span class="prest-item-glyph" aria-hidden="true">
+                    <svg viewBox="0 0 40 40" fill="currentColor" stroke="none">
+                      <rect x="6" y="10" width="2" height="20"></rect>
+                      <rect x="10" y="10" width="1" height="20"></rect>
+                      <rect x="13" y="10" width="2.5" height="20"></rect>
+                      <rect x="17" y="10" width="1" height="20"></rect>
+                      <rect x="20" y="10" width="3" height="20"></rect>
+                      <rect x="25" y="10" width="1" height="20"></rect>
+                      <rect x="28" y="10" width="2" height="20"></rect>
+                      <rect x="32" y="10" width="2.5" height="20"></rect>
+                    </svg>
+                  </span>
+                </div>
+                <h3 class="prest-item-title">
+                  Codes-barres &amp; étiqueteuses
+                </h3>
+                <p class="prest-item-desc">
+                  Pour la logistique, l'inventaire et la traçabilité produit.
+                </p>
+              </article>
+
+              <article class="prest-item">
+                <div class="prest-item-head">
+                  <span class="prest-item-glyph" aria-hidden="true">
+                    <svg
+                      viewBox="0 0 40 40"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="1.2"
+                      stroke-linejoin="round"
+                    >
+                      <rect x="3" y="14" width="34" height="10" rx="0.5"></rect>
+                      <circle cx="9" cy="19" r="2.5" opacity="0.6"></circle>
+                      <line x1="13" y1="19" x2="32" y2="19" opacity="0.3"
+                      ></line>
+                      <rect
+                        x="3"
+                        y="24"
+                        width="34"
+                        height="13"
+                        rx="0.5"
+                        opacity="0.35"></rect>
+                      <line
+                        x1="7"
+                        y1="29"
+                        x2="33"
+                        y2="29"
+                        stroke-dasharray="2 2"
+                        opacity="0.5"></line>
+                    </svg>
+                  </span>
+                </div>
+                <h3 class="prest-item-title">Traceurs grand format</h3>
+                <p class="prest-item-desc">
+                  Conçus pour le bâtiment, l'architecture et les bureaux
+                  d'études.
+                </p>
+              </article>
             </div>
           </div>
         </div>
-      </aside>
+      </section>
 
-      <div class="prest-menu reveal delay-1">
-
-        <article class="prest-item">
-          <div class="prest-item-head">
-            <span class="prest-item-glyph" aria-hidden="true">
-              <svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round">
-                <rect x="6" y="14" width="28" height="14" rx="0.5"/>
-                <rect x="10" y="6" width="20" height="8" rx="0.5" opacity="0.5"/>
-                <rect x="10" y="28" width="20" height="6" rx="0.5" opacity="0.7"/>
-                <circle cx="28" cy="21" r="1.4" fill="currentColor" opacity="0.7"/>
-              </svg>
-            </span>
-          </div>
-          <h3 class="prest-item-title">Photocopieurs &amp; imprimantes</h3>
-          <p class="prest-item-desc">Achat ou location, avec maintenance préventive et curative.</p>
-        </article>
-
-        <article class="prest-item">
-          <div class="prest-item-head">
-            <span class="prest-item-glyph" aria-hidden="true">
-              <svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round">
-                <circle cx="20" cy="20" r="3.4" fill="currentColor" opacity="0.6"/>
-                <circle cx="9" cy="9" r="2.4"/>
-                <circle cx="31" cy="9" r="2.4"/>
-                <circle cx="9" cy="31" r="2.4"/>
-                <circle cx="31" cy="31" r="2.4"/>
-                <line x1="11" y1="11" x2="17.5" y2="17.5" opacity="0.4"/>
-                <line x1="29" y1="11" x2="22.5" y2="17.5" opacity="0.4"/>
-                <line x1="11" y1="29" x2="17.5" y2="22.5" opacity="0.4"/>
-                <line x1="29" y1="29" x2="22.5" y2="22.5" opacity="0.4"/>
-              </svg>
-            </span>
-          </div>
-          <h3 class="prest-item-title">Gestion des impressions</h3>
-          <p class="prest-item-desc">Contrôle des volumes, sécurisation des flux et traçabilité.</p>
-        </article>
-
-        <article class="prest-item">
-          <div class="prest-item-head">
-            <span class="prest-item-glyph" aria-hidden="true">
-              <svg viewBox="0 0 40 40" fill="currentColor" stroke="none">
-                <rect x="6" y="10" width="2" height="20"/>
-                <rect x="10" y="10" width="1" height="20"/>
-                <rect x="13" y="10" width="2.5" height="20"/>
-                <rect x="17" y="10" width="1" height="20"/>
-                <rect x="20" y="10" width="3" height="20"/>
-                <rect x="25" y="10" width="1" height="20"/>
-                <rect x="28" y="10" width="2" height="20"/>
-                <rect x="32" y="10" width="2.5" height="20"/>
-              </svg>
-            </span>
-          </div>
-          <h3 class="prest-item-title">Codes-barres &amp; étiqueteuses</h3>
-          <p class="prest-item-desc">Pour la logistique, l'inventaire et la traçabilité produit.</p>
-        </article>
-
-        <article class="prest-item">
-          <div class="prest-item-head">
-            <span class="prest-item-glyph" aria-hidden="true">
-              <svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round">
-                <rect x="3" y="14" width="34" height="10" rx="0.5"/>
-                <circle cx="9" cy="19" r="2.5" opacity="0.6"/>
-                <line x1="13" y1="19" x2="32" y2="19" opacity="0.3"/>
-                <rect x="3" y="24" width="34" height="13" rx="0.5" opacity="0.35"/>
-                <line x1="7" y1="29" x2="33" y2="29" stroke-dasharray="2 2" opacity="0.5"/>
-              </svg>
-            </span>
-          </div>
-          <h3 class="prest-item-title">Traceurs grand format</h3>
-          <p class="prest-item-desc">Conçus pour le bâtiment, l'architecture et les bureaux d'études.</p>
-        </article>
-
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ================================
+      <!-- ================================
      SECTION DIVIDER — Compétences → Méthode (hairline monochrome)
      ================================ -->
-<div class="section-divider" aria-hidden="true">
-  <div class="container">
-    <span class="section-divider-line"></span>
-  </div>
-</div>
+      <div class="section-divider" aria-hidden="true">
+        <div class="container">
+          <span class="section-divider-line"></span>
+        </div>
+      </div>
 
-<!-- ================================
+      <!-- ================================
      PROCESS — Étapes (épuré, sans détails techniques)
      ================================ -->
-<section class="process" id="process" aria-labelledby="process-title">
-  <div class="container">
-    <div class="section-head reveal">
-      <h2 class="section-title" id="process-title">
-        Quatre étapes, <span class="accent">un seul interlocuteur</span>.
-        <span class="text-muted">De la première visite à la supervision au quotidien.</span>
-      </h2>
-    </div>
+      <section class="process" id="process" aria-labelledby="process-title">
+        <div class="container">
+          <div class="section-head reveal">
+            <h2 class="section-title" id="process-title">
+              Quatre étapes, <span class="accent">un seul interlocuteur</span>.
+              <span class="text-muted"
+                >De la première visite à la supervision au quotidien.</span
+              >
+            </h2>
+          </div>
 
-    <div class="pf-vflow reveal">
+          <div class="pf-vflow reveal">
+            <!-- ====== SVG Fountain : HUB top center → 4 branches Bezier orange divergent vers les 4 cards ====== -->
+            <svg
+              class="pf-vsvg"
+              viewBox="0 0 900 350"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+              aria-hidden="true"
+              preserveAspectRatio="xMidYMid meet"
+            >
+              <defs>
+                <filter
+                  id="pf-glow"
+                  x="-20%"
+                  y="-20%"
+                  width="140%"
+                  height="140%"
+                >
+                  <feGaussianBlur
+                    in="SourceGraphic"
+                    stdDeviation="4"
+                    result="blur"></feGaussianBlur>
+                  <feMerge>
+                    <feMergeNode in="blur"></feMergeNode>
+                    <feMergeNode in="SourceGraphic"></feMergeNode>
+                  </feMerge>
+                </filter>
+                <radialGradient id="pf-hub-aura" cx="50%" cy="50%" r="50%">
+                  <stop offset="0%" stop-color="#F3941D" stop-opacity="0.18"
+                  ></stop>
+                  <stop offset="60%" stop-color="#F3941D" stop-opacity="0.04"
+                  ></stop>
+                  <stop offset="100%" stop-color="#F3941D" stop-opacity="0"
+                  ></stop>
+                </radialGradient>
+              </defs>
 
-      <!-- ====== SVG Fountain : HUB top center → 4 branches Bezier orange divergent vers les 4 cards ====== -->
-      <svg class="pf-vsvg" viewBox="0 0 900 350" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" preserveAspectRatio="xMidYMid meet">
-        <defs>
-          <filter id="pf-glow" x="-20%" y="-20%" width="140%" height="140%">
-            <feGaussianBlur in="SourceGraphic" stdDeviation="4" result="blur"/>
-            <feMerge>
-              <feMergeNode in="blur"/>
-              <feMergeNode in="SourceGraphic"/>
-            </feMerge>
-          </filter>
-          <radialGradient id="pf-hub-aura" cx="50%" cy="50%" r="50%">
-            <stop offset="0%" stop-color="#F3941D" stop-opacity="0.18"/>
-            <stop offset="60%" stop-color="#F3941D" stop-opacity="0.04"/>
-            <stop offset="100%" stop-color="#F3941D" stop-opacity="0"/>
-          </radialGradient>
-        </defs>
+              <!-- Hub aura (halo subtil, derrière les branches) -->
+              <circle cx="450" cy="48" r="60" fill="url(#pf-hub-aura)"></circle>
 
-        <!-- Hub aura (halo subtil, derrière les branches) -->
-        <circle cx="450" cy="48" r="60" fill="url(#pf-hub-aura)"/>
+              <!-- ===== GLOW LAYERS (blurred wide stroke derrière) ===== -->
+              <path
+                class="pf-glow-line"
+                style="--d: 0.5s"
+                d="M 450,54 L 450,72 C 450,210 113,265 113,350"
+                stroke="#FFB877"
+                stroke-width="6"
+                stroke-linecap="round"
+                filter="url(#pf-glow)"></path>
+              <path
+                class="pf-glow-line"
+                style="--d: 0.6s"
+                d="M 450,54 L 450,72 C 450,200 338,265 338,350"
+                stroke="#F7A23F"
+                stroke-width="6"
+                stroke-linecap="round"
+                filter="url(#pf-glow)"></path>
+              <path
+                class="pf-glow-line"
+                style="--d: 0.7s"
+                d="M 450,54 L 450,72 C 450,200 562,265 562,350"
+                stroke="#F3941D"
+                stroke-width="6"
+                stroke-linecap="round"
+                filter="url(#pf-glow)"></path>
+              <path
+                class="pf-glow-line"
+                style="--d: 0.8s"
+                d="M 450,54 L 450,72 C 450,210 787,265 787,350"
+                stroke="#C47816"
+                stroke-width="6"
+                stroke-linecap="round"
+                filter="url(#pf-glow)"></path>
 
-        <!-- ===== GLOW LAYERS (blurred wide stroke derrière) ===== -->
-        <path class="pf-glow-line" style="--d: 0.5s"
-              d="M 450,54 L 450,72 C 450,210 113,265 113,350"
-              stroke="#FFB877" stroke-width="6" stroke-linecap="round" filter="url(#pf-glow)"/>
-        <path class="pf-glow-line" style="--d: 0.6s"
-              d="M 450,54 L 450,72 C 450,200 338,265 338,350"
-              stroke="#F7A23F" stroke-width="6" stroke-linecap="round" filter="url(#pf-glow)"/>
-        <path class="pf-glow-line" style="--d: 0.7s"
-              d="M 450,54 L 450,72 C 450,200 562,265 562,350"
-              stroke="#F3941D" stroke-width="6" stroke-linecap="round" filter="url(#pf-glow)"/>
-        <path class="pf-glow-line" style="--d: 0.8s"
-              d="M 450,54 L 450,72 C 450,210 787,265 787,350"
-              stroke="#C47816" stroke-width="6" stroke-linecap="round" filter="url(#pf-glow)"/>
+              <!-- ===== ECHO BEZIER ULTRA-FINS (renfort visuel discret, statique) ===== -->
+              <g aria-hidden="true">
+                <path
+                  d="M 450,54 L 450,72 C 450,210 113,265 113,350"
+                  stroke="#FFB877"
+                  stroke-width="0.6"
+                  stroke-opacity="0.14"
+                  stroke-linecap="round"
+                  transform="translate(-4, 3)"
+                  fill="none"></path>
+                <path
+                  d="M 450,54 L 450,72 C 450,200 338,265 338,350"
+                  stroke="#F7A23F"
+                  stroke-width="0.6"
+                  stroke-opacity="0.14"
+                  stroke-linecap="round"
+                  transform="translate(-2, 3)"
+                  fill="none"></path>
+                <path
+                  d="M 450,54 L 450,72 C 450,200 562,265 562,350"
+                  stroke="#F3941D"
+                  stroke-width="0.6"
+                  stroke-opacity="0.14"
+                  stroke-linecap="round"
+                  transform="translate(2, 3)"
+                  fill="none"></path>
+                <path
+                  d="M 450,54 L 450,72 C 450,210 787,265 787,350"
+                  stroke="#C47816"
+                  stroke-width="0.6"
+                  stroke-opacity="0.14"
+                  stroke-linecap="round"
+                  transform="translate(4, 3)"
+                  fill="none"></path>
+              </g>
 
-        <!-- ===== ECHO BEZIER ULTRA-FINS (renfort visuel discret, statique) ===== -->
-        <g aria-hidden="true">
-          <path d="M 450,54 L 450,72 C 450,210 113,265 113,350"
-                stroke="#FFB877" stroke-width="0.6" stroke-opacity="0.14" stroke-linecap="round"
-                transform="translate(-4, 3)" fill="none"/>
-          <path d="M 450,54 L 450,72 C 450,200 338,265 338,350"
-                stroke="#F7A23F" stroke-width="0.6" stroke-opacity="0.14" stroke-linecap="round"
-                transform="translate(-2, 3)" fill="none"/>
-          <path d="M 450,54 L 450,72 C 450,200 562,265 562,350"
-                stroke="#F3941D" stroke-width="0.6" stroke-opacity="0.14" stroke-linecap="round"
-                transform="translate(2, 3)" fill="none"/>
-          <path d="M 450,54 L 450,72 C 450,210 787,265 787,350"
-                stroke="#C47816" stroke-width="0.6" stroke-opacity="0.14" stroke-linecap="round"
-                transform="translate(4, 3)" fill="none"/>
-        </g>
+              <!-- ===== SHARP CURVES (4 branches Bezier élégantes jusqu'au bord inférieur SVG) ===== -->
+              <path
+                class="pf-anim-line"
+                pathLength="100"
+                style="--dur: 1.4s; --d: 0.5s"
+                d="M 450,54 L 450,72 C 450,210 113,265 113,350"
+                stroke="#FFB877"
+                stroke-width="1.5"
+                stroke-linecap="round"></path>
+              <path
+                class="pf-anim-line"
+                pathLength="100"
+                style="--dur: 1.4s; --d: 0.6s"
+                d="M 450,54 L 450,72 C 450,200 338,265 338,350"
+                stroke="#F7A23F"
+                stroke-width="1.5"
+                stroke-linecap="round"></path>
+              <path
+                class="pf-anim-line"
+                pathLength="100"
+                style="--dur: 1.4s; --d: 0.7s"
+                d="M 450,54 L 450,72 C 450,200 562,265 562,350"
+                stroke="#F3941D"
+                stroke-width="1.5"
+                stroke-linecap="round"></path>
+              <path
+                class="pf-anim-line"
+                pathLength="100"
+                style="--dur: 1.4s; --d: 0.8s"
+                d="M 450,54 L 450,72 C 450,210 787,265 787,350"
+                stroke="#C47816"
+                stroke-width="1.5"
+                stroke-linecap="round"></path>
 
-        <!-- ===== SHARP CURVES (4 branches Bezier élégantes jusqu'au bord inférieur SVG) ===== -->
-        <path class="pf-anim-line" pathLength="100" style="--dur: 1.4s; --d: 0.5s"
-              d="M 450,54 L 450,72 C 450,210 113,265 113,350"
-              stroke="#FFB877" stroke-width="1.5" stroke-linecap="round"/>
-        <path class="pf-anim-line" pathLength="100" style="--dur: 1.4s; --d: 0.6s"
-              d="M 450,54 L 450,72 C 450,200 338,265 338,350"
-              stroke="#F7A23F" stroke-width="1.5" stroke-linecap="round"/>
-        <path class="pf-anim-line" pathLength="100" style="--dur: 1.4s; --d: 0.7s"
-              d="M 450,54 L 450,72 C 450,200 562,265 562,350"
-              stroke="#F3941D" stroke-width="1.5" stroke-linecap="round"/>
-        <path class="pf-anim-line" pathLength="100" style="--dur: 1.4s; --d: 0.8s"
-              d="M 450,54 L 450,72 C 450,210 787,265 787,350"
-              stroke="#C47816" stroke-width="1.5" stroke-linecap="round"/>
-
-        <!-- HUB : circle + printer icon — dessiné PAR-DESSUS les branches
+              <!-- HUB : circle + printer icon — dessiné PAR-DESSUS les branches
              pour masquer proprement leur point de convergence (connexion nette) -->
-        <g class="pf-anim-node" style="--d: 0s">
-          <circle cx="450" cy="48" r="24" fill="#0d0d0d" stroke="rgba(243,148,29,0.38)" stroke-width="1"/>
-          <g stroke="#F3941D" stroke-width="1.3" stroke-linejoin="round" stroke-linecap="round" fill="none">
-            <!-- ADF (top scanner unit) -->
-            <rect x="442" y="37" width="16" height="3.4" rx="0.5" opacity="0.7"/>
-            <!-- Main body -->
-            <rect x="440" y="40.6" width="20" height="9" rx="1"/>
-            <!-- Output paper (sheet) -->
-            <rect x="444.5" y="49.6" width="11" height="6.2" rx="0.6"/>
-            <!-- Print lines on paper -->
-            <line x1="446.5" y1="52" x2="453" y2="52" stroke-width="0.65" opacity="0.55"/>
-            <line x1="446.5" y1="53.6" x2="451" y2="53.6" stroke-width="0.6" opacity="0.45"/>
-            <!-- Status LED -->
-            <circle cx="455.5" cy="44.7" r="0.9" fill="#F3941D" stroke="none"/>
-          </g>
-        </g>
+              <g class="pf-anim-node" style="--d: 0s">
+                <circle
+                  cx="450"
+                  cy="48"
+                  r="24"
+                  fill="#0d0d0d"
+                  stroke="rgba(243,148,29,0.38)"
+                  stroke-width="1"></circle>
+                <g
+                  stroke="#F3941D"
+                  stroke-width="1.3"
+                  stroke-linejoin="round"
+                  stroke-linecap="round"
+                  fill="none"
+                >
+                  <!-- ADF (top scanner unit) -->
+                  <rect
+                    x="442"
+                    y="37"
+                    width="16"
+                    height="3.4"
+                    rx="0.5"
+                    opacity="0.7"></rect>
+                  <!-- Main body -->
+                  <rect x="440" y="40.6" width="20" height="9" rx="1"></rect>
+                  <!-- Output paper (sheet) -->
+                  <rect x="444.5" y="49.6" width="11" height="6.2" rx="0.6"
+                  ></rect>
+                  <!-- Print lines on paper -->
+                  <line
+                    x1="446.5"
+                    y1="52"
+                    x2="453"
+                    y2="52"
+                    stroke-width="0.65"
+                    opacity="0.55"></line>
+                  <line
+                    x1="446.5"
+                    y1="53.6"
+                    x2="451"
+                    y2="53.6"
+                    stroke-width="0.6"
+                    opacity="0.45"></line>
+                  <!-- Status LED -->
+                  <circle
+                    cx="455.5"
+                    cy="44.7"
+                    r="0.9"
+                    fill="#F3941D"
+                    stroke="none"></circle>
+                </g>
+              </g>
 
-        <!-- "VOTRE PARC" label au-dessus du hub -->
-        <g class="pf-anim-node" style="--d: 0.15s">
-          <text x="450" y="12" text-anchor="middle" font-family="JetBrains Mono, ui-monospace, monospace" font-size="9.5" fill="rgba(255,255,255,0.42)" letter-spacing="3.5">VOTRE PARC</text>
-        </g>
+              <!-- "VOTRE PARC" label au-dessus du hub -->
+              <g class="pf-anim-node" style="--d: 0.15s">
+                <text
+                  x="450"
+                  y="12"
+                  text-anchor="middle"
+                  font-family="JetBrains Mono, ui-monospace, monospace"
+                  font-size="9.5"
+                  fill="rgba(255,255,255,0.42)"
+                  letter-spacing="3.5">VOTRE PARC</text
+                >
+              </g>
 
-        <!-- ===== ENDPOINT DOTS — au bord inférieur SVG (cy=350) pour se brancher directement sur la card ===== -->
-        <g class="pf-anim-node pf-vdot pf-vdot--1" style="--d: 1.1s">
-          <circle cx="113" cy="350" r="8" fill="#FFB877" opacity="0.20"/>
-          <circle cx="113" cy="350" r="4" fill="#FFB877"/>
-        </g>
-        <g class="pf-anim-node pf-vdot pf-vdot--2" style="--d: 1.2s">
-          <circle cx="338" cy="350" r="8" fill="#F7A23F" opacity="0.20"/>
-          <circle cx="338" cy="350" r="4" fill="#F7A23F"/>
-        </g>
-        <g class="pf-anim-node pf-vdot pf-vdot--3" style="--d: 1.3s">
-          <circle cx="562" cy="350" r="8" fill="#F3941D" opacity="0.20"/>
-          <circle cx="562" cy="350" r="4" fill="#F3941D"/>
-        </g>
-        <g class="pf-anim-node pf-vdot pf-vdot--4" style="--d: 1.4s">
-          <circle cx="787" cy="350" r="8" fill="#C47816" opacity="0.20"/>
-          <circle cx="787" cy="350" r="4" fill="#C47816"/>
-        </g>
-      </svg>
+              <!-- ===== ENDPOINT DOTS — au bord inférieur SVG (cy=350) pour se brancher directement sur la card ===== -->
+              <g class="pf-anim-node pf-vdot pf-vdot--1" style="--d: 1.1s">
+                <circle cx="113" cy="350" r="8" fill="#FFB877" opacity="0.20"
+                ></circle>
+                <circle cx="113" cy="350" r="4" fill="#FFB877"></circle>
+              </g>
+              <g class="pf-anim-node pf-vdot pf-vdot--2" style="--d: 1.2s">
+                <circle cx="338" cy="350" r="8" fill="#F7A23F" opacity="0.20"
+                ></circle>
+                <circle cx="338" cy="350" r="4" fill="#F7A23F"></circle>
+              </g>
+              <g class="pf-anim-node pf-vdot pf-vdot--3" style="--d: 1.3s">
+                <circle cx="562" cy="350" r="8" fill="#F3941D" opacity="0.20"
+                ></circle>
+                <circle cx="562" cy="350" r="4" fill="#F3941D"></circle>
+              </g>
+              <g class="pf-anim-node pf-vdot pf-vdot--4" style="--d: 1.4s">
+                <circle cx="787" cy="350" r="8" fill="#C47816" opacity="0.20"
+                ></circle>
+                <circle cx="787" cy="350" r="4" fill="#C47816"></circle>
+              </g>
+            </svg>
 
-      <!-- ====== 4 CARDS alignées avec les endpoints des branches ====== -->
-      <div class="pf-vcards">
+            <!-- ====== 4 CARDS alignées avec les endpoints des branches ====== -->
+            <div class="pf-vcards">
+              <article
+                class="pf-vcard"
+                style="--c: #FFB877; --c-rgb: 255,184,119;"
+              >
+                <div class="pf-vcard-shade" aria-hidden="true"></div>
+                <div class="pf-vcard-head">
+                  <span class="pf-vcard-glyph" aria-hidden="true">
+                    <svg
+                      viewBox="0 0 40 40"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="1.3"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    >
+                      <circle cx="17" cy="17" r="9.5"></circle>
+                      <path d="M23.9 23.9 L31 31"></path>
+                      <circle
+                        cx="13.6"
+                        cy="13.8"
+                        r="1.15"
+                        fill="currentColor"
+                        stroke="none"
+                        opacity="0.85"></circle>
+                      <circle
+                        cx="20.4"
+                        cy="13.8"
+                        r="1.15"
+                        fill="currentColor"
+                        stroke="none"
+                        opacity="0.85"></circle>
+                      <circle
+                        cx="13.6"
+                        cy="20.2"
+                        r="1.15"
+                        fill="currentColor"
+                        stroke="none"
+                        opacity="0.85"></circle>
+                      <circle
+                        cx="20.4"
+                        cy="20.2"
+                        r="1.15"
+                        fill="currentColor"
+                        stroke="none"
+                        opacity="0.85"></circle>
+                    </svg>
+                  </span>
+                </div>
+                <h3 class="pf-vcard-title">Audit du parc</h3>
+                <p class="pf-vcard-desc">
+                  Visite sur site et cartographie de vos équipements et de vos
+                  usages réels.
+                </p>
+              </article>
 
-        <article class="pf-vcard" style="--c: #FFB877; --c-rgb: 255,184,119;">
-          <div class="pf-vcard-shade" aria-hidden="true"></div>
-          <div class="pf-vcard-head">
-            <span class="pf-vcard-glyph" aria-hidden="true">
-              <svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round">
-                <circle cx="17" cy="17" r="9.5"/>
-                <path d="M23.9 23.9 L31 31"/>
-                <circle cx="13.6" cy="13.8" r="1.15" fill="currentColor" stroke="none" opacity="0.85"/>
-                <circle cx="20.4" cy="13.8" r="1.15" fill="currentColor" stroke="none" opacity="0.85"/>
-                <circle cx="13.6" cy="20.2" r="1.15" fill="currentColor" stroke="none" opacity="0.85"/>
-                <circle cx="20.4" cy="20.2" r="1.15" fill="currentColor" stroke="none" opacity="0.85"/>
-              </svg>
-            </span>
+              <article
+                class="pf-vcard"
+                style="--c: #F7A23F; --c-rgb: 247,162,63;"
+              >
+                <div class="pf-vcard-shade" aria-hidden="true"></div>
+                <div class="pf-vcard-head">
+                  <span class="pf-vcard-glyph" aria-hidden="true">
+                    <svg
+                      viewBox="0 0 40 40"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="1.3"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    >
+                      <rect x="10.5" y="9" width="19" height="24" rx="2.6"
+                      ></rect>
+                      <rect
+                        x="15.5"
+                        y="6.4"
+                        width="9"
+                        height="4.8"
+                        rx="1.5"
+                        opacity="0.55"></rect>
+                      <path d="M14.8 20.4 L17.9 23.5 L24.6 16.4" opacity="0.95"
+                      ></path>
+                      <line x1="15" y1="28.2" x2="25" y2="28.2" opacity="0.4"
+                      ></line>
+                    </svg>
+                  </span>
+                </div>
+                <h3 class="pf-vcard-title">Préconisation</h3>
+                <p class="pf-vcard-desc">
+                  Sélection des équipements, choix achat ou location et
+                  dimensionnement adapté.
+                </p>
+              </article>
+
+              <article
+                class="pf-vcard"
+                style="--c: #F3941D; --c-rgb: 243,148,29;"
+              >
+                <div class="pf-vcard-shade" aria-hidden="true"></div>
+                <div class="pf-vcard-head">
+                  <span class="pf-vcard-glyph" aria-hidden="true">
+                    <svg
+                      viewBox="0 0 40 40"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="1.3"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    >
+                      <path d="M20 7 V21.5"></path>
+                      <path d="M14 15.5 L20 21.5 L26 15.5"></path>
+                      <path
+                        d="M10.5 24.5 V31 a2 2 0 0 0 2 2 H27.5 a2 2 0 0 0 2 -2 V24.5"
+                        opacity="0.85"></path>
+                    </svg>
+                  </span>
+                </div>
+                <h3 class="pf-vcard-title">Déploiement</h3>
+                <p class="pf-vcard-desc">
+                  Installation, paramétrage et formation des utilisateurs, sur
+                  site.
+                </p>
+              </article>
+
+              <article
+                class="pf-vcard"
+                style="--c: #C47816; --c-rgb: 196,120,22;"
+              >
+                <div class="pf-vcard-shade" aria-hidden="true"></div>
+                <div class="pf-vcard-head">
+                  <span class="pf-vcard-glyph" aria-hidden="true">
+                    <svg
+                      viewBox="0 0 40 40"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="1.3"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    >
+                      <circle cx="20" cy="20" r="4.6"></circle>
+                      <circle cx="20" cy="20" r="10.5" opacity="0.26"></circle>
+                      <path
+                        d="M20 5.7 V9.4 M20 30.6 V34.3 M34.3 20 H30.6 M9.4 20 H5.7 M30.1 9.9 L27.5 12.5 M12.5 27.5 L9.9 30.1 M30.1 30.1 L27.5 27.5 M12.5 12.5 L9.9 9.9"
+                        opacity="0.7"></path>
+                    </svg>
+                  </span>
+                </div>
+                <h3 class="pf-vcard-title">Maintenance</h3>
+                <p class="pf-vcard-desc">
+                  Suivi, supervision et interventions, sur site comme à
+                  distance.
+                </p>
+              </article>
+            </div>
           </div>
-          <h3 class="pf-vcard-title">Audit du parc</h3>
-          <p class="pf-vcard-desc">Visite sur site et cartographie de vos équipements et de vos usages réels.</p>
-        </article>
+        </div>
+      </section>
 
-        <article class="pf-vcard" style="--c: #F7A23F; --c-rgb: 247,162,63;">
-          <div class="pf-vcard-shade" aria-hidden="true"></div>
-          <div class="pf-vcard-head">
-            <span class="pf-vcard-glyph" aria-hidden="true">
-              <svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round">
-                <rect x="10.5" y="9" width="19" height="24" rx="2.6"/>
-                <rect x="15.5" y="6.4" width="9" height="4.8" rx="1.5" opacity="0.55"/>
-                <path d="M14.8 20.4 L17.9 23.5 L24.6 16.4" opacity="0.95"/>
-                <line x1="15" y1="28.2" x2="25" y2="28.2" opacity="0.4"/>
-              </svg>
-            </span>
-          </div>
-          <h3 class="pf-vcard-title">Préconisation</h3>
-          <p class="pf-vcard-desc">Sélection des équipements, choix achat ou location et dimensionnement adapté.</p>
-        </article>
-
-        <article class="pf-vcard" style="--c: #F3941D; --c-rgb: 243,148,29;">
-          <div class="pf-vcard-shade" aria-hidden="true"></div>
-          <div class="pf-vcard-head">
-            <span class="pf-vcard-glyph" aria-hidden="true">
-              <svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M20 7 V21.5"/>
-                <path d="M14 15.5 L20 21.5 L26 15.5"/>
-                <path d="M10.5 24.5 V31 a2 2 0 0 0 2 2 H27.5 a2 2 0 0 0 2 -2 V24.5" opacity="0.85"/>
-              </svg>
-            </span>
-          </div>
-          <h3 class="pf-vcard-title">Déploiement</h3>
-          <p class="pf-vcard-desc">Installation, paramétrage et formation des utilisateurs, sur site.</p>
-        </article>
-
-        <article class="pf-vcard" style="--c: #C47816; --c-rgb: 196,120,22;">
-          <div class="pf-vcard-shade" aria-hidden="true"></div>
-          <div class="pf-vcard-head">
-            <span class="pf-vcard-glyph" aria-hidden="true">
-              <svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round">
-                <circle cx="20" cy="20" r="4.6"/>
-                <circle cx="20" cy="20" r="10.5" opacity="0.26"/>
-                <path d="M20 5.7 V9.4 M20 30.6 V34.3 M34.3 20 H30.6 M9.4 20 H5.7 M30.1 9.9 L27.5 12.5 M12.5 27.5 L9.9 30.1 M30.1 30.1 L27.5 27.5 M12.5 12.5 L9.9 9.9" opacity="0.7"/>
-              </svg>
-            </span>
-          </div>
-          <h3 class="pf-vcard-title">Maintenance</h3>
-          <p class="pf-vcard-desc">Suivi, supervision et interventions, sur site comme à distance.</p>
-        </article>
-
-      </div>
-    </div>
-  </div>
-</section>
-
-
-
-
-<!-- ================================
+      <!-- ================================
      CTA — Bandeau compact centré, esperluette serif comme accent
      ================================ -->
-<section class="cta-section" id="contact" aria-labelledby="cta-title">
-  <div class="container">
-    <div class="cta-frame">
+      <section class="cta-section" id="contact" aria-labelledby="cta-title">
+        <div class="container">
+          <div class="cta-frame">
+            <div class="cta-inner">
+              <span class="cta-amp reveal" aria-hidden="true">&amp;</span>
 
-      <div class="cta-inner">
-        <span class="cta-amp reveal" aria-hidden="true">&amp;</span>
+              <div class="cta-body">
+                <h2 class="cta-title reveal delay-1" id="cta-title">
+                  Un projet <em>d'impression&thinsp;?</em>
+                </h2>
 
-        <div class="cta-body">
-          <h2 class="cta-title reveal delay-1" id="cta-title">
-            Un projet <em>d'impression&thinsp;?</em>
-          </h2>
+                <p class="cta-sub reveal delay-2">
+                  Un devis sur mesure ou une visite sur site, sans engagement.
+                </p>
 
-          <p class="cta-sub reveal delay-2">
-            Un devis sur mesure ou une visite sur site, sans engagement.
+                <div class="cta-actions reveal delay-3">
+                  <a
+                    href="contact.html?pole=print"
+                    class="btn-cta btn-cta--primary"
+                  >
+                    Contacter le pôle Print
+                    <span class="btn-cta-arrow"
+                      ><svg
+                        viewBox="0 0 16 16"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="1.6"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        ><path d="M3 8h10M9 4l4 4-4 4"></path></svg
+                      ></span
+                    >
+                  </a>
+                  <span class="cta-actions-divider" aria-hidden="true"></span>
+                  <span class="cta-phone">
+                    <svg
+                      viewBox="0 0 20 20"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="1.4"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      width="14"
+                      height="14"
+                      ><path
+                        d="M2 3a1 1 0 011-1h3.28a1 1 0 01.95.68l1.07 3.21a1 1 0 01-.25 1L6.54 8.4a12.06 12.06 0 005.06 5.06l1.51-1.51a1 1 0 011-.25l3.21 1.07a1 1 0 01.68.95V17a1 1 0 01-1 1A15 15 0 012 3z"
+                      ></path></svg
+                    >
+                    <a href="tel:+33383183030" class="cta-phone-num"
+                      >03 83 18 30 30</a
+                    >
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- ================================
+     FOOTER
+     ================================ -->
+    <Footer />
+
+    <!-- ================================
+     SCRIPTS
+     ================================ -->
+    <script is:inline src="js/pages/print-1.js"></script>
+    <script is:inline src="js/shared/menu-frost.js"></script>
+    <!-- jcd-mobile-nav (injected) -->
+    <button
+      class="jcd-burger"
+      id="jcdBurger"
+      type="button"
+      aria-label="Ouvrir le menu"
+      aria-expanded="false"
+      aria-controls="jcdMnav"
+    >
+      <span class="jcd-burger__box" aria-hidden="true"
+        ><i></i><i></i><i></i></span
+      >
+    </button>
+    <div
+      class="jcd-mnav"
+      id="jcdMnav"
+      role="dialog"
+      aria-modal="true"
+      aria-label="Menu de navigation"
+      aria-hidden="true"
+    >
+      <div class="jcd-mnav__scroll">
+        <div class="jcd-mnav__inner">
+          <p
+            class="jcd-mnav__eyebrow jcd-mnav__reveal"
+            style="transition-delay:.04s"
+          >
+            Expertises
           </p>
 
-          <div class="cta-actions reveal delay-3">
-            <a href="contact.html?pole=print" class="btn-cta btn-cta--primary">
-              Contacter le pôle Print
-              <span class="btn-cta-arrow"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h10M9 4l4 4-4 4"/></svg></span>
-            </a>
-            <span class="cta-actions-divider" aria-hidden="true"></span>
-            <span class="cta-phone">
-              <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" width="14" height="14"><path d="M2 3a1 1 0 011-1h3.28a1 1 0 01.95.68l1.07 3.21a1 1 0 01-.25 1L6.54 8.4a12.06 12.06 0 005.06 5.06l1.51-1.51a1 1 0 011-.25l3.21 1.07a1 1 0 01.68.95V17a1 1 0 01-1 1A15 15 0 012 3z"/></svg>
-              <a href="tel:+33383183030" class="cta-phone-num">03 83 18 30 30</a>
-            </span>
+          <div class="jcd-mnav__reveal" style="transition-delay:.07s">
+            <div class="jcd-mnav__item" style="--mnav-c:#2E72BA">
+              <a class="jcd-mnav__link" href="informatique.html"
+                ><span class="jcd-mnav__dot"></span><span
+                  class="jcd-mnav__label">Informatique</span
+                ></a
+              >
+              <button
+                class="jcd-acc__toggle"
+                type="button"
+                aria-expanded="false"
+                aria-controls="jcdAccInfo"
+                aria-label="Afficher les sous-pages Informatique"
+              >
+                <svg
+                  viewBox="0 0 14 14"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.6"
+                  stroke-linecap="round"><path d="M7 2v10M2 7h10"></path></svg
+                >
+              </button>
+            </div>
+            <div class="jcd-acc__panel" id="jcdAccInfo">
+              <a class="jcd-mnav__sub" href="info-cloud.html">Cloud Microsoft</a
+              >
+              <a class="jcd-mnav__sub" href="info-collaboratif.html"
+                >Solutions collaboratives &amp; audiovisuelles</a
+              >
+              <a class="jcd-mnav__sub" href="info-reseaux.html"
+                >Architectures syst&egrave;mes &amp; r&eacute;seaux</a
+              >
+              <a class="jcd-mnav__sub" href="info-integration.html"
+                >Int&eacute;gration &amp; Support PC</a
+              >
+            </div>
+          </div>
+
+          <a
+            class="jcd-mnav__item jcd-mnav__reveal"
+            style="--mnav-c:#E51D29;transition-delay:.10s"
+            href="service.html"
+            ><span class="jcd-mnav__dot"></span><span class="jcd-mnav__label"
+              >Service</span
+            ></a
+          >
+          <a
+            class="jcd-mnav__item jcd-mnav__reveal"
+            style="--mnav-c:#F9D605;transition-delay:.13s"
+            href="developpement.html"
+            ><span class="jcd-mnav__dot"></span><span class="jcd-mnav__label"
+              >D&eacute;veloppement</span
+            ></a
+          >
+          <a
+            class="jcd-mnav__item jcd-mnav__reveal"
+            style="--mnav-c:#F3941D;transition-delay:.16s"
+            href="print.html"
+            ><span class="jcd-mnav__dot"></span><span class="jcd-mnav__label"
+              >Print</span
+            ></a
+          >
+          <a
+            class="jcd-mnav__item jcd-mnav__reveal"
+            style="--mnav-c:#B063AC;transition-delay:.19s"
+            href="telecom.html"
+            ><span class="jcd-mnav__dot"></span><span class="jcd-mnav__label"
+              >T&eacute;l&eacute;com</span
+            ></a
+          >
+          <div class="jcd-mnav__reveal" style="transition-delay:.22s">
+            <div class="jcd-mnav__item" style="--mnav-c:#8EC041">
+              <a class="jcd-mnav__link" href="formation.html"
+                ><span class="jcd-mnav__dot"></span><span
+                  class="jcd-mnav__label">Formation</span
+                ></a
+              >
+              <button
+                class="jcd-acc__toggle"
+                type="button"
+                aria-expanded="false"
+                aria-controls="jcdAccForm"
+                aria-label="Afficher les catégories de formation"
+              >
+                <svg
+                  viewBox="0 0 14 14"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.6"
+                  stroke-linecap="round"><path d="M7 2v10M2 7h10"></path></svg
+                >
+              </button>
+            </div>
+            <div class="jcd-acc__panel" id="jcdAccForm">
+              <a class="jcd-mnav__sub" href="formation-bureautique.html"
+                >Bureautique</a
+              >
+              <a
+                class="jcd-mnav__sub"
+                href="formation-intelligence-artificielle.html"
+                >Intelligence artificielle</a
+              >
+              <a class="jcd-mnav__sub" href="formation-informatique.html"
+                >Informatique</a
+              >
+              <a
+                class="jcd-mnav__sub"
+                href="formation-communication-marketing.html"
+                >Communication - Marketing</a
+              >
+              <a class="jcd-mnav__sub" href="formation-management.html"
+                >Management</a
+              >
+              <a
+                class="jcd-mnav__sub"
+                href="formation-commerce-relation-client.html"
+                >Commerce - Relation client</a
+              >
+              <a
+                class="jcd-mnav__sub"
+                href="formation-comptabilite-gestion.html"
+                >Comptabilit&eacute; - Gestion</a
+              >
+              <a class="jcd-mnav__sub" href="formation-ressources-humaines.html"
+                >Ressources humaines</a
+              >
+              <a
+                class="jcd-mnav__sub"
+                href="formation-developpement-personnel.html"
+                >D&eacute;veloppement personnel</a
+              >
+              <a class="jcd-mnav__sub" href="formation-graphisme-pao.html"
+                >Graphisme - PAO</a
+              >
+              <a
+                class="jcd-mnav__sub"
+                href="formation-administratif-secretariat-accueil.html"
+                >Administratif - Secr&eacute;tariat</a
+              >
+              <a class="jcd-mnav__sub" href="formation-securite.html"
+                >S&eacute;curit&eacute;</a
+              >
+              <a class="jcd-mnav__sub" href="formation-langues.html">Langues</a>
+            </div>
+          </div>
+          <a
+            class="jcd-mnav__item jcd-mnav__reveal"
+            style="--mnav-c:#A78D75;transition-delay:.25s"
+            href="agencement.html"
+            ><span class="jcd-mnav__dot"></span><span class="jcd-mnav__label"
+              >Agencement</span
+            ></a
+          >
+
+          <p
+            class="jcd-mnav__eyebrow jcd-mnav__sec2 jcd-mnav__reveal"
+            style="transition-delay:.30s"
+          >
+            D&eacute;couvrir
+          </p>
+          <a
+            class="jcd-mnav__item jcd-mnav__reveal"
+            style="--mnav-c:#9a9a9a;transition-delay:.33s"
+            href="assistance.html"
+            ><span class="jcd-mnav__dot"></span><span
+              class="jcd-mnav__label"
+              style="font-size:19px">Assistance</span
+            ></a
+          >
+          <a
+            class="jcd-mnav__item jcd-mnav__reveal"
+            style="--mnav-c:#9a9a9a;transition-delay:.36s"
+            href="carrieres.html"
+            ><span class="jcd-mnav__dot"></span><span
+              class="jcd-mnav__label"
+              style="font-size:19px">Carri&egrave;res</span
+            ></a
+          >
+
+          <div
+            class="jcd-mnav__cta jcd-mnav__reveal"
+            style="transition-delay:.40s"
+          >
+            <a class="jcd-mnav__btn jcd-mnav__btn--primary" href="contact.html"
+              >Contacter un expert
+              <span class="jcd-mnav__btn-ic"
+                ><svg
+                  viewBox="0 0 16 16"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.7"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  ><path d="M3 8h10M9 4l4 4-4 4"></path></svg
+                ></span
+              ></a
+            >
+            <a
+              class="jcd-mnav__btn jcd-mnav__btn--ghost"
+              href="tel:+33387184920"
+              >03 87 18 49 20
+              <span class="jcd-mnav__btn-ic"
+                ><svg
+                  viewBox="0 0 18 18"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.5"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  ><path
+                    d="M2.5 3.5a1 1 0 011-1h2.4a1 1 0 01.95.68l.86 2.4a1 1 0 01-.24 1l-1.2 1.2a11 11 0 004.6 4.6l1.2-1.2a1 1 0 011-.24l2.4.86a1 1 0 01.68.95V15a1 1 0 01-1 1A13.5 13.5 0 012.5 3.5z"
+                  ></path></svg
+                ></span
+              ></a
+            >
           </div>
         </div>
       </div>
-
     </div>
-  </div>
-</section>
-
-</main>
-
-<!-- ================================
-     FOOTER
-     ================================ -->
-<Footer />
-
-
-<!-- ================================
-     SCRIPTS
-     ================================ -->
-<script is:inline src="js/pages/print-1.js"></script>
-<script is:inline src="js/shared/menu-frost.js"></script>
-<!-- jcd-mobile-nav (injected) -->
-<button class="jcd-burger" id="jcdBurger" type="button" aria-label="Ouvrir le menu" aria-expanded="false" aria-controls="jcdMnav">
-  <span class="jcd-burger__box" aria-hidden="true"><i></i><i></i><i></i></span>
-</button>
-<div class="jcd-mnav" id="jcdMnav" role="dialog" aria-modal="true" aria-label="Menu de navigation" aria-hidden="true">
-  <div class="jcd-mnav__scroll">
-    <div class="jcd-mnav__inner">
-      <p class="jcd-mnav__eyebrow jcd-mnav__reveal" style="transition-delay:.04s">Expertises</p>
-
-      <div class="jcd-mnav__reveal" style="transition-delay:.07s">
-        <div class="jcd-mnav__item" style="--mnav-c:#2E72BA">
-          <a class="jcd-mnav__link" href="informatique.html"><span class="jcd-mnav__dot"></span><span class="jcd-mnav__label">Informatique</span></a>
-          <button class="jcd-acc__toggle" type="button" aria-expanded="false" aria-controls="jcdAccInfo" aria-label="Afficher les sous-pages Informatique">
-            <svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M7 2v10M2 7h10"/></svg>
-          </button>
-        </div>
-        <div class="jcd-acc__panel" id="jcdAccInfo">
-          <a class="jcd-mnav__sub" href="info-cloud.html">Cloud Microsoft</a>
-          <a class="jcd-mnav__sub" href="info-collaboratif.html">Solutions collaboratives &amp; audiovisuelles</a>
-          <a class="jcd-mnav__sub" href="info-reseaux.html">Architectures syst&egrave;mes &amp; r&eacute;seaux</a>
-          <a class="jcd-mnav__sub" href="info-integration.html">Int&eacute;gration &amp; Support PC</a>
-        </div>
-      </div>
-
-      <a class="jcd-mnav__item jcd-mnav__reveal" style="--mnav-c:#E51D29;transition-delay:.10s" href="service.html"><span class="jcd-mnav__dot"></span><span class="jcd-mnav__label">Service</span></a>
-      <a class="jcd-mnav__item jcd-mnav__reveal" style="--mnav-c:#F9D605;transition-delay:.13s" href="developpement.html"><span class="jcd-mnav__dot"></span><span class="jcd-mnav__label">D&eacute;veloppement</span></a>
-      <a class="jcd-mnav__item jcd-mnav__reveal" style="--mnav-c:#F3941D;transition-delay:.16s" href="print.html"><span class="jcd-mnav__dot"></span><span class="jcd-mnav__label">Print</span></a>
-      <a class="jcd-mnav__item jcd-mnav__reveal" style="--mnav-c:#B063AC;transition-delay:.19s" href="telecom.html"><span class="jcd-mnav__dot"></span><span class="jcd-mnav__label">T&eacute;l&eacute;com</span></a>
-      <div class="jcd-mnav__reveal" style="transition-delay:.22s">
-        <div class="jcd-mnav__item" style="--mnav-c:#8EC041">
-          <a class="jcd-mnav__link" href="formation.html"><span class="jcd-mnav__dot"></span><span class="jcd-mnav__label">Formation</span></a>
-          <button class="jcd-acc__toggle" type="button" aria-expanded="false" aria-controls="jcdAccForm" aria-label="Afficher les cat&eacute;gories de formation">
-            <svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M7 2v10M2 7h10"/></svg>
-          </button>
-        </div>
-        <div class="jcd-acc__panel" id="jcdAccForm">
-          <a class="jcd-mnav__sub" href="formation-bureautique.html">Bureautique</a>
-          <a class="jcd-mnav__sub" href="formation-intelligence-artificielle.html">Intelligence artificielle</a>
-          <a class="jcd-mnav__sub" href="formation-informatique.html">Informatique</a>
-          <a class="jcd-mnav__sub" href="formation-communication-marketing.html">Communication - Marketing</a>
-          <a class="jcd-mnav__sub" href="formation-management.html">Management</a>
-          <a class="jcd-mnav__sub" href="formation-commerce-relation-client.html">Commerce - Relation client</a>
-          <a class="jcd-mnav__sub" href="formation-comptabilite-gestion.html">Comptabilit&eacute; - Gestion</a>
-          <a class="jcd-mnav__sub" href="formation-ressources-humaines.html">Ressources humaines</a>
-          <a class="jcd-mnav__sub" href="formation-developpement-personnel.html">D&eacute;veloppement personnel</a>
-          <a class="jcd-mnav__sub" href="formation-graphisme-pao.html">Graphisme - PAO</a>
-          <a class="jcd-mnav__sub" href="formation-administratif-secretariat-accueil.html">Administratif - Secr&eacute;tariat</a>
-          <a class="jcd-mnav__sub" href="formation-securite.html">S&eacute;curit&eacute;</a>
-          <a class="jcd-mnav__sub" href="formation-langues.html">Langues</a>
-        </div>
-      </div>
-      <a class="jcd-mnav__item jcd-mnav__reveal" style="--mnav-c:#A78D75;transition-delay:.25s" href="agencement.html"><span class="jcd-mnav__dot"></span><span class="jcd-mnav__label">Agencement</span></a>
-
-      <p class="jcd-mnav__eyebrow jcd-mnav__sec2 jcd-mnav__reveal" style="transition-delay:.30s">D&eacute;couvrir</p>
-      <a class="jcd-mnav__item jcd-mnav__reveal" style="--mnav-c:#9a9a9a;transition-delay:.33s" href="assistance.html"><span class="jcd-mnav__dot"></span><span class="jcd-mnav__label" style="font-size:19px">Assistance</span></a>
-      <a class="jcd-mnav__item jcd-mnav__reveal" style="--mnav-c:#9a9a9a;transition-delay:.36s" href="carrieres.html"><span class="jcd-mnav__dot"></span><span class="jcd-mnav__label" style="font-size:19px">Carri&egrave;res</span></a>
-
-      <div class="jcd-mnav__cta jcd-mnav__reveal" style="transition-delay:.40s">
-        <a class="jcd-mnav__btn jcd-mnav__btn--primary" href="contact.html">Contacter un expert
-          <span class="jcd-mnav__btn-ic"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h10M9 4l4 4-4 4"/></svg></span></a>
-        <a class="jcd-mnav__btn jcd-mnav__btn--ghost" href="tel:+33387184920">03 87 18 49 20
-          <span class="jcd-mnav__btn-ic"><svg viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2.5 3.5a1 1 0 011-1h2.4a1 1 0 01.95.68l.86 2.4a1 1 0 01-.24 1l-1.2 1.2a11 11 0 004.6 4.6l1.2-1.2a1 1 0 011-.24l2.4.86a1 1 0 01.68.95V15a1 1 0 01-1 1A13.5 13.5 0 012.5 3.5z"/></svg></span></a>
-      </div>
+    <script is:inline src="js/shared/mobile-nav.js"></script>
+    <!-- jcd-a11y (Lot 5) -->
+    <div class="jcd-fab-wrap" id="jcd-fab">
+      <button
+        class="jcd-fab jcd-fab--top"
+        id="jcdToTop"
+        type="button"
+        aria-label="Remonter en haut"
+      >
+        <svg
+          viewBox="0 0 20 20"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="1.8"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          aria-hidden="true"><path d="M10 16V5M5 10l5-5 5 5"></path></svg
+        >
+      </button>
+      <a
+        class="jcd-fab jcd-fab--contact"
+        id="jcdFabContact"
+        href="contact.html"
+        aria-label="Nous contacter"
+      >
+        <svg
+          viewBox="0 0 20 20"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="1.6"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          aria-hidden="true"
+          ><rect x="2.5" y="4.5" width="15" height="11" rx="2.3"></rect><path
+            d="M3 6.7 L10 10.7 L17 6.7"></path></svg
+        >
+      </a>
     </div>
-  </div>
-</div>
-<script is:inline src="js/shared/mobile-nav.js"></script>
-<!-- jcd-a11y (Lot 5) -->
-<div class="jcd-fab-wrap" id="jcd-fab">
-  <button class="jcd-fab jcd-fab--top" id="jcdToTop" type="button" aria-label="Remonter en haut">
-    <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 16V5M5 10l5-5 5 5"/></svg>
-  </button>
-  <a class="jcd-fab jcd-fab--contact" id="jcdFabContact" href="contact.html" aria-label="Nous contacter">
-    <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2.5" y="4.5" width="15" height="11" rx="2.3"/><path d="M3 6.7 L10 10.7 L17 6.7"/></svg>
-  </a>
-</div>
-<script is:inline src="js/shared/a11y.js" id="jcd-a11y-js"></script>
-<script is:inline src="js/shared/micons.js" id="jcd-micons-js"></script>
-<script is:inline src="js/shared/mrefonte.js" id="jcd-mrefonte-js"></script>
-
-
-</body>
+    <script is:inline src="js/shared/a11y.js" id="jcd-a11y-js"></script>
+    <script is:inline src="js/shared/micons.js" id="jcd-micons-js"></script>
+    <script is:inline src="js/shared/mrefonte.js" id="jcd-mrefonte-js"></script>
+  </body>
 </html>

@@ -1,603 +1,1214 @@
 ---
-import Header from '../components/Header.astro';
-import Footer from '../components/Footer.astro';
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
 ---
-<!DOCTYPE html>
+
 <html lang="fr">
-<head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-<meta name="color-scheme" content="dark" />
-<meta name="theme-color" content="#0d0d0d" />
-<link rel="icon" href="favicon.svg" type="image/svg+xml" />
-<meta name="description" content="JCD Groupe · Pôle Agencement. Space planning, mobilier de bureau, conception 3D et installation clé en main d'espaces de travail sur-mesure en Grand Est, depuis 1996." />
-<link rel="canonical" href="https://www.jcd-groupe.fr/agencement.html" />
-<meta property="og:type" content="website" />
-<meta property="og:site_name" content="JCD Groupe" />
-<meta property="og:locale" content="fr_FR" />
-<meta property="og:title" content="Agencement · Espaces de travail sur-mesure · JCD Groupe" />
-<meta property="og:description" content="JCD Groupe · Pôle Agencement. Space planning, mobilier de bureau, conception 3D et installation clé en main d'espaces de travail sur-mesure en Grand Est, depuis 1996." />
-<meta property="og:url" content="https://www.jcd-groupe.fr/agencement.html" />
-<meta name="twitter:card" content="summary" />
-<title>Agencement · Espaces de travail sur-mesure · JCD Groupe</title>
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+    />
+    <meta name="color-scheme" content="dark" />
+    <meta name="theme-color" content="#0d0d0d" />
+    <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+    <meta
+      name="description"
+      content="JCD Groupe · Pôle Agencement. Space planning, mobilier de bureau, conception 3D et installation clé en main d'espaces de travail sur-mesure en Grand Est, depuis 1996."
+    />
+    <link rel="canonical" href="https://www.jcd-groupe.fr/agencement.html" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="JCD Groupe" />
+    <meta property="og:locale" content="fr_FR" />
+    <meta
+      property="og:title"
+      content="Agencement · Espaces de travail sur-mesure · JCD Groupe"
+    />
+    <meta
+      property="og:description"
+      content="JCD Groupe · Pôle Agencement. Space planning, mobilier de bureau, conception 3D et installation clé en main d'espaces de travail sur-mesure en Grand Est, depuis 1996."
+    />
+    <meta
+      property="og:url"
+      content="https://www.jcd-groupe.fr/agencement.html"
+    />
+    <meta name="twitter:card" content="summary" />
+    <title>Agencement · Espaces de travail sur-mesure · JCD Groupe</title>
 
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..700&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..700&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Instrument+Serif:ital@0;1&display=swap"
+      rel="stylesheet"
+    />
 
-<link rel="stylesheet" href="css/agencement.css">
-<link rel="stylesheet" href="css/global.css">
-<link rel="stylesheet" href="css/agencement-overrides.css">
-  <link rel="stylesheet" href="transition.css">
-  <script is:inline src="transition.js"></script>
-<script is:inline src="js/shared/xpcompact.js" id="jcd-xpcompact-js"></script>
-<script is:inline src="js/shared/touch.js" id="jcd-touch-js"></script>
-<script is:inline src="js/shared/mrefonte-shim.js" id="jcd-mrefonte-shim"></script>
-</head>
-<body>
-<a class="jcd-skip" href="#contenu">Aller au contenu</a>
+    <link rel="stylesheet" href="css/agencement.css" />
+    <link rel="stylesheet" href="css/global.css" />
+    <link rel="stylesheet" href="css/agencement-overrides.css" />
+    <link rel="stylesheet" href="transition.css" />
+    <script is:inline src="transition.js"></script>
+    <script is:inline src="js/shared/xpcompact.js" id="jcd-xpcompact-js"
+    ></script>
+    <script is:inline src="js/shared/touch.js" id="jcd-touch-js"></script>
+    <script is:inline src="js/shared/mrefonte-shim.js" id="jcd-mrefonte-shim"
+    ></script>
+  </head>
+  <body>
+    <a class="jcd-skip" href="#contenu">Aller au contenu</a>
 
-<!-- ====================================================================
+    <!-- ====================================================================
      NAVBAR v2 — Modal-like
      ==================================================================== -->
-<Header />
+    <Header />
 
-
-<main id="contenu">
-
-<!-- ====================================================================
+    <main id="contenu">
+      <!-- ====================================================================
      HERO + MANIFESTO — zone épinglée : le hero reste sticky, le manifeste
      glisse par-dessus.
      ==================================================================== -->
-<div class="hero-pin-zone">
+      <div class="hero-pin-zone">
+        <section class="print-hero" aria-labelledby="agc-hero-title">
+          <!-- Couche 0 : fallback CSS -->
+          <div class="hero-mesh-fallback" aria-hidden="true"></div>
 
-  <section class="print-hero" aria-labelledby="agc-hero-title">
+          <!-- Couche 1 : canvas WebGL — nappe de lumière taupe -->
+          <canvas class="hero-mesh" id="heroMesh" aria-hidden="true"></canvas>
 
-    <!-- Couche 0 : fallback CSS -->
-    <div class="hero-mesh-fallback" aria-hidden="true"></div>
+          <!-- Couche 2 : trame plan d'architecte — discrète (papier) -->
+          <div class="hero-texture hero-texture--plan" aria-hidden="true"></div>
 
-    <!-- Couche 1 : canvas WebGL — nappe de lumière taupe -->
-    <canvas class="hero-mesh" id="heroMesh" aria-hidden="true"></canvas>
+          <!-- Couche 3 : grain -->
+          <div class="hero-grain" aria-hidden="true"></div>
 
-    <!-- Couche 2 : trame plan d'architecte — discrète (papier) -->
-    <div class="hero-texture hero-texture--plan" aria-hidden="true"></div>
+          <div class="container">
+            <h1 id="agc-hero-title" class="hero-title reveal delay-1">
+              L'espace de travail qui s'adapte à vous,<br />
+              <span class="accent-grad">pas l'inverse.</span>
+            </h1>
 
-    <!-- Couche 3 : grain -->
-    <div class="hero-grain" aria-hidden="true"></div>
+            <p class="hero-sub reveal delay-2">
+              De l'étude des flux à la pose du dernier meuble : des espaces de
+              travail sur-mesure, orchestrés par un space planner dédié.
+            </p>
 
-    <div class="container">
-      <h1 id="agc-hero-title" class="hero-title reveal delay-1">
-        L'espace de travail qui s'adapte à vous,<br>
-        <span class="accent-grad">pas l'inverse.</span>
-      </h1>
+            <div class="hero-actions reveal delay-3">
+              <a href="#process" class="btn-cta btn-cta--ghost">
+                Contacter un expert
+                <span class="btn-cta-arrow"
+                  ><svg
+                    viewBox="0 0 16 16"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="1.6"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    ><path d="M3 8h10M9 4l4 4-4 4"></path></svg
+                  ></span
+                >
+              </a>
+            </div>
+          </div>
+        </section>
 
-      <p class="hero-sub reveal delay-2">
-        De l'étude des flux à la pose du dernier meuble : des espaces de travail sur-mesure, orchestrés par un space planner dédié.
-      </p>
-
-      <div class="hero-actions reveal delay-3">
-        <a href="#process" class="btn-cta btn-cta--ghost">
-          Contacter un expert
-          <span class="btn-cta-arrow"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h10M9 4l4 4-4 4"/></svg></span>
-        </a>
-      </div>
-    </div>
-  </section>
-
-  <!-- ================================
+        <!-- ================================
        MANIFESTO — Lignes de cote
        ================================ -->
-  <section class="manifesto" aria-labelledby="manifesto-title">
-    <div class="coupe-sheet">
-      <div class="coupe-light" aria-hidden="true"></div>
-      <div class="container">
+        <section class="manifesto" aria-labelledby="manifesto-title">
+          <div class="coupe-sheet">
+            <div class="coupe-light" aria-hidden="true"></div>
+            <div class="container">
+              <header class="mf-header">
+                <span class="mf-header-side">
+                  <span class="mf-caret" aria-hidden="true">&#9656;</span>
+                  <span class="mf-id">PL&middot;01</span>
+                  <span class="mf-rule" aria-hidden="true"></span>
+                  <span>Manifeste</span>
+                </span>
+                <span class="mf-header-side">
+                  <span>Coupe</span>
+                  <span class="mf-rule" aria-hidden="true"></span>
+                  <span class="mf-scale">Éch. 1:1</span>
+                  <span class="mf-rule" aria-hidden="true"></span>
+                  <span>Pôle Agencement</span>
+                </span>
+              </header>
 
-        <header class="mf-header">
-          <span class="mf-header-side">
-            <span class="mf-caret" aria-hidden="true">&#9656;</span>
-            <span class="mf-id">PL&middot;01</span>
-            <span class="mf-rule" aria-hidden="true"></span>
-            <span>Manifeste</span>
-          </span>
-          <span class="mf-header-side">
-            <span>Coupe</span>
-            <span class="mf-rule" aria-hidden="true"></span>
-            <span class="mf-scale">Éch. 1:1</span>
-            <span class="mf-rule" aria-hidden="true"></span>
-            <span>Pôle Agencement</span>
-          </span>
-        </header>
+              <blockquote class="mf-quote reveal delay-1" id="manifesto-title">
+                Aménager un espace, ce n'est pas seulement meubler une surface.
+                C'est optimiser les <span class="cote"
+                  >flux<span class="cote-sup" aria-hidden="true">01</span><span
+                    class="cote-uline"
+                    style="--cd:.34s"
+                    aria-hidden="true"
+                    ><span class="cote-uline-bar"></span></span
+                  ></span
+                >, les <span class="cote"
+                  >usages<span class="cote-sup" aria-hidden="true">02</span
+                  ><span class="cote-uline" style="--cd:.5s" aria-hidden="true"
+                    ><span class="cote-uline-bar"></span></span
+                  ></span
+                > et les <span class="cote"
+                  >silences<span class="cote-sup" aria-hidden="true">03</span
+                  ><span class="cote-uline" style="--cd:.66s" aria-hidden="true"
+                    ><span class="cote-uline-bar"></span></span
+                  ></span
+                > de vos équipes.
+              </blockquote>
 
-        <blockquote class="mf-quote reveal delay-1" id="manifesto-title">
-          Aménager un espace, ce n'est pas seulement meubler une surface. C'est optimiser les <span class="cote">flux<span class="cote-sup" aria-hidden="true">01</span><span class="cote-uline" style="--cd:.34s" aria-hidden="true"><span class="cote-uline-bar"></span></span></span>, les <span class="cote">usages<span class="cote-sup" aria-hidden="true">02</span><span class="cote-uline" style="--cd:.5s" aria-hidden="true"><span class="cote-uline-bar"></span></span></span> et les <span class="cote">silences<span class="cote-sup" aria-hidden="true">03</span><span class="cote-uline" style="--cd:.66s" aria-hidden="true"><span class="cote-uline-bar"></span></span></span> de vos équipes.
-        </blockquote>
-
-        <div class="mf-ruler reveal delay-2">
-          <span class="mf-ruler-line" aria-hidden="true"></span>
-          <div class="mf-ruler-stations">
-            <div class="mf-station" style="--sd:1.35s">
-              <span class="mf-station-tick" aria-hidden="true"></span>
-              <span class="mf-station-num">01</span>
-              <span class="mf-station-term">Flux</span>
-              <span class="mf-station-gloss">Comment on circule, on se croise, on se concentre, la chorégraphie d'une journée de travail.</span>
-            </div>
-            <div class="mf-station" style="--sd:1.5s">
-              <span class="mf-station-tick" aria-hidden="true"></span>
-              <span class="mf-station-num">02</span>
-              <span class="mf-station-term">Usages</span>
-              <span class="mf-station-gloss">Ce que chaque équipe fait réellement de l'espace, au-delà de l'organigramme.</span>
-            </div>
-            <div class="mf-station" style="--sd:1.65s">
-              <span class="mf-station-tick" aria-hidden="true"></span>
-              <span class="mf-station-num">03</span>
-              <span class="mf-station-term">Silences</span>
-              <span class="mf-station-gloss">Le calme, l'intime, la concentration&nbsp;: ce qui ne se dit pas mais doit se concevoir.</span>
+              <div class="mf-ruler reveal delay-2">
+                <span class="mf-ruler-line" aria-hidden="true"></span>
+                <div class="mf-ruler-stations">
+                  <div class="mf-station" style="--sd:1.35s">
+                    <span class="mf-station-tick" aria-hidden="true"></span>
+                    <span class="mf-station-num">01</span>
+                    <span class="mf-station-term">Flux</span>
+                    <span class="mf-station-gloss"
+                      >Comment on circule, on se croise, on se concentre, la
+                      chorégraphie d'une journée de travail.</span
+                    >
+                  </div>
+                  <div class="mf-station" style="--sd:1.5s">
+                    <span class="mf-station-tick" aria-hidden="true"></span>
+                    <span class="mf-station-num">02</span>
+                    <span class="mf-station-term">Usages</span>
+                    <span class="mf-station-gloss"
+                      >Ce que chaque équipe fait réellement de l'espace, au-delà
+                      de l'organigramme.</span
+                    >
+                  </div>
+                  <div class="mf-station" style="--sd:1.65s">
+                    <span class="mf-station-tick" aria-hidden="true"></span>
+                    <span class="mf-station-num">03</span>
+                    <span class="mf-station-term">Silences</span>
+                    <span class="mf-station-gloss"
+                      >Le calme, l'intime, la concentration&nbsp;: ce qui ne se
+                      dit pas mais doit se concevoir.</span
+                    >
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
-        </div>
+        </section>
+      </div><!-- /hero-pin-zone -->
 
-      </div>
-    </div>
-  </section>
-
-</div><!-- /hero-pin-zone -->
-
-
-<!-- ================================
+      <!-- ================================
      PRESTATIONS — Nos compétences
      ================================ -->
-<section class="prestations" id="prestations" aria-labelledby="prestations-title">
-  <div class="container">
-    <div class="prest-layout">
+      <section
+        class="prestations"
+        id="prestations"
+        aria-labelledby="prestations-title"
+      >
+        <div class="container">
+          <div class="prest-layout">
+            <aside class="prest-aside reveal">
+              <h2 class="prest-aside-title" id="prestations-title">
+                <span class="accent">Six savoir-faire</span>, un projet mené
+                d'un seul tenant.
+              </h2>
+              <p class="prest-aside-sub">
+                Du plan d'implantation à la pose du dernier meuble, un seul
+                interlocuteur porte chaque étape.
+              </p>
 
-      <aside class="prest-aside reveal">
-        <h2 class="prest-aside-title" id="prestations-title">
-          <span class="accent">Six savoir-faire</span>, un projet mené d'un seul tenant.
-        </h2>
-        <p class="prest-aside-sub">
-          Du plan d'implantation à la pose du dernier meuble, un seul interlocuteur porte chaque étape.
-        </p>
+              <div class="prest-aside-partners">
+                <div class="prest-aside-partners-head">
+                  <span class="prest-aside-partners-label">Fournisseurs</span>
+                  <span class="prest-aside-partners-rule" aria-hidden="true"
+                  ></span>
+                  <span class="prest-aside-partners-count">+100</span>
+                </div>
+                <div class="prest-aside-partners-grid">
+                  <div class="logo-tile" data-brand="sedus">
+                    <img
+                      class="logo-tile-img"
+                      loading="lazy"
+                      decoding="async"
+                      src="logo%20agencement/sedus.png"
+                      alt=""
+                      aria-hidden="true"
+                    />
+                    <span class="logo-tile-name">Sedus</span>
+                  </div>
+                  <div class="logo-tile" data-brand="brunner">
+                    <img
+                      class="logo-tile-img"
+                      loading="lazy"
+                      decoding="async"
+                      src="logo%20agencement/brunner.png"
+                      alt=""
+                      aria-hidden="true"
+                    />
+                    <span class="logo-tile-name">Brunner</span>
+                  </div>
+                  <div class="logo-tile" data-brand="forma5">
+                    <img
+                      class="logo-tile-img"
+                      loading="lazy"
+                      decoding="async"
+                      src="logo%20agencement/forma5.png"
+                      alt=""
+                      aria-hidden="true"
+                    />
+                    <span class="logo-tile-name">Forma 5</span>
+                  </div>
+                  <div class="logo-tile" data-brand="buronomic">
+                    <img
+                      class="logo-tile-img"
+                      loading="lazy"
+                      decoding="async"
+                      src="logo%20agencement/buronomic.png"
+                      alt=""
+                      aria-hidden="true"
+                    />
+                    <span class="logo-tile-name">Buronomic</span>
+                  </div>
+                  <div class="logo-tile" data-brand="bralco">
+                    <img
+                      class="logo-tile-img"
+                      loading="lazy"
+                      decoding="async"
+                      src="logo%20agencement/bralco.png"
+                      alt=""
+                      aria-hidden="true"
+                    />
+                    <span class="logo-tile-name">Bralco</span>
+                  </div>
+                  <div class="logo-tile" data-brand="clen">
+                    <img
+                      class="logo-tile-img"
+                      loading="lazy"
+                      decoding="async"
+                      src="logo%20agencement/clen.png"
+                      alt=""
+                      aria-hidden="true"
+                    />
+                    <span class="logo-tile-name">Clen</span>
+                  </div>
+                  <div class="logo-tile" data-brand="columbia">
+                    <img
+                      class="logo-tile-img"
+                      loading="lazy"
+                      decoding="async"
+                      src="logo%20agencement/columbia.png"
+                      alt=""
+                      aria-hidden="true"
+                    />
+                    <span class="logo-tile-name">Columbia</span>
+                  </div>
+                  <div class="logo-tile" data-brand="espattio">
+                    <img
+                      class="logo-tile-img"
+                      loading="lazy"
+                      decoding="async"
+                      src="logo%20agencement/espattio.png"
+                      alt=""
+                      aria-hidden="true"
+                    />
+                    <span class="logo-tile-name">esPattio</span>
+                  </div>
+                  <div class="logo-tile" data-brand="manade">
+                    <img
+                      class="logo-tile-img"
+                      loading="lazy"
+                      decoding="async"
+                      src="logo%20agencement/manade.png"
+                      alt=""
+                      aria-hidden="true"
+                    />
+                    <span class="logo-tile-name">Manade</span>
+                  </div>
+                  <div class="logo-tile" data-brand="mobimetal">
+                    <img
+                      class="logo-tile-img"
+                      loading="lazy"
+                      decoding="async"
+                      src="logo%20agencement/mobimetal.png"
+                      alt=""
+                      aria-hidden="true"
+                    />
+                    <span class="logo-tile-name">Mobimétal</span>
+                  </div>
+                </div>
+              </div>
+            </aside>
 
-        <div class="prest-aside-partners">
-          <div class="prest-aside-partners-head">
-            <span class="prest-aside-partners-label">Fournisseurs</span>
-            <span class="prest-aside-partners-rule" aria-hidden="true"></span>
-            <span class="prest-aside-partners-count">+100</span>
-          </div>
-          <div class="prest-aside-partners-grid">
-            <div class="logo-tile" data-brand="sedus">
-              <img class="logo-tile-img" loading="lazy" decoding="async" src="logo%20agencement/sedus.png" alt="" aria-hidden="true">
-              <span class="logo-tile-name">Sedus</span>
-            </div>
-            <div class="logo-tile" data-brand="brunner">
-              <img class="logo-tile-img" loading="lazy" decoding="async" src="logo%20agencement/brunner.png" alt="" aria-hidden="true">
-              <span class="logo-tile-name">Brunner</span>
-            </div>
-            <div class="logo-tile" data-brand="forma5">
-              <img class="logo-tile-img" loading="lazy" decoding="async" src="logo%20agencement/forma5.png" alt="" aria-hidden="true">
-              <span class="logo-tile-name">Forma 5</span>
-            </div>
-            <div class="logo-tile" data-brand="buronomic">
-              <img class="logo-tile-img" loading="lazy" decoding="async" src="logo%20agencement/buronomic.png" alt="" aria-hidden="true">
-              <span class="logo-tile-name">Buronomic</span>
-            </div>
-            <div class="logo-tile" data-brand="bralco">
-              <img class="logo-tile-img" loading="lazy" decoding="async" src="logo%20agencement/bralco.png" alt="" aria-hidden="true">
-              <span class="logo-tile-name">Bralco</span>
-            </div>
-            <div class="logo-tile" data-brand="clen">
-              <img class="logo-tile-img" loading="lazy" decoding="async" src="logo%20agencement/clen.png" alt="" aria-hidden="true">
-              <span class="logo-tile-name">Clen</span>
-            </div>
-            <div class="logo-tile" data-brand="columbia">
-              <img class="logo-tile-img" loading="lazy" decoding="async" src="logo%20agencement/columbia.png" alt="" aria-hidden="true">
-              <span class="logo-tile-name">Columbia</span>
-            </div>
-            <div class="logo-tile" data-brand="espattio">
-              <img class="logo-tile-img" loading="lazy" decoding="async" src="logo%20agencement/espattio.png" alt="" aria-hidden="true">
-              <span class="logo-tile-name">esPattio</span>
-            </div>
-            <div class="logo-tile" data-brand="manade">
-              <img class="logo-tile-img" loading="lazy" decoding="async" src="logo%20agencement/manade.png" alt="" aria-hidden="true">
-              <span class="logo-tile-name">Manade</span>
-            </div>
-            <div class="logo-tile" data-brand="mobimetal">
-              <img class="logo-tile-img" loading="lazy" decoding="async" src="logo%20agencement/mobimetal.png" alt="" aria-hidden="true">
-              <span class="logo-tile-name">Mobimétal</span>
+            <div class="prest-menu reveal delay-1">
+              <article class="prest-item">
+                <div class="prest-item-head">
+                  <span class="prest-item-glyph" aria-hidden="true">
+                    <svg
+                      viewBox="0 0 40 40"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="1.25"
+                      stroke-linejoin="round"
+                      stroke-linecap="round"
+                    >
+                      <rect x="6" y="8" width="28" height="24" rx="1.5"></rect>
+                      <path d="M21 8 V32" opacity="0.5"></path>
+                      <path d="M21 21 H34" opacity="0.5"></path>
+                      <path d="M6 20 H13" opacity="0.85"></path>
+                    </svg>
+                  </span>
+                </div>
+                <h3 class="prest-item-title">Space planning</h3>
+                <p class="prest-item-desc">
+                  Étude des flux et plans d'implantation pour tirer le meilleur
+                  de chaque mètre carré.
+                </p>
+              </article>
+
+              <article class="prest-item">
+                <div class="prest-item-head">
+                  <span class="prest-item-glyph" aria-hidden="true">
+                    <svg
+                      viewBox="0 0 40 40"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="1.25"
+                      stroke-linejoin="round"
+                      stroke-linecap="round"
+                    >
+                      <rect x="6" y="14" width="20" height="4" rx="1.2"></rect>
+                      <path d="M9 18 V29 M23 18 V29"></path>
+                      <circle cx="32" cy="21" r="5.4" opacity="0.62"></circle>
+                      <path d="M32 26.4 V31" opacity="0.62"></path>
+                    </svg>
+                  </span>
+                </div>
+                <h3 class="prest-item-title">Mobilier de bureau</h3>
+                <p class="prest-item-desc">
+                  Sélection et fourniture de mobilier sur-mesure, des postes
+                  individuels aux espaces partagés.
+                </p>
+              </article>
+
+              <article class="prest-item">
+                <div class="prest-item-head">
+                  <span class="prest-item-glyph" aria-hidden="true">
+                    <svg
+                      viewBox="0 0 40 40"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="1.25"
+                      stroke-linejoin="round"
+                      stroke-linecap="round"
+                    >
+                      <path d="M11 8 V32 M19 8 V32"></path>
+                      <path d="M25 13 a8 8 0 0 1 0 14" opacity="0.55"></path>
+                      <path d="M28.5 16.5 a4 4 0 0 1 0 7" opacity="0.8"></path>
+                    </svg>
+                  </span>
+                </div>
+                <h3 class="prest-item-title">Acoustique et ergonomie</h3>
+                <p class="prest-item-desc">
+                  Traitement acoustique et postes ergonomiques, pour des espaces
+                  sains et confortables à vivre.
+                </p>
+              </article>
+
+              <article class="prest-item">
+                <div class="prest-item-head">
+                  <span class="prest-item-glyph" aria-hidden="true">
+                    <svg
+                      viewBox="0 0 40 40"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="1.25"
+                      stroke-linejoin="round"
+                      stroke-linecap="round"
+                    >
+                      <path d="M20 6 L33 13.5 L33 27.5 L20 35 L7 27.5 L7 13.5 Z"
+                      ></path>
+                      <path
+                        d="M20 6 V20 M20 20 L33 13.5 M20 20 L7 13.5"
+                        opacity="0.55"></path>
+                    </svg>
+                  </span>
+                </div>
+                <h3 class="prest-item-title">Modélisation 3D</h3>
+                <p class="prest-item-desc">
+                  Plans, maquettes et visuels 3D : visualiser l'espace fini
+                  avant la pose du premier meuble.
+                </p>
+              </article>
+
+              <article class="prest-item">
+                <div class="prest-item-head">
+                  <span class="prest-item-glyph" aria-hidden="true">
+                    <svg
+                      viewBox="0 0 40 40"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="1.25"
+                      stroke-linejoin="round"
+                      stroke-linecap="round"
+                    >
+                      <circle cx="20" cy="20" r="8"></circle>
+                      <circle cx="20" cy="7.6" r="2.4"></circle>
+                      <circle cx="20" cy="32.4" r="2.4"></circle>
+                      <circle cx="7.6" cy="20" r="2.4"></circle>
+                      <circle cx="32.4" cy="20" r="2.4"></circle>
+                    </svg>
+                  </span>
+                </div>
+                <h3 class="prest-item-title">Espaces collaboratifs</h3>
+                <p class="prest-item-desc">
+                  Salles de réunion, phone-box et espaces de convivialité,
+                  équipés et prêts à l'usage.
+                </p>
+              </article>
+
+              <article class="prest-item">
+                <div class="prest-item-head">
+                  <span class="prest-item-glyph" aria-hidden="true">
+                    <svg
+                      viewBox="0 0 40 40"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="1.25"
+                      stroke-linejoin="round"
+                      stroke-linecap="round"
+                    >
+                      <path d="M9 8 L9 31 L32 31 Z"></path>
+                      <path d="M9 24 L16 24 L16 31" opacity="0.5"></path>
+                      <path d="M9 13 H13 M9 18 H13" opacity="0.7"></path>
+                    </svg>
+                  </span>
+                </div>
+                <h3 class="prest-item-title">Accompagnement &amp; pose</h3>
+                <p class="prest-item-desc">
+                  Du devis à l'achat des matériaux jusqu'à la livraison : une
+                  installation clé en main.
+                </p>
+              </article>
             </div>
           </div>
         </div>
-      </aside>
+      </section>
 
-      <div class="prest-menu reveal delay-1">
-
-        <article class="prest-item">
-          <div class="prest-item-head">
-            <span class="prest-item-glyph" aria-hidden="true">
-              <svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linejoin="round" stroke-linecap="round">
-                <rect x="6" y="8" width="28" height="24" rx="1.5"/>
-                <path d="M21 8 V32" opacity="0.5"/>
-                <path d="M21 21 H34" opacity="0.5"/>
-                <path d="M6 20 H13" opacity="0.85"/>
-              </svg>
-            </span>
-          </div>
-          <h3 class="prest-item-title">Space planning</h3>
-          <p class="prest-item-desc">Étude des flux et plans d'implantation pour tirer le meilleur de chaque mètre carré.</p>
-        </article>
-
-        <article class="prest-item">
-          <div class="prest-item-head">
-            <span class="prest-item-glyph" aria-hidden="true">
-              <svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linejoin="round" stroke-linecap="round">
-                <rect x="6" y="14" width="20" height="4" rx="1.2"/>
-                <path d="M9 18 V29 M23 18 V29"/>
-                <circle cx="32" cy="21" r="5.4" opacity="0.62"/>
-                <path d="M32 26.4 V31" opacity="0.62"/>
-              </svg>
-            </span>
-          </div>
-          <h3 class="prest-item-title">Mobilier de bureau</h3>
-          <p class="prest-item-desc">Sélection et fourniture de mobilier sur-mesure, des postes individuels aux espaces partagés.</p>
-        </article>
-
-        <article class="prest-item">
-          <div class="prest-item-head">
-            <span class="prest-item-glyph" aria-hidden="true">
-              <svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linejoin="round" stroke-linecap="round">
-                <path d="M11 8 V32 M19 8 V32"/>
-                <path d="M25 13 a8 8 0 0 1 0 14" opacity="0.55"/>
-                <path d="M28.5 16.5 a4 4 0 0 1 0 7" opacity="0.8"/>
-              </svg>
-            </span>
-          </div>
-          <h3 class="prest-item-title">Acoustique et ergonomie</h3>
-          <p class="prest-item-desc">Traitement acoustique et postes ergonomiques, pour des espaces sains et confortables à vivre.</p>
-        </article>
-
-        <article class="prest-item">
-          <div class="prest-item-head">
-            <span class="prest-item-glyph" aria-hidden="true">
-              <svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linejoin="round" stroke-linecap="round">
-                <path d="M20 6 L33 13.5 L33 27.5 L20 35 L7 27.5 L7 13.5 Z"/>
-                <path d="M20 6 V20 M20 20 L33 13.5 M20 20 L7 13.5" opacity="0.55"/>
-              </svg>
-            </span>
-          </div>
-          <h3 class="prest-item-title">Modélisation 3D</h3>
-          <p class="prest-item-desc">Plans, maquettes et visuels 3D : visualiser l'espace fini avant la pose du premier meuble.</p>
-        </article>
-
-        <article class="prest-item">
-          <div class="prest-item-head">
-            <span class="prest-item-glyph" aria-hidden="true">
-              <svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linejoin="round" stroke-linecap="round">
-                <circle cx="20" cy="20" r="8"/>
-                <circle cx="20" cy="7.6" r="2.4"/>
-                <circle cx="20" cy="32.4" r="2.4"/>
-                <circle cx="7.6" cy="20" r="2.4"/>
-                <circle cx="32.4" cy="20" r="2.4"/>
-              </svg>
-            </span>
-          </div>
-          <h3 class="prest-item-title">Espaces collaboratifs</h3>
-          <p class="prest-item-desc">Salles de réunion, phone-box et espaces de convivialité, équipés et prêts à l'usage.</p>
-        </article>
-
-        <article class="prest-item">
-          <div class="prest-item-head">
-            <span class="prest-item-glyph" aria-hidden="true">
-              <svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linejoin="round" stroke-linecap="round">
-                <path d="M9 8 L9 31 L32 31 Z"/>
-                <path d="M9 24 L16 24 L16 31" opacity="0.5"/>
-                <path d="M9 13 H13 M9 18 H13" opacity="0.7"/>
-              </svg>
-            </span>
-          </div>
-          <h3 class="prest-item-title">Accompagnement &amp; pose</h3>
-          <p class="prest-item-desc">Du devis à l'achat des matériaux jusqu'à la livraison : une installation clé en main.</p>
-        </article>
-
-      </div>
-    </div>
-  </div>
-</section>
-
-
-<!-- ================================
+      <!-- ================================
      SECTION DIVIDER
      ================================ -->
-<div class="section-divider" aria-hidden="true">
-  <div class="container">
-    <span class="section-divider-line"></span>
-  </div>
-</div>
+      <div class="section-divider" aria-hidden="true">
+        <div class="container">
+          <span class="section-divider-line"></span>
+        </div>
+      </div>
 
-
-<!-- ================================
+      <!-- ================================
      PROCESS — Ligne de cote : 3 temps
      ================================ -->
-<section class="process" id="process" aria-labelledby="process-title">
-  <div class="container">
-    <div class="section-head reveal">
-      <h2 class="section-title" id="process-title">
-        Trois temps, <span class="accent">un espace maîtrisé de bout en bout.</span>
-        <span class="text-muted">De la première esquisse au jour où vos équipes prennent leurs marques.</span>
-      </h2>
-    </div>
-
-    <div class="pf-vflow reveal">
-
-      <!-- ====== SVG Ligne de cote : axe coté + 3 stations-repères ====== -->
-      <svg class="pf-vsvg" viewBox="0 0 900 210" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" preserveAspectRatio="xMidYMid meet">
-        <defs>
-          <linearGradient id="pf-axis-grad" x1="96" y1="0" x2="804" y2="0" gradientUnits="userSpaceOnUse">
-            <stop offset="0"    stop-color="#A78D75" stop-opacity="0"/>
-            <stop offset="0.08" stop-color="#A78D75" stop-opacity="0.5"/>
-            <stop offset="0.92" stop-color="#A78D75" stop-opacity="0.5"/>
-            <stop offset="1"    stop-color="#A78D75" stop-opacity="0"/>
-          </linearGradient>
-        </defs>
-
-        <!-- Labels extrémités : état initial → état livré -->
-        <g class="pf-anim-node" style="--d: 0.2s">
-          <text x="22" y="36" font-family="JetBrains Mono, ui-monospace, monospace" font-size="9.5" fill="rgba(255,255,255,0.34)" letter-spacing="3.2">ESPACE EXISTANT</text>
-        </g>
-        <g class="pf-anim-node" style="--d: 1s">
-          <text x="878" y="36" text-anchor="end" font-family="JetBrains Mono, ui-monospace, monospace" font-size="9.5" fill="rgba(255,255,255,0.34)" letter-spacing="3.2">NOUVEL ESPACE</text>
-        </g>
-
-        <!-- Axe principal : hairline fondu aux deux extrémités, dessin progressif unique -->
-        <path class="pf-draw" style="--d: 0s" d="M 96,86 L 804,86" pathLength="100"
-              stroke="url(#pf-axis-grad)" stroke-width="1"/>
-
-        <!-- Connecteurs verticaux : hairlines pleines, tracé progressif station -> carte -->
-        <path class="pf-draw" style="--d: 0.6s"  d="M 150,99 L 150,203" pathLength="100" stroke="#c6ad95" stroke-width="1" stroke-opacity="0.55" stroke-linecap="round"/>
-        <path class="pf-draw" style="--d: 0.78s" d="M 450,99 L 450,203" pathLength="100" stroke="#A78D75" stroke-width="1" stroke-opacity="0.55" stroke-linecap="round"/>
-        <path class="pf-draw" style="--d: 0.96s" d="M 750,99 L 750,203" pathLength="100" stroke="#8a6e54" stroke-width="1" stroke-opacity="0.6" stroke-linecap="round"/>
-
-        <!-- Stations : anneau hairline + point, respiration autour de l'axe -->
-        <g class="pf-anim-node" style="--d: 0.5s">
-          <circle cx="150" cy="86" r="7" fill="#0d0d0d" stroke="#c6ad95" stroke-width="1" stroke-opacity="0.32"/>
-          <circle cx="150" cy="86" r="2.2" fill="#c6ad95"/>
-        </g>
-        <g class="pf-anim-node" style="--d: 0.68s">
-          <circle cx="450" cy="86" r="7" fill="#0d0d0d" stroke="#A78D75" stroke-width="1" stroke-opacity="0.34"/>
-          <circle cx="450" cy="86" r="2.2" fill="#A78D75"/>
-        </g>
-        <g class="pf-anim-node" style="--d: 0.86s">
-          <circle cx="750" cy="86" r="7" fill="#0d0d0d" stroke="#8a6e54" stroke-width="1" stroke-opacity="0.38"/>
-          <circle cx="750" cy="86" r="2.2" fill="#8a6e54"/>
-        </g>
-
-        <!-- Pads de connexion au top de chaque carte : point unique, discret -->
-        <g class="pf-anim-node pf-vdot pf-vdot--1" style="--d: 1.05s">
-          <circle cx="150" cy="210" r="4.5" fill="#141414" stroke="#c6ad95" stroke-width="1" stroke-opacity="0.4"/>
-          <circle cx="150" cy="210" r="1.6" fill="#c6ad95"/>
-        </g>
-        <g class="pf-anim-node pf-vdot pf-vdot--2" style="--d: 1.2s">
-          <circle cx="450" cy="210" r="4.5" fill="#141414" stroke="#A78D75" stroke-width="1" stroke-opacity="0.4"/>
-          <circle cx="450" cy="210" r="1.6" fill="#A78D75"/>
-        </g>
-        <g class="pf-anim-node pf-vdot pf-vdot--3" style="--d: 1.35s">
-          <circle cx="750" cy="210" r="4.5" fill="#141414" stroke="#8a6e54" stroke-width="1" stroke-opacity="0.4"/>
-          <circle cx="750" cy="210" r="1.6" fill="#8a6e54"/>
-        </g>
-      </svg>
-
-      <!-- ====== 3 CARDS alignées avec les stations ====== -->
-      <div class="pf-vcards">
-
-        <article class="pf-vcard" style="--c: #c6ad95; --c-rgb: 198,173,149;">
-          <div class="pf-vcard-head">
-            <span class="pf-vcard-glyph" aria-hidden="true">
-              <svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round">
-                <rect x="7" y="9" width="26" height="22" rx="1.6"/>
-                <path d="M11.5 25.5 C 16 14.5, 24 14.5, 27.5 21.5" opacity="0.8"/>
-                <path d="M27.5 21.5 L24.7 20.2 M27.5 21.5 L25.9 24.3" opacity="0.8"/>
-                <circle cx="11.5" cy="25.5" r="1.7" fill="currentColor" stroke="none"/>
-              </svg>
-            </span>
+      <section class="process" id="process" aria-labelledby="process-title">
+        <div class="container">
+          <div class="section-head reveal">
+            <h2 class="section-title" id="process-title">
+              Trois temps, <span class="accent"
+                >un espace maîtrisé de bout en bout.</span
+              >
+              <span class="text-muted"
+                >De la première esquisse au jour où vos équipes prennent leurs
+                marques.</span
+              >
+            </h2>
           </div>
-          <h3 class="pf-vcard-title">Réflexion</h3>
-          <p class="pf-vcard-desc">Analyse des besoins, des flux et des usages : nous lisons l'espace avant de le dessiner.</p>
-          <div class="pf-vcard-fade" aria-hidden="true"></div>
-        </article>
 
-        <article class="pf-vcard" style="--c: #A78D75; --c-rgb: 167,141,117;">
-          <div class="pf-vcard-head">
-            <span class="pf-vcard-glyph" aria-hidden="true">
-              <svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round">
-                <circle cx="20" cy="9" r="2.6"/>
-                <path d="M20 11.6 L12 31.5"/>
-                <path d="M20 11.6 L28 31.5"/>
-                <path d="M14.4 25.6 a 8.5 8.5 0 0 0 11.2 0" opacity="0.5"/>
-                <path d="M12 31.5 L10.3 27.6 L13.9 28 Z" fill="currentColor" stroke="none"/>
-              </svg>
-            </span>
+          <div class="pf-vflow reveal">
+            <!-- ====== SVG Ligne de cote : axe coté + 3 stations-repères ====== -->
+            <svg
+              class="pf-vsvg"
+              viewBox="0 0 900 210"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+              aria-hidden="true"
+              preserveAspectRatio="xMidYMid meet"
+            >
+              <defs>
+                <linearGradient
+                  id="pf-axis-grad"
+                  x1="96"
+                  y1="0"
+                  x2="804"
+                  y2="0"
+                  gradientUnits="userSpaceOnUse"
+                >
+                  <stop offset="0" stop-color="#A78D75" stop-opacity="0"></stop>
+                  <stop offset="0.08" stop-color="#A78D75" stop-opacity="0.5"
+                  ></stop>
+                  <stop offset="0.92" stop-color="#A78D75" stop-opacity="0.5"
+                  ></stop>
+                  <stop offset="1" stop-color="#A78D75" stop-opacity="0"></stop>
+                </linearGradient>
+              </defs>
+
+              <!-- Labels extrémités : état initial → état livré -->
+              <g class="pf-anim-node" style="--d: 0.2s">
+                <text
+                  x="22"
+                  y="36"
+                  font-family="JetBrains Mono, ui-monospace, monospace"
+                  font-size="9.5"
+                  fill="rgba(255,255,255,0.34)"
+                  letter-spacing="3.2">ESPACE EXISTANT</text
+                >
+              </g>
+              <g class="pf-anim-node" style="--d: 1s">
+                <text
+                  x="878"
+                  y="36"
+                  text-anchor="end"
+                  font-family="JetBrains Mono, ui-monospace, monospace"
+                  font-size="9.5"
+                  fill="rgba(255,255,255,0.34)"
+                  letter-spacing="3.2">NOUVEL ESPACE</text
+                >
+              </g>
+
+              <!-- Axe principal : hairline fondu aux deux extrémités, dessin progressif unique -->
+              <path
+                class="pf-draw"
+                style="--d: 0s"
+                d="M 96,86 L 804,86"
+                pathLength="100"
+                stroke="url(#pf-axis-grad)"
+                stroke-width="1"></path>
+
+              <!-- Connecteurs verticaux : hairlines pleines, tracé progressif station -> carte -->
+              <path
+                class="pf-draw"
+                style="--d: 0.6s"
+                d="M 150,99 L 150,203"
+                pathLength="100"
+                stroke="#c6ad95"
+                stroke-width="1"
+                stroke-opacity="0.55"
+                stroke-linecap="round"></path>
+              <path
+                class="pf-draw"
+                style="--d: 0.78s"
+                d="M 450,99 L 450,203"
+                pathLength="100"
+                stroke="#A78D75"
+                stroke-width="1"
+                stroke-opacity="0.55"
+                stroke-linecap="round"></path>
+              <path
+                class="pf-draw"
+                style="--d: 0.96s"
+                d="M 750,99 L 750,203"
+                pathLength="100"
+                stroke="#8a6e54"
+                stroke-width="1"
+                stroke-opacity="0.6"
+                stroke-linecap="round"></path>
+
+              <!-- Stations : anneau hairline + point, respiration autour de l'axe -->
+              <g class="pf-anim-node" style="--d: 0.5s">
+                <circle
+                  cx="150"
+                  cy="86"
+                  r="7"
+                  fill="#0d0d0d"
+                  stroke="#c6ad95"
+                  stroke-width="1"
+                  stroke-opacity="0.32"></circle>
+                <circle cx="150" cy="86" r="2.2" fill="#c6ad95"></circle>
+              </g>
+              <g class="pf-anim-node" style="--d: 0.68s">
+                <circle
+                  cx="450"
+                  cy="86"
+                  r="7"
+                  fill="#0d0d0d"
+                  stroke="#A78D75"
+                  stroke-width="1"
+                  stroke-opacity="0.34"></circle>
+                <circle cx="450" cy="86" r="2.2" fill="#A78D75"></circle>
+              </g>
+              <g class="pf-anim-node" style="--d: 0.86s">
+                <circle
+                  cx="750"
+                  cy="86"
+                  r="7"
+                  fill="#0d0d0d"
+                  stroke="#8a6e54"
+                  stroke-width="1"
+                  stroke-opacity="0.38"></circle>
+                <circle cx="750" cy="86" r="2.2" fill="#8a6e54"></circle>
+              </g>
+
+              <!-- Pads de connexion au top de chaque carte : point unique, discret -->
+              <g class="pf-anim-node pf-vdot pf-vdot--1" style="--d: 1.05s">
+                <circle
+                  cx="150"
+                  cy="210"
+                  r="4.5"
+                  fill="#141414"
+                  stroke="#c6ad95"
+                  stroke-width="1"
+                  stroke-opacity="0.4"></circle>
+                <circle cx="150" cy="210" r="1.6" fill="#c6ad95"></circle>
+              </g>
+              <g class="pf-anim-node pf-vdot pf-vdot--2" style="--d: 1.2s">
+                <circle
+                  cx="450"
+                  cy="210"
+                  r="4.5"
+                  fill="#141414"
+                  stroke="#A78D75"
+                  stroke-width="1"
+                  stroke-opacity="0.4"></circle>
+                <circle cx="450" cy="210" r="1.6" fill="#A78D75"></circle>
+              </g>
+              <g class="pf-anim-node pf-vdot pf-vdot--3" style="--d: 1.35s">
+                <circle
+                  cx="750"
+                  cy="210"
+                  r="4.5"
+                  fill="#141414"
+                  stroke="#8a6e54"
+                  stroke-width="1"
+                  stroke-opacity="0.4"></circle>
+                <circle cx="750" cy="210" r="1.6" fill="#8a6e54"></circle>
+              </g>
+            </svg>
+
+            <!-- ====== 3 CARDS alignées avec les stations ====== -->
+            <div class="pf-vcards">
+              <article
+                class="pf-vcard"
+                style="--c: #c6ad95; --c-rgb: 198,173,149;"
+              >
+                <div class="pf-vcard-head">
+                  <span class="pf-vcard-glyph" aria-hidden="true">
+                    <svg
+                      viewBox="0 0 40 40"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="1.3"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    >
+                      <rect x="7" y="9" width="26" height="22" rx="1.6"></rect>
+                      <path
+                        d="M11.5 25.5 C 16 14.5, 24 14.5, 27.5 21.5"
+                        opacity="0.8"></path>
+                      <path
+                        d="M27.5 21.5 L24.7 20.2 M27.5 21.5 L25.9 24.3"
+                        opacity="0.8"></path>
+                      <circle
+                        cx="11.5"
+                        cy="25.5"
+                        r="1.7"
+                        fill="currentColor"
+                        stroke="none"></circle>
+                    </svg>
+                  </span>
+                </div>
+                <h3 class="pf-vcard-title">Réflexion</h3>
+                <p class="pf-vcard-desc">
+                  Analyse des besoins, des flux et des usages : nous lisons
+                  l'espace avant de le dessiner.
+                </p>
+                <div class="pf-vcard-fade" aria-hidden="true"></div>
+              </article>
+
+              <article
+                class="pf-vcard"
+                style="--c: #A78D75; --c-rgb: 167,141,117;"
+              >
+                <div class="pf-vcard-head">
+                  <span class="pf-vcard-glyph" aria-hidden="true">
+                    <svg
+                      viewBox="0 0 40 40"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="1.3"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    >
+                      <circle cx="20" cy="9" r="2.6"></circle>
+                      <path d="M20 11.6 L12 31.5"></path>
+                      <path d="M20 11.6 L28 31.5"></path>
+                      <path d="M14.4 25.6 a 8.5 8.5 0 0 0 11.2 0" opacity="0.5"
+                      ></path>
+                      <path
+                        d="M12 31.5 L10.3 27.6 L13.9 28 Z"
+                        fill="currentColor"
+                        stroke="none"></path>
+                    </svg>
+                  </span>
+                </div>
+                <h3 class="pf-vcard-title">Conception</h3>
+                <p class="pf-vcard-desc">
+                  Plans, maquettes 3D et matériaux premium : votre futur lieu,
+                  validé avant les travaux.
+                </p>
+                <div class="pf-vcard-fade" aria-hidden="true"></div>
+              </article>
+
+              <article
+                class="pf-vcard"
+                style="--c: #8a6e54; --c-rgb: 138,110,84;"
+              >
+                <div class="pf-vcard-head">
+                  <span class="pf-vcard-glyph" aria-hidden="true">
+                    <svg
+                      viewBox="0 0 40 40"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="1.3"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    >
+                      <circle cx="14" cy="15" r="6.2"></circle>
+                      <circle
+                        cx="14"
+                        cy="15"
+                        r="2"
+                        fill="currentColor"
+                        stroke="none"
+                        opacity="0.7"></circle>
+                      <path d="M18.4 19.4 L30.5 31.5"></path>
+                      <path d="M25.5 26.5 L28.6 23.4 M28.6 31.6 L31.7 28.5"
+                      ></path>
+                    </svg>
+                  </span>
+                </div>
+                <h3 class="pf-vcard-title">Installation</h3>
+                <p class="pf-vcard-desc">
+                  Livraison clé en main : métiers coordonnés, pose et
+                  déménagement orchestrés de bout en bout.
+                </p>
+                <div class="pf-vcard-fade" aria-hidden="true"></div>
+              </article>
+            </div>
           </div>
-          <h3 class="pf-vcard-title">Conception</h3>
-          <p class="pf-vcard-desc">Plans, maquettes 3D et matériaux premium : votre futur lieu, validé avant les travaux.</p>
-          <div class="pf-vcard-fade" aria-hidden="true"></div>
-        </article>
+        </div>
+      </section>
 
-        <article class="pf-vcard" style="--c: #8a6e54; --c-rgb: 138,110,84;">
-          <div class="pf-vcard-head">
-            <span class="pf-vcard-glyph" aria-hidden="true">
-              <svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round">
-                <circle cx="14" cy="15" r="6.2"/>
-                <circle cx="14" cy="15" r="2" fill="currentColor" stroke="none" opacity="0.7"/>
-                <path d="M18.4 19.4 L30.5 31.5"/>
-                <path d="M25.5 26.5 L28.6 23.4 M28.6 31.6 L31.7 28.5"/>
-              </svg>
-            </span>
-          </div>
-          <h3 class="pf-vcard-title">Installation</h3>
-          <p class="pf-vcard-desc">Livraison clé en main : métiers coordonnés, pose et déménagement orchestrés de bout en bout.</p>
-          <div class="pf-vcard-fade" aria-hidden="true"></div>
-        </article>
-
-      </div>
-    </div>
-  </div>
-</section>
-
-
-<!-- ================================
+      <!-- ================================
      CTA — Bandeau compact, logo-icône Agencement (plan)
      ================================ -->
-<section class="cta-section" id="contact" aria-labelledby="cta-title">
-  <div class="container">
-    <div class="cta-frame">
+      <section class="cta-section" id="contact" aria-labelledby="cta-title">
+        <div class="container">
+          <div class="cta-frame">
+            <div class="cta-inner">
+              <svg
+                class="cta-icon reveal"
+                viewBox="0 0 120 120"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+                aria-hidden="true"
+                focusable="false"
+              >
+                <g
+                  stroke="currentColor"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <!-- Murs porteurs : contour avec ouverture de porte en bas a gauche -->
+                  <path
+                    d="M24 28 H96 V92 H60 M42 92 H26 Q24 92 24 90 V28"
+                    stroke-width="1.6"></path>
+                  <!-- Porte : battant + arc de debattement -->
+                  <line x1="42" y1="92" x2="42" y2="75" stroke-width="1.3"
+                  ></line>
+                  <path
+                    d="M42 75 A17 17 0 0 1 59 92"
+                    stroke-width="1"
+                    stroke-dasharray="2 3.5"
+                    opacity="0.55"></path>
+                  <!-- Cloison interieure avec passage -->
+                  <path
+                    d="M64 28 V52 M64 52 H76 M84 52 H96"
+                    stroke-width="1.2"
+                    opacity="0.6"></path>
+                  <!-- Mobilier esquisse : bureau (haut droite) + table ronde (zone gauche) -->
+                  <g stroke-width="1" opacity="0.38">
+                    <rect x="73" y="35" width="17" height="7" rx="1"></rect>
+                    <circle cx="42" cy="48" r="7"></circle>
+                    <line x1="42" y1="41" x2="42" y2="38"></line>
+                    <line x1="42" y1="55" x2="42" y2="58"></line>
+                  </g>
+                  <!-- Lignes de cote (convention archi : attaches + obliques, animees) -->
+                  <g class="cta-icon-wave" stroke-width="1">
+                    <path
+                      d="M24 24 V19 M96 24 V19 M24 21 H96 M21.5 23.5 L26.5 18.5 M93.5 23.5 L98.5 18.5"
+                    ></path>
+                    <path
+                      d="M20 28 H15 M20 92 H15 M17 28 V92 M14.5 30.5 L19.5 25.5 M14.5 94.5 L19.5 89.5"
+                    ></path>
+                  </g>
+                </g>
+                <!-- Point d'implantation -->
+                <circle
+                  cx="47"
+                  cy="72"
+                  r="7"
+                  stroke="currentColor"
+                  stroke-width="1"
+                  opacity="0.45"></circle>
+                <circle cx="47" cy="72" r="3.2" fill="currentColor"></circle>
+              </svg>
 
-      <div class="cta-inner">
-        <svg class="cta-icon reveal" viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
-          <g stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
-            <!-- Murs porteurs : contour avec ouverture de porte en bas a gauche -->
-            <path d="M24 28 H96 V92 H60 M42 92 H26 Q24 92 24 90 V28" stroke-width="1.6"/>
-            <!-- Porte : battant + arc de debattement -->
-            <line x1="42" y1="92" x2="42" y2="75" stroke-width="1.3"/>
-            <path d="M42 75 A17 17 0 0 1 59 92" stroke-width="1" stroke-dasharray="2 3.5" opacity="0.55"/>
-            <!-- Cloison interieure avec passage -->
-            <path d="M64 28 V52 M64 52 H76 M84 52 H96" stroke-width="1.2" opacity="0.6"/>
-            <!-- Mobilier esquisse : bureau (haut droite) + table ronde (zone gauche) -->
-            <g stroke-width="1" opacity="0.38">
-              <rect x="73" y="35" width="17" height="7" rx="1"/>
-              <circle cx="42" cy="48" r="7"/>
-              <line x1="42" y1="41" x2="42" y2="38"/>
-              <line x1="42" y1="55" x2="42" y2="58"/>
-            </g>
-            <!-- Lignes de cote (convention archi : attaches + obliques, animees) -->
-            <g class="cta-icon-wave" stroke-width="1">
-              <path d="M24 24 V19 M96 24 V19 M24 21 H96 M21.5 23.5 L26.5 18.5 M93.5 23.5 L98.5 18.5"/>
-              <path d="M20 28 H15 M20 92 H15 M17 28 V92 M14.5 30.5 L19.5 25.5 M14.5 94.5 L19.5 89.5"/>
-            </g>
-          </g>
-          <!-- Point d'implantation -->
-          <circle cx="47" cy="72" r="7" stroke="currentColor" stroke-width="1" opacity="0.45"/>
-          <circle cx="47" cy="72" r="3.2" fill="currentColor"/>
-        </svg>
+              <div class="cta-body">
+                <h2 class="cta-title reveal delay-1" id="cta-title">
+                  Un projet <em>d'agencement&thinsp;?</em>
+                </h2>
 
-        <div class="cta-body">
-          <h2 class="cta-title reveal delay-1" id="cta-title">
-            Un projet <em>d'agencement&thinsp;?</em>
-          </h2>
+                <p class="cta-sub reveal delay-2">
+                  Un space planner dédié, une étude sur site sans engagement :
+                  parlons de vos espaces.
+                </p>
 
-          <p class="cta-sub reveal delay-2">
-            Un space planner dédié, une étude sur site sans engagement : parlons de vos espaces.
+                <div class="cta-actions reveal delay-3">
+                  <a
+                    href="contact.html?pole=agencement"
+                    class="btn-cta btn-cta--primary"
+                  >
+                    Contacter le pôle Agencement
+                    <span class="btn-cta-arrow"
+                      ><svg
+                        viewBox="0 0 16 16"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="1.6"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        ><path d="M3 8h10M9 4l4 4-4 4"></path></svg
+                      ></span
+                    >
+                  </a>
+                  <span class="cta-actions-divider" aria-hidden="true"></span>
+                  <span class="cta-phone">
+                    <svg
+                      viewBox="0 0 20 20"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="1.4"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      width="14"
+                      height="14"
+                      ><path
+                        d="M2 3a1 1 0 011-1h3.28a1 1 0 01.95.68l1.07 3.21a1 1 0 01-.25 1L6.54 8.4a12.06 12.06 0 005.06 5.06l1.51-1.51a1 1 0 011-.25l3.21 1.07a1 1 0 01.68.95V17a1 1 0 01-1 1A15 15 0 012 3z"
+                      ></path></svg
+                    >
+                    <a href="tel:+33387184920" class="cta-phone-num"
+                      >03 87 18 49 20</a
+                    >
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- ================================
+     FOOTER
+     ================================ -->
+    <Footer />
+
+    <!-- ================================
+     SCRIPTS
+     ================================ -->
+    <script is:inline src="js/pages/agencement-1.js"></script>
+    <script is:inline src="js/shared/menu-frost.js"></script>
+    <!-- jcd-mobile-nav (injected) -->
+    <button
+      class="jcd-burger"
+      id="jcdBurger"
+      type="button"
+      aria-label="Ouvrir le menu"
+      aria-expanded="false"
+      aria-controls="jcdMnav"
+    >
+      <span class="jcd-burger__box" aria-hidden="true"
+        ><i></i><i></i><i></i></span
+      >
+    </button>
+    <div
+      class="jcd-mnav"
+      id="jcdMnav"
+      role="dialog"
+      aria-modal="true"
+      aria-label="Menu de navigation"
+      aria-hidden="true"
+    >
+      <div class="jcd-mnav__scroll">
+        <div class="jcd-mnav__inner">
+          <p
+            class="jcd-mnav__eyebrow jcd-mnav__reveal"
+            style="transition-delay:.04s"
+          >
+            Expertises
           </p>
 
-          <div class="cta-actions reveal delay-3">
-            <a href="contact.html?pole=agencement" class="btn-cta btn-cta--primary">
-              Contacter le pôle Agencement
-              <span class="btn-cta-arrow"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h10M9 4l4 4-4 4"/></svg></span>
-            </a>
-            <span class="cta-actions-divider" aria-hidden="true"></span>
-            <span class="cta-phone">
-              <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" width="14" height="14"><path d="M2 3a1 1 0 011-1h3.28a1 1 0 01.95.68l1.07 3.21a1 1 0 01-.25 1L6.54 8.4a12.06 12.06 0 005.06 5.06l1.51-1.51a1 1 0 011-.25l3.21 1.07a1 1 0 01.68.95V17a1 1 0 01-1 1A15 15 0 012 3z"/></svg>
-              <a href="tel:+33387184920" class="cta-phone-num">03 87 18 49 20</a>
-            </span>
+          <div class="jcd-mnav__reveal" style="transition-delay:.07s">
+            <div class="jcd-mnav__item" style="--mnav-c:#2E72BA">
+              <a class="jcd-mnav__link" href="informatique.html"
+                ><span class="jcd-mnav__dot"></span><span
+                  class="jcd-mnav__label">Informatique</span
+                ></a
+              >
+              <button
+                class="jcd-acc__toggle"
+                type="button"
+                aria-expanded="false"
+                aria-controls="jcdAccInfo"
+                aria-label="Afficher les sous-pages Informatique"
+              >
+                <svg
+                  viewBox="0 0 14 14"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.6"
+                  stroke-linecap="round"><path d="M7 2v10M2 7h10"></path></svg
+                >
+              </button>
+            </div>
+            <div class="jcd-acc__panel" id="jcdAccInfo">
+              <a class="jcd-mnav__sub" href="info-cloud.html">Cloud Microsoft</a
+              >
+              <a class="jcd-mnav__sub" href="info-collaboratif.html"
+                >Solutions collaboratives &amp; audiovisuelles</a
+              >
+              <a class="jcd-mnav__sub" href="info-reseaux.html"
+                >Architectures syst&egrave;mes &amp; r&eacute;seaux</a
+              >
+              <a class="jcd-mnav__sub" href="info-integration.html"
+                >Int&eacute;gration &amp; Support PC</a
+              >
+            </div>
+          </div>
+
+          <a
+            class="jcd-mnav__item jcd-mnav__reveal"
+            style="--mnav-c:#E51D29;transition-delay:.10s"
+            href="service.html"
+            ><span class="jcd-mnav__dot"></span><span class="jcd-mnav__label"
+              >Service</span
+            ></a
+          >
+          <a
+            class="jcd-mnav__item jcd-mnav__reveal"
+            style="--mnav-c:#F9D605;transition-delay:.13s"
+            href="developpement.html"
+            ><span class="jcd-mnav__dot"></span><span class="jcd-mnav__label"
+              >D&eacute;veloppement</span
+            ></a
+          >
+          <a
+            class="jcd-mnav__item jcd-mnav__reveal"
+            style="--mnav-c:#F3941D;transition-delay:.16s"
+            href="print.html"
+            ><span class="jcd-mnav__dot"></span><span class="jcd-mnav__label"
+              >Print</span
+            ></a
+          >
+          <a
+            class="jcd-mnav__item jcd-mnav__reveal"
+            style="--mnav-c:#B063AC;transition-delay:.19s"
+            href="telecom.html"
+            ><span class="jcd-mnav__dot"></span><span class="jcd-mnav__label"
+              >T&eacute;l&eacute;com</span
+            ></a
+          >
+          <div class="jcd-mnav__reveal" style="transition-delay:.22s">
+            <div class="jcd-mnav__item" style="--mnav-c:#8EC041">
+              <a class="jcd-mnav__link" href="formation.html"
+                ><span class="jcd-mnav__dot"></span><span
+                  class="jcd-mnav__label">Formation</span
+                ></a
+              >
+              <button
+                class="jcd-acc__toggle"
+                type="button"
+                aria-expanded="false"
+                aria-controls="jcdAccForm"
+                aria-label="Afficher les catégories de formation"
+              >
+                <svg
+                  viewBox="0 0 14 14"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.6"
+                  stroke-linecap="round"><path d="M7 2v10M2 7h10"></path></svg
+                >
+              </button>
+            </div>
+            <div class="jcd-acc__panel" id="jcdAccForm">
+              <a class="jcd-mnav__sub" href="formation-bureautique.html"
+                >Bureautique</a
+              >
+              <a
+                class="jcd-mnav__sub"
+                href="formation-intelligence-artificielle.html"
+                >Intelligence artificielle</a
+              >
+              <a class="jcd-mnav__sub" href="formation-informatique.html"
+                >Informatique</a
+              >
+              <a
+                class="jcd-mnav__sub"
+                href="formation-communication-marketing.html"
+                >Communication - Marketing</a
+              >
+              <a class="jcd-mnav__sub" href="formation-management.html"
+                >Management</a
+              >
+              <a
+                class="jcd-mnav__sub"
+                href="formation-commerce-relation-client.html"
+                >Commerce - Relation client</a
+              >
+              <a
+                class="jcd-mnav__sub"
+                href="formation-comptabilite-gestion.html"
+                >Comptabilit&eacute; - Gestion</a
+              >
+              <a class="jcd-mnav__sub" href="formation-ressources-humaines.html"
+                >Ressources humaines</a
+              >
+              <a
+                class="jcd-mnav__sub"
+                href="formation-developpement-personnel.html"
+                >D&eacute;veloppement personnel</a
+              >
+              <a class="jcd-mnav__sub" href="formation-graphisme-pao.html"
+                >Graphisme - PAO</a
+              >
+              <a
+                class="jcd-mnav__sub"
+                href="formation-administratif-secretariat-accueil.html"
+                >Administratif - Secr&eacute;tariat</a
+              >
+              <a class="jcd-mnav__sub" href="formation-securite.html"
+                >S&eacute;curit&eacute;</a
+              >
+              <a class="jcd-mnav__sub" href="formation-langues.html">Langues</a>
+            </div>
+          </div>
+          <a
+            class="jcd-mnav__item jcd-mnav__reveal"
+            style="--mnav-c:#A78D75;transition-delay:.25s"
+            href="agencement.html"
+            ><span class="jcd-mnav__dot"></span><span class="jcd-mnav__label"
+              >Agencement</span
+            ></a
+          >
+
+          <p
+            class="jcd-mnav__eyebrow jcd-mnav__sec2 jcd-mnav__reveal"
+            style="transition-delay:.30s"
+          >
+            D&eacute;couvrir
+          </p>
+          <a
+            class="jcd-mnav__item jcd-mnav__reveal"
+            style="--mnav-c:#9a9a9a;transition-delay:.33s"
+            href="assistance.html"
+            ><span class="jcd-mnav__dot"></span><span
+              class="jcd-mnav__label"
+              style="font-size:19px">Assistance</span
+            ></a
+          >
+          <a
+            class="jcd-mnav__item jcd-mnav__reveal"
+            style="--mnav-c:#9a9a9a;transition-delay:.36s"
+            href="carrieres.html"
+            ><span class="jcd-mnav__dot"></span><span
+              class="jcd-mnav__label"
+              style="font-size:19px">Carri&egrave;res</span
+            ></a
+          >
+
+          <div
+            class="jcd-mnav__cta jcd-mnav__reveal"
+            style="transition-delay:.40s"
+          >
+            <a class="jcd-mnav__btn jcd-mnav__btn--primary" href="contact.html"
+              >Contacter un expert
+              <span class="jcd-mnav__btn-ic"
+                ><svg
+                  viewBox="0 0 16 16"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.7"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  ><path d="M3 8h10M9 4l4 4-4 4"></path></svg
+                ></span
+              ></a
+            >
+            <a
+              class="jcd-mnav__btn jcd-mnav__btn--ghost"
+              href="tel:+33387184920"
+              >03 87 18 49 20
+              <span class="jcd-mnav__btn-ic"
+                ><svg
+                  viewBox="0 0 18 18"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.5"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  ><path
+                    d="M2.5 3.5a1 1 0 011-1h2.4a1 1 0 01.95.68l.86 2.4a1 1 0 01-.24 1l-1.2 1.2a11 11 0 004.6 4.6l1.2-1.2a1 1 0 011-.24l2.4.86a1 1 0 01.68.95V15a1 1 0 01-1 1A13.5 13.5 0 012.5 3.5z"
+                  ></path></svg
+                ></span
+              ></a
+            >
           </div>
         </div>
       </div>
-
     </div>
-  </div>
-</section>
-
-</main>
-
-<!-- ================================
-     FOOTER
-     ================================ -->
-<Footer />
-
-
-<!-- ================================
-     SCRIPTS
-     ================================ -->
-<script is:inline src="js/pages/agencement-1.js"></script>
-<script is:inline src="js/shared/menu-frost.js"></script>
-<!-- jcd-mobile-nav (injected) -->
-<button class="jcd-burger" id="jcdBurger" type="button" aria-label="Ouvrir le menu" aria-expanded="false" aria-controls="jcdMnav">
-  <span class="jcd-burger__box" aria-hidden="true"><i></i><i></i><i></i></span>
-</button>
-<div class="jcd-mnav" id="jcdMnav" role="dialog" aria-modal="true" aria-label="Menu de navigation" aria-hidden="true">
-  <div class="jcd-mnav__scroll">
-    <div class="jcd-mnav__inner">
-      <p class="jcd-mnav__eyebrow jcd-mnav__reveal" style="transition-delay:.04s">Expertises</p>
-
-      <div class="jcd-mnav__reveal" style="transition-delay:.07s">
-        <div class="jcd-mnav__item" style="--mnav-c:#2E72BA">
-          <a class="jcd-mnav__link" href="informatique.html"><span class="jcd-mnav__dot"></span><span class="jcd-mnav__label">Informatique</span></a>
-          <button class="jcd-acc__toggle" type="button" aria-expanded="false" aria-controls="jcdAccInfo" aria-label="Afficher les sous-pages Informatique">
-            <svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M7 2v10M2 7h10"/></svg>
-          </button>
-        </div>
-        <div class="jcd-acc__panel" id="jcdAccInfo">
-          <a class="jcd-mnav__sub" href="info-cloud.html">Cloud Microsoft</a>
-          <a class="jcd-mnav__sub" href="info-collaboratif.html">Solutions collaboratives &amp; audiovisuelles</a>
-          <a class="jcd-mnav__sub" href="info-reseaux.html">Architectures syst&egrave;mes &amp; r&eacute;seaux</a>
-          <a class="jcd-mnav__sub" href="info-integration.html">Int&eacute;gration &amp; Support PC</a>
-        </div>
-      </div>
-
-      <a class="jcd-mnav__item jcd-mnav__reveal" style="--mnav-c:#E51D29;transition-delay:.10s" href="service.html"><span class="jcd-mnav__dot"></span><span class="jcd-mnav__label">Service</span></a>
-      <a class="jcd-mnav__item jcd-mnav__reveal" style="--mnav-c:#F9D605;transition-delay:.13s" href="developpement.html"><span class="jcd-mnav__dot"></span><span class="jcd-mnav__label">D&eacute;veloppement</span></a>
-      <a class="jcd-mnav__item jcd-mnav__reveal" style="--mnav-c:#F3941D;transition-delay:.16s" href="print.html"><span class="jcd-mnav__dot"></span><span class="jcd-mnav__label">Print</span></a>
-      <a class="jcd-mnav__item jcd-mnav__reveal" style="--mnav-c:#B063AC;transition-delay:.19s" href="telecom.html"><span class="jcd-mnav__dot"></span><span class="jcd-mnav__label">T&eacute;l&eacute;com</span></a>
-      <div class="jcd-mnav__reveal" style="transition-delay:.22s">
-        <div class="jcd-mnav__item" style="--mnav-c:#8EC041">
-          <a class="jcd-mnav__link" href="formation.html"><span class="jcd-mnav__dot"></span><span class="jcd-mnav__label">Formation</span></a>
-          <button class="jcd-acc__toggle" type="button" aria-expanded="false" aria-controls="jcdAccForm" aria-label="Afficher les cat&eacute;gories de formation">
-            <svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M7 2v10M2 7h10"/></svg>
-          </button>
-        </div>
-        <div class="jcd-acc__panel" id="jcdAccForm">
-          <a class="jcd-mnav__sub" href="formation-bureautique.html">Bureautique</a>
-          <a class="jcd-mnav__sub" href="formation-intelligence-artificielle.html">Intelligence artificielle</a>
-          <a class="jcd-mnav__sub" href="formation-informatique.html">Informatique</a>
-          <a class="jcd-mnav__sub" href="formation-communication-marketing.html">Communication - Marketing</a>
-          <a class="jcd-mnav__sub" href="formation-management.html">Management</a>
-          <a class="jcd-mnav__sub" href="formation-commerce-relation-client.html">Commerce - Relation client</a>
-          <a class="jcd-mnav__sub" href="formation-comptabilite-gestion.html">Comptabilit&eacute; - Gestion</a>
-          <a class="jcd-mnav__sub" href="formation-ressources-humaines.html">Ressources humaines</a>
-          <a class="jcd-mnav__sub" href="formation-developpement-personnel.html">D&eacute;veloppement personnel</a>
-          <a class="jcd-mnav__sub" href="formation-graphisme-pao.html">Graphisme - PAO</a>
-          <a class="jcd-mnav__sub" href="formation-administratif-secretariat-accueil.html">Administratif - Secr&eacute;tariat</a>
-          <a class="jcd-mnav__sub" href="formation-securite.html">S&eacute;curit&eacute;</a>
-          <a class="jcd-mnav__sub" href="formation-langues.html">Langues</a>
-        </div>
-      </div>
-      <a class="jcd-mnav__item jcd-mnav__reveal" style="--mnav-c:#A78D75;transition-delay:.25s" href="agencement.html"><span class="jcd-mnav__dot"></span><span class="jcd-mnav__label">Agencement</span></a>
-
-      <p class="jcd-mnav__eyebrow jcd-mnav__sec2 jcd-mnav__reveal" style="transition-delay:.30s">D&eacute;couvrir</p>
-      <a class="jcd-mnav__item jcd-mnav__reveal" style="--mnav-c:#9a9a9a;transition-delay:.33s" href="assistance.html"><span class="jcd-mnav__dot"></span><span class="jcd-mnav__label" style="font-size:19px">Assistance</span></a>
-      <a class="jcd-mnav__item jcd-mnav__reveal" style="--mnav-c:#9a9a9a;transition-delay:.36s" href="carrieres.html"><span class="jcd-mnav__dot"></span><span class="jcd-mnav__label" style="font-size:19px">Carri&egrave;res</span></a>
-
-      <div class="jcd-mnav__cta jcd-mnav__reveal" style="transition-delay:.40s">
-        <a class="jcd-mnav__btn jcd-mnav__btn--primary" href="contact.html">Contacter un expert
-          <span class="jcd-mnav__btn-ic"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h10M9 4l4 4-4 4"/></svg></span></a>
-        <a class="jcd-mnav__btn jcd-mnav__btn--ghost" href="tel:+33387184920">03 87 18 49 20
-          <span class="jcd-mnav__btn-ic"><svg viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2.5 3.5a1 1 0 011-1h2.4a1 1 0 01.95.68l.86 2.4a1 1 0 01-.24 1l-1.2 1.2a11 11 0 004.6 4.6l1.2-1.2a1 1 0 011-.24l2.4.86a1 1 0 01.68.95V15a1 1 0 01-1 1A13.5 13.5 0 012.5 3.5z"/></svg></span></a>
-      </div>
+    <script is:inline src="js/shared/mobile-nav.js"></script>
+    <!-- jcd-a11y (Lot 5) -->
+    <div class="jcd-fab-wrap" id="jcd-fab">
+      <button
+        class="jcd-fab jcd-fab--top"
+        id="jcdToTop"
+        type="button"
+        aria-label="Remonter en haut"
+      >
+        <svg
+          viewBox="0 0 20 20"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="1.8"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          aria-hidden="true"><path d="M10 16V5M5 10l5-5 5 5"></path></svg
+        >
+      </button>
+      <a
+        class="jcd-fab jcd-fab--contact"
+        id="jcdFabContact"
+        href="contact.html"
+        aria-label="Nous contacter"
+      >
+        <svg
+          viewBox="0 0 20 20"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="1.6"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          aria-hidden="true"
+          ><rect x="2.5" y="4.5" width="15" height="11" rx="2.3"></rect><path
+            d="M3 6.7 L10 10.7 L17 6.7"></path></svg
+        >
+      </a>
     </div>
-  </div>
-</div>
-<script is:inline src="js/shared/mobile-nav.js"></script>
-<!-- jcd-a11y (Lot 5) -->
-<div class="jcd-fab-wrap" id="jcd-fab">
-  <button class="jcd-fab jcd-fab--top" id="jcdToTop" type="button" aria-label="Remonter en haut">
-    <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 16V5M5 10l5-5 5 5"/></svg>
-  </button>
-  <a class="jcd-fab jcd-fab--contact" id="jcdFabContact" href="contact.html" aria-label="Nous contacter">
-    <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2.5" y="4.5" width="15" height="11" rx="2.3"/><path d="M3 6.7 L10 10.7 L17 6.7"/></svg>
-  </a>
-</div>
-<script is:inline src="js/shared/a11y.js" id="jcd-a11y-js"></script>
-<script is:inline src="js/shared/micons.js" id="jcd-micons-js"></script>
-<script is:inline src="js/shared/mrefonte.js" id="jcd-mrefonte-js"></script>
-
-
-</body>
+    <script is:inline src="js/shared/a11y.js" id="jcd-a11y-js"></script>
+    <script is:inline src="js/shared/micons.js" id="jcd-micons-js"></script>
+    <script is:inline src="js/shared/mrefonte.js" id="jcd-mrefonte-js"></script>
+  </body>
 </html>

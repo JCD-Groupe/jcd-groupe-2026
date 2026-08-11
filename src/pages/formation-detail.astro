@@ -1,558 +1,2572 @@
 ---
-import Header from '../components/Header.astro';
-import Footer from '../components/Footer.astro';
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
 ---
-<!DOCTYPE html>
+
 <html lang="fr">
-<head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-<meta name="color-scheme" content="dark" />
-<meta name="theme-color" content="#0d0d0d" />
-<link rel="icon" href="favicon.svg" type="image/svg+xml" />
-<meta name="description" content="Fiche formation JCD Groupe : objectifs, programme détaillé, modalités et certification. Organisme certifié Qualiopi, centre d'examen TOSA, Metz &amp; Nancy." />
-<link rel="canonical" href="https://www.jcd-groupe.fr/formation-detail.html" />
-<meta property="og:type" content="website" />
-<meta property="og:site_name" content="JCD Groupe" />
-<meta property="og:locale" content="fr_FR" />
-<meta property="og:title" content="Formation · JCD Groupe" />
-<meta property="og:description" content="Fiche formation JCD Groupe : objectifs, programme détaillé, modalités et certification. Organisme certifié Qualiopi, centre d'examen TOSA, Metz &amp; Nancy." />
-<meta property="og:url" content="https://www.jcd-groupe.fr/formation-detail.html" />
-<meta name="twitter:card" content="summary" />
-<title>Formation · JCD Groupe</title>
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+    />
+    <meta name="color-scheme" content="dark" />
+    <meta name="theme-color" content="#0d0d0d" />
+    <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+    <meta
+      name="description"
+      content="Fiche formation JCD Groupe : objectifs, programme détaillé, modalités et certification. Organisme certifié Qualiopi, centre d'examen TOSA, Metz & Nancy."
+    />
+    <link
+      rel="canonical"
+      href="https://www.jcd-groupe.fr/formation-detail.html"
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="JCD Groupe" />
+    <meta property="og:locale" content="fr_FR" />
+    <meta property="og:title" content="Formation · JCD Groupe" />
+    <meta
+      property="og:description"
+      content="Fiche formation JCD Groupe : objectifs, programme détaillé, modalités et certification. Organisme certifié Qualiopi, centre d'examen TOSA, Metz & Nancy."
+    />
+    <meta
+      property="og:url"
+      content="https://www.jcd-groupe.fr/formation-detail.html"
+    />
+    <meta name="twitter:card" content="summary" />
+    <title>Formation · JCD Groupe</title>
 
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Instrument+Serif:ital@1&family=Fraunces:ital,opsz,wght@0,9..144,300..700;1,9..144,300..700&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Instrument+Serif:ital@1&family=Fraunces:ital,opsz,wght@0,9..144,300..700;1,9..144,300..700&display=swap"
+      rel="stylesheet"
+    />
 
-<link rel="stylesheet" href="css/formation-detail.css">
-<link rel="stylesheet" href="css/global.css">
-<link rel="stylesheet" href="css/formation-detail-overrides.css">
-  <link rel="stylesheet" href="transition.css">
-  <script is:inline src="transition.js"></script>
-<script is:inline src="js/shared/mpolish.js" id="jcd-mpolish-js"></script>
-<script is:inline src="js/shared/touch.js" id="jcd-touch-js"></script>
-<script is:inline src="js/shared/mrefonte-shim.js" id="jcd-mrefonte-shim"></script>
-</head>
-<body>
-<a class="jcd-skip" href="#contenu">Aller au contenu</a>
+    <link rel="stylesheet" href="css/formation-detail.css" />
+    <link rel="stylesheet" href="css/global.css" />
+    <link rel="stylesheet" href="css/formation-detail-overrides.css" />
+    <link rel="stylesheet" href="transition.css" />
+    <script is:inline src="transition.js"></script>
+    <script is:inline src="js/shared/mpolish.js" id="jcd-mpolish-js"></script>
+    <script is:inline src="js/shared/touch.js" id="jcd-touch-js"></script>
+    <script is:inline src="js/shared/mrefonte-shim.js" id="jcd-mrefonte-shim"
+    ></script>
+  </head>
+  <body>
+    <a class="jcd-skip" href="#contenu">Aller au contenu</a>
 
-<div class="scroll-progress" aria-hidden="true"></div>
+    <div class="scroll-progress" aria-hidden="true"></div>
 
-<Header catalogue />
+    <Header catalogue />
 
-<main id="contenu">
-
-<!-- ================================
+    <main id="contenu">
+      <!-- ================================
      HERO — fiche formation
      (zones data-field : à câbler sur Directus)
      ================================ -->
-<section class="fd-hero" aria-labelledby="fd-title">
-  <div class="container">
+      <section class="fd-hero" aria-labelledby="fd-title">
+        <div class="container">
+          <nav class="crumbs reveal" aria-label="Fil d'Ariane">
+            <a href="formation.html">Formation</a>
+            <span class="crumbs-sep" aria-hidden="true">/</span>
+            <a
+              href="formation-bureautique.html"
+              id="fd-crumb-cat"
+              data-field="categorie">Bureautique</a
+            >
+            <span class="crumbs-sep" aria-hidden="true">/</span>
+            <span aria-current="page" data-field="title">Excel initiation</span>
+          </nav>
 
-    <nav class="crumbs reveal" aria-label="Fil d'Ariane">
-      <a href="formation.html">Formation</a>
-      <span class="crumbs-sep" aria-hidden="true">/</span>
-      <a href="formation-bureautique.html" id="fd-crumb-cat" data-field="categorie">Bureautique</a>
-      <span class="crumbs-sep" aria-hidden="true">/</span>
-      <span aria-current="page" data-field="title">Excel initiation</span>
-    </nav>
+          <h1 class="fd-title reveal delay-1" id="fd-title">
+            <span data-field="title">Excel initiation</span><span
+              class="cat-dot">.</span>
+          </h1>
 
-    <h1 class="fd-title reveal delay-1" id="fd-title"><span data-field="title">Excel initiation</span><span class="cat-dot">.</span></h1>
+          <div class="fd-hero-meta reveal delay-2">
+            <span class="chip chip--cat" data-field="categorie"
+              >Bureautique</span
+            >
+            <span class="chip">
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.7"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                aria-hidden="true"
+                focusable="false"
+                ><circle cx="12" cy="12" r="9"></circle><path d="M12 7v5l3 2"
+                ></path></svg
+              >
+              <span data-field="duree">2 jours · 14 heures</span>
+            </span>
+            <span class="chip">
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.7"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                aria-hidden="true"
+                focusable="false"
+                ><circle cx="12" cy="12" r="9"></circle><path
+                  d="M14.8 9.2a3 3 0 0 0-5.6 1.3c0 3 5.6 2 5.6 5a3 3 0 0 1-5.6 1.3M12 6v2M12 16v2"
+                ></path></svg
+              >
+              <strong data-field="tarif">490&nbsp;€&nbsp;HT</strong>&nbsp;/
+              participant
+            </span>
+            <span class="chip">
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.7"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                aria-hidden="true"
+                focusable="false"
+                ><path d="M12 3l8 3v5c0 5-3.4 8.4-8 10-4.6-1.6-8-5-8-10V6l8-3z"
+                ></path><path d="M9 11.5l2 2 4-4"></path></svg
+              >
+              Certification TOSA en option
+            </span>
+          </div>
+        </div>
+      </section>
 
-    <div class="fd-hero-meta reveal delay-2">
-      <span class="chip chip--cat" data-field="categorie">Bureautique</span>
-      <span class="chip">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
-        <span data-field="duree">2 jours · 14 heures</span>
-      </span>
-      <span class="chip">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="9"/><path d="M14.8 9.2a3 3 0 0 0-5.6 1.3c0 3 5.6 2 5.6 5a3 3 0 0 1-5.6 1.3M12 6v2M12 16v2"/></svg>
-        <strong data-field="tarif">490&nbsp;€&nbsp;HT</strong>&nbsp;/ participant
-      </span>
-      <span class="chip">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 3l8 3v5c0 5-3.4 8.4-8 10-4.6-1.6-8-5-8-10V6l8-3z"/><path d="M9 11.5l2 2 4-4"/></svg>
-        Certification TOSA en option
-      </span>
-    </div>
-
-  </div>
-</section>
-
-<!-- ================================
+      <!-- ================================
      CORPS — contenu + récapitulatif sticky
      ================================ -->
-<section class="fd-body" aria-label="Détail de la formation">
-  <div class="container">
-    <div class="fd-layout">
+      <section class="fd-body" aria-label="Détail de la formation">
+        <div class="container">
+          <div class="fd-layout">
+            <div class="fd-main">
+              <!-- Objectifs pédagogiques -->
+              <section
+                id="fd-s-objectifs"
+                aria-labelledby="fd-goals-title"
+                data-field="objectifs"
+              >
+                <div class="fd-section-head reveal">
+                  <span class="fd-section-num">01</span>
+                  <div>
+                    <h2 class="fd-section-title" id="fd-goals-title">
+                      Objectifs pédagogiques
+                    </h2>
+                    <p class="fd-section-sub">
+                      À l'issue de la formation, vous serez capable de :
+                    </p>
+                  </div>
+                </div>
+                <ul class="fd-goals reveal delay-1">
+                  <li class="fd-goal">
+                    <span class="fd-goal-ic" aria-hidden="true"
+                      ><svg
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2.2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        ><path d="M5 12.5l4.5 4.5L19 7.5"></path></svg
+                      ></span
+                    >
+                    Construire et mettre en forme des tableaux avec des formules de
+                    calcul
+                  </li>
+                  <li class="fd-goal">
+                    <span class="fd-goal-ic" aria-hidden="true"
+                      ><svg
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2.2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        ><path d="M5 12.5l4.5 4.5L19 7.5"></path></svg
+                      ></span
+                    >
+                    Mettre en page et imprimer ses documents
+                  </li>
+                  <li class="fd-goal">
+                    <span class="fd-goal-ic" aria-hidden="true"
+                      ><svg
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2.2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        ><path d="M5 12.5l4.5 4.5L19 7.5"></path></svg
+                      ></span
+                    >
+                    Créer et personnaliser un graphique
+                  </li>
+                </ul>
+              </section>
 
-      <div class="fd-main">
+              <!-- Programme -->
+              <section
+                id="fd-s-programme"
+                aria-labelledby="fd-prog-title"
+                data-field="programme"
+              >
+                <div class="fd-section-head fd-section-head--prog reveal">
+                  <span class="fd-section-num">02</span>
+                  <div>
+                    <h2 class="fd-section-title" id="fd-prog-title">
+                      Programme détaillé
+                    </h2>
+                    <p class="fd-section-sub">
+                      8 modules progressifs, du premier classeur à l'analyse de
+                      données.
+                    </p>
+                  </div>
+                  <button
+                    type="button"
+                    class="fd-expand"
+                    id="fd-expand"
+                    data-open="false"
+                    aria-label="Déplier tous les modules du programme"
+                  >
+                    <span class="fd-expand-tx">Tout déplier</span>
+                    <svg
+                      viewBox="0 0 10 10"
+                      fill="none"
+                      aria-hidden="true"
+                      focusable="false"
+                      ><path
+                        d="M2.5 4l2.5 2.5L7.5 4"
+                        stroke="currentColor"
+                        stroke-width="1.4"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"></path></svg
+                    >
+                  </button>
+                </div>
+                <div class="fd-acc reveal delay-1">
+                  <article class="fd-mod" data-open="true">
+                    <button
+                      type="button"
+                      class="fd-mod-btn"
+                      aria-expanded="true"
+                    >
+                      <span class="fd-mod-num">M·01</span>
+                      <span class="fd-mod-title">Présentation d'Excel</span>
+                      <span class="fd-mod-chev" aria-hidden="true"
+                        ><svg viewBox="0 0 10 10" fill="none"
+                          ><path
+                            d="M2.5 4l2.5 2.5L7.5 4"
+                            stroke="currentColor"
+                            stroke-width="1.4"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"></path></svg
+                        ></span
+                      >
+                    </button>
+                    <div class="fd-mod-body">
+                      <div class="fd-mod-wrap">
+                        <ul class="fd-mod-list">
+                          <li>
+                            Découverte de l'interface : ruban, barre d'outils,
+                            zone de travail
+                          </li>
+                          <li>
+                            Notions de classeur, feuille, cellule et plage
+                          </li>
+                          <li>Se déplacer et sélectionner efficacement</li>
+                        </ul>
+                      </div>
+                    </div>
+                  </article>
 
-        <!-- Objectifs pédagogiques -->
-        <section id="fd-s-objectifs" aria-labelledby="fd-goals-title" data-field="objectifs">
-          <div class="fd-section-head reveal">
-            <span class="fd-section-num">01</span>
-            <div>
-              <h2 class="fd-section-title" id="fd-goals-title">Objectifs pédagogiques</h2>
-              <p class="fd-section-sub">À l'issue de la formation, vous serez capable de :</p>
+                  <article class="fd-mod" data-open="false">
+                    <button
+                      type="button"
+                      class="fd-mod-btn"
+                      aria-expanded="false"
+                    >
+                      <span class="fd-mod-num">M·02</span>
+                      <span class="fd-mod-title">Gestion des documents</span>
+                      <span class="fd-mod-chev" aria-hidden="true"
+                        ><svg viewBox="0 0 10 10" fill="none"
+                          ><path
+                            d="M2.5 4l2.5 2.5L7.5 4"
+                            stroke="currentColor"
+                            stroke-width="1.4"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"></path></svg
+                        ></span
+                      >
+                    </button>
+                    <div class="fd-mod-body">
+                      <div class="fd-mod-wrap">
+                        <ul class="fd-mod-list">
+                          <li>Créer, ouvrir et enregistrer un classeur</li>
+                          <li>Organiser ses fichiers et ses versions</li>
+                        </ul>
+                      </div>
+                    </div>
+                  </article>
+
+                  <article class="fd-mod" data-open="false">
+                    <button
+                      type="button"
+                      class="fd-mod-btn"
+                      aria-expanded="false"
+                    >
+                      <span class="fd-mod-num">M·03</span>
+                      <span class="fd-mod-title"
+                        >Saisir des données et des formules de calcul</span
+                      >
+                      <span class="fd-mod-chev" aria-hidden="true"
+                        ><svg viewBox="0 0 10 10" fill="none"
+                          ><path
+                            d="M2.5 4l2.5 2.5L7.5 4"
+                            stroke="currentColor"
+                            stroke-width="1.4"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"></path></svg
+                        ></span
+                      >
+                    </button>
+                    <div class="fd-mod-body">
+                      <div class="fd-mod-wrap">
+                        <ul class="fd-mod-list">
+                          <li>
+                            Saisir, modifier, copier et déplacer des données
+                          </li>
+                          <li>
+                            Construire des formules simples : opérateurs,
+                            références
+                          </li>
+                          <li>
+                            Fonctions essentielles : SOMME, MOYENNE, MIN, MAX
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                  </article>
+
+                  <article class="fd-mod" data-open="false">
+                    <button
+                      type="button"
+                      class="fd-mod-btn"
+                      aria-expanded="false"
+                    >
+                      <span class="fd-mod-num">M·04</span>
+                      <span class="fd-mod-title">Mise en forme</span>
+                      <span class="fd-mod-chev" aria-hidden="true"
+                        ><svg viewBox="0 0 10 10" fill="none"
+                          ><path
+                            d="M2.5 4l2.5 2.5L7.5 4"
+                            stroke="currentColor"
+                            stroke-width="1.4"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"></path></svg
+                        ></span
+                      >
+                    </button>
+                    <div class="fd-mod-body">
+                      <div class="fd-mod-wrap">
+                        <ul class="fd-mod-list">
+                          <li>
+                            Formats de cellules : nombres, dates, pourcentages
+                          </li>
+                          <li>Bordures, couleurs et styles de tableaux</li>
+                        </ul>
+                      </div>
+                    </div>
+                  </article>
+
+                  <article class="fd-mod" data-open="false">
+                    <button
+                      type="button"
+                      class="fd-mod-btn"
+                      aria-expanded="false"
+                    >
+                      <span class="fd-mod-num">M·05</span>
+                      <span class="fd-mod-title">Impression des documents</span>
+                      <span class="fd-mod-chev" aria-hidden="true"
+                        ><svg viewBox="0 0 10 10" fill="none"
+                          ><path
+                            d="M2.5 4l2.5 2.5L7.5 4"
+                            stroke="currentColor"
+                            stroke-width="1.4"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"></path></svg
+                        ></span
+                      >
+                    </button>
+                    <div class="fd-mod-body">
+                      <div class="fd-mod-wrap">
+                        <ul class="fd-mod-list">
+                          <li>
+                            Mise en page : marges, orientation, en-têtes et
+                            pieds de page
+                          </li>
+                          <li>Zone d'impression et aperçu avant impression</li>
+                        </ul>
+                      </div>
+                    </div>
+                  </article>
+
+                  <article class="fd-mod" data-open="false">
+                    <button
+                      type="button"
+                      class="fd-mod-btn"
+                      aria-expanded="false"
+                    >
+                      <span class="fd-mod-num">M·06</span>
+                      <span class="fd-mod-title">Les graphiques</span>
+                      <span class="fd-mod-chev" aria-hidden="true"
+                        ><svg viewBox="0 0 10 10" fill="none"
+                          ><path
+                            d="M2.5 4l2.5 2.5L7.5 4"
+                            stroke="currentColor"
+                            stroke-width="1.4"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"></path></svg
+                        ></span
+                      >
+                    </button>
+                    <div class="fd-mod-body">
+                      <div class="fd-mod-wrap">
+                        <ul class="fd-mod-list">
+                          <li>Choisir le bon type de graphique</li>
+                          <li>
+                            Créer, mettre en forme et imprimer un graphique
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                  </article>
+
+                  <article class="fd-mod" data-open="false">
+                    <button
+                      type="button"
+                      class="fd-mod-btn"
+                      aria-expanded="false"
+                    >
+                      <span class="fd-mod-num">M·07</span>
+                      <span class="fd-mod-title">Gestion du classeur</span>
+                      <span class="fd-mod-chev" aria-hidden="true"
+                        ><svg viewBox="0 0 10 10" fill="none"
+                          ><path
+                            d="M2.5 4l2.5 2.5L7.5 4"
+                            stroke="currentColor"
+                            stroke-width="1.4"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"></path></svg
+                        ></span
+                      >
+                    </button>
+                    <div class="fd-mod-body">
+                      <div class="fd-mod-wrap">
+                        <ul class="fd-mod-list">
+                          <li>Insérer, déplacer et renommer des feuilles</li>
+                          <li>
+                            Travailler sur plusieurs feuilles simultanément
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                  </article>
+
+                  <article class="fd-mod" data-open="false">
+                    <button
+                      type="button"
+                      class="fd-mod-btn"
+                      aria-expanded="false"
+                    >
+                      <span class="fd-mod-num">M·08</span>
+                      <span class="fd-mod-title">L'analyse de données</span>
+                      <span class="fd-mod-chev" aria-hidden="true"
+                        ><svg viewBox="0 0 10 10" fill="none"
+                          ><path
+                            d="M2.5 4l2.5 2.5L7.5 4"
+                            stroke="currentColor"
+                            stroke-width="1.4"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"></path></svg
+                        ></span
+                      >
+                    </button>
+                    <div class="fd-mod-body">
+                      <div class="fd-mod-wrap">
+                        <ul class="fd-mod-list">
+                          <li>Trier et filtrer des listes de données</li>
+                          <li>
+                            Premiers pas vers les tableaux croisés dynamiques
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                  </article>
+                </div>
+              </section>
+
+              <!-- Public & prérequis -->
+              <section id="fd-s-public" aria-labelledby="fd-pub-title">
+                <div class="fd-section-head reveal">
+                  <span class="fd-section-num">03</span>
+                  <h2 class="fd-section-title" id="fd-pub-title">
+                    Public visé &amp; prérequis
+                  </h2>
+                </div>
+                <div class="fd-cards reveal delay-1">
+                  <div class="fd-card" data-field="public">
+                    <div class="fd-card-head">
+                      <span class="fd-card-ic" aria-hidden="true"
+                        ><svg
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          stroke="currentColor"
+                          stroke-width="1.7"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          ><circle cx="9" cy="8" r="3.2"></circle><path
+                            d="M3 19c0-3 2.7-5 6-5s6 2 6 5"></path><circle
+                            cx="17"
+                            cy="9.5"
+                            r="2.4"></circle><path
+                            d="M14.5 19c.2-2.2 1.8-4 4-4s3.5 1.5 3.5 3.5"
+                          ></path></svg
+                        ></span
+                      >
+                      <h3 class="fd-card-title">Public visé</h3>
+                    </div>
+                    <p class="fd-card-tx">
+                      Toute personne souhaitant connaître les fonctionnalités de
+                      base d'Excel.
+                    </p>
+                  </div>
+                  <div class="fd-card" data-field="prerequis">
+                    <div class="fd-card-head">
+                      <span class="fd-card-ic" aria-hidden="true"
+                        ><svg
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          stroke="currentColor"
+                          stroke-width="1.7"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          ><path
+                            d="M9 5H7a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-2"
+                          ></path><rect x="9" y="3" width="6" height="4" rx="1"
+                          ></rect><path d="M9 13l2 2 4-4"></path></svg
+                        ></span
+                      >
+                      <h3 class="fd-card-title">Prérequis</h3>
+                    </div>
+                    <p class="fd-card-tx">
+                      Pratique de l'environnement Windows requise. Aucune
+                      connaissance préalable d'Excel n'est nécessaire.
+                    </p>
+                  </div>
+                </div>
+              </section>
+
+              <!-- Modalités -->
+              <section id="fd-s-modalites" aria-labelledby="fd-mod-title2">
+                <div class="fd-section-head reveal">
+                  <span class="fd-section-num">04</span>
+                  <h2 class="fd-section-title" id="fd-mod-title2">
+                    Modalités &amp; encadrement
+                  </h2>
+                </div>
+                <div class="fd-cards reveal delay-1">
+                  <div class="fd-card" data-field="modalites_pedagogiques">
+                    <div class="fd-card-head">
+                      <span class="fd-card-ic" aria-hidden="true"
+                        ><svg
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          stroke="currentColor"
+                          stroke-width="1.7"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          ><path d="M22 10 12 5 2 10l10 5 10-5z"></path><path
+                            d="M6 12v5c2 2 4 3 6 3s4-1 6-3v-5"></path></svg
+                        ></span
+                      >
+                      <h3 class="fd-card-title">Modalités pédagogiques</h3>
+                    </div>
+                    <p class="fd-card-tx">
+                      Alternance continue entre apports de connaissances et
+                      manipulation des outils. Salles équipées :
+                      vidéoprojecteur, un ordinateur par stagiaire, support
+                      papier et électronique.
+                    </p>
+                  </div>
+                  <div class="fd-card" data-field="modalites_evaluation">
+                    <div class="fd-card-head">
+                      <span class="fd-card-ic" aria-hidden="true"
+                        ><svg
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          stroke="currentColor"
+                          stroke-width="1.7"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          ><path d="M9 11l3 3 8-8"></path><path
+                            d="M20 12v6a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h9"
+                          ></path></svg
+                        ></span
+                      >
+                      <h3 class="fd-card-title">Modalités d'évaluation</h3>
+                    </div>
+                    <p class="fd-card-tx">
+                      Évaluation continue des acquis pendant le stage.
+                      Attestation de stage remise au participant et
+                      questionnaire d'évaluation de la formation.
+                    </p>
+                  </div>
+                  <div class="fd-card" data-field="intervenant">
+                    <div class="fd-card-head">
+                      <span class="fd-card-ic" aria-hidden="true"
+                        ><svg
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          stroke="currentColor"
+                          stroke-width="1.7"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          ><circle cx="12" cy="8" r="3.4"></circle><path
+                            d="M5 20c0-3.3 3.1-5.5 7-5.5s7 2.2 7 5.5"
+                          ></path></svg
+                        ></span
+                      >
+                      <h3 class="fd-card-title">Intervenant</h3>
+                    </div>
+                    <p class="fd-card-tx">
+                      Professionnel de l'informatique, expert en bureautique,
+                      sélectionné et présenté avant le démarrage de la
+                      formation.
+                    </p>
+                  </div>
+                  <div class="fd-card" data-field="accessibilite">
+                    <div class="fd-card-head">
+                      <span class="fd-card-ic" aria-hidden="true"
+                        ><svg
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          stroke="currentColor"
+                          stroke-width="1.7"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          ><circle cx="12" cy="5" r="2"></circle><path
+                            d="M12 7v6l4 1.5M12 13l-4 1.5"></path><path
+                            d="M6.5 17.5a6 6 0 0 0 11 0"></path></svg
+                        ></span
+                      >
+                      <h3 class="fd-card-title">Accessibilité handicap</h3>
+                    </div>
+                    <p class="fd-card-tx">
+                      Locaux accessibles aux personnes à mobilité réduite.
+                      Adaptations possibles sur demande auprès de notre référent
+                      handicap.
+                    </p>
+                  </div>
+                </div>
+              </section>
+
+              <!-- Certification -->
+              <section
+                id="fd-s-certif"
+                aria-label="Certification"
+                data-field="certification"
+              >
+                <div class="fd-certif reveal">
+                  <span class="fd-certif-ic" aria-hidden="true">
+                    <svg
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="1.7"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      ><circle cx="12" cy="9" r="6"></circle><path
+                        d="M8.5 14 7 22l5-2.5L17 22l-1.5-8"></path><path
+                        d="M9.7 9l1.6 1.6L14.5 7.4"></path></svg
+                    >
+                  </span>
+                  <div class="fd-certif-tx">
+                    <h2 class="fd-certif-title">
+                      Certification TOSA en option
+                    </h2>
+                    <p class="fd-certif-sub">
+                      Validez officiellement votre niveau à l'issue du stage :
+                      JCD Formation est centre d'examen TOSA agréé. Score
+                      reconnu par les entreprises, éligible aux financements.
+                    </p>
+                  </div>
+                </div>
+              </section>
             </div>
-          </div>
-          <ul class="fd-goals reveal delay-1">
-            <li class="fd-goal">
-              <span class="fd-goal-ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span>
-              Construire et mettre en forme des tableaux avec des formules de calcul
-            </li>
-            <li class="fd-goal">
-              <span class="fd-goal-ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span>
-              Mettre en page et imprimer ses documents
-            </li>
-            <li class="fd-goal">
-              <span class="fd-goal-ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span>
-              Créer et personnaliser un graphique
-            </li>
-          </ul>
-        </section>
 
-        <!-- Programme -->
-        <section id="fd-s-programme" aria-labelledby="fd-prog-title" data-field="programme">
-          <div class="fd-section-head fd-section-head--prog reveal">
-            <span class="fd-section-num">02</span>
-            <div>
-              <h2 class="fd-section-title" id="fd-prog-title">Programme détaillé</h2>
-              <p class="fd-section-sub">8 modules progressifs, du premier classeur à l'analyse de données.</p>
-            </div>
-            <button type="button" class="fd-expand" id="fd-expand" data-open="false" aria-label="Déplier tous les modules du programme">
-              <span class="fd-expand-tx">Tout déplier</span>
-              <svg viewBox="0 0 10 10" fill="none" aria-hidden="true" focusable="false"><path d="M2.5 4l2.5 2.5L7.5 4" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            </button>
-          </div>
-          <div class="fd-acc reveal delay-1">
-
-            <article class="fd-mod" data-open="true">
-              <button type="button" class="fd-mod-btn" aria-expanded="true">
-                <span class="fd-mod-num">M·01</span>
-                <span class="fd-mod-title">Présentation d'Excel</span>
-                <span class="fd-mod-chev" aria-hidden="true"><svg viewBox="0 0 10 10" fill="none"><path d="M2.5 4l2.5 2.5L7.5 4" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
-              </button>
-              <div class="fd-mod-body">
-                <div class="fd-mod-wrap">
-                  <ul class="fd-mod-list">
-                    <li>Découverte de l'interface : ruban, barre d'outils, zone de travail</li>
-                    <li>Notions de classeur, feuille, cellule et plage</li>
-                    <li>Se déplacer et sélectionner efficacement</li>
+            <!-- Récapitulatif sticky -->
+            <aside
+              class="fd-aside reveal delay-2"
+              aria-label="Informations pratiques"
+            >
+              <div class="fd-aside-shell">
+                <div class="fd-aside-core">
+                  <nav class="fd-toc" aria-label="Sommaire de la fiche">
+                    <a
+                      href="#fd-s-objectifs"
+                      class="fd-toc-item"
+                      data-spy="fd-s-objectifs"
+                      ><span class="fd-toc-n">01</span>Objectifs</a
+                    >
+                    <a
+                      href="#fd-s-programme"
+                      class="fd-toc-item"
+                      data-spy="fd-s-programme"
+                      ><span class="fd-toc-n">02</span>Programme</a
+                    >
+                    <a
+                      href="#fd-s-public"
+                      class="fd-toc-item"
+                      data-spy="fd-s-public"
+                      ><span class="fd-toc-n">03</span>Public &amp; prérequis</a
+                    >
+                    <a
+                      href="#fd-s-modalites"
+                      class="fd-toc-item"
+                      data-spy="fd-s-modalites"
+                      ><span class="fd-toc-n">04</span>Modalités</a
+                    >
+                    <a
+                      href="#fd-s-certif"
+                      class="fd-toc-item"
+                      data-spy="fd-s-certif"
+                      ><span class="fd-toc-n">05</span>Certification</a
+                    >
+                  </nav>
+                  <span class="fd-aside-label">Informations pratiques</span>
+                  <ul class="fd-facts">
+                    <li class="fd-fact">
+                      <span class="fd-fact-ic" aria-hidden="true"
+                        ><svg
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          stroke="currentColor"
+                          stroke-width="1.7"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          ><circle cx="12" cy="12" r="9"></circle><path
+                            d="M12 7v5l3 2"></path></svg
+                        ></span
+                      >
+                      <span class="fd-fact-tx">
+                        <span class="fd-fact-k">Durée</span>
+                        <span class="fd-fact-v" data-field="duree"
+                          >2 jours · 14 heures</span
+                        >
+                      </span>
+                    </li>
+                    <li class="fd-fact">
+                      <span class="fd-fact-ic" aria-hidden="true"
+                        ><svg
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          stroke="currentColor"
+                          stroke-width="1.7"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          ><circle cx="12" cy="12" r="9"></circle><path
+                            d="M14.8 9.2a3 3 0 0 0-5.6 1.3c0 3 5.6 2 5.6 5a3 3 0 0 1-5.6 1.3M12 6v2M12 16v2"
+                          ></path></svg
+                        ></span
+                      >
+                      <span class="fd-fact-tx">
+                        <span class="fd-fact-k">Tarif</span>
+                        <span class="fd-fact-v"
+                          ><span data-field="tarif">490&nbsp;€&nbsp;HT</span>
+                          <small>/ participant</small></span
+                        >
+                      </span>
+                    </li>
+                    <li class="fd-fact">
+                      <span class="fd-fact-ic" aria-hidden="true"
+                        ><svg
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          stroke="currentColor"
+                          stroke-width="1.7"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          ><path
+                            d="M9 5H7a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-2"
+                          ></path><rect x="9" y="3" width="6" height="4" rx="1"
+                          ></rect><path d="M9 12h6M9 16h4"></path></svg
+                        ></span
+                      >
+                      <span class="fd-fact-tx">
+                        <span class="fd-fact-k">Référence</span>
+                        <span class="fd-fact-v" data-field="reference"
+                          >EXLINI</span
+                        >
+                      </span>
+                    </li>
+                    <li class="fd-fact">
+                      <span class="fd-fact-ic" aria-hidden="true"
+                        ><svg
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          stroke="currentColor"
+                          stroke-width="1.7"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          ><path
+                            d="M20 10c0 6-8 11-8 11s-8-5-8-11a8 8 0 0 1 16 0z"
+                          ></path><circle cx="12" cy="10" r="2.6"></circle></svg
+                        ></span
+                      >
+                      <span class="fd-fact-tx">
+                        <span class="fd-fact-k">Lieux</span>
+                        <span class="fd-fact-v" data-field="lieux"
+                          >Metz · Nancy · vos locaux</span
+                        >
+                      </span>
+                    </li>
+                    <li class="fd-fact">
+                      <span class="fd-fact-ic" aria-hidden="true"
+                        ><svg
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          stroke="currentColor"
+                          stroke-width="1.7"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          ><circle cx="9" cy="8" r="3.2"></circle><path
+                            d="M3 19c0-3 2.7-5 6-5s6 2 6 5"></path><circle
+                            cx="17"
+                            cy="9.5"
+                            r="2.4"></circle><path
+                            d="M14.5 19c.2-2.2 1.8-4 4-4s3.5 1.5 3.5 3.5"
+                          ></path></svg
+                        ></span
+                      >
+                      <span class="fd-fact-tx">
+                        <span class="fd-fact-k">Format</span>
+                        <span class="fd-fact-v" data-field="format"
+                          >Intra &amp; inter-entreprises</span
+                        >
+                      </span>
+                    </li>
                   </ul>
+                  <div class="fd-aside-actions">
+                    <a
+                      href="contact.html?pole=formation"
+                      class="btn-cta btn-cta--primary"
+                      id="fd-cta-devis"
+                    >
+                      Demander un devis
+                      <span class="btn-cta-arrow"
+                        ><svg
+                          viewBox="0 0 16 16"
+                          fill="none"
+                          stroke="currentColor"
+                          stroke-width="1.6"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          ><path d="M3 8h10M9 4l4 4-4 4"></path></svg
+                        ></span
+                      >
+                    </a>
+                    <a
+                      href="contact.html?pole=formation&intent=rappel"
+                      class="btn-cta btn-cta--ghost">Être rappelé</a
+                    >
+                  </div>
+                  <p class="fd-aside-note">
+                    <svg
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="1.7"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      aria-hidden="true"
+                      focusable="false"
+                      ><path
+                        d="M12 3l8 3v5c0 5-3.4 8.4-8 10-4.6-1.6-8-5-8-10V6l8-3z"
+                      ></path><path d="M9 11.5l2 2 4-4"></path></svg
+                    >
+                    Premier rendez-vous gratuit · Réponse sous 24&nbsp;h ouvrées
+                  </p>
+                  <div class="fd-aside-phone">
+                    <svg
+                      viewBox="0 0 20 20"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="1.4"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      aria-hidden="true"
+                      focusable="false"
+                      ><path
+                        d="M2 3a1 1 0 011-1h3.28a1 1 0 01.95.68l1.07 3.21a1 1 0 01-.25 1L6.54 8.4a12.06 12.06 0 005.06 5.06l1.51-1.51a1 1 0 011-.25l3.21 1.07a1 1 0 01.68.95V17a1 1 0 01-1 1A15 15 0 012 3z"
+                      ></path></svg
+                    >
+                    <a href="tel:+33387184920">03 87 18 49 20</a>
+                  </div>
                 </div>
               </div>
-            </article>
-
-            <article class="fd-mod" data-open="false">
-              <button type="button" class="fd-mod-btn" aria-expanded="false">
-                <span class="fd-mod-num">M·02</span>
-                <span class="fd-mod-title">Gestion des documents</span>
-                <span class="fd-mod-chev" aria-hidden="true"><svg viewBox="0 0 10 10" fill="none"><path d="M2.5 4l2.5 2.5L7.5 4" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
-              </button>
-              <div class="fd-mod-body">
-                <div class="fd-mod-wrap">
-                  <ul class="fd-mod-list">
-                    <li>Créer, ouvrir et enregistrer un classeur</li>
-                    <li>Organiser ses fichiers et ses versions</li>
-                  </ul>
-                </div>
-              </div>
-            </article>
-
-            <article class="fd-mod" data-open="false">
-              <button type="button" class="fd-mod-btn" aria-expanded="false">
-                <span class="fd-mod-num">M·03</span>
-                <span class="fd-mod-title">Saisir des données et des formules de calcul</span>
-                <span class="fd-mod-chev" aria-hidden="true"><svg viewBox="0 0 10 10" fill="none"><path d="M2.5 4l2.5 2.5L7.5 4" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
-              </button>
-              <div class="fd-mod-body">
-                <div class="fd-mod-wrap">
-                  <ul class="fd-mod-list">
-                    <li>Saisir, modifier, copier et déplacer des données</li>
-                    <li>Construire des formules simples : opérateurs, références</li>
-                    <li>Fonctions essentielles : SOMME, MOYENNE, MIN, MAX</li>
-                  </ul>
-                </div>
-              </div>
-            </article>
-
-            <article class="fd-mod" data-open="false">
-              <button type="button" class="fd-mod-btn" aria-expanded="false">
-                <span class="fd-mod-num">M·04</span>
-                <span class="fd-mod-title">Mise en forme</span>
-                <span class="fd-mod-chev" aria-hidden="true"><svg viewBox="0 0 10 10" fill="none"><path d="M2.5 4l2.5 2.5L7.5 4" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
-              </button>
-              <div class="fd-mod-body">
-                <div class="fd-mod-wrap">
-                  <ul class="fd-mod-list">
-                    <li>Formats de cellules : nombres, dates, pourcentages</li>
-                    <li>Bordures, couleurs et styles de tableaux</li>
-                  </ul>
-                </div>
-              </div>
-            </article>
-
-            <article class="fd-mod" data-open="false">
-              <button type="button" class="fd-mod-btn" aria-expanded="false">
-                <span class="fd-mod-num">M·05</span>
-                <span class="fd-mod-title">Impression des documents</span>
-                <span class="fd-mod-chev" aria-hidden="true"><svg viewBox="0 0 10 10" fill="none"><path d="M2.5 4l2.5 2.5L7.5 4" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
-              </button>
-              <div class="fd-mod-body">
-                <div class="fd-mod-wrap">
-                  <ul class="fd-mod-list">
-                    <li>Mise en page : marges, orientation, en-têtes et pieds de page</li>
-                    <li>Zone d'impression et aperçu avant impression</li>
-                  </ul>
-                </div>
-              </div>
-            </article>
-
-            <article class="fd-mod" data-open="false">
-              <button type="button" class="fd-mod-btn" aria-expanded="false">
-                <span class="fd-mod-num">M·06</span>
-                <span class="fd-mod-title">Les graphiques</span>
-                <span class="fd-mod-chev" aria-hidden="true"><svg viewBox="0 0 10 10" fill="none"><path d="M2.5 4l2.5 2.5L7.5 4" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
-              </button>
-              <div class="fd-mod-body">
-                <div class="fd-mod-wrap">
-                  <ul class="fd-mod-list">
-                    <li>Choisir le bon type de graphique</li>
-                    <li>Créer, mettre en forme et imprimer un graphique</li>
-                  </ul>
-                </div>
-              </div>
-            </article>
-
-            <article class="fd-mod" data-open="false">
-              <button type="button" class="fd-mod-btn" aria-expanded="false">
-                <span class="fd-mod-num">M·07</span>
-                <span class="fd-mod-title">Gestion du classeur</span>
-                <span class="fd-mod-chev" aria-hidden="true"><svg viewBox="0 0 10 10" fill="none"><path d="M2.5 4l2.5 2.5L7.5 4" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
-              </button>
-              <div class="fd-mod-body">
-                <div class="fd-mod-wrap">
-                  <ul class="fd-mod-list">
-                    <li>Insérer, déplacer et renommer des feuilles</li>
-                    <li>Travailler sur plusieurs feuilles simultanément</li>
-                  </ul>
-                </div>
-              </div>
-            </article>
-
-            <article class="fd-mod" data-open="false">
-              <button type="button" class="fd-mod-btn" aria-expanded="false">
-                <span class="fd-mod-num">M·08</span>
-                <span class="fd-mod-title">L'analyse de données</span>
-                <span class="fd-mod-chev" aria-hidden="true"><svg viewBox="0 0 10 10" fill="none"><path d="M2.5 4l2.5 2.5L7.5 4" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
-              </button>
-              <div class="fd-mod-body">
-                <div class="fd-mod-wrap">
-                  <ul class="fd-mod-list">
-                    <li>Trier et filtrer des listes de données</li>
-                    <li>Premiers pas vers les tableaux croisés dynamiques</li>
-                  </ul>
-                </div>
-              </div>
-            </article>
-
+            </aside>
           </div>
-        </section>
+        </div>
+      </section>
 
-        <!-- Public & prérequis -->
-        <section id="fd-s-public" aria-labelledby="fd-pub-title">
-          <div class="fd-section-head reveal">
-            <span class="fd-section-num">03</span>
-            <h2 class="fd-section-title" id="fd-pub-title">Public visé &amp; prérequis</h2>
-          </div>
-          <div class="fd-cards reveal delay-1">
-            <div class="fd-card" data-field="public">
-              <div class="fd-card-head">
-                <span class="fd-card-ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3.2"/><path d="M3 19c0-3 2.7-5 6-5s6 2 6 5"/><circle cx="17" cy="9.5" r="2.4"/><path d="M14.5 19c.2-2.2 1.8-4 4-4s3.5 1.5 3.5 3.5"/></svg></span>
-                <h3 class="fd-card-title">Public visé</h3>
-              </div>
-              <p class="fd-card-tx">Toute personne souhaitant connaître les fonctionnalités de base d'Excel.</p>
-            </div>
-            <div class="fd-card" data-field="prerequis">
-              <div class="fd-card-head">
-                <span class="fd-card-ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5H7a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-2"/><rect x="9" y="3" width="6" height="4" rx="1"/><path d="M9 13l2 2 4-4"/></svg></span>
-                <h3 class="fd-card-title">Prérequis</h3>
-              </div>
-              <p class="fd-card-tx">Pratique de l'environnement Windows requise. Aucune connaissance préalable d'Excel n'est nécessaire.</p>
-            </div>
-          </div>
-        </section>
+      <section class="cta-section" id="contact" aria-labelledby="cta-title">
+        <div class="container">
+          <div class="cta-frame">
+            <div class="cta-inner">
+              <svg
+                class="cta-icon reveal"
+                viewBox="0 0 120 120"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+                aria-hidden="true"
+                focusable="false"
+              >
+                <g
+                  stroke="currentColor"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <!-- Chapeau de promotion — plateau (losange symétrique sur x=60) -->
+                  <path d="M60 30 L103 49 L60 68 L17 49 Z" stroke-width="2"
+                  ></path>
+                  <!-- Coiffe arrondie sous le plateau (montants logés sous les bords du losange) -->
+                  <path
+                    d="M45 62 L45 71 Q60 80 75 71 L75 62"
+                    stroke-width="2"
+                    opacity="0.4"></path>
+                  <!-- Pampille : cordon plat jusqu'au coin droit puis chute verticale -->
+                  <path
+                    d="M60 49 L103 49 L103 83"
+                    stroke-width="2"
+                    opacity="0.62"></path>
+                  <!-- Mèches du gland -->
+                  <path
+                    d="M103 86 L99.6 92.5 M103 86 L103 94 M103 86 L106.4 92.5"
+                    stroke-width="1.5"
+                    opacity="0.62"></path>
+                  <!-- Onde discrète, contenue dans le plateau -->
+                  <g class="cta-icon-wave">
+                    <circle
+                      cx="60"
+                      cy="49"
+                      r="8"
+                      stroke-width="1.5"
+                      opacity="0.5"></circle>
+                    <circle
+                      cx="60"
+                      cy="49"
+                      r="14"
+                      stroke-width="1"
+                      opacity="0.2"></circle>
+                  </g>
+                </g>
+                <!-- Bouton central -->
+                <circle cx="60" cy="49" r="3.6" fill="currentColor"></circle>
+                <!-- Nœud de la pampille -->
+                <circle cx="103" cy="84" r="2.6" fill="currentColor"></circle>
+              </svg>
 
-        <!-- Modalités -->
-        <section id="fd-s-modalites" aria-labelledby="fd-mod-title2">
-          <div class="fd-section-head reveal">
-            <span class="fd-section-num">04</span>
-            <h2 class="fd-section-title" id="fd-mod-title2">Modalités &amp; encadrement</h2>
-          </div>
-          <div class="fd-cards reveal delay-1">
-            <div class="fd-card" data-field="modalites_pedagogiques">
-              <div class="fd-card-head">
-                <span class="fd-card-ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10 12 5 2 10l10 5 10-5z"/><path d="M6 12v5c2 2 4 3 6 3s4-1 6-3v-5"/></svg></span>
-                <h3 class="fd-card-title">Modalités pédagogiques</h3>
-              </div>
-              <p class="fd-card-tx">Alternance continue entre apports de connaissances et manipulation des outils. Salles équipées : vidéoprojecteur, un ordinateur par stagiaire, support papier et électronique.</p>
-            </div>
-            <div class="fd-card" data-field="modalites_evaluation">
-              <div class="fd-card-head">
-                <span class="fd-card-ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3 8-8"/><path d="M20 12v6a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h9"/></svg></span>
-                <h3 class="fd-card-title">Modalités d'évaluation</h3>
-              </div>
-              <p class="fd-card-tx">Évaluation continue des acquis pendant le stage. Attestation de stage remise au participant et questionnaire d'évaluation de la formation.</p>
-            </div>
-            <div class="fd-card" data-field="intervenant">
-              <div class="fd-card-head">
-                <span class="fd-card-ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="3.4"/><path d="M5 20c0-3.3 3.1-5.5 7-5.5s7 2.2 7 5.5"/></svg></span>
-                <h3 class="fd-card-title">Intervenant</h3>
-              </div>
-              <p class="fd-card-tx">Professionnel de l'informatique, expert en bureautique, sélectionné et présenté avant le démarrage de la formation.</p>
-            </div>
-            <div class="fd-card" data-field="accessibilite">
-              <div class="fd-card-head">
-                <span class="fd-card-ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="5" r="2"/><path d="M12 7v6l4 1.5M12 13l-4 1.5"/><path d="M6.5 17.5a6 6 0 0 0 11 0"/></svg></span>
-                <h3 class="fd-card-title">Accessibilité handicap</h3>
-              </div>
-              <p class="fd-card-tx">Locaux accessibles aux personnes à mobilité réduite. Adaptations possibles sur demande auprès de notre référent handicap.</p>
-            </div>
-          </div>
-        </section>
+              <div class="cta-body">
+                <h2 class="cta-title reveal delay-1" id="cta-title">
+                  Un projet de <em>formation&thinsp;?</em>
+                </h2>
 
-        <!-- Certification -->
-        <section id="fd-s-certif" aria-label="Certification" data-field="certification">
-          <div class="fd-certif reveal">
-            <span class="fd-certif-ic" aria-hidden="true">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="9" r="6"/><path d="M8.5 14 7 22l5-2.5L17 22l-1.5-8"/><path d="M9.7 9l1.6 1.6L14.5 7.4"/></svg>
-            </span>
-            <div class="fd-certif-tx">
-              <h2 class="fd-certif-title">Certification TOSA en option</h2>
-              <p class="fd-certif-sub">Validez officiellement votre niveau à l'issue du stage : JCD Formation est centre d'examen TOSA agréé. Score reconnu par les entreprises, éligible aux financements.</p>
-            </div>
-          </div>
-        </section>
+                <p class="cta-sub reveal delay-2">
+                  Premier rendez-vous gratuit, chez vous ou en distanciel, avec
+                  présentation de l'intervenant.
+                </p>
 
-      </div>
-
-      <!-- Récapitulatif sticky -->
-      <aside class="fd-aside reveal delay-2" aria-label="Informations pratiques">
-        <div class="fd-aside-shell">
-          <div class="fd-aside-core">
-            <nav class="fd-toc" aria-label="Sommaire de la fiche">
-              <a href="#fd-s-objectifs" class="fd-toc-item" data-spy="fd-s-objectifs"><span class="fd-toc-n">01</span>Objectifs</a>
-              <a href="#fd-s-programme" class="fd-toc-item" data-spy="fd-s-programme"><span class="fd-toc-n">02</span>Programme</a>
-              <a href="#fd-s-public" class="fd-toc-item" data-spy="fd-s-public"><span class="fd-toc-n">03</span>Public &amp; prérequis</a>
-              <a href="#fd-s-modalites" class="fd-toc-item" data-spy="fd-s-modalites"><span class="fd-toc-n">04</span>Modalités</a>
-              <a href="#fd-s-certif" class="fd-toc-item" data-spy="fd-s-certif"><span class="fd-toc-n">05</span>Certification</a>
-            </nav>
-            <span class="fd-aside-label">Informations pratiques</span>
-            <ul class="fd-facts">
-              <li class="fd-fact">
-                <span class="fd-fact-ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></span>
-                <span class="fd-fact-tx">
-                  <span class="fd-fact-k">Durée</span>
-                  <span class="fd-fact-v" data-field="duree">2 jours · 14 heures</span>
-                </span>
-              </li>
-              <li class="fd-fact">
-                <span class="fd-fact-ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M14.8 9.2a3 3 0 0 0-5.6 1.3c0 3 5.6 2 5.6 5a3 3 0 0 1-5.6 1.3M12 6v2M12 16v2"/></svg></span>
-                <span class="fd-fact-tx">
-                  <span class="fd-fact-k">Tarif</span>
-                  <span class="fd-fact-v"><span data-field="tarif">490&nbsp;€&nbsp;HT</span> <small>/ participant</small></span>
-                </span>
-              </li>
-              <li class="fd-fact">
-                <span class="fd-fact-ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5H7a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-2"/><rect x="9" y="3" width="6" height="4" rx="1"/><path d="M9 12h6M9 16h4"/></svg></span>
-                <span class="fd-fact-tx">
-                  <span class="fd-fact-k">Référence</span>
-                  <span class="fd-fact-v" data-field="reference">EXLINI</span>
-                </span>
-              </li>
-              <li class="fd-fact">
-                <span class="fd-fact-ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 11-8 11s-8-5-8-11a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="2.6"/></svg></span>
-                <span class="fd-fact-tx">
-                  <span class="fd-fact-k">Lieux</span>
-                  <span class="fd-fact-v" data-field="lieux">Metz · Nancy · vos locaux</span>
-                </span>
-              </li>
-              <li class="fd-fact">
-                <span class="fd-fact-ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3.2"/><path d="M3 19c0-3 2.7-5 6-5s6 2 6 5"/><circle cx="17" cy="9.5" r="2.4"/><path d="M14.5 19c.2-2.2 1.8-4 4-4s3.5 1.5 3.5 3.5"/></svg></span>
-                <span class="fd-fact-tx">
-                  <span class="fd-fact-k">Format</span>
-                  <span class="fd-fact-v" data-field="format">Intra &amp; inter-entreprises</span>
-                </span>
-              </li>
-            </ul>
-            <div class="fd-aside-actions">
-              <a href="contact.html?pole=formation" class="btn-cta btn-cta--primary" id="fd-cta-devis">
-                Demander un devis
-                <span class="btn-cta-arrow"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h10M9 4l4 4-4 4"/></svg></span>
-              </a>
-              <a href="contact.html?pole=formation&amp;intent=rappel" class="btn-cta btn-cta--ghost">Être rappelé</a>
-            </div>
-            <p class="fd-aside-note">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 3l8 3v5c0 5-3.4 8.4-8 10-4.6-1.6-8-5-8-10V6l8-3z"/><path d="M9 11.5l2 2 4-4"/></svg>
-              Premier rendez-vous gratuit · Réponse sous 24&nbsp;h ouvrées
-            </p>
-            <div class="fd-aside-phone">
-              <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M2 3a1 1 0 011-1h3.28a1 1 0 01.95.68l1.07 3.21a1 1 0 01-.25 1L6.54 8.4a12.06 12.06 0 005.06 5.06l1.51-1.51a1 1 0 011-.25l3.21 1.07a1 1 0 01.68.95V17a1 1 0 01-1 1A15 15 0 012 3z"/></svg>
-              <a href="tel:+33387184920">03 87 18 49 20</a>
+                <div class="cta-actions reveal delay-3">
+                  <a
+                    href="contact.html?pole=formation"
+                    class="btn-cta btn-cta--primary"
+                  >
+                    Contacter le pôle Formation
+                    <span class="btn-cta-arrow"
+                      ><svg
+                        viewBox="0 0 16 16"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="1.6"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        ><path d="M3 8h10M9 4l4 4-4 4"></path></svg
+                      ></span
+                    >
+                  </a>
+                  <span class="cta-actions-divider" aria-hidden="true"></span>
+                  <span class="cta-phone">
+                    <svg
+                      viewBox="0 0 20 20"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="1.4"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      width="14"
+                      height="14"
+                      ><path
+                        d="M2 3a1 1 0 011-1h3.28a1 1 0 01.95.68l1.07 3.21a1 1 0 01-.25 1L6.54 8.4a12.06 12.06 0 005.06 5.06l1.51-1.51a1 1 0 011-.25l3.21 1.07a1 1 0 01.68.95V17a1 1 0 01-1 1A15 15 0 012 3z"
+                      ></path></svg
+                    >
+                    <a href="tel:+33387184920" class="cta-phone-num"
+                      >03 87 18 49 20</a
+                    >
+                  </span>
+                </div>
+              </div>
             </div>
           </div>
         </div>
-      </aside>
+      </section>
+    </main>
 
-    </div>
-  </div>
-</section>
+    <Footer />
 
-<section class="cta-section" id="contact" aria-labelledby="cta-title">
-  <div class="container">
-    <div class="cta-frame">
+    <script is:inline id="jcd-catalogue-index" type="application/json">
+      {
+        "pack-essentiel-utilisation-de-microsoft-365": [
+          {
+            "t": "Pack essentiel Utilisation de Microsoft 365",
+            "c": "Bureautique",
+            "s": "bureautique",
+            "p": "formation-bureautique.html",
+            "rgb": "85,160,94"
+          }
+        ],
+        "copilot-pour-microsoft-365": [
+          {
+            "t": "Copilot pour Microsoft 365",
+            "c": "Bureautique",
+            "s": "bureautique",
+            "p": "formation-bureautique.html",
+            "rgb": "85,160,94"
+          },
+          {
+            "t": "Copilot pour Microsoft 365",
+            "c": "Intelligence artificielle",
+            "s": "intelligence-artificielle",
+            "p": "formation-intelligence-artificielle.html",
+            "rgb": "118,184,63"
+          },
+          {
+            "t": "Copilot pour Microsoft 365",
+            "c": "Informatique",
+            "s": "informatique",
+            "p": "formation-informatique.html",
+            "rgb": "142,192,65"
+          }
+        ],
+        "copilot-pour-microsoft-365-avance": [
+          {
+            "t": "Copilot pour Microsoft 365 avancé",
+            "c": "Bureautique",
+            "s": "bureautique",
+            "p": "formation-bureautique.html",
+            "rgb": "85,160,94"
+          },
+          {
+            "t": "Copilot pour Microsoft 365 avancé",
+            "c": "Intelligence artificielle",
+            "s": "intelligence-artificielle",
+            "p": "formation-intelligence-artificielle.html",
+            "rgb": "118,184,63"
+          },
+          {
+            "t": "Copilot pour Microsoft 365 avancé",
+            "c": "Informatique",
+            "s": "informatique",
+            "p": "formation-informatique.html",
+            "rgb": "142,192,65"
+          }
+        ],
+        "powerpoint-initiation": [
+          {
+            "t": "PowerPoint Initiation",
+            "c": "Bureautique",
+            "s": "bureautique",
+            "p": "formation-bureautique.html",
+            "rgb": "85,160,94"
+          }
+        ],
+        "excel-macro-vba-expert": [
+          {
+            "t": "Excel Macro VBA expert",
+            "c": "Bureautique",
+            "s": "bureautique",
+            "p": "formation-bureautique.html",
+            "rgb": "85,160,94"
+          }
+        ],
+        "excel-macro-vba-base": [
+          {
+            "t": "Excel Macro VBA base",
+            "c": "Bureautique",
+            "s": "bureautique",
+            "p": "formation-bureautique.html",
+            "rgb": "85,160,94"
+          }
+        ],
+        "excel-macro-vba-avance": [
+          {
+            "t": "Excel Macro VBA avancé",
+            "c": "Bureautique",
+            "s": "bureautique",
+            "p": "formation-bureautique.html",
+            "rgb": "85,160,94"
+          }
+        ],
+        "analyser-et-visualiser-des-donnees-avec-microsoft-power-bi": [
+          {
+            "t": "Analyser et visualiser des données avec Microsoft Power BI",
+            "c": "Bureautique",
+            "s": "bureautique",
+            "p": "formation-bureautique.html",
+            "rgb": "85,160,94"
+          },
+          {
+            "t": "Analyser et visualiser des données avec Microsoft Power BI",
+            "c": "Informatique",
+            "s": "informatique",
+            "p": "formation-informatique.html",
+            "rgb": "142,192,65"
+          }
+        ],
+        "power-bi-desktop-power-pivot-power-query": [
+          {
+            "t": "Power Bi Desktop – Power Pivot – Power Query",
+            "c": "Bureautique",
+            "s": "bureautique",
+            "p": "formation-bureautique.html",
+            "rgb": "85,160,94"
+          }
+        ],
+        "sharepoint-utilisateurs": [
+          {
+            "t": "SharePoint Online – Utilisateur",
+            "c": "Bureautique",
+            "s": "bureautique",
+            "p": "formation-bureautique.html",
+            "rgb": "85,160,94"
+          }
+        ],
+        "teams-utilisateurs": [
+          {
+            "t": "Teams – Utilisateur",
+            "c": "Bureautique",
+            "s": "bureautique",
+            "p": "formation-bureautique.html",
+            "rgb": "85,160,94"
+          }
+        ],
+        "excel-initiation": [
+          {
+            "t": "Excel initiation",
+            "c": "Bureautique",
+            "s": "bureautique",
+            "p": "formation-bureautique.html",
+            "rgb": "85,160,94"
+          }
+        ],
+        "excel-intermediaire": [
+          {
+            "t": "Excel Intermédiaire",
+            "c": "Bureautique",
+            "s": "bureautique",
+            "p": "formation-bureautique.html",
+            "rgb": "85,160,94"
+          }
+        ],
+        "excel-perfectionnement": [
+          {
+            "t": "Excel Perfectionnement",
+            "c": "Bureautique",
+            "s": "bureautique",
+            "p": "formation-bureautique.html",
+            "rgb": "85,160,94"
+          }
+        ],
+        "atelier-excel-base-de-donnees-et-tableaux-croises-dynamiques": [
+          {
+            "t": "Excel, base de données et tableaux croisés dynamiques",
+            "c": "Bureautique",
+            "s": "bureautique",
+            "p": "formation-bureautique.html",
+            "rgb": "85,160,94"
+          }
+        ],
+        "optimiser-lutilisation-de-la-messagerie-outlook": [
+          {
+            "t": "Optimiser l’utilisation de la messagerie Outlook",
+            "c": "Bureautique",
+            "s": "bureautique",
+            "p": "formation-bureautique.html",
+            "rgb": "85,160,94"
+          }
+        ],
+        "word-initiation": [
+          {
+            "t": "Word Initiation",
+            "c": "Bureautique",
+            "s": "bureautique",
+            "p": "formation-bureautique.html",
+            "rgb": "85,160,94"
+          }
+        ],
+        "word-intermediaire-2": [
+          {
+            "t": "Word Intermédiaire",
+            "c": "Bureautique",
+            "s": "bureautique",
+            "p": "formation-bureautique.html",
+            "rgb": "85,160,94"
+          }
+        ],
+        "initiation-a-copilot-pour-microsoft-365": [
+          {
+            "t": "Initiation à Copilot pour Microsoft 365",
+            "c": "Bureautique",
+            "s": "bureautique",
+            "p": "formation-bureautique.html",
+            "rgb": "85,160,94"
+          },
+          {
+            "t": "Initiation à Copilot pour Microsoft 365",
+            "c": "Intelligence artificielle",
+            "s": "intelligence-artificielle",
+            "p": "formation-intelligence-artificielle.html",
+            "rgb": "118,184,63"
+          },
+          {
+            "t": "Initiation à Copilot pour Microsoft 365",
+            "c": "Informatique",
+            "s": "informatique",
+            "p": "formation-informatique.html",
+            "rgb": "142,192,65"
+          }
+        ],
+        "powerpoint-perfectionnement": [
+          {
+            "t": "PowerPoint Perfectionnement",
+            "c": "Bureautique",
+            "s": "bureautique",
+            "p": "formation-bureautique.html",
+            "rgb": "85,160,94"
+          }
+        ],
+        "word-perfectionnement": [
+          {
+            "t": "Word Perfectionnement",
+            "c": "Bureautique",
+            "s": "bureautique",
+            "p": "formation-bureautique.html",
+            "rgb": "85,160,94"
+          }
+        ],
+        "access-initiation": [
+          {
+            "t": "Access Initiation",
+            "c": "Bureautique",
+            "s": "bureautique",
+            "p": "formation-bureautique.html",
+            "rgb": "85,160,94"
+          }
+        ],
+        "access-perfectionnement": [
+          {
+            "t": "Access Perfectionnement",
+            "c": "Bureautique",
+            "s": "bureautique",
+            "p": "formation-bureautique.html",
+            "rgb": "85,160,94"
+          }
+        ],
+        "prompt-engineering-communiquer-efficacement-avec-les-intelligences-artificielles": [
+          {
+            "t": "Prompt engineering, communiquer efficacement avec les intelligences artificielles",
+            "c": "Intelligence artificielle",
+            "s": "intelligence-artificielle",
+            "p": "formation-intelligence-artificielle.html",
+            "rgb": "118,184,63"
+          },
+          {
+            "t": "Prompt engineering, communiquer efficacement avec les intelligences artificielles",
+            "c": "Informatique",
+            "s": "informatique",
+            "p": "formation-informatique.html",
+            "rgb": "142,192,65"
+          },
+          {
+            "t": "Prompt engineering, communiquer efficacement avec les intelligences artificielles",
+            "c": "Administratif - Secrétariat - Accueil",
+            "s": "administratif-secretariat-accueil",
+            "p": "formation-administratif-secretariat-accueil.html",
+            "rgb": "113,73,156"
+          }
+        ],
+        "utiliser-lia-pour-developper-son-efficacite-et-sa-productivite-au-travail-comment-integrer-lia-dans-son-travail-au-quotidien": [
+          {
+            "t": "Utiliser l’IA pour développer son efficacité et sa productivité au travail – Comment intégrer l’IA dans son travail au quotidien",
+            "c": "Intelligence artificielle",
+            "s": "intelligence-artificielle",
+            "p": "formation-intelligence-artificielle.html",
+            "rgb": "118,184,63"
+          },
+          {
+            "t": "Utiliser l’IA pour développer son efficacité et sa productivité au travail – Comment intégrer l’IA dans son travail au quotidien",
+            "c": "Informatique",
+            "s": "informatique",
+            "p": "formation-informatique.html",
+            "rgb": "142,192,65"
+          },
+          {
+            "t": "Utiliser l’IA pour développer son efficacité et sa productivité au travail – Comment intégrer l’IA dans son travail au quotidien",
+            "c": "Administratif - Secrétariat - Accueil",
+            "s": "administratif-secretariat-accueil",
+            "p": "formation-administratif-secretariat-accueil.html",
+            "rgb": "113,73,156"
+          }
+        ],
+        "optimiser-ses-ecrits-professionnels-grace-a-lia": [
+          {
+            "t": "Optimiser ses écrits professionnels grâce à l’IA",
+            "c": "Intelligence artificielle",
+            "s": "intelligence-artificielle",
+            "p": "formation-intelligence-artificielle.html",
+            "rgb": "118,184,63"
+          },
+          {
+            "t": "Optimiser ses écrits professionnels grâce à l’IA",
+            "c": "Administratif - Secrétariat - Accueil",
+            "s": "administratif-secretariat-accueil",
+            "p": "formation-administratif-secretariat-accueil.html",
+            "rgb": "113,73,156"
+          }
+        ],
+        "lintelligence-artificielle-au-service-du-manager": [
+          {
+            "t": "L’intelligence artificielle au service du manager",
+            "c": "Intelligence artificielle",
+            "s": "intelligence-artificielle",
+            "p": "formation-intelligence-artificielle.html",
+            "rgb": "118,184,63"
+          },
+          {
+            "t": "L’intelligence artificielle au service du manager",
+            "c": "Management",
+            "s": "management",
+            "p": "formation-management.html",
+            "rgb": "243,148,29"
+          }
+        ],
+        "booster-sa-prospection-commerciale-avec-lintelligence-artificielle": [
+          {
+            "t": "Booster sa prospection commerciale avec l’intelligence artificielle",
+            "c": "Intelligence artificielle",
+            "s": "intelligence-artificielle",
+            "p": "formation-intelligence-artificielle.html",
+            "rgb": "118,184,63"
+          },
+          {
+            "t": "Booster sa prospection commerciale avec l’intelligence artificielle",
+            "c": "Commerce - Relation client - Achat",
+            "s": "commerce-relation-client",
+            "p": "formation-commerce-relation-client.html",
+            "rgb": "230,110,50"
+          }
+        ],
+        "sinitier-a-la-creation-de-visuels-avec-midjourney": [
+          {
+            "t": "S’initier à la création de visuels avec MidJourney",
+            "c": "Intelligence artificielle",
+            "s": "intelligence-artificielle",
+            "p": "formation-intelligence-artificielle.html",
+            "rgb": "118,184,63"
+          },
+          {
+            "t": "S’initier à la création de visuels avec MidJourney",
+            "c": "Communication - Marketing",
+            "s": "communication-marketing",
+            "p": "formation-communication-marketing.html",
+            "rgb": "229,196,53"
+          }
+        ],
+        "intelligence-artificielle-generative-les-solutions-du-marche-et-leurs": [
+          {
+            "t": "Intelligence Artificielle Générative : les solutions du marché et leurs usages",
+            "c": "Intelligence artificielle",
+            "s": "intelligence-artificielle",
+            "p": "formation-intelligence-artificielle.html",
+            "rgb": "118,184,63"
+          },
+          {
+            "t": "Intelligence Artificielle Générative : les solutions du marché et leurs usages",
+            "c": "Informatique",
+            "s": "informatique",
+            "p": "formation-informatique.html",
+            "rgb": "142,192,65"
+          }
+        ],
+        "claude-pour-les-dirigeants-ia-souveraine-fiable-et-strategique": [
+          {
+            "t": "Claude pour les dirigeants – IA souveraine, fiable et stratégique",
+            "c": "Intelligence artificielle",
+            "s": "intelligence-artificielle",
+            "p": "formation-intelligence-artificielle.html",
+            "rgb": "118,184,63"
+          },
+          {
+            "t": "Claude pour les dirigeants – IA souveraine, fiable et stratégique",
+            "c": "Informatique",
+            "s": "informatique",
+            "p": "formation-informatique.html",
+            "rgb": "142,192,65"
+          }
+        ],
+        "claude-vs-chatgpt-choisir-et-combiner-les-bons-outils-ia-selon-les-usages": [
+          {
+            "t": "Claude vs ChatGPT – Choisir et combiner les bons outils IA selon les usages",
+            "c": "Intelligence artificielle",
+            "s": "intelligence-artificielle",
+            "p": "formation-intelligence-artificielle.html",
+            "rgb": "118,184,63"
+          },
+          {
+            "t": "Claude vs ChatGPT – Choisir et combiner les bons outils IA selon les usages",
+            "c": "Informatique",
+            "s": "informatique",
+            "p": "formation-informatique.html",
+            "rgb": "142,192,65"
+          }
+        ],
+        "decouvrir-les-agents-ia-avec-claude-et-n8n-automatiser-sans-developpeur": [
+          {
+            "t": "Découvrir les agents IA avec Claude et N8N – Automatiser sans développeur",
+            "c": "Intelligence artificielle",
+            "s": "intelligence-artificielle",
+            "p": "formation-intelligence-artificielle.html",
+            "rgb": "118,184,63"
+          },
+          {
+            "t": "Découvrir les agents IA avec Claude et N8N – Automatiser sans développeur",
+            "c": "Informatique",
+            "s": "informatique",
+            "p": "formation-informatique.html",
+            "rgb": "142,192,65"
+          }
+        ],
+        "claude-et-la-gestion-documentaire-analyser-contrats-bilans-et-dossiers-complets-en-quelques-minutes": [
+          {
+            "t": "Claude et la gestion documentaire – Analyser contrats, bilans et dossiers complets en quelques minutes",
+            "c": "Intelligence artificielle",
+            "s": "intelligence-artificielle",
+            "p": "formation-intelligence-artificielle.html",
+            "rgb": "118,184,63"
+          },
+          {
+            "t": "Claude et la gestion documentaire – Analyser contrats, bilans et dossiers complets en quelques minutes",
+            "c": "Informatique",
+            "s": "informatique",
+            "p": "formation-informatique.html",
+            "rgb": "142,192,65"
+          }
+        ],
+        "claude-ai-assistant-ia-le-plus-fiable-pour-les-professionnels": [
+          {
+            "t": "Claude AI au travail – L’assistant IA le plus fiable pour les professionnels",
+            "c": "Intelligence artificielle",
+            "s": "intelligence-artificielle",
+            "p": "formation-intelligence-artificielle.html",
+            "rgb": "118,184,63"
+          },
+          {
+            "t": "Claude AI au travail – L’assistant IA le plus fiable pour les professionnels",
+            "c": "Informatique",
+            "s": "informatique",
+            "p": "formation-informatique.html",
+            "rgb": "142,192,65"
+          }
+        ],
+        "iagraphistes": [
+          {
+            "t": "Les fondamentaux de l’IA générative pour les graphistes",
+            "c": "Intelligence artificielle",
+            "s": "intelligence-artificielle",
+            "p": "formation-intelligence-artificielle.html",
+            "rgb": "118,184,63"
+          },
+          {
+            "t": "Les fondamentaux de l’IA générative pour les graphistes",
+            "c": "Graphisme - PAO",
+            "s": "graphisme-pao",
+            "p": "formation-graphisme-pao.html",
+            "rgb": "156,95,181"
+          }
+        ],
+        "lintelligence-artificielle-au-service-du-recrutement": [
+          {
+            "t": "L’Intelligence Artificielle au service du recrutement",
+            "c": "Intelligence artificielle",
+            "s": "intelligence-artificielle",
+            "p": "formation-intelligence-artificielle.html",
+            "rgb": "118,184,63"
+          },
+          {
+            "t": "L’Intelligence Artificielle au service du recrutement",
+            "c": "Gestion des Ressources humaines",
+            "s": "ressources-humaines",
+            "p": "formation-ressources-humaines.html",
+            "rgb": "217,83,127"
+          }
+        ],
+        "pack-efficacite-microsoft-365-utilisateurs": [
+          {
+            "t": "PACK EFFICACITE Microsoft 365 Utilisateurs",
+            "c": "Informatique",
+            "s": "informatique",
+            "p": "formation-informatique.html",
+            "rgb": "142,192,65"
+          }
+        ],
+        "sharepoint-online-creer-des-applications-avec-powerapps-et-power-automate-flow": [
+          {
+            "t": "SharePoint Online, créer des applications avec PowerApps et Power Automate (Flow)",
+            "c": "Informatique",
+            "s": "informatique",
+            "p": "formation-informatique.html",
+            "rgb": "142,192,65"
+          }
+        ],
+        "powershell-perfectionnement": [
+          {
+            "t": "PowerShell perfectionnement",
+            "c": "Informatique",
+            "s": "informatique",
+            "p": "formation-informatique.html",
+            "rgb": "142,192,65"
+          }
+        ],
+        "powershell-gerer-automatisation-de-windows": [
+          {
+            "t": "PowerShell, gérer l’automatisation de Windows",
+            "c": "Informatique",
+            "s": "informatique",
+            "p": "formation-informatique.html",
+            "rgb": "142,192,65"
+          }
+        ],
+        "pack-essentiel-administration-microsoft-365": [
+          {
+            "t": "PACK ESSENTIEL – Administration Microsoft 365",
+            "c": "Informatique",
+            "s": "informatique",
+            "p": "formation-informatique.html",
+            "rgb": "142,192,65"
+          }
+        ],
+        "pack-performance-administrative-microsoft-365-utilisateurs": [
+          {
+            "t": "PACK PERFORMANCE ADMINISTRATIVE Microsoft 365 Utilisateurs",
+            "c": "Informatique",
+            "s": "informatique",
+            "p": "formation-informatique.html",
+            "rgb": "142,192,65"
+          }
+        ],
+        "microsoft-azure-les-fondamentaux": [
+          {
+            "t": "Microsoft Azure – Les fondamentaux",
+            "c": "Informatique",
+            "s": "informatique",
+            "p": "formation-informatique.html",
+            "rgb": "142,192,65"
+          }
+        ],
+        "pack-avance-administration-microsoft-365": [
+          {
+            "t": "PACK AVANCÉ – Administration Microsoft 365",
+            "c": "Informatique",
+            "s": "informatique",
+            "p": "formation-informatique.html",
+            "rgb": "142,192,65"
+          }
+        ],
+        "les-fondamentaux-de-la-securite-des-si": [
+          {
+            "t": "Les fondamentaux de la sécurité des SI",
+            "c": "Informatique",
+            "s": "informatique",
+            "p": "formation-informatique.html",
+            "rgb": "142,192,65"
+          }
+        ],
+        "gestion-de-microsoft-teams": [
+          {
+            "t": "Gestion de Microsoft Teams",
+            "c": "Informatique",
+            "s": "informatique",
+            "p": "formation-informatique.html",
+            "rgb": "142,192,65"
+          }
+        ],
+        "microsoft-azure-developpement-de-solutions": [
+          {
+            "t": "Microsoft Azure – Développement de solutions",
+            "c": "Informatique",
+            "s": "informatique",
+            "p": "formation-informatique.html",
+            "rgb": "142,192,65"
+          }
+        ],
+        "administrateur-didentite-et-dacces-microsoft": [
+          {
+            "t": "Administrateur d’identité et d’accès Microsoft",
+            "c": "Informatique",
+            "s": "informatique",
+            "p": "formation-informatique.html",
+            "rgb": "142,192,65"
+          }
+        ],
+        "microsoft-azure-administrateur": [
+          {
+            "t": "Microsoft Azure – Administrateur",
+            "c": "Informatique",
+            "s": "informatique",
+            "p": "formation-informatique.html",
+            "rgb": "142,192,65"
+          }
+        ],
+        "linux-administration-avancee": [
+          {
+            "t": "Linux – Administration avancée",
+            "c": "Informatique",
+            "s": "informatique",
+            "p": "formation-informatique.html",
+            "rgb": "142,192,65"
+          }
+        ],
+        "linux-administration": [
+          {
+            "t": "Linux – Administration",
+            "c": "Informatique",
+            "s": "informatique",
+            "p": "formation-informatique.html",
+            "rgb": "142,192,65"
+          }
+        ],
+        "itil-v4-foundation": [
+          {
+            "t": "ITIL V4 Foundation avec certification",
+            "c": "Informatique",
+            "s": "informatique",
+            "p": "formation-informatique.html",
+            "rgb": "142,192,65"
+          }
+        ],
+        "conduite-de-projet-informatique": [
+          {
+            "t": "Conduite de projet informatique",
+            "c": "Informatique",
+            "s": "informatique",
+            "p": "formation-informatique.html",
+            "rgb": "142,192,65"
+          }
+        ],
+        "sharepoint-online-concepteur": [
+          {
+            "t": "Sharepoint Online – Concepteur",
+            "c": "Informatique",
+            "s": "informatique",
+            "p": "formation-informatique.html",
+            "rgb": "142,192,65"
+          }
+        ],
+        "sharepoint-2019-administrateur": [
+          {
+            "t": "SharePoint – Administrateur",
+            "c": "Informatique",
+            "s": "informatique",
+            "p": "formation-informatique.html",
+            "rgb": "142,192,65"
+          }
+        ],
+        "microsoft-hyper-v-deploiement-et-administration": [
+          {
+            "t": "Microsoft Hyper-V – Déploiement et administration",
+            "c": "Informatique",
+            "s": "informatique",
+            "p": "formation-informatique.html",
+            "rgb": "142,192,65"
+          }
+        ],
+        "veeam-backup-replication-v12-configure-manage-recover": [
+          {
+            "t": "Veeam Backup & Replication v12 – Configure, Manage and Recover",
+            "c": "Informatique",
+            "s": "informatique",
+            "p": "formation-informatique.html",
+            "rgb": "142,192,65"
+          }
+        ],
+        "windows-server-2022-active-directory": [
+          {
+            "t": "Windows Server 2022 – Active Directory",
+            "c": "Informatique",
+            "s": "informatique",
+            "p": "formation-informatique.html",
+            "rgb": "142,192,65"
+          }
+        ],
+        "windows-server-2022-mise-en-oeuvre-et-administration": [
+          {
+            "t": "Windows Server 2022 – Mise en œuvre et Administration",
+            "c": "Informatique",
+            "s": "informatique",
+            "p": "formation-informatique.html",
+            "rgb": "142,192,65"
+          }
+        ],
+        "vmware-vsphere-8-install-configure-manage": [
+          {
+            "t": "VMware vsphere 8 – Install, Configure, Manage",
+            "c": "Informatique",
+            "s": "informatique",
+            "p": "formation-informatique.html",
+            "rgb": "142,192,65"
+          }
+        ],
+        "ethical-hacking": [
+          {
+            "t": "Ethical Hacking",
+            "c": "Informatique",
+            "s": "informatique",
+            "p": "formation-informatique.html",
+            "rgb": "142,192,65"
+          }
+        ],
+        "rgpd": [
+          {
+            "t": "RGPD : principes et mise en conformité",
+            "c": "Informatique",
+            "s": "informatique",
+            "p": "formation-informatique.html",
+            "rgb": "142,192,65"
+          }
+        ],
+        "sensibilisation-utilisateurs-cybersecurite": [
+          {
+            "t": "Cybersécurité réseaux/Internet, synthèse",
+            "c": "Informatique",
+            "s": "informatique",
+            "p": "formation-informatique.html",
+            "rgb": "142,192,65"
+          }
+        ],
+        "cybersecurite-sensibilisation-des-utilisateurs": [
+          {
+            "t": "Cybersécurité, sensibilisation des utilisateurs",
+            "c": "Informatique",
+            "s": "informatique",
+            "p": "formation-informatique.html",
+            "rgb": "142,192,65"
+          }
+        ],
+        "wordpress-perfectionnement": [
+          {
+            "t": "WordPress Perfectionnement",
+            "c": "Communication - Marketing",
+            "s": "communication-marketing",
+            "p": "formation-communication-marketing.html",
+            "rgb": "229,196,53"
+          }
+        ],
+        "wordpress-initiation": [
+          {
+            "t": "WordPress Initiation",
+            "c": "Communication - Marketing",
+            "s": "communication-marketing",
+            "p": "formation-communication-marketing.html",
+            "rgb": "229,196,53"
+          }
+        ],
+        "communication-digitale-elaborer-et-piloter-sa-strategie": [
+          {
+            "t": "Communication digitale : élaborer et piloter sa stratégie",
+            "c": "Communication - Marketing",
+            "s": "communication-marketing",
+            "p": "formation-communication-marketing.html",
+            "rgb": "229,196,53"
+          }
+        ],
+        "reseaux-sociaux": [
+          {
+            "t": "Utiliser les réseaux sociaux dans votre stratégie de communication",
+            "c": "Communication - Marketing",
+            "s": "communication-marketing",
+            "p": "formation-communication-marketing.html",
+            "rgb": "229,196,53"
+          }
+        ],
+        "communiquer-efficacement-grace-au-modele-disc": [
+          {
+            "t": "Communiquer efficacement grâce au modèle DISC",
+            "c": "Communication - Marketing",
+            "s": "communication-marketing",
+            "p": "formation-communication-marketing.html",
+            "rgb": "229,196,53"
+          }
+        ],
+        "campagne-de-mailing": [
+          {
+            "t": "Gérer sa campagne d’e-mailing",
+            "c": "Communication - Marketing",
+            "s": "communication-marketing",
+            "p": "formation-communication-marketing.html",
+            "rgb": "229,196,53"
+          }
+        ],
+        "gagner-en-assurance-avec-les-techniques-theatrales": [
+          {
+            "t": "Gagner en assurance avec les techniques théâtrales",
+            "c": "Communication - Marketing",
+            "s": "communication-marketing",
+            "p": "formation-communication-marketing.html",
+            "rgb": "229,196,53"
+          }
+        ],
+        "devenez-un-orateur-talentueux": [
+          {
+            "t": "Devenez un orateur talentueux !",
+            "c": "Communication - Marketing",
+            "s": "communication-marketing",
+            "p": "formation-communication-marketing.html",
+            "rgb": "229,196,53"
+          }
+        ],
+        "prevention-et-gestion-des-conflits": [
+          {
+            "t": "Prévention et gestion des conflits",
+            "c": "Communication - Marketing",
+            "s": "communication-marketing",
+            "p": "formation-communication-marketing.html",
+            "rgb": "229,196,53"
+          }
+        ],
+        "communication-relationnelle-adaptez-vous-a-vos-interlocuteurs-grace-a-loutil-processcom": [
+          {
+            "t": "Communication relationnelle – Adaptez-vous à vos interlocuteurs grâce à l’outil ProcessCom®",
+            "c": "Communication - Marketing",
+            "s": "communication-marketing",
+            "p": "formation-communication-marketing.html",
+            "rgb": "229,196,53"
+          }
+        ],
+        "management-a-distance": [
+          {
+            "t": "Management à distance",
+            "c": "Management",
+            "s": "management",
+            "p": "formation-management.html",
+            "rgb": "243,148,29"
+          }
+        ],
+        "la-boite-a-outils-du-manager": [
+          {
+            "t": "La boîte à outils du manager",
+            "c": "Management",
+            "s": "management",
+            "p": "formation-management.html",
+            "rgb": "243,148,29"
+          }
+        ],
+        "devenir-un-manager-agile-2": [
+          {
+            "t": "Devenir un manager agile",
+            "c": "Management",
+            "s": "management",
+            "p": "formation-management.html",
+            "rgb": "243,148,29"
+          }
+        ],
+        "nouvellesgenerations": [
+          {
+            "t": "Mobiliser les nouvelles générations et comprendre leurs valeurs au travail",
+            "c": "Management",
+            "s": "management",
+            "p": "formation-management.html",
+            "rgb": "243,148,29"
+          }
+        ],
+        "commmanagerialedisc": [
+          {
+            "t": "Adapter sa communication managériale grâce au modèle DISC",
+            "c": "Management",
+            "s": "management",
+            "p": "formation-management.html",
+            "rgb": "243,148,29"
+          }
+        ],
+        "formation-tuteurs": [
+          {
+            "t": "Formation des tuteurs",
+            "c": "Management",
+            "s": "management",
+            "p": "formation-management.html",
+            "rgb": "243,148,29"
+          }
+        ],
+        "formation-de-formateurs-occasionnels": [
+          {
+            "t": "Formation de formateurs occasionnels",
+            "c": "Management",
+            "s": "management",
+            "p": "formation-management.html",
+            "rgb": "243,148,29"
+          }
+        ],
+        "lintelligence-artificielle-au-service-de-la-relation-client": [
+          {
+            "t": "L’intelligence artificielle au service de la relation client",
+            "c": "Commerce - Relation client - Achat",
+            "s": "commerce-relation-client",
+            "p": "formation-commerce-relation-client.html",
+            "rgb": "230,110,50"
+          }
+        ],
+        "relation-client-a-distance": [
+          {
+            "t": "La relation client à distance : développez la qualité de vos appels",
+            "c": "Commerce - Relation client - Achat",
+            "s": "commerce-relation-client",
+            "p": "formation-commerce-relation-client.html",
+            "rgb": "230,110,50"
+          }
+        ],
+        "les-achats-responsables-dans-le-code-de-la-commande-publique-2": [
+          {
+            "t": "REPONDRE A UN APPEL D’OFFRE EN INTEGRANT LES CRITERES ESG D’UN CAHIER DES CHARGES",
+            "c": "Commerce - Relation client - Achat",
+            "s": "commerce-relation-client",
+            "p": "formation-commerce-relation-client.html",
+            "rgb": "230,110,50"
+          }
+        ],
+        "les-achats-responsables-dans-le-code-de-la-commande-publique": [
+          {
+            "t": "LES ACHATS RESPONSABLES DANS LE CODE DE LA COMMANDE PUBLIQUE",
+            "c": "Commerce - Relation client - Achat",
+            "s": "commerce-relation-client",
+            "p": "formation-commerce-relation-client.html",
+            "rgb": "230,110,50"
+          }
+        ],
+        "les-techniques-de-vente-training-intensif": [
+          {
+            "t": "Les techniques de vente : training intensif",
+            "c": "Commerce - Relation client - Achat",
+            "s": "commerce-relation-client",
+            "p": "formation-commerce-relation-client.html",
+            "rgb": "230,110,50"
+          }
+        ],
+        "votre-bilan-ou-votre-resultat-ont-ils-bonne-mine": [
+          {
+            "t": "Votre Bilan ou Votre Résultat ont-ils bonne mine ?",
+            "c": "Comptabilité - Gestion",
+            "s": "comptabilite-gestion",
+            "p": "formation-comptabilite-gestion.html",
+            "rgb": "225,79,70"
+          }
+        ],
+        "comptabilite-pour-non-comptable": [
+          {
+            "t": "Comptabilité pour non-comptables",
+            "c": "Comptabilité - Gestion",
+            "s": "comptabilite-gestion",
+            "p": "formation-comptabilite-gestion.html",
+            "rgb": "225,79,70"
+          }
+        ],
+        "referent-prevention-contre-le-sexisme-et-le-harcelement-sexuel": [
+          {
+            "t": "Référent prévention contre le sexisme et le harcèlement sexuel",
+            "c": "Gestion des Ressources humaines",
+            "s": "ressources-humaines",
+            "p": "formation-ressources-humaines.html",
+            "rgb": "217,83,127"
+          }
+        ],
+        "atelier-droit-local-et-droit-du-travail": [
+          {
+            "t": "Atelier : Droit local et droit du travail",
+            "c": "Gestion des Ressources humaines",
+            "s": "ressources-humaines",
+            "p": "formation-ressources-humaines.html",
+            "rgb": "217,83,127"
+          }
+        ],
+        "les-fondamentaux-de-la-paie": [
+          {
+            "t": "Les fondamentaux de la paie",
+            "c": "Gestion des Ressources humaines",
+            "s": "ressources-humaines",
+            "p": "formation-ressources-humaines.html",
+            "rgb": "217,83,127"
+          }
+        ],
+        "prevenir-le-harcelement-et-sensibiliser-ses-collaborateurs": [
+          {
+            "t": "Prévenir le harcèlement et sensibiliser ses collaborateurs",
+            "c": "Gestion des Ressources humaines",
+            "s": "ressources-humaines",
+            "p": "formation-ressources-humaines.html",
+            "rgb": "217,83,127"
+          }
+        ],
+        "preparer-sa-retraite": [
+          {
+            "t": "Préparer sa retraite",
+            "c": "Développement Personnel",
+            "s": "developpement-personnel",
+            "p": "formation-developpement-personnel.html",
+            "rgb": "199,107,180"
+          }
+        ],
+        "developper-son-assertivite-et-sa-confiance-en-soi": [
+          {
+            "t": "Développer son assertivité et sa confiance en soi",
+            "c": "Développement Personnel",
+            "s": "developpement-personnel",
+            "p": "formation-developpement-personnel.html",
+            "rgb": "199,107,180"
+          }
+        ],
+        "mieux-se-connaitre-neurosciences-pnl-et-outils-de-personnalite": [
+          {
+            "t": "Mieux se connaître : neurosciences, PNL et outils de personnalité",
+            "c": "Développement Personnel",
+            "s": "developpement-personnel",
+            "p": "formation-developpement-personnel.html",
+            "rgb": "199,107,180"
+          }
+        ],
+        "optimiser-son-organisation-pour-gagner-du-temps": [
+          {
+            "t": "Optimiser son organisation pour gagner du temps",
+            "c": "Développement Personnel",
+            "s": "developpement-personnel",
+            "p": "formation-developpement-personnel.html",
+            "rgb": "199,107,180"
+          }
+        ],
+        "adopter-une-demarche-eco-citoyenne-en-entreprise": [
+          {
+            "t": "Adopter une démarche éco-citoyenne en entreprise",
+            "c": "Développement Personnel",
+            "s": "developpement-personnel",
+            "p": "formation-developpement-personnel.html",
+            "rgb": "199,107,180"
+          }
+        ],
+        "gerer-son-stress-au-quotidien-transformer-son-stress-en-energie-positive": [
+          {
+            "t": "Gérer son stress au quotidien : transformer son stress en énergie positive",
+            "c": "Développement Personnel",
+            "s": "developpement-personnel",
+            "p": "formation-developpement-personnel.html",
+            "rgb": "199,107,180"
+          }
+        ],
+        "faire-face-au-risque-de-burn-out-des-collaborateurs": [
+          {
+            "t": "Faire face au risque de burn-out des collaborateurs",
+            "c": "Développement Personnel",
+            "s": "developpement-personnel",
+            "p": "formation-developpement-personnel.html",
+            "rgb": "199,107,180"
+          }
+        ],
+        "illustrator-perfectionnement-2": [
+          {
+            "t": "Illustrator Perfectionnement",
+            "c": "Graphisme - PAO",
+            "s": "graphisme-pao",
+            "p": "formation-graphisme-pao.html",
+            "rgb": "156,95,181"
+          }
+        ],
+        "indesign-perfectionnement-preparer-ses-documents-pour-limpression": [
+          {
+            "t": "InDesign Perfectionnement",
+            "c": "Graphisme - PAO",
+            "s": "graphisme-pao",
+            "p": "formation-graphisme-pao.html",
+            "rgb": "156,95,181"
+          }
+        ],
+        "initiation-pao": [
+          {
+            "t": "Initiation à la PAO",
+            "c": "Graphisme - PAO",
+            "s": "graphisme-pao",
+            "p": "formation-graphisme-pao.html",
+            "rgb": "156,95,181"
+          }
+        ],
+        "photoshop-perfectionnement-2": [
+          {
+            "t": "Photoshop Perfectionnement",
+            "c": "Graphisme - PAO",
+            "s": "graphisme-pao",
+            "p": "formation-graphisme-pao.html",
+            "rgb": "156,95,181"
+          }
+        ],
+        "photoshop-pao": [
+          {
+            "t": "Photoshop Initiation",
+            "c": "Graphisme - PAO",
+            "s": "graphisme-pao",
+            "p": "formation-graphisme-pao.html",
+            "rgb": "156,95,181"
+          }
+        ],
+        "in-design-initiation-mise-en-page": [
+          {
+            "t": "InDesign – Initiation",
+            "c": "Graphisme - PAO",
+            "s": "graphisme-pao",
+            "p": "formation-graphisme-pao.html",
+            "rgb": "156,95,181"
+          }
+        ],
+        "illustrator-initiation": [
+          {
+            "t": "Illustrator Initiation",
+            "c": "Graphisme - PAO",
+            "s": "graphisme-pao",
+            "p": "formation-graphisme-pao.html",
+            "rgb": "156,95,181"
+          }
+        ],
+        "gerer-les-situations-difficiles-a-laccueil": [
+          {
+            "t": "Gérer les situations difficiles à l’accueil",
+            "c": "Administratif - Secrétariat - Accueil",
+            "s": "administratif-secretariat-accueil",
+            "p": "formation-administratif-secretariat-accueil.html",
+            "rgb": "113,73,156"
+          }
+        ],
+        "gagner-du-temps-dans-la-gestion-et-la-redaction-de-ses-e-mails": [
+          {
+            "t": "Gagner du temps dans la gestion et la rédaction de ses e-mails",
+            "c": "Administratif - Secrétariat - Accueil",
+            "s": "administratif-secretariat-accueil",
+            "p": "formation-administratif-secretariat-accueil.html",
+            "rgb": "113,73,156"
+          }
+        ],
+        "rediger-des-ecrits-professionnels-efficaces": [
+          {
+            "t": "Rédiger des écrits professionnels efficaces",
+            "c": "Administratif - Secrétariat - Accueil",
+            "s": "administratif-secretariat-accueil",
+            "p": "formation-administratif-secretariat-accueil.html",
+            "rgb": "113,73,156"
+          }
+        ],
+        "accueil-telephonique-developper-limage-de-marque-de-lentreprise": [
+          {
+            "t": "Accueil téléphonique : développer l’image de marque de l’entreprise",
+            "c": "Administratif - Secrétariat - Accueil",
+            "s": "administratif-secretariat-accueil",
+            "p": "formation-administratif-secretariat-accueil.html",
+            "rgb": "113,73,156"
+          }
+        ],
+        "risqueincendie": [
+          {
+            "t": "COMPRENDRE ET MANAGER LE RISQUE INCENDIE EN ENTREPRISE",
+            "c": "Sécurité",
+            "s": "securite",
+            "p": "formation-securite.html",
+            "rgb": "92,132,177"
+          }
+        ],
+        "ecovadis": [
+          {
+            "t": "METTRE EN PLACE L’EVALUATION ECOVADIS DANS MON ENTREPRISE",
+            "c": "Sécurité",
+            "s": "securite",
+            "p": "formation-securite.html",
+            "rgb": "92,132,177"
+          }
+        ],
+        "sauveteur-secouriste-du-travail-sst": [
+          {
+            "t": "Sauveteur Secouriste du Travail (SST)",
+            "c": "Sécurité",
+            "s": "securite",
+            "p": "formation-securite.html",
+            "rgb": "92,132,177"
+          }
+        ],
+        "rse": [
+          {
+            "t": "COMPRENDRE ET INTEGRER LES FONDAMENTAUX DE LA RSE DANS MA STRATEGIE D’ENTREPRISE",
+            "c": "Sécurité",
+            "s": "securite",
+            "p": "formation-securite.html",
+            "rgb": "92,132,177"
+          }
+        ],
+        "mac-sst-maintien-et-actualisation-des-competences-sst": [
+          {
+            "t": "MAC (SST) : Maintien et Actualisation des Compétences SST",
+            "c": "Sécurité",
+            "s": "securite",
+            "p": "formation-securite.html",
+            "rgb": "92,132,177"
+          }
+        ],
+        "gestes-et-postures": [
+          {
+            "t": "Gestes et Postures",
+            "c": "Sécurité",
+            "s": "securite",
+            "p": "formation-securite.html",
+            "rgb": "92,132,177"
+          }
+        ],
+        "initiation-au-maniement-des-extincteurs": [
+          {
+            "t": "Initiation au maniement des extincteurs",
+            "c": "Sécurité",
+            "s": "securite",
+            "p": "formation-securite.html",
+            "rgb": "92,132,177"
+          }
+        ],
+        "cursus-de-langues-sur-mesure": [
+          {
+            "t": "Cursus de langues sur mesure",
+            "c": "Langues",
+            "s": "langues",
+            "p": "formation-langues.html",
+            "rgb": "60,184,169"
+          }
+        ]
+      }
+    </script>
 
-      <div class="cta-inner">
-        <svg class="cta-icon reveal" viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
-          <g stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
-            <!-- Chapeau de promotion — plateau (losange symétrique sur x=60) -->
-            <path d="M60 30 L103 49 L60 68 L17 49 Z" stroke-width="2"/>
-            <!-- Coiffe arrondie sous le plateau (montants logés sous les bords du losange) -->
-            <path d="M45 62 L45 71 Q60 80 75 71 L75 62" stroke-width="2" opacity="0.4"/>
-            <!-- Pampille : cordon plat jusqu'au coin droit puis chute verticale -->
-            <path d="M60 49 L103 49 L103 83" stroke-width="2" opacity="0.62"/>
-            <!-- Mèches du gland -->
-            <path d="M103 86 L99.6 92.5 M103 86 L103 94 M103 86 L106.4 92.5" stroke-width="1.5" opacity="0.62"/>
-            <!-- Onde discrète, contenue dans le plateau -->
-            <g class="cta-icon-wave">
-              <circle cx="60" cy="49" r="8" stroke-width="1.5" opacity="0.5"/>
-              <circle cx="60" cy="49" r="14" stroke-width="1" opacity="0.2"/>
-            </g>
-          </g>
-          <!-- Bouton central -->
-          <circle cx="60" cy="49" r="3.6" fill="currentColor"/>
-          <!-- Nœud de la pampille -->
-          <circle cx="103" cy="84" r="2.6" fill="currentColor"/>
-        </svg>
+    <script is:inline src="js/pages/formation-detail-1.js"></script>
 
-        <div class="cta-body">
-          <h2 class="cta-title reveal delay-1" id="cta-title">
-            Un projet de <em>formation&thinsp;?</em>
-          </h2>
-
-          <p class="cta-sub reveal delay-2">
-            Premier rendez-vous gratuit, chez vous ou en distanciel, avec présentation de l'intervenant.
+    <!-- jcd-mobile-nav (injected) -->
+    <button
+      class="jcd-burger"
+      id="jcdBurger"
+      type="button"
+      aria-label="Ouvrir le menu"
+      aria-expanded="false"
+      aria-controls="jcdMnav"
+    >
+      <span class="jcd-burger__box" aria-hidden="true"
+        ><i></i><i></i><i></i></span
+      >
+    </button>
+    <div
+      class="jcd-mnav"
+      id="jcdMnav"
+      role="dialog"
+      aria-modal="true"
+      aria-label="Menu de navigation"
+      aria-hidden="true"
+    >
+      <div class="jcd-mnav__scroll">
+        <div class="jcd-mnav__inner">
+          <p
+            class="jcd-mnav__eyebrow jcd-mnav__reveal"
+            style="transition-delay:.04s"
+          >
+            Expertises
           </p>
 
-          <div class="cta-actions reveal delay-3">
-            <a href="contact.html?pole=formation" class="btn-cta btn-cta--primary">
-              Contacter le pôle Formation
-              <span class="btn-cta-arrow"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h10M9 4l4 4-4 4"/></svg></span>
-            </a>
-            <span class="cta-actions-divider" aria-hidden="true"></span>
-            <span class="cta-phone">
-              <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" width="14" height="14"><path d="M2 3a1 1 0 011-1h3.28a1 1 0 01.95.68l1.07 3.21a1 1 0 01-.25 1L6.54 8.4a12.06 12.06 0 005.06 5.06l1.51-1.51a1 1 0 011-.25l3.21 1.07a1 1 0 01.68.95V17a1 1 0 01-1 1A15 15 0 012 3z"/></svg>
-              <a href="tel:+33387184920" class="cta-phone-num">03 87 18 49 20</a>
-            </span>
+          <div class="jcd-mnav__reveal" style="transition-delay:.07s">
+            <div class="jcd-mnav__item" style="--mnav-c:#2E72BA">
+              <a class="jcd-mnav__link" href="informatique.html"
+                ><span class="jcd-mnav__dot"></span><span
+                  class="jcd-mnav__label">Informatique</span
+                ></a
+              >
+              <button
+                class="jcd-acc__toggle"
+                type="button"
+                aria-expanded="false"
+                aria-controls="jcdAccInfo"
+                aria-label="Afficher les sous-pages Informatique"
+              >
+                <svg
+                  viewBox="0 0 14 14"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.6"
+                  stroke-linecap="round"><path d="M7 2v10M2 7h10"></path></svg
+                >
+              </button>
+            </div>
+            <div class="jcd-acc__panel" id="jcdAccInfo">
+              <a class="jcd-mnav__sub" href="info-cloud.html">Cloud Microsoft</a
+              >
+              <a class="jcd-mnav__sub" href="info-collaboratif.html"
+                >Solutions collaboratives &amp; audiovisuelles</a
+              >
+              <a class="jcd-mnav__sub" href="info-reseaux.html"
+                >Architectures syst&egrave;mes &amp; r&eacute;seaux</a
+              >
+              <a class="jcd-mnav__sub" href="info-integration.html"
+                >Int&eacute;gration &amp; Support PC</a
+              >
+            </div>
+          </div>
+
+          <a
+            class="jcd-mnav__item jcd-mnav__reveal"
+            style="--mnav-c:#E51D29;transition-delay:.10s"
+            href="service.html"
+            ><span class="jcd-mnav__dot"></span><span class="jcd-mnav__label"
+              >Service</span
+            ></a
+          >
+          <a
+            class="jcd-mnav__item jcd-mnav__reveal"
+            style="--mnav-c:#F9D605;transition-delay:.13s"
+            href="developpement.html"
+            ><span class="jcd-mnav__dot"></span><span class="jcd-mnav__label"
+              >D&eacute;veloppement</span
+            ></a
+          >
+          <a
+            class="jcd-mnav__item jcd-mnav__reveal"
+            style="--mnav-c:#F3941D;transition-delay:.16s"
+            href="print.html"
+            ><span class="jcd-mnav__dot"></span><span class="jcd-mnav__label"
+              >Print</span
+            ></a
+          >
+          <a
+            class="jcd-mnav__item jcd-mnav__reveal"
+            style="--mnav-c:#B063AC;transition-delay:.19s"
+            href="telecom.html"
+            ><span class="jcd-mnav__dot"></span><span class="jcd-mnav__label"
+              >T&eacute;l&eacute;com</span
+            ></a
+          >
+          <div class="jcd-mnav__reveal" style="transition-delay:.22s">
+            <div class="jcd-mnav__item" style="--mnav-c:#8EC041">
+              <a class="jcd-mnav__link" href="formation.html"
+                ><span class="jcd-mnav__dot"></span><span
+                  class="jcd-mnav__label">Formation</span
+                ></a
+              >
+              <button
+                class="jcd-acc__toggle"
+                type="button"
+                aria-expanded="false"
+                aria-controls="jcdAccForm"
+                aria-label="Afficher les catégories de formation"
+              >
+                <svg
+                  viewBox="0 0 14 14"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.6"
+                  stroke-linecap="round"><path d="M7 2v10M2 7h10"></path></svg
+                >
+              </button>
+            </div>
+            <div class="jcd-acc__panel" id="jcdAccForm">
+              <a class="jcd-mnav__sub" href="formation-bureautique.html"
+                >Bureautique</a
+              >
+              <a
+                class="jcd-mnav__sub"
+                href="formation-intelligence-artificielle.html"
+                >Intelligence artificielle</a
+              >
+              <a class="jcd-mnav__sub" href="formation-informatique.html"
+                >Informatique</a
+              >
+              <a
+                class="jcd-mnav__sub"
+                href="formation-communication-marketing.html"
+                >Communication - Marketing</a
+              >
+              <a class="jcd-mnav__sub" href="formation-management.html"
+                >Management</a
+              >
+              <a
+                class="jcd-mnav__sub"
+                href="formation-commerce-relation-client.html"
+                >Commerce - Relation client</a
+              >
+              <a
+                class="jcd-mnav__sub"
+                href="formation-comptabilite-gestion.html"
+                >Comptabilit&eacute; - Gestion</a
+              >
+              <a class="jcd-mnav__sub" href="formation-ressources-humaines.html"
+                >Ressources humaines</a
+              >
+              <a
+                class="jcd-mnav__sub"
+                href="formation-developpement-personnel.html"
+                >D&eacute;veloppement personnel</a
+              >
+              <a class="jcd-mnav__sub" href="formation-graphisme-pao.html"
+                >Graphisme - PAO</a
+              >
+              <a
+                class="jcd-mnav__sub"
+                href="formation-administratif-secretariat-accueil.html"
+                >Administratif - Secr&eacute;tariat</a
+              >
+              <a class="jcd-mnav__sub" href="formation-securite.html"
+                >S&eacute;curit&eacute;</a
+              >
+              <a class="jcd-mnav__sub" href="formation-langues.html">Langues</a>
+            </div>
+          </div>
+          <a
+            class="jcd-mnav__item jcd-mnav__reveal"
+            style="--mnav-c:#A78D75;transition-delay:.25s"
+            href="agencement.html"
+            ><span class="jcd-mnav__dot"></span><span class="jcd-mnav__label"
+              >Agencement</span
+            ></a
+          >
+
+          <p
+            class="jcd-mnav__eyebrow jcd-mnav__sec2 jcd-mnav__reveal"
+            style="transition-delay:.30s"
+          >
+            D&eacute;couvrir
+          </p>
+          <a
+            class="jcd-mnav__item jcd-mnav__reveal"
+            style="--mnav-c:#9a9a9a;transition-delay:.33s"
+            href="assistance.html"
+            ><span class="jcd-mnav__dot"></span><span
+              class="jcd-mnav__label"
+              style="font-size:19px">Assistance</span
+            ></a
+          >
+          <a
+            class="jcd-mnav__item jcd-mnav__reveal"
+            style="--mnav-c:#9a9a9a;transition-delay:.36s"
+            href="carrieres.html"
+            ><span class="jcd-mnav__dot"></span><span
+              class="jcd-mnav__label"
+              style="font-size:19px">Carri&egrave;res</span
+            ></a
+          >
+
+          <div
+            class="jcd-mnav__cta jcd-mnav__reveal"
+            style="transition-delay:.40s"
+          >
+            <a class="jcd-mnav__btn jcd-mnav__btn--primary" href="contact.html"
+              >Contacter un expert
+              <span class="jcd-mnav__btn-ic"
+                ><svg
+                  viewBox="0 0 16 16"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.7"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  ><path d="M3 8h10M9 4l4 4-4 4"></path></svg
+                ></span
+              ></a
+            >
+            <a
+              class="jcd-mnav__btn jcd-mnav__btn--ghost"
+              href="tel:+33387184920"
+              >03 87 18 49 20
+              <span class="jcd-mnav__btn-ic"
+                ><svg
+                  viewBox="0 0 18 18"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.5"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  ><path
+                    d="M2.5 3.5a1 1 0 011-1h2.4a1 1 0 01.95.68l.86 2.4a1 1 0 01-.24 1l-1.2 1.2a11 11 0 004.6 4.6l1.2-1.2a1 1 0 011-.24l2.4.86a1 1 0 01.68.95V15a1 1 0 01-1 1A13.5 13.5 0 012.5 3.5z"
+                  ></path></svg
+                ></span
+              ></a
+            >
           </div>
         </div>
       </div>
-
     </div>
-  </div>
-</section>
-
-</main>
-
-<Footer />
-
-
-<script is:inline id="jcd-catalogue-index" type="application/json">{"pack-essentiel-utilisation-de-microsoft-365":[{"t":"Pack essentiel Utilisation de Microsoft 365","c":"Bureautique","s":"bureautique","p":"formation-bureautique.html","rgb":"85,160,94"}],"copilot-pour-microsoft-365":[{"t":"Copilot pour Microsoft 365","c":"Bureautique","s":"bureautique","p":"formation-bureautique.html","rgb":"85,160,94"},{"t":"Copilot pour Microsoft 365","c":"Intelligence artificielle","s":"intelligence-artificielle","p":"formation-intelligence-artificielle.html","rgb":"118,184,63"},{"t":"Copilot pour Microsoft 365","c":"Informatique","s":"informatique","p":"formation-informatique.html","rgb":"142,192,65"}],"copilot-pour-microsoft-365-avance":[{"t":"Copilot pour Microsoft 365 avancé","c":"Bureautique","s":"bureautique","p":"formation-bureautique.html","rgb":"85,160,94"},{"t":"Copilot pour Microsoft 365 avancé","c":"Intelligence artificielle","s":"intelligence-artificielle","p":"formation-intelligence-artificielle.html","rgb":"118,184,63"},{"t":"Copilot pour Microsoft 365 avancé","c":"Informatique","s":"informatique","p":"formation-informatique.html","rgb":"142,192,65"}],"powerpoint-initiation":[{"t":"PowerPoint Initiation","c":"Bureautique","s":"bureautique","p":"formation-bureautique.html","rgb":"85,160,94"}],"excel-macro-vba-expert":[{"t":"Excel Macro VBA expert","c":"Bureautique","s":"bureautique","p":"formation-bureautique.html","rgb":"85,160,94"}],"excel-macro-vba-base":[{"t":"Excel Macro VBA base","c":"Bureautique","s":"bureautique","p":"formation-bureautique.html","rgb":"85,160,94"}],"excel-macro-vba-avance":[{"t":"Excel Macro VBA avancé","c":"Bureautique","s":"bureautique","p":"formation-bureautique.html","rgb":"85,160,94"}],"analyser-et-visualiser-des-donnees-avec-microsoft-power-bi":[{"t":"Analyser et visualiser des données avec Microsoft Power BI","c":"Bureautique","s":"bureautique","p":"formation-bureautique.html","rgb":"85,160,94"},{"t":"Analyser et visualiser des données avec Microsoft Power BI","c":"Informatique","s":"informatique","p":"formation-informatique.html","rgb":"142,192,65"}],"power-bi-desktop-power-pivot-power-query":[{"t":"Power Bi Desktop – Power Pivot – Power Query","c":"Bureautique","s":"bureautique","p":"formation-bureautique.html","rgb":"85,160,94"}],"sharepoint-utilisateurs":[{"t":"SharePoint Online – Utilisateur","c":"Bureautique","s":"bureautique","p":"formation-bureautique.html","rgb":"85,160,94"}],"teams-utilisateurs":[{"t":"Teams – Utilisateur","c":"Bureautique","s":"bureautique","p":"formation-bureautique.html","rgb":"85,160,94"}],"excel-initiation":[{"t":"Excel initiation","c":"Bureautique","s":"bureautique","p":"formation-bureautique.html","rgb":"85,160,94"}],"excel-intermediaire":[{"t":"Excel Intermédiaire","c":"Bureautique","s":"bureautique","p":"formation-bureautique.html","rgb":"85,160,94"}],"excel-perfectionnement":[{"t":"Excel Perfectionnement","c":"Bureautique","s":"bureautique","p":"formation-bureautique.html","rgb":"85,160,94"}],"atelier-excel-base-de-donnees-et-tableaux-croises-dynamiques":[{"t":"Excel, base de données et tableaux croisés dynamiques","c":"Bureautique","s":"bureautique","p":"formation-bureautique.html","rgb":"85,160,94"}],"optimiser-lutilisation-de-la-messagerie-outlook":[{"t":"Optimiser l’utilisation de la messagerie Outlook","c":"Bureautique","s":"bureautique","p":"formation-bureautique.html","rgb":"85,160,94"}],"word-initiation":[{"t":"Word Initiation","c":"Bureautique","s":"bureautique","p":"formation-bureautique.html","rgb":"85,160,94"}],"word-intermediaire-2":[{"t":"Word Intermédiaire","c":"Bureautique","s":"bureautique","p":"formation-bureautique.html","rgb":"85,160,94"}],"initiation-a-copilot-pour-microsoft-365":[{"t":"Initiation à Copilot pour Microsoft 365","c":"Bureautique","s":"bureautique","p":"formation-bureautique.html","rgb":"85,160,94"},{"t":"Initiation à Copilot pour Microsoft 365","c":"Intelligence artificielle","s":"intelligence-artificielle","p":"formation-intelligence-artificielle.html","rgb":"118,184,63"},{"t":"Initiation à Copilot pour Microsoft 365","c":"Informatique","s":"informatique","p":"formation-informatique.html","rgb":"142,192,65"}],"powerpoint-perfectionnement":[{"t":"PowerPoint Perfectionnement","c":"Bureautique","s":"bureautique","p":"formation-bureautique.html","rgb":"85,160,94"}],"word-perfectionnement":[{"t":"Word Perfectionnement","c":"Bureautique","s":"bureautique","p":"formation-bureautique.html","rgb":"85,160,94"}],"access-initiation":[{"t":"Access Initiation","c":"Bureautique","s":"bureautique","p":"formation-bureautique.html","rgb":"85,160,94"}],"access-perfectionnement":[{"t":"Access Perfectionnement","c":"Bureautique","s":"bureautique","p":"formation-bureautique.html","rgb":"85,160,94"}],"prompt-engineering-communiquer-efficacement-avec-les-intelligences-artificielles":[{"t":"Prompt engineering, communiquer efficacement avec les intelligences artificielles","c":"Intelligence artificielle","s":"intelligence-artificielle","p":"formation-intelligence-artificielle.html","rgb":"118,184,63"},{"t":"Prompt engineering, communiquer efficacement avec les intelligences artificielles","c":"Informatique","s":"informatique","p":"formation-informatique.html","rgb":"142,192,65"},{"t":"Prompt engineering, communiquer efficacement avec les intelligences artificielles","c":"Administratif - Secrétariat - Accueil","s":"administratif-secretariat-accueil","p":"formation-administratif-secretariat-accueil.html","rgb":"113,73,156"}],"utiliser-lia-pour-developper-son-efficacite-et-sa-productivite-au-travail-comment-integrer-lia-dans-son-travail-au-quotidien":[{"t":"Utiliser l’IA pour développer son efficacité et sa productivité au travail – Comment intégrer l’IA dans son travail au quotidien","c":"Intelligence artificielle","s":"intelligence-artificielle","p":"formation-intelligence-artificielle.html","rgb":"118,184,63"},{"t":"Utiliser l’IA pour développer son efficacité et sa productivité au travail – Comment intégrer l’IA dans son travail au quotidien","c":"Informatique","s":"informatique","p":"formation-informatique.html","rgb":"142,192,65"},{"t":"Utiliser l’IA pour développer son efficacité et sa productivité au travail – Comment intégrer l’IA dans son travail au quotidien","c":"Administratif - Secrétariat - Accueil","s":"administratif-secretariat-accueil","p":"formation-administratif-secretariat-accueil.html","rgb":"113,73,156"}],"optimiser-ses-ecrits-professionnels-grace-a-lia":[{"t":"Optimiser ses écrits professionnels grâce à l’IA","c":"Intelligence artificielle","s":"intelligence-artificielle","p":"formation-intelligence-artificielle.html","rgb":"118,184,63"},{"t":"Optimiser ses écrits professionnels grâce à l’IA","c":"Administratif - Secrétariat - Accueil","s":"administratif-secretariat-accueil","p":"formation-administratif-secretariat-accueil.html","rgb":"113,73,156"}],"lintelligence-artificielle-au-service-du-manager":[{"t":"L’intelligence artificielle au service du manager","c":"Intelligence artificielle","s":"intelligence-artificielle","p":"formation-intelligence-artificielle.html","rgb":"118,184,63"},{"t":"L’intelligence artificielle au service du manager","c":"Management","s":"management","p":"formation-management.html","rgb":"243,148,29"}],"booster-sa-prospection-commerciale-avec-lintelligence-artificielle":[{"t":"Booster sa prospection commerciale avec l’intelligence artificielle","c":"Intelligence artificielle","s":"intelligence-artificielle","p":"formation-intelligence-artificielle.html","rgb":"118,184,63"},{"t":"Booster sa prospection commerciale avec l’intelligence artificielle","c":"Commerce - Relation client - Achat","s":"commerce-relation-client","p":"formation-commerce-relation-client.html","rgb":"230,110,50"}],"sinitier-a-la-creation-de-visuels-avec-midjourney":[{"t":"S’initier à la création de visuels avec MidJourney","c":"Intelligence artificielle","s":"intelligence-artificielle","p":"formation-intelligence-artificielle.html","rgb":"118,184,63"},{"t":"S’initier à la création de visuels avec MidJourney","c":"Communication - Marketing","s":"communication-marketing","p":"formation-communication-marketing.html","rgb":"229,196,53"}],"intelligence-artificielle-generative-les-solutions-du-marche-et-leurs":[{"t":"Intelligence Artificielle Générative : les solutions du marché et leurs usages","c":"Intelligence artificielle","s":"intelligence-artificielle","p":"formation-intelligence-artificielle.html","rgb":"118,184,63"},{"t":"Intelligence Artificielle Générative : les solutions du marché et leurs usages","c":"Informatique","s":"informatique","p":"formation-informatique.html","rgb":"142,192,65"}],"claude-pour-les-dirigeants-ia-souveraine-fiable-et-strategique":[{"t":"Claude pour les dirigeants – IA souveraine, fiable et stratégique","c":"Intelligence artificielle","s":"intelligence-artificielle","p":"formation-intelligence-artificielle.html","rgb":"118,184,63"},{"t":"Claude pour les dirigeants – IA souveraine, fiable et stratégique","c":"Informatique","s":"informatique","p":"formation-informatique.html","rgb":"142,192,65"}],"claude-vs-chatgpt-choisir-et-combiner-les-bons-outils-ia-selon-les-usages":[{"t":"Claude vs ChatGPT – Choisir et combiner les bons outils IA selon les usages","c":"Intelligence artificielle","s":"intelligence-artificielle","p":"formation-intelligence-artificielle.html","rgb":"118,184,63"},{"t":"Claude vs ChatGPT – Choisir et combiner les bons outils IA selon les usages","c":"Informatique","s":"informatique","p":"formation-informatique.html","rgb":"142,192,65"}],"decouvrir-les-agents-ia-avec-claude-et-n8n-automatiser-sans-developpeur":[{"t":"Découvrir les agents IA avec Claude et N8N – Automatiser sans développeur","c":"Intelligence artificielle","s":"intelligence-artificielle","p":"formation-intelligence-artificielle.html","rgb":"118,184,63"},{"t":"Découvrir les agents IA avec Claude et N8N – Automatiser sans développeur","c":"Informatique","s":"informatique","p":"formation-informatique.html","rgb":"142,192,65"}],"claude-et-la-gestion-documentaire-analyser-contrats-bilans-et-dossiers-complets-en-quelques-minutes":[{"t":"Claude et la gestion documentaire – Analyser contrats, bilans et dossiers complets en quelques minutes","c":"Intelligence artificielle","s":"intelligence-artificielle","p":"formation-intelligence-artificielle.html","rgb":"118,184,63"},{"t":"Claude et la gestion documentaire – Analyser contrats, bilans et dossiers complets en quelques minutes","c":"Informatique","s":"informatique","p":"formation-informatique.html","rgb":"142,192,65"}],"claude-ai-assistant-ia-le-plus-fiable-pour-les-professionnels":[{"t":"Claude AI au travail – L’assistant IA le plus fiable pour les professionnels","c":"Intelligence artificielle","s":"intelligence-artificielle","p":"formation-intelligence-artificielle.html","rgb":"118,184,63"},{"t":"Claude AI au travail – L’assistant IA le plus fiable pour les professionnels","c":"Informatique","s":"informatique","p":"formation-informatique.html","rgb":"142,192,65"}],"iagraphistes":[{"t":"Les fondamentaux de l’IA générative pour les graphistes","c":"Intelligence artificielle","s":"intelligence-artificielle","p":"formation-intelligence-artificielle.html","rgb":"118,184,63"},{"t":"Les fondamentaux de l’IA générative pour les graphistes","c":"Graphisme - PAO","s":"graphisme-pao","p":"formation-graphisme-pao.html","rgb":"156,95,181"}],"lintelligence-artificielle-au-service-du-recrutement":[{"t":"L’Intelligence Artificielle au service du recrutement","c":"Intelligence artificielle","s":"intelligence-artificielle","p":"formation-intelligence-artificielle.html","rgb":"118,184,63"},{"t":"L’Intelligence Artificielle au service du recrutement","c":"Gestion des Ressources humaines","s":"ressources-humaines","p":"formation-ressources-humaines.html","rgb":"217,83,127"}],"pack-efficacite-microsoft-365-utilisateurs":[{"t":"PACK EFFICACITE Microsoft 365 Utilisateurs","c":"Informatique","s":"informatique","p":"formation-informatique.html","rgb":"142,192,65"}],"sharepoint-online-creer-des-applications-avec-powerapps-et-power-automate-flow":[{"t":"SharePoint Online, créer des applications avec PowerApps et Power Automate (Flow)","c":"Informatique","s":"informatique","p":"formation-informatique.html","rgb":"142,192,65"}],"powershell-perfectionnement":[{"t":"PowerShell perfectionnement","c":"Informatique","s":"informatique","p":"formation-informatique.html","rgb":"142,192,65"}],"powershell-gerer-automatisation-de-windows":[{"t":"PowerShell, gérer l’automatisation de Windows","c":"Informatique","s":"informatique","p":"formation-informatique.html","rgb":"142,192,65"}],"pack-essentiel-administration-microsoft-365":[{"t":"PACK ESSENTIEL – Administration Microsoft 365","c":"Informatique","s":"informatique","p":"formation-informatique.html","rgb":"142,192,65"}],"pack-performance-administrative-microsoft-365-utilisateurs":[{"t":"PACK PERFORMANCE ADMINISTRATIVE Microsoft 365 Utilisateurs","c":"Informatique","s":"informatique","p":"formation-informatique.html","rgb":"142,192,65"}],"microsoft-azure-les-fondamentaux":[{"t":"Microsoft Azure – Les fondamentaux","c":"Informatique","s":"informatique","p":"formation-informatique.html","rgb":"142,192,65"}],"pack-avance-administration-microsoft-365":[{"t":"PACK AVANCÉ – Administration Microsoft 365","c":"Informatique","s":"informatique","p":"formation-informatique.html","rgb":"142,192,65"}],"les-fondamentaux-de-la-securite-des-si":[{"t":"Les fondamentaux de la sécurité des SI","c":"Informatique","s":"informatique","p":"formation-informatique.html","rgb":"142,192,65"}],"gestion-de-microsoft-teams":[{"t":"Gestion de Microsoft Teams","c":"Informatique","s":"informatique","p":"formation-informatique.html","rgb":"142,192,65"}],"microsoft-azure-developpement-de-solutions":[{"t":"Microsoft Azure – Développement de solutions","c":"Informatique","s":"informatique","p":"formation-informatique.html","rgb":"142,192,65"}],"administrateur-didentite-et-dacces-microsoft":[{"t":"Administrateur d’identité et d’accès Microsoft","c":"Informatique","s":"informatique","p":"formation-informatique.html","rgb":"142,192,65"}],"microsoft-azure-administrateur":[{"t":"Microsoft Azure – Administrateur","c":"Informatique","s":"informatique","p":"formation-informatique.html","rgb":"142,192,65"}],"linux-administration-avancee":[{"t":"Linux – Administration avancée","c":"Informatique","s":"informatique","p":"formation-informatique.html","rgb":"142,192,65"}],"linux-administration":[{"t":"Linux – Administration","c":"Informatique","s":"informatique","p":"formation-informatique.html","rgb":"142,192,65"}],"itil-v4-foundation":[{"t":"ITIL V4 Foundation avec certification","c":"Informatique","s":"informatique","p":"formation-informatique.html","rgb":"142,192,65"}],"conduite-de-projet-informatique":[{"t":"Conduite de projet informatique","c":"Informatique","s":"informatique","p":"formation-informatique.html","rgb":"142,192,65"}],"sharepoint-online-concepteur":[{"t":"Sharepoint Online – Concepteur","c":"Informatique","s":"informatique","p":"formation-informatique.html","rgb":"142,192,65"}],"sharepoint-2019-administrateur":[{"t":"SharePoint – Administrateur","c":"Informatique","s":"informatique","p":"formation-informatique.html","rgb":"142,192,65"}],"microsoft-hyper-v-deploiement-et-administration":[{"t":"Microsoft Hyper-V – Déploiement et administration","c":"Informatique","s":"informatique","p":"formation-informatique.html","rgb":"142,192,65"}],"veeam-backup-replication-v12-configure-manage-recover":[{"t":"Veeam Backup & Replication v12 – Configure, Manage and Recover","c":"Informatique","s":"informatique","p":"formation-informatique.html","rgb":"142,192,65"}],"windows-server-2022-active-directory":[{"t":"Windows Server 2022 – Active Directory","c":"Informatique","s":"informatique","p":"formation-informatique.html","rgb":"142,192,65"}],"windows-server-2022-mise-en-oeuvre-et-administration":[{"t":"Windows Server 2022 – Mise en œuvre et Administration","c":"Informatique","s":"informatique","p":"formation-informatique.html","rgb":"142,192,65"}],"vmware-vsphere-8-install-configure-manage":[{"t":"VMware vsphere 8 – Install, Configure, Manage","c":"Informatique","s":"informatique","p":"formation-informatique.html","rgb":"142,192,65"}],"ethical-hacking":[{"t":"Ethical Hacking","c":"Informatique","s":"informatique","p":"formation-informatique.html","rgb":"142,192,65"}],"rgpd":[{"t":"RGPD : principes et mise en conformité","c":"Informatique","s":"informatique","p":"formation-informatique.html","rgb":"142,192,65"}],"sensibilisation-utilisateurs-cybersecurite":[{"t":"Cybersécurité réseaux/Internet, synthèse","c":"Informatique","s":"informatique","p":"formation-informatique.html","rgb":"142,192,65"}],"cybersecurite-sensibilisation-des-utilisateurs":[{"t":"Cybersécurité, sensibilisation des utilisateurs","c":"Informatique","s":"informatique","p":"formation-informatique.html","rgb":"142,192,65"}],"wordpress-perfectionnement":[{"t":"WordPress Perfectionnement","c":"Communication - Marketing","s":"communication-marketing","p":"formation-communication-marketing.html","rgb":"229,196,53"}],"wordpress-initiation":[{"t":"WordPress Initiation","c":"Communication - Marketing","s":"communication-marketing","p":"formation-communication-marketing.html","rgb":"229,196,53"}],"communication-digitale-elaborer-et-piloter-sa-strategie":[{"t":"Communication digitale : élaborer et piloter sa stratégie","c":"Communication - Marketing","s":"communication-marketing","p":"formation-communication-marketing.html","rgb":"229,196,53"}],"reseaux-sociaux":[{"t":"Utiliser les réseaux sociaux dans votre stratégie de communication","c":"Communication - Marketing","s":"communication-marketing","p":"formation-communication-marketing.html","rgb":"229,196,53"}],"communiquer-efficacement-grace-au-modele-disc":[{"t":"Communiquer efficacement grâce au modèle DISC","c":"Communication - Marketing","s":"communication-marketing","p":"formation-communication-marketing.html","rgb":"229,196,53"}],"campagne-de-mailing":[{"t":"Gérer sa campagne d’e-mailing","c":"Communication - Marketing","s":"communication-marketing","p":"formation-communication-marketing.html","rgb":"229,196,53"}],"gagner-en-assurance-avec-les-techniques-theatrales":[{"t":"Gagner en assurance avec les techniques théâtrales","c":"Communication - Marketing","s":"communication-marketing","p":"formation-communication-marketing.html","rgb":"229,196,53"}],"devenez-un-orateur-talentueux":[{"t":"Devenez un orateur talentueux !","c":"Communication - Marketing","s":"communication-marketing","p":"formation-communication-marketing.html","rgb":"229,196,53"}],"prevention-et-gestion-des-conflits":[{"t":"Prévention et gestion des conflits","c":"Communication - Marketing","s":"communication-marketing","p":"formation-communication-marketing.html","rgb":"229,196,53"}],"communication-relationnelle-adaptez-vous-a-vos-interlocuteurs-grace-a-loutil-processcom":[{"t":"Communication relationnelle – Adaptez-vous à vos interlocuteurs grâce à l’outil ProcessCom®","c":"Communication - Marketing","s":"communication-marketing","p":"formation-communication-marketing.html","rgb":"229,196,53"}],"management-a-distance":[{"t":"Management à distance","c":"Management","s":"management","p":"formation-management.html","rgb":"243,148,29"}],"la-boite-a-outils-du-manager":[{"t":"La boîte à outils du manager","c":"Management","s":"management","p":"formation-management.html","rgb":"243,148,29"}],"devenir-un-manager-agile-2":[{"t":"Devenir un manager agile","c":"Management","s":"management","p":"formation-management.html","rgb":"243,148,29"}],"nouvellesgenerations":[{"t":"Mobiliser les nouvelles générations et comprendre leurs valeurs au travail","c":"Management","s":"management","p":"formation-management.html","rgb":"243,148,29"}],"commmanagerialedisc":[{"t":"Adapter sa communication managériale grâce au modèle DISC","c":"Management","s":"management","p":"formation-management.html","rgb":"243,148,29"}],"formation-tuteurs":[{"t":"Formation des tuteurs","c":"Management","s":"management","p":"formation-management.html","rgb":"243,148,29"}],"formation-de-formateurs-occasionnels":[{"t":"Formation de formateurs occasionnels","c":"Management","s":"management","p":"formation-management.html","rgb":"243,148,29"}],"lintelligence-artificielle-au-service-de-la-relation-client":[{"t":"L’intelligence artificielle au service de la relation client","c":"Commerce - Relation client - Achat","s":"commerce-relation-client","p":"formation-commerce-relation-client.html","rgb":"230,110,50"}],"relation-client-a-distance":[{"t":"La relation client à distance : développez la qualité de vos appels","c":"Commerce - Relation client - Achat","s":"commerce-relation-client","p":"formation-commerce-relation-client.html","rgb":"230,110,50"}],"les-achats-responsables-dans-le-code-de-la-commande-publique-2":[{"t":"REPONDRE A UN APPEL D’OFFRE EN INTEGRANT LES CRITERES ESG D’UN CAHIER DES CHARGES","c":"Commerce - Relation client - Achat","s":"commerce-relation-client","p":"formation-commerce-relation-client.html","rgb":"230,110,50"}],"les-achats-responsables-dans-le-code-de-la-commande-publique":[{"t":"LES ACHATS RESPONSABLES DANS LE CODE DE LA COMMANDE PUBLIQUE","c":"Commerce - Relation client - Achat","s":"commerce-relation-client","p":"formation-commerce-relation-client.html","rgb":"230,110,50"}],"les-techniques-de-vente-training-intensif":[{"t":"Les techniques de vente : training intensif","c":"Commerce - Relation client - Achat","s":"commerce-relation-client","p":"formation-commerce-relation-client.html","rgb":"230,110,50"}],"votre-bilan-ou-votre-resultat-ont-ils-bonne-mine":[{"t":"Votre Bilan ou Votre Résultat ont-ils bonne mine ?","c":"Comptabilité - Gestion","s":"comptabilite-gestion","p":"formation-comptabilite-gestion.html","rgb":"225,79,70"}],"comptabilite-pour-non-comptable":[{"t":"Comptabilité pour non-comptables","c":"Comptabilité - Gestion","s":"comptabilite-gestion","p":"formation-comptabilite-gestion.html","rgb":"225,79,70"}],"referent-prevention-contre-le-sexisme-et-le-harcelement-sexuel":[{"t":"Référent prévention contre le sexisme et le harcèlement sexuel","c":"Gestion des Ressources humaines","s":"ressources-humaines","p":"formation-ressources-humaines.html","rgb":"217,83,127"}],"atelier-droit-local-et-droit-du-travail":[{"t":"Atelier : Droit local et droit du travail","c":"Gestion des Ressources humaines","s":"ressources-humaines","p":"formation-ressources-humaines.html","rgb":"217,83,127"}],"les-fondamentaux-de-la-paie":[{"t":"Les fondamentaux de la paie","c":"Gestion des Ressources humaines","s":"ressources-humaines","p":"formation-ressources-humaines.html","rgb":"217,83,127"}],"prevenir-le-harcelement-et-sensibiliser-ses-collaborateurs":[{"t":"Prévenir le harcèlement et sensibiliser ses collaborateurs","c":"Gestion des Ressources humaines","s":"ressources-humaines","p":"formation-ressources-humaines.html","rgb":"217,83,127"}],"preparer-sa-retraite":[{"t":"Préparer sa retraite","c":"Développement Personnel","s":"developpement-personnel","p":"formation-developpement-personnel.html","rgb":"199,107,180"}],"developper-son-assertivite-et-sa-confiance-en-soi":[{"t":"Développer son assertivité et sa confiance en soi","c":"Développement Personnel","s":"developpement-personnel","p":"formation-developpement-personnel.html","rgb":"199,107,180"}],"mieux-se-connaitre-neurosciences-pnl-et-outils-de-personnalite":[{"t":"Mieux se connaître : neurosciences, PNL et outils de personnalité","c":"Développement Personnel","s":"developpement-personnel","p":"formation-developpement-personnel.html","rgb":"199,107,180"}],"optimiser-son-organisation-pour-gagner-du-temps":[{"t":"Optimiser son organisation pour gagner du temps","c":"Développement Personnel","s":"developpement-personnel","p":"formation-developpement-personnel.html","rgb":"199,107,180"}],"adopter-une-demarche-eco-citoyenne-en-entreprise":[{"t":"Adopter une démarche éco-citoyenne en entreprise","c":"Développement Personnel","s":"developpement-personnel","p":"formation-developpement-personnel.html","rgb":"199,107,180"}],"gerer-son-stress-au-quotidien-transformer-son-stress-en-energie-positive":[{"t":"Gérer son stress au quotidien : transformer son stress en énergie positive","c":"Développement Personnel","s":"developpement-personnel","p":"formation-developpement-personnel.html","rgb":"199,107,180"}],"faire-face-au-risque-de-burn-out-des-collaborateurs":[{"t":"Faire face au risque de burn-out des collaborateurs","c":"Développement Personnel","s":"developpement-personnel","p":"formation-developpement-personnel.html","rgb":"199,107,180"}],"illustrator-perfectionnement-2":[{"t":"Illustrator Perfectionnement","c":"Graphisme - PAO","s":"graphisme-pao","p":"formation-graphisme-pao.html","rgb":"156,95,181"}],"indesign-perfectionnement-preparer-ses-documents-pour-limpression":[{"t":"InDesign Perfectionnement","c":"Graphisme - PAO","s":"graphisme-pao","p":"formation-graphisme-pao.html","rgb":"156,95,181"}],"initiation-pao":[{"t":"Initiation à la PAO","c":"Graphisme - PAO","s":"graphisme-pao","p":"formation-graphisme-pao.html","rgb":"156,95,181"}],"photoshop-perfectionnement-2":[{"t":"Photoshop Perfectionnement","c":"Graphisme - PAO","s":"graphisme-pao","p":"formation-graphisme-pao.html","rgb":"156,95,181"}],"photoshop-pao":[{"t":"Photoshop Initiation","c":"Graphisme - PAO","s":"graphisme-pao","p":"formation-graphisme-pao.html","rgb":"156,95,181"}],"in-design-initiation-mise-en-page":[{"t":"InDesign – Initiation","c":"Graphisme - PAO","s":"graphisme-pao","p":"formation-graphisme-pao.html","rgb":"156,95,181"}],"illustrator-initiation":[{"t":"Illustrator Initiation","c":"Graphisme - PAO","s":"graphisme-pao","p":"formation-graphisme-pao.html","rgb":"156,95,181"}],"gerer-les-situations-difficiles-a-laccueil":[{"t":"Gérer les situations difficiles à l’accueil","c":"Administratif - Secrétariat - Accueil","s":"administratif-secretariat-accueil","p":"formation-administratif-secretariat-accueil.html","rgb":"113,73,156"}],"gagner-du-temps-dans-la-gestion-et-la-redaction-de-ses-e-mails":[{"t":"Gagner du temps dans la gestion et la rédaction de ses e-mails","c":"Administratif - Secrétariat - Accueil","s":"administratif-secretariat-accueil","p":"formation-administratif-secretariat-accueil.html","rgb":"113,73,156"}],"rediger-des-ecrits-professionnels-efficaces":[{"t":"Rédiger des écrits professionnels efficaces","c":"Administratif - Secrétariat - Accueil","s":"administratif-secretariat-accueil","p":"formation-administratif-secretariat-accueil.html","rgb":"113,73,156"}],"accueil-telephonique-developper-limage-de-marque-de-lentreprise":[{"t":"Accueil téléphonique : développer l’image de marque de l’entreprise","c":"Administratif - Secrétariat - Accueil","s":"administratif-secretariat-accueil","p":"formation-administratif-secretariat-accueil.html","rgb":"113,73,156"}],"risqueincendie":[{"t":"COMPRENDRE ET MANAGER LE RISQUE INCENDIE EN ENTREPRISE","c":"Sécurité","s":"securite","p":"formation-securite.html","rgb":"92,132,177"}],"ecovadis":[{"t":"METTRE EN PLACE L’EVALUATION ECOVADIS DANS MON ENTREPRISE","c":"Sécurité","s":"securite","p":"formation-securite.html","rgb":"92,132,177"}],"sauveteur-secouriste-du-travail-sst":[{"t":"Sauveteur Secouriste du Travail (SST)","c":"Sécurité","s":"securite","p":"formation-securite.html","rgb":"92,132,177"}],"rse":[{"t":"COMPRENDRE ET INTEGRER LES FONDAMENTAUX DE LA RSE DANS MA STRATEGIE D’ENTREPRISE","c":"Sécurité","s":"securite","p":"formation-securite.html","rgb":"92,132,177"}],"mac-sst-maintien-et-actualisation-des-competences-sst":[{"t":"MAC (SST) : Maintien et Actualisation des Compétences SST","c":"Sécurité","s":"securite","p":"formation-securite.html","rgb":"92,132,177"}],"gestes-et-postures":[{"t":"Gestes et Postures","c":"Sécurité","s":"securite","p":"formation-securite.html","rgb":"92,132,177"}],"initiation-au-maniement-des-extincteurs":[{"t":"Initiation au maniement des extincteurs","c":"Sécurité","s":"securite","p":"formation-securite.html","rgb":"92,132,177"}],"cursus-de-langues-sur-mesure":[{"t":"Cursus de langues sur mesure","c":"Langues","s":"langues","p":"formation-langues.html","rgb":"60,184,169"}]}</script>
-
-<script is:inline src="js/pages/formation-detail-1.js"></script>
-
-<!-- jcd-mobile-nav (injected) -->
-<button class="jcd-burger" id="jcdBurger" type="button" aria-label="Ouvrir le menu" aria-expanded="false" aria-controls="jcdMnav">
-  <span class="jcd-burger__box" aria-hidden="true"><i></i><i></i><i></i></span>
-</button>
-<div class="jcd-mnav" id="jcdMnav" role="dialog" aria-modal="true" aria-label="Menu de navigation" aria-hidden="true">
-  <div class="jcd-mnav__scroll">
-    <div class="jcd-mnav__inner">
-      <p class="jcd-mnav__eyebrow jcd-mnav__reveal" style="transition-delay:.04s">Expertises</p>
-
-      <div class="jcd-mnav__reveal" style="transition-delay:.07s">
-        <div class="jcd-mnav__item" style="--mnav-c:#2E72BA">
-          <a class="jcd-mnav__link" href="informatique.html"><span class="jcd-mnav__dot"></span><span class="jcd-mnav__label">Informatique</span></a>
-          <button class="jcd-acc__toggle" type="button" aria-expanded="false" aria-controls="jcdAccInfo" aria-label="Afficher les sous-pages Informatique">
-            <svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M7 2v10M2 7h10"/></svg>
-          </button>
-        </div>
-        <div class="jcd-acc__panel" id="jcdAccInfo">
-          <a class="jcd-mnav__sub" href="info-cloud.html">Cloud Microsoft</a>
-          <a class="jcd-mnav__sub" href="info-collaboratif.html">Solutions collaboratives &amp; audiovisuelles</a>
-          <a class="jcd-mnav__sub" href="info-reseaux.html">Architectures syst&egrave;mes &amp; r&eacute;seaux</a>
-          <a class="jcd-mnav__sub" href="info-integration.html">Int&eacute;gration &amp; Support PC</a>
-        </div>
-      </div>
-
-      <a class="jcd-mnav__item jcd-mnav__reveal" style="--mnav-c:#E51D29;transition-delay:.10s" href="service.html"><span class="jcd-mnav__dot"></span><span class="jcd-mnav__label">Service</span></a>
-      <a class="jcd-mnav__item jcd-mnav__reveal" style="--mnav-c:#F9D605;transition-delay:.13s" href="developpement.html"><span class="jcd-mnav__dot"></span><span class="jcd-mnav__label">D&eacute;veloppement</span></a>
-      <a class="jcd-mnav__item jcd-mnav__reveal" style="--mnav-c:#F3941D;transition-delay:.16s" href="print.html"><span class="jcd-mnav__dot"></span><span class="jcd-mnav__label">Print</span></a>
-      <a class="jcd-mnav__item jcd-mnav__reveal" style="--mnav-c:#B063AC;transition-delay:.19s" href="telecom.html"><span class="jcd-mnav__dot"></span><span class="jcd-mnav__label">T&eacute;l&eacute;com</span></a>
-      <div class="jcd-mnav__reveal" style="transition-delay:.22s">
-        <div class="jcd-mnav__item" style="--mnav-c:#8EC041">
-          <a class="jcd-mnav__link" href="formation.html"><span class="jcd-mnav__dot"></span><span class="jcd-mnav__label">Formation</span></a>
-          <button class="jcd-acc__toggle" type="button" aria-expanded="false" aria-controls="jcdAccForm" aria-label="Afficher les cat&eacute;gories de formation">
-            <svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M7 2v10M2 7h10"/></svg>
-          </button>
-        </div>
-        <div class="jcd-acc__panel" id="jcdAccForm">
-          <a class="jcd-mnav__sub" href="formation-bureautique.html">Bureautique</a>
-          <a class="jcd-mnav__sub" href="formation-intelligence-artificielle.html">Intelligence artificielle</a>
-          <a class="jcd-mnav__sub" href="formation-informatique.html">Informatique</a>
-          <a class="jcd-mnav__sub" href="formation-communication-marketing.html">Communication - Marketing</a>
-          <a class="jcd-mnav__sub" href="formation-management.html">Management</a>
-          <a class="jcd-mnav__sub" href="formation-commerce-relation-client.html">Commerce - Relation client</a>
-          <a class="jcd-mnav__sub" href="formation-comptabilite-gestion.html">Comptabilit&eacute; - Gestion</a>
-          <a class="jcd-mnav__sub" href="formation-ressources-humaines.html">Ressources humaines</a>
-          <a class="jcd-mnav__sub" href="formation-developpement-personnel.html">D&eacute;veloppement personnel</a>
-          <a class="jcd-mnav__sub" href="formation-graphisme-pao.html">Graphisme - PAO</a>
-          <a class="jcd-mnav__sub" href="formation-administratif-secretariat-accueil.html">Administratif - Secr&eacute;tariat</a>
-          <a class="jcd-mnav__sub" href="formation-securite.html">S&eacute;curit&eacute;</a>
-          <a class="jcd-mnav__sub" href="formation-langues.html">Langues</a>
-        </div>
-      </div>
-      <a class="jcd-mnav__item jcd-mnav__reveal" style="--mnav-c:#A78D75;transition-delay:.25s" href="agencement.html"><span class="jcd-mnav__dot"></span><span class="jcd-mnav__label">Agencement</span></a>
-
-      <p class="jcd-mnav__eyebrow jcd-mnav__sec2 jcd-mnav__reveal" style="transition-delay:.30s">D&eacute;couvrir</p>
-      <a class="jcd-mnav__item jcd-mnav__reveal" style="--mnav-c:#9a9a9a;transition-delay:.33s" href="assistance.html"><span class="jcd-mnav__dot"></span><span class="jcd-mnav__label" style="font-size:19px">Assistance</span></a>
-      <a class="jcd-mnav__item jcd-mnav__reveal" style="--mnav-c:#9a9a9a;transition-delay:.36s" href="carrieres.html"><span class="jcd-mnav__dot"></span><span class="jcd-mnav__label" style="font-size:19px">Carri&egrave;res</span></a>
-
-      <div class="jcd-mnav__cta jcd-mnav__reveal" style="transition-delay:.40s">
-        <a class="jcd-mnav__btn jcd-mnav__btn--primary" href="contact.html">Contacter un expert
-          <span class="jcd-mnav__btn-ic"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h10M9 4l4 4-4 4"/></svg></span></a>
-        <a class="jcd-mnav__btn jcd-mnav__btn--ghost" href="tel:+33387184920">03 87 18 49 20
-          <span class="jcd-mnav__btn-ic"><svg viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2.5 3.5a1 1 0 011-1h2.4a1 1 0 01.95.68l.86 2.4a1 1 0 01-.24 1l-1.2 1.2a11 11 0 004.6 4.6l1.2-1.2a1 1 0 011-.24l2.4.86a1 1 0 01.68.95V15a1 1 0 01-1 1A13.5 13.5 0 012.5 3.5z"/></svg></span></a>
-      </div>
+    <script is:inline src="js/shared/mobile-nav.js"></script>
+    <!-- jcd-a11y (Lot 5) -->
+    <div class="jcd-fab-wrap" id="jcd-fab">
+      <button
+        class="jcd-fab jcd-fab--top"
+        id="jcdToTop"
+        type="button"
+        aria-label="Remonter en haut"
+      >
+        <svg
+          viewBox="0 0 20 20"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="1.8"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          aria-hidden="true"><path d="M10 16V5M5 10l5-5 5 5"></path></svg
+        >
+      </button>
+      <a
+        class="jcd-fab jcd-fab--contact"
+        id="jcdFabContact"
+        href="contact.html"
+        aria-label="Nous contacter"
+      >
+        <svg
+          viewBox="0 0 20 20"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="1.6"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          aria-hidden="true"
+          ><rect x="2.5" y="4.5" width="15" height="11" rx="2.3"></rect><path
+            d="M3 6.7 L10 10.7 L17 6.7"></path></svg
+        >
+      </a>
     </div>
-  </div>
-</div>
-<script is:inline src="js/shared/mobile-nav.js"></script>
-<!-- jcd-a11y (Lot 5) -->
-<div class="jcd-fab-wrap" id="jcd-fab">
-  <button class="jcd-fab jcd-fab--top" id="jcdToTop" type="button" aria-label="Remonter en haut">
-    <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 16V5M5 10l5-5 5 5"/></svg>
-  </button>
-  <a class="jcd-fab jcd-fab--contact" id="jcdFabContact" href="contact.html" aria-label="Nous contacter">
-    <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2.5" y="4.5" width="15" height="11" rx="2.3"/><path d="M3 6.7 L10 10.7 L17 6.7"/></svg>
-  </a>
-</div>
-<script is:inline src="js/shared/a11y.js" id="jcd-a11y-js"></script>
-<script is:inline src="js/shared/micons.js" id="jcd-micons-js"></script>
-<script is:inline src="js/shared/mrefonte.js" id="jcd-mrefonte-js"></script>
-
-
-</body>
+    <script is:inline src="js/shared/a11y.js" id="jcd-a11y-js"></script>
+    <script is:inline src="js/shared/micons.js" id="jcd-micons-js"></script>
+    <script is:inline src="js/shared/mrefonte.js" id="jcd-mrefonte-js"></script>
+  </body>
 </html>

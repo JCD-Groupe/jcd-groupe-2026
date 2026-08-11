@@ -1,625 +1,1302 @@
 ---
-import Header from '../components/Header.astro';
-import Footer from '../components/Footer.astro';
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
 ---
-<!DOCTYPE html>
+
 <html lang="fr">
-<head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-<meta name="color-scheme" content="dark" />
-<meta name="theme-color" content="#0d0d0d" />
-<link rel="icon" href="favicon.svg" type="image/svg+xml" />
-<meta name="description" content="Rejoignez JCD Groupe — 83 collaborateurs, 7 pôles d'expertise, 2 agences à Metz et Nancy. Découvrez nos offres d'emploi, la vie chez JCD (locaux, sport, team building, avantages) et envoyez votre candidature spontanée." />
-<link rel="canonical" href="https://www.jcd-groupe.fr/carrieres.html" />
-<meta property="og:type" content="website" />
-<meta property="og:site_name" content="JCD Groupe" />
-<meta property="og:locale" content="fr_FR" />
-<meta property="og:title" content="Carrières · JCD Groupe — Rejoignez un groupe qui avance" />
-<meta property="og:description" content="Rejoignez JCD Groupe — 83 collaborateurs, 7 pôles d'expertise, 2 agences à Metz et Nancy. Découvrez nos offres d'emploi, la vie chez JCD (locaux, sport, team building, avantages) et envoyez votre candidature spontanée." />
-<meta property="og:url" content="https://www.jcd-groupe.fr/carrieres.html" />
-<meta name="twitter:card" content="summary" />
-<title>Carrières · JCD Groupe — Rejoignez un groupe qui avance</title>
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+    />
+    <meta name="color-scheme" content="dark" />
+    <meta name="theme-color" content="#0d0d0d" />
+    <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+    <meta
+      name="description"
+      content="Rejoignez JCD Groupe — 83 collaborateurs, 7 pôles d'expertise, 2 agences à Metz et Nancy. Découvrez nos offres d'emploi, la vie chez JCD (locaux, sport, team building, avantages) et envoyez votre candidature spontanée."
+    />
+    <link rel="canonical" href="https://www.jcd-groupe.fr/carrieres.html" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="JCD Groupe" />
+    <meta property="og:locale" content="fr_FR" />
+    <meta
+      property="og:title"
+      content="Carrières · JCD Groupe — Rejoignez un groupe qui avance"
+    />
+    <meta
+      property="og:description"
+      content="Rejoignez JCD Groupe — 83 collaborateurs, 7 pôles d'expertise, 2 agences à Metz et Nancy. Découvrez nos offres d'emploi, la vie chez JCD (locaux, sport, team building, avantages) et envoyez votre candidature spontanée."
+    />
+    <meta
+      property="og:url"
+      content="https://www.jcd-groupe.fr/carrieres.html"
+    />
+    <meta name="twitter:card" content="summary" />
+    <title>Carrières · JCD Groupe — Rejoignez un groupe qui avance</title>
 
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
 
-<!-- Hero : 1re image de la video disponible des l'arrivee sur la page, pour que le
+    <!-- Hero : 1re image de la video disponible des l'arrivee sur la page, pour que le
      cadre ne reste jamais noir en attendant les donnees video (11 Mo). -->
-<link rel="preload" as="image" href="assets/poster-carrieres.jpg" fetchpriority="high">
+    <link
+      rel="preload"
+      as="image"
+      href="assets/poster-carrieres.jpg"
+      fetchpriority="high"
+    />
 
-<link rel="stylesheet" href="css/carrieres.css">
-<link rel="stylesheet" href="css/global.css">
-<link rel="stylesheet" href="css/carrieres-overrides.css">
-<script is:inline src="js/shared/mpolish.js" id="jcd-mpolish-js"></script>
-<script is:inline src="js/shared/touch.js" id="jcd-touch-js"></script>
-<script is:inline src="js/shared/mrefonte-shim.js" id="jcd-mrefonte-shim"></script>
-</head>
-<body>
-<a class="jcd-skip" href="#contenu">Aller au contenu</a>
+    <link rel="stylesheet" href="css/carrieres.css" />
+    <link rel="stylesheet" href="css/global.css" />
+    <link rel="stylesheet" href="css/carrieres-overrides.css" />
+    <script is:inline src="js/shared/mpolish.js" id="jcd-mpolish-js"></script>
+    <script is:inline src="js/shared/touch.js" id="jcd-touch-js"></script>
+    <script is:inline src="js/shared/mrefonte-shim.js" id="jcd-mrefonte-shim"
+    ></script>
+  </head>
+  <body>
+    <a class="jcd-skip" href="#contenu">Aller au contenu</a>
 
-<!-- ====================================================================
+    <!-- ====================================================================
      NAVBAR v2 — Modal-like
      Logo (g) · capsule centrale {Nos solutions ▾ · icône Carrières,
      marquée page courante} · CTA Assistance + Contact (d).
      Dropdown 7 expertises.
      ==================================================================== -->
-<Header current="carrieres" logo="blanc" />
+    <Header current="carrieres" logo="blanc" />
 
-
-<main id="contenu">
-
-<!-- ================================
+    <main id="contenu">
+      <!-- ================================
      HERO — vidéo de présentation en arrière-plan + texte en surimpression
      ================================ -->
-<section class="hero" aria-labelledby="hero-title">
-  <div class="container">
-
-    <!-- Vidéo encadrée (double-cadre, coins arrondis) — lecture auto, muette, en boucle, décorative -->
-    <div class="hero-media reveal">
-      <div class="hero-screen">
-        <!-- preload="auto" : le scanner de preload du navigateur met le MP4 en file
+      <section class="hero" aria-labelledby="hero-title">
+        <div class="container">
+          <!-- Vidéo encadrée (double-cadre, coins arrondis) — lecture auto, muette, en boucle, décorative -->
+          <div class="hero-media reveal">
+            <div class="hero-screen">
+              <!-- preload="auto" : le scanner de preload du navigateur met le MP4 en file
              des le debut du parsing (avant meme la feuille de style), au lieu
              d'attendre un script. media="(min-width:821px)" sur la <source> garde
              le mobile a 0 octet de video : la source ne matche pas, seul le poster
              s'affiche. -->
-        <video class="hero-video" id="hero-video"
-               muted loop playsinline preload="auto" poster="assets/poster-carrieres.jpg"
-               aria-hidden="true" tabindex="-1">
-          <source src="assets/JCD_interne_V2.mp4" type="video/mp4" media="(min-width: 821px)">
-        </video>
-        <script is:inline src="js/pages/carrieres-5.js"></script>
-      </div>
-    </div>
+              <video
+                class="hero-video"
+                id="hero-video"
+                muted
+                loop
+                playsinline
+                preload="auto"
+                poster="assets/poster-carrieres.jpg"
+                aria-hidden="true"
+                tabindex="-1"
+              >
+                <source
+                  src="assets/JCD_interne_V2.mp4"
+                  type="video/mp4"
+                  media="(min-width: 821px)"
+                />
+              </video>
+              <script is:inline src="js/pages/carrieres-5.js"></script>
+            </div>
+          </div>
 
-    <!-- Sous la vidéo : titre + CTA (gauche) · paragraphe (droite) -->
-    <div class="hero-row">
-      <div class="hero-headcol reveal delay-1">
-        <h1 class="hero-h1" id="hero-title">Rejoignez un groupe qui <em>avance</em></h1>
-        <a href="#postuler" class="hero-apply">
-          <span>Postuler</span>
-          <span class="hero-apply-ic" aria-hidden="true">
-            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
-          </span>
-        </a>
-      </div>
-      <p class="hero-lead reveal delay-2">
-        JCD Groupe réunit sept pôles d'expertise, de l'informatique à
-        l'agencement. Si vous aimez comprendre les enjeux de vos clients
-        et mettre votre expertise à leur service pour apporter des
-        réponses concrètes à leurs problématiques, alors c'est ici&nbsp;!
-      </p>
-    </div>
-
-  </div>
-</section>
-
-<!-- ================================
-     PRINCIPES / VALEURS — carrousel (titre · valeur active · pagination)
-     ================================ -->
-<section class="sec values-sec" id="valeurs" aria-labelledby="values-title">
-  <div class="container">
-    <div class="values-panel reveal">
-      <div class="values-head">
-        <h2 class="values-title" id="values-title">Les valeurs qui nous guident, en interne comme avec nos clients</h2>
-      </div>
-
-      <div class="values-stage" data-values>
-        <div class="values-viewport">
-          <ul class="values-track" id="values-track">
-
-            <li class="value-slide is-active">
-              <span class="value-visual" aria-hidden="true">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-5.6-7-11a7 7 0 0 1 14 0c0 5.4-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg>
-              </span>
-              <div class="value-body">
-                <h3 class="value-name">Proximité</h3>
-                <p class="value-text">On travaille au plus près du terrain et de nos clients. Un seul interlocuteur, des décisions rapides, pas de strates inutiles entre vous et l'action, pour nos clients comme pour nos équipes.</p>
-              </div>
-            </li>
-
-            <li class="value-slide">
-              <span class="value-visual" aria-hidden="true">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1.4"/></svg>
-              </span>
-              <div class="value-body">
-                <h3 class="value-name">Expertise</h3>
-                <p class="value-text">Sept pôles, des spécialistes dans chacun. On forme, on certifie, on reste à la pointe, parce que c'est la maîtrise du métier qui fait la différence chez nos clients.</p>
-              </div>
-            </li>
-
-            <li class="value-slide">
-              <span class="value-visual" aria-hidden="true">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg>
-              </span>
-              <div class="value-body">
-                <h3 class="value-name">Esprit d'équipe</h3>
-                <p class="value-text">On avance ensemble. Entraide entre pôles, transmission du savoir-faire, et des moments qui comptent hors du travail. Personne ne reste seul devant un problème.</p>
-              </div>
-            </li>
-
-            <li class="value-slide">
-              <span class="value-visual" aria-hidden="true">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg>
-              </span>
-              <div class="value-body">
-                <h3 class="value-name">Fiabilité</h3>
-                <p class="value-text">On tient ce qu'on promet. Nos clients nous confient leur informatique, leur télécom et leurs espaces de travail : la confiance se mérite, et elle se reconduit chaque jour.</p>
-              </div>
-            </li>
-
-            <li class="value-slide">
-              <span class="value-visual" aria-hidden="true">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19 14c1.5-1.5 3-3.2 3-5.5A4.5 4.5 0 0 0 17.5 4c-1.8 0-3 .9-4 2.2L12 7.7l-1.5-1.5C9.5 4.9 8.3 4 6.5 4A4.5 4.5 0 0 0 2 8.5c0 2.3 1.5 4 3 5.5l7 7Z"/></svg>
-              </span>
-              <div class="value-body">
-                <h3 class="value-name">Engagement</h3>
-                <p class="value-text">On s'investit pour nos clients, nos collaborateurs et notre région. Le travail bien fait, durablement, et la fierté d'un métier utile, au service du quotidien des entreprises.</p>
-              </div>
-            </li>
-
-          </ul>
-        </div>
-
-        <div class="values-foot">
-          <span class="values-count"><b id="values-cur">01</b><span>&thinsp;/&thinsp;05</span></span>
-          <div class="values-nav">
-            <button type="button" class="values-arrow" data-values-prev aria-label="Principe précédent">
-              <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 3 5 8l5 5"/></svg>
-            </button>
-            <button type="button" class="values-arrow" data-values-next aria-label="Principe suivant">
-              <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 3l5 5-5 5"/></svg>
-            </button>
+          <!-- Sous la vidéo : titre + CTA (gauche) · paragraphe (droite) -->
+          <div class="hero-row">
+            <div class="hero-headcol reveal delay-1">
+              <h1 class="hero-h1" id="hero-title">
+                Rejoignez un groupe qui <em>avance</em>
+              </h1>
+              <a href="#postuler" class="hero-apply">
+                <span>Postuler</span>
+                <span class="hero-apply-ic" aria-hidden="true">
+                  <svg
+                    viewBox="0 0 16 16"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="1.7"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    ><path d="M3 8h10M9 4l4 4-4 4"></path></svg
+                  >
+                </span>
+              </a>
+            </div>
+            <p class="hero-lead reveal delay-2">
+              JCD Groupe réunit sept pôles d'expertise, de l'informatique à
+              l'agencement. Si vous aimez comprendre les enjeux de vos clients
+              et mettre votre expertise à leur service pour apporter des
+              réponses concrètes à leurs problématiques, alors c'est ici&nbsp;!
+            </p>
           </div>
         </div>
-      </div>
-    </div>
-  </div>
-</section>
+      </section>
 
-<!-- ================================
+      <!-- ================================
+     PRINCIPES / VALEURS — carrousel (titre · valeur active · pagination)
+     ================================ -->
+      <section
+        class="sec values-sec"
+        id="valeurs"
+        aria-labelledby="values-title"
+      >
+        <div class="container">
+          <div class="values-panel reveal">
+            <div class="values-head">
+              <h2 class="values-title" id="values-title">
+                Les valeurs qui nous guident, en interne comme avec nos clients
+              </h2>
+            </div>
+
+            <div class="values-stage" data-values>
+              <div class="values-viewport">
+                <ul class="values-track" id="values-track">
+                  <li class="value-slide is-active">
+                    <span class="value-visual" aria-hidden="true">
+                      <svg
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="1.5"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        ><path
+                          d="M12 21s-7-5.6-7-11a7 7 0 0 1 14 0c0 5.4-7 11-7 11z"
+                        ></path><circle cx="12" cy="10" r="2.5"></circle></svg
+                      >
+                    </span>
+                    <div class="value-body">
+                      <h3 class="value-name">Proximité</h3>
+                      <p class="value-text">
+                        On travaille au plus près du terrain et de nos clients.
+                        Un seul interlocuteur, des décisions rapides, pas de
+                        strates inutiles entre vous et l'action, pour nos
+                        clients comme pour nos équipes.
+                      </p>
+                    </div>
+                  </li>
+
+                  <li class="value-slide">
+                    <span class="value-visual" aria-hidden="true">
+                      <svg
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="1.5"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        ><circle cx="12" cy="12" r="9"></circle><circle
+                          cx="12"
+                          cy="12"
+                          r="5"></circle><circle cx="12" cy="12" r="1.4"
+                        ></circle></svg
+                      >
+                    </span>
+                    <div class="value-body">
+                      <h3 class="value-name">Expertise</h3>
+                      <p class="value-text">
+                        Sept pôles, des spécialistes dans chacun. On forme, on
+                        certifie, on reste à la pointe, parce que c'est la
+                        maîtrise du métier qui fait la différence chez nos
+                        clients.
+                      </p>
+                    </div>
+                  </li>
+
+                  <li class="value-slide">
+                    <span class="value-visual" aria-hidden="true">
+                      <svg
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="1.5"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        ><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"
+                        ></path><circle cx="9" cy="7" r="4"></circle><path
+                          d="M22 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"
+                        ></path></svg
+                      >
+                    </span>
+                    <div class="value-body">
+                      <h3 class="value-name">Esprit d'équipe</h3>
+                      <p class="value-text">
+                        On avance ensemble. Entraide entre pôles, transmission
+                        du savoir-faire, et des moments qui comptent hors du
+                        travail. Personne ne reste seul devant un problème.
+                      </p>
+                    </div>
+                  </li>
+
+                  <li class="value-slide">
+                    <span class="value-visual" aria-hidden="true">
+                      <svg
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="1.5"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        ><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"
+                        ></path><path d="m9 12 2 2 4-4"></path></svg
+                      >
+                    </span>
+                    <div class="value-body">
+                      <h3 class="value-name">Fiabilité</h3>
+                      <p class="value-text">
+                        On tient ce qu'on promet. Nos clients nous confient leur
+                        informatique, leur télécom et leurs espaces de travail :
+                        la confiance se mérite, et elle se reconduit chaque
+                        jour.
+                      </p>
+                    </div>
+                  </li>
+
+                  <li class="value-slide">
+                    <span class="value-visual" aria-hidden="true">
+                      <svg
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="1.5"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        ><path
+                          d="M19 14c1.5-1.5 3-3.2 3-5.5A4.5 4.5 0 0 0 17.5 4c-1.8 0-3 .9-4 2.2L12 7.7l-1.5-1.5C9.5 4.9 8.3 4 6.5 4A4.5 4.5 0 0 0 2 8.5c0 2.3 1.5 4 3 5.5l7 7Z"
+                        ></path></svg
+                      >
+                    </span>
+                    <div class="value-body">
+                      <h3 class="value-name">Engagement</h3>
+                      <p class="value-text">
+                        On s'investit pour nos clients, nos collaborateurs et
+                        notre région. Le travail bien fait, durablement, et la
+                        fierté d'un métier utile, au service du quotidien des
+                        entreprises.
+                      </p>
+                    </div>
+                  </li>
+                </ul>
+              </div>
+
+              <div class="values-foot">
+                <span class="values-count"
+                  ><b id="values-cur">01</b><span>&thinsp;/&thinsp;05</span
+                  ></span
+                >
+                <div class="values-nav">
+                  <button
+                    type="button"
+                    class="values-arrow"
+                    data-values-prev
+                    aria-label="Principe précédent"
+                  >
+                    <svg
+                      viewBox="0 0 16 16"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="1.7"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      aria-hidden="true"><path d="M10 3 5 8l5 5"></path></svg
+                    >
+                  </button>
+                  <button
+                    type="button"
+                    class="values-arrow"
+                    data-values-next
+                    aria-label="Principe suivant"
+                  >
+                    <svg
+                      viewBox="0 0 16 16"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="1.7"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      aria-hidden="true"><path d="M6 3l5 5-5 5"></path></svg
+                    >
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================================
      CE QU'ON VOUS OFFRE — intro (g) + accordéon avantages (d)
      ================================ -->
-<section class="sec acc-sec" id="avantages" aria-labelledby="support-title">
-  <div class="container">
-    <div class="acc-grid">
-      <div class="acc-intro reveal">
-        <h2 class="acc-title" id="support-title">On prend soin des équipes, au travail comme en dehors</h2>
-        <p class="acc-text">
-          Le bien-être de nos salariés au premier plan : une rémunération juste, des avantages concrets et un cadre pensé pour nos équipes.
-        </p>
-      </div>
-      <div class="acc-list reveal delay-1">
+      <section
+        class="sec acc-sec"
+        id="avantages"
+        aria-labelledby="support-title"
+      >
+        <div class="container">
+          <div class="acc-grid">
+            <div class="acc-intro reveal">
+              <h2 class="acc-title" id="support-title">
+                On prend soin des équipes, au travail comme en dehors
+              </h2>
+              <p class="acc-text">
+                Le bien-être de nos salariés au premier plan : une rémunération
+                juste, des avantages concrets et un cadre pensé pour nos
+                équipes.
+              </p>
+            </div>
+            <div class="acc-list reveal delay-1">
+              <div class="acc-item">
+                <h3 class="acc-h">
+                  <button type="button" class="acc-q" aria-expanded="false">
+                    <span class="acc-q-tx"
+                      >Rémunération &amp; titres-restaurant</span
+                    >
+                    <span class="acc-icon" aria-hidden="true"></span>
+                  </button>
+                </h3>
+                <div class="acc-a">
+                  <div class="acc-a-in">
+                    <p>
+                      Un salaire à la hauteur de votre expertise, revu chaque
+                      année, et des titres-restaurant versés dès le 1ᵉʳ jour de
+                      travail, sans condition d'ancienneté, qui prennent en
+                      charge une partie de chaque déjeuner travaillé.
+                    </p>
+                  </div>
+                </div>
+              </div>
 
-        <div class="acc-item">
-          <h3 class="acc-h"><button type="button" class="acc-q" aria-expanded="false">
-            <span class="acc-q-tx">Rémunération &amp; titres-restaurant</span>
-            <span class="acc-icon" aria-hidden="true"></span>
-          </button></h3>
-          <div class="acc-a"><div class="acc-a-in"><p>
-            Un salaire à la hauteur de votre expertise, revu chaque année, et des
-            titres-restaurant versés dès le 1ᵉʳ jour de travail, sans condition
-            d'ancienneté, qui prennent en charge une partie de chaque déjeuner travaillé.
-          </p></div></div>
+              <div class="acc-item">
+                <h3 class="acc-h">
+                  <button type="button" class="acc-q" aria-expanded="false">
+                    <span class="acc-q-tx">Mutuelle &amp; prévoyance</span>
+                    <span class="acc-icon" aria-hidden="true"></span>
+                  </button>
+                </h3>
+                <div class="acc-a">
+                  <div class="acc-a-in">
+                    <p>
+                      60&nbsp;% de la cotisation mutuelle prise en charge par le
+                      groupe, pour vous et votre famille, avec une prévoyance
+                      pour les coups durs.
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="acc-item">
+                <h3 class="acc-h">
+                  <button type="button" class="acc-q" aria-expanded="false">
+                    <span class="acc-q-tx">Sport &amp; bien-être</span>
+                    <span class="acc-icon" aria-hidden="true"></span>
+                  </button>
+                </h3>
+                <div class="acc-a">
+                  <div class="acc-a-in">
+                    <p>
+                      Un gymnase et des créneaux sportifs réguliers entre
+                      collègues, sur le temps de travail. On s'y dépense, on
+                      décompresse, on se croise autrement.
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="acc-item">
+                <h3 class="acc-h">
+                  <button type="button" class="acc-q" aria-expanded="false">
+                    <span class="acc-q-tx">Vie d'équipe &amp; rendez-vous</span>
+                    <span class="acc-icon" aria-hidden="true"></span>
+                  </button>
+                </h3>
+                <div class="acc-a">
+                  <div class="acc-a-in">
+                    <p>
+                      JCD Day, fête de Noël, Beaujolais nouveau, afterworks,
+                      défis inter-pôles : des rendez-vous qui rythment l'année
+                      et soudent les équipes.
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="acc-item">
+                <h3 class="acc-h">
+                  <button type="button" class="acc-q" aria-expanded="false">
+                    <span class="acc-q-tx">Cadre &amp; locaux</span>
+                    <span class="acc-icon" aria-hidden="true"></span>
+                  </button>
+                </h3>
+                <div class="acc-a">
+                  <div class="acc-a-in">
+                    <p>
+                      3&nbsp;000&nbsp;m² à Metz et une agence à Nancy, équipés
+                      par nos propres pôles Agencement et Informatique :
+                      lumineux, et pensés pour bien travailler.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
+      </section>
 
-        <div class="acc-item">
-          <h3 class="acc-h"><button type="button" class="acc-q" aria-expanded="false">
-            <span class="acc-q-tx">Mutuelle &amp; prévoyance</span>
-            <span class="acc-icon" aria-hidden="true"></span>
-          </button></h3>
-          <div class="acc-a"><div class="acc-a-in"><p>
-            60&nbsp;% de la cotisation mutuelle prise en charge par le groupe, pour
-            vous et votre famille, avec une prévoyance pour les coups durs.
-          </p></div></div>
-        </div>
-
-        <div class="acc-item">
-          <h3 class="acc-h"><button type="button" class="acc-q" aria-expanded="false">
-            <span class="acc-q-tx">Sport &amp; bien-être</span>
-            <span class="acc-icon" aria-hidden="true"></span>
-          </button></h3>
-          <div class="acc-a"><div class="acc-a-in"><p>
-            Un gymnase et des créneaux sportifs réguliers entre collègues, sur le
-            temps de travail. On s'y dépense, on décompresse, on se croise autrement.
-          </p></div></div>
-        </div>
-
-        <div class="acc-item">
-          <h3 class="acc-h"><button type="button" class="acc-q" aria-expanded="false">
-            <span class="acc-q-tx">Vie d'équipe &amp; rendez-vous</span>
-            <span class="acc-icon" aria-hidden="true"></span>
-          </button></h3>
-          <div class="acc-a"><div class="acc-a-in"><p>
-            JCD Day, fête de Noël, Beaujolais nouveau, afterworks, défis inter-pôles :
-            des rendez-vous qui rythment l'année et soudent les équipes.
-          </p></div></div>
-        </div>
-
-        <div class="acc-item">
-          <h3 class="acc-h"><button type="button" class="acc-q" aria-expanded="false">
-            <span class="acc-q-tx">Cadre &amp; locaux</span>
-            <span class="acc-icon" aria-hidden="true"></span>
-          </button></h3>
-          <div class="acc-a"><div class="acc-a-in"><p>
-            3&nbsp;000&nbsp;m² à Metz et une agence à Nancy, équipés par nos propres
-            pôles Agencement et Informatique : lumineux, et pensés pour bien travailler.
-          </p></div></div>
-        </div>
-
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ================================
+      <!-- ================================
      COMMENT ON RECRUTE — intro (g) + accordéon process (d)
      ================================ -->
-<section class="sec acc-sec" id="recrutement" aria-labelledby="hire-title">
-  <div class="container">
-    <div class="acc-grid">
-      <div class="acc-intro reveal">
-        <h2 class="acc-title" id="hire-title">Un processus simple, humain et rapide</h2>
-        <p class="acc-text">
-          On cherche des personnes curieuses et fiables, plus que des CV parfaits.
-          Voici à quoi vous attendre quand vous postulez chez JCD.
-        </p>
-      </div>
-      <div class="acc-list reveal delay-1">
+      <section
+        class="sec acc-sec"
+        id="recrutement"
+        aria-labelledby="hire-title"
+      >
+        <div class="container">
+          <div class="acc-grid">
+            <div class="acc-intro reveal">
+              <h2 class="acc-title" id="hire-title">
+                Un processus simple, humain et rapide
+              </h2>
+              <p class="acc-text">
+                On cherche des personnes curieuses et fiables, plus que des CV
+                parfaits. Voici à quoi vous attendre quand vous postulez chez
+                JCD.
+              </p>
+            </div>
+            <div class="acc-list reveal delay-1">
+              <div class="acc-item">
+                <h3 class="acc-h">
+                  <button type="button" class="acc-q" aria-expanded="false">
+                    <span class="acc-q-tx">Ce qu'on regarde</span>
+                    <span class="acc-icon" aria-hidden="true"></span>
+                  </button>
+                </h3>
+                <div class="acc-a">
+                  <div class="acc-a-in">
+                    <p>
+                      Votre savoir-faire, bien sûr, mais surtout votre envie
+                      d'apprendre et votre sens du service. La personnalité
+                      compte autant que le diplôme.
+                    </p>
+                  </div>
+                </div>
+              </div>
 
-        <div class="acc-item">
-          <h3 class="acc-h"><button type="button" class="acc-q" aria-expanded="false">
-            <span class="acc-q-tx">Ce qu'on regarde</span>
-            <span class="acc-icon" aria-hidden="true"></span>
-          </button></h3>
-          <div class="acc-a"><div class="acc-a-in"><p>
-            Votre savoir-faire, bien sûr, mais surtout votre envie d'apprendre et
-            votre sens du service. La personnalité compte autant que le diplôme.
-          </p></div></div>
+              <div class="acc-item">
+                <h3 class="acc-h">
+                  <button type="button" class="acc-q" aria-expanded="false">
+                    <span class="acc-q-tx">Les étapes</span>
+                    <span class="acc-icon" aria-hidden="true"></span>
+                  </button>
+                </h3>
+                <div class="acc-a">
+                  <div class="acc-a-in">
+                    <p>
+                      Un premier échange téléphonique, un entretien avec
+                      l'équipe et le pôle concerné, parfois un cas pratique. Si
+                      votre profil est retenu, nous revenons vers vous
+                      rapidement.
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="acc-item">
+                <h3 class="acc-h">
+                  <button type="button" class="acc-q" aria-expanded="false">
+                    <span class="acc-q-tx">Un seul interlocuteur</span>
+                    <span class="acc-icon" aria-hidden="true"></span>
+                  </button>
+                </h3>
+                <div class="acc-a">
+                  <div class="acc-a-in">
+                    <p>
+                      Une personne vous suit de la candidature jusqu'à la
+                      réponse. Vous n'êtes jamais un numéro de dossier perdu
+                      dans une file d'attente.
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="acc-item">
+                <h3 class="acc-h">
+                  <button type="button" class="acc-q" aria-expanded="false">
+                    <span class="acc-q-tx">Confidentialité de vos données</span>
+                    <span class="acc-icon" aria-hidden="true"></span>
+                  </button>
+                </h3>
+                <div class="acc-a">
+                  <div class="acc-a-in">
+                    <p>
+                      Vos données ne servent qu'à votre candidature et restent
+                      confidentielles (RGPD). Les CV non retenus ne sont pas
+                      conservés au-delà du délai légal.
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="acc-item">
+                <h3 class="acc-h">
+                  <button type="button" class="acc-q" aria-expanded="false">
+                    <span class="acc-q-tx">Égalité des chances</span>
+                    <span class="acc-icon" aria-hidden="true"></span>
+                  </button>
+                </h3>
+                <div class="acc-a">
+                  <div class="acc-a-in">
+                    <p>
+                      On recrute sur les compétences et l'état d'esprit. Tous
+                      les profils sont les bienvenus, et des aménagements sont
+                      possibles : dites-le-nous.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
+      </section>
 
-        <div class="acc-item">
-          <h3 class="acc-h"><button type="button" class="acc-q" aria-expanded="false">
-            <span class="acc-q-tx">Les étapes</span>
-            <span class="acc-icon" aria-hidden="true"></span>
-          </button></h3>
-          <div class="acc-a"><div class="acc-a-in"><p>
-            Un premier échange téléphonique, un entretien avec l'équipe et le pôle
-            concerné, parfois un cas pratique. Si votre profil est retenu, nous
-            revenons vers vous rapidement.
-          </p></div></div>
-        </div>
-
-        <div class="acc-item">
-          <h3 class="acc-h"><button type="button" class="acc-q" aria-expanded="false">
-            <span class="acc-q-tx">Un seul interlocuteur</span>
-            <span class="acc-icon" aria-hidden="true"></span>
-          </button></h3>
-          <div class="acc-a"><div class="acc-a-in"><p>
-            Une personne vous suit de la candidature jusqu'à la réponse. Vous n'êtes
-            jamais un numéro de dossier perdu dans une file d'attente.
-          </p></div></div>
-        </div>
-
-        <div class="acc-item">
-          <h3 class="acc-h"><button type="button" class="acc-q" aria-expanded="false">
-            <span class="acc-q-tx">Confidentialité de vos données</span>
-            <span class="acc-icon" aria-hidden="true"></span>
-          </button></h3>
-          <div class="acc-a"><div class="acc-a-in"><p>
-            Vos données ne servent qu'à votre candidature et restent confidentielles
-            (RGPD). Les CV non retenus ne sont pas conservés au-delà du délai légal.
-          </p></div></div>
-        </div>
-
-        <div class="acc-item">
-          <h3 class="acc-h"><button type="button" class="acc-q" aria-expanded="false">
-            <span class="acc-q-tx">Égalité des chances</span>
-            <span class="acc-icon" aria-hidden="true"></span>
-          </button></h3>
-          <div class="acc-a"><div class="acc-a-in"><p>
-            On recrute sur les compétences et l'état d'esprit. Tous les profils sont
-            les bienvenus, et des aménagements sont possibles : dites-le-nous.
-          </p></div></div>
-        </div>
-
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ================================
+      <!-- ================================
      OFFRES DU MOMENT — carrousel de postes ouverts, description dépliable.
      Source de données : tableau OFFRES dans le script en bas de page.
      ================================ -->
-<section class="sec offers-sec" id="offres" aria-labelledby="offres-title">
-  <div class="container">
-    <div class="offers-head reveal">
-      <div>
-        <h2 class="sec-title" id="offres-title">Nos offres du <em>moment</em></h2>
-        <p class="offers-count" id="offres-count" aria-live="polite"></p>
-      </div>
-      <div class="offers-ctrl">
-        <button type="button" class="offers-btn" id="offers-prev" aria-label="Offres précédentes">
-          <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M13 8H3M7 4 3 8l4 4"/></svg>
-        </button>
-        <button type="button" class="offers-btn" id="offers-next" aria-label="Offres suivantes">
-          <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
-        </button>
-      </div>
-    </div>
-    <div class="offers-track reveal delay-1" id="offers-list" role="list" aria-label="Offres d'emploi ouvertes"></div>
-  </div>
-</section>
+      <section
+        class="sec offers-sec"
+        id="offres"
+        aria-labelledby="offres-title"
+      >
+        <div class="container">
+          <div class="offers-head reveal">
+            <div>
+              <h2 class="sec-title" id="offres-title">
+                Nos offres du <em>moment</em>
+              </h2>
+              <p class="offers-count" id="offres-count" aria-live="polite"></p>
+            </div>
+            <div class="offers-ctrl">
+              <button
+                type="button"
+                class="offers-btn"
+                id="offers-prev"
+                aria-label="Offres précédentes"
+              >
+                <svg
+                  viewBox="0 0 16 16"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.7"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  aria-hidden="true"><path d="M13 8H3M7 4 3 8l4 4"></path></svg
+                >
+              </button>
+              <button
+                type="button"
+                class="offers-btn"
+                id="offers-next"
+                aria-label="Offres suivantes"
+              >
+                <svg
+                  viewBox="0 0 16 16"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.7"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4"></path></svg
+                >
+              </button>
+            </div>
+          </div>
+          <div
+            class="offers-track reveal delay-1"
+            id="offers-list"
+            role="list"
+            aria-label="Offres d'emploi ouvertes"
+          >
+          </div>
+        </div>
+      </section>
 
-<!-- ================================
+      <!-- ================================
      FORMULAIRE DE CANDIDATURE
      ================================ -->
-<section class="sec apply-sec" id="postuler" aria-labelledby="postuler-title">
-  <div class="container">
+      <section
+        class="sec apply-sec"
+        id="postuler"
+        aria-labelledby="postuler-title"
+      >
+        <div class="container">
+          <div class="apply-grid">
+            <aside class="apply-aside reveal">
+              <h2 class="sec-title" id="postuler-title">
+                Et si c'était <em>vous</em>&nbsp;?
+              </h2>
+              <p class="sec-text">
+                Répondez à une offre ou tentez votre chance spontanément&nbsp;:
+                dans les deux cas, votre CV arrive directement à la bonne
+                équipe.
+              </p>
+              <ul class="apply-points">
+                <li class="apply-point">
+                  <span class="apply-point-tx"
+                    ><strong>Chaque dossier est lu</strong>Par l'équipe
+                    concernée, pas par un robot de tri.</span
+                  >
+                </li>
+                <li class="apply-point">
+                  <span class="apply-point-tx"
+                    ><strong>Un seul interlocuteur</strong>De votre candidature
+                    jusqu'à la réponse.</span
+                  >
+                </li>
+                <li class="apply-point">
+                  <span class="apply-point-tx"
+                    ><strong>Vos données restent confidentielles</strong>Elles
+                    ne servent qu'à votre candidature (RGPD).</span
+                  >
+                </li>
+              </ul>
+            </aside>
 
-    <div class="apply-grid">
+            <div class="apply-main">
+              <form id="apply-form" class="q-shell reveal delay-1" novalidate>
+                <div class="q-shell-inner">
+                  <!-- Type de candidature -->
+                  <div
+                    class="q-intent"
+                    role="radiogroup"
+                    aria-label="Type de candidature"
+                  >
+                    <button
+                      type="button"
+                      class="q-intent-opt is-selected"
+                      data-intent="offre"
+                      role="radio"
+                      aria-checked="true">Répondre à une offre</button
+                    >
+                    <button
+                      type="button"
+                      class="q-intent-opt"
+                      data-intent="spontanee"
+                      role="radio"
+                      aria-checked="false">Candidature spontanée</button
+                    >
+                    <span class="q-intent-glider" aria-hidden="true"></span>
+                  </div>
 
-      <aside class="apply-aside reveal">
-        <h2 class="sec-title" id="postuler-title">Et si c'était <em>vous</em>&nbsp;?</h2>
-        <p class="sec-text">
-          Répondez à une offre ou tentez votre chance spontanément&nbsp;:
-          dans les deux cas, votre CV arrive directement à la bonne équipe.
-        </p>
-        <ul class="apply-points">
-          <li class="apply-point">
-            <span class="apply-point-tx"><strong>Chaque dossier est lu</strong>Par l'équipe concernée, pas par un robot de tri.</span>
-          </li>
-          <li class="apply-point">
-            <span class="apply-point-tx"><strong>Un seul interlocuteur</strong>De votre candidature jusqu'à la réponse.</span>
-          </li>
-          <li class="apply-point">
-            <span class="apply-point-tx"><strong>Vos données restent confidentielles</strong>Elles ne servent qu'à votre candidature (RGPD).</span>
-          </li>
-        </ul>
-      </aside>
+                  <p class="apply-lead" id="apply-lead">
+                    Sélectionnez l'offre qui vous intéresse, joignez votre CV :
+                    c'est tout.
+                  </p>
 
-      <div class="apply-main">
+                  <div class="q-fields">
+                    <div class="q-row">
+                      <div class="q-field">
+                        <label for="f-firstname"
+                          >Prénom <span aria-hidden="true">*</span></label
+                        >
+                        <input
+                          id="f-firstname"
+                          name="prenom"
+                          type="text"
+                          autocomplete="given-name"
+                          required
+                          placeholder="Jeanne"
+                        />
+                      </div>
+                      <div class="q-field">
+                        <label for="f-lastname"
+                          >Nom <span aria-hidden="true">*</span></label
+                        >
+                        <input
+                          id="f-lastname"
+                          name="nom"
+                          type="text"
+                          autocomplete="family-name"
+                          required
+                          placeholder="Dupont"
+                        />
+                      </div>
+                    </div>
 
-      <form id="apply-form" class="q-shell reveal delay-1" novalidate>
-      <div class="q-shell-inner">
+                    <div class="q-row">
+                      <div class="q-field">
+                        <label for="f-phone"
+                          >Numéro de téléphone <span aria-hidden="true">*</span
+                          ></label
+                        >
+                        <input
+                          id="f-phone"
+                          name="telephone"
+                          type="tel"
+                          autocomplete="tel"
+                          inputmode="tel"
+                          required
+                          placeholder="06 12 34 56 78"
+                        />
+                      </div>
+                      <div class="q-field">
+                        <label for="f-email"
+                          >Email <span aria-hidden="true">*</span></label
+                        >
+                        <input
+                          id="f-email"
+                          name="email"
+                          type="email"
+                          autocomplete="email"
+                          required
+                          placeholder="jeanne.dupont@email.fr"
+                        />
+                      </div>
+                    </div>
 
-        <!-- Type de candidature -->
-        <div class="q-intent" role="radiogroup" aria-label="Type de candidature">
-          <button type="button" class="q-intent-opt is-selected" data-intent="offre" role="radio" aria-checked="true">Répondre à une offre</button>
-          <button type="button" class="q-intent-opt" data-intent="spontanee" role="radio" aria-checked="false">Candidature spontanée</button>
-          <span class="q-intent-glider" aria-hidden="true"></span>
-        </div>
+                    <!-- Visible en mode "Répondre à une offre" -->
+                    <div class="q-field" id="field-offre">
+                      <label for="f-offre"
+                        >Offre concernée <span aria-hidden="true">*</span
+                        ></label
+                      >
+                      <select id="f-offre" name="offre" required>
+                        <option value="" disabled selected
+                          >Choisissez une offre…</option
+                        >
+                      </select>
+                    </div>
 
-        <p class="apply-lead" id="apply-lead">
-          Sélectionnez l'offre qui vous intéresse, joignez votre CV : c'est tout.
-        </p>
+                    <!-- Visible en mode "Candidature spontanée" -->
+                    <div class="q-field" id="field-poste" hidden>
+                      <label for="f-poste"
+                        >Poste recherché <span aria-hidden="true">*</span
+                        ></label
+                      >
+                      <input
+                        id="f-poste"
+                        name="poste_recherche"
+                        type="text"
+                        placeholder="Ex. : technicien support, commercial, formateur…"
+                      />
+                    </div>
 
-        <div class="q-fields">
+                    <!-- CV : zone de dépôt drag & drop -->
+                    <div class="q-field">
+                      <label for="f-cv"
+                        >Votre CV <span aria-hidden="true">*</span></label
+                      >
+                      <div class="cv-drop" id="cv-drop">
+                        <span class="cv-drop-ico" aria-hidden="true">
+                          <svg
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="1.7"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            ><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"
+                            ></path><path d="M17 8l-5-5-5 5"></path><path
+                              d="M12 3v12"></path></svg
+                          >
+                        </span>
+                        <span class="cv-drop-label"
+                          >Glissez votre CV ici, ou <em
+                            >parcourez vos fichiers</em
+                          ></span
+                        >
+                        <span class="cv-drop-hint"
+                          >PDF, DOC ou DOCX · 5 Mo max</span
+                        >
+                        <input
+                          id="f-cv"
+                          name="attachment"
+                          type="file"
+                          accept=".pdf,.doc,.docx,application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+                          aria-describedby="cv-status"
+                        />
+                        <div class="cv-file" id="cv-file">
+                          <span class="cv-file-ico" aria-hidden="true">
+                            <svg
+                              viewBox="0 0 24 24"
+                              fill="none"
+                              stroke="currentColor"
+                              stroke-width="1.7"
+                              stroke-linecap="round"
+                              stroke-linejoin="round"
+                              ><path
+                                d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"
+                              ></path><path d="M14 2v6h6"></path></svg
+                            >
+                          </span>
+                          <span class="cv-file-tx">
+                            <span class="cv-file-name" id="cv-file-name"></span>
+                            <span class="cv-file-size" id="cv-file-size"></span>
+                          </span>
+                          <button
+                            type="button"
+                            class="cv-file-remove"
+                            id="cv-file-remove"
+                            aria-label="Retirer le fichier"
+                          >
+                            <svg
+                              viewBox="0 0 24 24"
+                              fill="none"
+                              stroke="currentColor"
+                              stroke-width="2"
+                              stroke-linecap="round"
+                              stroke-linejoin="round"
+                              aria-hidden="true"
+                              ><path d="M18 6 6 18M6 6l12 12"></path></svg
+                            >
+                          </button>
+                        </div>
+                      </div>
+                      <span
+                        class="visually-hidden"
+                        id="cv-status"
+                        role="status"
+                        aria-live="polite"></span>
+                    </div>
+                  </div>
 
-          <div class="q-row">
-            <div class="q-field">
-              <label for="f-firstname">Prénom <span aria-hidden="true">*</span></label>
-              <input id="f-firstname" name="prenom" type="text" autocomplete="given-name" required placeholder="Jeanne">
-            </div>
-            <div class="q-field">
-              <label for="f-lastname">Nom <span aria-hidden="true">*</span></label>
-              <input id="f-lastname" name="nom" type="text" autocomplete="family-name" required placeholder="Dupont">
-            </div>
-          </div>
+                  <label class="q-rgpd">
+                    <input type="checkbox" id="f-consent" required />
+                    <span
+                      >J'accepte que les informations transmises soient
+                      utilisées par JCD Groupe pour traiter ma candidature,
+                      conformément à la <a
+                        href="politique-de-confidentialite.html"
+                        target="_blank"
+                        rel="noopener">politique de confidentialité</a
+                      >. Les CV non retenus ne sont pas conservés au-delà du
+                      délai légal. <span aria-hidden="true">*</span></span
+                    >
+                  </label>
 
-          <div class="q-row">
-            <div class="q-field">
-              <label for="f-phone">Numéro de téléphone <span aria-hidden="true">*</span></label>
-              <input id="f-phone" name="telephone" type="tel" autocomplete="tel" inputmode="tel" required placeholder="06 12 34 56 78">
-            </div>
-            <div class="q-field">
-              <label for="f-email">Email <span aria-hidden="true">*</span></label>
-              <input id="f-email" name="email" type="email" autocomplete="email" required placeholder="jeanne.dupont@email.fr">
-            </div>
-          </div>
+                  <p class="q-error" id="q-error" role="alert" hidden></p>
 
-          <!-- Visible en mode "Répondre à une offre" -->
-          <div class="q-field" id="field-offre">
-            <label for="f-offre">Offre concernée <span aria-hidden="true">*</span></label>
-            <select id="f-offre" name="offre" required>
-              <option value="" disabled selected>Choisissez une offre…</option>
-            </select>
-          </div>
+                  <div class="q-actions">
+                    <button
+                      type="submit"
+                      class="q-btn q-btn--primary q-btn--send"
+                      id="q-submit"
+                    >
+                      Envoyer ma candidature
+                      <span class="q-btn-arrow" aria-hidden="true"
+                        ><svg
+                          viewBox="0 0 16 16"
+                          fill="none"
+                          stroke="currentColor"
+                          stroke-width="1.7"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          ><path d="M3 8h10M9 4l4 4-4 4"></path></svg
+                        ></span
+                      >
+                    </button>
+                  </div>
 
-          <!-- Visible en mode "Candidature spontanée" -->
-          <div class="q-field" id="field-poste" hidden>
-            <label for="f-poste">Poste recherché <span aria-hidden="true">*</span></label>
-            <input id="f-poste" name="poste_recherche" type="text" placeholder="Ex. : technicien support, commercial, formateur…">
-          </div>
-
-          <!-- CV : zone de dépôt drag & drop -->
-          <div class="q-field">
-            <label for="f-cv">Votre CV <span aria-hidden="true">*</span></label>
-            <div class="cv-drop" id="cv-drop">
-              <span class="cv-drop-ico" aria-hidden="true">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="M17 8l-5-5-5 5"/><path d="M12 3v12"/></svg>
-              </span>
-              <span class="cv-drop-label">Glissez votre CV ici, ou <em>parcourez vos fichiers</em></span>
-              <span class="cv-drop-hint">PDF, DOC ou DOCX · 5 Mo max</span>
-              <input id="f-cv" name="attachment" type="file" accept=".pdf,.doc,.docx,application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document" aria-describedby="cv-status">
-              <div class="cv-file" id="cv-file">
-                <span class="cv-file-ico" aria-hidden="true">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/></svg>
-                </span>
-                <span class="cv-file-tx">
-                  <span class="cv-file-name" id="cv-file-name"></span>
-                  <span class="cv-file-size" id="cv-file-size"></span>
-                </span>
-                <button type="button" class="cv-file-remove" id="cv-file-remove" aria-label="Retirer le fichier">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12"/></svg>
-                </button>
-              </div>
-            </div>
-            <span class="visually-hidden" id="cv-status" role="status" aria-live="polite"></span>
-          </div>
-
-        </div>
-
-        <label class="q-rgpd">
-          <input type="checkbox" id="f-consent" required>
-          <span>J'accepte que les informations transmises soient utilisées par JCD Groupe
-          pour traiter ma candidature, conformément à la <a href="politique-de-confidentialite.html" target="_blank" rel="noopener">politique de
-          confidentialité</a>. Les CV non retenus ne sont pas conservés au-delà du
-          délai légal. <span aria-hidden="true">*</span></span>
-        </label>
-
-        <p class="q-error" id="q-error" role="alert" hidden></p>
-
-        <div class="q-actions">
-          <button type="submit" class="q-btn q-btn--primary q-btn--send" id="q-submit">
-            Envoyer ma candidature
-            <span class="q-btn-arrow" aria-hidden="true"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h10M9 4l4 4-4 4"/></svg></span>
-          </button>
-        </div>
-
-        <!-- Champs cachés Web3Forms — REMPLACER la clé ci-dessous par votre
+                  <!-- Champs cachés Web3Forms — REMPLACER la clé ci-dessous par votre
              clé d'accès gratuite (https://web3forms.com → email destinataire
              = recrutement@jcd-groupe.fr). Tant que la clé n'est pas renseignée,
              l'envoi échoue volontairement (message d'erreur affiché).
              NB : la pièce jointe (champ "attachment") nécessite un plan
              Web3Forms Pro ; sinon, brancher le formulaire sur votre outil
              RH ou une boîte mail dédiée. -->
-        <input type="hidden" name="access_key" id="f-access-key" value="VOTRE_CLE_WEB3FORMS_ICI">
-        <input type="hidden" name="subject" id="f-subject" value="Nouvelle candidature — JCD Groupe">
-        <input type="hidden" name="from_name" value="Site JCD Groupe — Carrières">
-        <input type="checkbox" name="botcheck" id="f-botcheck" class="visually-hidden" tabindex="-1" autocomplete="off" aria-hidden="true">
+                  <input
+                    type="hidden"
+                    name="access_key"
+                    id="f-access-key"
+                    value="VOTRE_CLE_WEB3FORMS_ICI"
+                  />
+                  <input
+                    type="hidden"
+                    name="subject"
+                    id="f-subject"
+                    value="Nouvelle candidature — JCD Groupe"
+                  />
+                  <input
+                    type="hidden"
+                    name="from_name"
+                    value="Site JCD Groupe — Carrières"
+                  />
+                  <input
+                    type="checkbox"
+                    name="botcheck"
+                    id="f-botcheck"
+                    class="visually-hidden"
+                    tabindex="-1"
+                    autocomplete="off"
+                    aria-hidden="true"
+                  />
+                </div>
+              </form>
 
-      </div>
-    </form>
+              <!-- Écran de confirmation (affiché après envoi réussi) -->
+              <div
+                class="q-success"
+                id="q-success"
+                hidden
+                role="status"
+                aria-live="polite"
+              >
+                <span class="q-success-mark" aria-hidden="true">
+                  <svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    ><path d="M20 6 9 17l-5-5"></path></svg
+                  >
+                </span>
+                <h2>Merci&nbsp;!</h2>
+                <div class="q-success-recap" id="q-success-recap"></div>
+                <p>
+                  Votre candidature a bien été reçue. Elle sera étudiée par nos
+                  équipes et nous vous recontacterons si votre profil est
+                  retenu. Sans retour de notre part sous 3&nbsp;semaines,
+                  veuillez considérer que votre candidature n'a pas été retenue. <strong
+                    >Merci pour votre intérêt envers JCD&nbsp;Groupe.</strong>
+                </p>
+                <div class="q-actions" style="justify-content: center;">
+                  <a href="index.html" class="q-btn q-btn--ghost"
+                    >Retour à l'accueil</a
+                  >
+                </div>
+              </div>
 
-    <!-- Écran de confirmation (affiché après envoi réussi) -->
-    <div class="q-success" id="q-success" hidden role="status" aria-live="polite">
-      <span class="q-success-mark" aria-hidden="true">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
-      </span>
-      <h2>Merci&nbsp;!</h2>
-      <div class="q-success-recap" id="q-success-recap"></div>
-      <p>Votre candidature a bien été reçue. Elle sera étudiée par nos équipes
-      et nous vous recontacterons si votre profil est retenu. Sans retour de
-      notre part sous 3&nbsp;semaines, veuillez considérer que votre candidature
-      n'a pas été retenue. <strong>Merci pour votre intérêt envers
-      JCD&nbsp;Groupe.</strong></p>
-      <div class="q-actions" style="justify-content: center;">
-        <a href="index.html" class="q-btn q-btn--ghost">Retour à l'accueil</a>
-      </div>
-    </div>
+              <noscript>
+                <p
+                  style="max-width: 760px; margin: 24px auto; color: var(--text-2); text-align: center; line-height: 1.6;"
+                >
+                  Le formulaire interactif nécessite JavaScript. Vous pouvez
+                  envoyer votre candidature (CV + poste visé) directement à
+                  <a
+                    href="mailto:recrutement@jcd-groupe.fr"
+                    style="color: var(--text-1);">recrutement@jcd-groupe.fr</a
+                  >
+                  ou nous appeler au <a
+                    href="tel:+33387184920"
+                    style="color: var(--text-1);">03 87 18 49 20</a
+                  >.
+                </p>
+              </noscript>
+            </div><!-- /.apply-main -->
+          </div><!-- /.apply-grid -->
+        </div>
+      </section>
+    </main>
 
-    <noscript>
-      <p style="max-width: 760px; margin: 24px auto; color: var(--text-2); text-align: center; line-height: 1.6;">
-        Le formulaire interactif nécessite JavaScript. Vous pouvez envoyer votre
-        candidature (CV + poste visé) directement à
-        <a href="mailto:recrutement@jcd-groupe.fr" style="color: var(--text-1);">recrutement@jcd-groupe.fr</a>
-        ou nous appeler au <a href="tel:+33387184920" style="color: var(--text-1);">03 87 18 49 20</a>.
-      </p>
-    </noscript>
+    <Footer current="carrieres" />
 
-      </div><!-- /.apply-main -->
-    </div><!-- /.apply-grid -->
-  </div>
-</section>
-
-</main>
-
-<Footer current="carrieres" />
-
-
-<script is:inline src="js/pages/carrieres-4.js"></script>
-<script is:inline src="js/pages/carrieres-2.js"></script>
-<script is:inline src="js/pages/carrieres-3.js"></script>
-<!-- ================================
+    <script is:inline src="js/pages/carrieres-4.js"></script>
+    <script is:inline src="js/pages/carrieres-2.js"></script>
+    <script is:inline src="js/pages/carrieres-3.js"></script>
+    <!-- ================================
      REFONTE CLAIRE — carrousel de principes + accordéons
      ================================ -->
-<script is:inline src="js/pages/carrieres-1.js"></script>
+    <script is:inline src="js/pages/carrieres-1.js"></script>
 
-<!-- jcd-mobile-nav (injected) -->
-<button class="jcd-burger" id="jcdBurger" type="button" aria-label="Ouvrir le menu" aria-expanded="false" aria-controls="jcdMnav">
-  <span class="jcd-burger__box" aria-hidden="true"><i></i><i></i><i></i></span>
-</button>
-<div class="jcd-mnav" id="jcdMnav" role="dialog" aria-modal="true" aria-label="Menu de navigation" aria-hidden="true">
-  <div class="jcd-mnav__scroll">
-    <div class="jcd-mnav__inner">
-      <p class="jcd-mnav__eyebrow jcd-mnav__reveal" style="transition-delay:.04s">Expertises</p>
+    <!-- jcd-mobile-nav (injected) -->
+    <button
+      class="jcd-burger"
+      id="jcdBurger"
+      type="button"
+      aria-label="Ouvrir le menu"
+      aria-expanded="false"
+      aria-controls="jcdMnav"
+    >
+      <span class="jcd-burger__box" aria-hidden="true"
+        ><i></i><i></i><i></i></span
+      >
+    </button>
+    <div
+      class="jcd-mnav"
+      id="jcdMnav"
+      role="dialog"
+      aria-modal="true"
+      aria-label="Menu de navigation"
+      aria-hidden="true"
+    >
+      <div class="jcd-mnav__scroll">
+        <div class="jcd-mnav__inner">
+          <p
+            class="jcd-mnav__eyebrow jcd-mnav__reveal"
+            style="transition-delay:.04s"
+          >
+            Expertises
+          </p>
 
-      <div class="jcd-mnav__reveal" style="transition-delay:.07s">
-        <div class="jcd-mnav__item" style="--mnav-c:#2E72BA">
-          <a class="jcd-mnav__link" href="informatique.html"><span class="jcd-mnav__dot"></span><span class="jcd-mnav__label">Informatique</span></a>
-          <button class="jcd-acc__toggle" type="button" aria-expanded="false" aria-controls="jcdAccInfo" aria-label="Afficher les sous-pages Informatique">
-            <svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M7 2v10M2 7h10"/></svg>
-          </button>
+          <div class="jcd-mnav__reveal" style="transition-delay:.07s">
+            <div class="jcd-mnav__item" style="--mnav-c:#2E72BA">
+              <a class="jcd-mnav__link" href="informatique.html"
+                ><span class="jcd-mnav__dot"></span><span
+                  class="jcd-mnav__label">Informatique</span
+                ></a
+              >
+              <button
+                class="jcd-acc__toggle"
+                type="button"
+                aria-expanded="false"
+                aria-controls="jcdAccInfo"
+                aria-label="Afficher les sous-pages Informatique"
+              >
+                <svg
+                  viewBox="0 0 14 14"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.6"
+                  stroke-linecap="round"><path d="M7 2v10M2 7h10"></path></svg
+                >
+              </button>
+            </div>
+            <div class="jcd-acc__panel" id="jcdAccInfo">
+              <a class="jcd-mnav__sub" href="info-cloud.html">Cloud Microsoft</a
+              >
+              <a class="jcd-mnav__sub" href="info-collaboratif.html"
+                >Solutions collaboratives &amp; audiovisuelles</a
+              >
+              <a class="jcd-mnav__sub" href="info-reseaux.html"
+                >Architectures syst&egrave;mes &amp; r&eacute;seaux</a
+              >
+              <a class="jcd-mnav__sub" href="info-integration.html"
+                >Int&eacute;gration &amp; Support PC</a
+              >
+            </div>
+          </div>
+
+          <a
+            class="jcd-mnav__item jcd-mnav__reveal"
+            style="--mnav-c:#E51D29;transition-delay:.10s"
+            href="service.html"
+            ><span class="jcd-mnav__dot"></span><span class="jcd-mnav__label"
+              >Service</span
+            ></a
+          >
+          <a
+            class="jcd-mnav__item jcd-mnav__reveal"
+            style="--mnav-c:#F9D605;transition-delay:.13s"
+            href="developpement.html"
+            ><span class="jcd-mnav__dot"></span><span class="jcd-mnav__label"
+              >D&eacute;veloppement</span
+            ></a
+          >
+          <a
+            class="jcd-mnav__item jcd-mnav__reveal"
+            style="--mnav-c:#F3941D;transition-delay:.16s"
+            href="print.html"
+            ><span class="jcd-mnav__dot"></span><span class="jcd-mnav__label"
+              >Print</span
+            ></a
+          >
+          <a
+            class="jcd-mnav__item jcd-mnav__reveal"
+            style="--mnav-c:#B063AC;transition-delay:.19s"
+            href="telecom.html"
+            ><span class="jcd-mnav__dot"></span><span class="jcd-mnav__label"
+              >T&eacute;l&eacute;com</span
+            ></a
+          >
+          <div class="jcd-mnav__reveal" style="transition-delay:.22s">
+            <div class="jcd-mnav__item" style="--mnav-c:#8EC041">
+              <a class="jcd-mnav__link" href="formation.html"
+                ><span class="jcd-mnav__dot"></span><span
+                  class="jcd-mnav__label">Formation</span
+                ></a
+              >
+              <button
+                class="jcd-acc__toggle"
+                type="button"
+                aria-expanded="false"
+                aria-controls="jcdAccForm"
+                aria-label="Afficher les catégories de formation"
+              >
+                <svg
+                  viewBox="0 0 14 14"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.6"
+                  stroke-linecap="round"><path d="M7 2v10M2 7h10"></path></svg
+                >
+              </button>
+            </div>
+            <div class="jcd-acc__panel" id="jcdAccForm">
+              <a class="jcd-mnav__sub" href="formation-bureautique.html"
+                >Bureautique</a
+              >
+              <a
+                class="jcd-mnav__sub"
+                href="formation-intelligence-artificielle.html"
+                >Intelligence artificielle</a
+              >
+              <a class="jcd-mnav__sub" href="formation-informatique.html"
+                >Informatique</a
+              >
+              <a
+                class="jcd-mnav__sub"
+                href="formation-communication-marketing.html"
+                >Communication - Marketing</a
+              >
+              <a class="jcd-mnav__sub" href="formation-management.html"
+                >Management</a
+              >
+              <a
+                class="jcd-mnav__sub"
+                href="formation-commerce-relation-client.html"
+                >Commerce - Relation client</a
+              >
+              <a
+                class="jcd-mnav__sub"
+                href="formation-comptabilite-gestion.html"
+                >Comptabilit&eacute; - Gestion</a
+              >
+              <a class="jcd-mnav__sub" href="formation-ressources-humaines.html"
+                >Ressources humaines</a
+              >
+              <a
+                class="jcd-mnav__sub"
+                href="formation-developpement-personnel.html"
+                >D&eacute;veloppement personnel</a
+              >
+              <a class="jcd-mnav__sub" href="formation-graphisme-pao.html"
+                >Graphisme - PAO</a
+              >
+              <a
+                class="jcd-mnav__sub"
+                href="formation-administratif-secretariat-accueil.html"
+                >Administratif - Secr&eacute;tariat</a
+              >
+              <a class="jcd-mnav__sub" href="formation-securite.html"
+                >S&eacute;curit&eacute;</a
+              >
+              <a class="jcd-mnav__sub" href="formation-langues.html">Langues</a>
+            </div>
+          </div>
+          <a
+            class="jcd-mnav__item jcd-mnav__reveal"
+            style="--mnav-c:#A78D75;transition-delay:.25s"
+            href="agencement.html"
+            ><span class="jcd-mnav__dot"></span><span class="jcd-mnav__label"
+              >Agencement</span
+            ></a
+          >
+
+          <p
+            class="jcd-mnav__eyebrow jcd-mnav__sec2 jcd-mnav__reveal"
+            style="transition-delay:.30s"
+          >
+            D&eacute;couvrir
+          </p>
+          <a
+            class="jcd-mnav__item jcd-mnav__reveal"
+            style="--mnav-c:#9a9a9a;transition-delay:.33s"
+            href="assistance.html"
+            ><span class="jcd-mnav__dot"></span><span
+              class="jcd-mnav__label"
+              style="font-size:19px">Assistance</span
+            ></a
+          >
+          <a
+            class="jcd-mnav__item jcd-mnav__reveal"
+            style="--mnav-c:#9a9a9a;transition-delay:.36s"
+            href="carrieres.html"
+            ><span class="jcd-mnav__dot"></span><span
+              class="jcd-mnav__label"
+              style="font-size:19px">Carri&egrave;res</span
+            ></a
+          >
+
+          <div
+            class="jcd-mnav__cta jcd-mnav__reveal"
+            style="transition-delay:.40s"
+          >
+            <a class="jcd-mnav__btn jcd-mnav__btn--primary" href="contact.html"
+              >Contacter un expert
+              <span class="jcd-mnav__btn-ic"
+                ><svg
+                  viewBox="0 0 16 16"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.7"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  ><path d="M3 8h10M9 4l4 4-4 4"></path></svg
+                ></span
+              ></a
+            >
+            <a
+              class="jcd-mnav__btn jcd-mnav__btn--ghost"
+              href="tel:+33387184920"
+              >03 87 18 49 20
+              <span class="jcd-mnav__btn-ic"
+                ><svg
+                  viewBox="0 0 18 18"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.5"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  ><path
+                    d="M2.5 3.5a1 1 0 011-1h2.4a1 1 0 01.95.68l.86 2.4a1 1 0 01-.24 1l-1.2 1.2a11 11 0 004.6 4.6l1.2-1.2a1 1 0 011-.24l2.4.86a1 1 0 01.68.95V15a1 1 0 01-1 1A13.5 13.5 0 012.5 3.5z"
+                  ></path></svg
+                ></span
+              ></a
+            >
+          </div>
         </div>
-        <div class="jcd-acc__panel" id="jcdAccInfo">
-          <a class="jcd-mnav__sub" href="info-cloud.html">Cloud Microsoft</a>
-          <a class="jcd-mnav__sub" href="info-collaboratif.html">Solutions collaboratives &amp; audiovisuelles</a>
-          <a class="jcd-mnav__sub" href="info-reseaux.html">Architectures syst&egrave;mes &amp; r&eacute;seaux</a>
-          <a class="jcd-mnav__sub" href="info-integration.html">Int&eacute;gration &amp; Support PC</a>
-        </div>
-      </div>
-
-      <a class="jcd-mnav__item jcd-mnav__reveal" style="--mnav-c:#E51D29;transition-delay:.10s" href="service.html"><span class="jcd-mnav__dot"></span><span class="jcd-mnav__label">Service</span></a>
-      <a class="jcd-mnav__item jcd-mnav__reveal" style="--mnav-c:#F9D605;transition-delay:.13s" href="developpement.html"><span class="jcd-mnav__dot"></span><span class="jcd-mnav__label">D&eacute;veloppement</span></a>
-      <a class="jcd-mnav__item jcd-mnav__reveal" style="--mnav-c:#F3941D;transition-delay:.16s" href="print.html"><span class="jcd-mnav__dot"></span><span class="jcd-mnav__label">Print</span></a>
-      <a class="jcd-mnav__item jcd-mnav__reveal" style="--mnav-c:#B063AC;transition-delay:.19s" href="telecom.html"><span class="jcd-mnav__dot"></span><span class="jcd-mnav__label">T&eacute;l&eacute;com</span></a>
-      <div class="jcd-mnav__reveal" style="transition-delay:.22s">
-        <div class="jcd-mnav__item" style="--mnav-c:#8EC041">
-          <a class="jcd-mnav__link" href="formation.html"><span class="jcd-mnav__dot"></span><span class="jcd-mnav__label">Formation</span></a>
-          <button class="jcd-acc__toggle" type="button" aria-expanded="false" aria-controls="jcdAccForm" aria-label="Afficher les cat&eacute;gories de formation">
-            <svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M7 2v10M2 7h10"/></svg>
-          </button>
-        </div>
-        <div class="jcd-acc__panel" id="jcdAccForm">
-          <a class="jcd-mnav__sub" href="formation-bureautique.html">Bureautique</a>
-          <a class="jcd-mnav__sub" href="formation-intelligence-artificielle.html">Intelligence artificielle</a>
-          <a class="jcd-mnav__sub" href="formation-informatique.html">Informatique</a>
-          <a class="jcd-mnav__sub" href="formation-communication-marketing.html">Communication - Marketing</a>
-          <a class="jcd-mnav__sub" href="formation-management.html">Management</a>
-          <a class="jcd-mnav__sub" href="formation-commerce-relation-client.html">Commerce - Relation client</a>
-          <a class="jcd-mnav__sub" href="formation-comptabilite-gestion.html">Comptabilit&eacute; - Gestion</a>
-          <a class="jcd-mnav__sub" href="formation-ressources-humaines.html">Ressources humaines</a>
-          <a class="jcd-mnav__sub" href="formation-developpement-personnel.html">D&eacute;veloppement personnel</a>
-          <a class="jcd-mnav__sub" href="formation-graphisme-pao.html">Graphisme - PAO</a>
-          <a class="jcd-mnav__sub" href="formation-administratif-secretariat-accueil.html">Administratif - Secr&eacute;tariat</a>
-          <a class="jcd-mnav__sub" href="formation-securite.html">S&eacute;curit&eacute;</a>
-          <a class="jcd-mnav__sub" href="formation-langues.html">Langues</a>
-        </div>
-      </div>
-      <a class="jcd-mnav__item jcd-mnav__reveal" style="--mnav-c:#A78D75;transition-delay:.25s" href="agencement.html"><span class="jcd-mnav__dot"></span><span class="jcd-mnav__label">Agencement</span></a>
-
-      <p class="jcd-mnav__eyebrow jcd-mnav__sec2 jcd-mnav__reveal" style="transition-delay:.30s">D&eacute;couvrir</p>
-      <a class="jcd-mnav__item jcd-mnav__reveal" style="--mnav-c:#9a9a9a;transition-delay:.33s" href="assistance.html"><span class="jcd-mnav__dot"></span><span class="jcd-mnav__label" style="font-size:19px">Assistance</span></a>
-      <a class="jcd-mnav__item jcd-mnav__reveal" style="--mnav-c:#9a9a9a;transition-delay:.36s" href="carrieres.html"><span class="jcd-mnav__dot"></span><span class="jcd-mnav__label" style="font-size:19px">Carri&egrave;res</span></a>
-
-      <div class="jcd-mnav__cta jcd-mnav__reveal" style="transition-delay:.40s">
-        <a class="jcd-mnav__btn jcd-mnav__btn--primary" href="contact.html">Contacter un expert
-          <span class="jcd-mnav__btn-ic"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h10M9 4l4 4-4 4"/></svg></span></a>
-        <a class="jcd-mnav__btn jcd-mnav__btn--ghost" href="tel:+33387184920">03 87 18 49 20
-          <span class="jcd-mnav__btn-ic"><svg viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2.5 3.5a1 1 0 011-1h2.4a1 1 0 01.95.68l.86 2.4a1 1 0 01-.24 1l-1.2 1.2a11 11 0 004.6 4.6l1.2-1.2a1 1 0 011-.24l2.4.86a1 1 0 01.68.95V15a1 1 0 01-1 1A13.5 13.5 0 012.5 3.5z"/></svg></span></a>
       </div>
     </div>
-  </div>
-</div>
-<script is:inline src="js/shared/mobile-nav.js"></script>
-<!-- jcd-a11y (Lot 5) -->
-<div class="jcd-fab-wrap" id="jcd-fab">
-  <button class="jcd-fab jcd-fab--top" id="jcdToTop" type="button" aria-label="Remonter en haut">
-    <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 16V5M5 10l5-5 5 5"/></svg>
-  </button>
-  <a class="jcd-fab jcd-fab--contact" id="jcdFabContact" href="contact.html" aria-label="Nous contacter">
-    <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2.5" y="4.5" width="15" height="11" rx="2.3"/><path d="M3 6.7 L10 10.7 L17 6.7"/></svg>
-  </a>
-</div>
-<script is:inline src="js/shared/a11y.js" id="jcd-a11y-js"></script>
-<script is:inline src="js/shared/micons.js" id="jcd-micons-js"></script>
-<script is:inline src="js/shared/mrefonte.js" id="jcd-mrefonte-js"></script>
-<script is:inline src="js/pages/carrieres-mtap-swipe.js" id="jcd-mtap-swipe"></script>
-<script is:inline src="js/pages/carrieres-moffers.js" id="jcd-moffers-js"></script>
-
-
-</body>
+    <script is:inline src="js/shared/mobile-nav.js"></script>
+    <!-- jcd-a11y (Lot 5) -->
+    <div class="jcd-fab-wrap" id="jcd-fab">
+      <button
+        class="jcd-fab jcd-fab--top"
+        id="jcdToTop"
+        type="button"
+        aria-label="Remonter en haut"
+      >
+        <svg
+          viewBox="0 0 20 20"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="1.8"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          aria-hidden="true"><path d="M10 16V5M5 10l5-5 5 5"></path></svg
+        >
+      </button>
+      <a
+        class="jcd-fab jcd-fab--contact"
+        id="jcdFabContact"
+        href="contact.html"
+        aria-label="Nous contacter"
+      >
+        <svg
+          viewBox="0 0 20 20"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="1.6"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          aria-hidden="true"
+          ><rect x="2.5" y="4.5" width="15" height="11" rx="2.3"></rect><path
+            d="M3 6.7 L10 10.7 L17 6.7"></path></svg
+        >
+      </a>
+    </div>
+    <script is:inline src="js/shared/a11y.js" id="jcd-a11y-js"></script>
+    <script is:inline src="js/shared/micons.js" id="jcd-micons-js"></script>
+    <script is:inline src="js/shared/mrefonte.js" id="jcd-mrefonte-js"></script>
+    <script is:inline src="js/pages/carrieres-mtap-swipe.js" id="jcd-mtap-swipe"
+    ></script>
+    <script is:inline src="js/pages/carrieres-moffers.js" id="jcd-moffers-js"
+    ></script>
+  </body>
 </html>

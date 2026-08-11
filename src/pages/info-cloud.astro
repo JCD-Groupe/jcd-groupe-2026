@@ -1,595 +1,1464 @@
 ---
-import Header from '../components/Header.astro';
-import Footer from '../components/Footer.astro';
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
 ---
-<!DOCTYPE html>
+
 <html lang="fr">
-<head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-<meta name="color-scheme" content="dark" />
-<meta name="theme-color" content="#0d0d0d" />
-<link rel="icon" href="favicon.svg" type="image/svg+xml" />
-<meta name="description" content="JCD Groupe · Pôle Informatique. Partenaire Tier 1 Microsoft : déploiement et optimisation de Microsoft 365, Azure, téléphonie Teams et gouvernance du cloud. 11 ans d'expertise, 200 000+ utilisateurs suivis." />
-<link rel="canonical" href="https://www.jcd-groupe.fr/info-cloud.html" />
-<meta property="og:type" content="website" />
-<meta property="og:site_name" content="JCD Groupe" />
-<meta property="og:locale" content="fr_FR" />
-<meta property="og:title" content="Cloud Microsoft 365 &amp; Azure · Informatique · JCD Groupe" />
-<meta property="og:description" content="JCD Groupe · Pôle Informatique. Partenaire Tier 1 Microsoft : déploiement et optimisation de Microsoft 365, Azure, téléphonie Teams et gouvernance du cloud. 11 ans d'expertise, 200 000+ utilisateurs suivis." />
-<meta property="og:url" content="https://www.jcd-groupe.fr/info-cloud.html" />
-<meta name="twitter:card" content="summary" />
-<title>Cloud Microsoft 365 &amp; Azure · Informatique · JCD Groupe</title>
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+    />
+    <meta name="color-scheme" content="dark" />
+    <meta name="theme-color" content="#0d0d0d" />
+    <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+    <meta
+      name="description"
+      content="JCD Groupe · Pôle Informatique. Partenaire Tier 1 Microsoft : déploiement et optimisation de Microsoft 365, Azure, téléphonie Teams et gouvernance du cloud. 11 ans d'expertise, 200 000+ utilisateurs suivis."
+    />
+    <link rel="canonical" href="https://www.jcd-groupe.fr/info-cloud.html" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="JCD Groupe" />
+    <meta property="og:locale" content="fr_FR" />
+    <meta
+      property="og:title"
+      content="Cloud Microsoft 365 & Azure · Informatique · JCD Groupe"
+    />
+    <meta
+      property="og:description"
+      content="JCD Groupe · Pôle Informatique. Partenaire Tier 1 Microsoft : déploiement et optimisation de Microsoft 365, Azure, téléphonie Teams et gouvernance du cloud. 11 ans d'expertise, 200 000+ utilisateurs suivis."
+    />
+    <meta
+      property="og:url"
+      content="https://www.jcd-groupe.fr/info-cloud.html"
+    />
+    <meta name="twitter:card" content="summary" />
+    <title>Cloud Microsoft 365 &amp; Azure · Informatique · JCD Groupe</title>
 
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Instrument+Serif:ital@0;1&display=swap"
+      rel="stylesheet"
+    />
 
-<link rel="stylesheet" href="css/info-cloud.css">
-<link rel="stylesheet" href="css/global.css">
-<link rel="stylesheet" href="css/info-cloud-overrides.css">
-  <link rel="stylesheet" href="transition.css">
-  <script is:inline src="transition.js"></script>
-<script is:inline src="js/shared/xpcompact.js" id="jcd-xpcompact-js"></script>
-<script is:inline src="js/shared/infocompact.js" id="jcd-infocompact-js"></script>
-<script is:inline src="js/shared/touch.js" id="jcd-touch-js"></script>
-<script is:inline src="js/shared/page-boot.js"></script>
-<script is:inline src="js/shared/mrefonte-shim.js" id="jcd-mrefonte-shim"></script>
-</head>
-<body>
-<div id="jcd-pagefade" aria-hidden="true"></div>
-<a class="jcd-skip" href="#contenu">Aller au contenu</a>
+    <link rel="stylesheet" href="css/info-cloud.css" />
+    <link rel="stylesheet" href="css/global.css" />
+    <link rel="stylesheet" href="css/info-cloud-overrides.css" />
+    <link rel="stylesheet" href="transition.css" />
+    <script is:inline src="transition.js"></script>
+    <script is:inline src="js/shared/xpcompact.js" id="jcd-xpcompact-js"
+    ></script>
+    <script is:inline src="js/shared/infocompact.js" id="jcd-infocompact-js"
+    ></script>
+    <script is:inline src="js/shared/touch.js" id="jcd-touch-js"></script>
+    <script is:inline src="js/shared/page-boot.js"></script>
+    <script is:inline src="js/shared/mrefonte-shim.js" id="jcd-mrefonte-shim"
+    ></script>
+  </head>
+  <body>
+    <div id="jcd-pagefade" aria-hidden="true"></div>
+    <a class="jcd-skip" href="#contenu">Aller au contenu</a>
 
-<!-- ====================================================================
+    <!-- ====================================================================
      NAVBAR v2 — Modal-like
      Logo (g) · capsule centrale {Expertises ▾ · Contact · Carrières}
      · CTA Assistance (d). Bande pleine largeur, fade gauche/droite,
      dropdown "Expertises" avec 7 SVG 3D isométriques colorés.
      ==================================================================== -->
-<Header />
+    <Header />
 
-<!-- ====================================================================
+    <!-- ====================================================================
      RAIL DE SOUS-NAVIGATION — écosystème Informatique
      Ancré en permanence sous le navbar. Libellés complets, page active
      en bleu JCD. Permet de naviguer entre la vue d'ensemble et les 4
      domaines du pôle.
      ==================================================================== -->
-<nav class="info-subnav" aria-label="Navigation du pôle Informatique" role="menubar">
-  <div class="info-subnav__inner">
-    <a href="informatique.html" class="info-subnav__home" role="menuitem" aria-label="Vue d'ensemble, Pôle Informatique" title="Vue d'ensemble">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="7" height="7" rx="1.6"/><rect x="14" y="3" width="7" height="7" rx="1.6"/><rect x="3" y="14" width="7" height="7" rx="1.6"/><rect x="14" y="14" width="7" height="7" rx="1.6"/></svg>
-    </a>
-    <span class="info-subnav__sep" aria-hidden="true"></span>
-    <ul class="info-subnav__list">
-        <li role="none"><a href="info-integration.html" class="info-subnav__link" role="menuitem"><span class="info-subnav__ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg></span>Service Intégration &amp; Support PC</a></li>
-        <li role="none"><a href="info-reseaux.html" class="info-subnav__link" role="menuitem"><span class="info-subnav__ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="8" rx="2"/><rect x="2" y="13" width="20" height="8" rx="2"/><path d="M6 7h.01M6 17h.01"/></svg></span>Architectures systèmes &amp; réseaux</a></li>
-        <li role="none"><a href="info-collaboratif.html" class="info-subnav__link" role="menuitem"><span class="info-subnav__ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="m22 8-6 4 6 4V8Z"/><rect x="2" y="6" width="14" height="12" rx="2"/></svg></span>Solutions collaboratives &amp; audiovisuelles</a></li>
-        <li role="none"><a href="info-cloud.html" class="info-subnav__link is-active" aria-current="page" role="menuitem"><span class="info-subnav__ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M17.5 19H9a7 7 0 1 1 6.71-9h1.79a4.5 4.5 0 1 1 0 9Z"/></svg></span>Cloud Microsoft</a></li>
-    </ul>
-  </div>
-</nav>
+    <nav
+      class="info-subnav"
+      aria-label="Navigation du pôle Informatique"
+      role="menubar"
+    >
+      <div class="info-subnav__inner">
+        <a
+          href="informatique.html"
+          class="info-subnav__home"
+          role="menuitem"
+          aria-label="Vue d'ensemble, Pôle Informatique"
+          title="Vue d'ensemble"
+        >
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.7"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            aria-hidden="true"
+            ><rect x="3" y="3" width="7" height="7" rx="1.6"></rect><rect
+              x="14"
+              y="3"
+              width="7"
+              height="7"
+              rx="1.6"></rect><rect x="3" y="14" width="7" height="7" rx="1.6"
+            ></rect><rect x="14" y="14" width="7" height="7" rx="1.6"
+            ></rect></svg
+          >
+        </a>
+        <span class="info-subnav__sep" aria-hidden="true"></span>
+        <ul class="info-subnav__list">
+          <li role="none">
+            <a
+              href="info-integration.html"
+              class="info-subnav__link"
+              role="menuitem"
+              ><span class="info-subnav__ic" aria-hidden="true"
+                ><svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.7"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  ><path
+                    d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"
+                  ></path></svg
+                ></span
+              >Service Intégration &amp; Support PC</a>
+          </li>
+          <li role="none">
+            <a
+              href="info-reseaux.html"
+              class="info-subnav__link"
+              role="menuitem"
+              ><span class="info-subnav__ic" aria-hidden="true"
+                ><svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.7"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  ><rect x="2" y="3" width="20" height="8" rx="2"></rect><rect
+                    x="2"
+                    y="13"
+                    width="20"
+                    height="8"
+                    rx="2"></rect><path d="M6 7h.01M6 17h.01"></path></svg
+                ></span
+              >Architectures systèmes &amp; réseaux</a>
+          </li>
+          <li role="none">
+            <a
+              href="info-collaboratif.html"
+              class="info-subnav__link"
+              role="menuitem"
+              ><span class="info-subnav__ic" aria-hidden="true"
+                ><svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.7"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  ><path d="m22 8-6 4 6 4V8Z"></path><rect
+                    x="2"
+                    y="6"
+                    width="14"
+                    height="12"
+                    rx="2"></rect></svg
+                ></span
+              >Solutions collaboratives &amp; audiovisuelles</a>
+          </li>
+          <li role="none">
+            <a
+              href="info-cloud.html"
+              class="info-subnav__link is-active"
+              aria-current="page"
+              role="menuitem"
+              ><span class="info-subnav__ic" aria-hidden="true"
+                ><svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.7"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  ><path d="M17.5 19H9a7 7 0 1 1 6.71-9h1.79a4.5 4.5 0 1 1 0 9Z"
+                  ></path></svg
+                ></span
+              >Cloud Microsoft</a>
+          </li>
+        </ul>
+      </div>
+    </nav>
 
-
-
-<main id="contenu">
-
-<div class="hero-pin-zone">
-
-<!-- ====================================================================
+    <main id="contenu">
+      <div class="hero-pin-zone">
+        <!-- ====================================================================
      HERO — épinglé (sticky), fond animé. La couche WebGL (.hero-mesh)
      sera branchée plus tard ; le fallback CSS reste visible d'ici là.
      ==================================================================== -->
-<section class="print-hero" aria-labelledby="hero-title">
+        <section class="print-hero" aria-labelledby="hero-title">
+          <div class="hero-mesh-fallback" aria-hidden="true"></div>
+          <canvas class="hero-mesh" id="heroMesh" aria-hidden="true"></canvas>
+          <div class="hero-texture" aria-hidden="true"></div>
+          <div class="hero-grain" aria-hidden="true"></div>
 
-  <div class="hero-mesh-fallback" aria-hidden="true"></div>
-  <canvas class="hero-mesh" id="heroMesh" aria-hidden="true"></canvas>
-  <div class="hero-texture" aria-hidden="true"></div>
-  <div class="hero-grain" aria-hidden="true"></div>
+          <div class="container">
+            <h1 id="hero-title" class="hero-title reveal delay-1">
+              Le <span class="accent-grad">Cloud Microsoft</span>, déployé et
+              maîtrisé.
+            </h1>
 
-  <div class="container">
-    <h1 id="hero-title" class="hero-title reveal delay-1">
-      Le <span class="accent-grad">Cloud Microsoft</span>, déployé et maîtrisé.
-    </h1>
+            <p class="hero-sub reveal delay-2">
+              Microsoft 365, Azure et Teams. Nous accompagnons tout type de
+              structure dans la modernisation de son informatique en tirant
+              parti de la puissance du Cloud — en partenaire <strong
+                >Tier&nbsp;1 Microsoft</strong
+              >.
+            </p>
 
-    <p class="hero-sub reveal delay-2">
-      Microsoft 365, Azure et Teams. Nous accompagnons tout type de structure dans la modernisation de son informatique en tirant parti de la puissance du Cloud — en partenaire <strong>Tier&nbsp;1 Microsoft</strong>.
-    </p>
+            <div class="hero-actions reveal delay-3">
+              <a
+                href="contact.html?pole=informatique"
+                class="btn-cta btn-cta--ghost"
+              >
+                Échanger avec un expert Microsoft
+                <span class="btn-cta-arrow"
+                  ><svg
+                    viewBox="0 0 16 16"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="1.6"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    ><path d="M3 8h10M9 4l4 4-4 4"></path></svg
+                  ></span
+                >
+              </a>
+            </div>
+          </div>
+        </section>
 
-    <div class="hero-actions reveal delay-3">
-      <a href="contact.html?pole=informatique" class="btn-cta btn-cta--ghost">
-        Échanger avec un expert Microsoft
-        <span class="btn-cta-arrow"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h10M9 4l4 4-4 4"/></svg></span>
-      </a>
-    </div>
-  </div>
-</section>
-
-<!-- ====================================================================
+        <!-- ====================================================================
      MANIFESTE — feuille sticky (JetBrains Mono) qui glisse par-dessus
      le hero épinglé. Personnalisable par section.
      ==================================================================== -->
-<section class="manifesto" aria-labelledby="manifesto-title">
-  <div class="info-sheet">
-    <div class="container">
+        <section class="manifesto" aria-labelledby="manifesto-title">
+          <div class="info-sheet">
+            <div class="container">
+              <header class="mf-head reveal">
+                <span class="mf-head-side">
+                  <span class="mf-caret" aria-hidden="true">&#9656;</span>
+                  <span class="mf-id">CLOUD&middot;04</span>
+                  <span class="mf-rule" aria-hidden="true"></span>
+                  <span>Manifeste</span>
+                </span>
+                <span class="mf-head-side">
+                  <span>Pôle Informatique</span>
+                </span>
+              </header>
 
-      <header class="mf-head reveal">
-        <span class="mf-head-side">
-          <span class="mf-caret" aria-hidden="true">&#9656;</span>
-          <span class="mf-id">CLOUD&middot;04</span>
-          <span class="mf-rule" aria-hidden="true"></span>
-          <span>Manifeste</span>
-        </span>
-        <span class="mf-head-side">
-          <span>Pôle Informatique</span>
-        </span>
-      </header>
+              <div class="mf-cols">
+                <blockquote
+                  class="manifesto-quote reveal delay-1"
+                  id="manifesto-title"
+                >
+                  Depuis plus de <span class="accent">10 ans</span>, nous
+                  déployons et optimisons les environnements Microsoft&nbsp;365
+                  et Azure. <span class="q-soft"
+                    >Vous gagnez en puissance, tout en gardant la maîtrise.</span
+                  ><span class="mf-cursor" aria-hidden="true"></span>
+                </blockquote>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div><!-- /hero-pin-zone : hero sticky + manifeste qui glisse par-dessus -->
 
-      <div class="mf-cols">
-      <blockquote class="manifesto-quote reveal delay-1" id="manifesto-title">
-        Depuis plus de <span class="accent">10 ans</span>, nous déployons et optimisons les environnements Microsoft&nbsp;365 et Azure. <span class="q-soft">Vous gagnez en puissance, tout en gardant la maîtrise.</span><span class="mf-cursor" aria-hidden="true"></span>
-      </blockquote>
-      </div>
-
-    </div>
-  </div>
-</section>
-
-</div><!-- /hero-pin-zone : hero sticky + manifeste qui glisse par-dessus -->
-
-<!-- ====================================================================
+      <!-- ====================================================================
      PRESTATIONS
      ==================================================================== -->
-<section class="prestations" id="prestations" aria-labelledby="prest-title">
-  <div class="container">
-    <div class="sec-head reveal">
-      <h2 id="prest-title">Tout l'écosystème <em>Microsoft</em>, opéré pour vous.</h2>
-      <p>De Microsoft&nbsp;365 à Azure, de la téléphonie Teams aux signatures de mail&nbsp;: un accompagnement complet, de l'étude de l'existant à l'exploitation au quotidien.</p>
-    </div>
+      <section
+        class="prestations"
+        id="prestations"
+        aria-labelledby="prest-title"
+      >
+        <div class="container">
+          <div class="sec-head reveal">
+            <h2 id="prest-title">
+              Tout l'écosystème <em>Microsoft</em>, opéré pour vous.
+            </h2>
+            <p>
+              De Microsoft&nbsp;365 à Azure, de la téléphonie Teams aux
+              signatures de mail&nbsp;: un accompagnement complet, de l'étude de
+              l'existant à l'exploitation au quotidien.
+            </p>
+          </div>
 
-    <div class="prest-grid reveal delay-1">
+          <div class="prest-grid reveal delay-1">
+            <article class="prest-item">
+              <div class="prest-item-head">
+                <span class="prest-item-glyph" aria-hidden="true">
+                  <svg
+                    viewBox="0 0 40 40"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="1.3"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    ><path
+                      d="M27.5 26.5H13a6 6 0 1 1 1.6-11.8A8.5 8.5 0 0 1 31 13.8a5.5 5.5 0 0 1 2 10.4"
+                    ></path><path d="M20 33V21.5"></path><path
+                      d="m15.5 26 4.5-4.5L24.5 26"></path></svg
+                  >
+                </span>
+              </div>
+              <h3 class="prest-item-title">
+                Migration &amp; optimisation Microsoft&nbsp;365
+              </h3>
+              <p class="prest-item-desc">
+                Étude de votre existant, identification des plus fortes valeurs
+                ajoutées du cloud Microsoft, puis accompagnement complet dans la
+                mise en œuvre.
+              </p>
+            </article>
 
-      <article class="prest-item">
-        <div class="prest-item-head">
-          <span class="prest-item-glyph" aria-hidden="true">
-            <svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"><path d="M27.5 26.5H13a6 6 0 1 1 1.6-11.8A8.5 8.5 0 0 1 31 13.8a5.5 5.5 0 0 1 2 10.4"/><path d="M20 33V21.5"/><path d="m15.5 26 4.5-4.5L24.5 26"/></svg>
-          </span>
+            <article class="prest-item">
+              <div class="prest-item-head">
+                <span class="prest-item-glyph" aria-hidden="true">
+                  <svg
+                    viewBox="0 0 40 40"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="1.3"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    ><path d="M20 6.5l11.5 6.3v12.4L20 31.5 8.5 25.2V12.8z"
+                    ></path><path d="M8.7 13l11.3 6.4L31.3 13"></path><path
+                      d="M20 19.4V31.5"></path></svg
+                  >
+                </span>
+              </div>
+              <h3 class="prest-item-title">Environnements Microsoft Azure</h3>
+              <p class="prest-item-desc">
+                Mise en œuvre d'environnements Azure pour améliorer la
+                disponibilité et la sécurité de vos applicatifs métier, en
+                tirant parti de la puissance et de la résilience du cloud.
+              </p>
+            </article>
+
+            <article class="prest-item">
+              <div class="prest-item-head">
+                <span class="prest-item-glyph" aria-hidden="true">
+                  <svg
+                    viewBox="0 0 40 40"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="1.3"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    ><path
+                      d="M20 5.5l12 4.2v8.8c0 7.2-5.1 12.2-12 14.5-6.9-2.3-12-7.3-12-14.5V9.7z"
+                    ></path><path d="m14.8 19.6 3.4 3.4 7-7.4"></path></svg
+                  >
+                </span>
+              </div>
+              <h3 class="prest-item-title">
+                Gouvernance &amp; sécurité du cloud
+              </h3>
+              <p class="prest-item-desc">
+                Suivi des évolutions, sauvegardes et conseil de proximité&nbsp;:
+                vous gardez la maîtrise de votre environnement, en alliant
+                sécurité et ergonomie.
+              </p>
+            </article>
+
+            <article class="prest-item prest-item--wide">
+              <div class="prest-item-head">
+                <span class="prest-item-glyph" aria-hidden="true">
+                  <svg
+                    viewBox="0 0 40 40"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="1.3"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    ><path d="M11 20.5v-1a9 9 0 0 1 18 0v1"></path><path
+                      d="M8.5 20.5h3.2v7.8H9.7a1.2 1.2 0 0 1-1.2-1.2z"
+                    ></path><path
+                      d="M31.5 20.5h-3.2v7.8h2a1.2 1.2 0 0 0 1.2-1.2z"
+                    ></path><path d="M28.3 28.3v1a3 3 0 0 1-3 3H20.8"
+                    ></path></svg
+                  >
+                </span>
+              </div>
+              <h3 class="prest-item-title">Téléphonie Teams</h3>
+              <p class="prest-item-desc">
+                Migration de votre téléphonie existante vers Microsoft Teams
+                pour accroître la mobilité et la sécurité de vos utilisateurs,
+                où qu'ils travaillent.
+              </p>
+              <a class="prest-cta" href="telecom.html">
+                Découvrez nos offres télécom
+                <svg
+                  viewBox="0 0 16 16"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.6"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4"></path></svg
+                >
+              </a>
+            </article>
+
+            <article class="prest-item prest-item--wide">
+              <div class="prest-item-head">
+                <span class="prest-item-glyph" aria-hidden="true">
+                  <svg
+                    viewBox="0 0 40 40"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="1.3"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    ><rect x="7" y="11.5" width="26" height="17" rx="2.5"
+                    ></rect><path d="M8 13.5l12 8 12-8"></path><path
+                      d="M13 33c2-1.6 3.5-1.6 5 0s3.5 1.6 5 0 3.5-1.6 5 0"
+                    ></path></svg
+                  >
+                </span>
+              </div>
+              <h3 class="prest-item-title">
+                Signatures de mail &amp; bannières
+              </h3>
+              <p class="prest-item-desc">
+                Déploiement de signatures de mail et de bannières dynamiques
+                pour améliorer votre communication interne et externe, sur
+                l'ensemble de vos collaborateurs.
+              </p>
+            </article>
+          </div>
         </div>
-        <h3 class="prest-item-title">Migration &amp; optimisation Microsoft&nbsp;365</h3>
-        <p class="prest-item-desc">Étude de votre existant, identification des plus fortes valeurs ajoutées du cloud Microsoft, puis accompagnement complet dans la mise en œuvre.</p>
-      </article>
+      </section>
 
-      <article class="prest-item">
-        <div class="prest-item-head">
-          <span class="prest-item-glyph" aria-hidden="true">
-            <svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6.5l11.5 6.3v12.4L20 31.5 8.5 25.2V12.8z"/><path d="M8.7 13l11.3 6.4L31.3 13"/><path d="M20 19.4V31.5"/></svg>
-          </span>
-        </div>
-        <h3 class="prest-item-title">Environnements Microsoft Azure</h3>
-        <p class="prest-item-desc">Mise en œuvre d'environnements Azure pour améliorer la disponibilité et la sécurité de vos applicatifs métier, en tirant parti de la puissance et de la résilience du cloud.</p>
-      </article>
-
-      <article class="prest-item">
-        <div class="prest-item-head">
-          <span class="prest-item-glyph" aria-hidden="true">
-            <svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 5.5l12 4.2v8.8c0 7.2-5.1 12.2-12 14.5-6.9-2.3-12-7.3-12-14.5V9.7z"/><path d="m14.8 19.6 3.4 3.4 7-7.4"/></svg>
-          </span>
-        </div>
-        <h3 class="prest-item-title">Gouvernance &amp; sécurité du cloud</h3>
-        <p class="prest-item-desc">Suivi des évolutions, sauvegardes et conseil de proximité&nbsp;: vous gardez la maîtrise de votre environnement, en alliant sécurité et ergonomie.</p>
-      </article>
-
-      <article class="prest-item prest-item--wide">
-        <div class="prest-item-head">
-          <span class="prest-item-glyph" aria-hidden="true">
-            <svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"><path d="M11 20.5v-1a9 9 0 0 1 18 0v1"/><path d="M8.5 20.5h3.2v7.8H9.7a1.2 1.2 0 0 1-1.2-1.2z"/><path d="M31.5 20.5h-3.2v7.8h2a1.2 1.2 0 0 0 1.2-1.2z"/><path d="M28.3 28.3v1a3 3 0 0 1-3 3H20.8"/></svg>
-          </span>
-        </div>
-        <h3 class="prest-item-title">Téléphonie Teams</h3>
-        <p class="prest-item-desc">Migration de votre téléphonie existante vers Microsoft Teams pour accroître la mobilité et la sécurité de vos utilisateurs, où qu'ils travaillent.</p>
-        <a class="prest-cta" href="telecom.html">
-          Découvrez nos offres télécom
-          <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
-        </a>
-      </article>
-
-      <article class="prest-item prest-item--wide">
-        <div class="prest-item-head">
-          <span class="prest-item-glyph" aria-hidden="true">
-            <svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"><rect x="7" y="11.5" width="26" height="17" rx="2.5"/><path d="M8 13.5l12 8 12-8"/><path d="M13 33c2-1.6 3.5-1.6 5 0s3.5 1.6 5 0 3.5-1.6 5 0"/></svg>
-          </span>
-        </div>
-        <h3 class="prest-item-title">Signatures de mail &amp; bannières</h3>
-        <p class="prest-item-desc">Déploiement de signatures de mail et de bannières dynamiques pour améliorer votre communication interne et externe, sur l'ensemble de vos collaborateurs.</p>
-      </article>
-
-    </div>
-  </div>
-</section>
-
-<!-- ====================================================================
+      <!-- ====================================================================
      SÉCURITÉ OPÉRÉE — cybersécurité distillée (réponses questionnaire)
      ==================================================================== -->
-<section class="secblock" aria-labelledby="sec-title">
-  <div class="container">
+      <section class="secblock" aria-labelledby="sec-title">
+        <div class="container">
+          <div class="secblock-head secblock-head--center reveal">
+            <h2 id="sec-title">
+              Vos environnements Microsoft, <em>sous bonne garde.</em>
+            </h2>
+            <p>
+              Moderniser son informatique, c'est aussi en garder la maîtrise.
+              Nos équipes assurent le suivi, la sauvegarde et la sécurisation de
+              vos environnements Microsoft&nbsp;365 et Azure.
+            </p>
+            <a href="informatique.html#cybersecurite" class="secblock-link">
+              Découvrir notre expertise Cybersécurité
+              <svg
+                viewBox="0 0 16 16"
+                width="15"
+                height="15"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.6"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4"></path></svg
+              >
+            </a>
+          </div>
 
-    <div class="secblock-head secblock-head--center reveal">
-      <h2 id="sec-title">Vos environnements Microsoft, <em>sous bonne garde.</em></h2>
-      <p>Moderniser son informatique, c'est aussi en garder la maîtrise. Nos équipes assurent le suivi, la sauvegarde et la sécurisation de vos environnements Microsoft&nbsp;365 et Azure.</p>
-      <a href="informatique.html#cybersecurite" class="secblock-link">
-        Découvrir notre expertise Cybersécurité
-        <svg viewBox="0 0 16 16" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
-      </a>
-    </div>
-
-    <div class="skywatch reveal delay-1">
-
-      <div class="sky-dome" aria-hidden="true">
-        <svg viewBox="0 0 760 400" fill="none">
-          <defs>
-            <radialGradient id="skDome" cx="0.5" cy="1" r="0.9">
-              <stop offset="0" stop-color="#4FC9E2" stop-opacity="0.05"/>
-              <stop offset="0.6" stop-color="#4FC9E2" stop-opacity="0.018"/>
-              <stop offset="1" stop-color="#4FC9E2" stop-opacity="0"/>
-            </radialGradient>
-            <linearGradient id="skSweep" x1="0.1" y1="0" x2="0.55" y2="1">
-              <stop offset="0" stop-color="#4FC9E2" stop-opacity="0.26"/>
-              <stop offset="0.55" stop-color="#4FC9E2" stop-opacity="0.07"/>
-              <stop offset="1" stop-color="#4FC9E2" stop-opacity="0"/>
-            </linearGradient>
-            <linearGradient id="skBase" x1="0" y1="0" x2="760" y2="0" gradientUnits="userSpaceOnUse">
-              <stop offset="0" stop-color="#4FC9E2" stop-opacity="0"/>
-              <stop offset="0.12" stop-color="#4FC9E2" stop-opacity="0.34"/>
-              <stop offset="0.88" stop-color="#4FC9E2" stop-opacity="0.34"/>
-              <stop offset="1" stop-color="#4FC9E2" stop-opacity="0"/>
-            </linearGradient>
-            <radialGradient id="skSpec" cx="0.5" cy="0.5" r="0.5">
-              <stop offset="0" stop-color="#FFFFFF" stop-opacity="0.16"/>
-              <stop offset="1" stop-color="#FFFFFF" stop-opacity="0"/>
-            </radialGradient>
-            <linearGradient id="skRim" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0" stop-color="#FFFFFF" stop-opacity="0.34"/>
-              <stop offset="0.55" stop-color="#4FC9E2" stop-opacity="0.14"/>
-              <stop offset="1" stop-color="#FFFFFF" stop-opacity="0.05"/>
-            </linearGradient>
-            <!-- Le balayage est rogné à la voûte : rien ne dépasse sous l'horizon,
+          <div class="skywatch reveal delay-1">
+            <div class="sky-dome" aria-hidden="true">
+              <svg viewBox="0 0 760 400" fill="none">
+                <defs>
+                  <radialGradient id="skDome" cx="0.5" cy="1" r="0.9">
+                    <stop offset="0" stop-color="#4FC9E2" stop-opacity="0.05"
+                    ></stop>
+                    <stop offset="0.6" stop-color="#4FC9E2" stop-opacity="0.018"
+                    ></stop>
+                    <stop offset="1" stop-color="#4FC9E2" stop-opacity="0"
+                    ></stop>
+                  </radialGradient>
+                  <linearGradient id="skSweep" x1="0.1" y1="0" x2="0.55" y2="1">
+                    <stop offset="0" stop-color="#4FC9E2" stop-opacity="0.26"
+                    ></stop>
+                    <stop offset="0.55" stop-color="#4FC9E2" stop-opacity="0.07"
+                    ></stop>
+                    <stop offset="1" stop-color="#4FC9E2" stop-opacity="0"
+                    ></stop>
+                  </linearGradient>
+                  <linearGradient
+                    id="skBase"
+                    x1="0"
+                    y1="0"
+                    x2="760"
+                    y2="0"
+                    gradientUnits="userSpaceOnUse"
+                  >
+                    <stop offset="0" stop-color="#4FC9E2" stop-opacity="0"
+                    ></stop>
+                    <stop offset="0.12" stop-color="#4FC9E2" stop-opacity="0.34"
+                    ></stop>
+                    <stop offset="0.88" stop-color="#4FC9E2" stop-opacity="0.34"
+                    ></stop>
+                    <stop offset="1" stop-color="#4FC9E2" stop-opacity="0"
+                    ></stop>
+                  </linearGradient>
+                  <radialGradient id="skSpec" cx="0.5" cy="0.5" r="0.5">
+                    <stop offset="0" stop-color="#FFFFFF" stop-opacity="0.16"
+                    ></stop>
+                    <stop offset="1" stop-color="#FFFFFF" stop-opacity="0"
+                    ></stop>
+                  </radialGradient>
+                  <linearGradient id="skRim" x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="0" stop-color="#FFFFFF" stop-opacity="0.34"
+                    ></stop>
+                    <stop offset="0.55" stop-color="#4FC9E2" stop-opacity="0.14"
+                    ></stop>
+                    <stop offset="1" stop-color="#FFFFFF" stop-opacity="0.05"
+                    ></stop>
+                  </linearGradient>
+                  <!-- Le balayage est rogné à la voûte : rien ne dépasse sous l'horizon,
                  le rebouclage (-24° → 156°) se produit hors champ. -->
-            <clipPath id="skClip">
-              <path d="M60 360 A320 320 0 0 1 700 360 Z"/>
-            </clipPath>
-          </defs>
+                  <clipPath id="skClip">
+                    <path d="M60 360 A320 320 0 0 1 700 360 Z"></path>
+                  </clipPath>
+                </defs>
 
-          <!-- voûte : remplissage à peine teinté, plus dense vers l'horizon -->
-          <path d="M60 360 A320 320 0 0 1 700 360 Z" fill="url(#skDome)"/>
+                <!-- voûte : remplissage à peine teinté, plus dense vers l'horizon -->
+                <path d="M60 360 A320 320 0 0 1 700 360 Z" fill="url(#skDome)"
+                ></path>
 
-          <!-- secteurs de veille (illuminés au survol des cartes) + labels -->
-          <g class="sk-s1">
-            <path class="sk-sector" d="M380 360 L60 360 A320 320 0 0 1 220 82.9 Z"/>
-            <text x="79" y="186" class="sk-lab">01 · AUDITER</text>
-          </g>
-          <g class="sk-s2">
-            <path class="sk-sector" d="M380 360 L220 82.9 A320 320 0 0 1 540 82.9 Z"/>
-            <text x="380" y="24" class="sk-lab">02 · DÉTECTER</text>
-          </g>
-          <g class="sk-s3">
-            <path class="sk-sector" d="M380 360 L540 82.9 A320 320 0 0 1 700 360 Z"/>
-            <text x="681" y="186" class="sk-lab">03 · FORMER</text>
-          </g>
+                <!-- secteurs de veille (illuminés au survol des cartes) + labels -->
+                <g class="sk-s1">
+                  <path
+                    class="sk-sector"
+                    d="M380 360 L60 360 A320 320 0 0 1 220 82.9 Z"></path>
+                  <text x="79" y="186" class="sk-lab">01 · AUDITER</text>
+                </g>
+                <g class="sk-s2">
+                  <path
+                    class="sk-sector"
+                    d="M380 360 L220 82.9 A320 320 0 0 1 540 82.9 Z"></path>
+                  <text x="380" y="24" class="sk-lab">02 · DÉTECTER</text>
+                </g>
+                <g class="sk-s3">
+                  <path
+                    class="sk-sector"
+                    d="M380 360 L540 82.9 A320 320 0 0 1 700 360 Z"></path>
+                  <text x="681" y="186" class="sk-lab">03 · FORMER</text>
+                </g>
 
-          <!-- grille du dôme : arcs de portée hiérarchisés (extérieur affirmé,
+                <!-- grille du dôme : arcs de portée hiérarchisés (extérieur affirmé,
                internes en retrait) + rayons atténués + graduations d'horizon -->
-          <path class="sk-arc" style="--sk-arcop: 0.22" d="M60 360 A320 320 0 0 1 700 360" stroke-dasharray="2 7"/>
-          <path class="sk-arc" style="--sk-arcop: 0.12" d="M140 360 A240 240 0 0 1 620 360"/>
-          <path class="sk-arc" style="--sk-arcop: 0.09" d="M220 360 A160 160 0 0 1 540 360"/>
-          <path class="sk-arc" style="--sk-arcop: 0.07" d="M300 360 A80 80 0 0 1 460 360"/>
-          <path class="sk-ticks" d="M92 356.5 V360 M124 356.5 V360 M156 356.5 V360 M188 356.5 V360 M220 356.5 V360 M252 356.5 V360 M284 356.5 V360 M316 356.5 V360 M444 356.5 V360 M476 356.5 V360 M508 356.5 V360 M540 356.5 V360 M572 356.5 V360 M604 356.5 V360 M636 356.5 V360 M668 356.5 V360" stroke-width="1"/>
-          <line class="sk-ray" x1="449.3" y1="320" x2="657.1" y2="200"/>
-          <line class="sk-ray" x1="420" y1="290.7" x2="540" y2="82.9"/>
-          <line class="sk-ray" x1="380" y1="280" x2="380" y2="40"/>
-          <line class="sk-ray" x1="340" y1="290.7" x2="220" y2="82.9"/>
-          <line class="sk-ray" x1="310.7" y1="320" x2="102.9" y2="200"/>
+                <path
+                  class="sk-arc"
+                  style="--sk-arcop: 0.22"
+                  d="M60 360 A320 320 0 0 1 700 360"
+                  stroke-dasharray="2 7"></path>
+                <path
+                  class="sk-arc"
+                  style="--sk-arcop: 0.12"
+                  d="M140 360 A240 240 0 0 1 620 360"></path>
+                <path
+                  class="sk-arc"
+                  style="--sk-arcop: 0.09"
+                  d="M220 360 A160 160 0 0 1 540 360"></path>
+                <path
+                  class="sk-arc"
+                  style="--sk-arcop: 0.07"
+                  d="M300 360 A80 80 0 0 1 460 360"></path>
+                <path
+                  class="sk-ticks"
+                  d="M92 356.5 V360 M124 356.5 V360 M156 356.5 V360 M188 356.5 V360 M220 356.5 V360 M252 356.5 V360 M284 356.5 V360 M316 356.5 V360 M444 356.5 V360 M476 356.5 V360 M508 356.5 V360 M540 356.5 V360 M572 356.5 V360 M604 356.5 V360 M636 356.5 V360 M668 356.5 V360"
+                  stroke-width="1"></path>
+                <line class="sk-ray" x1="449.3" y1="320" x2="657.1" y2="200"
+                ></line>
+                <line class="sk-ray" x1="420" y1="290.7" x2="540" y2="82.9"
+                ></line>
+                <line class="sk-ray" x1="380" y1="280" x2="380" y2="40"></line>
+                <line class="sk-ray" x1="340" y1="290.7" x2="220" y2="82.9"
+                ></line>
+                <line class="sk-ray" x1="310.7" y1="320" x2="102.9" y2="200"
+                ></line>
 
-          <!-- faisceau de balayage (rotation continue gauche → droite) —
+                <!-- faisceau de balayage (rotation continue gauche → droite) —
                le clip est porté par le groupe PARENT fixe : il resterait
                solidaire du faisceau s'il était posé sur le groupe animé. -->
-          <g clip-path="url(#skClip)">
-            <g class="sk-sweep">
-              <path d="M380 360 L87.7 229.9 A320 320 0 0 0 60 360 Z" fill="url(#skSweep)"/>
-              <line class="sk-beam" x1="380" y1="360" x2="87.7" y2="229.9"/>
-              <circle class="sk-beam-tip" cx="87.7" cy="229.9" r="3"/>
-            </g>
-          </g>
+                <g clip-path="url(#skClip)">
+                  <g class="sk-sweep">
+                    <path
+                      d="M380 360 L87.7 229.9 A320 320 0 0 0 60 360 Z"
+                      fill="url(#skSweep)"></path>
+                    <line class="sk-beam" x1="380" y1="360" x2="87.7" y2="229.9"
+                    ></line>
+                    <circle class="sk-beam-tip" cx="87.7" cy="229.9" r="3"
+                    ></circle>
+                  </g>
+                </g>
 
-          <!-- échos détectés (pulse phasé sur le passage du faisceau) -->
-          <g class="sk-blip" style="animation-delay: 0.98s"><circle class="sk-bcore" cx="170" cy="280" r="3" fill="#4FC9E2"/><circle class="sk-bw sk-bw1" cx="170" cy="280" r="9" stroke="rgba(79,201,226,0.45)" stroke-width="1"/><circle class="sk-bw sk-bw2" cx="170" cy="280" r="9" stroke="rgba(79,201,226,0.30)" stroke-width="1"/></g>
-          <g class="sk-blip" style="animation-delay: 2.71s"><circle class="sk-bcore" cx="255" cy="160" r="3" fill="#4FC9E2"/><circle class="sk-bw sk-bw1" cx="255" cy="160" r="9" stroke="rgba(79,201,226,0.45)" stroke-width="1"/><circle class="sk-bw sk-bw2" cx="255" cy="160" r="9" stroke="rgba(79,201,226,0.30)" stroke-width="1"/></g>
-          <g class="sk-blip" style="animation-delay: 4.75s"><circle class="sk-bcore" cx="430" cy="120" r="3" fill="#4FC9E2"/><circle class="sk-bw sk-bw1" cx="430" cy="120" r="9" stroke="rgba(79,201,226,0.45)" stroke-width="1"/><circle class="sk-bw sk-bw2" cx="430" cy="120" r="9" stroke="rgba(79,201,226,0.30)" stroke-width="1"/></g>
-          <g class="sk-blip" style="animation-delay: 6.53s"><circle class="sk-bcore" cx="565" cy="205" r="3" fill="#4FC9E2"/><circle class="sk-bw sk-bw1" cx="565" cy="205" r="9" stroke="rgba(79,201,226,0.45)" stroke-width="1"/><circle class="sk-bw sk-bw2" cx="565" cy="205" r="9" stroke="rgba(79,201,226,0.30)" stroke-width="1"/></g>
-          <g class="sk-blip" style="animation-delay: 7.79s"><circle class="sk-bcore" cx="640" cy="300" r="3" fill="#4FC9E2"/><circle class="sk-bw sk-bw1" cx="640" cy="300" r="9" stroke="rgba(79,201,226,0.45)" stroke-width="1"/><circle class="sk-bw sk-bw2" cx="640" cy="300" r="9" stroke="rgba(79,201,226,0.30)" stroke-width="1"/></g>
+                <!-- échos détectés (pulse phasé sur le passage du faisceau) -->
+                <g class="sk-blip" style="animation-delay: 0.98s"
+                  ><circle
+                    class="sk-bcore"
+                    cx="170"
+                    cy="280"
+                    r="3"
+                    fill="#4FC9E2"></circle><circle
+                    class="sk-bw sk-bw1"
+                    cx="170"
+                    cy="280"
+                    r="9"
+                    stroke="rgba(79,201,226,0.45)"
+                    stroke-width="1"></circle><circle
+                    class="sk-bw sk-bw2"
+                    cx="170"
+                    cy="280"
+                    r="9"
+                    stroke="rgba(79,201,226,0.30)"
+                    stroke-width="1"></circle></g
+                >
+                <g class="sk-blip" style="animation-delay: 2.71s"
+                  ><circle
+                    class="sk-bcore"
+                    cx="255"
+                    cy="160"
+                    r="3"
+                    fill="#4FC9E2"></circle><circle
+                    class="sk-bw sk-bw1"
+                    cx="255"
+                    cy="160"
+                    r="9"
+                    stroke="rgba(79,201,226,0.45)"
+                    stroke-width="1"></circle><circle
+                    class="sk-bw sk-bw2"
+                    cx="255"
+                    cy="160"
+                    r="9"
+                    stroke="rgba(79,201,226,0.30)"
+                    stroke-width="1"></circle></g
+                >
+                <g class="sk-blip" style="animation-delay: 4.75s"
+                  ><circle
+                    class="sk-bcore"
+                    cx="430"
+                    cy="120"
+                    r="3"
+                    fill="#4FC9E2"></circle><circle
+                    class="sk-bw sk-bw1"
+                    cx="430"
+                    cy="120"
+                    r="9"
+                    stroke="rgba(79,201,226,0.45)"
+                    stroke-width="1"></circle><circle
+                    class="sk-bw sk-bw2"
+                    cx="430"
+                    cy="120"
+                    r="9"
+                    stroke="rgba(79,201,226,0.30)"
+                    stroke-width="1"></circle></g
+                >
+                <g class="sk-blip" style="animation-delay: 6.53s"
+                  ><circle
+                    class="sk-bcore"
+                    cx="565"
+                    cy="205"
+                    r="3"
+                    fill="#4FC9E2"></circle><circle
+                    class="sk-bw sk-bw1"
+                    cx="565"
+                    cy="205"
+                    r="9"
+                    stroke="rgba(79,201,226,0.45)"
+                    stroke-width="1"></circle><circle
+                    class="sk-bw sk-bw2"
+                    cx="565"
+                    cy="205"
+                    r="9"
+                    stroke="rgba(79,201,226,0.30)"
+                    stroke-width="1"></circle></g
+                >
+                <g class="sk-blip" style="animation-delay: 7.79s"
+                  ><circle
+                    class="sk-bcore"
+                    cx="640"
+                    cy="300"
+                    r="3"
+                    fill="#4FC9E2"></circle><circle
+                    class="sk-bw sk-bw1"
+                    cx="640"
+                    cy="300"
+                    r="9"
+                    stroke="rgba(79,201,226,0.45)"
+                    stroke-width="1"></circle><circle
+                    class="sk-bw sk-bw2"
+                    cx="640"
+                    cy="300"
+                    r="9"
+                    stroke="rgba(79,201,226,0.30)"
+                    stroke-width="1"></circle></g
+                >
 
-          <!-- horizon : votre SI (g) ↔ cloud public (d), SOC au centre -->
-          <line x1="36" y1="360" x2="724" y2="360" stroke="url(#skBase)" stroke-width="1"/>
-          <circle cx="60" cy="360" r="4" stroke="#4FC9E2" stroke-opacity="0.55"/>
-          <circle cx="60" cy="360" r="1.6" fill="#4FC9E2" fill-opacity="0.8"/>
-          <circle cx="700" cy="360" r="4" stroke="#4FC9E2" stroke-opacity="0.55"/>
-          <circle cx="700" cy="360" r="1.6" fill="#4FC9E2" fill-opacity="0.8"/>
-          <text x="60" y="388" class="sk-end">VOTRE SI</text>
-          <text x="700" y="388" class="sk-end">CLOUD PUBLIC</text>
-          <text x="380" y="388" class="sk-end sk-soc">SOC · 24/7</text>
+                <!-- horizon : votre SI (g) ↔ cloud public (d), SOC au centre -->
+                <line
+                  x1="36"
+                  y1="360"
+                  x2="724"
+                  y2="360"
+                  stroke="url(#skBase)"
+                  stroke-width="1"></line>
+                <circle
+                  cx="60"
+                  cy="360"
+                  r="4"
+                  stroke="#4FC9E2"
+                  stroke-opacity="0.55"></circle>
+                <circle
+                  cx="60"
+                  cy="360"
+                  r="1.6"
+                  fill="#4FC9E2"
+                  fill-opacity="0.8"></circle>
+                <circle
+                  cx="700"
+                  cy="360"
+                  r="4"
+                  stroke="#4FC9E2"
+                  stroke-opacity="0.55"></circle>
+                <circle
+                  cx="700"
+                  cy="360"
+                  r="1.6"
+                  fill="#4FC9E2"
+                  fill-opacity="0.8"></circle>
+                <text x="60" y="388" class="sk-end">VOTRE SI</text>
+                <text x="700" y="388" class="sk-end">CLOUD PUBLIC</text>
+                <text x="380" y="388" class="sk-end sk-soc">SOC · 24/7</text>
 
-          <!-- cœur bouclier (verre) à la base du dôme -->
-          <path d="M330 360 A50 50 0 0 1 430 360 Z" fill="rgba(79,201,226,0.07)" stroke="url(#skRim)" stroke-width="1.1"/>
-          <ellipse cx="368" cy="334" rx="18" ry="9" fill="url(#skSpec)"/>
-          <g class="sk-shield">
-            <path d="M380 318 l14 5.2 v10.4 c0 9.6 -6.6 15.3 -14 17.9 c-7.4 -2.6 -14 -8.3 -14 -17.9 v-10.4 z" stroke="#4FC9E2" stroke-width="1.6" stroke-linejoin="round"/>
-            <path d="M373.5 337 l4.8 4.8 l9.2 -10" stroke="#4FC9E2" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
-          </g>
-        </svg>
-      </div>
+                <!-- cœur bouclier (verre) à la base du dôme -->
+                <path
+                  d="M330 360 A50 50 0 0 1 430 360 Z"
+                  fill="rgba(79,201,226,0.07)"
+                  stroke="url(#skRim)"
+                  stroke-width="1.1"></path>
+                <ellipse cx="368" cy="334" rx="18" ry="9" fill="url(#skSpec)"
+                ></ellipse>
+                <g class="sk-shield">
+                  <path
+                    d="M380 318 l14 5.2 v10.4 c0 9.6 -6.6 15.3 -14 17.9 c-7.4 -2.6 -14 -8.3 -14 -17.9 v-10.4 z"
+                    stroke="#4FC9E2"
+                    stroke-width="1.6"
+                    stroke-linejoin="round"></path>
+                  <path
+                    d="M373.5 337 l4.8 4.8 l9.2 -10"
+                    stroke="#4FC9E2"
+                    stroke-width="1.8"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"></path>
+                </g>
+              </svg>
+            </div>
 
-      <!-- connecteurs schéma → cartes (statiques, illuminés au survol de la carte) -->
-      <svg class="sky-wires" viewBox="0 0 1000 110" preserveAspectRatio="none" aria-hidden="true">
-        <defs>
-          <linearGradient id="skWire" x1="0" y1="0" x2="0" y2="110" gradientUnits="userSpaceOnUse">
-            <stop offset="0" stop-color="#4FC9E2" stop-opacity="0.45"/>
-            <stop offset="1" stop-color="#4FC9E2" stop-opacity="0.10"/>
-          </linearGradient>
-        </defs>
-        <path class="sk-wire sk-wire-1" pathLength="100" d="M500 0 C500 54 161 50 161 110"/>
-        <path class="sk-wire sk-wire-2" pathLength="100" d="M500 0 L500 110"/>
-        <path class="sk-wire sk-wire-3" pathLength="100" d="M500 0 C500 54 839 50 839 110"/>
-      </svg>
+            <!-- connecteurs schéma → cartes (statiques, illuminés au survol de la carte) -->
+            <svg
+              class="sky-wires"
+              viewBox="0 0 1000 110"
+              preserveAspectRatio="none"
+              aria-hidden="true"
+            >
+              <defs>
+                <linearGradient
+                  id="skWire"
+                  x1="0"
+                  y1="0"
+                  x2="0"
+                  y2="110"
+                  gradientUnits="userSpaceOnUse"
+                >
+                  <stop offset="0" stop-color="#4FC9E2" stop-opacity="0.45"
+                  ></stop>
+                  <stop offset="1" stop-color="#4FC9E2" stop-opacity="0.10"
+                  ></stop>
+                </linearGradient>
+              </defs>
+              <path
+                class="sk-wire sk-wire-1"
+                pathLength="100"
+                d="M500 0 C500 54 161 50 161 110"></path>
+              <path
+                class="sk-wire sk-wire-2"
+                pathLength="100"
+                d="M500 0 L500 110"></path>
+              <path
+                class="sk-wire sk-wire-3"
+                pathLength="100"
+                d="M500 0 C500 54 839 50 839 110"></path>
+            </svg>
 
-      <div class="sky-grid">
-        <div class="skypoint" data-sector="1">
-          <span class="sk-node" aria-hidden="true"></span>
-          <h4>Gouvernance &amp; audit&nbsp;: Cyber et NIS2</h4>
-          <p>Des audits qui identifient les faiblesses techniques, administratives ou de processus, des recommandations face aux référentiels comme NIS&nbsp;2, et une planification réaliste, adaptée à votre structure.</p>
+            <div class="sky-grid">
+              <div class="skypoint" data-sector="1">
+                <span class="sk-node" aria-hidden="true"></span>
+                <h4>Gouvernance &amp; audit&nbsp;: Cyber et NIS2</h4>
+                <p>
+                  Des audits qui identifient les faiblesses techniques,
+                  administratives ou de processus, des recommandations face aux
+                  référentiels comme NIS&nbsp;2, et une planification réaliste,
+                  adaptée à votre structure.
+                </p>
+              </div>
+              <div class="skypoint" data-sector="2">
+                <span class="sk-node" aria-hidden="true"></span>
+                <h4>SOC &amp; MicroSOC, 24/7</h4>
+                <p>
+                  Réagir rapidement aux menaces, vous conseiller, vous rassurer
+                  et vous défendre, en continu, du SI local jusqu'à vos
+                  environnements cloud.
+                </p>
+              </div>
+              <div class="skypoint" data-sector="3">
+                <span class="sk-node" aria-hidden="true"></span>
+                <h4>Formation &amp; sensibilisation</h4>
+                <p>
+                  Tester vos équipes, vérifier que vos protections sont
+                  correctes et maintenir votre niveau de compétences à la
+                  hauteur de vos besoins.
+                </p>
+                <a class="skypoint-cta" href="formation-informatique.html">
+                  Découvrez nos formations cybersécurité
+                  <svg
+                    viewBox="0 0 16 16"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="1.6"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    aria-hidden="true"
+                    ><path d="M3 8h10M9 4l4 4-4 4"></path></svg
+                  >
+                </a>
+              </div>
+            </div>
+
+            <div class="sky-offer reveal delay-2">
+              <span class="sky-offer-tag">
+                <svg
+                  width="13"
+                  height="13"
+                  viewBox="0 0 16 16"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.4"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  aria-hidden="true"
+                  ><path
+                    d="M8 1.5 9.8 6 14.5 8 9.8 10 8 14.5 6.2 10 1.5 8 6.2 6z"
+                  ></path></svg
+                >
+                Premier pas
+              </span>
+              <p>
+                Bénéficiez d'un <strong
+                  >audit cybersécurité co-financé jusqu'à 50&nbsp;%</strong
+                > par la Région Grand&nbsp;Est.
+              </p>
+              <a href="contact.html?pole=informatique" class="sky-offer-link">
+                En profiter
+                <svg
+                  viewBox="0 0 16 16"
+                  width="14"
+                  height="14"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.6"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4"></path></svg
+                >
+              </a>
+            </div>
+          </div>
         </div>
-        <div class="skypoint" data-sector="2">
-          <span class="sk-node" aria-hidden="true"></span>
-          <h4>SOC &amp; MicroSOC, 24/7</h4>
-          <p>Réagir rapidement aux menaces, vous conseiller, vous rassurer et vous défendre, en continu, du SI local jusqu'à vos environnements cloud.</p>
-        </div>
-        <div class="skypoint" data-sector="3">
-          <span class="sk-node" aria-hidden="true"></span>
-          <h4>Formation &amp; sensibilisation</h4>
-          <p>Tester vos équipes, vérifier que vos protections sont correctes et maintenir votre niveau de compétences à la hauteur de vos besoins.</p>
-          <a class="skypoint-cta" href="formation-informatique.html">
-            Découvrez nos formations cybersécurité
-            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
-          </a>
-        </div>
-      </div>
+      </section>
 
-      <div class="sky-offer reveal delay-2">
-        <span class="sky-offer-tag">
-          <svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 1.5 9.8 6 14.5 8 9.8 10 8 14.5 6.2 10 1.5 8 6.2 6z"/></svg>
-          Premier pas
-        </span>
-        <p>Bénéficiez d'un <strong>audit cybersécurité co-financé jusqu'à 50&nbsp;%</strong> par la Région Grand&nbsp;Est.</p>
-        <a href="contact.html?pole=informatique" class="sky-offer-link">
-          En profiter
-          <svg viewBox="0 0 16 16" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
-        </a>
-      </div>
-
-    </div>
-  </div>
-</section>
-
-<!-- ====================================================================
+      <!-- ====================================================================
      PROCESS
      ==================================================================== -->
-<section class="process" id="process" aria-labelledby="process-title">
-  <div class="container">
-    <div class="sec-head reveal">
-      <h2 id="process-title">Une modernisation <em>par paliers</em>.</h2>
-      <p>Une trajectoire progressive vers le cloud Microsoft, validée palier après palier, de l'étude de l'existant à l'exploitation.</p>
-    </div>
+      <section class="process" id="process" aria-labelledby="process-title">
+        <div class="container">
+          <div class="sec-head reveal">
+            <h2 id="process-title">Une modernisation <em>par paliers</em>.</h2>
+            <p>
+              Une trajectoire progressive vers le cloud Microsoft, validée
+              palier après palier, de l'étude de l'existant à l'exploitation.
+            </p>
+          </div>
 
-    <div class="flightpath reveal delay-1">
+          <div class="flightpath reveal delay-1">
+            <div class="fp-sky" aria-hidden="true">
+              <svg viewBox="0 0 1000 250" fill="none">
+                <defs>
+                  <linearGradient
+                    id="fpStroke"
+                    x1="0"
+                    y1="0"
+                    x2="1000"
+                    y2="0"
+                    gradientUnits="userSpaceOnUse"
+                  >
+                    <stop offset="0" stop-color="#2E72BA" stop-opacity="0.30"
+                    ></stop>
+                    <stop offset="1" stop-color="#5290cb" stop-opacity="0.95"
+                    ></stop>
+                  </linearGradient>
+                </defs>
 
-      <div class="fp-sky" aria-hidden="true">
-        <svg viewBox="0 0 1000 250" fill="none">
-          <defs>
-            <linearGradient id="fpStroke" x1="0" y1="0" x2="1000" y2="0" gradientUnits="userSpaceOnUse">
-              <stop offset="0" stop-color="#2E72BA" stop-opacity="0.30"/>
-              <stop offset="1" stop-color="#5290cb" stop-opacity="0.95"/>
-            </linearGradient>
-          </defs>
+                <!-- repères : départ au sol (votre SI) → arrivée en altitude (cloud) -->
+                <text x="14" y="243" class="fp-tag">ON-PREM</text>
+                <text
+                  x="986"
+                  y="22"
+                  class="fp-tag fp-tag-cloud"
+                  text-anchor="end">CLOUD</text
+                >
+                <g
+                  class="fp-cloud-ic"
+                  transform="translate(922 7.5) scale(0.62)"
+                  ><path d="M17.5 19H9a7 7 0 1 1 6.71-9h1.79a4.5 4.5 0 1 1 0 9Z"
+                  ></path></g
+                >
 
-          <!-- repères : départ au sol (votre SI) → arrivée en altitude (cloud) -->
-          <text x="14" y="243" class="fp-tag">ON-PREM</text>
-          <text x="986" y="22" class="fp-tag fp-tag-cloud" text-anchor="end">CLOUD</text>
-          <g class="fp-cloud-ic" transform="translate(922 7.5) scale(0.62)"><path d="M17.5 19H9a7 7 0 1 1 6.71-9h1.79a4.5 4.5 0 1 1 0 9Z"/></g>
+                <!-- descentes pointillées jalons → étapes -->
+                <line
+                  class="fp-drop fp-drop-1"
+                  x1="125"
+                  y1="207"
+                  x2="125"
+                  y2="246"></line>
+                <line
+                  class="fp-drop fp-drop-2"
+                  x1="375"
+                  y1="159"
+                  x2="375"
+                  y2="246"></line>
+                <line
+                  class="fp-drop fp-drop-3"
+                  x1="625"
+                  y1="111"
+                  x2="625"
+                  y2="246"></line>
+                <line
+                  class="fp-drop fp-drop-4"
+                  x1="875"
+                  y1="63"
+                  x2="875"
+                  y2="246"></line>
 
-          <!-- descentes pointillées jalons → étapes -->
-          <line class="fp-drop fp-drop-1" x1="125" y1="207" x2="125" y2="246"/>
-          <line class="fp-drop fp-drop-2" x1="375" y1="159" x2="375" y2="246"/>
-          <line class="fp-drop fp-drop-3" x1="625" y1="111" x2="625" y2="246"/>
-          <line class="fp-drop fp-drop-4" x1="875" y1="63" x2="875" y2="246"/>
-
-          <!-- route d'ascension : pointillés (toujours) + tracé qui se dessine
+                <!-- route d'ascension : pointillés (toujours) + tracé qui se dessine
                + progression lumineuse (étendue au survol des étapes) -->
-          <path class="fp-route-base" d="M 0 222 C 69 222 56 196 125 196 C 263 196 237 148 375 148 C 513 148 487 100 625 100 C 763 100 737 52 875 52 C 944 52 931 36 1000 36"/>
-          <path class="fp-route" pathLength="100" d="M 0 222 C 69 222 56 196 125 196 C 263 196 237 148 375 148 C 513 148 487 100 625 100 C 763 100 737 52 875 52 C 944 52 931 36 1000 36"/>
-          <path class="fp-progress" pathLength="100" d="M 0 222 C 69 222 56 196 125 196 C 263 196 237 148 375 148 C 513 148 487 100 625 100 C 763 100 737 52 875 52 C 944 52 931 36 1000 36"/>
+                <path
+                  class="fp-route-base"
+                  d="M 0 222 C 69 222 56 196 125 196 C 263 196 237 148 375 148 C 513 148 487 100 625 100 C 763 100 737 52 875 52 C 944 52 931 36 1000 36"
+                ></path>
+                <path
+                  class="fp-route"
+                  pathLength="100"
+                  d="M 0 222 C 69 222 56 196 125 196 C 263 196 237 148 375 148 C 513 148 487 100 625 100 C 763 100 737 52 875 52 C 944 52 931 36 1000 36"
+                ></path>
+                <path
+                  class="fp-progress"
+                  pathLength="100"
+                  d="M 0 222 C 69 222 56 196 125 196 C 263 196 237 148 375 148 C 513 148 487 100 625 100 C 763 100 737 52 875 52 C 944 52 931 36 1000 36"
+                ></path>
 
-          <!-- jalons posés sur la courbe -->
-          <g class="fp-node fp-n1"><circle class="fp-ring" cx="125" cy="196" r="8"/><circle class="fp-core" cx="125" cy="196" r="3.4"/></g>
-          <g class="fp-node fp-n2"><circle class="fp-ring" cx="375" cy="148" r="8"/><circle class="fp-core" cx="375" cy="148" r="3.4"/></g>
-          <g class="fp-node fp-n3"><circle class="fp-ring" cx="625" cy="100" r="8"/><circle class="fp-core" cx="625" cy="100" r="3.4"/></g>
-          <g class="fp-node fp-n4"><circle class="fp-ring" cx="875" cy="52" r="8"/><circle class="fp-core" cx="875" cy="52" r="3.4"/></g>
+                <!-- jalons posés sur la courbe -->
+                <g class="fp-node fp-n1"
+                  ><circle class="fp-ring" cx="125" cy="196" r="8"
+                  ></circle><circle class="fp-core" cx="125" cy="196" r="3.4"
+                  ></circle></g
+                >
+                <g class="fp-node fp-n2"
+                  ><circle class="fp-ring" cx="375" cy="148" r="8"
+                  ></circle><circle class="fp-core" cx="375" cy="148" r="3.4"
+                  ></circle></g
+                >
+                <g class="fp-node fp-n3"
+                  ><circle class="fp-ring" cx="625" cy="100" r="8"
+                  ></circle><circle class="fp-core" cx="625" cy="100" r="3.4"
+                  ></circle></g
+                >
+                <g class="fp-node fp-n4"
+                  ><circle class="fp-ring" cx="875" cy="52" r="8"
+                  ></circle><circle class="fp-core" cx="875" cy="52" r="3.4"
+                  ></circle></g
+                >
 
-          <!-- arrivée cloud : halo + point au bout du tracé -->
-          <g class="fp-node fp-end"><circle class="fp-end-glow" cx="1000" cy="36" r="12"/><circle class="fp-end-dot" cx="1000" cy="36" r="2.6"/></g>
-        </svg>
-      </div>
+                <!-- arrivée cloud : halo + point au bout du tracé -->
+                <g class="fp-node fp-end"
+                  ><circle class="fp-end-glow" cx="1000" cy="36" r="12"
+                  ></circle><circle class="fp-end-dot" cx="1000" cy="36" r="2.6"
+                  ></circle></g
+                >
+              </svg>
+            </div>
 
-      <ol class="fp-steps">
-        <li class="fp-step">
-          <h3>Étude de l'existant</h3>
-          <p>Analyse de votre informatique actuelle, de vos usages et de vos contraintes pour cibler la plus forte valeur ajoutée du cloud Microsoft.</p>
-        </li>
-        <li class="fp-step">
-          <h3>Socle Microsoft sécurisé</h3>
-          <p>Préparation des fondations&nbsp;: identités, sécurité et configuration de votre environnement Microsoft&nbsp;365 et Azure.</p>
-        </li>
-        <li class="fp-step">
-          <h3>Mise en œuvre par vagues</h3>
-          <p>Déploiement et migration progressifs, testés et maîtrisés, vague après vague, sans interruption d'activité.</p>
-        </li>
-        <li class="fp-step">
-          <h3>Gouvernance &amp; optimisation</h3>
-          <p>Suivi régulier, sauvegardes et optimisation continue&nbsp;: vous gardez la maîtrise de votre environnement dans le temps.</p>
-        </li>
-      </ol>
+            <ol class="fp-steps">
+              <li class="fp-step">
+                <h3>Étude de l'existant</h3>
+                <p>
+                  Analyse de votre informatique actuelle, de vos usages et de
+                  vos contraintes pour cibler la plus forte valeur ajoutée du
+                  cloud Microsoft.
+                </p>
+              </li>
+              <li class="fp-step">
+                <h3>Socle Microsoft sécurisé</h3>
+                <p>
+                  Préparation des fondations&nbsp;: identités, sécurité et
+                  configuration de votre environnement Microsoft&nbsp;365 et
+                  Azure.
+                </p>
+              </li>
+              <li class="fp-step">
+                <h3>Mise en œuvre par vagues</h3>
+                <p>
+                  Déploiement et migration progressifs, testés et maîtrisés,
+                  vague après vague, sans interruption d'activité.
+                </p>
+              </li>
+              <li class="fp-step">
+                <h3>Gouvernance &amp; optimisation</h3>
+                <p>
+                  Suivi régulier, sauvegardes et optimisation continue&nbsp;:
+                  vous gardez la maîtrise de votre environnement dans le temps.
+                </p>
+              </li>
+            </ol>
+          </div>
+        </div>
+      </section>
 
-    </div>
-  </div>
-</section>
-
-<!-- ====================================================================
+      <!-- ====================================================================
      CTA — style maison (icône + corps + téléphone), commun aux pôles
      ==================================================================== -->
-<section class="cta-section" id="contact" aria-labelledby="cta-title">
-  <div class="container">
-    <div class="cta-frame">
-      <div class="cta-inner">
-        <svg class="cta-icon reveal" viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
-          <!-- Nappe cloud — contour accent, épuré -->
-          <path d="M77 41.8H58.2a15.4 15.4 0 1 1 14.76-19.8h3.94a9.9 9.9 0 1 1 .1 19.8Z" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" opacity="0.80"/>
+      <section class="cta-section" id="contact" aria-labelledby="cta-title">
+        <div class="container">
+          <div class="cta-frame">
+            <div class="cta-inner">
+              <svg
+                class="cta-icon reveal"
+                viewBox="0 0 120 120"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+                aria-hidden="true"
+                focusable="false"
+              >
+                <!-- Nappe cloud — contour accent, épuré -->
+                <path
+                  d="M77 41.8H58.2a15.4 15.4 0 1 1 14.76-19.8h3.94a9.9 9.9 0 1 1 .1 19.8Z"
+                  stroke="currentColor"
+                  stroke-width="1.3"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  opacity="0.80"></path>
 
-          <!-- Hub de distribution -->
-          <circle cx="60" cy="60" r="8.5" stroke="#f4f4f4" stroke-width="1.1" opacity="0.35"/>
-          <circle cx="60" cy="60" r="2.4" fill="currentColor"/>
-          <circle class="cta-vig-ping" cx="60" cy="60" r="8.5" stroke="currentColor" stroke-width="1"/>
+                <!-- Hub de distribution -->
+                <circle
+                  cx="60"
+                  cy="60"
+                  r="8.5"
+                  stroke="#f4f4f4"
+                  stroke-width="1.1"
+                  opacity="0.35"></circle>
+                <circle cx="60" cy="60" r="2.4" fill="currentColor"></circle>
+                <circle
+                  class="cta-vig-ping"
+                  cx="60"
+                  cy="60"
+                  r="8.5"
+                  stroke="currentColor"
+                  stroke-width="1"></circle>
 
-          <!-- Liaisons douces : cloud → hub → sites -->
-          <g stroke="#f4f4f4" stroke-width="1.1" stroke-linecap="round" fill="none" opacity="0.26">
-            <line x1="60" y1="44" x2="60" y2="51.5"/>
-            <path d="M54 66.5 C 47 74, 41 76.5, 34.5 83"/>
-            <path d="M66 66.5 C 73 74, 79 76.5, 85.5 83"/>
-          </g>
+                <!-- Liaisons douces : cloud → hub → sites -->
+                <g
+                  stroke="#f4f4f4"
+                  stroke-width="1.1"
+                  stroke-linecap="round"
+                  fill="none"
+                  opacity="0.26"
+                >
+                  <line x1="60" y1="44" x2="60" y2="51.5"></line>
+                  <path d="M54 66.5 C 47 74, 41 76.5, 34.5 83"></path>
+                  <path d="M66 66.5 C 73 74, 79 76.5, 85.5 83"></path>
+                </g>
 
-          <!-- Sites / serveurs locaux : baies épurées -->
-          <g stroke="#f4f4f4" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" opacity="0.32">
-            <rect x="20" y="85" width="26" height="17" rx="4"/>
-            <rect x="74" y="85" width="26" height="17" rx="4"/>
-          </g>
-        </svg>
+                <!-- Sites / serveurs locaux : baies épurées -->
+                <g
+                  stroke="#f4f4f4"
+                  stroke-width="1.2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  opacity="0.32"
+                >
+                  <rect x="20" y="85" width="26" height="17" rx="4"></rect>
+                  <rect x="74" y="85" width="26" height="17" rx="4"></rect>
+                </g>
+              </svg>
 
-        <div class="cta-body">
-          <h2 class="cta-title reveal delay-1" id="cta-title">
-            Un projet <em>Cloud Microsoft&thinsp;?</em>
-          </h2>
-          <p class="cta-sub reveal delay-2">
-            Contactez nos experts pour une première réunion de qualification rapide et gratuite.
+              <div class="cta-body">
+                <h2 class="cta-title reveal delay-1" id="cta-title">
+                  Un projet <em>Cloud Microsoft&thinsp;?</em>
+                </h2>
+                <p class="cta-sub reveal delay-2">
+                  Contactez nos experts pour une première réunion de
+                  qualification rapide et gratuite.
+                </p>
+                <div class="cta-actions reveal delay-3">
+                  <a
+                    href="contact.html?pole=informatique"
+                    class="btn-cta btn-cta--primary"
+                  >
+                    Contacter le pôle Informatique
+                    <span class="btn-cta-arrow"
+                      ><svg
+                        viewBox="0 0 16 16"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="1.6"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        ><path d="M3 8h10M9 4l4 4-4 4"></path></svg
+                      ></span
+                    >
+                  </a>
+                  <span class="cta-actions-divider" aria-hidden="true"></span>
+                  <span class="cta-phone">
+                    <svg
+                      viewBox="0 0 20 20"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="1.4"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      width="14"
+                      height="14"
+                      ><path
+                        d="M2 3a1 1 0 011-1h3.28a1 1 0 01.95.68l1.07 3.21a1 1 0 01-.25 1L6.54 8.4a12.06 12.06 0 005.06 5.06l1.51-1.51a1 1 0 011-.25l3.21 1.07a1 1 0 01.68.95V17a1 1 0 01-1 1A15 15 0 012 3z"
+                      ></path></svg
+                    >
+                    <a href="tel:+33387184920" class="cta-phone-num"
+                      >03 87 18 49 20</a
+                    >
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <Footer />
+
+    <script is:inline src="js/pages/info-cloud-1.js"></script>
+    <script is:inline src="js/shared/menu-frost.js"></script>
+    <!-- jcd-mobile-nav (injected) -->
+    <button
+      class="jcd-burger"
+      id="jcdBurger"
+      type="button"
+      aria-label="Ouvrir le menu"
+      aria-expanded="false"
+      aria-controls="jcdMnav"
+    >
+      <span class="jcd-burger__box" aria-hidden="true"
+        ><i></i><i></i><i></i></span
+      >
+    </button>
+    <div
+      class="jcd-mnav"
+      id="jcdMnav"
+      role="dialog"
+      aria-modal="true"
+      aria-label="Menu de navigation"
+      aria-hidden="true"
+    >
+      <div class="jcd-mnav__scroll">
+        <div class="jcd-mnav__inner">
+          <p
+            class="jcd-mnav__eyebrow jcd-mnav__reveal"
+            style="transition-delay:.04s"
+          >
+            Expertises
           </p>
-          <div class="cta-actions reveal delay-3">
-            <a href="contact.html?pole=informatique" class="btn-cta btn-cta--primary">
-              Contacter le pôle Informatique
-              <span class="btn-cta-arrow"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h10M9 4l4 4-4 4"/></svg></span>
-            </a>
-            <span class="cta-actions-divider" aria-hidden="true"></span>
-            <span class="cta-phone">
-              <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" width="14" height="14"><path d="M2 3a1 1 0 011-1h3.28a1 1 0 01.95.68l1.07 3.21a1 1 0 01-.25 1L6.54 8.4a12.06 12.06 0 005.06 5.06l1.51-1.51a1 1 0 011-.25l3.21 1.07a1 1 0 01.68.95V17a1 1 0 01-1 1A15 15 0 012 3z"/></svg>
-              <a href="tel:+33387184920" class="cta-phone-num">03 87 18 49 20</a>
-            </span>
+
+          <div class="jcd-mnav__reveal" style="transition-delay:.07s">
+            <div class="jcd-mnav__item" style="--mnav-c:#2E72BA">
+              <a class="jcd-mnav__link" href="informatique.html"
+                ><span class="jcd-mnav__dot"></span><span
+                  class="jcd-mnav__label">Informatique</span
+                ></a
+              >
+              <button
+                class="jcd-acc__toggle"
+                type="button"
+                aria-expanded="false"
+                aria-controls="jcdAccInfo"
+                aria-label="Afficher les sous-pages Informatique"
+              >
+                <svg
+                  viewBox="0 0 14 14"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.6"
+                  stroke-linecap="round"><path d="M7 2v10M2 7h10"></path></svg
+                >
+              </button>
+            </div>
+            <div class="jcd-acc__panel" id="jcdAccInfo">
+              <a class="jcd-mnav__sub" href="info-cloud.html">Cloud Microsoft</a
+              >
+              <a class="jcd-mnav__sub" href="info-collaboratif.html"
+                >Solutions collaboratives &amp; audiovisuelles</a
+              >
+              <a class="jcd-mnav__sub" href="info-reseaux.html"
+                >Architectures syst&egrave;mes &amp; r&eacute;seaux</a
+              >
+              <a class="jcd-mnav__sub" href="info-integration.html"
+                >Int&eacute;gration &amp; Support PC</a
+              >
+            </div>
+          </div>
+
+          <a
+            class="jcd-mnav__item jcd-mnav__reveal"
+            style="--mnav-c:#E51D29;transition-delay:.10s"
+            href="service.html"
+            ><span class="jcd-mnav__dot"></span><span class="jcd-mnav__label"
+              >Service</span
+            ></a
+          >
+          <a
+            class="jcd-mnav__item jcd-mnav__reveal"
+            style="--mnav-c:#F9D605;transition-delay:.13s"
+            href="developpement.html"
+            ><span class="jcd-mnav__dot"></span><span class="jcd-mnav__label"
+              >D&eacute;veloppement</span
+            ></a
+          >
+          <a
+            class="jcd-mnav__item jcd-mnav__reveal"
+            style="--mnav-c:#F3941D;transition-delay:.16s"
+            href="print.html"
+            ><span class="jcd-mnav__dot"></span><span class="jcd-mnav__label"
+              >Print</span
+            ></a
+          >
+          <a
+            class="jcd-mnav__item jcd-mnav__reveal"
+            style="--mnav-c:#B063AC;transition-delay:.19s"
+            href="telecom.html"
+            ><span class="jcd-mnav__dot"></span><span class="jcd-mnav__label"
+              >T&eacute;l&eacute;com</span
+            ></a
+          >
+          <div class="jcd-mnav__reveal" style="transition-delay:.22s">
+            <div class="jcd-mnav__item" style="--mnav-c:#8EC041">
+              <a class="jcd-mnav__link" href="formation.html"
+                ><span class="jcd-mnav__dot"></span><span
+                  class="jcd-mnav__label">Formation</span
+                ></a
+              >
+              <button
+                class="jcd-acc__toggle"
+                type="button"
+                aria-expanded="false"
+                aria-controls="jcdAccForm"
+                aria-label="Afficher les catégories de formation"
+              >
+                <svg
+                  viewBox="0 0 14 14"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.6"
+                  stroke-linecap="round"><path d="M7 2v10M2 7h10"></path></svg
+                >
+              </button>
+            </div>
+            <div class="jcd-acc__panel" id="jcdAccForm">
+              <a class="jcd-mnav__sub" href="formation-bureautique.html"
+                >Bureautique</a
+              >
+              <a
+                class="jcd-mnav__sub"
+                href="formation-intelligence-artificielle.html"
+                >Intelligence artificielle</a
+              >
+              <a class="jcd-mnav__sub" href="formation-informatique.html"
+                >Informatique</a
+              >
+              <a
+                class="jcd-mnav__sub"
+                href="formation-communication-marketing.html"
+                >Communication - Marketing</a
+              >
+              <a class="jcd-mnav__sub" href="formation-management.html"
+                >Management</a
+              >
+              <a
+                class="jcd-mnav__sub"
+                href="formation-commerce-relation-client.html"
+                >Commerce - Relation client</a
+              >
+              <a
+                class="jcd-mnav__sub"
+                href="formation-comptabilite-gestion.html"
+                >Comptabilit&eacute; - Gestion</a
+              >
+              <a class="jcd-mnav__sub" href="formation-ressources-humaines.html"
+                >Ressources humaines</a
+              >
+              <a
+                class="jcd-mnav__sub"
+                href="formation-developpement-personnel.html"
+                >D&eacute;veloppement personnel</a
+              >
+              <a class="jcd-mnav__sub" href="formation-graphisme-pao.html"
+                >Graphisme - PAO</a
+              >
+              <a
+                class="jcd-mnav__sub"
+                href="formation-administratif-secretariat-accueil.html"
+                >Administratif - Secr&eacute;tariat</a
+              >
+              <a class="jcd-mnav__sub" href="formation-securite.html"
+                >S&eacute;curit&eacute;</a
+              >
+              <a class="jcd-mnav__sub" href="formation-langues.html">Langues</a>
+            </div>
+          </div>
+          <a
+            class="jcd-mnav__item jcd-mnav__reveal"
+            style="--mnav-c:#A78D75;transition-delay:.25s"
+            href="agencement.html"
+            ><span class="jcd-mnav__dot"></span><span class="jcd-mnav__label"
+              >Agencement</span
+            ></a
+          >
+
+          <p
+            class="jcd-mnav__eyebrow jcd-mnav__sec2 jcd-mnav__reveal"
+            style="transition-delay:.30s"
+          >
+            D&eacute;couvrir
+          </p>
+          <a
+            class="jcd-mnav__item jcd-mnav__reveal"
+            style="--mnav-c:#9a9a9a;transition-delay:.33s"
+            href="assistance.html"
+            ><span class="jcd-mnav__dot"></span><span
+              class="jcd-mnav__label"
+              style="font-size:19px">Assistance</span
+            ></a
+          >
+          <a
+            class="jcd-mnav__item jcd-mnav__reveal"
+            style="--mnav-c:#9a9a9a;transition-delay:.36s"
+            href="carrieres.html"
+            ><span class="jcd-mnav__dot"></span><span
+              class="jcd-mnav__label"
+              style="font-size:19px">Carri&egrave;res</span
+            ></a
+          >
+
+          <div
+            class="jcd-mnav__cta jcd-mnav__reveal"
+            style="transition-delay:.40s"
+          >
+            <a class="jcd-mnav__btn jcd-mnav__btn--primary" href="contact.html"
+              >Contacter un expert
+              <span class="jcd-mnav__btn-ic"
+                ><svg
+                  viewBox="0 0 16 16"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.7"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  ><path d="M3 8h10M9 4l4 4-4 4"></path></svg
+                ></span
+              ></a
+            >
+            <a
+              class="jcd-mnav__btn jcd-mnav__btn--ghost"
+              href="tel:+33387184920"
+              >03 87 18 49 20
+              <span class="jcd-mnav__btn-ic"
+                ><svg
+                  viewBox="0 0 18 18"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.5"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  ><path
+                    d="M2.5 3.5a1 1 0 011-1h2.4a1 1 0 01.95.68l.86 2.4a1 1 0 01-.24 1l-1.2 1.2a11 11 0 004.6 4.6l1.2-1.2a1 1 0 011-.24l2.4.86a1 1 0 01.68.95V15a1 1 0 01-1 1A13.5 13.5 0 012.5 3.5z"
+                  ></path></svg
+                ></span
+              ></a
+            >
           </div>
         </div>
       </div>
     </div>
-  </div>
-</section>
-
-</main>
-
-<Footer />
-
-
-<script is:inline src="js/pages/info-cloud-1.js"></script>
-<script is:inline src="js/shared/menu-frost.js"></script>
-<!-- jcd-mobile-nav (injected) -->
-<button class="jcd-burger" id="jcdBurger" type="button" aria-label="Ouvrir le menu" aria-expanded="false" aria-controls="jcdMnav">
-  <span class="jcd-burger__box" aria-hidden="true"><i></i><i></i><i></i></span>
-</button>
-<div class="jcd-mnav" id="jcdMnav" role="dialog" aria-modal="true" aria-label="Menu de navigation" aria-hidden="true">
-  <div class="jcd-mnav__scroll">
-    <div class="jcd-mnav__inner">
-      <p class="jcd-mnav__eyebrow jcd-mnav__reveal" style="transition-delay:.04s">Expertises</p>
-
-      <div class="jcd-mnav__reveal" style="transition-delay:.07s">
-        <div class="jcd-mnav__item" style="--mnav-c:#2E72BA">
-          <a class="jcd-mnav__link" href="informatique.html"><span class="jcd-mnav__dot"></span><span class="jcd-mnav__label">Informatique</span></a>
-          <button class="jcd-acc__toggle" type="button" aria-expanded="false" aria-controls="jcdAccInfo" aria-label="Afficher les sous-pages Informatique">
-            <svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M7 2v10M2 7h10"/></svg>
-          </button>
-        </div>
-        <div class="jcd-acc__panel" id="jcdAccInfo">
-          <a class="jcd-mnav__sub" href="info-cloud.html">Cloud Microsoft</a>
-          <a class="jcd-mnav__sub" href="info-collaboratif.html">Solutions collaboratives &amp; audiovisuelles</a>
-          <a class="jcd-mnav__sub" href="info-reseaux.html">Architectures syst&egrave;mes &amp; r&eacute;seaux</a>
-          <a class="jcd-mnav__sub" href="info-integration.html">Int&eacute;gration &amp; Support PC</a>
-        </div>
-      </div>
-
-      <a class="jcd-mnav__item jcd-mnav__reveal" style="--mnav-c:#E51D29;transition-delay:.10s" href="service.html"><span class="jcd-mnav__dot"></span><span class="jcd-mnav__label">Service</span></a>
-      <a class="jcd-mnav__item jcd-mnav__reveal" style="--mnav-c:#F9D605;transition-delay:.13s" href="developpement.html"><span class="jcd-mnav__dot"></span><span class="jcd-mnav__label">D&eacute;veloppement</span></a>
-      <a class="jcd-mnav__item jcd-mnav__reveal" style="--mnav-c:#F3941D;transition-delay:.16s" href="print.html"><span class="jcd-mnav__dot"></span><span class="jcd-mnav__label">Print</span></a>
-      <a class="jcd-mnav__item jcd-mnav__reveal" style="--mnav-c:#B063AC;transition-delay:.19s" href="telecom.html"><span class="jcd-mnav__dot"></span><span class="jcd-mnav__label">T&eacute;l&eacute;com</span></a>
-      <div class="jcd-mnav__reveal" style="transition-delay:.22s">
-        <div class="jcd-mnav__item" style="--mnav-c:#8EC041">
-          <a class="jcd-mnav__link" href="formation.html"><span class="jcd-mnav__dot"></span><span class="jcd-mnav__label">Formation</span></a>
-          <button class="jcd-acc__toggle" type="button" aria-expanded="false" aria-controls="jcdAccForm" aria-label="Afficher les cat&eacute;gories de formation">
-            <svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M7 2v10M2 7h10"/></svg>
-          </button>
-        </div>
-        <div class="jcd-acc__panel" id="jcdAccForm">
-          <a class="jcd-mnav__sub" href="formation-bureautique.html">Bureautique</a>
-          <a class="jcd-mnav__sub" href="formation-intelligence-artificielle.html">Intelligence artificielle</a>
-          <a class="jcd-mnav__sub" href="formation-informatique.html">Informatique</a>
-          <a class="jcd-mnav__sub" href="formation-communication-marketing.html">Communication - Marketing</a>
-          <a class="jcd-mnav__sub" href="formation-management.html">Management</a>
-          <a class="jcd-mnav__sub" href="formation-commerce-relation-client.html">Commerce - Relation client</a>
-          <a class="jcd-mnav__sub" href="formation-comptabilite-gestion.html">Comptabilit&eacute; - Gestion</a>
-          <a class="jcd-mnav__sub" href="formation-ressources-humaines.html">Ressources humaines</a>
-          <a class="jcd-mnav__sub" href="formation-developpement-personnel.html">D&eacute;veloppement personnel</a>
-          <a class="jcd-mnav__sub" href="formation-graphisme-pao.html">Graphisme - PAO</a>
-          <a class="jcd-mnav__sub" href="formation-administratif-secretariat-accueil.html">Administratif - Secr&eacute;tariat</a>
-          <a class="jcd-mnav__sub" href="formation-securite.html">S&eacute;curit&eacute;</a>
-          <a class="jcd-mnav__sub" href="formation-langues.html">Langues</a>
-        </div>
-      </div>
-      <a class="jcd-mnav__item jcd-mnav__reveal" style="--mnav-c:#A78D75;transition-delay:.25s" href="agencement.html"><span class="jcd-mnav__dot"></span><span class="jcd-mnav__label">Agencement</span></a>
-
-      <p class="jcd-mnav__eyebrow jcd-mnav__sec2 jcd-mnav__reveal" style="transition-delay:.30s">D&eacute;couvrir</p>
-      <a class="jcd-mnav__item jcd-mnav__reveal" style="--mnav-c:#9a9a9a;transition-delay:.33s" href="assistance.html"><span class="jcd-mnav__dot"></span><span class="jcd-mnav__label" style="font-size:19px">Assistance</span></a>
-      <a class="jcd-mnav__item jcd-mnav__reveal" style="--mnav-c:#9a9a9a;transition-delay:.36s" href="carrieres.html"><span class="jcd-mnav__dot"></span><span class="jcd-mnav__label" style="font-size:19px">Carri&egrave;res</span></a>
-
-      <div class="jcd-mnav__cta jcd-mnav__reveal" style="transition-delay:.40s">
-        <a class="jcd-mnav__btn jcd-mnav__btn--primary" href="contact.html">Contacter un expert
-          <span class="jcd-mnav__btn-ic"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h10M9 4l4 4-4 4"/></svg></span></a>
-        <a class="jcd-mnav__btn jcd-mnav__btn--ghost" href="tel:+33387184920">03 87 18 49 20
-          <span class="jcd-mnav__btn-ic"><svg viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2.5 3.5a1 1 0 011-1h2.4a1 1 0 01.95.68l.86 2.4a1 1 0 01-.24 1l-1.2 1.2a11 11 0 004.6 4.6l1.2-1.2a1 1 0 011-.24l2.4.86a1 1 0 01.68.95V15a1 1 0 01-1 1A13.5 13.5 0 012.5 3.5z"/></svg></span></a>
-      </div>
+    <script is:inline src="js/shared/mobile-nav.js"></script>
+    <!-- jcd-a11y (Lot 5) -->
+    <div class="jcd-fab-wrap" id="jcd-fab">
+      <button
+        class="jcd-fab jcd-fab--top"
+        id="jcdToTop"
+        type="button"
+        aria-label="Remonter en haut"
+      >
+        <svg
+          viewBox="0 0 20 20"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="1.8"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          aria-hidden="true"><path d="M10 16V5M5 10l5-5 5 5"></path></svg
+        >
+      </button>
+      <a
+        class="jcd-fab jcd-fab--contact"
+        id="jcdFabContact"
+        href="contact.html"
+        aria-label="Nous contacter"
+      >
+        <svg
+          viewBox="0 0 20 20"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="1.6"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          aria-hidden="true"
+          ><rect x="2.5" y="4.5" width="15" height="11" rx="2.3"></rect><path
+            d="M3 6.7 L10 10.7 L17 6.7"></path></svg
+        >
+      </a>
     </div>
-  </div>
-</div>
-<script is:inline src="js/shared/mobile-nav.js"></script>
-<!-- jcd-a11y (Lot 5) -->
-<div class="jcd-fab-wrap" id="jcd-fab">
-  <button class="jcd-fab jcd-fab--top" id="jcdToTop" type="button" aria-label="Remonter en haut">
-    <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 16V5M5 10l5-5 5 5"/></svg>
-  </button>
-  <a class="jcd-fab jcd-fab--contact" id="jcdFabContact" href="contact.html" aria-label="Nous contacter">
-    <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2.5" y="4.5" width="15" height="11" rx="2.3"/><path d="M3 6.7 L10 10.7 L17 6.7"/></svg>
-  </a>
-</div>
-<script is:inline src="js/shared/a11y.js" id="jcd-a11y-js"></script>
-<script is:inline src="js/shared/micons.js" id="jcd-micons-js"></script>
-<script is:inline src="js/shared/mrefonte.js" id="jcd-mrefonte-js"></script>
-
-
-</body>
+    <script is:inline src="js/shared/a11y.js" id="jcd-a11y-js"></script>
+    <script is:inline src="js/shared/micons.js" id="jcd-micons-js"></script>
+    <script is:inline src="js/shared/mrefonte.js" id="jcd-mrefonte-js"></script>
+  </body>
 </html>

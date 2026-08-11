@@ -1,903 +1,1980 @@
 ---
-import Header from '../components/Header.astro';
-import Footer from '../components/Footer.astro';
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
 ---
-<!DOCTYPE html>
+
 <html lang="fr">
-<head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-<meta name="color-scheme" content="dark" />
-<meta name="theme-color" content="#0d0d0d" />
-<link rel="icon" href="favicon.svg" type="image/svg+xml" />
-<meta name="description" content="JCD Groupe · Pôle Développement. Outils sur mesure, digitalisation des processus." />
-<link rel="canonical" href="https://www.jcd-groupe.fr/developpement.html" />
-<meta property="og:type" content="website" />
-<meta property="og:site_name" content="JCD Groupe" />
-<meta property="og:locale" content="fr_FR" />
-<meta property="og:title" content="Développement · JCD Groupe" />
-<meta property="og:description" content="JCD Groupe · Pôle Développement. Outils sur mesure, digitalisation des processus." />
-<meta property="og:url" content="https://www.jcd-groupe.fr/developpement.html" />
-<meta name="twitter:card" content="summary" />
-<title>Développement · JCD Groupe</title>
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+    />
+    <meta name="color-scheme" content="dark" />
+    <meta name="theme-color" content="#0d0d0d" />
+    <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+    <meta
+      name="description"
+      content="JCD Groupe · Pôle Développement. Outils sur mesure, digitalisation des processus."
+    />
+    <link rel="canonical" href="https://www.jcd-groupe.fr/developpement.html" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="JCD Groupe" />
+    <meta property="og:locale" content="fr_FR" />
+    <meta property="og:title" content="Développement · JCD Groupe" />
+    <meta
+      property="og:description"
+      content="JCD Groupe · Pôle Développement. Outils sur mesure, digitalisation des processus."
+    />
+    <meta
+      property="og:url"
+      content="https://www.jcd-groupe.fr/developpement.html"
+    />
+    <meta name="twitter:card" content="summary" />
+    <title>Développement · JCD Groupe</title>
 
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Instrument+Serif:ital@0;1&display=swap"
+      rel="stylesheet"
+    />
 
-<link rel="stylesheet" href="css/developpement.css">
-<link rel="stylesheet" href="css/global.css">
-<link rel="stylesheet" href="css/developpement-overrides.css">
-  <link rel="stylesheet" href="transition.css">
-  <script is:inline src="transition.js"></script>
-<script is:inline src="js/shared/xpcompact.js" id="jcd-xpcompact-js"></script>
-<script is:inline src="js/shared/touch.js" id="jcd-touch-js"></script>
-<script is:inline src="js/shared/mrefonte-shim.js" id="jcd-mrefonte-shim"></script>
-</head>
-<body>
-<a class="jcd-skip" href="#contenu">Aller au contenu</a>
+    <link rel="stylesheet" href="css/developpement.css" />
+    <link rel="stylesheet" href="css/global.css" />
+    <link rel="stylesheet" href="css/developpement-overrides.css" />
+    <link rel="stylesheet" href="transition.css" />
+    <script is:inline src="transition.js"></script>
+    <script is:inline src="js/shared/xpcompact.js" id="jcd-xpcompact-js"
+    ></script>
+    <script is:inline src="js/shared/touch.js" id="jcd-touch-js"></script>
+    <script is:inline src="js/shared/mrefonte-shim.js" id="jcd-mrefonte-shim"
+    ></script>
+  </head>
+  <body>
+    <a class="jcd-skip" href="#contenu">Aller au contenu</a>
 
-<!-- ====================================================================
+    <!-- ====================================================================
      NAVBAR v2 — Modal-like
      Logo (g) · capsule centrale {Expertises ▾ · Contact · Carrières}
      · CTA Assistance (d). Bande pleine largeur, fade gauche/droite,
      dropdown "Expertises" avec 7 SVG 3D isométriques colorés.
      ==================================================================== -->
-<Header />
+    <Header />
 
-
-<main id="contenu">
-
-<div class="hero-pin-zone">
-
-<!-- ====================================================================
+    <main id="contenu">
+      <div class="hero-pin-zone">
+        <!-- ====================================================================
      HERO — Mesh WebGL (or JCD) + champ ASCII binaire
      ==================================================================== -->
-<section class="print-hero" aria-labelledby="hero-title">
+        <section class="print-hero" aria-labelledby="hero-title">
+          <div class="hero-mesh-fallback" aria-hidden="true"></div>
+          <canvas class="hero-mesh" id="heroMesh" aria-hidden="true"></canvas>
+          <canvas class="hero-gridglow" id="heroGrid" aria-hidden="true"
+          ></canvas>
+          <div class="hero-texture hero-texture--grid" aria-hidden="true"></div>
+          <canvas class="hero-ascii" id="heroAscii" aria-hidden="true"></canvas>
+          <div class="hero-grain" aria-hidden="true"></div>
 
-  <div class="hero-mesh-fallback" aria-hidden="true"></div>
-  <canvas class="hero-mesh" id="heroMesh" aria-hidden="true"></canvas>
-  <canvas class="hero-gridglow" id="heroGrid" aria-hidden="true"></canvas>
-  <div class="hero-texture hero-texture--grid" aria-hidden="true"></div>
-  <canvas class="hero-ascii" id="heroAscii" aria-hidden="true"></canvas>
-  <div class="hero-grain" aria-hidden="true"></div>
+          <div class="container">
+            <h1 id="hero-title" class="hero-title reveal delay-1">
+              Des applications <span class="accent-grad">sur mesure</span>,
+              pensées pour votre métier.
+            </h1>
 
-  <div class="container">
-    <h1 id="hero-title" class="hero-title reveal delay-1">
-      Des applications <span class="accent-grad">sur mesure</span>, pensées pour votre métier.
-    </h1>
+            <p class="hero-sub reveal delay-2">
+              Applications web et sites internet conçus et développés pour tous
+              vos besoins.
+            </p>
 
-    <p class="hero-sub reveal delay-2">
-      Applications web et sites internet conçus et développés pour tous vos besoins.
-    </p>
+            <div class="hero-actions reveal delay-3">
+              <a
+                href="contact.html?pole=developpement"
+                class="btn-cta btn-cta--ghost"
+              >
+                Démarrer un projet
+                <span class="btn-cta-arrow"
+                  ><svg
+                    viewBox="0 0 16 16"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="1.6"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    ><path d="M3 8h10M9 4l4 4-4 4"></path></svg
+                  ></span
+                >
+              </a>
+            </div>
+          </div>
+        </section>
 
-    <div class="hero-actions reveal delay-3">
-      <a href="contact.html?pole=developpement" class="btn-cta btn-cta--ghost">
-        Démarrer un projet
-        <span class="btn-cta-arrow"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h10M9 4l4 4-4 4"/></svg></span>
-      </a>
-    </div>
-  </div>
-</section>
-
-
-<!-- ====================================================================
+        <!-- ====================================================================
      MANIFESTO — Fenêtre terminal : le manifeste du pôle, en ligne de commande
      ==================================================================== -->
-<section class="manifesto" aria-label="Manifeste du pôle Développement">
-  <div class="container">
-    <div class="mf-shell">
+        <section class="manifesto" aria-label="Manifeste du pôle Développement">
+          <div class="container">
+            <div class="mf-shell">
+              <header class="mf-header reveal">
+                <span class="mf-header-side">
+                  <span class="mf-caret" aria-hidden="true">&#9656;</span>
+                  <span class="mf-id">DEV&middot;01</span>
+                  <span class="mf-rule" aria-hidden="true"></span>
+                  <span>Manifeste</span>
+                </span>
+                <span class="mf-header-side">
+                  <span>Terminal</span>
+                  <span class="mf-rule" aria-hidden="true"></span>
+                  <span>Pôle Développement</span>
+                </span>
+              </header>
 
-      <header class="mf-header reveal">
-        <span class="mf-header-side">
-          <span class="mf-caret" aria-hidden="true">&#9656;</span>
-          <span class="mf-id">DEV&middot;01</span>
-          <span class="mf-rule" aria-hidden="true"></span>
-          <span>Manifeste</span>
-        </span>
-        <span class="mf-header-side">
-          <span>Terminal</span>
-          <span class="mf-rule" aria-hidden="true"></span>
-          <span>Pôle Développement</span>
-        </span>
-      </header>
-
-      <div class="term-window reveal delay-1" id="termWindow">
-        <div class="term-bar">
-          <span class="term-dots" aria-hidden="true"><i></i><i></i><i></i></span>
-          <span class="term-title">manifeste · jcd:~/developpement · zsh</span>
-          <span class="term-bar-spacer" aria-hidden="true"></span>
-        </div>
-        <div class="term-body">
-          <div class="term-line">
-            <span class="term-prompt" aria-hidden="true">$</span>
-            <span class="term-cmd" id="termCmd" data-cmd="cat manifeste.md"></span><span class="term-cursor" id="termCursor" aria-hidden="true"></span>
+              <div class="term-window reveal delay-1" id="termWindow">
+                <div class="term-bar">
+                  <span class="term-dots" aria-hidden="true"
+                    ><i></i><i></i><i></i></span
+                  >
+                  <span class="term-title"
+                    >manifeste · jcd:~/developpement · zsh</span
+                  >
+                  <span class="term-bar-spacer" aria-hidden="true"></span>
+                </div>
+                <div class="term-body">
+                  <div class="term-line">
+                    <span class="term-prompt" aria-hidden="true">$</span>
+                    <span
+                      class="term-cmd"
+                      id="termCmd"
+                      data-cmd="cat manifeste.md"></span><span
+                      class="term-cursor"
+                      id="termCursor"
+                      aria-hidden="true"></span>
+                  </div>
+                  <span class="term-com"># pôle développement · jcd groupe</span
+                  >
+                  <p class="term-out" id="termOut">
+                    <strong>Développer</strong>, ce n'est pas seulement empiler
+                    des lignes de code. C'est aussi traduire vos besoins métier
+                    en un outil qui travaille pour vous. Chaque application est <span
+                      class="accent">conçue sur mesure</span
+                    >. À partir de votre cahier des charges, nous développons
+                    votre projet. Notre code l'exécute, le teste et le
+                    maintient. La technologie au service du résultat.
+                  </p>
+                </div>
+              </div>
+            </div>
           </div>
-          <span class="term-com"># pôle développement · jcd groupe</span>
-          <p class="term-out" id="termOut">
-            <strong>Développer</strong>, ce n'est pas seulement empiler des lignes de code. C'est aussi traduire vos besoins métier en un outil qui travaille pour vous. Chaque application est <span class="accent">conçue sur mesure</span>. À partir de votre cahier des charges, nous développons votre projet. Notre code l'exécute, le teste et le maintient. La technologie au service du résultat.
-          </p>
-        </div>
-      </div>
+        </section>
+      </div><!-- /hero-pin-zone -->
 
-    </div>
-  </div>
-</section>
-
-</div><!-- /hero-pin-zone -->
-
-<!-- ====================================================================
+      <!-- ====================================================================
      PRESTATIONS — Deux solutions (apps web + sites) en grille 2x3
      ==================================================================== -->
-<section class="prestations" id="prestations" aria-labelledby="prestations-title">
-  <div class="container">
-    <div class="prest-layout">
+      <section
+        class="prestations"
+        id="prestations"
+        aria-labelledby="prestations-title"
+      >
+        <div class="container">
+          <div class="prest-layout">
+            <aside class="prest-aside reveal">
+              <h2 class="prest-aside-title" id="prestations-title">
+                <span class="accent">Six prestations</span>, un seul
+                interlocuteur.
+              </h2>
+              <p class="prest-aside-sub">
+                Applications web métier et sites internet vitrine ou marchand,
+                de l'analyse du besoin à l'hébergement et la maintenance, tout
+                est internalisé.
+              </p>
 
-      <aside class="prest-aside reveal">
-        <h2 class="prest-aside-title" id="prestations-title">
-          <span class="accent">Six prestations</span>, un seul interlocuteur.
-        </h2>
-        <p class="prest-aside-sub">
-          Applications web métier et sites internet vitrine ou marchand, de l'analyse du besoin à l'hébergement et la maintenance, tout est internalisé.
-        </p>
+              <div class="prest-aside-clients">
+                <div class="prest-aside-clients-head">
+                  <span class="prest-aside-clients-label"
+                    >Ils nous font confiance</span
+                  >
+                  <span class="prest-aside-clients-rule" aria-hidden="true"
+                  ></span>
+                  <span class="prest-aside-clients-count">100+</span>
+                </div>
+                <div class="jcd-lcards" aria-label="Logos de nos clients">
+                  <div class="jcd-lcard" data-name="Banque Populaire ALC">
+                    <img
+                      src="logos%20DEV/banque-populaire.png"
+                      alt="Banque Populaire ALC"
+                    />
+                  </div>
+                  <div class="jcd-lcard" data-name="Viessmann">
+                    <img src="logos%20DEV/viessmann.png" alt="Viessmann" />
+                  </div>
+                  <div class="jcd-lcard" data-name="Georgia Tech Europe">
+                    <img
+                      src="logos%20DEV/georgia-tech.png"
+                      alt="Georgia Tech Europe"
+                    />
+                  </div>
+                  <div class="jcd-lcard" data-name="Lorraine Aéroport">
+                    <img
+                      src="logos%20DEV/lorraine-aeroport.png"
+                      alt="Lorraine Aéroport"
+                    />
+                  </div>
+                  <div class="jcd-lcard" data-name="Car Avenue">
+                    <img src="logos%20DEV/car-avenue.webp" alt="Car Avenue" />
+                  </div>
+                  <div class="jcd-lcard" data-name="Briotet">
+                    <img src="logos%20DEV/briotet.webp" alt="Briotet" />
+                  </div>
+                </div>
+              </div>
+            </aside>
 
-        <div class="prest-aside-clients">
-          <div class="prest-aside-clients-head">
-            <span class="prest-aside-clients-label">Ils nous font confiance</span>
-            <span class="prest-aside-clients-rule" aria-hidden="true"></span>
-            <span class="prest-aside-clients-count">100+</span>
-          </div>
-          <div class="jcd-lcards" aria-label="Logos de nos clients">
-            <div class="jcd-lcard" data-name="Banque Populaire ALC">
-              <img src="logos%20DEV/banque-populaire.png" alt="Banque Populaire ALC">
-            </div>
-            <div class="jcd-lcard" data-name="Viessmann">
-              <img src="logos%20DEV/viessmann.png" alt="Viessmann">
-            </div>
-            <div class="jcd-lcard" data-name="Georgia Tech Europe">
-              <img src="logos%20DEV/georgia-tech.png" alt="Georgia Tech Europe">
-            </div>
-            <div class="jcd-lcard" data-name="Lorraine Aéroport">
-              <img src="logos%20DEV/lorraine-aeroport.png" alt="Lorraine Aéroport">
-            </div>
-            <div class="jcd-lcard" data-name="Car Avenue">
-              <img src="logos%20DEV/car-avenue.webp" alt="Car Avenue">
-            </div>
-            <div class="jcd-lcard" data-name="Briotet">
-              <img src="logos%20DEV/briotet.webp" alt="Briotet">
+            <div class="prest-menu reveal delay-1">
+              <article class="prest-item">
+                <div class="prest-item-head">
+                  <span class="prest-item-glyph" aria-hidden="true">
+                    <svg
+                      viewBox="0 0 40 40"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="1.25"
+                      stroke-linejoin="round"
+                      stroke-linecap="round"
+                    >
+                      <path
+                        d="M20 7 a8 8 0 0 1 5 14 c-1 1-1.5 2-1.5 3.5 h-7 c0-1.5-.5-2.5-1.5-3.5 a8 8 0 0 1 5-14 Z"
+                      ></path>
+                      <path d="M16.5 28 h7 M17.5 32 h5" opacity="0.6"></path>
+                    </svg>
+                  </span>
+                </div>
+                <h3 class="prest-item-title">Analyse &amp; conseil</h3>
+                <p class="prest-item-desc">
+                  Étude du contexte et du besoin réel. On vous oriente vers la
+                  solution la plus juste.
+                </p>
+              </article>
+
+              <article class="prest-item">
+                <div class="prest-item-head">
+                  <span class="prest-item-glyph" aria-hidden="true">
+                    <svg
+                      viewBox="0 0 40 40"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="1.25"
+                      stroke-linejoin="round"
+                      stroke-linecap="round"
+                    >
+                      <rect x="9" y="6" width="22" height="28" rx="2"></rect>
+                      <path d="M14 14 h12 M14 19 h12 M14 24 h7" opacity="0.6"
+                      ></path>
+                      <path d="M21 28.5 l2 2 4-4" opacity="0.9"></path>
+                    </svg>
+                  </span>
+                </div>
+                <h3 class="prest-item-title">Audit &amp; cahier des charges</h3>
+                <p class="prest-item-desc">
+                  Audit de l'existant et rédaction d'un cahier des charges
+                  clair, qui cadre le projet et les coûts.
+                </p>
+              </article>
+
+              <article class="prest-item">
+                <div class="prest-item-head">
+                  <span class="prest-item-glyph" aria-hidden="true">
+                    <svg
+                      viewBox="0 0 40 40"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="1.25"
+                      stroke-linejoin="round"
+                      stroke-linecap="round"
+                    >
+                      <path d="M15 14 l-7 6 7 6"></path>
+                      <path d="M25 14 l7 6-7 6"></path>
+                      <path d="M22 11 l-4 18" opacity="0.6"></path>
+                    </svg>
+                  </span>
+                </div>
+                <h3 class="prest-item-title">Applications web sur mesure</h3>
+                <p class="prest-item-desc">
+                  Conception, développement et mise en œuvre d'outils métier qui
+                  digitalisent vos processus.
+                </p>
+              </article>
+
+              <article class="prest-item">
+                <div class="prest-item-head">
+                  <span class="prest-item-glyph" aria-hidden="true">
+                    <svg
+                      viewBox="0 0 40 40"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="1.25"
+                      stroke-linejoin="round"
+                      stroke-linecap="round"
+                    >
+                      <rect x="7" y="9" width="26" height="22" rx="2"></rect>
+                      <path d="M7 15 h26"></path>
+                      <circle
+                        cx="11"
+                        cy="12"
+                        r="0.9"
+                        fill="currentColor"
+                        stroke="none"></circle>
+                      <path d="M14 21 h7 M14 25 h12" opacity="0.55"></path>
+                    </svg>
+                  </span>
+                </div>
+                <h3 class="prest-item-title">Sites vitrine &amp; marchands</h3>
+                <p class="prest-item-desc">
+                  Sites internet sur mesure, du site vitrine à la boutique en
+                  ligne, pensés pour convertir.
+                </p>
+              </article>
+
+              <article class="prest-item">
+                <div class="prest-item-head">
+                  <span class="prest-item-glyph" aria-hidden="true">
+                    <svg
+                      viewBox="0 0 40 40"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="1.25"
+                      stroke-linejoin="round"
+                      stroke-linecap="round"
+                    >
+                      <circle cx="17" cy="17" r="9"></circle>
+                      <path d="M23.5 23.5 L32 32"></path>
+                      <path d="M13 19 l3-3 2 2 4-5" opacity="0.7"></path>
+                      <path d="M20 13 h2.4 v2.4" opacity="0.7"></path>
+                    </svg>
+                  </span>
+                </div>
+                <h3 class="prest-item-title">Référencement SEO / SEA</h3>
+                <p class="prest-item-desc">
+                  Optimisation du référencement naturel et payant pour rendre
+                  votre site visible et performant.
+                </p>
+              </article>
+
+              <article class="prest-item">
+                <div class="prest-item-head">
+                  <span class="prest-item-glyph" aria-hidden="true">
+                    <svg
+                      viewBox="0 0 40 40"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="1.25"
+                      stroke-linejoin="round"
+                      stroke-linecap="round"
+                    >
+                      <rect x="8" y="8" width="24" height="9" rx="1.5"></rect>
+                      <rect x="8" y="21" width="24" height="9" rx="1.5"></rect>
+                      <circle
+                        cx="13"
+                        cy="12.5"
+                        r="1"
+                        fill="currentColor"
+                        stroke="none"></circle>
+                      <circle
+                        cx="13"
+                        cy="25.5"
+                        r="1"
+                        fill="currentColor"
+                        stroke="none"></circle>
+                      <path d="M23 25.5 h5" opacity="0.5"></path>
+                    </svg>
+                  </span>
+                </div>
+                <h3 class="prest-item-title">Hébergement &amp; maintenance</h3>
+                <p class="prest-item-desc">
+                  Formation, suivi, hotline, hébergement et maintenance. Votre
+                  solution reste vivante dans le temps.
+                </p>
+              </article>
             </div>
           </div>
         </div>
-      </aside>
+      </section>
 
-      <div class="prest-menu reveal delay-1">
-
-        <article class="prest-item">
-          <div class="prest-item-head">
-            <span class="prest-item-glyph" aria-hidden="true">
-              <svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linejoin="round" stroke-linecap="round">
-                <path d="M20 7 a8 8 0 0 1 5 14 c-1 1-1.5 2-1.5 3.5 h-7 c0-1.5-.5-2.5-1.5-3.5 a8 8 0 0 1 5-14 Z"/>
-                <path d="M16.5 28 h7 M17.5 32 h5" opacity="0.6"/>
-              </svg>
-            </span>
-          </div>
-          <h3 class="prest-item-title">Analyse &amp; conseil</h3>
-          <p class="prest-item-desc">Étude du contexte et du besoin réel. On vous oriente vers la solution la plus juste.</p>
-        </article>
-
-        <article class="prest-item">
-          <div class="prest-item-head">
-            <span class="prest-item-glyph" aria-hidden="true">
-              <svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linejoin="round" stroke-linecap="round">
-                <rect x="9" y="6" width="22" height="28" rx="2"/>
-                <path d="M14 14 h12 M14 19 h12 M14 24 h7" opacity="0.6"/>
-                <path d="M21 28.5 l2 2 4-4" opacity="0.9"/>
-              </svg>
-            </span>
-          </div>
-          <h3 class="prest-item-title">Audit &amp; cahier des charges</h3>
-          <p class="prest-item-desc">Audit de l'existant et rédaction d'un cahier des charges clair, qui cadre le projet et les coûts.</p>
-        </article>
-
-        <article class="prest-item">
-          <div class="prest-item-head">
-            <span class="prest-item-glyph" aria-hidden="true">
-              <svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linejoin="round" stroke-linecap="round">
-                <path d="M15 14 l-7 6 7 6"/>
-                <path d="M25 14 l7 6-7 6"/>
-                <path d="M22 11 l-4 18" opacity="0.6"/>
-              </svg>
-            </span>
-          </div>
-          <h3 class="prest-item-title">Applications web sur mesure</h3>
-          <p class="prest-item-desc">Conception, développement et mise en œuvre d'outils métier qui digitalisent vos processus.</p>
-        </article>
-
-        <article class="prest-item">
-          <div class="prest-item-head">
-            <span class="prest-item-glyph" aria-hidden="true">
-              <svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linejoin="round" stroke-linecap="round">
-                <rect x="7" y="9" width="26" height="22" rx="2"/>
-                <path d="M7 15 h26"/>
-                <circle cx="11" cy="12" r="0.9" fill="currentColor" stroke="none"/>
-                <path d="M14 21 h7 M14 25 h12" opacity="0.55"/>
-              </svg>
-            </span>
-          </div>
-          <h3 class="prest-item-title">Sites vitrine &amp; marchands</h3>
-          <p class="prest-item-desc">Sites internet sur mesure, du site vitrine à la boutique en ligne, pensés pour convertir.</p>
-        </article>
-
-        <article class="prest-item">
-          <div class="prest-item-head">
-            <span class="prest-item-glyph" aria-hidden="true">
-              <svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linejoin="round" stroke-linecap="round">
-                <circle cx="17" cy="17" r="9"/>
-                <path d="M23.5 23.5 L32 32"/>
-                <path d="M13 19 l3-3 2 2 4-5" opacity="0.7"/>
-                <path d="M20 13 h2.4 v2.4" opacity="0.7"/>
-              </svg>
-            </span>
-          </div>
-          <h3 class="prest-item-title">Référencement SEO / SEA</h3>
-          <p class="prest-item-desc">Optimisation du référencement naturel et payant pour rendre votre site visible et performant.</p>
-        </article>
-
-        <article class="prest-item">
-          <div class="prest-item-head">
-            <span class="prest-item-glyph" aria-hidden="true">
-              <svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linejoin="round" stroke-linecap="round">
-                <rect x="8" y="8" width="24" height="9" rx="1.5"/>
-                <rect x="8" y="21" width="24" height="9" rx="1.5"/>
-                <circle cx="13" cy="12.5" r="1" fill="currentColor" stroke="none"/>
-                <circle cx="13" cy="25.5" r="1" fill="currentColor" stroke="none"/>
-                <path d="M23 25.5 h5" opacity="0.5"/>
-              </svg>
-            </span>
-          </div>
-          <h3 class="prest-item-title">Hébergement &amp; maintenance</h3>
-          <p class="prest-item-desc">Formation, suivi, hotline, hébergement et maintenance. Votre solution reste vivante dans le temps.</p>
-        </article>
-
-      </div>
-    </div>
-  </div>
-</section>
-
-
-<!-- ====================================================================
+      <!-- ====================================================================
      SECTION DIVIDER
      ==================================================================== -->
-<div class="section-divider" aria-hidden="true">
-  <div class="container"><span class="section-divider-line"></span></div>
-</div>
+      <div class="section-divider" aria-hidden="true">
+        <div class="container"><span class="section-divider-line"></span></div>
+      </div>
 
-
-<!-- ====================================================================
+      <!-- ====================================================================
      PROCESS — "Pipeline" : axe CI/CD horizontal à 4 étapes
      ==================================================================== -->
-<section class="process" id="process" aria-labelledby="process-title">
-  <div class="container">
-    <div class="section-head reveal">
-      <h2 class="section-title" id="process-title">
-        Quatre temps, <span class="accent">un pipeline maîtrisé de bout en bout.</span>
-        <span class="text-muted">De l'écoute du besoin à la mise en production et la maintenance, chaque étape est tracée et validée avec vous.</span>
-      </h2>
-    </div>
+      <section class="process" id="process" aria-labelledby="process-title">
+        <div class="container">
+          <div class="section-head reveal">
+            <h2 class="section-title" id="process-title">
+              Quatre temps, <span class="accent"
+                >un pipeline maîtrisé de bout en bout.</span
+              >
+              <span class="text-muted"
+                >De l'écoute du besoin à la mise en production et la
+                maintenance, chaque étape est tracée et validée avec vous.</span
+              >
+            </h2>
+          </div>
 
-    <!-- « Pipeline développement » : axe horizontal, 4 jalons (cadrage → build →
+          <!-- « Pipeline développement » : axe horizontal, 4 jalons (cadrage → build →
          run), pulse de données qui traverse en boucle. Technique identique aux
          autres pôles (SVG pathLength + glow + .reveal IntersectionObserver). -->
-    <div class="pf-vflow reveal" id="pf-vflow">
-      <svg class="pf-vsvg" viewBox="0 0 900 290" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
-        <defs>
-          <linearGradient id="pf-curve-grad" x1="0" y1="0" x2="1" y2="0">
-            <stop offset="0%"   stop-color="#fce148"/>
-            <stop offset="35%"  stop-color="#F9D605"/>
-            <stop offset="70%"  stop-color="#d9bd05"/>
-            <stop offset="100%" stop-color="#b89e04"/>
-          </linearGradient>
-          <filter id="pf-glow" x="-15%" y="-15%" width="130%" height="130%">
-            <feGaussianBlur stdDeviation="2.2" result="b"/>
-            <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
-          </filter>
-          <!-- Flou doux dédié au signal : feutre les extrémités du faisceau pour
+          <div class="pf-vflow reveal" id="pf-vflow">
+            <svg
+              class="pf-vsvg"
+              viewBox="0 0 900 290"
+              preserveAspectRatio="xMidYMid meet"
+              aria-hidden="true"
+            >
+              <defs>
+                <linearGradient id="pf-curve-grad" x1="0" y1="0" x2="1" y2="0">
+                  <stop offset="0%" stop-color="#fce148"></stop>
+                  <stop offset="35%" stop-color="#F9D605"></stop>
+                  <stop offset="70%" stop-color="#d9bd05"></stop>
+                  <stop offset="100%" stop-color="#b89e04"></stop>
+                </linearGradient>
+                <filter
+                  id="pf-glow"
+                  x="-15%"
+                  y="-15%"
+                  width="130%"
+                  height="130%"
+                >
+                  <feGaussianBlur stdDeviation="2.2" result="b"
+                  ></feGaussianBlur>
+                  <feMerge
+                    ><feMergeNode in="b"></feMergeNode><feMergeNode
+                      in="SourceGraphic"></feMergeNode></feMerge
+                  >
+                </filter>
+                <!-- Flou doux dédié au signal : feutre les extrémités du faisceau pour
                un fondu progressif avec sa courbe (rupture moins nette). -->
-          <filter id="pf-signal-soft" x="-50%" y="-50%" width="200%" height="200%">
-            <feGaussianBlur stdDeviation="3.2"/>
-          </filter>
-          <linearGradient id="pf-drop-g1" gradientUnits="userSpaceOnUse" x1="0" y1="113" x2="0" y2="272">
-            <stop offset="0%" stop-color="#fce148" stop-opacity="0.55"/>
-            <stop offset="62%" stop-color="#fce148" stop-opacity="0.20"/>
-            <stop offset="100%" stop-color="#fce148" stop-opacity="0.08"/>
-          </linearGradient>
-          <linearGradient id="pf-drop-g2" gradientUnits="userSpaceOnUse" x1="0" y1="153" x2="0" y2="272">
-            <stop offset="0%" stop-color="#F9D605" stop-opacity="0.55"/>
-            <stop offset="62%" stop-color="#F9D605" stop-opacity="0.20"/>
-            <stop offset="100%" stop-color="#F9D605" stop-opacity="0.08"/>
-          </linearGradient>
-          <linearGradient id="pf-drop-g3" gradientUnits="userSpaceOnUse" x1="0" y1="71" x2="0" y2="272">
-            <stop offset="0%" stop-color="#d9bd05" stop-opacity="0.55"/>
-            <stop offset="62%" stop-color="#d9bd05" stop-opacity="0.18"/>
-            <stop offset="100%" stop-color="#d9bd05" stop-opacity="0.08"/>
-          </linearGradient>
-          <linearGradient id="pf-drop-g4" gradientUnits="userSpaceOnUse" x1="0" y1="113" x2="0" y2="272">
-            <stop offset="0%" stop-color="#b89e04" stop-opacity="0.55"/>
-            <stop offset="62%" stop-color="#b89e04" stop-opacity="0.18"/>
-            <stop offset="100%" stop-color="#b89e04" stop-opacity="0.08"/>
-          </linearGradient>
-        </defs>
+                <filter
+                  id="pf-signal-soft"
+                  x="-50%"
+                  y="-50%"
+                  width="200%"
+                  height="200%"
+                >
+                  <feGaussianBlur stdDeviation="3.2"></feGaussianBlur>
+                </filter>
+                <linearGradient
+                  id="pf-drop-g1"
+                  gradientUnits="userSpaceOnUse"
+                  x1="0"
+                  y1="113"
+                  x2="0"
+                  y2="272"
+                >
+                  <stop offset="0%" stop-color="#fce148" stop-opacity="0.55"
+                  ></stop>
+                  <stop offset="62%" stop-color="#fce148" stop-opacity="0.20"
+                  ></stop>
+                  <stop offset="100%" stop-color="#fce148" stop-opacity="0.08"
+                  ></stop>
+                </linearGradient>
+                <linearGradient
+                  id="pf-drop-g2"
+                  gradientUnits="userSpaceOnUse"
+                  x1="0"
+                  y1="153"
+                  x2="0"
+                  y2="272"
+                >
+                  <stop offset="0%" stop-color="#F9D605" stop-opacity="0.55"
+                  ></stop>
+                  <stop offset="62%" stop-color="#F9D605" stop-opacity="0.20"
+                  ></stop>
+                  <stop offset="100%" stop-color="#F9D605" stop-opacity="0.08"
+                  ></stop>
+                </linearGradient>
+                <linearGradient
+                  id="pf-drop-g3"
+                  gradientUnits="userSpaceOnUse"
+                  x1="0"
+                  y1="71"
+                  x2="0"
+                  y2="272"
+                >
+                  <stop offset="0%" stop-color="#d9bd05" stop-opacity="0.55"
+                  ></stop>
+                  <stop offset="62%" stop-color="#d9bd05" stop-opacity="0.18"
+                  ></stop>
+                  <stop offset="100%" stop-color="#d9bd05" stop-opacity="0.08"
+                  ></stop>
+                </linearGradient>
+                <linearGradient
+                  id="pf-drop-g4"
+                  gradientUnits="userSpaceOnUse"
+                  x1="0"
+                  y1="113"
+                  x2="0"
+                  y2="272"
+                >
+                  <stop offset="0%" stop-color="#b89e04" stop-opacity="0.55"
+                  ></stop>
+                  <stop offset="62%" stop-color="#b89e04" stop-opacity="0.18"
+                  ></stop>
+                  <stop offset="100%" stop-color="#b89e04" stop-opacity="0.08"
+                  ></stop>
+                </linearGradient>
+              </defs>
 
+              <!-- Étiquettes bookend (au-dessus des nodes d'entrée / sortie) -->
+              <text class="pf-label" x="113" y="74" text-anchor="middle"
+                >Brief client</text
+              >
+              <text class="pf-label" x="787" y="74" text-anchor="middle"
+                >Livraison</text
+              >
 
-        <!-- Étiquettes bookend (au-dessus des nodes d'entrée / sortie) -->
-        <text class="pf-label" x="113" y="74" text-anchor="middle">Brief client</text>
-        <text class="pf-label" x="787" y="74" text-anchor="middle">Livraison</text>
+              <!-- Circuit PCB : tracé en escalier (routage 90° arrondi) reliant les 4 nodes -->
+              <path
+                class="pf-track-base"
+                d="M 113 100 L 215 100 Q 225 100 225 110 L 225 130 Q 225 140 235 140 L 338 140 L 440 140 Q 450 140 450 130 L 450 68 Q 450 58 460 58 L 562 58 L 665 58 Q 675 58 675 68 L 675 90 Q 675 100 685 100 L 787 100"
+              ></path>
+              <path
+                class="pf-track-line"
+                d="M 113 100 L 215 100 Q 225 100 225 110 L 225 130 Q 225 140 235 140 L 338 140 L 440 140 Q 450 140 450 130 L 450 68 Q 450 58 460 58 L 562 58 L 665 58 Q 675 58 675 68 L 675 90 Q 675 100 685 100 L 787 100"
+                pathLength="100"></path>
+              <path
+                class="pf-signal"
+                d="M 113 100 L 215 100 Q 225 100 225 110 L 225 130 Q 225 140 235 140 L 338 140 L 440 140 Q 450 140 450 130 L 450 68 Q 450 58 460 58 L 562 58 L 665 58 Q 675 58 675 68 L 675 90 Q 675 100 685 100 L 787 100"
+                pathLength="100"></path>
 
-        <!-- Circuit PCB : tracé en escalier (routage 90° arrondi) reliant les 4 nodes -->
-        <path class="pf-track-base" d="M 113 100 L 215 100 Q 225 100 225 110 L 225 130 Q 225 140 235 140 L 338 140 L 440 140 Q 450 140 450 130 L 450 68 Q 450 58 460 58 L 562 58 L 665 58 Q 675 58 675 68 L 675 90 Q 675 100 685 100 L 787 100"/>
-        <path class="pf-track-line" d="M 113 100 L 215 100 Q 225 100 225 110 L 225 130 Q 225 140 235 140 L 338 140 L 440 140 Q 450 140 450 130 L 450 68 Q 450 58 460 58 L 562 58 L 665 58 Q 675 58 675 68 L 675 90 Q 675 100 685 100 L 787 100" pathLength="100"/>
-        <path class="pf-signal" d="M 113 100 L 215 100 Q 225 100 225 110 L 225 130 Q 225 140 235 140 L 338 140 L 440 140 Q 450 140 450 130 L 450 68 Q 450 58 460 58 L 562 58 L 665 58 Q 675 58 675 68 L 675 90 Q 675 100 685 100 L 787 100" pathLength="100"/>
+              <!-- Faisceaux verticaux node → stack (longueurs variées selon la hauteur du node) -->
+              <line
+                class="pf-drop pf-drop--1"
+                x1="113"
+                y1="113"
+                x2="113"
+                y2="252"
+                pathLength="100"></line>
+              <line
+                class="pf-drop pf-drop--2"
+                x1="338"
+                y1="153"
+                x2="338"
+                y2="270"
+                pathLength="100"></line>
+              <line
+                class="pf-drop pf-drop--3"
+                x1="562"
+                y1="71"
+                x2="562"
+                y2="252"
+                pathLength="100"></line>
+              <line
+                class="pf-drop pf-drop--4"
+                x1="787"
+                y1="113"
+                x2="787"
+                y2="270"
+                pathLength="100"></line>
 
-        <!-- Faisceaux verticaux node → stack (longueurs variées selon la hauteur du node) -->
-        <line class="pf-drop pf-drop--1" x1="113" y1="113" x2="113" y2="252" pathLength="100"/>
-        <line class="pf-drop pf-drop--2" x1="338" y1="153" x2="338" y2="270" pathLength="100"/>
-        <line class="pf-drop pf-drop--3" x1="562" y1="71"  x2="562" y2="252" pathLength="100"/>
-        <line class="pf-drop pf-drop--4" x1="787" y1="113" x2="787" y2="270" pathLength="100"/>
+              <!-- Stacks de couches (terminal de chaque faisceau) : 3 barres décroissantes -->
+              <g class="pf-stack pf-stack--1" style="--node-c:#fce148">
+                <line
+                  class="pf-stack-bar pf-stack-bar--1"
+                  x1="100"
+                  y1="254"
+                  x2="126"
+                  y2="254"></line>
+                <line
+                  class="pf-stack-bar pf-stack-bar--2"
+                  x1="104.5"
+                  y1="260"
+                  x2="121.5"
+                  y2="260"></line>
+                <line
+                  class="pf-stack-bar pf-stack-bar--3"
+                  x1="109"
+                  y1="266"
+                  x2="117"
+                  y2="266"></line>
+              </g>
+              <g class="pf-stack pf-stack--2" style="--node-c:#F9D605">
+                <line
+                  class="pf-stack-bar pf-stack-bar--1"
+                  x1="325"
+                  y1="272"
+                  x2="351"
+                  y2="272"></line>
+                <line
+                  class="pf-stack-bar pf-stack-bar--2"
+                  x1="329.5"
+                  y1="278"
+                  x2="346.5"
+                  y2="278"></line>
+                <line
+                  class="pf-stack-bar pf-stack-bar--3"
+                  x1="334"
+                  y1="284"
+                  x2="342"
+                  y2="284"></line>
+              </g>
+              <g class="pf-stack pf-stack--3" style="--node-c:#d9bd05">
+                <line
+                  class="pf-stack-bar pf-stack-bar--1"
+                  x1="549"
+                  y1="254"
+                  x2="575"
+                  y2="254"></line>
+                <line
+                  class="pf-stack-bar pf-stack-bar--2"
+                  x1="553.5"
+                  y1="260"
+                  x2="570.5"
+                  y2="260"></line>
+                <line
+                  class="pf-stack-bar pf-stack-bar--3"
+                  x1="558"
+                  y1="266"
+                  x2="566"
+                  y2="266"></line>
+              </g>
+              <g class="pf-stack pf-stack--4" style="--node-c:#b89e04">
+                <line
+                  class="pf-stack-bar pf-stack-bar--1"
+                  x1="774"
+                  y1="272"
+                  x2="800"
+                  y2="272"></line>
+                <line
+                  class="pf-stack-bar pf-stack-bar--2"
+                  x1="778.5"
+                  y1="278"
+                  x2="795.5"
+                  y2="278"></line>
+                <line
+                  class="pf-stack-bar pf-stack-bar--3"
+                  x1="783"
+                  y1="284"
+                  x2="791"
+                  y2="284"></line>
+              </g>
 
-        <!-- Stacks de couches (terminal de chaque faisceau) : 3 barres décroissantes -->
-        <g class="pf-stack pf-stack--1" style="--node-c:#fce148">
-          <line class="pf-stack-bar pf-stack-bar--1" x1="100" y1="254" x2="126" y2="254"/>
-          <line class="pf-stack-bar pf-stack-bar--2" x1="104.5" y1="260" x2="121.5" y2="260"/>
-          <line class="pf-stack-bar pf-stack-bar--3" x1="109" y1="266" x2="117" y2="266"/>
-        </g>
-        <g class="pf-stack pf-stack--2" style="--node-c:#F9D605">
-          <line class="pf-stack-bar pf-stack-bar--1" x1="325" y1="272" x2="351" y2="272"/>
-          <line class="pf-stack-bar pf-stack-bar--2" x1="329.5" y1="278" x2="346.5" y2="278"/>
-          <line class="pf-stack-bar pf-stack-bar--3" x1="334" y1="284" x2="342" y2="284"/>
-        </g>
-        <g class="pf-stack pf-stack--3" style="--node-c:#d9bd05">
-          <line class="pf-stack-bar pf-stack-bar--1" x1="549" y1="254" x2="575" y2="254"/>
-          <line class="pf-stack-bar pf-stack-bar--2" x1="553.5" y1="260" x2="570.5" y2="260"/>
-          <line class="pf-stack-bar pf-stack-bar--3" x1="558" y1="266" x2="566" y2="266"/>
-        </g>
-        <g class="pf-stack pf-stack--4" style="--node-c:#b89e04">
-          <line class="pf-stack-bar pf-stack-bar--1" x1="774" y1="272" x2="800" y2="272"/>
-          <line class="pf-stack-bar pf-stack-bar--2" x1="778.5" y1="278" x2="795.5" y2="278"/>
-          <line class="pf-stack-bar pf-stack-bar--3" x1="783" y1="284" x2="791" y2="284"/>
-        </g>
+              <!-- Node 01 : Analyse (loupe) — hauteur milieu -->
+              <g transform="translate(113 100)">
+                <g class="pf-node pf-node--1" style="--node-c:#fce148">
+                  <circle class="pf-node-halo" r="20"></circle>
+                  <rect
+                    class="pf-node-box"
+                    x="-13"
+                    y="-13"
+                    width="26"
+                    height="26"
+                    rx="7"></rect>
+                  <circle class="pf-node-icon" cx="-2" cy="-2" r="5"></circle>
+                  <path class="pf-node-icon" d="M2 2 L6 6"></path>
+                </g>
+              </g>
 
-        <!-- Node 01 : Analyse (loupe) — hauteur milieu -->
-        <g transform="translate(113 100)">
-          <g class="pf-node pf-node--1" style="--node-c:#fce148">
-            <circle class="pf-node-halo" r="20"/>
-            <rect class="pf-node-box" x="-13" y="-13" width="26" height="26" rx="7"/>
-            <circle class="pf-node-icon" cx="-2" cy="-2" r="5"/>
-            <path class="pf-node-icon" d="M2 2 L6 6"/>
-          </g>
-        </g>
+              <!-- Node 02 : Conception (drafting) — hauteur basse -->
+              <g transform="translate(338 140)">
+                <g class="pf-node pf-node--2" style="--node-c:#F9D605">
+                  <circle class="pf-node-halo" r="20"></circle>
+                  <rect
+                    class="pf-node-box"
+                    x="-13"
+                    y="-13"
+                    width="26"
+                    height="26"
+                    rx="7"></rect>
+                  <path
+                    class="pf-node-icon"
+                    d="M-4 -8 q-4 0 -4 5 q0 3 -2 3 q2 0 2 3 q0 5 4 5"></path>
+                  <path
+                    class="pf-node-icon"
+                    d="M4 -8 q4 0 4 5 q0 3 2 3 q-2 0 -2 3 q0 5 -4 5"></path>
+                </g>
+              </g>
 
-        <!-- Node 02 : Conception (drafting) — hauteur basse -->
-        <g transform="translate(338 140)">
-          <g class="pf-node pf-node--2" style="--node-c:#F9D605">
-            <circle class="pf-node-halo" r="20"/>
-            <rect class="pf-node-box" x="-13" y="-13" width="26" height="26" rx="7"/>
-            <path class="pf-node-icon" d="M-4 -8 q-4 0 -4 5 q0 3 -2 3 q2 0 2 3 q0 5 4 5"/>
-            <path class="pf-node-icon" d="M4 -8 q4 0 4 5 q0 3 2 3 q-2 0 -2 3 q0 5 -4 5"/>
-          </g>
-        </g>
+              <!-- Node 03 : Développement (code) — hauteur haute -->
+              <g transform="translate(562 58)">
+                <g class="pf-node pf-node--3" style="--node-c:#d9bd05">
+                  <circle class="pf-node-halo" r="20"></circle>
+                  <rect
+                    class="pf-node-box"
+                    x="-13"
+                    y="-13"
+                    width="26"
+                    height="26"
+                    rx="7"></rect>
+                  <path class="pf-node-icon" d="M-3 -5 L-8 0 L-3 5"></path>
+                  <path class="pf-node-icon" d="M3 -5 L8 0 L3 5"></path>
+                </g>
+              </g>
 
-        <!-- Node 03 : Développement (code) — hauteur haute -->
-        <g transform="translate(562 58)">
-          <g class="pf-node pf-node--3" style="--node-c:#d9bd05">
-            <circle class="pf-node-halo" r="20"/>
-            <rect class="pf-node-box" x="-13" y="-13" width="26" height="26" rx="7"/>
-            <path class="pf-node-icon" d="M-3 -5 L-8 0 L-3 5"/>
-            <path class="pf-node-icon" d="M3 -5 L8 0 L3 5"/>
-          </g>
-        </g>
+              <!-- Node 04 : Mise en prod (rocket) — hauteur milieu -->
+              <g transform="translate(787 100)">
+                <g class="pf-node pf-node--4" style="--node-c:#b89e04">
+                  <circle class="pf-node-halo" r="20"></circle>
+                  <rect
+                    class="pf-node-box"
+                    x="-13"
+                    y="-13"
+                    width="26"
+                    height="26"
+                    rx="7"></rect>
+                  <path
+                    class="pf-node-icon"
+                    d="M0 -8 C4 -4 4 2 0 6 C-4 2 -4 -4 0 -8 Z"></path>
+                  <path class="pf-node-icon" d="M-3 3 L-5 7 M3 3 L5 7"></path>
+                  <circle class="pf-node-icon" cx="0" cy="-2" r="1.4"></circle>
+                </g>
+              </g>
+            </svg>
 
-        <!-- Node 04 : Mise en prod (rocket) — hauteur milieu -->
-        <g transform="translate(787 100)">
-          <g class="pf-node pf-node--4" style="--node-c:#b89e04">
-            <circle class="pf-node-halo" r="20"/>
-            <rect class="pf-node-box" x="-13" y="-13" width="26" height="26" rx="7"/>
-            <path class="pf-node-icon" d="M0 -8 C4 -4 4 2 0 6 C-4 2 -4 -4 0 -8 Z"/>
-            <path class="pf-node-icon" d="M-3 3 L-5 7 M3 3 L5 7"/>
-            <circle class="pf-node-icon" cx="0" cy="-2" r="1.4"/>
-          </g>
-        </g>
-      </svg>
+            <div class="pf-vcards">
+              <article
+                class="pf-vcard"
+                style="--c:#fce148; --c-rgb:252, 225, 72;"
+              >
+                <h3 class="pf-vcard-title">Analyse &amp; cahier des charges</h3>
+                <p class="pf-vcard-desc">
+                  Écoute du besoin, audit, rédaction du cahier des charges. On
+                  ne code rien avant d'avoir compris.
+                </p>
+              </article>
 
-      <div class="pf-vcards">
+              <article
+                class="pf-vcard"
+                style="--c:#F9D605; --c-rgb:249, 214, 5;"
+              >
+                <h3 class="pf-vcard-title">Conception &amp; architecture</h3>
+                <p class="pf-vcard-desc">
+                  Choix techniques, maquettage et architecture de la solution.
+                  Le bon outil pour le bon usage.
+                </p>
+              </article>
 
-        <article class="pf-vcard" style="--c:#fce148; --c-rgb:252, 225, 72;">
-          <h3 class="pf-vcard-title">Analyse &amp; cahier des charges</h3>
-          <p class="pf-vcard-desc">Écoute du besoin, audit, rédaction du cahier des charges. On ne code rien avant d'avoir compris.</p>
-        </article>
+              <article
+                class="pf-vcard"
+                style="--c:#d9bd05; --c-rgb:217, 189, 5;"
+              >
+                <h3 class="pf-vcard-title">Développement &amp; intégration</h3>
+                <p class="pf-vcard-desc">
+                  Code sur mesure, intégrations et recette. Des points réguliers
+                  avec un chef de projet dédié.
+                </p>
+              </article>
 
-        <article class="pf-vcard" style="--c:#F9D605; --c-rgb:249, 214, 5;">
-          <h3 class="pf-vcard-title">Conception &amp; architecture</h3>
-          <p class="pf-vcard-desc">Choix techniques, maquettage et architecture de la solution. Le bon outil pour le bon usage.</p>
-        </article>
+              <article
+                class="pf-vcard"
+                style="--c:#b89e04; --c-rgb:184, 158, 4;"
+              >
+                <h3 class="pf-vcard-title">Déploiement &amp; maintenance</h3>
+                <p class="pf-vcard-desc">
+                  Déploiement, formation, hébergement, hotline et maintenance.
+                  On reste à vos côtés après la livraison.
+                </p>
+              </article>
+            </div>
+          </div>
+        </div>
+      </section>
 
-        <article class="pf-vcard" style="--c:#d9bd05; --c-rgb:217, 189, 5;">
-          <h3 class="pf-vcard-title">Développement &amp; intégration</h3>
-          <p class="pf-vcard-desc">Code sur mesure, intégrations et recette. Des points réguliers avec un chef de projet dédié.</p>
-        </article>
-
-        <article class="pf-vcard" style="--c:#b89e04; --c-rgb:184, 158, 4;">
-          <h3 class="pf-vcard-title">Déploiement &amp; maintenance</h3>
-          <p class="pf-vcard-desc">Déploiement, formation, hébergement, hotline et maintenance. On reste à vos côtés après la livraison.</p>
-        </article>
-
-      </div>
-    </div>
-  </div>
-</section>
-
-
-<!-- ====================================================================
+      <!-- ====================================================================
      TÉMOIGNAGES — 2 vidéos clients (placeholders : liens à venir)
      ==================================================================== -->
-<section class="testi" id="temoignages" aria-labelledby="real-title">
-  <div class="container">
+      <section class="testi" id="temoignages" aria-labelledby="real-title">
+        <div class="container">
+          <!-- ============ RÉALISATIONS — grille filtrable ============ -->
+          <div class="section-head reveal" id="realisations">
+            <div class="eyebrow">Nos réalisations</div>
+            <h2 class="section-title" id="real-title">
+              Notre <span class="accent">portfolio.</span>
+              <span class="text-muted"
+                >12 réalisations du pôle Développement&nbsp;: applications
+                métier, sites vitrine &amp; e-commerce.</span
+              >
+            </h2>
+          </div>
 
-    <!-- ============ RÉALISATIONS — grille filtrable ============ -->
-    <div class="section-head reveal" id="realisations">
-      <div class="eyebrow">Nos réalisations</div>
-      <h2 class="section-title" id="real-title">
-        Notre <span class="accent">portfolio.</span>
-        <span class="text-muted">12 réalisations du pôle Développement&nbsp;: applications métier, sites vitrine &amp; e-commerce.</span>
-      </h2>
-    </div>
+          <div
+            class="real-filters"
+            role="group"
+            aria-label="Filtrer les réalisations par type"
+          >
+            <button
+              type="button"
+              class="real-filter is-active"
+              data-filter="all"
+              aria-pressed="true"
+              >Tout <span class="real-filter-count">12</span></button
+            >
+            <button
+              type="button"
+              class="real-filter"
+              data-filter="app"
+              aria-pressed="false"
+              >Application sur-mesure <span class="real-filter-count">6</span
+              ></button
+            >
+            <button
+              type="button"
+              class="real-filter"
+              data-filter="vitrine"
+              aria-pressed="false"
+              >Vitrine <span class="real-filter-count">6</span></button
+            >
+            <button
+              type="button"
+              class="real-filter"
+              data-filter="ecommerce"
+              aria-pressed="false"
+              >E-commerce <span class="real-filter-count">2</span></button
+            >
+            <button
+              type="button"
+              class="real-filter"
+              data-filter="reservation"
+              aria-pressed="false"
+              >Réservation <span class="real-filter-count">2</span></button
+            >
+            <button
+              type="button"
+              class="real-filter"
+              data-filter="mobile"
+              aria-pressed="false"
+              >Mobile <span class="real-filter-count">1</span></button
+            >
+          </div>
 
-    <div class="real-filters" role="group" aria-label="Filtrer les réalisations par type">
-      <button type="button" class="real-filter is-active" data-filter="all" aria-pressed="true">Tout <span class="real-filter-count">12</span></button>
-      <button type="button" class="real-filter" data-filter="app" aria-pressed="false">Application sur-mesure <span class="real-filter-count">6</span></button>
-      <button type="button" class="real-filter" data-filter="vitrine" aria-pressed="false">Vitrine <span class="real-filter-count">6</span></button>
-      <button type="button" class="real-filter" data-filter="ecommerce" aria-pressed="false">E-commerce <span class="real-filter-count">2</span></button>
-      <button type="button" class="real-filter" data-filter="reservation" aria-pressed="false">Réservation <span class="real-filter-count">2</span></button>
-      <button type="button" class="real-filter" data-filter="mobile" aria-pressed="false">Mobile <span class="real-filter-count">1</span></button>
-    </div>
+          <div
+            class="real-grid reveal"
+            id="real-grid"
+            tabindex="0"
+            role="region"
+            aria-label="Carrousel des réalisations (défilement horizontal)"
+          >
+            <!-- 1. Self Béton -->
+            <article class="real-card" data-cat="app" data-project="selfbeton">
+              <a
+                class="real-card-link"
+                href="https://portfolio.jcddev.fr/realisations/"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Self Béton, application sur-mesure. Voir sur le portfolio JCD Dev."
+              >
+                <div class="real-media">
+                  <span class="real-tag">Application sur-mesure</span>
+                  <img
+                    class="real-cover"
+                    src="realisations/logo-selfbeton.png"
+                    alt="Self Béton"
+                    loading="lazy"
+                    decoding="async"
+                  />
+                </div>
+                <div class="real-body">
+                  <h3 class="real-title">Self Béton</h3>
+                  <p class="real-desc">
+                    Bornes tactiles de commande, paiement CB/NFC et distribution
+                    par QR code sécurisé.
+                  </p>
+                  <ul class="real-tech" aria-label="Technologies">
+                    <li>Laravel</li><li>PHP</li><li>Angular</li><li>
+                      TypeScript
+                    </li><li class="real-tech-more">+3</li>
+                  </ul>
+                  <div class="real-foot">
+                    <span class="real-foot-label">Voir le projet</span>
+                    <span class="real-arrow" aria-hidden="true"
+                      ><svg
+                        viewBox="0 0 16 16"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="1.6"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        ><path d="M3 8h10M9 4l4 4-4 4"></path></svg
+                      ></span
+                    >
+                  </div>
+                </div>
+              </a>
+            </article>
 
-    <div class="real-grid reveal" id="real-grid" tabindex="0" role="region" aria-label="Carrousel des réalisations (défilement horizontal)">
+            <!-- 2. Le Lavoir d'Adèle -->
+            <article
+              class="real-card"
+              data-cat="reservation vitrine"
+              data-project="lavoir-adele"
+            >
+              <a
+                class="real-card-link"
+                href="https://portfolio.jcddev.fr/realisations/"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Le Lavoir d'Adèle, réservation & vitrine. Voir sur le portfolio JCD Dev."
+              >
+                <div class="real-media">
+                  <span class="real-tag">Réservation</span>
+                  <img
+                    class="real-cover"
+                    src="realisations/logo-lavoir-adele.png"
+                    alt="Le Lavoir d'Adèle"
+                    loading="lazy"
+                    decoding="async"
+                  />
+                </div>
+                <div class="real-body">
+                  <h3 class="real-title">Le Lavoir d'Adèle</h3>
+                  <p class="real-desc">
+                    Réservation en ligne du logement et collecte automatisée des
+                    avis post-séjour.
+                  </p>
+                  <ul class="real-tech" aria-label="Technologies">
+                    <li>WooCommerce</li>
+                  </ul>
+                  <div class="real-foot">
+                    <span class="real-foot-label">Voir le projet</span>
+                    <span class="real-arrow" aria-hidden="true"
+                      ><svg
+                        viewBox="0 0 16 16"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="1.6"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        ><path d="M3 8h10M9 4l4 4-4 4"></path></svg
+                      ></span
+                    >
+                  </div>
+                </div>
+              </a>
+            </article>
 
-      <!-- 1. Self Béton -->
-      <article class="real-card" data-cat="app" data-project="selfbeton">
-        <a class="real-card-link" href="https://portfolio.jcddev.fr/realisations/" target="_blank" rel="noopener noreferrer" aria-label="Self Béton, application sur-mesure. Voir sur le portfolio JCD Dev.">
-          <div class="real-media">
-            <span class="real-tag">Application sur-mesure</span>
-            <img class="real-cover" src="realisations/logo-selfbeton.png" alt="Self Béton" loading="lazy" decoding="async">
-          </div>
-          <div class="real-body">
-            <h3 class="real-title">Self Béton</h3>
-            <p class="real-desc">Bornes tactiles de commande, paiement CB/NFC et distribution par QR code sécurisé.</p>
-            <ul class="real-tech" aria-label="Technologies">
-              <li>Laravel</li><li>PHP</li><li>Angular</li><li>TypeScript</li><li class="real-tech-more">+3</li>
-            </ul>
-            <div class="real-foot">
-              <span class="real-foot-label">Voir le projet</span>
-              <span class="real-arrow" aria-hidden="true"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h10M9 4l4 4-4 4"/></svg></span>
-            </div>
-          </div>
-        </a>
-      </article>
+            <!-- 3. LiteYear • Still Provide -->
+            <article
+              class="real-card"
+              data-cat="mobile"
+              data-project="stillprovide"
+            >
+              <a
+                class="real-card-link"
+                href="https://portfolio.jcddev.fr/realisations/"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="LiteYear Still Provide, application Android & iOS. Voir sur le portfolio JCD Dev."
+              >
+                <div class="real-media">
+                  <span class="real-tag">Mobile · Android &amp; iOS</span>
+                  <img
+                    class="real-cover"
+                    src="realisations/logo-stillprovide.png"
+                    alt="LiteYear Still Provide"
+                    loading="lazy"
+                    decoding="async"
+                  />
+                </div>
+                <div class="real-body">
+                  <h3 class="real-title">
+                    LiteYear <span class="accent">•</span> Still Provide
+                  </h3>
+                  <p class="real-desc">
+                    App mobile de prise et suivi de rendez-vous, agenda et
+                    édition assistée de contrats.
+                  </p>
+                  <ul class="real-tech" aria-label="Technologies">
+                    <li>Flutter</li><li>Android</li><li>iOS</li><li>
+                      API REST
+                    </li>
+                  </ul>
+                  <div class="real-foot">
+                    <span class="real-foot-label">Voir le projet</span>
+                    <span class="real-arrow" aria-hidden="true"
+                      ><svg
+                        viewBox="0 0 16 16"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="1.6"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        ><path d="M3 8h10M9 4l4 4-4 4"></path></svg
+                      ></span
+                    >
+                  </div>
+                </div>
+              </a>
+            </article>
 
-      <!-- 2. Le Lavoir d'Adèle -->
-      <article class="real-card" data-cat="reservation vitrine" data-project="lavoir-adele">
-        <a class="real-card-link" href="https://portfolio.jcddev.fr/realisations/" target="_blank" rel="noopener noreferrer" aria-label="Le Lavoir d'Adèle, réservation & vitrine. Voir sur le portfolio JCD Dev.">
-          <div class="real-media">
-            <span class="real-tag">Réservation</span>
-            <img class="real-cover" src="realisations/logo-lavoir-adele.png" alt="Le Lavoir d'Adèle" loading="lazy" decoding="async">
-          </div>
-          <div class="real-body">
-            <h3 class="real-title">Le Lavoir d'Adèle</h3>
-            <p class="real-desc">Réservation en ligne du logement et collecte automatisée des avis post-séjour.</p>
-            <ul class="real-tech" aria-label="Technologies">
-              <li>WooCommerce</li>
-            </ul>
-            <div class="real-foot">
-              <span class="real-foot-label">Voir le projet</span>
-              <span class="real-arrow" aria-hidden="true"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h10M9 4l4 4-4 4"/></svg></span>
-            </div>
-          </div>
-        </a>
-      </article>
+            <!-- 4. Cormontaigne -->
+            <article
+              class="real-card"
+              data-cat="vitrine"
+              data-project="cormontaigne"
+            >
+              <a
+                class="real-card-link"
+                href="https://portfolio.jcddev.fr/realisations/"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Cormontaigne, vitrine. Voir sur le portfolio JCD Dev."
+              >
+                <div class="real-media">
+                  <span class="real-tag">Vitrine</span>
+                  <img
+                    class="real-cover"
+                    src="realisations/logo-cormontaigne.png"
+                    alt="Cormontaigne"
+                    loading="lazy"
+                    decoding="async"
+                  />
+                </div>
+                <div class="real-body">
+                  <h3 class="real-title">Cormontaigne</h3>
+                  <p class="real-desc">
+                    Site vitrine avec inscription aux webinaires et prise de
+                    rendez-vous téléphonique.
+                  </p>
+                  <ul class="real-tech" aria-label="Technologies">
+                    <li>WordPress</li>
+                  </ul>
+                  <div class="real-foot">
+                    <span class="real-foot-label">Voir le projet</span>
+                    <span class="real-arrow" aria-hidden="true"
+                      ><svg
+                        viewBox="0 0 16 16"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="1.6"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        ><path d="M3 8h10M9 4l4 4-4 4"></path></svg
+                      ></span
+                    >
+                  </div>
+                </div>
+              </a>
+            </article>
 
-      <!-- 3. LiteYear • Still Provide -->
-      <article class="real-card" data-cat="mobile" data-project="stillprovide">
-        <a class="real-card-link" href="https://portfolio.jcddev.fr/realisations/" target="_blank" rel="noopener noreferrer" aria-label="LiteYear Still Provide, application Android & iOS. Voir sur le portfolio JCD Dev.">
-          <div class="real-media">
-            <span class="real-tag">Mobile · Android &amp; iOS</span>
-            <img class="real-cover" src="realisations/logo-stillprovide.png" alt="LiteYear Still Provide" loading="lazy" decoding="async">
-          </div>
-          <div class="real-body">
-            <h3 class="real-title">LiteYear <span class="accent">•</span> Still Provide</h3>
-            <p class="real-desc">App mobile de prise et suivi de rendez-vous, agenda et édition assistée de contrats.</p>
-            <ul class="real-tech" aria-label="Technologies">
-              <li>Flutter</li><li>Android</li><li>iOS</li><li>API REST</li>
-            </ul>
-            <div class="real-foot">
-              <span class="real-foot-label">Voir le projet</span>
-              <span class="real-arrow" aria-hidden="true"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h10M9 4l4 4-4 4"/></svg></span>
-            </div>
-          </div>
-        </a>
-      </article>
+            <!-- 5. Arkema -->
+            <article class="real-card" data-cat="app" data-project="arkema">
+              <a
+                class="real-card-link"
+                href="https://portfolio.jcddev.fr/realisations/"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Arkema, application sur-mesure. Voir sur le portfolio JCD Dev."
+              >
+                <div class="real-media">
+                  <span class="real-tag">Application sur-mesure</span>
+                  <img
+                    class="real-cover"
+                    src="realisations/logo-arkema.png"
+                    alt="Arkema"
+                    loading="lazy"
+                    decoding="async"
+                  />
+                </div>
+                <div class="real-body">
+                  <h3 class="real-title">Arkema</h3>
+                  <p class="real-desc">
+                    Suivi de stock de poudre empilée en silo et calculateur
+                    complexe de mélanges.
+                  </p>
+                  <ul class="real-tech" aria-label="Technologies">
+                    <li>Symfony</li><li>PHP</li>
+                  </ul>
+                  <div class="real-foot">
+                    <span class="real-foot-label">Voir le projet</span>
+                    <span class="real-arrow" aria-hidden="true"
+                      ><svg
+                        viewBox="0 0 16 16"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="1.6"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        ><path d="M3 8h10M9 4l4 4-4 4"></path></svg
+                      ></span
+                    >
+                  </div>
+                </div>
+              </a>
+            </article>
 
-      <!-- 4. Cormontaigne -->
-      <article class="real-card" data-cat="vitrine" data-project="cormontaigne">
-        <a class="real-card-link" href="https://portfolio.jcddev.fr/realisations/" target="_blank" rel="noopener noreferrer" aria-label="Cormontaigne, vitrine. Voir sur le portfolio JCD Dev.">
-          <div class="real-media">
-            <span class="real-tag">Vitrine</span>
-            <img class="real-cover" src="realisations/logo-cormontaigne.png" alt="Cormontaigne" loading="lazy" decoding="async">
-          </div>
-          <div class="real-body">
-            <h3 class="real-title">Cormontaigne</h3>
-            <p class="real-desc">Site vitrine avec inscription aux webinaires et prise de rendez-vous téléphonique.</p>
-            <ul class="real-tech" aria-label="Technologies">
-              <li>WordPress</li>
-            </ul>
-            <div class="real-foot">
-              <span class="real-foot-label">Voir le projet</span>
-              <span class="real-arrow" aria-hidden="true"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h10M9 4l4 4-4 4"/></svg></span>
-            </div>
-          </div>
-        </a>
-      </article>
+            <!-- 6. Thimo -->
+            <article
+              class="real-card"
+              data-cat="ecommerce vitrine"
+              data-project="thimo"
+            >
+              <a
+                class="real-card-link"
+                href="https://portfolio.jcddev.fr/realisations/"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Thimo, e-commerce & vitrine. Voir sur le portfolio JCD Dev."
+              >
+                <div class="real-media">
+                  <span class="real-tag">E-commerce</span>
+                  <img
+                    class="real-cover"
+                    src="realisations/logo-thimo.png"
+                    alt="Thimo"
+                    loading="lazy"
+                    decoding="async"
+                  />
+                </div>
+                <div class="real-body">
+                  <h3 class="real-title">Thimo</h3>
+                  <p class="real-desc">
+                    E-commerce de décoration avec génération d'étiquettes de
+                    livraison et vitrine d'architecture d'intérieur.
+                  </p>
+                  <ul class="real-tech" aria-label="Technologies">
+                    <li>WooCommerce</li>
+                  </ul>
+                  <div class="real-foot">
+                    <span class="real-foot-label">Voir le projet</span>
+                    <span class="real-arrow" aria-hidden="true"
+                      ><svg
+                        viewBox="0 0 16 16"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="1.6"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        ><path d="M3 8h10M9 4l4 4-4 4"></path></svg
+                      ></span
+                    >
+                  </div>
+                </div>
+              </a>
+            </article>
 
-      <!-- 5. Arkema -->
-      <article class="real-card" data-cat="app" data-project="arkema">
-        <a class="real-card-link" href="https://portfolio.jcddev.fr/realisations/" target="_blank" rel="noopener noreferrer" aria-label="Arkema, application sur-mesure. Voir sur le portfolio JCD Dev.">
-          <div class="real-media">
-            <span class="real-tag">Application sur-mesure</span>
-            <img class="real-cover" src="realisations/logo-arkema.png" alt="Arkema" loading="lazy" decoding="async">
-          </div>
-          <div class="real-body">
-            <h3 class="real-title">Arkema</h3>
-            <p class="real-desc">Suivi de stock de poudre empilée en silo et calculateur complexe de mélanges.</p>
-            <ul class="real-tech" aria-label="Technologies">
-              <li>Symfony</li><li>PHP</li>
-            </ul>
-            <div class="real-foot">
-              <span class="real-foot-label">Voir le projet</span>
-              <span class="real-arrow" aria-hidden="true"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h10M9 4l4 4-4 4"/></svg></span>
-            </div>
-          </div>
-        </a>
-      </article>
+            <!-- 7. Viessmann • Virenov -->
+            <article class="real-card" data-cat="app" data-project="virenov">
+              <a
+                class="real-card-link"
+                href="https://portfolio.jcddev.fr/realisations/"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Viessmann Virenov, application sur-mesure. Voir sur le portfolio JCD Dev."
+              >
+                <div class="real-media">
+                  <span class="real-tag">Application sur-mesure</span>
+                  <img
+                    class="real-cover"
+                    src="realisations/logo-virenov.png"
+                    alt="Viessmann Virenov"
+                    loading="lazy"
+                    decoding="async"
+                  />
+                </div>
+                <div class="real-body">
+                  <h3 class="real-title">
+                    Viessmann <span class="accent">•</span> Virenov
+                  </h3>
+                  <p class="real-desc">
+                    Plateforme installateurs : suivi de dossiers, démarches
+                    CEE/PV, calculettes d'aides et comparateurs.
+                  </p>
+                  <ul class="real-tech" aria-label="Technologies">
+                    <li>Laravel</li><li>PHP</li><li>Angular</li><li>
+                      API REST
+                    </li><li class="real-tech-more">+1</li>
+                  </ul>
+                  <div class="real-foot">
+                    <span class="real-foot-label">Voir le projet</span>
+                    <span class="real-arrow" aria-hidden="true"
+                      ><svg
+                        viewBox="0 0 16 16"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="1.6"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        ><path d="M3 8h10M9 4l4 4-4 4"></path></svg
+                      ></span
+                    >
+                  </div>
+                </div>
+              </a>
+            </article>
 
-      <!-- 6. Thimo -->
-      <article class="real-card" data-cat="ecommerce vitrine" data-project="thimo">
-        <a class="real-card-link" href="https://portfolio.jcddev.fr/realisations/" target="_blank" rel="noopener noreferrer" aria-label="Thimo, e-commerce & vitrine. Voir sur le portfolio JCD Dev.">
-          <div class="real-media">
-            <span class="real-tag">E-commerce</span>
-            <img class="real-cover" src="realisations/logo-thimo.png" alt="Thimo" loading="lazy" decoding="async">
-          </div>
-          <div class="real-body">
-            <h3 class="real-title">Thimo</h3>
-            <p class="real-desc">E-commerce de décoration avec génération d'étiquettes de livraison et vitrine d'architecture d'intérieur.</p>
-            <ul class="real-tech" aria-label="Technologies">
-              <li>WooCommerce</li>
-            </ul>
-            <div class="real-foot">
-              <span class="real-foot-label">Voir le projet</span>
-              <span class="real-arrow" aria-hidden="true"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h10M9 4l4 4-4 4"/></svg></span>
-            </div>
-          </div>
-        </a>
-      </article>
+            <!-- 8. Univac -->
+            <article
+              class="real-card"
+              data-cat="reservation vitrine"
+              data-project="univac"
+            >
+              <a
+                class="real-card-link"
+                href="https://portfolio.jcddev.fr/realisations/"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Univac, réservation & vitrine. Voir sur le portfolio JCD Dev."
+              >
+                <div class="real-media">
+                  <span class="real-tag">Réservation</span>
+                  <img
+                    class="real-cover"
+                    src="realisations/logo-univac.png"
+                    alt="Univac"
+                    loading="lazy"
+                    decoding="async"
+                  />
+                </div>
+                <div class="real-body">
+                  <h3 class="real-title">Univac</h3>
+                  <p class="real-desc">
+                    Réservation de chambres d'hôtel en ligne et présentation des
+                    établissements.
+                  </p>
+                  <ul class="real-tech" aria-label="Technologies">
+                    <li>WooCommerce</li>
+                  </ul>
+                  <div class="real-foot">
+                    <span class="real-foot-label">Voir le projet</span>
+                    <span class="real-arrow" aria-hidden="true"
+                      ><svg
+                        viewBox="0 0 16 16"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="1.6"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        ><path d="M3 8h10M9 4l4 4-4 4"></path></svg
+                      ></span
+                    >
+                  </div>
+                </div>
+              </a>
+            </article>
 
-      <!-- 7. Viessmann • Virenov -->
-      <article class="real-card" data-cat="app" data-project="virenov">
-        <a class="real-card-link" href="https://portfolio.jcddev.fr/realisations/" target="_blank" rel="noopener noreferrer" aria-label="Viessmann Virenov, application sur-mesure. Voir sur le portfolio JCD Dev.">
-          <div class="real-media">
-            <span class="real-tag">Application sur-mesure</span>
-            <img class="real-cover" src="realisations/logo-virenov.png" alt="Viessmann Virenov" loading="lazy" decoding="async">
-          </div>
-          <div class="real-body">
-            <h3 class="real-title">Viessmann <span class="accent">•</span> Virenov</h3>
-            <p class="real-desc">Plateforme installateurs : suivi de dossiers, démarches CEE/PV, calculettes d'aides et comparateurs.</p>
-            <ul class="real-tech" aria-label="Technologies">
-              <li>Laravel</li><li>PHP</li><li>Angular</li><li>API REST</li><li class="real-tech-more">+1</li>
-            </ul>
-            <div class="real-foot">
-              <span class="real-foot-label">Voir le projet</span>
-              <span class="real-arrow" aria-hidden="true"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h10M9 4l4 4-4 4"/></svg></span>
-            </div>
-          </div>
-        </a>
-      </article>
+            <!-- 9. Viessmann • Solution de prescriptions -->
+            <article
+              class="real-card"
+              data-cat="app vitrine"
+              data-project="viessmann"
+            >
+              <a
+                class="real-card-link"
+                href="https://portfolio.jcddev.fr/realisations/"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Viessmann Solution de prescriptions, application sur-mesure. Voir sur le portfolio JCD Dev."
+              >
+                <div class="real-media">
+                  <span class="real-tag">Application sur-mesure</span>
+                  <img
+                    class="real-cover"
+                    src="realisations/logo-viessmann.png"
+                    alt="Viessmann Solution de prescriptions"
+                    loading="lazy"
+                    decoding="async"
+                  />
+                </div>
+                <div class="real-body">
+                  <h3 class="real-title">
+                    Viessmann <span class="accent">•</span> Prescriptions
+                  </h3>
+                  <p class="real-desc">
+                    Catalogue produit documenté et algorithme de calcul de la
+                    production d'eau chaude sanitaire.
+                  </p>
+                  <ul class="real-tech" aria-label="Technologies">
+                    <li>WordPress</li><li>PHP</li>
+                  </ul>
+                  <div class="real-foot">
+                    <span class="real-foot-label">Voir le projet</span>
+                    <span class="real-arrow" aria-hidden="true"
+                      ><svg
+                        viewBox="0 0 16 16"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="1.6"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        ><path d="M3 8h10M9 4l4 4-4 4"></path></svg
+                      ></span
+                    >
+                  </div>
+                </div>
+              </a>
+            </article>
 
-      <!-- 8. Univac -->
-      <article class="real-card" data-cat="reservation vitrine" data-project="univac">
-        <a class="real-card-link" href="https://portfolio.jcddev.fr/realisations/" target="_blank" rel="noopener noreferrer" aria-label="Univac, réservation & vitrine. Voir sur le portfolio JCD Dev.">
-          <div class="real-media">
-            <span class="real-tag">Réservation</span>
-            <img class="real-cover" src="realisations/logo-univac.png" alt="Univac" loading="lazy" decoding="async">
-          </div>
-          <div class="real-body">
-            <h3 class="real-title">Univac</h3>
-            <p class="real-desc">Réservation de chambres d'hôtel en ligne et présentation des établissements.</p>
-            <ul class="real-tech" aria-label="Technologies">
-              <li>WooCommerce</li>
-            </ul>
-            <div class="real-foot">
-              <span class="real-foot-label">Voir le projet</span>
-              <span class="real-arrow" aria-hidden="true"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h10M9 4l4 4-4 4"/></svg></span>
-            </div>
-          </div>
-        </a>
-      </article>
+            <!-- 10. Synapse Santé -->
+            <article class="real-card" data-cat="app" data-project="synapse">
+              <a
+                class="real-card-link"
+                href="https://portfolio.jcddev.fr/realisations/"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Synapse Santé, application sur-mesure. Voir sur le portfolio JCD Dev."
+              >
+                <div class="real-media">
+                  <span class="real-tag">Application sur-mesure</span>
+                  <img
+                    class="real-cover"
+                    src="realisations/logo-synapse.png"
+                    alt="Synapse Santé"
+                    loading="lazy"
+                    decoding="async"
+                  />
+                </div>
+                <div class="real-body">
+                  <h3 class="real-title">Synapse Santé</h3>
+                  <p class="real-desc">
+                    Extranet médical : centralisation des données patient,
+                    indicateurs visuels et signature de documents.
+                  </p>
+                  <ul class="real-tech" aria-label="Technologies">
+                    <li>Laravel</li><li>PHP</li><li>Angular</li><li>
+                      TypeScript
+                    </li><li class="real-tech-more">+2</li>
+                  </ul>
+                  <div class="real-foot">
+                    <span class="real-foot-label">Voir le projet</span>
+                    <span class="real-arrow" aria-hidden="true"
+                      ><svg
+                        viewBox="0 0 16 16"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="1.6"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        ><path d="M3 8h10M9 4l4 4-4 4"></path></svg
+                      ></span
+                    >
+                  </div>
+                </div>
+              </a>
+            </article>
 
-      <!-- 9. Viessmann • Solution de prescriptions -->
-      <article class="real-card" data-cat="app vitrine" data-project="viessmann">
-        <a class="real-card-link" href="https://portfolio.jcddev.fr/realisations/" target="_blank" rel="noopener noreferrer" aria-label="Viessmann Solution de prescriptions, application sur-mesure. Voir sur le portfolio JCD Dev.">
-          <div class="real-media">
-            <span class="real-tag">Application sur-mesure</span>
-            <img class="real-cover" src="realisations/logo-viessmann.png" alt="Viessmann Solution de prescriptions" loading="lazy" decoding="async">
-          </div>
-          <div class="real-body">
-            <h3 class="real-title">Viessmann <span class="accent">•</span> Prescriptions</h3>
-            <p class="real-desc">Catalogue produit documenté et algorithme de calcul de la production d'eau chaude sanitaire.</p>
-            <ul class="real-tech" aria-label="Technologies">
-              <li>WordPress</li><li>PHP</li>
-            </ul>
-            <div class="real-foot">
-              <span class="real-foot-label">Voir le projet</span>
-              <span class="real-arrow" aria-hidden="true"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h10M9 4l4 4-4 4"/></svg></span>
-            </div>
-          </div>
-        </a>
-      </article>
+            <!-- 11. Tarte aux sucres -->
+            <article
+              class="real-card"
+              data-cat="ecommerce vitrine"
+              data-project="tarte-sucre"
+            >
+              <a
+                class="real-card-link"
+                href="https://portfolio.jcddev.fr/realisations/"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Tarte aux sucres, e-commerce & vitrine. Voir sur le portfolio JCD Dev."
+              >
+                <div class="real-media">
+                  <span class="real-tag">E-commerce</span>
+                  <img
+                    class="real-cover"
+                    src="realisations/logo-tarte-sucre.png"
+                    alt="Tarte aux sucres"
+                    loading="lazy"
+                    decoding="async"
+                  />
+                </div>
+                <div class="real-body">
+                  <h3 class="real-title">Tarte aux sucres</h3>
+                  <p class="real-desc">
+                    Click &amp; collect sur le catalogue et mise en avant de
+                    l'ensemble des produits en ligne.
+                  </p>
+                  <ul class="real-tech" aria-label="Technologies">
+                    <li>WooCommerce</li>
+                  </ul>
+                  <div class="real-foot">
+                    <span class="real-foot-label">Voir le projet</span>
+                    <span class="real-arrow" aria-hidden="true"
+                      ><svg
+                        viewBox="0 0 16 16"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="1.6"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        ><path d="M3 8h10M9 4l4 4-4 4"></path></svg
+                      ></span
+                    >
+                  </div>
+                </div>
+              </a>
+            </article>
 
-      <!-- 10. Synapse Santé -->
-      <article class="real-card" data-cat="app" data-project="synapse">
-        <a class="real-card-link" href="https://portfolio.jcddev.fr/realisations/" target="_blank" rel="noopener noreferrer" aria-label="Synapse Santé, application sur-mesure. Voir sur le portfolio JCD Dev.">
-          <div class="real-media">
-            <span class="real-tag">Application sur-mesure</span>
-            <img class="real-cover" src="realisations/logo-synapse.png" alt="Synapse Santé" loading="lazy" decoding="async">
+            <!-- 12. LiteYear • OAV -->
+            <article class="real-card" data-cat="app" data-project="liteyear">
+              <a
+                class="real-card-link"
+                href="https://portfolio.jcddev.fr/realisations/"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="LiteYear OAV, application sur-mesure. Voir sur le portfolio JCD Dev."
+              >
+                <div class="real-media">
+                  <span class="real-tag">Application sur-mesure</span>
+                  <img
+                    class="real-cover"
+                    src="realisations/logo-liteyear.png"
+                    alt="LiteYear OAV"
+                    loading="lazy"
+                    decoding="async"
+                  />
+                </div>
+                <div class="real-body">
+                  <h3 class="real-title">
+                    LiteYear <span class="accent">•</span> OAV
+                  </h3>
+                  <p class="real-desc">
+                    Édition de contrats synchronisés avec les fournisseurs et
+                    suivi des performances commerciales.
+                  </p>
+                  <ul class="real-tech" aria-label="Technologies">
+                    <li>Laravel</li><li>PHP</li><li>API REST</li>
+                  </ul>
+                  <div class="real-foot">
+                    <span class="real-foot-label">Voir le projet</span>
+                    <span class="real-arrow" aria-hidden="true"
+                      ><svg
+                        viewBox="0 0 16 16"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="1.6"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        ><path d="M3 8h10M9 4l4 4-4 4"></path></svg
+                      ></span
+                    >
+                  </div>
+                </div>
+              </a>
+            </article>
           </div>
-          <div class="real-body">
-            <h3 class="real-title">Synapse Santé</h3>
-            <p class="real-desc">Extranet médical : centralisation des données patient, indicateurs visuels et signature de documents.</p>
-            <ul class="real-tech" aria-label="Technologies">
-              <li>Laravel</li><li>PHP</li><li>Angular</li><li>TypeScript</li><li class="real-tech-more">+2</li>
-            </ul>
-            <div class="real-foot">
-              <span class="real-foot-label">Voir le projet</span>
-              <span class="real-arrow" aria-hidden="true"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h10M9 4l4 4-4 4"/></svg></span>
-            </div>
+
+          <div class="real-ctrl">
+            <button
+              type="button"
+              class="real-nav"
+              id="real-prev"
+              aria-label="Projets précédents"
+              disabled
+            >
+              <svg viewBox="0 0 16 16" aria-hidden="true"
+                ><path d="M10 3 L5 8 L10 13"></path></svg
+              >
+            </button>
+            <button
+              type="button"
+              class="real-nav"
+              id="real-next"
+              aria-label="Projets suivants"
+            >
+              <svg viewBox="0 0 16 16" aria-hidden="true"
+                ><path d="M6 3 L11 8 L6 13"></path></svg
+              >
+            </button>
           </div>
-        </a>
-      </article>
 
-      <!-- 11. Tarte aux sucres -->
-      <article class="real-card" data-cat="ecommerce vitrine" data-project="tarte-sucre">
-        <a class="real-card-link" href="https://portfolio.jcddev.fr/realisations/" target="_blank" rel="noopener noreferrer" aria-label="Tarte aux sucres, e-commerce & vitrine. Voir sur le portfolio JCD Dev.">
-          <div class="real-media">
-            <span class="real-tag">E-commerce</span>
-            <img class="real-cover" src="realisations/logo-tarte-sucre.png" alt="Tarte aux sucres" loading="lazy" decoding="async">
-          </div>
-          <div class="real-body">
-            <h3 class="real-title">Tarte aux sucres</h3>
-            <p class="real-desc">Click &amp; collect sur le catalogue et mise en avant de l'ensemble des produits en ligne.</p>
-            <ul class="real-tech" aria-label="Technologies">
-              <li>WooCommerce</li>
-            </ul>
-            <div class="real-foot">
-              <span class="real-foot-label">Voir le projet</span>
-              <span class="real-arrow" aria-hidden="true"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h10M9 4l4 4-4 4"/></svg></span>
-            </div>
-          </div>
-        </a>
-      </article>
+          <p class="real-sr" role="status" aria-live="polite" id="real-live">
+          </p>
+        </div>
+      </section>
 
-      <!-- 12. LiteYear • OAV -->
-      <article class="real-card" data-cat="app" data-project="liteyear">
-        <a class="real-card-link" href="https://portfolio.jcddev.fr/realisations/" target="_blank" rel="noopener noreferrer" aria-label="LiteYear OAV, application sur-mesure. Voir sur le portfolio JCD Dev.">
-          <div class="real-media">
-            <span class="real-tag">Application sur-mesure</span>
-            <img class="real-cover" src="realisations/logo-liteyear.png" alt="LiteYear OAV" loading="lazy" decoding="async">
-          </div>
-          <div class="real-body">
-            <h3 class="real-title">LiteYear <span class="accent">•</span> OAV</h3>
-            <p class="real-desc">Édition de contrats synchronisés avec les fournisseurs et suivi des performances commerciales.</p>
-            <ul class="real-tech" aria-label="Technologies">
-              <li>Laravel</li><li>PHP</li><li>API REST</li>
-            </ul>
-            <div class="real-foot">
-              <span class="real-foot-label">Voir le projet</span>
-              <span class="real-arrow" aria-hidden="true"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h10M9 4l4 4-4 4"/></svg></span>
-            </div>
-          </div>
-        </a>
-      </article>
-
-    </div>
-
-    <div class="real-ctrl">
-      <button type="button" class="real-nav" id="real-prev" aria-label="Projets précédents" disabled>
-        <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M10 3 L5 8 L10 13"/></svg>
-      </button>
-      <button type="button" class="real-nav" id="real-next" aria-label="Projets suivants">
-        <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M6 3 L11 8 L6 13"/></svg>
-      </button>
-    </div>
-
-    <p class="real-sr" role="status" aria-live="polite" id="real-live"></p>
-  </div>
-</section>
-
-
-<!-- ====================================================================
+      <!-- ====================================================================
      CTA — Premier contact gratuit
      ==================================================================== -->
-<section class="cta-section" id="contact" aria-labelledby="cta-title">
-  <div class="container">
-    <div class="cta-frame">
-      <div class="cta-inner">
-        <svg class="cta-icon reveal" viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
-          <g stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" fill="none">
-            <rect x="22" y="30" width="76" height="58" rx="6" stroke-width="2"/>
-            <path d="M22 44 H98" stroke-width="2" opacity="0.5"/>
-            <circle cx="31" cy="37" r="1.6" fill="currentColor" stroke="none"/>
-            <circle cx="38" cy="37" r="1.6" fill="currentColor" stroke="none" opacity="0.6"/>
-            <circle cx="45" cy="37" r="1.6" fill="currentColor" stroke="none" opacity="0.4"/>
-            <path d="M34 58 L42 64 L34 70" stroke-width="2.4"/>
-            <g class="cta-icon-wave"><path d="M50 70 H70" stroke-width="2.4"/></g>
-          </g>
-        </svg>
+      <section class="cta-section" id="contact" aria-labelledby="cta-title">
+        <div class="container">
+          <div class="cta-frame">
+            <div class="cta-inner">
+              <svg
+                class="cta-icon reveal"
+                viewBox="0 0 120 120"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+                aria-hidden="true"
+                focusable="false"
+              >
+                <g
+                  stroke="currentColor"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  fill="none"
+                >
+                  <rect
+                    x="22"
+                    y="30"
+                    width="76"
+                    height="58"
+                    rx="6"
+                    stroke-width="2"></rect>
+                  <path d="M22 44 H98" stroke-width="2" opacity="0.5"></path>
+                  <circle
+                    cx="31"
+                    cy="37"
+                    r="1.6"
+                    fill="currentColor"
+                    stroke="none"></circle>
+                  <circle
+                    cx="38"
+                    cy="37"
+                    r="1.6"
+                    fill="currentColor"
+                    stroke="none"
+                    opacity="0.6"></circle>
+                  <circle
+                    cx="45"
+                    cy="37"
+                    r="1.6"
+                    fill="currentColor"
+                    stroke="none"
+                    opacity="0.4"></circle>
+                  <path d="M34 58 L42 64 L34 70" stroke-width="2.4"></path>
+                  <g class="cta-icon-wave"
+                    ><path d="M50 70 H70" stroke-width="2.4"></path></g
+                  >
+                </g>
+              </svg>
 
-        <div class="cta-body">
-          <h2 class="cta-title reveal delay-1" id="cta-title">
-            Un projet de <em>développement&thinsp;?</em>
-          </h2>
-          <p class="cta-sub reveal delay-2">
-            Bénéficiez d'un conseil personnalisé gratuit pour votre transformation digitale. Audit, diagnostic, devis, démo ou simple échange, par téléphone, en visio ou chez vous.
-          </p>
-          <div class="cta-actions reveal delay-3">
-            <a href="contact.html?pole=developpement" class="btn-cta btn-cta--primary">
-              Contacter le pôle Développement
-              <span class="btn-cta-arrow"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h10M9 4l4 4-4 4"/></svg></span>
-            </a>
-            <span class="cta-actions-divider" aria-hidden="true"></span>
-            <span class="cta-phone">
-              <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" width="14" height="14"><path d="M2 3a1 1 0 011-1h3.28a1 1 0 01.95.68l1.07 3.21a1 1 0 01-.25 1L6.54 8.4a12.06 12.06 0 005.06 5.06l1.51-1.51a1 1 0 011-.25l3.21 1.07a1 1 0 01.68.95V17a1 1 0 01-1 1A15 15 0 012 3z"/></svg>
-              <a href="tel:+33387184920" class="cta-phone-num">03 87 18 49 20</a>
-            </span>
+              <div class="cta-body">
+                <h2 class="cta-title reveal delay-1" id="cta-title">
+                  Un projet de <em>développement&thinsp;?</em>
+                </h2>
+                <p class="cta-sub reveal delay-2">
+                  Bénéficiez d'un conseil personnalisé gratuit pour votre
+                  transformation digitale. Audit, diagnostic, devis, démo ou
+                  simple échange, par téléphone, en visio ou chez vous.
+                </p>
+                <div class="cta-actions reveal delay-3">
+                  <a
+                    href="contact.html?pole=developpement"
+                    class="btn-cta btn-cta--primary"
+                  >
+                    Contacter le pôle Développement
+                    <span class="btn-cta-arrow"
+                      ><svg
+                        viewBox="0 0 16 16"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="1.6"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        ><path d="M3 8h10M9 4l4 4-4 4"></path></svg
+                      ></span
+                    >
+                  </a>
+                  <span class="cta-actions-divider" aria-hidden="true"></span>
+                  <span class="cta-phone">
+                    <svg
+                      viewBox="0 0 20 20"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="1.4"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      width="14"
+                      height="14"
+                      ><path
+                        d="M2 3a1 1 0 011-1h3.28a1 1 0 01.95.68l1.07 3.21a1 1 0 01-.25 1L6.54 8.4a12.06 12.06 0 005.06 5.06l1.51-1.51a1 1 0 011-.25l3.21 1.07a1 1 0 01.68.95V17a1 1 0 01-1 1A15 15 0 012 3z"
+                      ></path></svg
+                    >
+                    <a href="tel:+33387184920" class="cta-phone-num"
+                      >03 87 18 49 20</a
+                    >
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <Footer />
+
+    <script is:inline src="js/pages/developpement-2.js"></script>
+
+    <!-- ============ Aperçu projet — modale carousel + description ============ -->
+    <div class="rp-modal" id="rp-modal" aria-hidden="true">
+      <div class="rp-backdrop" data-rp-close></div>
+      <div class="rp-scroll" data-rp-close>
+        <div
+          class="rp-dialog"
+          role="dialog"
+          aria-modal="true"
+          aria-labelledby="rp-title"
+          tabindex="-1"
+        >
+          <div class="rp-bar">
+            <span class="rp-dots" aria-hidden="true"><i></i><i></i><i></i></span
+            >
+            <span class="rp-bar-title" id="rp-bar-title"
+              >projet · <span class="accent">preview</span></span
+            >
+            <button
+              type="button"
+              class="rp-close"
+              id="rp-close"
+              aria-label="Fermer l'aperçu"
+            >
+              <svg
+                viewBox="0 0 16 16"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.7"
+                stroke-linecap="round"><path d="M4 4l8 8M12 4l-8 8"></path></svg
+              >
+            </button>
+          </div>
+          <div class="rp-carousel" id="rp-carousel">
+            <span class="rp-counter" id="rp-counter"><b>01</b> / 01</span>
+            <div class="rp-viewport">
+              <div class="rp-track" id="rp-track"></div>
+            </div>
+            <button
+              type="button"
+              class="rp-nav rp-prev"
+              id="rp-prev"
+              aria-label="Image précédente"
+            >
+              <svg
+                viewBox="0 0 16 16"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.7"
+                stroke-linecap="round"
+                stroke-linejoin="round"><path d="M10 3L5 8l5 5"></path></svg
+              >
+            </button>
+            <button
+              type="button"
+              class="rp-nav rp-next"
+              id="rp-next"
+              aria-label="Image suivante"
+            >
+              <svg
+                viewBox="0 0 16 16"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.7"
+                stroke-linecap="round"
+                stroke-linejoin="round"><path d="M6 3l5 5-5 5"></path></svg
+              >
+            </button>
+            <div
+              class="rp-dots-row"
+              id="rp-dots"
+              aria-label="Choisir une image"
+            >
+            </div>
+          </div>
+          <div class="rp-content">
+            <span class="rp-eyebrow" id="rp-eyebrow">Réalisation</span>
+            <h3 class="rp-title" id="rp-title"></h3>
+            <p class="rp-sub" id="rp-sub"></p>
+            <p class="rp-desc" id="rp-desc"></p>
+            <ul class="rp-tech" id="rp-tech" aria-label="Technologies"></ul>
           </div>
         </div>
       </div>
     </div>
-  </div>
-</section>
 
-</main>
+    <script is:inline src="js/pages/developpement-1.js"></script>
+    <script is:inline src="js/shared/menu-frost.js"></script>
+    <!-- jcd-mobile-nav (injected) -->
+    <button
+      class="jcd-burger"
+      id="jcdBurger"
+      type="button"
+      aria-label="Ouvrir le menu"
+      aria-expanded="false"
+      aria-controls="jcdMnav"
+    >
+      <span class="jcd-burger__box" aria-hidden="true"
+        ><i></i><i></i><i></i></span
+      >
+    </button>
+    <div
+      class="jcd-mnav"
+      id="jcdMnav"
+      role="dialog"
+      aria-modal="true"
+      aria-label="Menu de navigation"
+      aria-hidden="true"
+    >
+      <div class="jcd-mnav__scroll">
+        <div class="jcd-mnav__inner">
+          <p
+            class="jcd-mnav__eyebrow jcd-mnav__reveal"
+            style="transition-delay:.04s"
+          >
+            Expertises
+          </p>
 
-<Footer />
+          <div class="jcd-mnav__reveal" style="transition-delay:.07s">
+            <div class="jcd-mnav__item" style="--mnav-c:#2E72BA">
+              <a class="jcd-mnav__link" href="informatique.html"
+                ><span class="jcd-mnav__dot"></span><span
+                  class="jcd-mnav__label">Informatique</span
+                ></a
+              >
+              <button
+                class="jcd-acc__toggle"
+                type="button"
+                aria-expanded="false"
+                aria-controls="jcdAccInfo"
+                aria-label="Afficher les sous-pages Informatique"
+              >
+                <svg
+                  viewBox="0 0 14 14"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.6"
+                  stroke-linecap="round"><path d="M7 2v10M2 7h10"></path></svg
+                >
+              </button>
+            </div>
+            <div class="jcd-acc__panel" id="jcdAccInfo">
+              <a class="jcd-mnav__sub" href="info-cloud.html">Cloud Microsoft</a
+              >
+              <a class="jcd-mnav__sub" href="info-collaboratif.html"
+                >Solutions collaboratives &amp; audiovisuelles</a
+              >
+              <a class="jcd-mnav__sub" href="info-reseaux.html"
+                >Architectures syst&egrave;mes &amp; r&eacute;seaux</a
+              >
+              <a class="jcd-mnav__sub" href="info-integration.html"
+                >Int&eacute;gration &amp; Support PC</a
+              >
+            </div>
+          </div>
 
+          <a
+            class="jcd-mnav__item jcd-mnav__reveal"
+            style="--mnav-c:#E51D29;transition-delay:.10s"
+            href="service.html"
+            ><span class="jcd-mnav__dot"></span><span class="jcd-mnav__label"
+              >Service</span
+            ></a
+          >
+          <a
+            class="jcd-mnav__item jcd-mnav__reveal"
+            style="--mnav-c:#F9D605;transition-delay:.13s"
+            href="developpement.html"
+            ><span class="jcd-mnav__dot"></span><span class="jcd-mnav__label"
+              >D&eacute;veloppement</span
+            ></a
+          >
+          <a
+            class="jcd-mnav__item jcd-mnav__reveal"
+            style="--mnav-c:#F3941D;transition-delay:.16s"
+            href="print.html"
+            ><span class="jcd-mnav__dot"></span><span class="jcd-mnav__label"
+              >Print</span
+            ></a
+          >
+          <a
+            class="jcd-mnav__item jcd-mnav__reveal"
+            style="--mnav-c:#B063AC;transition-delay:.19s"
+            href="telecom.html"
+            ><span class="jcd-mnav__dot"></span><span class="jcd-mnav__label"
+              >T&eacute;l&eacute;com</span
+            ></a
+          >
+          <div class="jcd-mnav__reveal" style="transition-delay:.22s">
+            <div class="jcd-mnav__item" style="--mnav-c:#8EC041">
+              <a class="jcd-mnav__link" href="formation.html"
+                ><span class="jcd-mnav__dot"></span><span
+                  class="jcd-mnav__label">Formation</span
+                ></a
+              >
+              <button
+                class="jcd-acc__toggle"
+                type="button"
+                aria-expanded="false"
+                aria-controls="jcdAccForm"
+                aria-label="Afficher les catégories de formation"
+              >
+                <svg
+                  viewBox="0 0 14 14"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.6"
+                  stroke-linecap="round"><path d="M7 2v10M2 7h10"></path></svg
+                >
+              </button>
+            </div>
+            <div class="jcd-acc__panel" id="jcdAccForm">
+              <a class="jcd-mnav__sub" href="formation-bureautique.html"
+                >Bureautique</a
+              >
+              <a
+                class="jcd-mnav__sub"
+                href="formation-intelligence-artificielle.html"
+                >Intelligence artificielle</a
+              >
+              <a class="jcd-mnav__sub" href="formation-informatique.html"
+                >Informatique</a
+              >
+              <a
+                class="jcd-mnav__sub"
+                href="formation-communication-marketing.html"
+                >Communication - Marketing</a
+              >
+              <a class="jcd-mnav__sub" href="formation-management.html"
+                >Management</a
+              >
+              <a
+                class="jcd-mnav__sub"
+                href="formation-commerce-relation-client.html"
+                >Commerce - Relation client</a
+              >
+              <a
+                class="jcd-mnav__sub"
+                href="formation-comptabilite-gestion.html"
+                >Comptabilit&eacute; - Gestion</a
+              >
+              <a class="jcd-mnav__sub" href="formation-ressources-humaines.html"
+                >Ressources humaines</a
+              >
+              <a
+                class="jcd-mnav__sub"
+                href="formation-developpement-personnel.html"
+                >D&eacute;veloppement personnel</a
+              >
+              <a class="jcd-mnav__sub" href="formation-graphisme-pao.html"
+                >Graphisme - PAO</a
+              >
+              <a
+                class="jcd-mnav__sub"
+                href="formation-administratif-secretariat-accueil.html"
+                >Administratif - Secr&eacute;tariat</a
+              >
+              <a class="jcd-mnav__sub" href="formation-securite.html"
+                >S&eacute;curit&eacute;</a
+              >
+              <a class="jcd-mnav__sub" href="formation-langues.html">Langues</a>
+            </div>
+          </div>
+          <a
+            class="jcd-mnav__item jcd-mnav__reveal"
+            style="--mnav-c:#A78D75;transition-delay:.25s"
+            href="agencement.html"
+            ><span class="jcd-mnav__dot"></span><span class="jcd-mnav__label"
+              >Agencement</span
+            ></a
+          >
 
-<script is:inline src="js/pages/developpement-2.js"></script>
+          <p
+            class="jcd-mnav__eyebrow jcd-mnav__sec2 jcd-mnav__reveal"
+            style="transition-delay:.30s"
+          >
+            D&eacute;couvrir
+          </p>
+          <a
+            class="jcd-mnav__item jcd-mnav__reveal"
+            style="--mnav-c:#9a9a9a;transition-delay:.33s"
+            href="assistance.html"
+            ><span class="jcd-mnav__dot"></span><span
+              class="jcd-mnav__label"
+              style="font-size:19px">Assistance</span
+            ></a
+          >
+          <a
+            class="jcd-mnav__item jcd-mnav__reveal"
+            style="--mnav-c:#9a9a9a;transition-delay:.36s"
+            href="carrieres.html"
+            ><span class="jcd-mnav__dot"></span><span
+              class="jcd-mnav__label"
+              style="font-size:19px">Carri&egrave;res</span
+            ></a
+          >
 
-<!-- ============ Aperçu projet — modale carousel + description ============ -->
-<div class="rp-modal" id="rp-modal" aria-hidden="true">
-  <div class="rp-backdrop" data-rp-close></div>
-  <div class="rp-scroll" data-rp-close>
-    <div class="rp-dialog" role="dialog" aria-modal="true" aria-labelledby="rp-title" tabindex="-1">
-      <div class="rp-bar">
-        <span class="rp-dots" aria-hidden="true"><i></i><i></i><i></i></span>
-        <span class="rp-bar-title" id="rp-bar-title">projet · <span class="accent">preview</span></span>
-        <button type="button" class="rp-close" id="rp-close" aria-label="Fermer l'aperçu">
-          <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><path d="M4 4l8 8M12 4l-8 8"/></svg>
-        </button>
-      </div>
-      <div class="rp-carousel" id="rp-carousel">
-        <span class="rp-counter" id="rp-counter"><b>01</b> / 01</span>
-        <div class="rp-viewport"><div class="rp-track" id="rp-track"></div></div>
-        <button type="button" class="rp-nav rp-prev" id="rp-prev" aria-label="Image précédente">
-          <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M10 3L5 8l5 5"/></svg>
-        </button>
-        <button type="button" class="rp-nav rp-next" id="rp-next" aria-label="Image suivante">
-          <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3l5 5-5 5"/></svg>
-        </button>
-        <div class="rp-dots-row" id="rp-dots" aria-label="Choisir une image"></div>
-      </div>
-      <div class="rp-content">
-        <span class="rp-eyebrow" id="rp-eyebrow">Réalisation</span>
-        <h3 class="rp-title" id="rp-title"></h3>
-        <p class="rp-sub" id="rp-sub"></p>
-        <p class="rp-desc" id="rp-desc"></p>
-        <ul class="rp-tech" id="rp-tech" aria-label="Technologies"></ul>
+          <div
+            class="jcd-mnav__cta jcd-mnav__reveal"
+            style="transition-delay:.40s"
+          >
+            <a class="jcd-mnav__btn jcd-mnav__btn--primary" href="contact.html"
+              >Contacter un expert
+              <span class="jcd-mnav__btn-ic"
+                ><svg
+                  viewBox="0 0 16 16"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.7"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  ><path d="M3 8h10M9 4l4 4-4 4"></path></svg
+                ></span
+              ></a
+            >
+            <a
+              class="jcd-mnav__btn jcd-mnav__btn--ghost"
+              href="tel:+33387184920"
+              >03 87 18 49 20
+              <span class="jcd-mnav__btn-ic"
+                ><svg
+                  viewBox="0 0 18 18"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.5"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  ><path
+                    d="M2.5 3.5a1 1 0 011-1h2.4a1 1 0 01.95.68l.86 2.4a1 1 0 01-.24 1l-1.2 1.2a11 11 0 004.6 4.6l1.2-1.2a1 1 0 011-.24l2.4.86a1 1 0 01.68.95V15a1 1 0 01-1 1A13.5 13.5 0 012.5 3.5z"
+                  ></path></svg
+                ></span
+              ></a
+            >
+          </div>
+        </div>
       </div>
     </div>
-  </div>
-</div>
-
-<script is:inline src="js/pages/developpement-1.js"></script>
-<script is:inline src="js/shared/menu-frost.js"></script>
-<!-- jcd-mobile-nav (injected) -->
-<button class="jcd-burger" id="jcdBurger" type="button" aria-label="Ouvrir le menu" aria-expanded="false" aria-controls="jcdMnav">
-  <span class="jcd-burger__box" aria-hidden="true"><i></i><i></i><i></i></span>
-</button>
-<div class="jcd-mnav" id="jcdMnav" role="dialog" aria-modal="true" aria-label="Menu de navigation" aria-hidden="true">
-  <div class="jcd-mnav__scroll">
-    <div class="jcd-mnav__inner">
-      <p class="jcd-mnav__eyebrow jcd-mnav__reveal" style="transition-delay:.04s">Expertises</p>
-
-      <div class="jcd-mnav__reveal" style="transition-delay:.07s">
-        <div class="jcd-mnav__item" style="--mnav-c:#2E72BA">
-          <a class="jcd-mnav__link" href="informatique.html"><span class="jcd-mnav__dot"></span><span class="jcd-mnav__label">Informatique</span></a>
-          <button class="jcd-acc__toggle" type="button" aria-expanded="false" aria-controls="jcdAccInfo" aria-label="Afficher les sous-pages Informatique">
-            <svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M7 2v10M2 7h10"/></svg>
-          </button>
-        </div>
-        <div class="jcd-acc__panel" id="jcdAccInfo">
-          <a class="jcd-mnav__sub" href="info-cloud.html">Cloud Microsoft</a>
-          <a class="jcd-mnav__sub" href="info-collaboratif.html">Solutions collaboratives &amp; audiovisuelles</a>
-          <a class="jcd-mnav__sub" href="info-reseaux.html">Architectures syst&egrave;mes &amp; r&eacute;seaux</a>
-          <a class="jcd-mnav__sub" href="info-integration.html">Int&eacute;gration &amp; Support PC</a>
-        </div>
-      </div>
-
-      <a class="jcd-mnav__item jcd-mnav__reveal" style="--mnav-c:#E51D29;transition-delay:.10s" href="service.html"><span class="jcd-mnav__dot"></span><span class="jcd-mnav__label">Service</span></a>
-      <a class="jcd-mnav__item jcd-mnav__reveal" style="--mnav-c:#F9D605;transition-delay:.13s" href="developpement.html"><span class="jcd-mnav__dot"></span><span class="jcd-mnav__label">D&eacute;veloppement</span></a>
-      <a class="jcd-mnav__item jcd-mnav__reveal" style="--mnav-c:#F3941D;transition-delay:.16s" href="print.html"><span class="jcd-mnav__dot"></span><span class="jcd-mnav__label">Print</span></a>
-      <a class="jcd-mnav__item jcd-mnav__reveal" style="--mnav-c:#B063AC;transition-delay:.19s" href="telecom.html"><span class="jcd-mnav__dot"></span><span class="jcd-mnav__label">T&eacute;l&eacute;com</span></a>
-      <div class="jcd-mnav__reveal" style="transition-delay:.22s">
-        <div class="jcd-mnav__item" style="--mnav-c:#8EC041">
-          <a class="jcd-mnav__link" href="formation.html"><span class="jcd-mnav__dot"></span><span class="jcd-mnav__label">Formation</span></a>
-          <button class="jcd-acc__toggle" type="button" aria-expanded="false" aria-controls="jcdAccForm" aria-label="Afficher les cat&eacute;gories de formation">
-            <svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M7 2v10M2 7h10"/></svg>
-          </button>
-        </div>
-        <div class="jcd-acc__panel" id="jcdAccForm">
-          <a class="jcd-mnav__sub" href="formation-bureautique.html">Bureautique</a>
-          <a class="jcd-mnav__sub" href="formation-intelligence-artificielle.html">Intelligence artificielle</a>
-          <a class="jcd-mnav__sub" href="formation-informatique.html">Informatique</a>
-          <a class="jcd-mnav__sub" href="formation-communication-marketing.html">Communication - Marketing</a>
-          <a class="jcd-mnav__sub" href="formation-management.html">Management</a>
-          <a class="jcd-mnav__sub" href="formation-commerce-relation-client.html">Commerce - Relation client</a>
-          <a class="jcd-mnav__sub" href="formation-comptabilite-gestion.html">Comptabilit&eacute; - Gestion</a>
-          <a class="jcd-mnav__sub" href="formation-ressources-humaines.html">Ressources humaines</a>
-          <a class="jcd-mnav__sub" href="formation-developpement-personnel.html">D&eacute;veloppement personnel</a>
-          <a class="jcd-mnav__sub" href="formation-graphisme-pao.html">Graphisme - PAO</a>
-          <a class="jcd-mnav__sub" href="formation-administratif-secretariat-accueil.html">Administratif - Secr&eacute;tariat</a>
-          <a class="jcd-mnav__sub" href="formation-securite.html">S&eacute;curit&eacute;</a>
-          <a class="jcd-mnav__sub" href="formation-langues.html">Langues</a>
-        </div>
-      </div>
-      <a class="jcd-mnav__item jcd-mnav__reveal" style="--mnav-c:#A78D75;transition-delay:.25s" href="agencement.html"><span class="jcd-mnav__dot"></span><span class="jcd-mnav__label">Agencement</span></a>
-
-      <p class="jcd-mnav__eyebrow jcd-mnav__sec2 jcd-mnav__reveal" style="transition-delay:.30s">D&eacute;couvrir</p>
-      <a class="jcd-mnav__item jcd-mnav__reveal" style="--mnav-c:#9a9a9a;transition-delay:.33s" href="assistance.html"><span class="jcd-mnav__dot"></span><span class="jcd-mnav__label" style="font-size:19px">Assistance</span></a>
-      <a class="jcd-mnav__item jcd-mnav__reveal" style="--mnav-c:#9a9a9a;transition-delay:.36s" href="carrieres.html"><span class="jcd-mnav__dot"></span><span class="jcd-mnav__label" style="font-size:19px">Carri&egrave;res</span></a>
-
-      <div class="jcd-mnav__cta jcd-mnav__reveal" style="transition-delay:.40s">
-        <a class="jcd-mnav__btn jcd-mnav__btn--primary" href="contact.html">Contacter un expert
-          <span class="jcd-mnav__btn-ic"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h10M9 4l4 4-4 4"/></svg></span></a>
-        <a class="jcd-mnav__btn jcd-mnav__btn--ghost" href="tel:+33387184920">03 87 18 49 20
-          <span class="jcd-mnav__btn-ic"><svg viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2.5 3.5a1 1 0 011-1h2.4a1 1 0 01.95.68l.86 2.4a1 1 0 01-.24 1l-1.2 1.2a11 11 0 004.6 4.6l1.2-1.2a1 1 0 011-.24l2.4.86a1 1 0 01.68.95V15a1 1 0 01-1 1A13.5 13.5 0 012.5 3.5z"/></svg></span></a>
-      </div>
+    <script is:inline src="js/shared/mobile-nav.js"></script>
+    <!-- jcd-a11y (Lot 5) -->
+    <div class="jcd-fab-wrap" id="jcd-fab">
+      <button
+        class="jcd-fab jcd-fab--top"
+        id="jcdToTop"
+        type="button"
+        aria-label="Remonter en haut"
+      >
+        <svg
+          viewBox="0 0 20 20"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="1.8"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          aria-hidden="true"><path d="M10 16V5M5 10l5-5 5 5"></path></svg
+        >
+      </button>
+      <a
+        class="jcd-fab jcd-fab--contact"
+        id="jcdFabContact"
+        href="contact.html"
+        aria-label="Nous contacter"
+      >
+        <svg
+          viewBox="0 0 20 20"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="1.6"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          aria-hidden="true"
+          ><rect x="2.5" y="4.5" width="15" height="11" rx="2.3"></rect><path
+            d="M3 6.7 L10 10.7 L17 6.7"></path></svg
+        >
+      </a>
     </div>
-  </div>
-</div>
-<script is:inline src="js/shared/mobile-nav.js"></script>
-<!-- jcd-a11y (Lot 5) -->
-<div class="jcd-fab-wrap" id="jcd-fab">
-  <button class="jcd-fab jcd-fab--top" id="jcdToTop" type="button" aria-label="Remonter en haut">
-    <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 16V5M5 10l5-5 5 5"/></svg>
-  </button>
-  <a class="jcd-fab jcd-fab--contact" id="jcdFabContact" href="contact.html" aria-label="Nous contacter">
-    <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2.5" y="4.5" width="15" height="11" rx="2.3"/><path d="M3 6.7 L10 10.7 L17 6.7"/></svg>
-  </a>
-</div>
-<script is:inline src="js/shared/a11y.js" id="jcd-a11y-js"></script>
+    <script is:inline src="js/shared/a11y.js" id="jcd-a11y-js"></script>
 
-<script is:inline src="js/shared/logo-marquee.js"></script>
-<script is:inline src="js/shared/micons.js" id="jcd-micons-js"></script>
-<script is:inline src="js/shared/mrefonte.js" id="jcd-mrefonte-js"></script>
-
-
-</body>
+    <script is:inline src="js/shared/logo-marquee.js"></script>
+    <script is:inline src="js/shared/micons.js" id="jcd-micons-js"></script>
+    <script is:inline src="js/shared/mrefonte.js" id="jcd-mrefonte-js"></script>
+  </body>
 </html>

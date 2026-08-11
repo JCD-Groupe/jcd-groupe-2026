@@ -1,252 +1,625 @@
 ---
-import Header from '../components/Header.astro';
-import Footer from '../components/Footer.astro';
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
 ---
-<!DOCTYPE html>
+
 <html lang="fr">
-<head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-<meta name="color-scheme" content="dark" />
-<meta name="theme-color" content="#0d0d0d" />
-<link rel="icon" href="favicon.svg" type="image/svg+xml" />
-<meta name="description" content="Politique de confidentialité de JCD Groupe : quelles données personnelles nous collectons et pourquoi, leur durée de conservation, la sécurité de vos données et vos droits (accès, rectification, opposition, oubli, portabilité). Contactez notre Délégué à la Protection des Données." />
-<link rel="canonical" href="https://www.jcd-groupe.fr/politique-de-confidentialite.html" />
-<meta property="og:type" content="website" />
-<meta property="og:site_name" content="JCD Groupe" />
-<meta property="og:locale" content="fr_FR" />
-<meta property="og:title" content="Politique de confidentialité · JCD Groupe" />
-<meta property="og:description" content="Politique de confidentialité de JCD Groupe : quelles données personnelles nous collectons et pourquoi, leur durée de conservation, la sécurité de vos données et vos droits (accès, rectification, opposition, oubli, portabilité). Contactez notre Délégué à la Protection des Données." />
-<meta property="og:url" content="https://www.jcd-groupe.fr/politique-de-confidentialite.html" />
-<meta name="twitter:card" content="summary" />
-<title>Politique de confidentialité · JCD Groupe</title>
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+    />
+    <meta name="color-scheme" content="dark" />
+    <meta name="theme-color" content="#0d0d0d" />
+    <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+    <meta
+      name="description"
+      content="Politique de confidentialité de JCD Groupe : quelles données personnelles nous collectons et pourquoi, leur durée de conservation, la sécurité de vos données et vos droits (accès, rectification, opposition, oubli, portabilité). Contactez notre Délégué à la Protection des Données."
+    />
+    <link
+      rel="canonical"
+      href="https://www.jcd-groupe.fr/politique-de-confidentialite.html"
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="JCD Groupe" />
+    <meta property="og:locale" content="fr_FR" />
+    <meta
+      property="og:title"
+      content="Politique de confidentialité · JCD Groupe"
+    />
+    <meta
+      property="og:description"
+      content="Politique de confidentialité de JCD Groupe : quelles données personnelles nous collectons et pourquoi, leur durée de conservation, la sécurité de vos données et vos droits (accès, rectification, opposition, oubli, portabilité). Contactez notre Délégué à la Protection des Données."
+    />
+    <meta
+      property="og:url"
+      content="https://www.jcd-groupe.fr/politique-de-confidentialite.html"
+    />
+    <meta name="twitter:card" content="summary" />
+    <title>Politique de confidentialité · JCD Groupe</title>
 
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Instrument+Serif:ital@0;1&display=swap"
+      rel="stylesheet"
+    />
 
-<link rel="stylesheet" href="css/politique-de-confidentialite.css">
-<link rel="stylesheet" href="css/global.css">
-<link rel="stylesheet" href="css/politique-de-confidentialite-overrides.css">
-  <link rel="stylesheet" href="transition.css">
-  <script is:inline src="transition.js"></script>
-<script is:inline src="js/shared/mpolish.js" id="jcd-mpolish-js"></script>
-<script is:inline src="js/shared/touch.js" id="jcd-touch-js"></script>
-<script is:inline src="js/shared/mrefonte-shim.js" id="jcd-mrefonte-shim"></script>
-</head>
-<body>
-<a class="jcd-skip" href="#contenu">Aller au contenu</a>
+    <link rel="stylesheet" href="css/politique-de-confidentialite.css" />
+    <link rel="stylesheet" href="css/global.css" />
+    <link
+      rel="stylesheet"
+      href="css/politique-de-confidentialite-overrides.css"
+    />
+    <link rel="stylesheet" href="transition.css" />
+    <script is:inline src="transition.js"></script>
+    <script is:inline src="js/shared/mpolish.js" id="jcd-mpolish-js"></script>
+    <script is:inline src="js/shared/touch.js" id="jcd-touch-js"></script>
+    <script is:inline src="js/shared/mrefonte-shim.js" id="jcd-mrefonte-shim"
+    ></script>
+  </head>
+  <body>
+    <a class="jcd-skip" href="#contenu">Aller au contenu</a>
 
-<!-- ====================================================================
+    <!-- ====================================================================
      NAVBAR v2 — Modal-like
      Logo (g) · capsule centrale {Expertises ▾ · Contact · Carrières}
      · CTA Assistance (d). Bande pleine largeur, fade gauche/droite,
      dropdown "Expertises" avec 7 SVG 3D isométriques colorés.
      ==================================================================== -->
-<Header current="contact" />
+    <Header current="contact" />
 
+    <noscript
+      ><style is:inline>
+        .reveal {
+          opacity: 1 !important;
+          transform: none !important;
+          filter: none !important;
+        }
+      </style></noscript
+    >
 
+    <main id="contenu">
+      <section class="legal-hero">
+        <div class="container">
+          <nav class="legal-breadcrumb" aria-label="Fil d'Ariane">
+            <a href="index.html">Accueil</a>
+            <span aria-hidden="true">/</span>
+            <span aria-current="page">Politique de confidentialité</span>
+          </nav>
+          <h1 class="legal-title">Politique de confidentialité</h1>
+          <p class="legal-lead">
+            Entreprises de Services du Numérique, les sociétés de JCD Groupe
+            apportent à leurs clients le meilleur service possible.
+          </p>
+        </div>
+      </section>
 
-<noscript><style is:inline>
-  .reveal { opacity: 1 !important; transform: none !important; filter: none !important; }
-</style></noscript>
+      <section class="legal-body">
+        <div class="container">
+          <div class="legal-intro reveal">
+            <p>
+              La notion de « donnée à caractère personnel » ou « données
+              personnelles » correspond à la définition donnée par l'article 4
+              du Règlement Général de l'Union Européenne sur la protection des
+              Données (RGPD 2016/679) c'est-à-dire à toute information
+              susceptible de permettre l'identification d'une personne physique
+              de manière directe ou indirecte : nom, prénom, adresse IP, adresse
+              email, etc.
+            </p>
+            <p>
+              JCD Groupe affirme son attachement au respect des lois et
+              règlements applicables en matière de protection des données, et
+              s'engage à préserver leur sécurité, leur confidentialité et leur
+              intégrité.
+            </p>
+            <p>
+              Pour vous délivrer nos services, nous avons besoin de collecter et
+              traiter des données personnelles vous concernant. Nous attachons
+              la plus grande importance à en faire un usage responsable et
+              respectueux de votre confiance. Ainsi, nous mettons tout en œuvre
+              pour garantir la confidentialité et la sécurité de celles-ci.
+            </p>
+            <p>
+              Voici notre politique de confidentialité pour tout comprendre.
+            </p>
+            <p>
+              Pour profiter de nos services, vous nous communiquez certaines
+              données telles que votre nom, votre adresse postale, votre numéro
+              de téléphone, votre email, vos coordonnées bancaires et votre
+              SIREN quand vous êtes un professionnel.
+            </p>
+          </div>
 
-<main id="contenu">
+          <div class="acc-list">
+            <div class="legal-section acc-item reveal">
+              <h3 class="acc-h">
+                <button type="button" class="acc-q" aria-expanded="true">
+                  <span class="acc-q-tx"
+                    >Quelles données et pourquoi&nbsp;?</span
+                  >
+                  <span class="acc-icon" aria-hidden="true"></span>
+                </button>
+              </h3>
+              <div class="acc-a">
+                <div class="acc-a-in">
+                  <p>
+                    Vos communications nécessitent un traitement de données
+                    techniques liées aux différents réseaux. La collecte et le
+                    traitement de ces informations sont indispensables pour :
+                  </p>
+                  <p>
+                    JCD groupe est susceptible de traiter tout ou partie des
+                    données :
+                  </p>
+                  <ul class="legal-list">
+                    <li>
+                      Pour permettre la navigation sur le Site et la gestion et
+                      la traçabilité des prestations et services commandés par
+                      l'utilisateur : données de connexion et d'utilisation du
+                      Site, facturation, historique des commandes, etc.
+                    </li>
+                    <li>
+                      Pour prévenir et lutter contre la fraude informatique
+                      (spamming, hacking…) : matériel informatique utilisé pour
+                      la navigation, l'adresse IP, le mot de passe (hashé)
+                    </li>
+                    <li>
+                      Pour améliorer la navigation sur le Site : données de
+                      connexion et d'utilisation
+                    </li>
+                    <li>
+                      Pour mener des enquêtes de satisfaction facultatives sur
+                      jcd-agencement.fr : adresse email
+                    </li>
+                    <li>
+                      Pour mener des campagnes de communication (sms, mail) :
+                      numéro de téléphone, adresse email.
+                    </li>
+                    <li>Pour répondre à une obligation légale.</li>
+                  </ul>
+                  <p>
+                    JCD groupe <strong>ne commercialise pas</strong> vos données personnelles,
+                    elles sont donc uniquement utilisées par nécessité ou à des fins
+                    statistiques et d'analyses.
+                  </p>
+                </div>
+              </div>
+            </div>
 
-<section class="legal-hero">
-  <div class="container">
-    <nav class="legal-breadcrumb" aria-label="Fil d'Ariane">
-      <a href="index.html">Accueil</a>
-      <span aria-hidden="true">/</span>
-      <span aria-current="page">Politique de confidentialité</span>
-    </nav>
-    <h1 class="legal-title">Politique de confidentialité</h1>
-    <p class="legal-lead">Entreprises de Services du Numérique, les sociétés de JCD Groupe apportent à leurs clients le meilleur service possible.</p>
-  </div>
-</section>
+            <div class="legal-section acc-item reveal">
+              <h3 class="acc-h">
+                <button type="button" class="acc-q" aria-expanded="false">
+                  <span class="acc-q-tx"
+                    >Comment nous déterminons la durée de conservation de vos
+                    données&nbsp;?</span
+                  >
+                  <span class="acc-icon" aria-hidden="true"></span>
+                </button>
+              </h3>
+              <div class="acc-a">
+                <div class="acc-a-in">
+                  <p>
+                    Nous déterminons les durées de conservation de vos données
+                    en fonction des dispositions légales applicables
+                    conformément aux lois en vigueur.
+                  </p>
+                  <p>
+                    Il existe donc plusieurs durées de conservation, qui sont
+                    disponibles sur demande auprès de votre service client.
+                  </p>
+                </div>
+              </div>
+            </div>
 
-<section class="legal-body">
-  <div class="container">
+            <div class="legal-section acc-item reveal">
+              <h3 class="acc-h">
+                <button type="button" class="acc-q" aria-expanded="false">
+                  <span class="acc-q-tx">Sécurité de vos données</span>
+                  <span class="acc-icon" aria-hidden="true"></span>
+                </button>
+              </h3>
+              <div class="acc-a">
+                <div class="acc-a-in">
+                  <p>
+                    Nous attachons une grande importance à conserver vos données
+                    en garantissant leur intégrité et leur confidentialité. Vos
+                    données personnelles sont partagées avec des tiers
+                    sélectionnés par nos soins. Cela peut être le cas avec des
+                    prestataires comme des éditeurs ou des constructeurs, des
+                    sociétés affiliées et notre réseau professionnel.
+                  </p>
+                  <p>
+                    Nous confions le stockage à un prestataire de confiance, vos
+                    données sont dans l'Union Européenne pour gérer votre
+                    contrat, vos services et/ou vous proposer nos offres.
+                  </p>
+                  <p>
+                    Lorsque nous transférons vos données hors de l'Union
+                    Européenne, nous vous garantissons le même niveau de
+                    protection que dans l'ensemble de l'Union Européenne, parce
+                    que nos prestataires se sont engagés à se conformer aux
+                    clauses contractuelles types établies par la Commission
+                    Européenne.
+                  </p>
+                  <p>
+                    Dans l'hypothèse où un tiers non autorisé aurait accès à vos
+                    données, nous vous en informerions et en aviserions
+                    également la Commission Nationale Informatique et Libertés.
+                  </p>
+                </div>
+              </div>
+            </div>
 
-    <div class="legal-intro reveal">
-      <p>La notion de « donnée à caractère personnel » ou « données personnelles » correspond à la définition donnée par l'article 4 du Règlement Général de l'Union Européenne sur la protection des Données (RGPD 2016/679) c'est-à-dire à toute information susceptible de permettre l'identification d'une personne physique de manière directe ou indirecte : nom, prénom, adresse IP, adresse email, etc.</p>
-      <p>JCD Groupe affirme son attachement au respect des lois et règlements applicables en matière de protection des données, et s'engage à préserver leur sécurité, leur confidentialité et leur intégrité.</p>
-      <p>Pour vous délivrer nos services, nous avons besoin de collecter et traiter des données personnelles vous concernant. Nous attachons la plus grande importance à en faire un usage responsable et respectueux de votre confiance. Ainsi, nous mettons tout en œuvre pour garantir la confidentialité et la sécurité de celles-ci.</p>
-      <p>Voici notre politique de confidentialité pour tout comprendre.</p>
-      <p>Pour profiter de nos services, vous nous communiquez certaines données telles que votre nom, votre adresse postale, votre numéro de téléphone, votre email, vos coordonnées bancaires et votre SIREN quand vous êtes un professionnel.</p>
-    </div>
+            <div class="legal-section acc-item reveal">
+              <h3 class="acc-h">
+                <button type="button" class="acc-q" aria-expanded="false">
+                  <span class="acc-q-tx">Vos droits</span>
+                  <span class="acc-icon" aria-hidden="true"></span>
+                </button>
+              </h3>
+              <div class="acc-a">
+                <div class="acc-a-in">
+                  <p>
+                    Vous disposez de plusieurs droits sur les données vous
+                    concernant :
+                  </p>
+                  <ul class="legal-list">
+                    <li>
+                      Vous pouvez choisir, à tout moment et gratuitement, de
+                      faire usage de votre droit d'opposition.
+                    </li>
+                    <li>Vous avez un droit d'accès à vos données.</li>
+                    <li>Vous avez un droit de rectification de vos données.</li>
+                    <li>Vous disposez d'un droit à l'oubli.</li>
+                    <li>Vous avez un droit à la limitation.</li>
+                    <li>Vous avez un droit à la portabilité des données.</li>
+                    <li>
+                      Enfin, si vous estimez que le traitement de vos données a
+                      été effectué en violation de la réglementation applicable,
+                      vous avez le droit d'introduire une réclamation auprès de
+                      la Commission Nationale Informatique et Libertés (<a
+                        href="https://www.cnil.fr/fr/plaintes"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        >https://www.cnil.fr/fr/plaintes</a
+                      >).
+                    </li>
+                  </ul>
 
-    <div class="acc-list">
+                  <div class="legal-callout">
+                    <div class="legal-callout-inner">
+                      <h3>Exercer vos droits</h3>
+                      <p>
+                        Vous pouvez exercer vos droits en vous adressant à notre
+                        Délégué à la Protection des Données. Il est accessible
+                        soit par courriel à <a
+                          class="legal-dpo-mail"
+                          href="mailto:dpo@globalinfo.fr">dpo@globalinfo.fr</a>
+                      </p>
+                      <p>soit par courrier postale à :</p>
+                      <address>
+                        Mr le DPO,<br />193 rue du Général Metman,<br />57070
+                        Metz.
+                      </address>
+                    </div>
+                  </div>
 
-      <div class="legal-section acc-item reveal">
-        <h3 class="acc-h"><button type="button" class="acc-q" aria-expanded="true">
-          <span class="acc-q-tx">Quelles données et pourquoi&nbsp;?</span>
-          <span class="acc-icon" aria-hidden="true"></span>
-        </button></h3>
-        <div class="acc-a"><div class="acc-a-in">
-          <p>Vos communications nécessitent un traitement de données techniques liées aux différents réseaux. La collecte et le traitement de ces informations sont indispensables pour :</p>
-          <p>JCD groupe est susceptible de traiter tout ou partie des données :</p>
-          <ul class="legal-list">
-            <li>Pour permettre la navigation sur le Site et la gestion et la traçabilité des prestations et services commandés par l'utilisateur : données de connexion et d'utilisation du Site, facturation, historique des commandes, etc.</li>
-            <li>Pour prévenir et lutter contre la fraude informatique (spamming, hacking…) : matériel informatique utilisé pour la navigation, l'adresse IP, le mot de passe (hashé)</li>
-            <li>Pour améliorer la navigation sur le Site : données de connexion et d'utilisation</li>
-            <li>Pour mener des enquêtes de satisfaction facultatives sur jcd-agencement.fr : adresse email</li>
-            <li>Pour mener des campagnes de communication (sms, mail) : numéro de téléphone, adresse email.</li>
-            <li>Pour répondre à une obligation légale.</li>
-          </ul>
-          <p>JCD groupe <strong>ne commercialise pas</strong> vos données personnelles, elles sont donc uniquement utilisées par nécessité ou à des fins statistiques et d'analyses.</p>
-        </div></div>
-      </div>
+                  <p>
+                    Si vous êtes mineurs, ces droits seront exercés par le
+                    titulaire de l'autorité parentale avant vos 15 ans, vous
+                    pourrez exercer directement vos droits lorsque vous aurez 15
+                    ans.
+                  </p>
+                  <p>
+                    Concernant la confidentialité de vos données, nous nous
+                    réservons le droit de vous demander de nous fournir des
+                    justificatifs d'identité nous permettant de nous assurer de
+                    votre identité.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
 
-      <div class="legal-section acc-item reveal">
-        <h3 class="acc-h"><button type="button" class="acc-q" aria-expanded="false">
-          <span class="acc-q-tx">Comment nous déterminons la durée de conservation de vos données&nbsp;?</span>
-          <span class="acc-icon" aria-hidden="true"></span>
-        </button></h3>
-        <div class="acc-a"><div class="acc-a-in">
-          <p>Nous déterminons les durées de conservation de vos données en fonction des dispositions légales applicables conformément aux lois en vigueur.</p>
-          <p>Il existe donc plusieurs durées de conservation, qui sont disponibles sur demande auprès de votre service client.</p>
-        </div></div>
-      </div>
+    <Footer />
 
-      <div class="legal-section acc-item reveal">
-        <h3 class="acc-h"><button type="button" class="acc-q" aria-expanded="false">
-          <span class="acc-q-tx">Sécurité de vos données</span>
-          <span class="acc-icon" aria-hidden="true"></span>
-        </button></h3>
-        <div class="acc-a"><div class="acc-a-in">
-          <p>Nous attachons une grande importance à conserver vos données en garantissant leur intégrité et leur confidentialité. Vos données personnelles sont partagées avec des tiers sélectionnés par nos soins. Cela peut être le cas avec des prestataires comme des éditeurs ou des constructeurs, des sociétés affiliées et notre réseau professionnel.</p>
-          <p>Nous confions le stockage à un prestataire de confiance, vos données sont dans l'Union Européenne pour gérer votre contrat, vos services et/ou vous proposer nos offres.</p>
-          <p>Lorsque nous transférons vos données hors de l'Union Européenne, nous vous garantissons le même niveau de protection que dans l'ensemble de l'Union Européenne, parce que nos prestataires se sont engagés à se conformer aux clauses contractuelles types établies par la Commission Européenne.</p>
-          <p>Dans l'hypothèse où un tiers non autorisé aurait accès à vos données, nous vous en informerions et en aviserions également la Commission Nationale Informatique et Libertés.</p>
-        </div></div>
-      </div>
+    <script is:inline src="js/pages/politique-de-confidentialite-1.js"></script>
 
-      <div class="legal-section acc-item reveal">
-        <h3 class="acc-h"><button type="button" class="acc-q" aria-expanded="false">
-          <span class="acc-q-tx">Vos droits</span>
-          <span class="acc-icon" aria-hidden="true"></span>
-        </button></h3>
-        <div class="acc-a"><div class="acc-a-in">
-          <p>Vous disposez de plusieurs droits sur les données vous concernant :</p>
-          <ul class="legal-list">
-            <li>Vous pouvez choisir, à tout moment et gratuitement, de faire usage de votre droit d'opposition.</li>
-            <li>Vous avez un droit d'accès à vos données.</li>
-            <li>Vous avez un droit de rectification de vos données.</li>
-            <li>Vous disposez d'un droit à l'oubli.</li>
-            <li>Vous avez un droit à la limitation.</li>
-            <li>Vous avez un droit à la portabilité des données.</li>
-            <li>Enfin, si vous estimez que le traitement de vos données a été effectué en violation de la réglementation applicable, vous avez le droit d'introduire une réclamation auprès de la Commission Nationale Informatique et Libertés (<a href="https://www.cnil.fr/fr/plaintes" target="_blank" rel="noopener noreferrer">https://www.cnil.fr/fr/plaintes</a>).</li>
-          </ul>
+    <script is:inline src="js/shared/menu-frost.js"></script>
+    <!-- jcd-mobile-nav (injected) -->
+    <button
+      class="jcd-burger"
+      id="jcdBurger"
+      type="button"
+      aria-label="Ouvrir le menu"
+      aria-expanded="false"
+      aria-controls="jcdMnav"
+    >
+      <span class="jcd-burger__box" aria-hidden="true"
+        ><i></i><i></i><i></i></span
+      >
+    </button>
+    <div
+      class="jcd-mnav"
+      id="jcdMnav"
+      role="dialog"
+      aria-modal="true"
+      aria-label="Menu de navigation"
+      aria-hidden="true"
+    >
+      <div class="jcd-mnav__scroll">
+        <div class="jcd-mnav__inner">
+          <p
+            class="jcd-mnav__eyebrow jcd-mnav__reveal"
+            style="transition-delay:.04s"
+          >
+            Expertises
+          </p>
 
-          <div class="legal-callout">
-            <div class="legal-callout-inner">
-              <h3>Exercer vos droits</h3>
-              <p>Vous pouvez exercer vos droits en vous adressant à notre Délégué à la Protection des Données. Il est accessible soit par courriel à <a class="legal-dpo-mail" href="mailto:dpo@globalinfo.fr">dpo@globalinfo.fr</a></p>
-              <p>soit par courrier postale à :</p>
-              <address>Mr le DPO,<br>193 rue du Général Metman,<br>57070 Metz.</address>
+          <div class="jcd-mnav__reveal" style="transition-delay:.07s">
+            <div class="jcd-mnav__item" style="--mnav-c:#2E72BA">
+              <a class="jcd-mnav__link" href="informatique.html"
+                ><span class="jcd-mnav__dot"></span><span
+                  class="jcd-mnav__label">Informatique</span
+                ></a
+              >
+              <button
+                class="jcd-acc__toggle"
+                type="button"
+                aria-expanded="false"
+                aria-controls="jcdAccInfo"
+                aria-label="Afficher les sous-pages Informatique"
+              >
+                <svg
+                  viewBox="0 0 14 14"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.6"
+                  stroke-linecap="round"><path d="M7 2v10M2 7h10"></path></svg
+                >
+              </button>
+            </div>
+            <div class="jcd-acc__panel" id="jcdAccInfo">
+              <a class="jcd-mnav__sub" href="info-cloud.html">Cloud Microsoft</a
+              >
+              <a class="jcd-mnav__sub" href="info-collaboratif.html"
+                >Solutions collaboratives &amp; audiovisuelles</a
+              >
+              <a class="jcd-mnav__sub" href="info-reseaux.html"
+                >Architectures syst&egrave;mes &amp; r&eacute;seaux</a
+              >
+              <a class="jcd-mnav__sub" href="info-integration.html"
+                >Int&eacute;gration &amp; Support PC</a
+              >
             </div>
           </div>
 
-          <p>Si vous êtes mineurs, ces droits seront exercés par le titulaire de l'autorité parentale avant vos 15 ans, vous pourrez exercer directement vos droits lorsque vous aurez 15 ans.</p>
-          <p>Concernant la confidentialité de vos données, nous nous réservons le droit de vous demander de nous fournir des justificatifs d'identité nous permettant de nous assurer de votre identité.</p>
-        </div></div>
-      </div>
+          <a
+            class="jcd-mnav__item jcd-mnav__reveal"
+            style="--mnav-c:#E51D29;transition-delay:.10s"
+            href="service.html"
+            ><span class="jcd-mnav__dot"></span><span class="jcd-mnav__label"
+              >Service</span
+            ></a
+          >
+          <a
+            class="jcd-mnav__item jcd-mnav__reveal"
+            style="--mnav-c:#F9D605;transition-delay:.13s"
+            href="developpement.html"
+            ><span class="jcd-mnav__dot"></span><span class="jcd-mnav__label"
+              >D&eacute;veloppement</span
+            ></a
+          >
+          <a
+            class="jcd-mnav__item jcd-mnav__reveal"
+            style="--mnav-c:#F3941D;transition-delay:.16s"
+            href="print.html"
+            ><span class="jcd-mnav__dot"></span><span class="jcd-mnav__label"
+              >Print</span
+            ></a
+          >
+          <a
+            class="jcd-mnav__item jcd-mnav__reveal"
+            style="--mnav-c:#B063AC;transition-delay:.19s"
+            href="telecom.html"
+            ><span class="jcd-mnav__dot"></span><span class="jcd-mnav__label"
+              >T&eacute;l&eacute;com</span
+            ></a
+          >
+          <div class="jcd-mnav__reveal" style="transition-delay:.22s">
+            <div class="jcd-mnav__item" style="--mnav-c:#8EC041">
+              <a class="jcd-mnav__link" href="formation.html"
+                ><span class="jcd-mnav__dot"></span><span
+                  class="jcd-mnav__label">Formation</span
+                ></a
+              >
+              <button
+                class="jcd-acc__toggle"
+                type="button"
+                aria-expanded="false"
+                aria-controls="jcdAccForm"
+                aria-label="Afficher les catégories de formation"
+              >
+                <svg
+                  viewBox="0 0 14 14"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.6"
+                  stroke-linecap="round"><path d="M7 2v10M2 7h10"></path></svg
+                >
+              </button>
+            </div>
+            <div class="jcd-acc__panel" id="jcdAccForm">
+              <a class="jcd-mnav__sub" href="formation-bureautique.html"
+                >Bureautique</a
+              >
+              <a
+                class="jcd-mnav__sub"
+                href="formation-intelligence-artificielle.html"
+                >Intelligence artificielle</a
+              >
+              <a class="jcd-mnav__sub" href="formation-informatique.html"
+                >Informatique</a
+              >
+              <a
+                class="jcd-mnav__sub"
+                href="formation-communication-marketing.html"
+                >Communication - Marketing</a
+              >
+              <a class="jcd-mnav__sub" href="formation-management.html"
+                >Management</a
+              >
+              <a
+                class="jcd-mnav__sub"
+                href="formation-commerce-relation-client.html"
+                >Commerce - Relation client</a
+              >
+              <a
+                class="jcd-mnav__sub"
+                href="formation-comptabilite-gestion.html"
+                >Comptabilit&eacute; - Gestion</a
+              >
+              <a class="jcd-mnav__sub" href="formation-ressources-humaines.html"
+                >Ressources humaines</a
+              >
+              <a
+                class="jcd-mnav__sub"
+                href="formation-developpement-personnel.html"
+                >D&eacute;veloppement personnel</a
+              >
+              <a class="jcd-mnav__sub" href="formation-graphisme-pao.html"
+                >Graphisme - PAO</a
+              >
+              <a
+                class="jcd-mnav__sub"
+                href="formation-administratif-secretariat-accueil.html"
+                >Administratif - Secr&eacute;tariat</a
+              >
+              <a class="jcd-mnav__sub" href="formation-securite.html"
+                >S&eacute;curit&eacute;</a
+              >
+              <a class="jcd-mnav__sub" href="formation-langues.html">Langues</a>
+            </div>
+          </div>
+          <a
+            class="jcd-mnav__item jcd-mnav__reveal"
+            style="--mnav-c:#A78D75;transition-delay:.25s"
+            href="agencement.html"
+            ><span class="jcd-mnav__dot"></span><span class="jcd-mnav__label"
+              >Agencement</span
+            ></a
+          >
 
+          <p
+            class="jcd-mnav__eyebrow jcd-mnav__sec2 jcd-mnav__reveal"
+            style="transition-delay:.30s"
+          >
+            D&eacute;couvrir
+          </p>
+          <a
+            class="jcd-mnav__item jcd-mnav__reveal"
+            style="--mnav-c:#9a9a9a;transition-delay:.33s"
+            href="assistance.html"
+            ><span class="jcd-mnav__dot"></span><span
+              class="jcd-mnav__label"
+              style="font-size:19px">Assistance</span
+            ></a
+          >
+          <a
+            class="jcd-mnav__item jcd-mnav__reveal"
+            style="--mnav-c:#9a9a9a;transition-delay:.36s"
+            href="carrieres.html"
+            ><span class="jcd-mnav__dot"></span><span
+              class="jcd-mnav__label"
+              style="font-size:19px">Carri&egrave;res</span
+            ></a
+          >
+
+          <div
+            class="jcd-mnav__cta jcd-mnav__reveal"
+            style="transition-delay:.40s"
+          >
+            <a class="jcd-mnav__btn jcd-mnav__btn--primary" href="contact.html"
+              >Contacter un expert
+              <span class="jcd-mnav__btn-ic"
+                ><svg
+                  viewBox="0 0 16 16"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.7"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  ><path d="M3 8h10M9 4l4 4-4 4"></path></svg
+                ></span
+              ></a
+            >
+            <a
+              class="jcd-mnav__btn jcd-mnav__btn--ghost"
+              href="tel:+33387184920"
+              >03 87 18 49 20
+              <span class="jcd-mnav__btn-ic"
+                ><svg
+                  viewBox="0 0 18 18"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.5"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  ><path
+                    d="M2.5 3.5a1 1 0 011-1h2.4a1 1 0 01.95.68l.86 2.4a1 1 0 01-.24 1l-1.2 1.2a11 11 0 004.6 4.6l1.2-1.2a1 1 0 011-.24l2.4.86a1 1 0 01.68.95V15a1 1 0 01-1 1A13.5 13.5 0 012.5 3.5z"
+                  ></path></svg
+                ></span
+              ></a
+            >
+          </div>
+        </div>
+      </div>
     </div>
-
-  </div>
-</section>
-
-</main>
-
-<Footer />
-
-
-<script is:inline src="js/pages/politique-de-confidentialite-1.js"></script>
-
-
-<script is:inline src="js/shared/menu-frost.js"></script>
-<!-- jcd-mobile-nav (injected) -->
-<button class="jcd-burger" id="jcdBurger" type="button" aria-label="Ouvrir le menu" aria-expanded="false" aria-controls="jcdMnav">
-  <span class="jcd-burger__box" aria-hidden="true"><i></i><i></i><i></i></span>
-</button>
-<div class="jcd-mnav" id="jcdMnav" role="dialog" aria-modal="true" aria-label="Menu de navigation" aria-hidden="true">
-  <div class="jcd-mnav__scroll">
-    <div class="jcd-mnav__inner">
-      <p class="jcd-mnav__eyebrow jcd-mnav__reveal" style="transition-delay:.04s">Expertises</p>
-
-      <div class="jcd-mnav__reveal" style="transition-delay:.07s">
-        <div class="jcd-mnav__item" style="--mnav-c:#2E72BA">
-          <a class="jcd-mnav__link" href="informatique.html"><span class="jcd-mnav__dot"></span><span class="jcd-mnav__label">Informatique</span></a>
-          <button class="jcd-acc__toggle" type="button" aria-expanded="false" aria-controls="jcdAccInfo" aria-label="Afficher les sous-pages Informatique">
-            <svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M7 2v10M2 7h10"/></svg>
-          </button>
-        </div>
-        <div class="jcd-acc__panel" id="jcdAccInfo">
-          <a class="jcd-mnav__sub" href="info-cloud.html">Cloud Microsoft</a>
-          <a class="jcd-mnav__sub" href="info-collaboratif.html">Solutions collaboratives &amp; audiovisuelles</a>
-          <a class="jcd-mnav__sub" href="info-reseaux.html">Architectures syst&egrave;mes &amp; r&eacute;seaux</a>
-          <a class="jcd-mnav__sub" href="info-integration.html">Int&eacute;gration &amp; Support PC</a>
-        </div>
-      </div>
-
-      <a class="jcd-mnav__item jcd-mnav__reveal" style="--mnav-c:#E51D29;transition-delay:.10s" href="service.html"><span class="jcd-mnav__dot"></span><span class="jcd-mnav__label">Service</span></a>
-      <a class="jcd-mnav__item jcd-mnav__reveal" style="--mnav-c:#F9D605;transition-delay:.13s" href="developpement.html"><span class="jcd-mnav__dot"></span><span class="jcd-mnav__label">D&eacute;veloppement</span></a>
-      <a class="jcd-mnav__item jcd-mnav__reveal" style="--mnav-c:#F3941D;transition-delay:.16s" href="print.html"><span class="jcd-mnav__dot"></span><span class="jcd-mnav__label">Print</span></a>
-      <a class="jcd-mnav__item jcd-mnav__reveal" style="--mnav-c:#B063AC;transition-delay:.19s" href="telecom.html"><span class="jcd-mnav__dot"></span><span class="jcd-mnav__label">T&eacute;l&eacute;com</span></a>
-      <div class="jcd-mnav__reveal" style="transition-delay:.22s">
-        <div class="jcd-mnav__item" style="--mnav-c:#8EC041">
-          <a class="jcd-mnav__link" href="formation.html"><span class="jcd-mnav__dot"></span><span class="jcd-mnav__label">Formation</span></a>
-          <button class="jcd-acc__toggle" type="button" aria-expanded="false" aria-controls="jcdAccForm" aria-label="Afficher les cat&eacute;gories de formation">
-            <svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M7 2v10M2 7h10"/></svg>
-          </button>
-        </div>
-        <div class="jcd-acc__panel" id="jcdAccForm">
-          <a class="jcd-mnav__sub" href="formation-bureautique.html">Bureautique</a>
-          <a class="jcd-mnav__sub" href="formation-intelligence-artificielle.html">Intelligence artificielle</a>
-          <a class="jcd-mnav__sub" href="formation-informatique.html">Informatique</a>
-          <a class="jcd-mnav__sub" href="formation-communication-marketing.html">Communication - Marketing</a>
-          <a class="jcd-mnav__sub" href="formation-management.html">Management</a>
-          <a class="jcd-mnav__sub" href="formation-commerce-relation-client.html">Commerce - Relation client</a>
-          <a class="jcd-mnav__sub" href="formation-comptabilite-gestion.html">Comptabilit&eacute; - Gestion</a>
-          <a class="jcd-mnav__sub" href="formation-ressources-humaines.html">Ressources humaines</a>
-          <a class="jcd-mnav__sub" href="formation-developpement-personnel.html">D&eacute;veloppement personnel</a>
-          <a class="jcd-mnav__sub" href="formation-graphisme-pao.html">Graphisme - PAO</a>
-          <a class="jcd-mnav__sub" href="formation-administratif-secretariat-accueil.html">Administratif - Secr&eacute;tariat</a>
-          <a class="jcd-mnav__sub" href="formation-securite.html">S&eacute;curit&eacute;</a>
-          <a class="jcd-mnav__sub" href="formation-langues.html">Langues</a>
-        </div>
-      </div>
-      <a class="jcd-mnav__item jcd-mnav__reveal" style="--mnav-c:#A78D75;transition-delay:.25s" href="agencement.html"><span class="jcd-mnav__dot"></span><span class="jcd-mnav__label">Agencement</span></a>
-
-      <p class="jcd-mnav__eyebrow jcd-mnav__sec2 jcd-mnav__reveal" style="transition-delay:.30s">D&eacute;couvrir</p>
-      <a class="jcd-mnav__item jcd-mnav__reveal" style="--mnav-c:#9a9a9a;transition-delay:.33s" href="assistance.html"><span class="jcd-mnav__dot"></span><span class="jcd-mnav__label" style="font-size:19px">Assistance</span></a>
-      <a class="jcd-mnav__item jcd-mnav__reveal" style="--mnav-c:#9a9a9a;transition-delay:.36s" href="carrieres.html"><span class="jcd-mnav__dot"></span><span class="jcd-mnav__label" style="font-size:19px">Carri&egrave;res</span></a>
-
-      <div class="jcd-mnav__cta jcd-mnav__reveal" style="transition-delay:.40s">
-        <a class="jcd-mnav__btn jcd-mnav__btn--primary" href="contact.html">Contacter un expert
-          <span class="jcd-mnav__btn-ic"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h10M9 4l4 4-4 4"/></svg></span></a>
-        <a class="jcd-mnav__btn jcd-mnav__btn--ghost" href="tel:+33387184920">03 87 18 49 20
-          <span class="jcd-mnav__btn-ic"><svg viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2.5 3.5a1 1 0 011-1h2.4a1 1 0 01.95.68l.86 2.4a1 1 0 01-.24 1l-1.2 1.2a11 11 0 004.6 4.6l1.2-1.2a1 1 0 011-.24l2.4.86a1 1 0 01.68.95V15a1 1 0 01-1 1A13.5 13.5 0 012.5 3.5z"/></svg></span></a>
-      </div>
+    <script is:inline src="js/shared/mobile-nav.js"></script>
+    <!-- jcd-a11y (Lot 5) -->
+    <div class="jcd-fab-wrap" id="jcd-fab">
+      <button
+        class="jcd-fab jcd-fab--top"
+        id="jcdToTop"
+        type="button"
+        aria-label="Remonter en haut"
+      >
+        <svg
+          viewBox="0 0 20 20"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="1.8"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          aria-hidden="true"><path d="M10 16V5M5 10l5-5 5 5"></path></svg
+        >
+      </button>
+      <a
+        class="jcd-fab jcd-fab--contact"
+        id="jcdFabContact"
+        href="contact.html"
+        aria-label="Nous contacter"
+      >
+        <svg
+          viewBox="0 0 20 20"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="1.6"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          aria-hidden="true"
+          ><rect x="2.5" y="4.5" width="15" height="11" rx="2.3"></rect><path
+            d="M3 6.7 L10 10.7 L17 6.7"></path></svg
+        >
+      </a>
     </div>
-  </div>
-</div>
-<script is:inline src="js/shared/mobile-nav.js"></script>
-<!-- jcd-a11y (Lot 5) -->
-<div class="jcd-fab-wrap" id="jcd-fab">
-  <button class="jcd-fab jcd-fab--top" id="jcdToTop" type="button" aria-label="Remonter en haut">
-    <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 16V5M5 10l5-5 5 5"/></svg>
-  </button>
-  <a class="jcd-fab jcd-fab--contact" id="jcdFabContact" href="contact.html" aria-label="Nous contacter">
-    <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2.5" y="4.5" width="15" height="11" rx="2.3"/><path d="M3 6.7 L10 10.7 L17 6.7"/></svg>
-  </a>
-</div>
-<script is:inline src="js/shared/a11y.js" id="jcd-a11y-js"></script>
-<script is:inline src="js/shared/micons.js" id="jcd-micons-js"></script>
-<script is:inline src="js/shared/mrefonte.js" id="jcd-mrefonte-js"></script>
-
-
-</body>
+    <script is:inline src="js/shared/a11y.js" id="jcd-a11y-js"></script>
+    <script is:inline src="js/shared/micons.js" id="jcd-micons-js"></script>
+    <script is:inline src="js/shared/mrefonte.js" id="jcd-mrefonte-js"></script>
+  </body>
 </html>
