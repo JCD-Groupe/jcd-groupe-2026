@@ -133,11 +133,11 @@ const logos3 = logos.slice(third * 2);
      ================================ -->
       <section class="hero" aria-labelledby="hero-title">
         <div class="container">
-          <h1 id="hero-title" class="reveal delay-1">
-            Votre expert informatique de <span class="accent-grad"
-              >proximité</span
-            >
-          </h1>
+          <h1
+            id="hero-title"
+            class="reveal delay-1"
+            set:html={accueil.titre_hero}
+          />
 
           <p class="hero-sub reveal delay-2">
             {accueil.sous_titre_hero}
