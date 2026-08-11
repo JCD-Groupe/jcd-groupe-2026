@@ -68,7 +68,7 @@
   .fcard-inner { position: relative; z-index: 1; padding: clamp(18px, 1.6vw, 24px); height: 100%; }
 
   /* Touches bleu-gris « slate » du footer, alignées sur le footer de
-     carrieres.html (#748099). Variables limitées au footer : le reste de la
+     carrieres (#748099). Variables limitées au footer : le reste de la
      page conserve son bleu de marque. */
   footer[role="contentinfo"] {
     --accent: #748099;

@@ -3,7 +3,10 @@
   try { if (sessionStorage.getItem('jcdFadeIn')) { sessionStorage.removeItem('jcdFadeIn'); root.classList.add('jcd-nav-in'); } } catch (e) {}
   try { reduce = matchMedia('(prefers-reduced-motion: reduce)').matches; } catch (e) {}
   function veil() { return d.getElementById('jcd-pagefade'); }
-  function isInfo(p) { var f = (p.split('/').pop() || '').toLowerCase(); return f === 'informatique.html' || /^info-[a-z]+\.html$/.test(f); }
+  function isInfo(p) {
+    var f = (p.split("/").pop() || "").toLowerCase();
+    return f === "informatique" || /^info-[a-z]+\$/.test(f);
+  }
   d.addEventListener('animationend', function (e) { if (e.animationName === 'jcd-pagefade-reveal') root.classList.remove('jcd-nav-in'); });
   d.addEventListener('click', function (e) {
     if (e.defaultPrevented || e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
