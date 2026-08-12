@@ -1641,7 +1641,7 @@
   .sk-wire {
     /* PAS de vector-effect:non-scaling-stroke : avec pathLength + dash,
        Chromium coupe le trait ~9% avant la card en large (dash mesuré
-       sur le path écran étiré). Cf. .cyber-wire (informatique.html). */
+       sur le path écran étiré). Cf. .cyber-wire (informatique). */
     fill: none; stroke: url(#skWire); stroke-width: 1.4;
     opacity: 0.75; transition: opacity 360ms var(--ease-out);
   }

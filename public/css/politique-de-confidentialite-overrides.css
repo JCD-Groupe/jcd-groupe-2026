@@ -7,7 +7,7 @@
   /* ===========================================================
      PAGE LEGALE — Politique de confidentialite
      Colonne unique lisible, theme sombre, accent bleu-gris #748099
-     (repris de index.html / carrieres.html). Reutilise les tokens
+     (repris de index / carrieres). Reutilise les tokens
      globaux (--bg, --text-*, --line-*, .container, .reveal).
      =========================================================== */
   :root {
@@ -83,7 +83,7 @@
   }
   .legal-section p:last-child { margin-bottom: 0; }
 
-  /* ---- Accordeons (sous-parties repliables) — repris de carrieres.html ----
+  /* ---- Accordeons (sous-parties repliables) — repris de carrieres ----
      Chaque .legal-section devient un .acc-item : le <h2> est rendu dans le
      bouton .acc-q (libelle .acc-q-tx + icone +/-), le contenu vit dans
      .acc-a > .acc-a-in. Le marqueur decoratif h2::before est neutralise a
@@ -177,7 +177,7 @@
    ================================================================== */
 
   /* ===========================================================
-     FOOTER — Bento compact (repris de index.html), rendu autonome.
+     FOOTER — Bento compact (repris de index), rendu autonome.
      Spécificité par pôle : liseré des cartes (au hover), bloc légal
      et bouton LinkedIn teintés via --accent / --accent-rgb.
      =========================================================== */

@@ -1523,7 +1523,7 @@
   /* Architecture « défense en profondeur » (unique à cette page) :
      schéma d'anneaux concentriques centré (données → réseau → posture
      autour d'un cœur bouclier), relié par trois connecteurs aux cartes
-     de garanties alignées dessous (réf. schéma cyber d'informatique.html).
+     de garanties alignées dessous (réf. schéma cyber d'informatique).
      Survoler une carte illumine son anneau, son label et son connecteur. */
   .defense { display: flex; flex-direction: column; align-items: center; }
   .defense-rings { position: relative; width: 100%; max-width: 430px; margin-inline: auto; }

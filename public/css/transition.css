@@ -9,7 +9,7 @@
      supportée (Firefox, anciens navigateurs).
    · Respecte prefers-reduced-motion.
 
-   Le type « jcd-theme » est posé par transition.js, selon que la page
+   Le type « jcd-theme » est posé par js/shared/transition.js, selon que la page
    Carrières soit l'origine OU la destination de la navigation.
    ============================================================ */
 @view-transition { navigation: auto; }
@@ -57,7 +57,7 @@ html:active-view-transition-type(jcd-theme)::view-transition-new(root) {
    JCD — Pôle courant dans le footer.
    Sur une page de pôle (ou sa sous-page), le lien du pôle dans la
    colonne « Nos pôles » prend la couleur d'accent du pôle (--accent).
-   La classe .is-current est posée par transition.js. Sert de repère
+   La classe .is-current est posée par js/shared/transition.js. Sert de repère
    de navigation, dans la lignée du marqueur .is-current de la méga-nav.
    Spécificité 0,3,0 → l'emporte sur .footer-link et .footer-link:hover.
    ============================================================ */

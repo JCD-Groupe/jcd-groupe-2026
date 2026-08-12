@@ -19,7 +19,7 @@ import Footer from "../components/Footer.astro";
     />
     <link
       rel="canonical"
-      href="https://www.jcd-groupe.fr/formation-informatique.html"
+      href="https://www.jcd-groupe.fr/formation-informatique"
     />
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="JCD Groupe" />
@@ -34,7 +34,7 @@ import Footer from "../components/Footer.astro";
     />
     <meta
       property="og:url"
-      content="https://www.jcd-groupe.fr/formation-informatique.html"
+      content="https://www.jcd-groupe.fr/formation-informatique"
     />
     <meta name="twitter:card" content="summary" />
     <title>Informatique · Catalogue des formations · JCD Groupe</title>
@@ -49,8 +49,8 @@ import Footer from "../components/Footer.astro";
     <link rel="stylesheet" href="css/formation-informatique.css" />
     <link rel="stylesheet" href="css/global.css" />
     <link rel="stylesheet" href="css/formation-informatique-overrides.css" />
-    <link rel="stylesheet" href="transition.css" />
-    <script is:inline src="transition.js"></script>
+    <link rel="stylesheet" href="css/transition.css" />
+    <script is:inline src="js/shared/js/shared/transition.js"></script>
     <script is:inline src="js/shared/mpolish.js" id="jcd-mpolish-js"></script>
     <script is:inline src="js/shared/touch.js" id="jcd-touch-js"></script>
     <script is:inline src="js/shared/mrefonte-shim.js" id="jcd-mrefonte-shim"
@@ -79,7 +79,7 @@ import Footer from "../components/Footer.astro";
         </div>
         <div class="container">
           <nav class="crumbs reveal" aria-label="Fil d'Ariane">
-            <a href="formation.html">Formation</a>
+            <a href="formation">Formation</a>
             <span class="crumbs-sep" aria-hidden="true">/</span>
             <span>Catalogue</span>
             <span class="crumbs-sep" aria-hidden="true">/</span>
@@ -111,7 +111,7 @@ import Footer from "../components/Footer.astro";
                 ></span
               >
             </a>
-            <a href="contact.html?pole=formation" class="btn-cta btn-cta--ghost"
+            <a href="contact?pole=formation" class="btn-cta btn-cta--ghost"
               >Être conseillé</a
             >
           </div>
@@ -210,7 +210,7 @@ import Footer from "../components/Footer.astro";
             >
               <a
                 class="fcat-card-link"
-                href="formation-detail.html?f=prompt-engineering-communiquer-efficacement-avec-les-intelligences-artificielles&cat=informatique"
+                href="formation-detail?f=prompt-engineering-communiquer-efficacement-avec-les-intelligences-artificielles&cat=informatique"
               >
                 <div class="fcat-card-top">
                   <span class="fcat-num">01</span>
@@ -255,7 +255,7 @@ import Footer from "../components/Footer.astro";
             >
               <a
                 class="fcat-card-link"
-                href="formation-detail.html?f=utiliser-lia-pour-developper-son-efficacite-et-sa-productivite-au-travail-comment-integrer-lia-dans-son-travail-au-quotidien&cat=informatique"
+                href="formation-detail?f=utiliser-lia-pour-developper-son-efficacite-et-sa-productivite-au-travail-comment-integrer-lia-dans-son-travail-au-quotidien&cat=informatique"
               >
                 <div class="fcat-card-top">
                   <span class="fcat-num">02</span>
@@ -301,7 +301,7 @@ import Footer from "../components/Footer.astro";
             >
               <a
                 class="fcat-card-link"
-                href="formation-detail.html?f=pack-efficacite-microsoft-365-utilisateurs&cat=informatique"
+                href="formation-detail?f=pack-efficacite-microsoft-365-utilisateurs&cat=informatique"
               >
                 <div class="fcat-card-top">
                   <span class="fcat-num">03</span>
@@ -345,7 +345,7 @@ import Footer from "../components/Footer.astro";
             >
               <a
                 class="fcat-card-link"
-                href="formation-detail.html?f=sharepoint-online-creer-des-applications-avec-powerapps-et-power-automate-flow&cat=informatique"
+                href="formation-detail?f=sharepoint-online-creer-des-applications-avec-powerapps-et-power-automate-flow&cat=informatique"
               >
                 <div class="fcat-card-top">
                   <span class="fcat-num">04</span>
@@ -390,7 +390,7 @@ import Footer from "../components/Footer.astro";
             >
               <a
                 class="fcat-card-link"
-                href="formation-detail.html?f=powershell-perfectionnement&cat=informatique"
+                href="formation-detail?f=powershell-perfectionnement&cat=informatique"
               >
                 <div class="fcat-card-top">
                   <span class="fcat-num">05</span>
@@ -432,7 +432,7 @@ import Footer from "../components/Footer.astro";
             >
               <a
                 class="fcat-card-link"
-                href="formation-detail.html?f=powershell-gerer-automatisation-de-windows&cat=informatique"
+                href="formation-detail?f=powershell-gerer-automatisation-de-windows&cat=informatique"
               >
                 <div class="fcat-card-top">
                   <span class="fcat-num">06</span>
@@ -476,7 +476,7 @@ import Footer from "../components/Footer.astro";
             >
               <a
                 class="fcat-card-link"
-                href="formation-detail.html?f=pack-essentiel-administration-microsoft-365&cat=informatique"
+                href="formation-detail?f=pack-essentiel-administration-microsoft-365&cat=informatique"
               >
                 <div class="fcat-card-top">
                   <span class="fcat-num">07</span>
@@ -520,7 +520,7 @@ import Footer from "../components/Footer.astro";
             >
               <a
                 class="fcat-card-link"
-                href="formation-detail.html?f=pack-performance-administrative-microsoft-365-utilisateurs&cat=informatique"
+                href="formation-detail?f=pack-performance-administrative-microsoft-365-utilisateurs&cat=informatique"
               >
                 <div class="fcat-card-top">
                   <span class="fcat-num">08</span>
@@ -564,7 +564,7 @@ import Footer from "../components/Footer.astro";
             >
               <a
                 class="fcat-card-link"
-                href="formation-detail.html?f=microsoft-azure-les-fondamentaux&cat=informatique"
+                href="formation-detail?f=microsoft-azure-les-fondamentaux&cat=informatique"
               >
                 <div class="fcat-card-top">
                   <span class="fcat-num">09</span>
@@ -606,7 +606,7 @@ import Footer from "../components/Footer.astro";
             >
               <a
                 class="fcat-card-link"
-                href="formation-detail.html?f=intelligence-artificielle-generative-les-solutions-du-marche-et-leurs&cat=informatique"
+                href="formation-detail?f=intelligence-artificielle-generative-les-solutions-du-marche-et-leurs&cat=informatique"
               >
                 <div class="fcat-card-top">
                   <span class="fcat-num">10</span>
@@ -651,7 +651,7 @@ import Footer from "../components/Footer.astro";
             >
               <a
                 class="fcat-card-link"
-                href="formation-detail.html?f=claude-pour-les-dirigeants-ia-souveraine-fiable-et-strategique&cat=informatique"
+                href="formation-detail?f=claude-pour-les-dirigeants-ia-souveraine-fiable-et-strategique&cat=informatique"
               >
                 <div class="fcat-card-top">
                   <span class="fcat-num">11</span>
@@ -696,7 +696,7 @@ import Footer from "../components/Footer.astro";
             >
               <a
                 class="fcat-card-link"
-                href="formation-detail.html?f=claude-vs-chatgpt-choisir-et-combiner-les-bons-outils-ia-selon-les-usages&cat=informatique"
+                href="formation-detail?f=claude-vs-chatgpt-choisir-et-combiner-les-bons-outils-ia-selon-les-usages&cat=informatique"
               >
                 <div class="fcat-card-top">
                   <span class="fcat-num">12</span>
@@ -741,7 +741,7 @@ import Footer from "../components/Footer.astro";
             >
               <a
                 class="fcat-card-link"
-                href="formation-detail.html?f=decouvrir-les-agents-ia-avec-claude-et-n8n-automatiser-sans-developpeur&cat=informatique"
+                href="formation-detail?f=decouvrir-les-agents-ia-avec-claude-et-n8n-automatiser-sans-developpeur&cat=informatique"
               >
                 <div class="fcat-card-top">
                   <span class="fcat-num">13</span>
@@ -786,7 +786,7 @@ import Footer from "../components/Footer.astro";
             >
               <a
                 class="fcat-card-link"
-                href="formation-detail.html?f=claude-et-la-gestion-documentaire-analyser-contrats-bilans-et-dossiers-complets-en-quelques-minutes&cat=informatique"
+                href="formation-detail?f=claude-et-la-gestion-documentaire-analyser-contrats-bilans-et-dossiers-complets-en-quelques-minutes&cat=informatique"
               >
                 <div class="fcat-card-top">
                   <span class="fcat-num">14</span>
@@ -831,7 +831,7 @@ import Footer from "../components/Footer.astro";
             >
               <a
                 class="fcat-card-link"
-                href="formation-detail.html?f=claude-ai-assistant-ia-le-plus-fiable-pour-les-professionnels&cat=informatique"
+                href="formation-detail?f=claude-ai-assistant-ia-le-plus-fiable-pour-les-professionnels&cat=informatique"
               >
                 <div class="fcat-card-top">
                   <span class="fcat-num">15</span>
@@ -876,7 +876,7 @@ import Footer from "../components/Footer.astro";
             >
               <a
                 class="fcat-card-link"
-                href="formation-detail.html?f=pack-avance-administration-microsoft-365&cat=informatique"
+                href="formation-detail?f=pack-avance-administration-microsoft-365&cat=informatique"
               >
                 <div class="fcat-card-top">
                   <span class="fcat-num">16</span>
@@ -920,7 +920,7 @@ import Footer from "../components/Footer.astro";
             >
               <a
                 class="fcat-card-link"
-                href="formation-detail.html?f=les-fondamentaux-de-la-securite-des-si&cat=informatique"
+                href="formation-detail?f=les-fondamentaux-de-la-securite-des-si&cat=informatique"
               >
                 <div class="fcat-card-top">
                   <span class="fcat-num">17</span>
@@ -964,7 +964,7 @@ import Footer from "../components/Footer.astro";
             >
               <a
                 class="fcat-card-link"
-                href="formation-detail.html?f=gestion-de-microsoft-teams&cat=informatique"
+                href="formation-detail?f=gestion-de-microsoft-teams&cat=informatique"
               >
                 <div class="fcat-card-top">
                   <span class="fcat-num">18</span>
@@ -1006,7 +1006,7 @@ import Footer from "../components/Footer.astro";
             >
               <a
                 class="fcat-card-link"
-                href="formation-detail.html?f=microsoft-azure-developpement-de-solutions&cat=informatique"
+                href="formation-detail?f=microsoft-azure-developpement-de-solutions&cat=informatique"
               >
                 <div class="fcat-card-top">
                   <span class="fcat-num">19</span>
@@ -1050,7 +1050,7 @@ import Footer from "../components/Footer.astro";
             >
               <a
                 class="fcat-card-link"
-                href="formation-detail.html?f=administrateur-didentite-et-dacces-microsoft&cat=informatique"
+                href="formation-detail?f=administrateur-didentite-et-dacces-microsoft&cat=informatique"
               >
                 <div class="fcat-card-top">
                   <span class="fcat-num">20</span>
@@ -1094,7 +1094,7 @@ import Footer from "../components/Footer.astro";
             >
               <a
                 class="fcat-card-link"
-                href="formation-detail.html?f=microsoft-azure-administrateur&cat=informatique"
+                href="formation-detail?f=microsoft-azure-administrateur&cat=informatique"
               >
                 <div class="fcat-card-top">
                   <span class="fcat-num">21</span>
@@ -1136,7 +1136,7 @@ import Footer from "../components/Footer.astro";
             >
               <a
                 class="fcat-card-link"
-                href="formation-detail.html?f=copilot-pour-microsoft-365&cat=informatique"
+                href="formation-detail?f=copilot-pour-microsoft-365&cat=informatique"
               >
                 <div class="fcat-card-top">
                   <span class="fcat-num">22</span>
@@ -1178,7 +1178,7 @@ import Footer from "../components/Footer.astro";
             >
               <a
                 class="fcat-card-link"
-                href="formation-detail.html?f=copilot-pour-microsoft-365-avance&cat=informatique"
+                href="formation-detail?f=copilot-pour-microsoft-365-avance&cat=informatique"
               >
                 <div class="fcat-card-top">
                   <span class="fcat-num">23</span>
@@ -1220,7 +1220,7 @@ import Footer from "../components/Footer.astro";
             >
               <a
                 class="fcat-card-link"
-                href="formation-detail.html?f=analyser-et-visualiser-des-donnees-avec-microsoft-power-bi&cat=informatique"
+                href="formation-detail?f=analyser-et-visualiser-des-donnees-avec-microsoft-power-bi&cat=informatique"
               >
                 <div class="fcat-card-top">
                   <span class="fcat-num">24</span>
@@ -1264,7 +1264,7 @@ import Footer from "../components/Footer.astro";
             >
               <a
                 class="fcat-card-link"
-                href="formation-detail.html?f=linux-administration-avancee&cat=informatique"
+                href="formation-detail?f=linux-administration-avancee&cat=informatique"
               >
                 <div class="fcat-card-top">
                   <span class="fcat-num">25</span>
@@ -1306,7 +1306,7 @@ import Footer from "../components/Footer.astro";
             >
               <a
                 class="fcat-card-link"
-                href="formation-detail.html?f=linux-administration&cat=informatique"
+                href="formation-detail?f=linux-administration&cat=informatique"
               >
                 <div class="fcat-card-top">
                   <span class="fcat-num">26</span>
@@ -1348,7 +1348,7 @@ import Footer from "../components/Footer.astro";
             >
               <a
                 class="fcat-card-link"
-                href="formation-detail.html?f=itil-v4-foundation&cat=informatique"
+                href="formation-detail?f=itil-v4-foundation&cat=informatique"
               >
                 <div class="fcat-card-top">
                   <span class="fcat-num">27</span>
@@ -1392,7 +1392,7 @@ import Footer from "../components/Footer.astro";
             >
               <a
                 class="fcat-card-link"
-                href="formation-detail.html?f=conduite-de-projet-informatique&cat=informatique"
+                href="formation-detail?f=conduite-de-projet-informatique&cat=informatique"
               >
                 <div class="fcat-card-top">
                   <span class="fcat-num">28</span>
@@ -1434,7 +1434,7 @@ import Footer from "../components/Footer.astro";
             >
               <a
                 class="fcat-card-link"
-                href="formation-detail.html?f=sharepoint-online-concepteur&cat=informatique"
+                href="formation-detail?f=sharepoint-online-concepteur&cat=informatique"
               >
                 <div class="fcat-card-top">
                   <span class="fcat-num">29</span>
@@ -1476,7 +1476,7 @@ import Footer from "../components/Footer.astro";
             >
               <a
                 class="fcat-card-link"
-                href="formation-detail.html?f=sharepoint-2019-administrateur&cat=informatique"
+                href="formation-detail?f=sharepoint-2019-administrateur&cat=informatique"
               >
                 <div class="fcat-card-top">
                   <span class="fcat-num">30</span>
@@ -1518,7 +1518,7 @@ import Footer from "../components/Footer.astro";
             >
               <a
                 class="fcat-card-link"
-                href="formation-detail.html?f=microsoft-hyper-v-deploiement-et-administration&cat=informatique"
+                href="formation-detail?f=microsoft-hyper-v-deploiement-et-administration&cat=informatique"
               >
                 <div class="fcat-card-top">
                   <span class="fcat-num">31</span>
@@ -1562,7 +1562,7 @@ import Footer from "../components/Footer.astro";
             >
               <a
                 class="fcat-card-link"
-                href="formation-detail.html?f=veeam-backup-replication-v12-configure-manage-recover&cat=informatique"
+                href="formation-detail?f=veeam-backup-replication-v12-configure-manage-recover&cat=informatique"
               >
                 <div class="fcat-card-top">
                   <span class="fcat-num">32</span>
@@ -1607,7 +1607,7 @@ import Footer from "../components/Footer.astro";
             >
               <a
                 class="fcat-card-link"
-                href="formation-detail.html?f=windows-server-2022-active-directory&cat=informatique"
+                href="formation-detail?f=windows-server-2022-active-directory&cat=informatique"
               >
                 <div class="fcat-card-top">
                   <span class="fcat-num">33</span>
@@ -1651,7 +1651,7 @@ import Footer from "../components/Footer.astro";
             >
               <a
                 class="fcat-card-link"
-                href="formation-detail.html?f=windows-server-2022-mise-en-oeuvre-et-administration&cat=informatique"
+                href="formation-detail?f=windows-server-2022-mise-en-oeuvre-et-administration&cat=informatique"
               >
                 <div class="fcat-card-top">
                   <span class="fcat-num">34</span>
@@ -1695,7 +1695,7 @@ import Footer from "../components/Footer.astro";
             >
               <a
                 class="fcat-card-link"
-                href="formation-detail.html?f=vmware-vsphere-8-install-configure-manage&cat=informatique"
+                href="formation-detail?f=vmware-vsphere-8-install-configure-manage&cat=informatique"
               >
                 <div class="fcat-card-top">
                   <span class="fcat-num">35</span>
@@ -1739,7 +1739,7 @@ import Footer from "../components/Footer.astro";
             >
               <a
                 class="fcat-card-link"
-                href="formation-detail.html?f=ethical-hacking&cat=informatique"
+                href="formation-detail?f=ethical-hacking&cat=informatique"
               >
                 <div class="fcat-card-top">
                   <span class="fcat-num">36</span>
@@ -1781,7 +1781,7 @@ import Footer from "../components/Footer.astro";
             >
               <a
                 class="fcat-card-link"
-                href="formation-detail.html?f=rgpd&cat=informatique"
+                href="formation-detail?f=rgpd&cat=informatique"
               >
                 <div class="fcat-card-top">
                   <span class="fcat-num">37</span>
@@ -1825,7 +1825,7 @@ import Footer from "../components/Footer.astro";
             >
               <a
                 class="fcat-card-link"
-                href="formation-detail.html?f=sensibilisation-utilisateurs-cybersecurite&cat=informatique"
+                href="formation-detail?f=sensibilisation-utilisateurs-cybersecurite&cat=informatique"
               >
                 <div class="fcat-card-top">
                   <span class="fcat-num">38</span>
@@ -1869,7 +1869,7 @@ import Footer from "../components/Footer.astro";
             >
               <a
                 class="fcat-card-link"
-                href="formation-detail.html?f=cybersecurite-sensibilisation-des-utilisateurs&cat=informatique"
+                href="formation-detail?f=cybersecurite-sensibilisation-des-utilisateurs&cat=informatique"
               >
                 <div class="fcat-card-top">
                   <span class="fcat-num">39</span>
@@ -1913,7 +1913,7 @@ import Footer from "../components/Footer.astro";
             >
               <a
                 class="fcat-card-link"
-                href="formation-detail.html?f=initiation-a-copilot-pour-microsoft-365&cat=informatique"
+                href="formation-detail?f=initiation-a-copilot-pour-microsoft-365&cat=informatique"
               >
                 <div class="fcat-card-top">
                   <span class="fcat-num">40</span>
@@ -1987,7 +1987,7 @@ import Footer from "../components/Footer.astro";
             <li>
               <a
                 class="ocat-chip"
-                href="formation-bureautique.html"
+                href="formation-bureautique"
                 style="--cc:85,160,94"
                 ><span class="ocat-ic" aria-hidden="true"
                   ><svg
@@ -2004,12 +2004,13 @@ import Footer from "../components/Footer.astro";
                   ></span
                 ><span class="ocat-tx">Bureautique</span><span class="ocat-n"
                   >23</span
-                ></a>
+                ></a
+              >
             </li>
             <li>
               <a
                 class="ocat-chip"
-                href="formation-intelligence-artificielle.html"
+                href="formation-intelligence-artificielle"
                 style="--cc:118,184,63"
                 ><span class="ocat-ic" aria-hidden="true"
                   ><svg
@@ -2029,12 +2030,13 @@ import Footer from "../components/Footer.astro";
                   ></span
                 ><span class="ocat-tx">Intelligence artificielle</span><span
                   class="ocat-n">17</span
-                ></a>
+                ></a
+              >
             </li>
             <li>
               <a
                 class="ocat-chip"
-                href="formation-communication-marketing.html"
+                href="formation-communication-marketing"
                 style="--cc:229,196,53"
                 ><span class="ocat-ic" aria-hidden="true"
                   ><svg
@@ -2051,12 +2053,13 @@ import Footer from "../components/Footer.astro";
                   ></span
                 ><span class="ocat-tx">Communication - Marketing</span><span
                   class="ocat-n">11</span
-                ></a>
+                ></a
+              >
             </li>
             <li>
               <a
                 class="ocat-chip"
-                href="formation-management.html"
+                href="formation-management"
                 style="--cc:243,148,29"
                 ><span class="ocat-ic" aria-hidden="true"
                   ><svg
@@ -2077,12 +2080,13 @@ import Footer from "../components/Footer.astro";
                   ></span
                 ><span class="ocat-tx">Management</span><span class="ocat-n"
                   >8</span
-                ></a>
+                ></a
+              >
             </li>
             <li>
               <a
                 class="ocat-chip"
-                href="formation-commerce-relation-client.html"
+                href="formation-commerce-relation-client"
                 style="--cc:230,110,50"
                 ><span class="ocat-ic" aria-hidden="true"
                   ><svg
@@ -2098,12 +2102,13 @@ import Footer from "../components/Footer.astro";
                       d="M9 10V6a3 3 0 0 1 6 0v4"></path></svg
                   ></span
                 ><span class="ocat-tx">Commerce - Relation client - Achat</span
-                ><span class="ocat-n">6</span></a>
+                ><span class="ocat-n">6</span></a
+              >
             </li>
             <li>
               <a
                 class="ocat-chip"
-                href="formation-comptabilite-gestion.html"
+                href="formation-comptabilite-gestion"
                 style="--cc:225,79,70"
                 ><span class="ocat-ic" aria-hidden="true"
                   ><svg
@@ -2122,12 +2127,13 @@ import Footer from "../components/Footer.astro";
                   ></span
                 ><span class="ocat-tx">Comptabilité - Gestion</span><span
                   class="ocat-n">2</span
-                ></a>
+                ></a
+              >
             </li>
             <li>
               <a
                 class="ocat-chip"
-                href="formation-ressources-humaines.html"
+                href="formation-ressources-humaines"
                 style="--cc:217,83,127"
                 ><span class="ocat-ic" aria-hidden="true"
                   ><svg
@@ -2144,12 +2150,13 @@ import Footer from "../components/Footer.astro";
                       d="M15.5 11l2 2 4-4"></path></svg
                   ></span
                 ><span class="ocat-tx">Gestion des Ressources humaines</span
-                ><span class="ocat-n">5</span></a>
+                ><span class="ocat-n">5</span></a
+              >
             </li>
             <li>
               <a
                 class="ocat-chip"
-                href="formation-developpement-personnel.html"
+                href="formation-developpement-personnel"
                 style="--cc:199,107,180"
                 ><span class="ocat-ic" aria-hidden="true"
                   ><svg
@@ -2166,12 +2173,13 @@ import Footer from "../components/Footer.astro";
                   ></span
                 ><span class="ocat-tx">Développement Personnel</span><span
                   class="ocat-n">7</span
-                ></a>
+                ></a
+              >
             </li>
             <li>
               <a
                 class="ocat-chip"
-                href="formation-graphisme-pao.html"
+                href="formation-graphisme-pao"
                 style="--cc:156,95,181"
                 ><span class="ocat-ic" aria-hidden="true"
                   ><svg
@@ -2191,12 +2199,13 @@ import Footer from "../components/Footer.astro";
                   ></span
                 ><span class="ocat-tx">Graphisme - PAO</span><span
                   class="ocat-n">8</span
-                ></a>
+                ></a
+              >
             </li>
             <li>
               <a
                 class="ocat-chip"
-                href="formation-administratif-secretariat-accueil.html"
+                href="formation-administratif-secretariat-accueil"
                 style="--cc:113,73,156"
                 ><span class="ocat-ic" aria-hidden="true"
                   ><svg
@@ -2215,12 +2224,13 @@ import Footer from "../components/Footer.astro";
                   ></span
                 ><span class="ocat-tx"
                   >Administratif - Secrétariat - Accueil</span
-                ><span class="ocat-n">7</span></a>
+                ><span class="ocat-n">7</span></a
+              >
             </li>
             <li>
               <a
                 class="ocat-chip"
-                href="formation-securite.html"
+                href="formation-securite"
                 style="--cc:92,132,177"
                 ><span class="ocat-ic" aria-hidden="true"
                   ><svg
@@ -2238,12 +2248,13 @@ import Footer from "../components/Footer.astro";
                   ></span
                 ><span class="ocat-tx">Sécurité</span><span class="ocat-n"
                   >7</span
-                ></a>
+                ></a
+              >
             </li>
             <li>
               <a
                 class="ocat-chip"
-                href="formation-langues.html"
+                href="formation-langues"
                 style="--cc:60,184,169"
                 ><span class="ocat-ic" aria-hidden="true"
                   ><svg
@@ -2262,7 +2273,8 @@ import Footer from "../components/Footer.astro";
                   ></span
                 ><span class="ocat-tx">Langues</span><span class="ocat-n"
                   >1</span
-                ></a>
+                ></a
+              >
             </li>
           </ul>
         </div>
@@ -2337,7 +2349,7 @@ import Footer from "../components/Footer.astro";
 
                 <div class="cta-actions reveal delay-3">
                   <a
-                    href="contact.html?pole=formation"
+                    href="contact?pole=formation"
                     class="btn-cta btn-cta--primary"
                   >
                     Contacter le pôle Formation
@@ -2416,7 +2428,7 @@ import Footer from "../components/Footer.astro";
 
           <div class="jcd-mnav__reveal" style="transition-delay:.07s">
             <div class="jcd-mnav__item" style="--mnav-c:#2E72BA">
-              <a class="jcd-mnav__link" href="informatique.html"
+              <a class="jcd-mnav__link" href="informatique"
                 ><span class="jcd-mnav__dot"></span><span
                   class="jcd-mnav__label">Informatique</span
                 ></a
@@ -2438,15 +2450,14 @@ import Footer from "../components/Footer.astro";
               </button>
             </div>
             <div class="jcd-acc__panel" id="jcdAccInfo">
-              <a class="jcd-mnav__sub" href="info-cloud.html">Cloud Microsoft</a
-              >
-              <a class="jcd-mnav__sub" href="info-collaboratif.html"
+              <a class="jcd-mnav__sub" href="info-cloud">Cloud Microsoft</a>
+              <a class="jcd-mnav__sub" href="info-collaboratif"
                 >Solutions collaboratives &amp; audiovisuelles</a
               >
-              <a class="jcd-mnav__sub" href="info-reseaux.html"
+              <a class="jcd-mnav__sub" href="info-reseaux"
                 >Architectures syst&egrave;mes &amp; r&eacute;seaux</a
               >
-              <a class="jcd-mnav__sub" href="info-integration.html"
+              <a class="jcd-mnav__sub" href="info-integration"
                 >Int&eacute;gration &amp; Support PC</a
               >
             </div>
@@ -2455,7 +2466,7 @@ import Footer from "../components/Footer.astro";
           <a
             class="jcd-mnav__item jcd-mnav__reveal"
             style="--mnav-c:#E51D29;transition-delay:.10s"
-            href="service.html"
+            href="service"
             ><span class="jcd-mnav__dot"></span><span class="jcd-mnav__label"
               >Service</span
             ></a
@@ -2463,7 +2474,7 @@ import Footer from "../components/Footer.astro";
           <a
             class="jcd-mnav__item jcd-mnav__reveal"
             style="--mnav-c:#F9D605;transition-delay:.13s"
-            href="developpement.html"
+            href="developpement"
             ><span class="jcd-mnav__dot"></span><span class="jcd-mnav__label"
               >D&eacute;veloppement</span
             ></a
@@ -2471,7 +2482,7 @@ import Footer from "../components/Footer.astro";
           <a
             class="jcd-mnav__item jcd-mnav__reveal"
             style="--mnav-c:#F3941D;transition-delay:.16s"
-            href="print.html"
+            href="print"
             ><span class="jcd-mnav__dot"></span><span class="jcd-mnav__label"
               >Print</span
             ></a
@@ -2479,14 +2490,14 @@ import Footer from "../components/Footer.astro";
           <a
             class="jcd-mnav__item jcd-mnav__reveal"
             style="--mnav-c:#B063AC;transition-delay:.19s"
-            href="telecom.html"
+            href="telecom"
             ><span class="jcd-mnav__dot"></span><span class="jcd-mnav__label"
               >T&eacute;l&eacute;com</span
             ></a
           >
           <div class="jcd-mnav__reveal" style="transition-delay:.22s">
             <div class="jcd-mnav__item" style="--mnav-c:#8EC041">
-              <a class="jcd-mnav__link" href="formation.html"
+              <a class="jcd-mnav__link" href="formation"
                 ><span class="jcd-mnav__dot"></span><span
                   class="jcd-mnav__label">Formation</span
                 ></a
@@ -2508,61 +2519,52 @@ import Footer from "../components/Footer.astro";
               </button>
             </div>
             <div class="jcd-acc__panel" id="jcdAccForm">
-              <a class="jcd-mnav__sub" href="formation-bureautique.html"
+              <a class="jcd-mnav__sub" href="formation-bureautique"
                 >Bureautique</a
               >
               <a
                 class="jcd-mnav__sub"
-                href="formation-intelligence-artificielle.html"
+                href="formation-intelligence-artificielle"
                 >Intelligence artificielle</a
               >
-              <a class="jcd-mnav__sub" href="formation-informatique.html"
+              <a class="jcd-mnav__sub" href="formation-informatique"
                 >Informatique</a
               >
-              <a
-                class="jcd-mnav__sub"
-                href="formation-communication-marketing.html"
+              <a class="jcd-mnav__sub" href="formation-communication-marketing"
                 >Communication - Marketing</a
               >
-              <a class="jcd-mnav__sub" href="formation-management.html"
-                >Management</a
+              <a class="jcd-mnav__sub" href="formation-management">Management</a
               >
-              <a
-                class="jcd-mnav__sub"
-                href="formation-commerce-relation-client.html"
+              <a class="jcd-mnav__sub" href="formation-commerce-relation-client"
                 >Commerce - Relation client</a
               >
-              <a
-                class="jcd-mnav__sub"
-                href="formation-comptabilite-gestion.html"
+              <a class="jcd-mnav__sub" href="formation-comptabilite-gestion"
                 >Comptabilit&eacute; - Gestion</a
               >
-              <a class="jcd-mnav__sub" href="formation-ressources-humaines.html"
+              <a class="jcd-mnav__sub" href="formation-ressources-humaines"
                 >Ressources humaines</a
               >
-              <a
-                class="jcd-mnav__sub"
-                href="formation-developpement-personnel.html"
+              <a class="jcd-mnav__sub" href="formation-developpement-personnel"
                 >D&eacute;veloppement personnel</a
               >
-              <a class="jcd-mnav__sub" href="formation-graphisme-pao.html"
+              <a class="jcd-mnav__sub" href="formation-graphisme-pao"
                 >Graphisme - PAO</a
               >
               <a
                 class="jcd-mnav__sub"
-                href="formation-administratif-secretariat-accueil.html"
+                href="formation-administratif-secretariat-accueil"
                 >Administratif - Secr&eacute;tariat</a
               >
-              <a class="jcd-mnav__sub" href="formation-securite.html"
+              <a class="jcd-mnav__sub" href="formation-securite"
                 >S&eacute;curit&eacute;</a
               >
-              <a class="jcd-mnav__sub" href="formation-langues.html">Langues</a>
+              <a class="jcd-mnav__sub" href="formation-langues">Langues</a>
             </div>
           </div>
           <a
             class="jcd-mnav__item jcd-mnav__reveal"
             style="--mnav-c:#A78D75;transition-delay:.25s"
-            href="agencement.html"
+            href="agencement"
             ><span class="jcd-mnav__dot"></span><span class="jcd-mnav__label"
               >Agencement</span
             ></a
@@ -2577,7 +2579,7 @@ import Footer from "../components/Footer.astro";
           <a
             class="jcd-mnav__item jcd-mnav__reveal"
             style="--mnav-c:#9a9a9a;transition-delay:.33s"
-            href="assistance.html"
+            href="assistance"
             ><span class="jcd-mnav__dot"></span><span
               class="jcd-mnav__label"
               style="font-size:19px">Assistance</span
@@ -2586,7 +2588,7 @@ import Footer from "../components/Footer.astro";
           <a
             class="jcd-mnav__item jcd-mnav__reveal"
             style="--mnav-c:#9a9a9a;transition-delay:.36s"
-            href="carrieres.html"
+            href="carrieres"
             ><span class="jcd-mnav__dot"></span><span
               class="jcd-mnav__label"
               style="font-size:19px">Carri&egrave;res</span
@@ -2597,7 +2599,7 @@ import Footer from "../components/Footer.astro";
             class="jcd-mnav__cta jcd-mnav__reveal"
             style="transition-delay:.40s"
           >
-            <a class="jcd-mnav__btn jcd-mnav__btn--primary" href="contact.html"
+            <a class="jcd-mnav__btn jcd-mnav__btn--primary" href="contact"
               >Contacter un expert
               <span class="jcd-mnav__btn-ic"
                 ><svg
@@ -2655,7 +2657,7 @@ import Footer from "../components/Footer.astro";
       <a
         class="jcd-fab jcd-fab--contact"
         id="jcdFabContact"
-        href="contact.html"
+        href="contact"
         aria-label="Nous contacter"
       >
         <svg

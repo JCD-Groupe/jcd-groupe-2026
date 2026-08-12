@@ -17,7 +17,7 @@ import Footer from "../components/Footer.astro";
       name="description"
       content="JCD Groupe · Pôle Informatique. Parc maîtrisé, supervisé par un interlocuteur dédié."
     />
-    <link rel="canonical" href="https://www.jcd-groupe.fr/informatique.html" />
+    <link rel="canonical" href="https://www.jcd-groupe.fr/informatique" />
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="JCD Groupe" />
     <meta property="og:locale" content="fr_FR" />
@@ -26,10 +26,7 @@ import Footer from "../components/Footer.astro";
       property="og:description"
       content="JCD Groupe · Pôle Informatique. Parc maîtrisé, supervisé par un interlocuteur dédié."
     />
-    <meta
-      property="og:url"
-      content="https://www.jcd-groupe.fr/informatique.html"
-    />
+    <meta property="og:url" content="https://www.jcd-groupe.fr/informatique" />
     <meta name="twitter:card" content="summary" />
     <title>Informatique · JCD Groupe</title>
 
@@ -43,8 +40,8 @@ import Footer from "../components/Footer.astro";
     <link rel="stylesheet" href="css/informatique.css" />
     <link rel="stylesheet" href="css/global.css" />
     <link rel="stylesheet" href="css/informatique-overrides.css" />
-    <link rel="stylesheet" href="transition.css" />
-    <script is:inline src="transition.js"></script>
+    <link rel="stylesheet" href="css/transition.css" />
+    <script is:inline src="js/shared/js/shared/transition.js"></script>
     <script is:inline src="js/shared/mpolish.js" id="jcd-mpolish-js"></script>
     <script is:inline src="js/shared/touch.js" id="jcd-touch-js"></script>
     <script is:inline src="js/shared/page-boot.js"></script>
@@ -76,7 +73,7 @@ import Footer from "../components/Footer.astro";
     >
       <div class="info-subnav__inner">
         <a
-          href="informatique.html"
+          href="informatique"
           class="info-subnav__home is-active"
           aria-current="page"
           role="menuitem"
@@ -104,10 +101,7 @@ import Footer from "../components/Footer.astro";
         <span class="info-subnav__sep" aria-hidden="true"></span>
         <ul class="info-subnav__list">
           <li role="none">
-            <a
-              href="info-integration.html"
-              class="info-subnav__link"
-              role="menuitem"
+            <a href="info-integration" class="info-subnav__link" role="menuitem"
               ><span class="info-subnav__ic" aria-hidden="true"
                 ><svg
                   viewBox="0 0 24 24"
@@ -120,13 +114,11 @@ import Footer from "../components/Footer.astro";
                     d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"
                   ></path></svg
                 ></span
-              >Service Intégration &amp; Support PC</a>
+              >Service Intégration &amp; Support PC</a
+            >
           </li>
           <li role="none">
-            <a
-              href="info-reseaux.html"
-              class="info-subnav__link"
-              role="menuitem"
+            <a href="info-reseaux" class="info-subnav__link" role="menuitem"
               ><span class="info-subnav__ic" aria-hidden="true"
                 ><svg
                   viewBox="0 0 24 24"
@@ -142,11 +134,12 @@ import Footer from "../components/Footer.astro";
                     height="8"
                     rx="2"></rect><path d="M6 7h.01M6 17h.01"></path></svg
                 ></span
-              >Architectures systèmes &amp; réseaux</a>
+              >Architectures systèmes &amp; réseaux</a
+            >
           </li>
           <li role="none">
             <a
-              href="info-collaboratif.html"
+              href="info-collaboratif"
               class="info-subnav__link"
               role="menuitem"
               ><span class="info-subnav__ic" aria-hidden="true"
@@ -164,10 +157,11 @@ import Footer from "../components/Footer.astro";
                     height="12"
                     rx="2"></rect></svg
                 ></span
-              >Solutions collaboratives &amp; audiovisuelles</a>
+              >Solutions collaboratives &amp; audiovisuelles</a
+            >
           </li>
           <li role="none">
-            <a href="info-cloud.html" class="info-subnav__link" role="menuitem"
+            <a href="info-cloud" class="info-subnav__link" role="menuitem"
               ><span class="info-subnav__ic" aria-hidden="true"
                 ><svg
                   viewBox="0 0 24 24"
@@ -179,7 +173,8 @@ import Footer from "../components/Footer.astro";
                   ><path d="M17.5 19H9a7 7 0 1 1 6.71-9h1.79a4.5 4.5 0 1 1 0 9Z"
                   ></path></svg
                 ></span
-              >Cloud Microsoft</a>
+              >Cloud Microsoft</a
+            >
           </li>
         </ul>
       </div>
@@ -205,7 +200,7 @@ import Footer from "../components/Footer.astro";
           <div class="pole-cards reveal">
             <a
               class="pole-card"
-              href="info-integration.html"
+              href="info-integration"
               aria-label="Service Intégration & Support PC"
             >
               <div class="pole-card-top">
@@ -233,7 +228,7 @@ import Footer from "../components/Footer.astro";
 
             <a
               class="pole-card"
-              href="info-reseaux.html"
+              href="info-reseaux"
               aria-label="Architectures systèmes & réseaux"
             >
               <div class="pole-card-top">
@@ -264,7 +259,7 @@ import Footer from "../components/Footer.astro";
 
             <a
               class="pole-card"
-              href="info-collaboratif.html"
+              href="info-collaboratif"
               aria-label="Solutions collaboratives & audiovisuelles"
             >
               <div class="pole-card-top">
@@ -293,11 +288,7 @@ import Footer from "../components/Footer.astro";
               </p>
             </a>
 
-            <a
-              class="pole-card"
-              href="info-cloud.html"
-              aria-label="Cloud Microsoft"
-            >
+            <a class="pole-card" href="info-cloud" aria-label="Cloud Microsoft">
               <div class="pole-card-top">
                 <span class="pole-card-icon" aria-hidden="true"
                   ><svg
@@ -512,7 +503,7 @@ import Footer from "../components/Footer.astro";
                   correctes et on maintient le niveau de compétence de vos
                   équipes.
                 </p>
-                <a class="cyber-pilier-link" href="formation-informatique.html"
+                <a class="cyber-pilier-link" href="formation-informatique"
                   >Nos formations cybers&eacute;curit&eacute;<svg
                     viewBox="0 0 16 16"
                     fill="none"
@@ -555,7 +546,7 @@ import Footer from "../components/Footer.astro";
             </span>
             <a
               class="cyber-audit"
-              href="contact.html?pole=informatique"
+              href="contact?pole=informatique"
               aria-label="Contacter un expert cybersécurité"
               >Audit cyber <strong
                 >co-financé par la Région Grand Est jusqu'à 50 %</strong
@@ -884,7 +875,7 @@ import Footer from "../components/Footer.astro";
                 </p>
                 <div class="cta-actions reveal delay-3">
                   <a
-                    href="contact.html?pole=informatique"
+                    href="contact?pole=informatique"
                     class="btn-cta btn-cta--primary"
                   >
                     Contacter le pôle Informatique
@@ -963,7 +954,7 @@ import Footer from "../components/Footer.astro";
 
           <div class="jcd-mnav__reveal" style="transition-delay:.07s">
             <div class="jcd-mnav__item" style="--mnav-c:#2E72BA">
-              <a class="jcd-mnav__link" href="informatique.html"
+              <a class="jcd-mnav__link" href="informatique"
                 ><span class="jcd-mnav__dot"></span><span
                   class="jcd-mnav__label">Informatique</span
                 ></a
@@ -985,15 +976,14 @@ import Footer from "../components/Footer.astro";
               </button>
             </div>
             <div class="jcd-acc__panel" id="jcdAccInfo">
-              <a class="jcd-mnav__sub" href="info-cloud.html">Cloud Microsoft</a
-              >
-              <a class="jcd-mnav__sub" href="info-collaboratif.html"
+              <a class="jcd-mnav__sub" href="info-cloud">Cloud Microsoft</a>
+              <a class="jcd-mnav__sub" href="info-collaboratif"
                 >Solutions collaboratives &amp; audiovisuelles</a
               >
-              <a class="jcd-mnav__sub" href="info-reseaux.html"
+              <a class="jcd-mnav__sub" href="info-reseaux"
                 >Architectures syst&egrave;mes &amp; r&eacute;seaux</a
               >
-              <a class="jcd-mnav__sub" href="info-integration.html"
+              <a class="jcd-mnav__sub" href="info-integration"
                 >Int&eacute;gration &amp; Support PC</a
               >
             </div>
@@ -1002,7 +992,7 @@ import Footer from "../components/Footer.astro";
           <a
             class="jcd-mnav__item jcd-mnav__reveal"
             style="--mnav-c:#E51D29;transition-delay:.10s"
-            href="service.html"
+            href="service"
             ><span class="jcd-mnav__dot"></span><span class="jcd-mnav__label"
               >Service</span
             ></a
@@ -1010,7 +1000,7 @@ import Footer from "../components/Footer.astro";
           <a
             class="jcd-mnav__item jcd-mnav__reveal"
             style="--mnav-c:#F9D605;transition-delay:.13s"
-            href="developpement.html"
+            href="developpement"
             ><span class="jcd-mnav__dot"></span><span class="jcd-mnav__label"
               >D&eacute;veloppement</span
             ></a
@@ -1018,7 +1008,7 @@ import Footer from "../components/Footer.astro";
           <a
             class="jcd-mnav__item jcd-mnav__reveal"
             style="--mnav-c:#F3941D;transition-delay:.16s"
-            href="print.html"
+            href="print"
             ><span class="jcd-mnav__dot"></span><span class="jcd-mnav__label"
               >Print</span
             ></a
@@ -1026,14 +1016,14 @@ import Footer from "../components/Footer.astro";
           <a
             class="jcd-mnav__item jcd-mnav__reveal"
             style="--mnav-c:#B063AC;transition-delay:.19s"
-            href="telecom.html"
+            href="telecom"
             ><span class="jcd-mnav__dot"></span><span class="jcd-mnav__label"
               >T&eacute;l&eacute;com</span
             ></a
           >
           <div class="jcd-mnav__reveal" style="transition-delay:.22s">
             <div class="jcd-mnav__item" style="--mnav-c:#8EC041">
-              <a class="jcd-mnav__link" href="formation.html"
+              <a class="jcd-mnav__link" href="formation"
                 ><span class="jcd-mnav__dot"></span><span
                   class="jcd-mnav__label">Formation</span
                 ></a
@@ -1055,61 +1045,52 @@ import Footer from "../components/Footer.astro";
               </button>
             </div>
             <div class="jcd-acc__panel" id="jcdAccForm">
-              <a class="jcd-mnav__sub" href="formation-bureautique.html"
+              <a class="jcd-mnav__sub" href="formation-bureautique"
                 >Bureautique</a
               >
               <a
                 class="jcd-mnav__sub"
-                href="formation-intelligence-artificielle.html"
+                href="formation-intelligence-artificielle"
                 >Intelligence artificielle</a
               >
-              <a class="jcd-mnav__sub" href="formation-informatique.html"
+              <a class="jcd-mnav__sub" href="formation-informatique"
                 >Informatique</a
               >
-              <a
-                class="jcd-mnav__sub"
-                href="formation-communication-marketing.html"
+              <a class="jcd-mnav__sub" href="formation-communication-marketing"
                 >Communication - Marketing</a
               >
-              <a class="jcd-mnav__sub" href="formation-management.html"
-                >Management</a
+              <a class="jcd-mnav__sub" href="formation-management">Management</a
               >
-              <a
-                class="jcd-mnav__sub"
-                href="formation-commerce-relation-client.html"
+              <a class="jcd-mnav__sub" href="formation-commerce-relation-client"
                 >Commerce - Relation client</a
               >
-              <a
-                class="jcd-mnav__sub"
-                href="formation-comptabilite-gestion.html"
+              <a class="jcd-mnav__sub" href="formation-comptabilite-gestion"
                 >Comptabilit&eacute; - Gestion</a
               >
-              <a class="jcd-mnav__sub" href="formation-ressources-humaines.html"
+              <a class="jcd-mnav__sub" href="formation-ressources-humaines"
                 >Ressources humaines</a
               >
-              <a
-                class="jcd-mnav__sub"
-                href="formation-developpement-personnel.html"
+              <a class="jcd-mnav__sub" href="formation-developpement-personnel"
                 >D&eacute;veloppement personnel</a
               >
-              <a class="jcd-mnav__sub" href="formation-graphisme-pao.html"
+              <a class="jcd-mnav__sub" href="formation-graphisme-pao"
                 >Graphisme - PAO</a
               >
               <a
                 class="jcd-mnav__sub"
-                href="formation-administratif-secretariat-accueil.html"
+                href="formation-administratif-secretariat-accueil"
                 >Administratif - Secr&eacute;tariat</a
               >
-              <a class="jcd-mnav__sub" href="formation-securite.html"
+              <a class="jcd-mnav__sub" href="formation-securite"
                 >S&eacute;curit&eacute;</a
               >
-              <a class="jcd-mnav__sub" href="formation-langues.html">Langues</a>
+              <a class="jcd-mnav__sub" href="formation-langues">Langues</a>
             </div>
           </div>
           <a
             class="jcd-mnav__item jcd-mnav__reveal"
             style="--mnav-c:#A78D75;transition-delay:.25s"
-            href="agencement.html"
+            href="agencement"
             ><span class="jcd-mnav__dot"></span><span class="jcd-mnav__label"
               >Agencement</span
             ></a
@@ -1124,7 +1105,7 @@ import Footer from "../components/Footer.astro";
           <a
             class="jcd-mnav__item jcd-mnav__reveal"
             style="--mnav-c:#9a9a9a;transition-delay:.33s"
-            href="assistance.html"
+            href="assistance"
             ><span class="jcd-mnav__dot"></span><span
               class="jcd-mnav__label"
               style="font-size:19px">Assistance</span
@@ -1133,7 +1114,7 @@ import Footer from "../components/Footer.astro";
           <a
             class="jcd-mnav__item jcd-mnav__reveal"
             style="--mnav-c:#9a9a9a;transition-delay:.36s"
-            href="carrieres.html"
+            href="carrieres"
             ><span class="jcd-mnav__dot"></span><span
               class="jcd-mnav__label"
               style="font-size:19px">Carri&egrave;res</span
@@ -1144,7 +1125,7 @@ import Footer from "../components/Footer.astro";
             class="jcd-mnav__cta jcd-mnav__reveal"
             style="transition-delay:.40s"
           >
-            <a class="jcd-mnav__btn jcd-mnav__btn--primary" href="contact.html"
+            <a class="jcd-mnav__btn jcd-mnav__btn--primary" href="contact"
               >Contacter un expert
               <span class="jcd-mnav__btn-ic"
                 ><svg
@@ -1202,7 +1183,7 @@ import Footer from "../components/Footer.astro";
       <a
         class="jcd-fab jcd-fab--contact"
         id="jcdFabContact"
-        href="contact.html"
+        href="contact"
         aria-label="Nous contacter"
       >
         <svg

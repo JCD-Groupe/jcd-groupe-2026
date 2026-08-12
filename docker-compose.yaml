@@ -1,0 +1,8 @@
+services:
+  astro:
+    build: .
+    env_file:
+      - .env
+    restart: always
+    ports:
+      - "80:80"

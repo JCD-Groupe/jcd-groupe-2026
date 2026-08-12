@@ -20,7 +20,7 @@
     if (y) y.textContent = String(new Date().getFullYear());
   })();
 
-  /* ---- Accordéons (repris de carrieres.html) ----
+  /* ---- Accordéons (repris de carrieres) ----
      Anime la hauteur de .acc-a + bascule aria-expanded. Un item peut
      démarrer ouvert (aria-expanded="true") : on cale alors sa hauteur
      à 'auto' au chargement pour que la 1re fermeture parte d'une
@@ -182,7 +182,7 @@
            Les items de la zone Decouvrir (anchors) ne sont jamais
            marques courants. === */
     var here = (location.pathname.split('/').pop() || '').toLowerCase();
-    if (!here) here = 'index.html';
+    if (!here) here = "index";
     panel.querySelectorAll('.nm-zone--expertises .nm-item').forEach(function (a) {
       var hrefAttr = a.getAttribute('href') || '';
       if (hrefAttr.indexOf('#') !== -1) return;

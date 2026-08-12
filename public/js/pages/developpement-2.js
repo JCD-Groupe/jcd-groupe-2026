@@ -266,7 +266,7 @@
            Les items de la zone Decouvrir (anchors) ne sont jamais
            marques courants. === */
     var here = (location.pathname.split('/').pop() || '').toLowerCase();
-    if (!here) here = 'index.html';
+    if (!here) here = "index";
     panel.querySelectorAll('.nm-zone--expertises .nm-item').forEach(function (a) {
       var hrefAttr = a.getAttribute('href') || '';
       if (hrefAttr.indexOf('#') !== -1) return;

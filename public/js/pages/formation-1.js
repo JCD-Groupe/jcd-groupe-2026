@@ -310,7 +310,7 @@
            Les items de la zone Decouvrir (anchors) ne sont jamais
            marques courants. === */
     var here = (location.pathname.split('/').pop() || '').toLowerCase();
-    if (!here) here = 'index.html';
+    if (!here) here = "index";
     panel.querySelectorAll('.nm-zone--expertises .nm-item').forEach(function (a) {
       var hrefAttr = a.getAttribute('href') || '';
       if (hrefAttr.indexOf('#') !== -1) return;
@@ -326,39 +326,58 @@
 
   /* ---- Mega menu Catalogue ---- */
   (function setupCatalogueMenu() {
-    var trigger = document.getElementById('nav-catalogue-trigger');
-    var panel   = document.getElementById('nav-catalogue-panel');
-    var pill    = document.getElementById('nav-catalogue-pill');
-    var navbar  = document.getElementById('navbar');
+    var trigger = document.getElementById("nav-catalogue-trigger");
+    var panel = document.getElementById("nav-catalogue-panel");
+    var pill = document.getElementById("nav-catalogue-pill");
+    var navbar = document.getElementById("navbar");
     if (!trigger || !panel || !pill || !navbar) return;
 
-    var body    = panel.querySelector('.ncat-body');
-    var search  = panel.querySelector('.ncat-search');
-    var input   = panel.querySelector('.ncat-input');
-    var cats    = Array.prototype.slice.call(panel.querySelectorAll('.ncat-cat'));
-    var groups  = Array.prototype.slice.call(panel.querySelectorAll('.ncat-group'));
-    var items   = Array.prototype.slice.call(panel.querySelectorAll('.ncat-item'));
+    var body = panel.querySelector(".ncat-body");
+    var search = panel.querySelector(".ncat-search");
+    var input = panel.querySelector(".ncat-input");
+    var cats = Array.prototype.slice.call(panel.querySelectorAll(".ncat-cat"));
+    var groups = Array.prototype.slice.call(
+      panel.querySelectorAll(".ncat-group"),
+    );
+    var items = Array.prototype.slice.call(
+      panel.querySelectorAll(".ncat-item"),
+    );
     var focusables = Array.prototype.slice.call(
-      panel.querySelectorAll('.ncat-cat, .ncat-item, .ncat-group-all, .ncat-foot-cta, .ncat-void-reset')
+      panel.querySelectorAll(
+        ".ncat-cat, .ncat-item, .ncat-group-all, .ncat-foot-cta, .ncat-void-reset",
+      ),
     );
 
-    var openTimer = null, closeTimer = null, hoverTimer = null, isOpen = false;
+    var openTimer = null,
+      closeTimer = null,
+      hoverTimer = null,
+      isOpen = false;
 
     /* Index de recherche : libellés normalisés sans accents. */
     function fold(s) {
-      return (s || '').toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '');
+      return (s || "").toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g, "");
     }
-    items.forEach(function (it) { it.setAttribute('data-q', fold(it.textContent)); });
+    items.forEach(function (it) {
+      it.setAttribute("data-q", fold(it.textContent));
+    });
 
     function setTabbable(on) {
-      focusables.forEach(function (el) { el.setAttribute('tabindex', on ? '0' : '-1'); });
-      if (input) input.setAttribute('tabindex', on ? '0' : '-1');
+      focusables.forEach(function (el) {
+        el.setAttribute("tabindex", on ? "0" : "-1");
+      });
+      if (input) input.setAttribute("tabindex", on ? "0" : "-1");
     }
     setTabbable(false);
 
     function clearTimers() {
-      if (openTimer)  { window.clearTimeout(openTimer);  openTimer = null;  }
-      if (closeTimer) { window.clearTimeout(closeTimer); closeTimer = null; }
+      if (openTimer) {
+        window.clearTimeout(openTimer);
+        openTimer = null;
+      }
+      if (closeTimer) {
+        window.clearTimeout(closeTimer);
+        closeTimer = null;
+      }
     }
 
     window.__jcdNavClosers = window.__jcdNavClosers || [];
@@ -367,42 +386,54 @@
       clearTimers();
       if (isOpen) return;
       isOpen = true;
-      window.__jcdNavClosers.forEach(function (fn) { if (fn !== closePanel) fn(); });
-      trigger.setAttribute('aria-expanded', 'true');
-      panel.setAttribute('aria-hidden', 'false');
+      window.__jcdNavClosers.forEach(function (fn) {
+        if (fn !== closePanel) fn();
+      });
+      trigger.setAttribute("aria-expanded", "true");
+      panel.setAttribute("aria-hidden", "false");
       setTabbable(true);
     }
     function closePanel() {
       clearTimers();
       if (!isOpen) return;
       isOpen = false;
-      trigger.setAttribute('aria-expanded', 'false');
-      panel.setAttribute('aria-hidden', 'true');
+      trigger.setAttribute("aria-expanded", "false");
+      panel.setAttribute("aria-hidden", "true");
       resetSearch();
       setTabbable(false);
     }
     window.__jcdNavClosers.push(closePanel);
 
-    function deferOpen()  { clearTimers(); openTimer  = window.setTimeout(openPanel,  60);  }
-    function deferClose() { clearTimers(); closeTimer = window.setTimeout(closePanel, 180); }
+    function deferOpen() {
+      clearTimers();
+      openTimer = window.setTimeout(openPanel, 60);
+    }
+    function deferClose() {
+      clearTimers();
+      closeTimer = window.setTimeout(closePanel, 180);
+    }
 
     [pill, panel].forEach(function (el) {
-      el.addEventListener('mouseenter', function () { deferOpen();  });
-      el.addEventListener('mouseleave', function () { deferClose(); });
+      el.addEventListener("mouseenter", function () {
+        deferOpen();
+      });
+      el.addEventListener("mouseleave", function () {
+        deferClose();
+      });
     });
 
-    trigger.addEventListener('click', function (e) {
+    trigger.addEventListener("click", function (e) {
       e.preventDefault();
       if (isOpen) closePanel();
       else openPanel();
     });
 
-    trigger.addEventListener('keydown', function (e) {
-      if (e.key === 'ArrowDown' || e.key === 'Enter' || e.key === ' ') {
+    trigger.addEventListener("keydown", function (e) {
+      if (e.key === "ArrowDown" || e.key === "Enter" || e.key === " ") {
         e.preventDefault();
         openPanel();
         if (input) input.focus();
-      } else if (e.key === 'Escape' && isOpen) {
+      } else if (e.key === "Escape" && isOpen) {
         closePanel();
         trigger.focus();
       }
@@ -410,51 +441,78 @@
 
     /* — Sélection de catégorie (survol ou focus du rail) — */
     function activate(slug) {
-      cats.forEach(function (c) { c.setAttribute('aria-selected', String(c.getAttribute('data-cat') === slug)); });
-      groups.forEach(function (g) { g.classList.toggle('is-active', g.getAttribute('data-cat') === slug); });
+      cats.forEach(function (c) {
+        c.setAttribute(
+          "aria-selected",
+          String(c.getAttribute("data-cat") === slug),
+        );
+      });
+      groups.forEach(function (g) {
+        g.classList.toggle("is-active", g.getAttribute("data-cat") === slug);
+      });
     }
     cats.forEach(function (cat) {
-      cat.addEventListener('mouseenter', function () {
-        if (hoverTimer) { clearTimeout(hoverTimer); hoverTimer = null; }
-        hoverTimer = setTimeout(function () { activate(cat.getAttribute('data-cat')); }, 55);
+      cat.addEventListener("mouseenter", function () {
+        if (hoverTimer) {
+          clearTimeout(hoverTimer);
+          hoverTimer = null;
+        }
+        hoverTimer = setTimeout(function () {
+          activate(cat.getAttribute("data-cat"));
+        }, 55);
       });
-      cat.addEventListener('focus', function () { activate(cat.getAttribute('data-cat')); });
+      cat.addEventListener("focus", function () {
+        activate(cat.getAttribute("data-cat"));
+      });
     });
 
     /* — Recherche instantanée plein catalogue — */
     function applySearch(qRaw) {
       var q = fold(qRaw.trim());
       var hits = 0;
-      if (search) search.classList.toggle('has-query', q.length > 0);
+      if (search) search.classList.toggle("has-query", q.length > 0);
       if (!q) {
-        body.classList.remove('is-searching', 'no-results');
-        items.forEach(function (it) { it.removeAttribute('hidden'); });
-        groups.forEach(function (g) { g.removeAttribute('data-empty'); });
+        body.classList.remove("is-searching", "no-results");
+        items.forEach(function (it) {
+          it.removeAttribute("hidden");
+        });
+        groups.forEach(function (g) {
+          g.removeAttribute("data-empty");
+        });
         return;
       }
-      body.classList.add('is-searching');
+      body.classList.add("is-searching");
       var terms = q.split(/\s+/);
       groups.forEach(function (g) {
         var any = false;
-        g.querySelectorAll('.ncat-item').forEach(function (it) {
-          var hay = it.getAttribute('data-q') || '';
-          var ok = terms.every(function (t) { return hay.indexOf(t) !== -1; });
-          if (ok) { it.removeAttribute('hidden'); any = true; hits++; }
-          else { it.setAttribute('hidden', ''); }
+        g.querySelectorAll(".ncat-item").forEach(function (it) {
+          var hay = it.getAttribute("data-q") || "";
+          var ok = terms.every(function (t) {
+            return hay.indexOf(t) !== -1;
+          });
+          if (ok) {
+            it.removeAttribute("hidden");
+            any = true;
+            hits++;
+          } else {
+            it.setAttribute("hidden", "");
+          }
         });
-        g.setAttribute('data-empty', any ? 'false' : 'true');
+        g.setAttribute("data-empty", any ? "false" : "true");
       });
-      body.classList.toggle('no-results', hits === 0);
+      body.classList.toggle("no-results", hits === 0);
     }
     function resetSearch() {
       if (!input) return;
-      input.value = '';
-      applySearch('');
+      input.value = "";
+      applySearch("");
     }
     if (input) {
-      input.addEventListener('input', function () { applySearch(input.value); });
-      input.addEventListener('keydown', function (e) {
-        if (e.key === 'Escape') {
+      input.addEventListener("input", function () {
+        applySearch(input.value);
+      });
+      input.addEventListener("keydown", function (e) {
+        if (e.key === "Escape") {
           if (input.value) {
             e.stopPropagation();
             resetSearch();
@@ -462,24 +520,24 @@
             closePanel();
             trigger.focus();
           }
-        } else if (e.key === 'Enter') {
+        } else if (e.key === "Enter") {
           e.preventDefault();
-          if (body.classList.contains('is-searching')) {
-            var first = panel.querySelector('.ncat-item:not([hidden])');
+          if (body.classList.contains("is-searching")) {
+            var first = panel.querySelector(".ncat-item:not([hidden])");
             if (first) first.click();
           }
-        } else if (e.key === 'ArrowDown') {
+        } else if (e.key === "ArrowDown") {
           e.preventDefault();
-          var next = body.classList.contains('is-searching')
-            ? panel.querySelector('.ncat-item:not([hidden])')
+          var next = body.classList.contains("is-searching")
+            ? panel.querySelector(".ncat-item:not([hidden])")
             : cats[0];
           if (next) next.focus();
         }
       });
     }
-    var voidReset = panel.querySelector('.ncat-void-reset');
+    var voidReset = panel.querySelector(".ncat-void-reset");
     if (voidReset) {
-      voidReset.addEventListener('click', function () {
+      voidReset.addEventListener("click", function () {
         resetSearch();
         if (input) input.focus();
       });
@@ -488,51 +546,57 @@
     /* — Navigation clavier : rail vertical, flèche droite vers la
          scène, flèche gauche pour revenir au rail. — */
     cats.forEach(function (cat, i) {
-      cat.addEventListener('keydown', function (e) {
-        if (e.key === 'ArrowDown') {
+      cat.addEventListener("keydown", function (e) {
+        if (e.key === "ArrowDown") {
           e.preventDefault();
           cats[(i + 1) % cats.length].focus();
-        } else if (e.key === 'ArrowUp') {
+        } else if (e.key === "ArrowUp") {
           e.preventDefault();
           cats[(i - 1 + cats.length) % cats.length].focus();
-        } else if (e.key === 'ArrowRight') {
+        } else if (e.key === "ArrowRight") {
           e.preventDefault();
-          var g = panel.querySelector('.ncat-group.is-active .ncat-item:not([hidden])');
+          var g = panel.querySelector(
+            ".ncat-group.is-active .ncat-item:not([hidden])",
+          );
           if (g) g.focus();
-        } else if (e.key === 'Escape') {
+        } else if (e.key === "Escape") {
           closePanel();
           trigger.focus();
         }
       });
     });
     items.forEach(function (item) {
-      item.addEventListener('keydown', function (e) {
-        var visible = items.filter(function (it) { return !it.hasAttribute('hidden') && it.offsetParent !== null; });
+      item.addEventListener("keydown", function (e) {
+        var visible = items.filter(function (it) {
+          return !it.hasAttribute("hidden") && it.offsetParent !== null;
+        });
         var idx = visible.indexOf(item);
-        if (e.key === 'ArrowDown') {
+        if (e.key === "ArrowDown") {
           e.preventDefault();
           if (visible.length) visible[(idx + 1) % visible.length].focus();
-        } else if (e.key === 'ArrowUp') {
+        } else if (e.key === "ArrowUp") {
           e.preventDefault();
-          if (visible.length) visible[(idx - 1 + visible.length) % visible.length].focus();
-        } else if (e.key === 'ArrowLeft') {
+          if (visible.length)
+            visible[(idx - 1 + visible.length) % visible.length].focus();
+        } else if (e.key === "ArrowLeft") {
           e.preventDefault();
-          var current = panel.querySelector('.ncat-cat[aria-selected="true"]') || cats[0];
+          var current =
+            panel.querySelector('.ncat-cat[aria-selected="true"]') || cats[0];
           current.focus();
-        } else if (e.key === 'Escape') {
+        } else if (e.key === "Escape") {
           closePanel();
           trigger.focus();
         }
       });
     });
 
-    document.addEventListener('click', function (e) {
+    document.addEventListener("click", function (e) {
       if (!isOpen) return;
       if (navbar.contains(e.target)) return;
       closePanel();
     });
-    document.addEventListener('keydown', function (e) {
-      if (e.key === 'Escape' && isOpen) {
+    document.addEventListener("keydown", function (e) {
+      if (e.key === "Escape" && isOpen) {
         closePanel();
         trigger.focus();
       }
@@ -541,24 +605,40 @@
     /* — Raccourci « / » : focus la recherche locale si la page en a
          une (pages catégories), sinon ouvre le catalogue et focus
          sa recherche. Ignoré pendant une saisie. — */
-    document.addEventListener('keydown', function (e) {
-      if (e.key !== '/' || e.ctrlKey || e.metaKey || e.altKey) return;
+    document.addEventListener("keydown", function (e) {
+      if (e.key !== "/" || e.ctrlKey || e.metaKey || e.altKey) return;
       var t = e.target;
-      if (t && (t.tagName === 'INPUT' || t.tagName === 'TEXTAREA' || t.isContentEditable)) return;
+      if (
+        t &&
+        (t.tagName === "INPUT" ||
+          t.tagName === "TEXTAREA" ||
+          t.isContentEditable)
+      )
+        return;
       e.preventDefault();
-      var local = document.getElementById('ct-search');
-      if (local) { local.focus(); local.select(); return; }
+      var local = document.getElementById("ct-search");
+      if (local) {
+        local.focus();
+        local.select();
+        return;
+      }
       openPanel();
-      if (input) window.setTimeout(function () { input.focus(); }, 90);
+      if (input)
+        window.setTimeout(function () {
+          input.focus();
+        }, 90);
     });
 
-    /* — Marqueur de catégorie courante (pages formation-*.html) — */
-    var here = (location.pathname.split('/').pop() || '').toLowerCase();
+    /* — Marqueur de catégorie courante (pages formation-*) — */
+    var here = (location.pathname.split("/").pop() || "").toLowerCase();
     cats.forEach(function (c) {
-      var target = (c.getAttribute('href') || '').split('/').pop().toLowerCase();
+      var target = (c.getAttribute("href") || "")
+        .split("/")
+        .pop()
+        .toLowerCase();
       if (target && target === here) {
-        c.classList.add('is-current');
-        activate(c.getAttribute('data-cat'));
+        c.classList.add("is-current");
+        activate(c.getAttribute("data-cat"));
       }
     });
   })();

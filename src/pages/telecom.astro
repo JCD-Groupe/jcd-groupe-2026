@@ -17,7 +17,7 @@ import Footer from "../components/Footer.astro";
       name="description"
       content="JCD Groupe · Pôle Télécom. Téléphonie d'entreprise fixe et mobile, liens opérateurs fibre / 5G / satellite, UCaaS. Approche multi-opérateurs en Grand Est."
     />
-    <link rel="canonical" href="https://www.jcd-groupe.fr/telecom.html" />
+    <link rel="canonical" href="https://www.jcd-groupe.fr/telecom" />
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="JCD Groupe" />
     <meta property="og:locale" content="fr_FR" />
@@ -29,7 +29,7 @@ import Footer from "../components/Footer.astro";
       property="og:description"
       content="JCD Groupe · Pôle Télécom. Téléphonie d'entreprise fixe et mobile, liens opérateurs fibre / 5G / satellite, UCaaS. Approche multi-opérateurs en Grand Est."
     />
-    <meta property="og:url" content="https://www.jcd-groupe.fr/telecom.html" />
+    <meta property="og:url" content="https://www.jcd-groupe.fr/telecom" />
     <meta name="twitter:card" content="summary" />
     <title>
       Télécom · Téléphonie d'entreprise &amp; connectivité · JCD Groupe
@@ -45,8 +45,8 @@ import Footer from "../components/Footer.astro";
     <link rel="stylesheet" href="css/telecom.css" />
     <link rel="stylesheet" href="css/global.css" />
     <link rel="stylesheet" href="css/telecom-overrides.css" />
-    <link rel="stylesheet" href="transition.css" />
-    <script is:inline src="transition.js"></script>
+    <link rel="stylesheet" href="css/transition.css" />
+    <script is:inline src="js/shared/js/shared/transition.js"></script>
     <script is:inline src="js/shared/xpcompact.js" id="jcd-xpcompact-js"
     ></script>
     <script is:inline src="js/shared/touch.js" id="jcd-touch-js"></script>
@@ -94,10 +94,7 @@ import Footer from "../components/Footer.astro";
             </p>
 
             <div class="hero-actions reveal delay-3">
-              <a
-                href="contact.html?pole=telecom"
-                class="btn-cta btn-cta--ghost"
-              >
+              <a href="contact?pole=telecom" class="btn-cta btn-cta--ghost">
                 Faire le point sur mon réseau
                 <span class="btn-cta-arrow"
                   ><svg
@@ -1126,7 +1123,7 @@ import Footer from "../components/Footer.astro";
 
                 <div class="cta-actions reveal delay-3">
                   <a
-                    href="contact.html?pole=telecom"
+                    href="contact?pole=telecom"
                     class="btn-cta btn-cta--primary"
                   >
                     Contacter le pôle Télécom
@@ -1211,7 +1208,7 @@ import Footer from "../components/Footer.astro";
 
           <div class="jcd-mnav__reveal" style="transition-delay:.07s">
             <div class="jcd-mnav__item" style="--mnav-c:#2E72BA">
-              <a class="jcd-mnav__link" href="informatique.html"
+              <a class="jcd-mnav__link" href="informatique"
                 ><span class="jcd-mnav__dot"></span><span
                   class="jcd-mnav__label">Informatique</span
                 ></a
@@ -1233,15 +1230,14 @@ import Footer from "../components/Footer.astro";
               </button>
             </div>
             <div class="jcd-acc__panel" id="jcdAccInfo">
-              <a class="jcd-mnav__sub" href="info-cloud.html">Cloud Microsoft</a
-              >
-              <a class="jcd-mnav__sub" href="info-collaboratif.html"
+              <a class="jcd-mnav__sub" href="info-cloud">Cloud Microsoft</a>
+              <a class="jcd-mnav__sub" href="info-collaboratif"
                 >Solutions collaboratives &amp; audiovisuelles</a
               >
-              <a class="jcd-mnav__sub" href="info-reseaux.html"
+              <a class="jcd-mnav__sub" href="info-reseaux"
                 >Architectures syst&egrave;mes &amp; r&eacute;seaux</a
               >
-              <a class="jcd-mnav__sub" href="info-integration.html"
+              <a class="jcd-mnav__sub" href="info-integration"
                 >Int&eacute;gration &amp; Support PC</a
               >
             </div>
@@ -1250,7 +1246,7 @@ import Footer from "../components/Footer.astro";
           <a
             class="jcd-mnav__item jcd-mnav__reveal"
             style="--mnav-c:#E51D29;transition-delay:.10s"
-            href="service.html"
+            href="service"
             ><span class="jcd-mnav__dot"></span><span class="jcd-mnav__label"
               >Service</span
             ></a
@@ -1258,7 +1254,7 @@ import Footer from "../components/Footer.astro";
           <a
             class="jcd-mnav__item jcd-mnav__reveal"
             style="--mnav-c:#F9D605;transition-delay:.13s"
-            href="developpement.html"
+            href="developpement"
             ><span class="jcd-mnav__dot"></span><span class="jcd-mnav__label"
               >D&eacute;veloppement</span
             ></a
@@ -1266,7 +1262,7 @@ import Footer from "../components/Footer.astro";
           <a
             class="jcd-mnav__item jcd-mnav__reveal"
             style="--mnav-c:#F3941D;transition-delay:.16s"
-            href="print.html"
+            href="print"
             ><span class="jcd-mnav__dot"></span><span class="jcd-mnav__label"
               >Print</span
             ></a
@@ -1274,14 +1270,14 @@ import Footer from "../components/Footer.astro";
           <a
             class="jcd-mnav__item jcd-mnav__reveal"
             style="--mnav-c:#B063AC;transition-delay:.19s"
-            href="telecom.html"
+            href="telecom"
             ><span class="jcd-mnav__dot"></span><span class="jcd-mnav__label"
               >T&eacute;l&eacute;com</span
             ></a
           >
           <div class="jcd-mnav__reveal" style="transition-delay:.22s">
             <div class="jcd-mnav__item" style="--mnav-c:#8EC041">
-              <a class="jcd-mnav__link" href="formation.html"
+              <a class="jcd-mnav__link" href="formation"
                 ><span class="jcd-mnav__dot"></span><span
                   class="jcd-mnav__label">Formation</span
                 ></a
@@ -1303,61 +1299,52 @@ import Footer from "../components/Footer.astro";
               </button>
             </div>
             <div class="jcd-acc__panel" id="jcdAccForm">
-              <a class="jcd-mnav__sub" href="formation-bureautique.html"
+              <a class="jcd-mnav__sub" href="formation-bureautique"
                 >Bureautique</a
               >
               <a
                 class="jcd-mnav__sub"
-                href="formation-intelligence-artificielle.html"
+                href="formation-intelligence-artificielle"
                 >Intelligence artificielle</a
               >
-              <a class="jcd-mnav__sub" href="formation-informatique.html"
+              <a class="jcd-mnav__sub" href="formation-informatique"
                 >Informatique</a
               >
-              <a
-                class="jcd-mnav__sub"
-                href="formation-communication-marketing.html"
+              <a class="jcd-mnav__sub" href="formation-communication-marketing"
                 >Communication - Marketing</a
               >
-              <a class="jcd-mnav__sub" href="formation-management.html"
-                >Management</a
+              <a class="jcd-mnav__sub" href="formation-management">Management</a
               >
-              <a
-                class="jcd-mnav__sub"
-                href="formation-commerce-relation-client.html"
+              <a class="jcd-mnav__sub" href="formation-commerce-relation-client"
                 >Commerce - Relation client</a
               >
-              <a
-                class="jcd-mnav__sub"
-                href="formation-comptabilite-gestion.html"
+              <a class="jcd-mnav__sub" href="formation-comptabilite-gestion"
                 >Comptabilit&eacute; - Gestion</a
               >
-              <a class="jcd-mnav__sub" href="formation-ressources-humaines.html"
+              <a class="jcd-mnav__sub" href="formation-ressources-humaines"
                 >Ressources humaines</a
               >
-              <a
-                class="jcd-mnav__sub"
-                href="formation-developpement-personnel.html"
+              <a class="jcd-mnav__sub" href="formation-developpement-personnel"
                 >D&eacute;veloppement personnel</a
               >
-              <a class="jcd-mnav__sub" href="formation-graphisme-pao.html"
+              <a class="jcd-mnav__sub" href="formation-graphisme-pao"
                 >Graphisme - PAO</a
               >
               <a
                 class="jcd-mnav__sub"
-                href="formation-administratif-secretariat-accueil.html"
+                href="formation-administratif-secretariat-accueil"
                 >Administratif - Secr&eacute;tariat</a
               >
-              <a class="jcd-mnav__sub" href="formation-securite.html"
+              <a class="jcd-mnav__sub" href="formation-securite"
                 >S&eacute;curit&eacute;</a
               >
-              <a class="jcd-mnav__sub" href="formation-langues.html">Langues</a>
+              <a class="jcd-mnav__sub" href="formation-langues">Langues</a>
             </div>
           </div>
           <a
             class="jcd-mnav__item jcd-mnav__reveal"
             style="--mnav-c:#A78D75;transition-delay:.25s"
-            href="agencement.html"
+            href="agencement"
             ><span class="jcd-mnav__dot"></span><span class="jcd-mnav__label"
               >Agencement</span
             ></a
@@ -1372,7 +1359,7 @@ import Footer from "../components/Footer.astro";
           <a
             class="jcd-mnav__item jcd-mnav__reveal"
             style="--mnav-c:#9a9a9a;transition-delay:.33s"
-            href="assistance.html"
+            href="assistance"
             ><span class="jcd-mnav__dot"></span><span
               class="jcd-mnav__label"
               style="font-size:19px">Assistance</span
@@ -1381,7 +1368,7 @@ import Footer from "../components/Footer.astro";
           <a
             class="jcd-mnav__item jcd-mnav__reveal"
             style="--mnav-c:#9a9a9a;transition-delay:.36s"
-            href="carrieres.html"
+            href="carrieres"
             ><span class="jcd-mnav__dot"></span><span
               class="jcd-mnav__label"
               style="font-size:19px">Carri&egrave;res</span
@@ -1392,7 +1379,7 @@ import Footer from "../components/Footer.astro";
             class="jcd-mnav__cta jcd-mnav__reveal"
             style="transition-delay:.40s"
           >
-            <a class="jcd-mnav__btn jcd-mnav__btn--primary" href="contact.html"
+            <a class="jcd-mnav__btn jcd-mnav__btn--primary" href="contact"
               >Contacter un expert
               <span class="jcd-mnav__btn-ic"
                 ><svg
@@ -1450,7 +1437,7 @@ import Footer from "../components/Footer.astro";
       <a
         class="jcd-fab jcd-fab--contact"
         id="jcdFabContact"
-        href="contact.html"
+        href="contact"
         aria-label="Nous contacter"
       >
         <svg

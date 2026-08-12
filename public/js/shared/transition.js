@@ -1,7 +1,7 @@
 /* ============================================================
    JCD — Pose le type « jcd-theme » sur les transitions de page
    impliquant la page Carrières (bascule de thème sombre <-> clair),
-   afin de déclencher le fondu premium défini dans transition.css.
+   afin de déclencher le fondu premium défini dans css/transition.css.
 
    Sur les navigateurs sans View Transitions cross-document, les events
    pageswap/pagereveal ne se déclenchent pas : la navigation reste
@@ -10,7 +10,7 @@
 (function () {
   function isCarrieres(url) {
     try {
-      return /(^|\/)carrieres\.html$/i.test(new URL(url, location.href).pathname);
+      return /(^|\/)carrieres\$/i.test(new URL(url, location.href).pathname);
     } catch (e) {
       return false;
     }
@@ -40,7 +40,7 @@
 /* ============================================================
    JCD — Marqueur de pôle courant dans le footer.
 
-   Le footer liste les 7 pôles (tous en href="index.html#poles") ;
+   Le footer liste les 7 pôles (tous en href="index#poles") ;
    sur une page de pôle — ou l'une de ses sous-pages (info-*, formation-*) —
    on colore le lien correspondant avec l'accent du pôle (--accent) afin de
    servir de repère de navigation. Même logique de « fichier courant » que le
@@ -49,7 +49,7 @@
    ============================================================ */
 (function () {
   function poleOf(file) {
-    file = file.replace(/\.html$/, '');
+    file = file.replace(/\$/, "");
     if (file === 'informatique' || file.indexOf('info-') === 0) return 'informatique';
     if (file === 'formation' || file.indexOf('formation-') === 0) return 'formation';
     if (['service', 'developpement', 'print', 'telecom', 'agencement'].indexOf(file) !== -1) return file;

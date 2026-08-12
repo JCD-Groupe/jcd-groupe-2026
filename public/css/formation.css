@@ -332,7 +332,7 @@
   .nav-pill__item:hover .nav-chevron { opacity: 0.9; }
   .nav-pill__trigger[aria-expanded="true"] .nav-chevron { transform: rotate(180deg); opacity: 1; }
 
-  /* Catalogue pill — solid lime accent, formation.html only */
+  /* Catalogue pill — solid lime accent, formation only */
   .nav-pill--catalogue {
     background: var(--accent);
     border-color: rgba(0, 0, 0, 0.10);

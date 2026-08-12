@@ -2,7 +2,7 @@
 // Pied de page commun (toutes pages sauf 404, qui garde le sien).
 // Props :
 //   current 'carrieres' | null -> aria-current sur "Nous rejoindre"
-//   home    true sur index     -> ancres nues (#histoire) au lieu de index.html#histoire
+//   home    true sur index     -> ancres nues (#histoire) au lieu de index#histoire
 const { current = null, home = false } = Astro.props;
 ---
 
@@ -16,17 +16,17 @@ const { current = null, home = false } = Astro.props;
           <h4 class="fcard-title">Pôles</h4>
           <ul class="footer-links footer-links--cols">
             <li>
-              <a class="footer-link" href="informatique.html">Informatique</a>
+              <a class="footer-link" href="informatique">Informatique</a>
             </li>
-            <li><a class="footer-link" href="service.html">Service</a></li>
+            <li><a class="footer-link" href="service">Service</a></li>
             <li>
-              <a class="footer-link" href="developpement.html">Développement</a>
+              <a class="footer-link" href="developpement">Développement</a>
             </li>
-            <li><a class="footer-link" href="print.html">Print</a></li>
-            <li><a class="footer-link" href="telecom.html">Télécom</a></li>
-            <li><a class="footer-link" href="formation.html">Formation</a></li>
+            <li><a class="footer-link" href="print">Print</a></li>
+            <li><a class="footer-link" href="telecom">Télécom</a></li>
+            <li><a class="footer-link" href="formation">Formation</a></li>
             <li>
-              <a class="footer-link" href="agencement.html">Agencement</a>
+              <a class="footer-link" href="agencement">Agencement</a>
             </li>
           </ul>
         </div>
@@ -38,33 +38,30 @@ const { current = null, home = false } = Astro.props;
           <h4 class="fcard-title">Le groupe</h4>
           <ul class="footer-links">
             <li>
-              <a
-                class="footer-link"
-                href={(home ? "" : "index.html") + "#histoire"}>Histoire</a
+              <a class="footer-link" href={(home ? "" : "index") + "#histoire"}
+                >Histoire</a
               >
             </li>
             <li>
-              <a
-                class="footer-link"
-                href={(home ? "" : "index.html") + "#valeurs"}>Valeurs</a
+              <a class="footer-link" href={(home ? "" : "index") + "#valeurs"}
+                >Valeurs</a
               >
             </li>
             <li>
-              <a
-                class="footer-link"
-                href={(home ? "" : "index.html") + "#chiffres"}>Chiffres clés</a
+              <a class="footer-link" href={(home ? "" : "index") + "#chiffres"}
+                >Chiffres clés</a
               >
             </li>
             <li>
               <a
                 class={"footer-link" +
                   (current === "carrieres" ? " is-current" : "")}
-                href="carrieres.html"
+                href="carrieres"
                 aria-current={current === "carrieres" ? "page" : undefined}
                 >Nous rejoindre</a
               >
             </li>
-            <li><a class="footer-link" href="contact.html">Contact</a></li>
+            <li><a class="footer-link" href="contact">Contact</a></li>
           </ul>
         </div>
       </div>
@@ -191,11 +188,8 @@ const { current = null, home = false } = Astro.props;
 
       <div class="footer-bottom-right">
         <span class="footer-legal"
-          ><a class="footer-link" href="mentions-legales.html"
-            >Mentions légales</a
-          > &middot; <a
-            class="footer-link"
-            href="politique-de-confidentialite.html"
+          ><a class="footer-link" href="mentions-legales">Mentions légales</a> &middot;
+          <a class="footer-link" href="politique-de-confidentialite"
             >Politique de confidentialité</a
           ></span
         >

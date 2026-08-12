@@ -1,6 +1,24 @@
 ---
+import { directus } from "../lib/directus";
+import { readSingleton } from "@directus/sdk";
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
+
+let developpement;
+
+developpement = await directus.request(
+  readSingleton("JCD_Developpement", {
+    fields: [
+      "*",
+      { logo_client_1: ["*"] },
+      { logo_client_2: ["*"] },
+      { logo_client_3: ["*"] },
+      { logo_client_4: ["*"] },
+      { logo_client_5: ["*"] },
+      { logo_client_6: ["*"] },
+    ],
+  }),
+);
 ---
 
 <html lang="fr">
@@ -13,25 +31,16 @@ import Footer from "../components/Footer.astro";
     <meta name="color-scheme" content="dark" />
     <meta name="theme-color" content="#0d0d0d" />
     <link rel="icon" href="favicon.svg" type="image/svg+xml" />
-    <meta
-      name="description"
-      content="JCD Groupe · Pôle Développement. Outils sur mesure, digitalisation des processus."
-    />
-    <link rel="canonical" href="https://www.jcd-groupe.fr/developpement.html" />
+    <meta name="description" content={developpement.meta_description} />
+    <link rel="canonical" href="https://www.jcd-groupe.fr/developpement" />
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="JCD Groupe" />
     <meta property="og:locale" content="fr_FR" />
-    <meta property="og:title" content="Développement · JCD Groupe" />
-    <meta
-      property="og:description"
-      content="JCD Groupe · Pôle Développement. Outils sur mesure, digitalisation des processus."
-    />
-    <meta
-      property="og:url"
-      content="https://www.jcd-groupe.fr/developpement.html"
-    />
+    <meta property="og:title" content={developpement.og_title} />
+    <meta property="og:description" content={developpement.og_description} />
+    <meta property="og:url" content="https://www.jcd-groupe.fr/developpement" />
     <meta name="twitter:card" content="summary" />
-    <title>Développement · JCD Groupe</title>
+    <title>{developpement.meta_title}</title>
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -43,8 +52,8 @@ import Footer from "../components/Footer.astro";
     <link rel="stylesheet" href="css/developpement.css" />
     <link rel="stylesheet" href="css/global.css" />
     <link rel="stylesheet" href="css/developpement-overrides.css" />
-    <link rel="stylesheet" href="transition.css" />
-    <script is:inline src="transition.js"></script>
+    <link rel="stylesheet" href="css/transition.css" />
+    <script is:inline src="js/shared/transition.js"></script>
     <script is:inline src="js/shared/xpcompact.js" id="jcd-xpcompact-js"
     ></script>
     <script is:inline src="js/shared/touch.js" id="jcd-touch-js"></script>
@@ -77,22 +86,21 @@ import Footer from "../components/Footer.astro";
           <div class="hero-grain" aria-hidden="true"></div>
 
           <div class="container">
-            <h1 id="hero-title" class="hero-title reveal delay-1">
-              Des applications <span class="accent-grad">sur mesure</span>,
-              pensées pour votre métier.
-            </h1>
-
+            <h1
+              id="hero-title"
+              class="hero-title reveal delay-1"
+              set:html={developpement.titre_hero}
+            />
             <p class="hero-sub reveal delay-2">
-              Applications web et sites internet conçus et développés pour tous
-              vos besoins.
+              {developpement.sous_titre_hero}
             </p>
 
             <div class="hero-actions reveal delay-3">
               <a
-                href="contact.html?pole=developpement"
+                href="contact?pole=developpement"
                 class="btn-cta btn-cta--ghost"
               >
-                Démarrer un projet
+                {developpement.bouton_hero}
                 <span class="btn-cta-arrow"
                   ><svg
                     viewBox="0 0 16 16"
@@ -152,15 +160,7 @@ import Footer from "../components/Footer.astro";
                   </div>
                   <span class="term-com"># pôle développement · jcd groupe</span
                   >
-                  <p class="term-out" id="termOut">
-                    <strong>Développer</strong>, ce n'est pas seulement empiler
-                    des lignes de code. C'est aussi traduire vos besoins métier
-                    en un outil qui travaille pour vous. Chaque application est <span
-                      class="accent">conçue sur mesure</span
-                    >. À partir de votre cahier des charges, nous développons
-                    votre projet. Notre code l'exécute, le teste et le
-                    maintient. La technologie au service du résultat.
-                  </p>
+                  <div set:html={developpement.manifeste} />
                 </div>
               </div>
             </div>
@@ -179,52 +179,81 @@ import Footer from "../components/Footer.astro";
         <div class="container">
           <div class="prest-layout">
             <aside class="prest-aside reveal">
-              <h2 class="prest-aside-title" id="prestations-title">
-                <span class="accent">Six prestations</span>, un seul
-                interlocuteur.
-              </h2>
-              <p class="prest-aside-sub">
-                Applications web métier et sites internet vitrine ou marchand,
-                de l'analyse du besoin à l'hébergement et la maintenance, tout
-                est internalisé.
-              </p>
+              <h2
+                class="prest-aside-title"
+                id="prestations-title"
+                set:html={developpement.titre_prestations}
+              />
+              <p
+                class="prest-aside-sub"
+                set:html={developpement.sous_titre_prestations}
+              />
 
               <div class="prest-aside-clients">
                 <div class="prest-aside-clients-head">
                   <span class="prest-aside-clients-label"
-                    >Ils nous font confiance</span
+                    >{developpement.titre_clients}</span
                   >
                   <span class="prest-aside-clients-rule" aria-hidden="true"
                   ></span>
-                  <span class="prest-aside-clients-count">100+</span>
+                  <span class="prest-aside-clients-count"
+                    >{developpement.nombre_clients}</span
+                  >
                 </div>
                 <div class="jcd-lcards" aria-label="Logos de nos clients">
                   <div class="jcd-lcard" data-name="Banque Populaire ALC">
                     <img
-                      src="logos%20DEV/banque-populaire.png"
-                      alt="Banque Populaire ALC"
+                      src={`${import.meta.env.PUBLIC_DIRECTUS_URL}/assets/${developpement.logo_client_1.id}`}
+                      alt={developpement.logo_client_1.title || ""}
+                      title={developpement.logo_client_1.title || ""}
+                      loading="lazy"
+                      decoding="async"
                     />
                   </div>
                   <div class="jcd-lcard" data-name="Viessmann">
-                    <img src="logos%20DEV/viessmann.png" alt="Viessmann" />
+                    <img
+                      src={`${import.meta.env.PUBLIC_DIRECTUS_URL}/assets/${developpement.logo_client_2.id}`}
+                      alt={developpement.logo_client_2.title || ""}
+                      title={developpement.logo_client_2.title || ""}
+                      loading="lazy"
+                      decoding="async"
+                    />
                   </div>
                   <div class="jcd-lcard" data-name="Georgia Tech Europe">
                     <img
-                      src="logos%20DEV/georgia-tech.png"
-                      alt="Georgia Tech Europe"
+                      src={`${import.meta.env.PUBLIC_DIRECTUS_URL}/assets/${developpement.logo_client_3.id}`}
+                      alt={developpement.logo_client_3.title || ""}
+                      title={developpement.logo_client_3.title || ""}
+                      loading="lazy"
+                      decoding="async"
                     />
                   </div>
                   <div class="jcd-lcard" data-name="Lorraine Aéroport">
                     <img
-                      src="logos%20DEV/lorraine-aeroport.png"
-                      alt="Lorraine Aéroport"
+                      src={`${import.meta.env.PUBLIC_DIRECTUS_URL}/assets/${developpement.logo_client_4.id}`}
+                      alt={developpement.logo_client_4.title || ""}
+                      title={developpement.logo_client_4.title || ""}
+                      loading="lazy"
+                      decoding="async"
                     />
                   </div>
                   <div class="jcd-lcard" data-name="Car Avenue">
-                    <img src="logos%20DEV/car-avenue.webp" alt="Car Avenue" />
+                    <img
+                      src={`${import.meta.env.PUBLIC_DIRECTUS_URL}/assets/${developpement.logo_client_5.id}`}
+                      alt={developpement.logo_client_5.title || ""}
+                      title={developpement.logo_client_5.title || ""}
+                      loading="lazy"
+                      decoding="async"
+                    />
                   </div>
                   <div class="jcd-lcard" data-name="Briotet">
-                    <img src="logos%20DEV/briotet.webp" alt="Briotet" />
+                    <img
+                      src={`${import.meta.env.PUBLIC_DIRECTUS_URL}/assets/${developpement.logo_client_6.id}`}
+                      alt={developpement.logo_client_6.title || ""}
+                      title={developpement.logo_client_6.title || ""}
+                      loading="lazy"
+                      decoding="async"
+                    />
                   </div>
                 </div>
               </div>
@@ -249,10 +278,11 @@ import Footer from "../components/Footer.astro";
                     </svg>
                   </span>
                 </div>
-                <h3 class="prest-item-title">Analyse &amp; conseil</h3>
+                <h3 class="prest-item-title">
+                  {developpement.prestation_1_titre}
+                </h3>
                 <p class="prest-item-desc">
-                  Étude du contexte et du besoin réel. On vous oriente vers la
-                  solution la plus juste.
+                  {developpement.prestation_1_description}
                 </p>
               </article>
 
@@ -274,10 +304,11 @@ import Footer from "../components/Footer.astro";
                     </svg>
                   </span>
                 </div>
-                <h3 class="prest-item-title">Audit &amp; cahier des charges</h3>
+                <h3 class="prest-item-title">
+                  {developpement.prestation_2_titre}
+                </h3>
                 <p class="prest-item-desc">
-                  Audit de l'existant et rédaction d'un cahier des charges
-                  clair, qui cadre le projet et les coûts.
+                  {developpement.prestation_2_description}
                 </p>
               </article>
 
@@ -298,10 +329,11 @@ import Footer from "../components/Footer.astro";
                     </svg>
                   </span>
                 </div>
-                <h3 class="prest-item-title">Applications web sur mesure</h3>
+                <h3 class="prest-item-title">
+                  {developpement.prestation_3_titre}
+                </h3>
                 <p class="prest-item-desc">
-                  Conception, développement et mise en œuvre d'outils métier qui
-                  digitalisent vos processus.
+                  {developpement.prestation_3_description}
                 </p>
               </article>
 
@@ -328,10 +360,11 @@ import Footer from "../components/Footer.astro";
                     </svg>
                   </span>
                 </div>
-                <h3 class="prest-item-title">Sites vitrine &amp; marchands</h3>
+                <h3 class="prest-item-title">
+                  {developpement.prestation_4_titre}
+                </h3>
                 <p class="prest-item-desc">
-                  Sites internet sur mesure, du site vitrine à la boutique en
-                  ligne, pensés pour convertir.
+                  {developpement.prestation_4_description}
                 </p>
               </article>
 
@@ -353,10 +386,11 @@ import Footer from "../components/Footer.astro";
                     </svg>
                   </span>
                 </div>
-                <h3 class="prest-item-title">Référencement SEO / SEA</h3>
+                <h3 class="prest-item-title">
+                  {developpement.prestation_5_titre}
+                </h3>
                 <p class="prest-item-desc">
-                  Optimisation du référencement naturel et payant pour rendre
-                  votre site visible et performant.
+                  {developpement.prestation_5_description}
                 </p>
               </article>
 
@@ -389,10 +423,11 @@ import Footer from "../components/Footer.astro";
                     </svg>
                   </span>
                 </div>
-                <h3 class="prest-item-title">Hébergement &amp; maintenance</h3>
+                <h3 class="prest-item-title">
+                  {developpement.prestation_6_titre}
+                </h3>
                 <p class="prest-item-desc">
-                  Formation, suivi, hotline, hébergement et maintenance. Votre
-                  solution reste vivante dans le temps.
+                  {developpement.prestation_6_description}
                 </p>
               </article>
             </div>
@@ -414,12 +449,9 @@ import Footer from "../components/Footer.astro";
         <div class="container">
           <div class="section-head reveal">
             <h2 class="section-title" id="process-title">
-              Quatre temps, <span class="accent"
-                >un pipeline maîtrisé de bout en bout.</span
-              >
+              <span set:html={developpement.titre_processus} />
               <span class="text-muted"
-                >De l'écoute du besoin à la mise en production et la
-                maintenance, chaque étape est tracée et validée avec vous.</span
+                >{developpement.sous_titre_processus}</span
               >
             </h2>
           </div>
@@ -530,10 +562,10 @@ import Footer from "../components/Footer.astro";
 
               <!-- Étiquettes bookend (au-dessus des nodes d'entrée / sortie) -->
               <text class="pf-label" x="113" y="74" text-anchor="middle"
-                >Brief client</text
+                >{developpement.processus_label_debut}</text
               >
               <text class="pf-label" x="787" y="74" text-anchor="middle"
-                >Livraison</text
+                >{developpement.processus_label_fin}</text
               >
 
               <!-- Circuit PCB : tracé en escalier (routage 90° arrondi) reliant les 4 nodes -->
@@ -739,10 +771,11 @@ import Footer from "../components/Footer.astro";
                 class="pf-vcard"
                 style="--c:#fce148; --c-rgb:252, 225, 72;"
               >
-                <h3 class="pf-vcard-title">Analyse &amp; cahier des charges</h3>
+                <h3 class="pf-vcard-title">
+                  {developpement.processus_1_titre}
+                </h3>
                 <p class="pf-vcard-desc">
-                  Écoute du besoin, audit, rédaction du cahier des charges. On
-                  ne code rien avant d'avoir compris.
+                  {developpement.processus_1_description}
                 </p>
               </article>
 
@@ -750,10 +783,11 @@ import Footer from "../components/Footer.astro";
                 class="pf-vcard"
                 style="--c:#F9D605; --c-rgb:249, 214, 5;"
               >
-                <h3 class="pf-vcard-title">Conception &amp; architecture</h3>
+                <h3 class="pf-vcard-title">
+                  {developpement.processus_2_titre}
+                </h3>
                 <p class="pf-vcard-desc">
-                  Choix techniques, maquettage et architecture de la solution.
-                  Le bon outil pour le bon usage.
+                  {developpement.processus_2_description}
                 </p>
               </article>
 
@@ -761,10 +795,11 @@ import Footer from "../components/Footer.astro";
                 class="pf-vcard"
                 style="--c:#d9bd05; --c-rgb:217, 189, 5;"
               >
-                <h3 class="pf-vcard-title">Développement &amp; intégration</h3>
+                <h3 class="pf-vcard-title">
+                  {developpement.processus_3_titre}
+                </h3>
                 <p class="pf-vcard-desc">
-                  Code sur mesure, intégrations et recette. Des points réguliers
-                  avec un chef de projet dédié.
+                  {developpement.processus_3_description}
                 </p>
               </article>
 
@@ -772,10 +807,11 @@ import Footer from "../components/Footer.astro";
                 class="pf-vcard"
                 style="--c:#b89e04; --c-rgb:184, 158, 4;"
               >
-                <h3 class="pf-vcard-title">Déploiement &amp; maintenance</h3>
+                <h3 class="pf-vcard-title">
+                  {developpement.processus_4_titre}
+                </h3>
                 <p class="pf-vcard-desc">
-                  Déploiement, formation, hébergement, hotline et maintenance.
-                  On reste à vos côtés après la livraison.
+                  {developpement.processus_4_description}
                 </p>
               </article>
             </div>
@@ -790,12 +826,11 @@ import Footer from "../components/Footer.astro";
         <div class="container">
           <!-- ============ RÉALISATIONS — grille filtrable ============ -->
           <div class="section-head reveal" id="realisations">
-            <div class="eyebrow">Nos réalisations</div>
-            <h2 class="section-title" id="real-title">
-              Notre <span class="accent">portfolio.</span>
+            <div class="eyebrow">{developpement.sur_titre_realisations}</div>
+            <h2 class="section-title" id="process-title">
+              <span set:html={developpement.titre_realisations} />
               <span class="text-muted"
-                >12 réalisations du pôle Développement&nbsp;: applications
-                métier, sites vitrine &amp; e-commerce.</span
+                >{developpement.sous_titre_realisations}</span
               >
             </h2>
           </div>
@@ -1540,20 +1575,21 @@ import Footer from "../components/Footer.astro";
               </svg>
 
               <div class="cta-body">
-                <h2 class="cta-title reveal delay-1" id="cta-title">
-                  Un projet de <em>développement&thinsp;?</em>
-                </h2>
-                <p class="cta-sub reveal delay-2">
-                  Bénéficiez d'un conseil personnalisé gratuit pour votre
-                  transformation digitale. Audit, diagnostic, devis, démo ou
-                  simple échange, par téléphone, en visio ou chez vous.
-                </p>
+                <h2
+                  class="cta-title reveal delay-1"
+                  id="cta-title"
+                  set:html={developpement.titre_cta}
+                />
+                <p
+                  class="cta-sub reveal delay-2"
+                  set:html={developpement.sous_titre_cta}
+                />
                 <div class="cta-actions reveal delay-3">
                   <a
-                    href="contact.html?pole=developpement"
+                    href="contact?pole=developpement"
                     class="btn-cta btn-cta--primary"
                   >
-                    Contacter le pôle Développement
+                    {developpement.bouton_cta}
                     <span class="btn-cta-arrow"
                       ><svg
                         viewBox="0 0 16 16"
@@ -1580,6 +1616,7 @@ import Footer from "../components/Footer.astro";
                       ><path
                         d="M2 3a1 1 0 011-1h3.28a1 1 0 01.95.68l1.07 3.21a1 1 0 01-.25 1L6.54 8.4a12.06 12.06 0 005.06 5.06l1.51-1.51a1 1 0 011-.25l3.21 1.07a1 1 0 01.68.95V17a1 1 0 01-1 1A15 15 0 012 3z"
                       ></path></svg
+                    >
                     >
                     <a href="tel:+33387184920" class="cta-phone-num"
                       >03 87 18 49 20</a
@@ -1716,7 +1753,7 @@ import Footer from "../components/Footer.astro";
 
           <div class="jcd-mnav__reveal" style="transition-delay:.07s">
             <div class="jcd-mnav__item" style="--mnav-c:#2E72BA">
-              <a class="jcd-mnav__link" href="informatique.html"
+              <a class="jcd-mnav__link" href="informatique"
                 ><span class="jcd-mnav__dot"></span><span
                   class="jcd-mnav__label">Informatique</span
                 ></a
@@ -1738,15 +1775,14 @@ import Footer from "../components/Footer.astro";
               </button>
             </div>
             <div class="jcd-acc__panel" id="jcdAccInfo">
-              <a class="jcd-mnav__sub" href="info-cloud.html">Cloud Microsoft</a
-              >
-              <a class="jcd-mnav__sub" href="info-collaboratif.html"
+              <a class="jcd-mnav__sub" href="info-cloud">Cloud Microsoft</a>
+              <a class="jcd-mnav__sub" href="info-collaboratif"
                 >Solutions collaboratives &amp; audiovisuelles</a
               >
-              <a class="jcd-mnav__sub" href="info-reseaux.html"
+              <a class="jcd-mnav__sub" href="info-reseaux"
                 >Architectures syst&egrave;mes &amp; r&eacute;seaux</a
               >
-              <a class="jcd-mnav__sub" href="info-integration.html"
+              <a class="jcd-mnav__sub" href="info-integration"
                 >Int&eacute;gration &amp; Support PC</a
               >
             </div>
@@ -1755,7 +1791,7 @@ import Footer from "../components/Footer.astro";
           <a
             class="jcd-mnav__item jcd-mnav__reveal"
             style="--mnav-c:#E51D29;transition-delay:.10s"
-            href="service.html"
+            href="service"
             ><span class="jcd-mnav__dot"></span><span class="jcd-mnav__label"
               >Service</span
             ></a
@@ -1763,7 +1799,7 @@ import Footer from "../components/Footer.astro";
           <a
             class="jcd-mnav__item jcd-mnav__reveal"
             style="--mnav-c:#F9D605;transition-delay:.13s"
-            href="developpement.html"
+            href="developpement"
             ><span class="jcd-mnav__dot"></span><span class="jcd-mnav__label"
               >D&eacute;veloppement</span
             ></a
@@ -1771,7 +1807,7 @@ import Footer from "../components/Footer.astro";
           <a
             class="jcd-mnav__item jcd-mnav__reveal"
             style="--mnav-c:#F3941D;transition-delay:.16s"
-            href="print.html"
+            href="print"
             ><span class="jcd-mnav__dot"></span><span class="jcd-mnav__label"
               >Print</span
             ></a
@@ -1779,14 +1815,14 @@ import Footer from "../components/Footer.astro";
           <a
             class="jcd-mnav__item jcd-mnav__reveal"
             style="--mnav-c:#B063AC;transition-delay:.19s"
-            href="telecom.html"
+            href="telecom"
             ><span class="jcd-mnav__dot"></span><span class="jcd-mnav__label"
               >T&eacute;l&eacute;com</span
             ></a
           >
           <div class="jcd-mnav__reveal" style="transition-delay:.22s">
             <div class="jcd-mnav__item" style="--mnav-c:#8EC041">
-              <a class="jcd-mnav__link" href="formation.html"
+              <a class="jcd-mnav__link" href="formation"
                 ><span class="jcd-mnav__dot"></span><span
                   class="jcd-mnav__label">Formation</span
                 ></a
@@ -1808,61 +1844,52 @@ import Footer from "../components/Footer.astro";
               </button>
             </div>
             <div class="jcd-acc__panel" id="jcdAccForm">
-              <a class="jcd-mnav__sub" href="formation-bureautique.html"
+              <a class="jcd-mnav__sub" href="formation-bureautique"
                 >Bureautique</a
               >
               <a
                 class="jcd-mnav__sub"
-                href="formation-intelligence-artificielle.html"
+                href="formation-intelligence-artificielle"
                 >Intelligence artificielle</a
               >
-              <a class="jcd-mnav__sub" href="formation-informatique.html"
+              <a class="jcd-mnav__sub" href="formation-informatique"
                 >Informatique</a
               >
-              <a
-                class="jcd-mnav__sub"
-                href="formation-communication-marketing.html"
+              <a class="jcd-mnav__sub" href="formation-communication-marketing"
                 >Communication - Marketing</a
               >
-              <a class="jcd-mnav__sub" href="formation-management.html"
-                >Management</a
+              <a class="jcd-mnav__sub" href="formation-management">Management</a
               >
-              <a
-                class="jcd-mnav__sub"
-                href="formation-commerce-relation-client.html"
+              <a class="jcd-mnav__sub" href="formation-commerce-relation-client"
                 >Commerce - Relation client</a
               >
-              <a
-                class="jcd-mnav__sub"
-                href="formation-comptabilite-gestion.html"
+              <a class="jcd-mnav__sub" href="formation-comptabilite-gestion"
                 >Comptabilit&eacute; - Gestion</a
               >
-              <a class="jcd-mnav__sub" href="formation-ressources-humaines.html"
+              <a class="jcd-mnav__sub" href="formation-ressources-humaines"
                 >Ressources humaines</a
               >
-              <a
-                class="jcd-mnav__sub"
-                href="formation-developpement-personnel.html"
+              <a class="jcd-mnav__sub" href="formation-developpement-personnel"
                 >D&eacute;veloppement personnel</a
               >
-              <a class="jcd-mnav__sub" href="formation-graphisme-pao.html"
+              <a class="jcd-mnav__sub" href="formation-graphisme-pao"
                 >Graphisme - PAO</a
               >
               <a
                 class="jcd-mnav__sub"
-                href="formation-administratif-secretariat-accueil.html"
+                href="formation-administratif-secretariat-accueil"
                 >Administratif - Secr&eacute;tariat</a
               >
-              <a class="jcd-mnav__sub" href="formation-securite.html"
+              <a class="jcd-mnav__sub" href="formation-securite"
                 >S&eacute;curit&eacute;</a
               >
-              <a class="jcd-mnav__sub" href="formation-langues.html">Langues</a>
+              <a class="jcd-mnav__sub" href="formation-langues">Langues</a>
             </div>
           </div>
           <a
             class="jcd-mnav__item jcd-mnav__reveal"
             style="--mnav-c:#A78D75;transition-delay:.25s"
-            href="agencement.html"
+            href="agencement"
             ><span class="jcd-mnav__dot"></span><span class="jcd-mnav__label"
               >Agencement</span
             ></a
@@ -1877,7 +1904,7 @@ import Footer from "../components/Footer.astro";
           <a
             class="jcd-mnav__item jcd-mnav__reveal"
             style="--mnav-c:#9a9a9a;transition-delay:.33s"
-            href="assistance.html"
+            href="assistance"
             ><span class="jcd-mnav__dot"></span><span
               class="jcd-mnav__label"
               style="font-size:19px">Assistance</span
@@ -1886,7 +1913,7 @@ import Footer from "../components/Footer.astro";
           <a
             class="jcd-mnav__item jcd-mnav__reveal"
             style="--mnav-c:#9a9a9a;transition-delay:.36s"
-            href="carrieres.html"
+            href="carrieres"
             ><span class="jcd-mnav__dot"></span><span
               class="jcd-mnav__label"
               style="font-size:19px">Carri&egrave;res</span
@@ -1897,7 +1924,7 @@ import Footer from "../components/Footer.astro";
             class="jcd-mnav__cta jcd-mnav__reveal"
             style="transition-delay:.40s"
           >
-            <a class="jcd-mnav__btn jcd-mnav__btn--primary" href="contact.html"
+            <a class="jcd-mnav__btn jcd-mnav__btn--primary" href="contact"
               >Contacter un expert
               <span class="jcd-mnav__btn-ic"
                 ><svg
@@ -1955,7 +1982,7 @@ import Footer from "../components/Footer.astro";
       <a
         class="jcd-fab jcd-fab--contact"
         id="jcdFabContact"
-        href="contact.html"
+        href="contact"
         aria-label="Nous contacter"
       >
         <svg

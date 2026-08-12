@@ -38,7 +38,11 @@
   if(toTop){ toTop.addEventListener('click',function(){ var rm=window.matchMedia('(prefers-reduced-motion:reduce)').matches; try{ window.scrollTo({top:0,behavior:rm?'auto':'smooth'}); }catch(e){ window.scrollTo(0,0); } }); }
   /* 4) hide the contact shortcut on the contact page itself */
   var cf=d.getElementById('jcdFabContact');
-  if(cf && /contact\.html(\?|$)/.test(location.pathname+location.search)){ if(cf.parentNode){ cf.parentNode.removeChild(cf); } }
+  if (cf && /contact\(\?|$)/.test(location.pathname + location.search)) {
+    if (cf.parentNode) {
+      cf.parentNode.removeChild(cf);
+    }
+  }
   /* 5) mobile keyboard refinements */
   try{
     Array.prototype.forEach.call(d.querySelectorAll('input[type="email"]'),function(i){ i.setAttribute('inputmode','email'); i.setAttribute('enterkeyhint','next'); });
