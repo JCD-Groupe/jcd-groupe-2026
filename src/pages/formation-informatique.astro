@@ -49,8 +49,8 @@ import Footer from "../components/Footer.astro";
     <link rel="stylesheet" href="css/formation-informatique.css" />
     <link rel="stylesheet" href="css/global.css" />
     <link rel="stylesheet" href="css/formation-informatique-overrides.css" />
-    <link rel="stylesheet" href="transition.css" />
-    <script is:inline src="transition.js"></script>
+    <link rel="stylesheet" href="css/transition.css" />
+    <script is:inline src="js/shared/js/shared/transition.js"></script>
     <script is:inline src="js/shared/mpolish.js" id="jcd-mpolish-js"></script>
     <script is:inline src="js/shared/touch.js" id="jcd-touch-js"></script>
     <script is:inline src="js/shared/mrefonte-shim.js" id="jcd-mrefonte-shim"
@@ -2004,7 +2004,8 @@ import Footer from "../components/Footer.astro";
                   ></span
                 ><span class="ocat-tx">Bureautique</span><span class="ocat-n"
                   >23</span
-                ></a>
+                ></a
+              >
             </li>
             <li>
               <a
@@ -2029,7 +2030,8 @@ import Footer from "../components/Footer.astro";
                   ></span
                 ><span class="ocat-tx">Intelligence artificielle</span><span
                   class="ocat-n">17</span
-                ></a>
+                ></a
+              >
             </li>
             <li>
               <a
@@ -2051,7 +2053,8 @@ import Footer from "../components/Footer.astro";
                   ></span
                 ><span class="ocat-tx">Communication - Marketing</span><span
                   class="ocat-n">11</span
-                ></a>
+                ></a
+              >
             </li>
             <li>
               <a
@@ -2077,7 +2080,8 @@ import Footer from "../components/Footer.astro";
                   ></span
                 ><span class="ocat-tx">Management</span><span class="ocat-n"
                   >8</span
-                ></a>
+                ></a
+              >
             </li>
             <li>
               <a
@@ -2098,7 +2102,8 @@ import Footer from "../components/Footer.astro";
                       d="M9 10V6a3 3 0 0 1 6 0v4"></path></svg
                   ></span
                 ><span class="ocat-tx">Commerce - Relation client - Achat</span
-                ><span class="ocat-n">6</span></a>
+                ><span class="ocat-n">6</span></a
+              >
             </li>
             <li>
               <a
@@ -2122,7 +2127,8 @@ import Footer from "../components/Footer.astro";
                   ></span
                 ><span class="ocat-tx">Comptabilité - Gestion</span><span
                   class="ocat-n">2</span
-                ></a>
+                ></a
+              >
             </li>
             <li>
               <a
@@ -2144,7 +2150,8 @@ import Footer from "../components/Footer.astro";
                       d="M15.5 11l2 2 4-4"></path></svg
                   ></span
                 ><span class="ocat-tx">Gestion des Ressources humaines</span
-                ><span class="ocat-n">5</span></a>
+                ><span class="ocat-n">5</span></a
+              >
             </li>
             <li>
               <a
@@ -2166,7 +2173,8 @@ import Footer from "../components/Footer.astro";
                   ></span
                 ><span class="ocat-tx">Développement Personnel</span><span
                   class="ocat-n">7</span
-                ></a>
+                ></a
+              >
             </li>
             <li>
               <a
@@ -2191,7 +2199,8 @@ import Footer from "../components/Footer.astro";
                   ></span
                 ><span class="ocat-tx">Graphisme - PAO</span><span
                   class="ocat-n">8</span
-                ></a>
+                ></a
+              >
             </li>
             <li>
               <a
@@ -2215,7 +2224,8 @@ import Footer from "../components/Footer.astro";
                   ></span
                 ><span class="ocat-tx"
                   >Administratif - Secrétariat - Accueil</span
-                ><span class="ocat-n">7</span></a>
+                ><span class="ocat-n">7</span></a
+              >
             </li>
             <li>
               <a
@@ -2238,7 +2248,8 @@ import Footer from "../components/Footer.astro";
                   ></span
                 ><span class="ocat-tx">Sécurité</span><span class="ocat-n"
                   >7</span
-                ></a>
+                ></a
+              >
             </li>
             <li>
               <a
@@ -2262,7 +2273,8 @@ import Footer from "../components/Footer.astro";
                   ></span
                 ><span class="ocat-tx">Langues</span><span class="ocat-n"
                   >1</span
-                ></a>
+                ></a
+              >
             </li>
           </ul>
         </div>
@@ -2438,8 +2450,7 @@ import Footer from "../components/Footer.astro";
               </button>
             </div>
             <div class="jcd-acc__panel" id="jcdAccInfo">
-              <a class="jcd-mnav__sub" href="info-cloud">Cloud Microsoft</a
-              >
+              <a class="jcd-mnav__sub" href="info-cloud">Cloud Microsoft</a>
               <a class="jcd-mnav__sub" href="info-collaboratif"
                 >Solutions collaboratives &amp; audiovisuelles</a
               >
@@ -2519,30 +2530,21 @@ import Footer from "../components/Footer.astro";
               <a class="jcd-mnav__sub" href="formation-informatique"
                 >Informatique</a
               >
-              <a
-                class="jcd-mnav__sub"
-                href="formation-communication-marketing"
+              <a class="jcd-mnav__sub" href="formation-communication-marketing"
                 >Communication - Marketing</a
               >
-              <a class="jcd-mnav__sub" href="formation-management"
-                >Management</a
+              <a class="jcd-mnav__sub" href="formation-management">Management</a
               >
-              <a
-                class="jcd-mnav__sub"
-                href="formation-commerce-relation-client"
+              <a class="jcd-mnav__sub" href="formation-commerce-relation-client"
                 >Commerce - Relation client</a
               >
-              <a
-                class="jcd-mnav__sub"
-                href="formation-comptabilite-gestion"
+              <a class="jcd-mnav__sub" href="formation-comptabilite-gestion"
                 >Comptabilit&eacute; - Gestion</a
               >
               <a class="jcd-mnav__sub" href="formation-ressources-humaines"
                 >Ressources humaines</a
               >
-              <a
-                class="jcd-mnav__sub"
-                href="formation-developpement-personnel"
+              <a class="jcd-mnav__sub" href="formation-developpement-personnel"
                 >D&eacute;veloppement personnel</a
               >
               <a class="jcd-mnav__sub" href="formation-graphisme-pao"

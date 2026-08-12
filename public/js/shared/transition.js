@@ -1,7 +1,7 @@
 /* ============================================================
    JCD — Pose le type « jcd-theme » sur les transitions de page
    impliquant la page Carrières (bascule de thème sombre <-> clair),
-   afin de déclencher le fondu premium défini dans transition.css.
+   afin de déclencher le fondu premium défini dans css/transition.css.
 
    Sur les navigateurs sans View Transitions cross-document, les events
    pageswap/pagereveal ne se déclenchent pas : la navigation reste

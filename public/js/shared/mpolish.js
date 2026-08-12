@@ -1,5 +1,5 @@
 /* Mobile: force the reduced-motion code paths so the WebGL hero + typewriter never start
-   (real CPU/GPU/battery saving). transition.js does NOT read this query, so page fades stay. */
+   (real CPU/GPU/battery saving). js/shared/transition.js does NOT read this query, so page fades stay. */
 (function(){
   try{
     if (window.innerWidth > 820) return;
