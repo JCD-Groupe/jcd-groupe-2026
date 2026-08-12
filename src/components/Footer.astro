@@ -23,7 +23,7 @@ const { current = null, home = false } = Astro.props;
               <a class="footer-link" href="/developpement">Développement</a>
             </li>
             <li><a class="footer-link" href="/print">Print</a></li>
-            <li><a class="footer-link" href="telecom">Télécom</a></li>
+            <li><a class="footer-link" href="/telecom">Télécom</a></li>
             <li><a class="footer-link" href="/formation">Formation</a></li>
             <li>
               <a class="footer-link" href="/agencement">Agencement</a>
@@ -38,17 +38,17 @@ const { current = null, home = false } = Astro.props;
           <h4 class="fcard-title">Le groupe</h4>
           <ul class="footer-links">
             <li>
-              <a class="footer-link" href={(home ? "" : "index") + "#histoire"}
+              <a class="footer-link" href={(home ? "" : "/") + "#histoire"}
                 >Histoire</a
               >
             </li>
             <li>
-              <a class="footer-link" href={(home ? "" : "index") + "#valeurs"}
+              <a class="footer-link" href={(home ? "" : "/") + "#valeurs"}
                 >Valeurs</a
               >
             </li>
             <li>
-              <a class="footer-link" href={(home ? "" : "index") + "#chiffres"}
+              <a class="footer-link" href={(home ? "" : "/") + "#chiffres"}
                 >Chiffres clés</a
               >
             </li>
