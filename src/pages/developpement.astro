@@ -825,17 +825,14 @@ developpement = await directus.request(
       <section class="testi" id="temoignages" aria-labelledby="real-title">
         <div class="container">
           <!-- ============ RÉALISATIONS — grille filtrable ============ -->
-          <div
-            class="section-head reveal"
-            id="realisations"
-            set:html={developpement.titre_realisations}
-          >
-            <div class="eyebrow">{developpement.eyebrow_realisations}</div>
-            <h2
-              class="section-title"
-              id="real-title"
-              set:html={developpement.titre_realisations}
-            />
+          <div class="section-head reveal" id="realisations">
+            <div class="eyebrow">{developpement.sur_titre_realisations}</div>
+            <h2 class="section-title" id="process-title">
+              <span set:html={developpement.titre_realisations} />
+              <span class="text-muted"
+                >{developpement.sous_titre_realisations}</span
+              >
+            </h2>
           </div>
 
           <div
@@ -1592,7 +1589,7 @@ developpement = await directus.request(
                     href="contact?pole=developpement"
                     class="btn-cta btn-cta--primary"
                   >
-                    {developpement.bouton_cta_contact}
+                    {developpement.bouton_cta}
                     <span class="btn-cta-arrow"
                       ><svg
                         viewBox="0 0 16 16"
