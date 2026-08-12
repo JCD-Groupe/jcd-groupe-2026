@@ -193,12 +193,13 @@
       var hasSub = !!group.querySelector('.nm-sub');
       group.addEventListener('mouseenter', function () {
         if (grpTimer) { clearTimeout(grpTimer); grpTimer = null; }
+        if (!hasSub) return;
         grpTimer = setTimeout(function () {
-          setExpanded(hasSub ? group : null);
+          setExpanded(group);
         }, 70);
       });
       group.addEventListener('focusin', function () {
-        setExpanded(hasSub ? group : null);
+        if (hasSub) setExpanded(group);
       });
     });
 

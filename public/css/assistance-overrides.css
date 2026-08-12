@@ -33,7 +33,9 @@
     color: var(--text-2);
   }
 
-  /* Carte téléphone — recours si le client n’est pas encore en ligne */
+  /* Carte téléphone — CTA d'appel mis en avant : carte cliquable
+     teintée rouge assistance, icône en tuile, numéro en grand,
+     horaires. Recours principal si le client n'est pas en ligne. */
   .assist-head-aside {
     display: flex;
     flex-direction: column;
@@ -42,6 +44,44 @@
     border: 0;
     background: none;
   }
+  .assist-phone-card {
+    display: inline-flex;
+    align-items: center;
+    gap: 15px;
+    padding: 13px 24px 13px 15px;
+    border-radius: 18px;
+    background: linear-gradient(135deg,
+      rgba(var(--accent-rgb), 0.11) 0%,
+      rgba(var(--accent-rgb), 0.04) 55%,
+      rgba(var(--accent-rgb), 0.015) 100%);
+    border: 1px solid rgba(var(--accent-rgb), 0.30);
+    box-shadow: 0 10px 30px -16px rgba(var(--accent-rgb), 0.42);
+    transition: border-color 0.3s var(--ease-out), background 0.3s var(--ease-out),
+                transform 0.3s var(--ease-out), box-shadow 0.3s var(--ease-out);
+  }
+  .assist-phone-card:hover,
+  .assist-phone-card:focus-visible {
+    border-color: rgba(var(--accent-rgb), 0.48);
+    background: linear-gradient(135deg,
+      rgba(var(--accent-rgb), 0.16) 0%,
+      rgba(var(--accent-rgb), 0.06) 55%,
+      rgba(var(--accent-rgb), 0.03) 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 14px 36px -16px rgba(var(--accent-rgb), 0.55);
+  }
+  .assist-phone-ic {
+    flex: 0 0 auto;
+    width: 46px; height: 46px;
+    border-radius: 13px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--accent-hi);
+    background: rgba(var(--accent-rgb), 0.13);
+    border: 1px solid rgba(var(--accent-rgb), 0.32);
+  }
+  .assist-phone-ic svg { width: 21px; height: 21px; }
+  .assist-phone-tx { display: flex; flex-direction: column; gap: 2px; }
   .assist-phone-label {
     display: inline-flex;
     align-items: center;
@@ -50,28 +90,22 @@
     font-size: 10.5px;
     letter-spacing: 0.14em;
     text-transform: uppercase;
-    color: var(--text-3);
-  }
-  .assist-phone-dot {
-    width: 7px; height: 7px; border-radius: 999px;
-    background: var(--status);
-    box-shadow: 0 0 9px var(--status-dim);
-    flex: 0 0 auto;
-    animation: assistPulse 2.4s ease-in-out infinite;
-  }
-  @keyframes assistPulse {
-    0%, 100% { opacity: 1; }
-    50% { opacity: 0.35; }
+    color: var(--text-2);
   }
   .assist-phone-num {
-    font-size: 20px;
-    font-weight: 600;
-    letter-spacing: -0.015em;
-    color: var(--text-1);
-    transition: color 0.25s var(--ease-out);
+    font-size: 25px;
+    font-weight: 650;
+    letter-spacing: -0.01em;
+    color: #ffffff;
+    font-variant-numeric: tabular-nums;
+    line-height: 1.15;
   }
-  .assist-phone-num:hover { color: var(--accent-hi); }
-  .assist-phone-hours { font-size: 12.5px; color: var(--text-3); }
+  .assist-phone-hours {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    color: var(--text-3);
+  }
 
   /* ---- Section outils ---- */
   .assist-tools { padding: clamp(24px, 3.6vh, 36px) 0 clamp(36px, 5vh, 56px); }
@@ -87,33 +121,45 @@
     gap: 12px;
   }
 
+  /* Cartes-outils : chaque outil porte sa couleur (--tc / --tc-rgb,
+     posées inline — bleu, vert, orange JCD) pour que le technicien
+     puisse dire « cliquez sur la carte bleue » : tuile d'icône
+     colorée, badge « Outil 0X », CTA en pilule teintée. */
   .assist-card {
+    --tc: var(--accent);
+    --tc-rgb: var(--accent-rgb);
     display: flex;
     flex-direction: column;
     gap: 10px;
     padding: clamp(18px, 2.2vw, 24px);
     min-height: 0;
-    background: var(--bg-1);
-    border: 1px solid var(--line-1);
+    background: linear-gradient(180deg,
+      rgba(var(--tc-rgb), 0.05) 0%,
+      rgba(var(--tc-rgb), 0.015) 42%,
+      var(--bg-1) 100%);
+    border: 1px solid rgba(var(--tc-rgb), 0.20);
     border-radius: 20px;
     position: relative;
     overflow: hidden;
-    transition: border-color 0.3s var(--ease-out), background 0.3s var(--ease-out);
+    transition: border-color 0.3s var(--ease-out), background 0.3s var(--ease-out),
+                transform 0.3s var(--ease-out), box-shadow 0.3s var(--ease-out);
   }
   .assist-card::before {
-    /* liseré accent en tête de carte — révélé au hover */
+    /* liseré couleur outil en tête de carte — toujours présent,
+       intensifié au hover */
     content: "";
     position: absolute;
     top: 0; left: 0; right: 0;
     height: 2px;
-    background: linear-gradient(90deg, var(--accent), transparent 70%);
-    opacity: 0;
+    background: linear-gradient(90deg, var(--tc), transparent 78%);
+    opacity: 0.40;
     transition: opacity 0.3s var(--ease-out);
   }
   .assist-card:hover,
   .assist-card:focus-visible {
-    border-color: var(--accent-line);
-    background: var(--bg-2);
+    border-color: rgba(var(--tc-rgb), 0.42);
+    transform: translateY(-2px);
+    box-shadow: 0 14px 34px -18px rgba(var(--tc-rgb), 0.40);
   }
   .assist-card:hover::before,
   .assist-card:focus-visible::before { opacity: 1; }
@@ -122,20 +168,35 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
+    /* DOM : badge puis icône — on inverse pour icône à gauche,
+       badge à droite. */
+    flex-direction: row-reverse;
     margin-bottom: 2px;
   }
   .assist-card-num {
     font-family: var(--font-mono);
-    font-size: 11px;
+    font-size: 10.5px;
     letter-spacing: 0.16em;
-    color: var(--text-4);
+    text-transform: uppercase;
+    color: color-mix(in srgb, var(--tc) 70%, white);
+    padding: 4px 10px;
+    border-radius: 999px;
+    background: rgba(var(--tc-rgb), 0.09);
+    border: 1px solid rgba(var(--tc-rgb), 0.22);
   }
   .assist-card-ic {
-    width: 28px; height: 28px;
-    color: var(--text-3);
-    transition: color 0.3s var(--ease-out);
+    width: 48px; height: 48px;
+    padding: 11px;
+    border-radius: 13px;
+    color: color-mix(in srgb, var(--tc) 72%, white);
+    background: rgba(var(--tc-rgb), 0.10);
+    border: 1px solid rgba(var(--tc-rgb), 0.26);
+    transition: background 0.3s var(--ease-out), border-color 0.3s var(--ease-out);
   }
-  .assist-card:hover .assist-card-ic { color: var(--accent-hi); }
+  .assist-card:hover .assist-card-ic {
+    background: rgba(var(--tc-rgb), 0.16);
+    border-color: rgba(var(--tc-rgb), 0.40);
+  }
 
   .assist-card-name {
     font-size: 18px;
@@ -151,13 +212,23 @@
     flex: 1;
   }
   .assist-card-cta {
-    display: inline-flex;
+    display: flex;
     align-items: center;
+    justify-content: space-between;
     gap: 10px;
     font-size: 13.5px;
     font-weight: 600;
     color: var(--text-1);
-    margin-top: 2px;
+    margin-top: 6px;
+    padding: 9px 10px 9px 15px;
+    border-radius: 999px;
+    background: rgba(var(--tc-rgb), 0.09);
+    border: 1px solid rgba(var(--tc-rgb), 0.24);
+    transition: background 0.3s var(--ease-out), border-color 0.3s var(--ease-out);
+  }
+  .assist-card:hover .assist-card-cta {
+    background: rgba(var(--tc-rgb), 0.15);
+    border-color: rgba(var(--tc-rgb), 0.38);
   }
   .assist-card-arrow {
     width: 26px; height: 26px;
@@ -165,16 +236,15 @@
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    border: 1px solid var(--line-3);
+    border: 1px solid rgba(var(--tc-rgb, 255, 255, 255), 0.40);
     flex: 0 0 auto;
     transition: transform 0.35s var(--ease-out), border-color 0.35s var(--ease-out), background 0.35s var(--ease-out);
   }
   .assist-card-arrow svg { width: 13px; height: 13px; }
-  .assist-card:hover .assist-card-arrow,
-  .assist-sec-link:hover .assist-card-arrow {
+  .assist-card:hover .assist-card-arrow {
     transform: translateX(3px);
-    border-color: var(--accent-line);
-    background: var(--accent-soft);
+    border-color: rgba(var(--tc-rgb), 0.46);
+    background: rgba(var(--tc-rgb), 0.16);
   }
 
   /* ---- Accès secondaires ---- */
@@ -190,14 +260,16 @@
     justify-content: space-between;
     gap: 16px;
     padding: 13px clamp(18px, 2.2vw, 24px);
-    border: 1px solid var(--line-1);
+    /* Sans flèche : c'est la bordure claire qui signale le lien —
+       nettement plus lumineuse que le fond. */
+    border: 1px solid rgba(255, 255, 255, 0.20);
     border-radius: 16px;
     background: transparent;
     transition: border-color 0.3s var(--ease-out), background 0.3s var(--ease-out);
   }
   .assist-sec-link:hover,
   .assist-sec-link:focus-visible {
-    border-color: var(--line-3);
+    border-color: rgba(255, 255, 255, 0.34);
     background: var(--bg-1);
   }
   .assist-sec-main { display: flex; flex-direction: column; gap: 3px; min-width: 0; }
@@ -228,9 +300,9 @@
   footer[role="contentinfo"] {
     /* Tokens neutres autonomes (valeurs de l'index) : rendu identique
        quelle que soit la page hôte. L'accent reste piloté par la page. */
-    --bg-elev-1: #131313;
+    --bg-elev-1: #101010;
     --text-primary: #f4f4f4;
-    --text-secondary: #9b9b9b;
+    --text-secondary: #b8b8b8;
     --text-tertiary: #6a6a6a;
     --border-subtle: rgba(255, 255, 255, 0.06);
 

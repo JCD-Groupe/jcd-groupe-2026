@@ -29,7 +29,7 @@ developpement = await directus.request(
       content="width=device-width, initial-scale=1.0, viewport-fit=cover"
     />
     <meta name="color-scheme" content="dark" />
-    <meta name="theme-color" content="#0d0d0d" />
+    <meta name="theme-color" content="#0a0a0a" />
     <link rel="icon" href="favicon.svg" type="image/svg+xml" />
     <meta name="description" content={developpement.meta_description} />
     <link rel="canonical" href="https://www.jcd-groupe.fr/developpement" />
@@ -97,7 +97,7 @@ developpement = await directus.request(
 
             <div class="hero-actions reveal delay-3">
               <a
-                href="contact?pole=developpement"
+                href="contact?pole=developpement&step=2"
                 class="btn-cta btn-cta--ghost"
               >
                 {developpement.bouton_hero}
@@ -160,7 +160,7 @@ developpement = await directus.request(
                   </div>
                   <span class="term-com"># pôle développement · jcd groupe</span
                   >
-                  <div set:html={developpement.manifeste} />
+                  <div class="manifesto-rich" set:html={developpement.manifeste} />
                 </div>
               </div>
             </div>
@@ -1586,7 +1586,7 @@ developpement = await directus.request(
                 />
                 <div class="cta-actions reveal delay-3">
                   <a
-                    href="contact?pole=developpement"
+                    href="contact?pole=developpement&step=2"
                     class="btn-cta btn-cta--primary"
                   >
                     {developpement.bouton_cta}

@@ -190,6 +190,15 @@
         if (msg) msg.value = 'Bonjour, je souhaite rejoindre le Groupe JCD (candidature spontanée). ';
       }
       updateCount();
+
+      /* Saut direct à l'étape 2 (?step=2) : les CTA des pages de pôle
+         arrivent avec le bon pôle déjà présélectionné — on saute
+         l'étape de sélection, le récap chip suffit. Ignoré si aucun
+         pôle n'a été coché (l'étape 1 reste alors pertinente). */
+      if (params.get('step') === '2' && selectedPoleIds().length) {
+        renderRecap();
+        showStep(2);
+      }
     }
 
     /* ---- 7. Construction de la charge utile ---- */

@@ -2,7 +2,7 @@
    JCD — Transitions de page (View Transitions API, cross-document)
 
    Fondu de THÈME premium réservé aux allers/retours avec la page
-   Carrières (bascule sombre #0d0d0d  <->  clair #faf9f4).
+   Carrières (bascule sombre #0a0a0a  <->  clair #faf9f4).
    Les autres navigations conservent le fondu simple par défaut.
 
    · Dégrade proprement : navigation instantanée si l'API n'est pas
@@ -61,4 +61,4 @@ html:active-view-transition-type(jcd-theme)::view-transition-new(root) {
    de navigation, dans la lignée du marqueur .is-current de la méga-nav.
    Spécificité 0,3,0 → l'emporte sur .footer-link et .footer-link:hover.
    ============================================================ */
-.footer-links--cols .footer-link.is-current { color: var(--accent); }
+.footer-links--cols .footer-link.is-current { color: var(--accent-hi, var(--accent)); }
