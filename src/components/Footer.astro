@@ -16,17 +16,17 @@ const { current = null, home = false } = Astro.props;
           <h4 class="fcard-title">Pôles</h4>
           <ul class="footer-links footer-links--cols">
             <li>
-              <a class="footer-link" href="informatique">Informatique</a>
+              <a class="footer-link" href="/informatique">Informatique</a>
             </li>
-            <li><a class="footer-link" href="service">Service</a></li>
+            <li><a class="footer-link" href="/service">Service</a></li>
             <li>
-              <a class="footer-link" href="developpement">Développement</a>
+              <a class="footer-link" href="/developpement">Développement</a>
             </li>
-            <li><a class="footer-link" href="print">Print</a></li>
+            <li><a class="footer-link" href="/print">Print</a></li>
             <li><a class="footer-link" href="telecom">Télécom</a></li>
-            <li><a class="footer-link" href="formation">Formation</a></li>
+            <li><a class="footer-link" href="/formation">Formation</a></li>
             <li>
-              <a class="footer-link" href="agencement">Agencement</a>
+              <a class="footer-link" href="/agencement">Agencement</a>
             </li>
           </ul>
         </div>
@@ -56,12 +56,12 @@ const { current = null, home = false } = Astro.props;
               <a
                 class={"footer-link" +
                   (current === "carrieres" ? " is-current" : "")}
-                href="carrieres"
+                href="/carrieres"
                 aria-current={current === "carrieres" ? "page" : undefined}
                 >Nous rejoindre</a
               >
             </li>
-            <li><a class="footer-link" href="contact">Contact</a></li>
+            <li><a class="footer-link" href="/contact">Contact</a></li>
           </ul>
         </div>
       </div>
@@ -108,7 +108,7 @@ const { current = null, home = false } = Astro.props;
           aria-label="PC Lease — ingénierie informatique (nouvel onglet)"
         >
           <img
-            src="assets/pclease-blanc.svg"
+            src="/assets/pclease-blanc.svg"
             alt="PC Lease"
             height="14"
             decoding="async"
@@ -136,7 +136,7 @@ const { current = null, home = false } = Astro.props;
           aria-label="Rsecure — cybersécurité (nouvel onglet)"
         >
           <img
-            src="assets/rsecure-blanc.svg"
+            src="/assets/rsecure-blanc.svg"
             alt="Rsecure"
             height="17"
             decoding="async"
@@ -164,7 +164,7 @@ const { current = null, home = false } = Astro.props;
           aria-label="Digidoc Services — gestion documentaire (nouvel onglet)"
         >
           <img
-            src="assets/digidoc-blanc.svg"
+            src="/assets/digidoc-blanc.svg"
             alt="Digidoc Services"
             height="13"
             decoding="async"
@@ -188,8 +188,8 @@ const { current = null, home = false } = Astro.props;
 
       <div class="footer-bottom-right">
         <span class="footer-legal"
-          ><a class="footer-link" href="mentions-legales">Mentions légales</a> &middot;
-          <a class="footer-link" href="politique-de-confidentialite"
+          ><a class="footer-link" href="/mentions-legales">Mentions légales</a> &middot;
+          <a class="footer-link" href="/politique-de-confidentialite"
             >Politique de confidentialité</a
           ></span
         >

@@ -1,18 +1,13 @@
-FROM node:lts-alpine
+# Build
+FROM node:lts-alpine AS builder
 WORKDIR /app
-
-# Copie et installation
 COPY package*.json ./
 RUN npm install
-
-# Copie tout le projet (.env inclus)
 COPY . .
-
-# Build statique (SSG)
 RUN npm run build
 
-# Installation d'un petit serveur pour servir le dossier dist
-RUN npm install -g serve
-
+# Production avec Nginx
+FROM nginx:alpine
+COPY --from=builder /app/dist /usr/share/nginx/html
 EXPOSE 80
-CMD ["serve", "-s", "dist", "-l", "80"]
+CMD ["nginx", "-g", "daemon off;"]

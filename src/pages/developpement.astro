@@ -30,7 +30,7 @@ developpement = await directus.request(
     />
     <meta name="color-scheme" content="dark" />
     <meta name="theme-color" content="#0a0a0a" />
-    <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <meta name="description" content={developpement.meta_description} />
     <link rel="canonical" href="https://www.jcd-groupe.fr/developpement" />
     <meta property="og:type" content="website" />
@@ -49,15 +49,15 @@ developpement = await directus.request(
       rel="stylesheet"
     />
 
-    <link rel="stylesheet" href="css/developpement.css" />
-    <link rel="stylesheet" href="css/global.css" />
-    <link rel="stylesheet" href="css/developpement-overrides.css" />
-    <link rel="stylesheet" href="css/transition.css" />
-    <script is:inline src="js/shared/transition.js"></script>
-    <script is:inline src="js/shared/xpcompact.js" id="jcd-xpcompact-js"
+    <link rel="stylesheet" href="/css/developpement.css" />
+    <link rel="stylesheet" href="/css/global.css" />
+    <link rel="stylesheet" href="/css/developpement-overrides.css" />
+    <link rel="stylesheet" href="/css/transition.css" />
+    <script is:inline src="/js/shared/transition.js"></script>
+    <script is:inline src="/js/shared/xpcompact.js" id="jcd-xpcompact-js"
     ></script>
-    <script is:inline src="js/shared/touch.js" id="jcd-touch-js"></script>
-    <script is:inline src="js/shared/mrefonte-shim.js" id="jcd-mrefonte-shim"
+    <script is:inline src="/js/shared/touch.js" id="jcd-touch-js"></script>
+    <script is:inline src="/js/shared/mrefonte-shim.js" id="jcd-mrefonte-shim"
     ></script>
   </head>
   <body>
@@ -97,7 +97,7 @@ developpement = await directus.request(
 
             <div class="hero-actions reveal delay-3">
               <a
-                href="contact?pole=developpement&step=2"
+                href="/contact?pole=developpement&step=2"
                 class="btn-cta btn-cta--ghost"
               >
                 {developpement.bouton_hero}
@@ -160,7 +160,10 @@ developpement = await directus.request(
                   </div>
                   <span class="term-com"># pôle développement · jcd groupe</span
                   >
-                  <div class="manifesto-rich" set:html={developpement.manifeste} />
+                  <div
+                    class="manifesto-rich"
+                    set:html={developpement.manifeste}
+                  />
                 </div>
               </div>
             </div>
@@ -905,7 +908,7 @@ developpement = await directus.request(
                   <span class="real-tag">Application sur-mesure</span>
                   <img
                     class="real-cover"
-                    src="realisations/logo-selfbeton.png"
+                    src="/realisations/logo-selfbeton.png"
                     alt="Self Béton"
                     loading="lazy"
                     decoding="async"
@@ -957,7 +960,7 @@ developpement = await directus.request(
                   <span class="real-tag">Réservation</span>
                   <img
                     class="real-cover"
-                    src="realisations/logo-lavoir-adele.png"
+                    src="/realisations/logo-lavoir-adele.png"
                     alt="Le Lavoir d'Adèle"
                     loading="lazy"
                     decoding="async"
@@ -1007,7 +1010,7 @@ developpement = await directus.request(
                   <span class="real-tag">Mobile · Android &amp; iOS</span>
                   <img
                     class="real-cover"
-                    src="realisations/logo-stillprovide.png"
+                    src="/realisations/logo-stillprovide.png"
                     alt="LiteYear Still Provide"
                     loading="lazy"
                     decoding="async"
@@ -1061,7 +1064,7 @@ developpement = await directus.request(
                   <span class="real-tag">Vitrine</span>
                   <img
                     class="real-cover"
-                    src="realisations/logo-cormontaigne.png"
+                    src="/realisations/logo-cormontaigne.png"
                     alt="Cormontaigne"
                     loading="lazy"
                     decoding="async"
@@ -1107,7 +1110,7 @@ developpement = await directus.request(
                   <span class="real-tag">Application sur-mesure</span>
                   <img
                     class="real-cover"
-                    src="realisations/logo-arkema.png"
+                    src="/realisations/logo-arkema.png"
                     alt="Arkema"
                     loading="lazy"
                     decoding="async"
@@ -1157,7 +1160,7 @@ developpement = await directus.request(
                   <span class="real-tag">E-commerce</span>
                   <img
                     class="real-cover"
-                    src="realisations/logo-thimo.png"
+                    src="/realisations/logo-thimo.png"
                     alt="Thimo"
                     loading="lazy"
                     decoding="async"
@@ -1203,7 +1206,7 @@ developpement = await directus.request(
                   <span class="real-tag">Application sur-mesure</span>
                   <img
                     class="real-cover"
-                    src="realisations/logo-virenov.png"
+                    src="/realisations/logo-virenov.png"
                     alt="Viessmann Virenov"
                     loading="lazy"
                     decoding="async"
@@ -1257,7 +1260,7 @@ developpement = await directus.request(
                   <span class="real-tag">Réservation</span>
                   <img
                     class="real-cover"
-                    src="realisations/logo-univac.png"
+                    src="/realisations/logo-univac.png"
                     alt="Univac"
                     loading="lazy"
                     decoding="async"
@@ -1307,7 +1310,7 @@ developpement = await directus.request(
                   <span class="real-tag">Application sur-mesure</span>
                   <img
                     class="real-cover"
-                    src="realisations/logo-viessmann.png"
+                    src="/realisations/logo-viessmann.png"
                     alt="Viessmann Solution de prescriptions"
                     loading="lazy"
                     decoding="async"
@@ -1355,7 +1358,7 @@ developpement = await directus.request(
                   <span class="real-tag">Application sur-mesure</span>
                   <img
                     class="real-cover"
-                    src="realisations/logo-synapse.png"
+                    src="/realisations/logo-synapse.png"
                     alt="Synapse Santé"
                     loading="lazy"
                     decoding="async"
@@ -1407,7 +1410,7 @@ developpement = await directus.request(
                   <span class="real-tag">E-commerce</span>
                   <img
                     class="real-cover"
-                    src="realisations/logo-tarte-sucre.png"
+                    src="/realisations/logo-tarte-sucre.png"
                     alt="Tarte aux sucres"
                     loading="lazy"
                     decoding="async"
@@ -1453,7 +1456,7 @@ developpement = await directus.request(
                   <span class="real-tag">Application sur-mesure</span>
                   <img
                     class="real-cover"
-                    src="realisations/logo-liteyear.png"
+                    src="/realisations/logo-liteyear.png"
                     alt="LiteYear OAV"
                     loading="lazy"
                     decoding="async"
@@ -1586,7 +1589,7 @@ developpement = await directus.request(
                 />
                 <div class="cta-actions reveal delay-3">
                   <a
-                    href="contact?pole=developpement&step=2"
+                    href="/contact?pole=developpement&step=2"
                     class="btn-cta btn-cta--primary"
                   >
                     {developpement.bouton_cta}
@@ -1632,7 +1635,7 @@ developpement = await directus.request(
 
     <Footer />
 
-    <script is:inline src="js/pages/developpement-2.js"></script>
+    <script is:inline src="/js/pages/developpement-2.js"></script>
 
     <!-- ============ Aperçu projet — modale carousel + description ============ -->
     <div class="rp-modal" id="rp-modal" aria-hidden="true">
@@ -1719,8 +1722,8 @@ developpement = await directus.request(
       </div>
     </div>
 
-    <script is:inline src="js/pages/developpement-1.js"></script>
-    <script is:inline src="js/shared/menu-frost.js"></script>
+    <script is:inline src="/js/pages/developpement-1.js"></script>
+    <script is:inline src="/js/shared/menu-frost.js"></script>
     <!-- jcd-mobile-nav (injected) -->
     <button
       class="jcd-burger"
@@ -1753,7 +1756,7 @@ developpement = await directus.request(
 
           <div class="jcd-mnav__reveal" style="transition-delay:.07s">
             <div class="jcd-mnav__item" style="--mnav-c:#2E72BA">
-              <a class="jcd-mnav__link" href="informatique"
+              <a class="jcd-mnav__link" href="/informatique"
                 ><span class="jcd-mnav__dot"></span><span
                   class="jcd-mnav__label">Informatique</span
                 ></a
@@ -1775,14 +1778,14 @@ developpement = await directus.request(
               </button>
             </div>
             <div class="jcd-acc__panel" id="jcdAccInfo">
-              <a class="jcd-mnav__sub" href="info-cloud">Cloud Microsoft</a>
-              <a class="jcd-mnav__sub" href="info-collaboratif"
+              <a class="jcd-mnav__sub" href="/info-cloud">Cloud Microsoft</a>
+              <a class="jcd-mnav__sub" href="/info-collaboratif"
                 >Solutions collaboratives &amp; audiovisuelles</a
               >
-              <a class="jcd-mnav__sub" href="info-reseaux"
+              <a class="jcd-mnav__sub" href="/info-reseaux"
                 >Architectures syst&egrave;mes &amp; r&eacute;seaux</a
               >
-              <a class="jcd-mnav__sub" href="info-integration"
+              <a class="jcd-mnav__sub" href="/info-integration"
                 >Int&eacute;gration &amp; Support PC</a
               >
             </div>
@@ -1791,7 +1794,7 @@ developpement = await directus.request(
           <a
             class="jcd-mnav__item jcd-mnav__reveal"
             style="--mnav-c:#E51D29;transition-delay:.10s"
-            href="service"
+            href="/service"
             ><span class="jcd-mnav__dot"></span><span class="jcd-mnav__label"
               >Service</span
             ></a
@@ -1799,7 +1802,7 @@ developpement = await directus.request(
           <a
             class="jcd-mnav__item jcd-mnav__reveal"
             style="--mnav-c:#F9D605;transition-delay:.13s"
-            href="developpement"
+            href="/developpement"
             ><span class="jcd-mnav__dot"></span><span class="jcd-mnav__label"
               >D&eacute;veloppement</span
             ></a
@@ -1807,7 +1810,7 @@ developpement = await directus.request(
           <a
             class="jcd-mnav__item jcd-mnav__reveal"
             style="--mnav-c:#F3941D;transition-delay:.16s"
-            href="print"
+            href="/print"
             ><span class="jcd-mnav__dot"></span><span class="jcd-mnav__label"
               >Print</span
             ></a
@@ -1822,7 +1825,7 @@ developpement = await directus.request(
           >
           <div class="jcd-mnav__reveal" style="transition-delay:.22s">
             <div class="jcd-mnav__item" style="--mnav-c:#8EC041">
-              <a class="jcd-mnav__link" href="formation"
+              <a class="jcd-mnav__link" href="/formation"
                 ><span class="jcd-mnav__dot"></span><span
                   class="jcd-mnav__label">Formation</span
                 ></a
@@ -1844,52 +1847,55 @@ developpement = await directus.request(
               </button>
             </div>
             <div class="jcd-acc__panel" id="jcdAccForm">
-              <a class="jcd-mnav__sub" href="formation-bureautique"
+              <a class="jcd-mnav__sub" href="/formation-bureautique"
                 >Bureautique</a
               >
               <a
                 class="jcd-mnav__sub"
-                href="formation-intelligence-artificielle"
+                href="/formation-intelligence-artificielle"
                 >Intelligence artificielle</a
               >
-              <a class="jcd-mnav__sub" href="formation-informatique"
+              <a class="jcd-mnav__sub" href="/formation-informatique"
                 >Informatique</a
               >
-              <a class="jcd-mnav__sub" href="formation-communication-marketing"
+              <a class="jcd-mnav__sub" href="/formation-communication-marketing"
                 >Communication - Marketing</a
               >
-              <a class="jcd-mnav__sub" href="formation-management">Management</a
+              <a class="jcd-mnav__sub" href="/formation-management"
+                >Management</a
               >
-              <a class="jcd-mnav__sub" href="formation-commerce-relation-client"
+              <a
+                class="jcd-mnav__sub"
+                href="/formation-commerce-relation-client"
                 >Commerce - Relation client</a
               >
-              <a class="jcd-mnav__sub" href="formation-comptabilite-gestion"
+              <a class="jcd-mnav__sub" href="/formation-comptabilite-gestion"
                 >Comptabilit&eacute; - Gestion</a
               >
-              <a class="jcd-mnav__sub" href="formation-ressources-humaines"
+              <a class="jcd-mnav__sub" href="/formation-ressources-humaines"
                 >Ressources humaines</a
               >
-              <a class="jcd-mnav__sub" href="formation-developpement-personnel"
+              <a class="jcd-mnav__sub" href="/formation-developpement-personnel"
                 >D&eacute;veloppement personnel</a
               >
-              <a class="jcd-mnav__sub" href="formation-graphisme-pao"
+              <a class="jcd-mnav__sub" href="/formation-graphisme-pao"
                 >Graphisme - PAO</a
               >
               <a
                 class="jcd-mnav__sub"
-                href="formation-administratif-secretariat-accueil"
+                href="/formation-administratif-secretariat-accueil"
                 >Administratif - Secr&eacute;tariat</a
               >
-              <a class="jcd-mnav__sub" href="formation-securite"
+              <a class="jcd-mnav__sub" href="/formation-securite"
                 >S&eacute;curit&eacute;</a
               >
-              <a class="jcd-mnav__sub" href="formation-langues">Langues</a>
+              <a class="jcd-mnav__sub" href="/formation-langues">Langues</a>
             </div>
           </div>
           <a
             class="jcd-mnav__item jcd-mnav__reveal"
             style="--mnav-c:#A78D75;transition-delay:.25s"
-            href="agencement"
+            href="/agencement"
             ><span class="jcd-mnav__dot"></span><span class="jcd-mnav__label"
               >Agencement</span
             ></a
@@ -1904,7 +1910,7 @@ developpement = await directus.request(
           <a
             class="jcd-mnav__item jcd-mnav__reveal"
             style="--mnav-c:#9a9a9a;transition-delay:.33s"
-            href="assistance"
+            href="/assistance"
             ><span class="jcd-mnav__dot"></span><span
               class="jcd-mnav__label"
               style="font-size:19px">Assistance</span
@@ -1913,7 +1919,7 @@ developpement = await directus.request(
           <a
             class="jcd-mnav__item jcd-mnav__reveal"
             style="--mnav-c:#9a9a9a;transition-delay:.36s"
-            href="carrieres"
+            href="/carrieres"
             ><span class="jcd-mnav__dot"></span><span
               class="jcd-mnav__label"
               style="font-size:19px">Carri&egrave;res</span
@@ -1924,7 +1930,7 @@ developpement = await directus.request(
             class="jcd-mnav__cta jcd-mnav__reveal"
             style="transition-delay:.40s"
           >
-            <a class="jcd-mnav__btn jcd-mnav__btn--primary" href="contact"
+            <a class="jcd-mnav__btn jcd-mnav__btn--primary" href="/contact"
               >Contacter un expert
               <span class="jcd-mnav__btn-ic"
                 ><svg
@@ -1960,7 +1966,7 @@ developpement = await directus.request(
         </div>
       </div>
     </div>
-    <script is:inline src="js/shared/mobile-nav.js"></script>
+    <script is:inline src="/js/shared/mobile-nav.js"></script>
     <!-- jcd-a11y (Lot 5) -->
     <div class="jcd-fab-wrap" id="jcd-fab">
       <button
@@ -1982,7 +1988,7 @@ developpement = await directus.request(
       <a
         class="jcd-fab jcd-fab--contact"
         id="jcdFabContact"
-        href="contact"
+        href="/contact"
         aria-label="Nous contacter"
       >
         <svg
@@ -1998,10 +2004,11 @@ developpement = await directus.request(
         >
       </a>
     </div>
-    <script is:inline src="js/shared/a11y.js" id="jcd-a11y-js"></script>
+    <script is:inline src="/js/shared/a11y.js" id="jcd-a11y-js"></script>
 
-    <script is:inline src="js/shared/logo-marquee.js"></script>
-    <script is:inline src="js/shared/micons.js" id="jcd-micons-js"></script>
-    <script is:inline src="js/shared/mrefonte.js" id="jcd-mrefonte-js"></script>
+    <script is:inline src="/js/shared/logo-marquee.js"></script>
+    <script is:inline src="/js/shared/micons.js" id="jcd-micons-js"></script>
+    <script is:inline src="/js/shared/mrefonte.js" id="jcd-mrefonte-js"
+    ></script>
   </body>
 </html>
