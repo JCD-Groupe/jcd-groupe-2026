@@ -1,6 +1,6 @@
 ================================================================
-RÉCAPITULATIF DES CHANGEMENTS — Session du 12/08/2026
-Site JCD Groupe (jcd-groupe-front) — branche modifs-legeres-martin
+RÉCAPITULATIF DES CHANGEMENTS — 12/08/2026
+Site JCD Groupe (jcd-groupe-front) 
 ================================================================
 
 1. GRILLE PARTENAIRES TÉLÉCOM
