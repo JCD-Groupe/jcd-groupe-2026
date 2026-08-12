@@ -29,7 +29,7 @@ const logos3 = logos.slice(third * 2);
       content="width=device-width, initial-scale=1.0, viewport-fit=cover"
     />
     <meta name="color-scheme" content="dark" />
-    <meta name="theme-color" content="#0d0d0d" />
+    <meta name="theme-color" content="#0a0a0a" />
     <link rel="icon" href="favicon.svg" type="image/svg+xml" />
     <meta
       name="description"
@@ -1513,19 +1513,19 @@ const logos3 = logos.slice(third * 2);
           >
             <defs>
               <radialGradient id="ctaGF-fill" cx="50%" cy="38%" r="62%">
-                <stop offset="0%" stop-color="#FFFFFF" stop-opacity="0.12"
+                <stop offset="0%" stop-color="#FFFFFF" stop-opacity="0.20"
                 ></stop>
-                <stop offset="16%" stop-color="#2E72BA" stop-opacity="0.18"
+                <stop offset="16%" stop-color="#2E72BA" stop-opacity="0.32"
                 ></stop>
-                <stop offset="32%" stop-color="#F9D605" stop-opacity="0.15"
+                <stop offset="32%" stop-color="#F9D605" stop-opacity="0.27"
                 ></stop>
-                <stop offset="48%" stop-color="#F3941D" stop-opacity="0.14"
+                <stop offset="48%" stop-color="#F3941D" stop-opacity="0.25"
                 ></stop>
-                <stop offset="64%" stop-color="#E51D29" stop-opacity="0.12"
+                <stop offset="64%" stop-color="#E51D29" stop-opacity="0.21"
                 ></stop>
-                <stop offset="78%" stop-color="#8D2C87" stop-opacity="0.10"
+                <stop offset="78%" stop-color="#8D2C87" stop-opacity="0.18"
                 ></stop>
-                <stop offset="92%" stop-color="#8EC041" stop-opacity="0.06"
+                <stop offset="92%" stop-color="#8EC041" stop-opacity="0.12"
                 ></stop>
                 <stop offset="100%" stop-color="#A78D75" stop-opacity="0"
                 ></stop>
@@ -1792,36 +1792,48 @@ const logos3 = logos.slice(third * 2);
             preserveAspectRatio="xMidYMid meet"
           >
             <defs>
-              <!-- Filament net : pic du gradient déplacé du sommet (0%) au
-             milieu (~50%) pour éliminer le bloom blanc au point de
-             jonction avec la trace verticale. Le mask CSS sur
-             .cta-spine-ring fade ensuite le sommet à transparent. -->
+              <!-- Filament net : dégradé 7 couleurs JCD le long du contour
+             visible (sommet → horizons) : bleu, jaune, orange, rouge,
+             violet, vert, marron. Seule la moitié haute du cercle est
+             visible → les 7 teintes sont réparties sur 0-50% du
+             gradient vertical. Le mask CSS sur .cta-spine-ring fade
+             toujours le sommet pour éviter le bloom à la jonction. -->
               <linearGradient id="ctaSpine-ring" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="0%" stop-color="#FFFFFF" stop-opacity="0.10"
+                <stop offset="0%" stop-color="#2E72BA" stop-opacity="0.55"
                 ></stop>
-                <stop offset="15%" stop-color="#FFFFFF" stop-opacity="0.14"
+                <stop offset="8%" stop-color="#F9D605" stop-opacity="0.50"
                 ></stop>
-                <stop offset="35%" stop-color="#FFFFFF" stop-opacity="0.16"
+                <stop offset="17%" stop-color="#F3941D" stop-opacity="0.46"
                 ></stop>
-                <stop offset="55%" stop-color="#FFFFFF" stop-opacity="0.135"
+                <stop offset="25%" stop-color="#E51D29" stop-opacity="0.42"
                 ></stop>
-                <stop offset="78%" stop-color="#FFFFFF" stop-opacity="0.075"
+                <stop offset="33%" stop-color="#8D2C87" stop-opacity="0.36"
                 ></stop>
-                <stop offset="100%" stop-color="#FFFFFF" stop-opacity="0.025"
+                <stop offset="42%" stop-color="#8EC041" stop-opacity="0.30"
+                ></stop>
+                <stop offset="50%" stop-color="#A78D75" stop-opacity="0.22"
+                ></stop>
+                <stop offset="100%" stop-color="#A78D75" stop-opacity="0.05"
                 ></stop>
               </linearGradient>
-              <!-- Halo atmosphérique : opacités fortement réduites au sommet
-             pour ne plus créer de bloom blurré à la jonction. -->
+              <!-- Halo atmosphérique : mêmes 7 couleurs JCD, opacités
+             douces (le blur diffuse la teinte autour du filament). -->
               <linearGradient id="ctaSpine-halo" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="0%" stop-color="#FFFFFF" stop-opacity="0.06"
+                <stop offset="0%" stop-color="#2E72BA" stop-opacity="0.30"
                 ></stop>
-                <stop offset="20%" stop-color="#FFFFFF" stop-opacity="0.080"
+                <stop offset="8%" stop-color="#F9D605" stop-opacity="0.28"
                 ></stop>
-                <stop offset="50%" stop-color="#FFFFFF" stop-opacity="0.045"
+                <stop offset="17%" stop-color="#F3941D" stop-opacity="0.25"
                 ></stop>
-                <stop offset="80%" stop-color="#FFFFFF" stop-opacity="0.020"
+                <stop offset="25%" stop-color="#E51D29" stop-opacity="0.22"
                 ></stop>
-                <stop offset="100%" stop-color="#FFFFFF" stop-opacity="0.008"
+                <stop offset="33%" stop-color="#8D2C87" stop-opacity="0.18"
+                ></stop>
+                <stop offset="42%" stop-color="#8EC041" stop-opacity="0.14"
+                ></stop>
+                <stop offset="50%" stop-color="#A78D75" stop-opacity="0.10"
+                ></stop>
+                <stop offset="100%" stop-color="#A78D75" stop-opacity="0.02"
                 ></stop>
               </linearGradient>
               <filter
@@ -1877,26 +1889,39 @@ const logos3 = logos.slice(third * 2);
             preserveAspectRatio="xMidYMid meet"
           >
             <defs>
-              <!-- Sweep 7 couleurs JCD — CONTINU (pas de stop transparent
-             aux extrêmes). Le gradient boucle proprement (0% bleu →
-             100% bleu) pour que le dash montre toujours des couleurs
-             pleines quelle que soit sa position le long du contour. -->
-              <linearGradient id="ctaO-rainbow" x1="0" y1="0" x2="1" y2="0">
-                <stop offset="0%" stop-color="#2E72BA" stop-opacity="0.70"
+              <!-- Sweep 7 couleurs JCD — VERROUILLÉ SUR LA POSITION du
+             contour pour épouser exactement le fade statique du
+             spine-ring : bleu au sommet, puis jaune, orange, rouge,
+             violet, vert, marron en descendant vers les horizons
+             (mêmes offsets que #ctaSpine-ring). Les cercles portent
+             transform="rotate(-90 400 400)" : le vecteur du gradient
+             est défini en userSpace de (690,400) vers (110,400) pour
+             qu'après rotation il soit vertical à l'écran (sommet →
+             bas). Le dash révèle donc, en grandissant au scroll, les
+             mêmes teintes que celles déjà présentes sous lui. -->
+              <linearGradient
+                id="ctaO-rainbow"
+                gradientUnits="userSpaceOnUse"
+                x1="690"
+                y1="400"
+                x2="110"
+                y2="400"
+              >
+                <stop offset="0%" stop-color="#2E72BA" stop-opacity="0.85"
                 ></stop>
-                <stop offset="14%" stop-color="#F9D605" stop-opacity="0.70"
+                <stop offset="8%" stop-color="#F9D605" stop-opacity="0.82"
                 ></stop>
-                <stop offset="28%" stop-color="#F3941D" stop-opacity="0.70"
+                <stop offset="17%" stop-color="#F3941D" stop-opacity="0.80"
                 ></stop>
-                <stop offset="42%" stop-color="#E51D29" stop-opacity="0.70"
+                <stop offset="25%" stop-color="#E51D29" stop-opacity="0.76"
                 ></stop>
-                <stop offset="57%" stop-color="#8D2C87" stop-opacity="0.70"
+                <stop offset="33%" stop-color="#8D2C87" stop-opacity="0.72"
                 ></stop>
-                <stop offset="71%" stop-color="#8EC041" stop-opacity="0.70"
+                <stop offset="42%" stop-color="#8EC041" stop-opacity="0.66"
                 ></stop>
-                <stop offset="85%" stop-color="#A78D75" stop-opacity="0.70"
+                <stop offset="50%" stop-color="#A78D75" stop-opacity="0.58"
                 ></stop>
-                <stop offset="100%" stop-color="#2E72BA" stop-opacity="0.70"
+                <stop offset="100%" stop-color="#A78D75" stop-opacity="0.30"
                 ></stop>
               </linearGradient>
             </defs>

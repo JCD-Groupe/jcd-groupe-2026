@@ -41,7 +41,7 @@ body.jcd-mnav-open .jcd-mnav{opacity:1;visibility:visible;pointer-events:auto;tr
 .jcd-mnav__sub:active{color:var(--mnav-fg);}
 .jcd-mnav__cta{margin-top:28px;display:flex;flex-direction:column;gap:11px;}
 .jcd-mnav__btn{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:15px 16px 15px 22px;border-radius:18px;font-size:16px;font-weight:600;}
-.jcd-mnav a.jcd-mnav__btn--primary{background:#f4f4f4;color:#0d0d0d;}
+.jcd-mnav a.jcd-mnav__btn--primary{background:#f4f4f4;color:#0a0a0a;}
 .jcd-mnav a.jcd-mnav__btn--ghost{border:1px solid var(--mnav-line);color:var(--mnav-fg);}
 .jcd-mnav__btn-ic{width:30px;height:30px;border-radius:999px;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,.10);transition:transform .4s var(--mnav-ease);}
 .jcd-mnav__btn--ghost .jcd-mnav__btn-ic{background:rgba(255,255,255,.09);}
@@ -88,8 +88,8 @@ body.jcd-mnav-open .jcd-mnav__reveal{opacity:1;transform:none;}
    ================================================================== */
 
 /* ===== JCD mobile quick-wins (a11y / perf / interaction) ===== */
-.jcd-skip{ position:fixed; top:calc(8px + env(safe-area-inset-top)); left:8px; z-index:6000; padding:10px 16px; border-radius:9px; background:#f4f4f4; color:#0d0d0d; font-family:Inter,system-ui,sans-serif; font-size:14px; font-weight:600; text-decoration:none; transform:translateY(-160%); transition:transform .22s cubic-bezier(.32,.72,0,1); }
-.jcd-skip:focus{ transform:translateY(0); outline:2px solid #0d0d0d; outline-offset:2px; }
+.jcd-skip{ position:fixed; top:calc(8px + env(safe-area-inset-top)); left:8px; z-index:6000; padding:10px 16px; border-radius:9px; background:#f4f4f4; color:#0a0a0a; font-family:Inter,system-ui,sans-serif; font-size:14px; font-weight:600; text-decoration:none; transform:translateY(-160%); transition:transform .22s cubic-bezier(.32,.72,0,1); }
+.jcd-skip:focus{ transform:translateY(0); outline:2px solid #0a0a0a; outline-offset:2px; }
 
 /* Focus-visible sur les composants mobiles injectes */
 .jcd-burger:focus-visible,.jcd-acc__toggle:focus-visible,.jcd-mnav__link:focus-visible,.jcd-mnav__sub:focus-visible,.jcd-mnav__btn:focus-visible,.jcd-xpnav a:focus-visible{ outline:2px solid #f4f4f4; outline-offset:2px; }
@@ -161,7 +161,7 @@ body.jcd-mnav-open .jcd-mnav__reveal{opacity:1;transform:none;}
   .jcd-fab{ width:47px; height:47px; border-radius:999px; display:flex; align-items:center; justify-content:center; border:1px solid rgba(255,255,255,.12); background:rgba(20,20,20,.62); -webkit-backdrop-filter:blur(15px) saturate(140%); backdrop-filter:blur(15px) saturate(140%); color:#f4f4f4; -webkit-tap-highlight-color:transparent; text-decoration:none; cursor:pointer; transition:transform .35s cubic-bezier(.32,.72,0,1), background .3s ease; }
   .jcd-fab:active{ transform:scale(.91); }
   .jcd-fab svg{ width:20px; height:20px; }
-  .jcd-fab--contact{ background:#f4f4f4; color:#0d0d0d; border-color:transparent; box-shadow:0 8px 24px rgba(0,0,0,.32); }
+  .jcd-fab--contact{ background:#f4f4f4; color:#0a0a0a; border-color:transparent; box-shadow:0 8px 24px rgba(0,0,0,.32); }
   .jcd-fab--top{ display:none; }
   .jcd-fab--top.is-on{ display:flex; }
   body.jcd-mnav-open .jcd-fab-wrap{ opacity:0 !important; pointer-events:none !important; }
@@ -272,13 +272,13 @@ body.jcd-mnav-open .jcd-mnav__reveal{opacity:1;transform:none;}
   .eco-net-traces{ display:none !important; }
   .eco-net{ display:block !important; background:none !important; border:0 !important; padding:0 !important; }
   .eco-quad{ margin:0 0 20px !important; padding:0 !important; background:none !important; border:0 !important; position:static !important; }
-  .eco-quad-label{ display:block !important; margin:0 0 10px !important; padding:0 !important; font-family:'JetBrains Mono',ui-monospace,monospace !important; font-size:10.5px !important; letter-spacing:.13em !important; text-transform:uppercase !important; color:var(--text-2,#9b9b9b) !important; position:static !important; background:none !important; }
+  .eco-quad-label{ display:block !important; margin:0 0 10px !important; padding:0 !important; font-family:'JetBrains Mono',ui-monospace,monospace !important; font-size:10.5px !important; letter-spacing:.13em !important; text-transform:uppercase !important; color:var(--text-2,#b8b8b8) !important; position:static !important; background:none !important; }
   .eco-quad-grid{ display:flex !important; flex-wrap:wrap !important; align-items:center !important; gap:14px 24px !important; background:none !important; border:0 !important; }
   .eco-tile{ width:auto !important; height:28px !important; min-height:0 !important; aspect-ratio:auto !important; padding:0 !important; border:0 !important; background:none !important; display:flex !important; align-items:center !important; }
   .eco-tile-img{ height:100% !important; width:auto !important; max-width:none !important; max-height:100% !important; }
   .eco-tile.has-logo .eco-tile-name{ display:none !important; }
   .eco-tile--ph{ height:auto !important; border:1px solid rgba(255,255,255,.13) !important; border-radius:999px !important; padding:5px 11px !important; }
-  .eco-tile--ph .eco-tile-name{ font-size:10px !important; letter-spacing:.1em !important; text-transform:uppercase !important; color:var(--text-2,#9b9b9b) !important; }
+  .eco-tile--ph .eco-tile-name{ font-size:10px !important; letter-spacing:.1em !important; text-transform:uppercase !important; color:var(--text-2,#b8b8b8) !important; }
   /* -- 7e. Sous-nav informatique : remise dans le flux (ne recouvre plus les heros), defile avec la page -- */
   .info-subnav{ position:static !important; top:auto !important; height:auto !important; margin-top:calc(70px + env(safe-area-inset-top)) !important; pointer-events:auto !important; }
   .info-subnav::before{ display:none !important; }
@@ -334,7 +334,7 @@ body.jcd-mnav-open .jcd-mnav__reveal{opacity:1;transform:none;}
   .pole-card.pole-center{ grid-column:1 / -1 !important; display:grid !important; grid-template-columns:auto 1fr !important; column-gap:12px !important; row-gap:1px !important; align-items:center !important; text-align:left !important; padding:13px 14px !important; }
   .pole-card.pole-center .pole-card-top{ grid-row:1 / 3 !important; }
   .pole-card.pole-center h3{ font-size:15px !important; }
-  .pole-card.pole-center p{ display:-webkit-box !important; -webkit-box-orient:vertical !important; -webkit-line-clamp:1 !important; overflow:hidden !important; margin:0 !important; font-size:12px !important; line-height:1.4 !important; color:var(--text-2,#9b9b9b) !important; }
+  .pole-card.pole-center p{ display:-webkit-box !important; -webkit-box-orient:vertical !important; -webkit-line-clamp:1 !important; overflow:hidden !important; margin:0 !important; font-size:12px !important; line-height:1.4 !important; color:var(--text-2,#b8b8b8) !important; }
   /* -- 7h. Murs de logos clients -> bande horizontale unique (jamais de defilement vertical) -- */
   .prest-aside-clients{ margin-top:16px !important; padding-top:14px !important; }
   .logo-marquee{ display:flex !important; flex-direction:row !important; flex-wrap:nowrap !important; align-items:center !important; gap:26px !important; overflow-x:auto !important; overflow-y:hidden !important; height:auto !important; min-height:0 !important; max-height:none !important; padding:12px 2px 4px !important; scrollbar-width:none; -webkit-mask-image:linear-gradient(90deg,transparent,#000 5%,#000 95%,transparent); mask-image:linear-gradient(90deg,transparent,#000 5%,#000 95%,transparent); }
@@ -384,3 +384,10 @@ body.jcd-mnav-open .jcd-mnav__reveal{opacity:1;transform:none;}
    ================================================================== */
 
 @media (max-width:820px){.chiffres,.valeurs,.process,.testi,.secblock,.cyber,.partners,.why{padding-top:40px!important;padding-bottom:40px!important;}.prestations{padding-bottom:40px!important;}body:has(.secblock) .prestations{padding-top:40px!important;}.hero{padding-bottom:28px!important;}#poles.poles{margin-top:0!important;}.poles{padding-bottom:36px!important;}.cta-final{padding-top:48px!important;padding-bottom:44px!important;}.hub-intro{padding-bottom:28px!important;}.values-sec,.acc-sec,.offers-sec,.apply-sec{padding-top:40px!important;padding-bottom:40px!important;}.jcd-fcat-mob{padding-top:36px!important;}.cat-others{padding-bottom:40px!important;}.assist-head{padding-top:88px!important;}.legal-hero{padding-bottom:24px!important;}.legal-body{padding-top:24px!important;padding-bottom:36px!important;}.section-head{margin-bottom:28px!important;}}
+
+/* ==================================================================
+   Manifestes — contenu riche Directus
+   L'italique (<i>) saisi dans le WYSIWYG devient la couleur accent
+   du pôle (chaque page définit --accent-hi dans son propre CSS).
+   ================================================================== */
+.manifesto-rich i{ font-style:normal; font-weight:500; color:var(--accent-hi,var(--accent,#f4f4f4)); }

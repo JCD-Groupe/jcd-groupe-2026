@@ -1,0 +1,107 @@
+================================================================
+RÉCAPITULATIF DES CHANGEMENTS — Session du 12/08/2026
+Site JCD Groupe (jcd-groupe-front) — branche modifs-legeres-martin
+================================================================
+
+1. GRILLE PARTENAIRES TÉLÉCOM
+   - Suppression de la tuile Fortinet (src/pages/telecom.astro).
+   - La grille passe de 12 à 11 logos (dernière rangée à 2 tuiles),
+     compteur « Partenaires » mis à jour (12 → 11).
+
+2. MANIFESTES — OPTIMISATION DIRECTUS
+   - Classe « manifesto-rich » posée sur le parent du bloc texte du
+     manifeste des 10 pages (telecom, service, print, info-reseaux,
+     info-integration, info-collaboratif, info-cloud, formation,
+     agencement, developpement — sur le div set:html Directus).
+   - Nouvelle règle dans css/global.css : les balises italiques <i>
+     prennent automatiquement la couleur accent du pôle (var(--accent-hi)).
+     Un rédacteur Directus n'a plus qu'à cliquer « italique » pour
+     mettre un passage en couleur.
+
+3. MENU « NOS SOLUTIONS » (header)
+   - Le sous-menu Informatique reste déplié tant que le curseur est
+     dans le container du menu (survoler les autres sections ne le
+     replie plus).
+   - À la sortie du menu, tout se replie et disparaît ensemble comme
+     à l'origine (~180 ms).
+   - Patch appliqué aux 18 fichiers JS qui dupliquent le code du
+     dropdown (16 pages + reveal-animations.js + formation-page.js).
+
+4. LISIBILITÉ DES TEXTES GRIS (site entier)
+   - Nouveau barème, hiérarchie conservée (titres inchangés #f4f4f4) :
+     · --text-2 (corps/sous-titres) : #9b9b9b → #b8b8b8
+     · --text-3 : #7a7a7a → #9a9a9a
+     · --text-4 : #4a4a4a → #6e6e6e
+   - Appliqué sur les 63 fichiers CSS (+ variantes index.css :
+     --text-secondary/tertiary). Section « cahier » claire de
+     formation volontairement intacte.
+
+5. AUDIT CONTRASTE WCAG + CORRECTIONS
+   - Audit automatique du texte visible sur 14 pages (seuils AA).
+   - Corrections :
+     · Footer : lien de la page courante en accent clair du pôle
+       (var(--accent-hi)) au lieu de l'accent brut (transition.css).
+     · /print (section papier) : nouveaux tokens --accent-paper /
+       --accent-paper-lg (orange assombri lisible sur crème) +
+       encre --ink-3 renforcée.
+     · /carrieres : hint d'upload CV éclairci, badges de pôle des
+       offres éclaircis (color-mix 70 % pôle + 30 % blanc).
+   - Résultat : zéro texte sous les seuils AA sur les pages testées.
+
+6. FONDS ASSOMBRIS (léger, site entier)
+   - Gamme sombre abaissée d'~3 points/canal pour faire ressortir
+     textes et couleurs :
+     · #0d0d0d → #0a0a0a (et rgba(13,13,13,…) → rgba(10,10,10,…))
+     · #131313 → #101010 · #181818 → #141414 · #1f1f1f → #1a1a1a
+   - ~550 occurrences synchronisées (CSS + fichiers Astro, y compris
+     les meta theme-color) : aucun raccord visible dans les fades.
+
+7. GLOBE DU CTA FINAL (accueil)
+   - Glow recalé : largeur unique --globe-w (1100 px) partagée par le
+     wireframe et toutes les couches lumineuses — le halo épouse
+     exactement l'arrondi du cercle (avant : ~50 px trop grand).
+   - Fade du contour passé du blanc aux 7 couleurs JCD dans l'ordre
+     bleu, jaune, orange, rouge, violet, vert, marron (sommet →
+     horizons), filament + halo.
+   - Intensité du remplissage au scroll augmentée (~+70 %), pulse
+     orbital 0,70 → 0,85.
+   - Pulse animé verrouillé sur la position du contour : mêmes
+     couleurs aux mêmes endroits que le fade statique (gradient
+     userSpaceOnUse compensant la rotation -90°).
+
+8. HEROS DES PÔLES — CONTRASTE + VIGNETTAGE
+   - Analyse des 7 heros ; corrections d'intensité :
+     · developpement : mesh filtré brightness(0.86) saturate(1.18)
+     · agencement : mesh filtré brightness(0.85) saturate(1.1)
+   - Vignettage doux derrière la baseline de chaque hero (7 pages) :
+     ellipse radiale sombre sans bord perceptible (closest-side),
+     variante renforcée sur developpement/agencement, légère sur le
+     hub informatique.
+
+9. PARCOURS CTA → QUESTIONNAIRE CONTACT
+   - Le questionnaire gère ?step=2 : arrivée directe en phase 2
+     « Coordonnées » quand un pôle est présélectionné via ?pole=…
+     (récap chip affiché, retour phase 1 possible).
+   - 52 liens « contact?pole=… » du site complétés avec &step=2
+     (boutons hero, CTA de fin de page, liens prestations — 7 pôles,
+     sous-pages informatique, pages catalogue formation, assistance).
+
+10. QUESTIONNAIRE CONTACT — CASES PÔLES
+   - Contour des cartes légèrement teinté de la couleur du pôle dès
+     le repos (16 %), franchement teinté au survol (45 %) avec halo
+     et fond léger. Échelle : repos < survol < sélectionné (60 %).
+
+11. PAGE ASSISTANCE — REFONTE UX
+   - Téléphone mis en avant : carte d'appel cliquable (tel:) teintée
+     rouge avec icône en tuile, numéro en grand blanc et horaires.
+   - Cartes-outils différenciées par couleur JCD (Prise en main =
+     bleu, Assist = vert, TeamViewer = orange) : tuile d'icône
+     colorée, badge « Outil 01/02/03 », CTA en pilule pleine largeur.
+   - Ajustements finaux : teintes atténuées (~-30 %), dot rouge
+     supprimé, liens secondaires (EASI / Nous contacter) sans flèche
+     mais avec bordure claire contrastée.
+
+DIVERS
+   - Création de .claude/launch.json (lancement du dev server Astro).
+   - Tous les changements vérifiés visuellement et fonctionnellement
+     dans l'aperçu (desktop + mobile pour l'assistance).

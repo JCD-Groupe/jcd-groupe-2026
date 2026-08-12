@@ -184,9 +184,9 @@
   footer[role="contentinfo"] {
     /* Tokens neutres autonomes (valeurs de l'index) : rendu identique
        quelle que soit la page hôte. L'accent reste piloté par la page. */
-    --bg-elev-1: #131313;
+    --bg-elev-1: #101010;
     --text-primary: #f4f4f4;
-    --text-secondary: #9b9b9b;
+    --text-secondary: #b8b8b8;
     --text-tertiary: #6a6a6a;
     --border-subtle: rgba(255, 255, 255, 0.06);
 

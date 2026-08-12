@@ -202,8 +202,9 @@ void main(){
     });
 
     /* === Accordeon : sous-items d'Informatique (et tout groupe qui
-           contient un .nm-sub). Hoverer un autre groupe replie le
-           precedent. Reset complet a la fermeture du panneau. === */
+           contient un .nm-sub). Survoler un autre groupe ne replie pas
+           le sous-menu : il reste deploye tant que le curseur est dans
+           le menu, et se replie avec le panneau a sa fermeture. === */
     var grpTimer = null;
     function setExpanded(target) {
       if (grpTimer) { clearTimeout(grpTimer); grpTimer = null; }
@@ -215,12 +216,13 @@ void main(){
       var hasSub = !!group.querySelector('.nm-sub');
       group.addEventListener('mouseenter', function () {
         if (grpTimer) { clearTimeout(grpTimer); grpTimer = null; }
+        if (!hasSub) return;
         grpTimer = setTimeout(function () {
-          setExpanded(hasSub ? group : null);
+          setExpanded(group);
         }, 70);
       });
       group.addEventListener('focusin', function () {
-        setExpanded(hasSub ? group : null);
+        if (hasSub) setExpanded(group);
       });
     });
 
