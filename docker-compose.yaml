@@ -29,8 +29,8 @@ services:
       
       PUBLIC_URL: "${PUBLIC_DIRECTUS_URL}"
       
-      ADMIN_EMAIL: "cyprien.cotinaut@jcd-groupe.fr"
-      ADMIN_PASSWORD: "Sr/a~%k`xA(}q5D<7f"
+      ADMIN_EMAIL: "${DIRECTUS_ADMIN_EMAIL}"
+      ADMIN_PASSWORD: "${DIRECTUS_ADMIN_PASSWORD}"
       
       CORS_ENABLED: "true"
       CORS_ORIGIN: "${PUBLIC_FRONT_URL}"
