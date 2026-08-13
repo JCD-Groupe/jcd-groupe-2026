@@ -1,13 +1,17 @@
-# Build
-FROM node:lts-alpine AS builder
-WORKDIR /app
-COPY package*.json ./
-RUN npm install
-COPY . .
-RUN npm run build
+FROM node:lts-alpine
 
-# Production avec Nginx
-FROM nginx:alpine
-COPY --from=builder /app/dist /usr/share/nginx/html
-EXPOSE 80
-CMD ["nginx", "-g", "daemon off;"]
+WORKDIR /app
+
+# Copie des fichiers de dépendances
+COPY package*.json ./
+
+# Installation des dépendances
+RUN npm ci
+
+# Copie du reste du code source
+COPY . .
+
+EXPOSE 4321
+
+# Démarrage d'un serveur statique ultra-léger pour servir le dossier dist
+CMD ["npx", "serve", "dist", "-l", "4321"]

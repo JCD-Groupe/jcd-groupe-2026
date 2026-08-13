@@ -1,8 +1,36 @@
+version: '3.8'
+
 services:
-  astro:
+  astro-app:
     build: .
-    env_file:
-      - .env
+    container_name: jcd-groupe-front
     restart: always
     ports:
-      - "80:80"
+      - "80:4321"
+    volumes:
+      # Permet de synchroniser votre code source sans reconstruire l'image
+      - .:/app
+      # Évite de surécrire les node_modules du conteneur avec ceux de l'hôte
+      - /app/node_modules
+  directus:
+    container_name: jcd-groupe-api
+    image: directus/directus:latest
+    ports:
+      - "8055:8055"
+    volumes:
+      - ./directus/database:/directus/database
+      - ./directus/uploads:/directus/uploads
+      - ./directus/extensions:/directus/extensions
+    environment:
+      KEY: "${DIRECTUS_KEY}"
+      SECRET: "${DIRECTUS_SECRET}"
+      DB_CLIENT: "sqlite3"
+      DB_FILENAME: "/directus/database/data.db"
+      ADMIN_EMAIL: "cyprien.cotinaut@jcd-groupe.fr"
+      ADMIN_PASSWORD: "Sr/a~%k`xA(}q5D<7f"
+      CORS_ENABLED: "true"
+      CORS_ORIGIN: "http://localhost"
+      CORS_METHODS: "GET,POST,PUT,PATCH,DELETE,OPTIONS"
+      CORS_ALLOWED_HEADERS: "Content-Type,Authorization"
+      CORS_CREDENTIALS: "true"
+    restart: unless-stopped
