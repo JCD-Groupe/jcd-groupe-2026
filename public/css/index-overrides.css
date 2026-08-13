@@ -307,7 +307,7 @@
   .footer-link,.footer-copyright,.footer-legal,.footer-legal a,#year{color:#9a9a9a !important;}
   .jcd-mnav__sub{font-size:16px !important;}
 
-  .accent-grad{background-image:linear-gradient(120deg,rgba(46,114,186,1) 0%,rgba(46,114,186,1) 9%,rgba(249,214,5,0.95) 24%,rgba(243,148,29,0.95) 38%,rgba(239,72,88,0.95) 53%,rgba(176,99,172,0.95) 69%,rgba(142,192,65,0.95) 84%,rgba(201,179,156,0.95) 100%) !important;}
+  em{background-image:linear-gradient(120deg,rgba(46,114,186,1) 0%,rgba(46,114,186,1) 9%,rgba(249,214,5,0.95) 24%,rgba(243,148,29,0.95) 38%,rgba(239,72,88,0.95) 53%,rgba(176,99,172,0.95) 69%,rgba(142,192,65,0.95) 84%,rgba(201,179,156,0.95) 100%) !important;}
 }
 
 /* ==================================================================

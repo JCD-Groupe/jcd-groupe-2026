@@ -703,7 +703,7 @@
     font-weight: 600; max-width: 18ch;
     color: var(--text-1);
   }
-  .hero-title .accent-grad {
+  .hero-title em {
     background: linear-gradient(120deg,
       rgba(240, 65, 80, 0.95) 0%,
       rgba(229, 29, 41, 0.92) 50%,
@@ -776,7 +776,7 @@
     letter-spacing: 0.18em;
     flex-wrap: wrap; justify-content: center;
   }
-  .cs-progress .accent { color: var(--accent-hi); }
+  .cs-progress em { color: var(--accent-hi); }
   .cs-actions {
     display: inline-flex; gap: 12px; flex-wrap: wrap;
     justify-content: center; margin-top: 4px;
@@ -1163,7 +1163,7 @@
   .contact-hero { min-height: auto; padding: clamp(116px, 13vh, 150px) 0 8px; }
   .contact-hero::before { height: 460px; }
   /* Sur la page contact, le mot accentué prend le dégradé 7 couleurs */
-  .contact-hero .accent-grad {
+  .contact-hero em {
     background: var(--rainbow);
     -webkit-background-clip: text; background-clip: text; color: transparent;
   }

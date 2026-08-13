@@ -67,7 +67,7 @@
     content: ""; width: 5px; height: 5px; border-radius: 50%;
     background: var(--accent-hi); flex: 0 0 auto;
   }
-  .nf-code .accent { color: var(--accent-hi); }
+  .nf-code em { color: var(--accent-hi); }
   .nf h1 {
     font-size: clamp(30px, 5.2vw, 46px); font-weight: 600;
     letter-spacing: -0.03em; line-height: 1.12; margin-bottom: 14px;

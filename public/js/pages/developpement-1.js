@@ -76,7 +76,8 @@
 
     document.getElementById('rp-title').innerHTML = card.querySelector('.real-title').innerHTML;
     document.getElementById('rp-eyebrow').textContent = card.querySelector('.real-tag').textContent.trim();
-    document.getElementById('rp-bar-title').innerHTML = 'projet · <span class="accent">' + slug + '</span>';
+    document.getElementById("rp-bar-title").innerHTML =
+      "projet · <em>" + slug + "</em>";
     document.getElementById('rp-sub').textContent = d.sub;
     document.getElementById('rp-desc').textContent = d.body;
 

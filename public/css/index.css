@@ -743,7 +743,7 @@
     font-weight: 600;
     max-width: 18ch;
   }
-  .hero h1 .accent-grad {
+  .hero h1 em {
     /* Gradient multi-couleurs JCD appliqué sur le texte
        (bleu renforcé sur le P). */
     background: linear-gradient(120deg,
@@ -1094,7 +1094,7 @@
     font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase;
     color: var(--text-tertiary); margin-bottom: 26px;
   }
-  .clients-eyebrow .accent { color: var(--accent-text); }
+  .clients-eyebrow em { color: var(--accent-text); }
 
   .clients-marquee {
     position: relative;
