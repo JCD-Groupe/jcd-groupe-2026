@@ -29,7 +29,7 @@ services:
       ADMIN_EMAIL: "cyprien.cotinaut@jcd-groupe.fr"
       ADMIN_PASSWORD: "Sr/a~%k`xA(}q5D<7f"
       CORS_ENABLED: "true"
-      CORS_ORIGIN: "http://localhost"
+      CORS_ORIGIN: "${PUBLIC_FRONT_URL}"
       CORS_METHODS: "GET,POST,PUT,PATCH,DELETE,OPTIONS"
       CORS_ALLOWED_HEADERS: "Content-Type,Authorization"
       CORS_CREDENTIALS: "true"
