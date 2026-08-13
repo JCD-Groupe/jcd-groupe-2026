@@ -391,3 +391,6 @@ body.jcd-mnav-open .jcd-mnav__reveal{opacity:1;transform:none;}
    du pôle (chaque page définit --accent-hi dans son propre CSS).
    ================================================================== */
 .manifesto-rich i{ font-style:normal; font-weight:500; color:var(--accent-hi,var(--accent,#f4f4f4)); }
+em {
+   font-style:normal;
+}
