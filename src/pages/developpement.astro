@@ -1,12 +1,10 @@
 ---
 import { directus } from "../lib/directus";
-import { readSingleton } from "@directus/sdk";
+import { readItems, readSingleton } from "@directus/sdk";
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
 
-let developpement;
-
-developpement = await directus.request(
+let developpement = await directus.request(
   readSingleton("JCD_Developpement", {
     fields: [
       "*",
@@ -19,8 +17,34 @@ developpement = await directus.request(
     ],
   }),
 );
+
+let tagsRealisations = await directus.request(
+  readItems("tags_realisations_developpement"),
+);
+
+let realisations = await directus.request(
+  readItems("realisations_developpement", {
+    fields: [
+      "*",
+      {
+        tags: [
+          {
+            tags_realisations_developpement_slug: ["*"],
+          },
+        ],
+        images: [
+          {
+            directus_files_id: ["*"],
+          },
+        ],
+        technologies: [{ technologies_realisations_developpement_id: ["*"] }],
+      },
+    ],
+  }),
+);
 ---
 
+<!-- {JSON.stringify(realisations)} -->
 <html lang="fr">
   <head>
     <meta charset="UTF-8" />
@@ -60,7 +84,7 @@ developpement = await directus.request(
     <script is:inline src="/js/shared/mrefonte-shim.js" id="jcd-mrefonte-shim"
     ></script>
   </head>
-  <body>
+  <body data-directus-url={import.meta.env.PUBLIC_DIRECTUS_URL}>
     <a class="jcd-skip" href="#contenu">Aller au contenu</a>
 
     <!-- ====================================================================
@@ -850,42 +874,20 @@ developpement = await directus.request(
               aria-pressed="true"
               >Tout <span class="real-filter-count">12</span></button
             >
-            <button
-              type="button"
-              class="real-filter"
-              data-filter="app"
-              aria-pressed="false"
-              >Application sur-mesure <span class="real-filter-count">6</span
-              ></button
-            >
-            <button
-              type="button"
-              class="real-filter"
-              data-filter="vitrine"
-              aria-pressed="false"
-              >Vitrine <span class="real-filter-count">6</span></button
-            >
-            <button
-              type="button"
-              class="real-filter"
-              data-filter="ecommerce"
-              aria-pressed="false"
-              >E-commerce <span class="real-filter-count">2</span></button
-            >
-            <button
-              type="button"
-              class="real-filter"
-              data-filter="reservation"
-              aria-pressed="false"
-              >Réservation <span class="real-filter-count">2</span></button
-            >
-            <button
-              type="button"
-              class="real-filter"
-              data-filter="mobile"
-              aria-pressed="false"
-              >Mobile <span class="real-filter-count">1</span></button
-            >
+            {
+              tagsRealisations.map((tag) => {
+                return (
+                  <button
+                    type="button"
+                    class="real-filter"
+                    data-filter={tag.slug}
+                    aria-pressed="false"
+                  >
+                    {tag.nom} <span class="real-filter-count">6</span>
+                  </button>
+                );
+              })
+            }
           </div>
 
           <div
@@ -895,601 +897,80 @@ developpement = await directus.request(
             role="region"
             aria-label="Carrousel des réalisations (défilement horizontal)"
           >
-            <!-- 1. Self Béton -->
-            <article class="real-card" data-cat="app" data-project="selfbeton">
-              <a
-                class="real-card-link"
-                href="https://portfolio.jcddev.fr/realisations/"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="Self Béton, application sur-mesure. Voir sur le portfolio JCD Dev."
-              >
-                <div class="real-media">
-                  <span class="real-tag">Application sur-mesure</span>
-                  <img
-                    class="real-cover"
-                    src="/realisations/logo-selfbeton.png"
-                    alt="Self Béton"
-                    loading="lazy"
-                    decoding="async"
-                  />
-                </div>
-                <div class="real-body">
-                  <h3 class="real-title">Self Béton</h3>
-                  <p class="real-desc">
-                    Bornes tactiles de commande, paiement CB/NFC et distribution
-                    par QR code sécurisé.
-                  </p>
-                  <ul class="real-tech" aria-label="Technologies">
-                    <li>Laravel</li><li>PHP</li><li>Angular</li><li>
-                      TypeScript
-                    </li><li class="real-tech-more">+3</li>
-                  </ul>
-                  <div class="real-foot">
-                    <span class="real-foot-label">Voir le projet</span>
-                    <span class="real-arrow" aria-hidden="true"
-                      ><svg
-                        viewBox="0 0 16 16"
-                        fill="none"
-                        stroke="currentColor"
-                        stroke-width="1.6"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        ><path d="M3 8h10M9 4l4 4-4 4"></path></svg
-                      ></span
-                    >
-                  </div>
-                </div>
-              </a>
-            </article>
+            {
+              realisations.map((real) => {
+                const tags = real.tags.map(
+                  (t: any) => t.tags_realisations_developpement_slug,
+                );
+                const tagNames = tags.map((t: any) => t.nom).join(" · ");
+                const tagSlugs = tags.map((t: any) => t.slug).join(" ");
 
-            <!-- 2. Le Lavoir d'Adèle -->
-            <article
-              class="real-card"
-              data-cat="reservation vitrine"
-              data-project="lavoir-adele"
-            >
-              <a
-                class="real-card-link"
-                href="https://portfolio.jcddev.fr/realisations/"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="Le Lavoir d'Adèle, réservation & vitrine. Voir sur le portfolio JCD Dev."
-              >
-                <div class="real-media">
-                  <span class="real-tag">Réservation</span>
-                  <img
-                    class="real-cover"
-                    src="/realisations/logo-lavoir-adele.png"
-                    alt="Le Lavoir d'Adèle"
-                    loading="lazy"
-                    decoding="async"
-                  />
-                </div>
-                <div class="real-body">
-                  <h3 class="real-title">Le Lavoir d'Adèle</h3>
-                  <p class="real-desc">
-                    Réservation en ligne du logement et collecte automatisée des
-                    avis post-séjour.
-                  </p>
-                  <ul class="real-tech" aria-label="Technologies">
-                    <li>WooCommerce</li>
-                  </ul>
-                  <div class="real-foot">
-                    <span class="real-foot-label">Voir le projet</span>
-                    <span class="real-arrow" aria-hidden="true"
-                      ><svg
-                        viewBox="0 0 16 16"
-                        fill="none"
-                        stroke="currentColor"
-                        stroke-width="1.6"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        ><path d="M3 8h10M9 4l4 4-4 4"></path></svg
-                      ></span
-                    >
-                  </div>
-                </div>
-              </a>
-            </article>
+                const tech = real.technologies.map(
+                  (t: any) => t.technologies_realisations_developpement_id,
+                );
+                const techNames = tech.map((t: any) => t.nom).join(", ");
 
-            <!-- 3. LiteYear • Still Provide -->
-            <article
-              class="real-card"
-              data-cat="mobile"
-              data-project="stillprovide"
-            >
-              <a
-                class="real-card-link"
-                href="https://portfolio.jcddev.fr/realisations/"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="LiteYear Still Provide, application Android & iOS. Voir sur le portfolio JCD Dev."
-              >
-                <div class="real-media">
-                  <span class="real-tag">Mobile · Android &amp; iOS</span>
-                  <img
-                    class="real-cover"
-                    src="/realisations/logo-stillprovide.png"
-                    alt="LiteYear Still Provide"
-                    loading="lazy"
-                    decoding="async"
-                  />
-                </div>
-                <div class="real-body">
-                  <h3 class="real-title">
-                    LiteYear <em>•</em> Still Provide
-                  </h3>
-                  <p class="real-desc">
-                    App mobile de prise et suivi de rendez-vous, agenda et
-                    édition assistée de contrats.
-                  </p>
-                  <ul class="real-tech" aria-label="Technologies">
-                    <li>Flutter</li><li>Android</li><li>iOS</li><li>
-                      API REST
-                    </li>
-                  </ul>
-                  <div class="real-foot">
-                    <span class="real-foot-label">Voir le projet</span>
-                    <span class="real-arrow" aria-hidden="true"
-                      ><svg
-                        viewBox="0 0 16 16"
-                        fill="none"
-                        stroke="currentColor"
-                        stroke-width="1.6"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        ><path d="M3 8h10M9 4l4 4-4 4"></path></svg
-                      ></span
-                    >
-                  </div>
-                </div>
-              </a>
-            </article>
+                const imageIds = real.images
+                  .map((img: any) => img.directus_files_id.id)
+                  .join(",");
 
-            <!-- 4. Cormontaigne -->
-            <article
-              class="real-card"
-              data-cat="vitrine"
-              data-project="cormontaigne"
-            >
-              <a
-                class="real-card-link"
-                href="https://portfolio.jcddev.fr/realisations/"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="Cormontaigne, vitrine. Voir sur le portfolio JCD Dev."
-              >
-                <div class="real-media">
-                  <span class="real-tag">Vitrine</span>
-                  <img
-                    class="real-cover"
-                    src="/realisations/logo-cormontaigne.png"
-                    alt="Cormontaigne"
-                    loading="lazy"
-                    decoding="async"
-                  />
-                </div>
-                <div class="real-body">
-                  <h3 class="real-title">Cormontaigne</h3>
-                  <p class="real-desc">
-                    Site vitrine avec inscription aux webinaires et prise de
-                    rendez-vous téléphonique.
-                  </p>
-                  <ul class="real-tech" aria-label="Technologies">
-                    <li>WordPress</li>
-                  </ul>
-                  <div class="real-foot">
-                    <span class="real-foot-label">Voir le projet</span>
-                    <span class="real-arrow" aria-hidden="true"
-                      ><svg
-                        viewBox="0 0 16 16"
-                        fill="none"
-                        stroke="currentColor"
-                        stroke-width="1.6"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        ><path d="M3 8h10M9 4l4 4-4 4"></path></svg
-                      ></span
+                return (
+                  <article
+                    class="real-card"
+                    data-cat={tagSlugs}
+                    data-project={real.id}
+                    data-sub={real.sous_titre}
+                    data-desc={real.description}
+                    data-tech={techNames}
+                    data-imgs-count={real.images.length}
+                    data-imgs-ids={imageIds}
+                  >
+                    <span
+                      class="real-card-link"
+                      aria-label={`${real.titre}, ${tagNames}. Voir le projet.`}
                     >
-                  </div>
-                </div>
-              </a>
-            </article>
-
-            <!-- 5. Arkema -->
-            <article class="real-card" data-cat="app" data-project="arkema">
-              <a
-                class="real-card-link"
-                href="https://portfolio.jcddev.fr/realisations/"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="Arkema, application sur-mesure. Voir sur le portfolio JCD Dev."
-              >
-                <div class="real-media">
-                  <span class="real-tag">Application sur-mesure</span>
-                  <img
-                    class="real-cover"
-                    src="/realisations/logo-arkema.png"
-                    alt="Arkema"
-                    loading="lazy"
-                    decoding="async"
-                  />
-                </div>
-                <div class="real-body">
-                  <h3 class="real-title">Arkema</h3>
-                  <p class="real-desc">
-                    Suivi de stock de poudre empilée en silo et calculateur
-                    complexe de mélanges.
-                  </p>
-                  <ul class="real-tech" aria-label="Technologies">
-                    <li>Symfony</li><li>PHP</li>
-                  </ul>
-                  <div class="real-foot">
-                    <span class="real-foot-label">Voir le projet</span>
-                    <span class="real-arrow" aria-hidden="true"
-                      ><svg
-                        viewBox="0 0 16 16"
-                        fill="none"
-                        stroke="currentColor"
-                        stroke-width="1.6"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        ><path d="M3 8h10M9 4l4 4-4 4"></path></svg
-                      ></span
-                    >
-                  </div>
-                </div>
-              </a>
-            </article>
-
-            <!-- 6. Thimo -->
-            <article
-              class="real-card"
-              data-cat="ecommerce vitrine"
-              data-project="thimo"
-            >
-              <a
-                class="real-card-link"
-                href="https://portfolio.jcddev.fr/realisations/"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="Thimo, e-commerce & vitrine. Voir sur le portfolio JCD Dev."
-              >
-                <div class="real-media">
-                  <span class="real-tag">E-commerce</span>
-                  <img
-                    class="real-cover"
-                    src="/realisations/logo-thimo.png"
-                    alt="Thimo"
-                    loading="lazy"
-                    decoding="async"
-                  />
-                </div>
-                <div class="real-body">
-                  <h3 class="real-title">Thimo</h3>
-                  <p class="real-desc">
-                    E-commerce de décoration avec génération d'étiquettes de
-                    livraison et vitrine d'architecture d'intérieur.
-                  </p>
-                  <ul class="real-tech" aria-label="Technologies">
-                    <li>WooCommerce</li>
-                  </ul>
-                  <div class="real-foot">
-                    <span class="real-foot-label">Voir le projet</span>
-                    <span class="real-arrow" aria-hidden="true"
-                      ><svg
-                        viewBox="0 0 16 16"
-                        fill="none"
-                        stroke="currentColor"
-                        stroke-width="1.6"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        ><path d="M3 8h10M9 4l4 4-4 4"></path></svg
-                      ></span
-                    >
-                  </div>
-                </div>
-              </a>
-            </article>
-
-            <!-- 7. Viessmann • Virenov -->
-            <article class="real-card" data-cat="app" data-project="virenov">
-              <a
-                class="real-card-link"
-                href="https://portfolio.jcddev.fr/realisations/"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="Viessmann Virenov, application sur-mesure. Voir sur le portfolio JCD Dev."
-              >
-                <div class="real-media">
-                  <span class="real-tag">Application sur-mesure</span>
-                  <img
-                    class="real-cover"
-                    src="/realisations/logo-virenov.png"
-                    alt="Viessmann Virenov"
-                    loading="lazy"
-                    decoding="async"
-                  />
-                </div>
-                <div class="real-body">
-                  <h3 class="real-title">
-                    Viessmann <em>•</em> Virenov
-                  </h3>
-                  <p class="real-desc">
-                    Plateforme installateurs : suivi de dossiers, démarches
-                    CEE/PV, calculettes d'aides et comparateurs.
-                  </p>
-                  <ul class="real-tech" aria-label="Technologies">
-                    <li>Laravel</li><li>PHP</li><li>Angular</li><li>
-                      API REST
-                    </li><li class="real-tech-more">+1</li>
-                  </ul>
-                  <div class="real-foot">
-                    <span class="real-foot-label">Voir le projet</span>
-                    <span class="real-arrow" aria-hidden="true"
-                      ><svg
-                        viewBox="0 0 16 16"
-                        fill="none"
-                        stroke="currentColor"
-                        stroke-width="1.6"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        ><path d="M3 8h10M9 4l4 4-4 4"></path></svg
-                      ></span
-                    >
-                  </div>
-                </div>
-              </a>
-            </article>
-
-            <!-- 8. Univac -->
-            <article
-              class="real-card"
-              data-cat="reservation vitrine"
-              data-project="univac"
-            >
-              <a
-                class="real-card-link"
-                href="https://portfolio.jcddev.fr/realisations/"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="Univac, réservation & vitrine. Voir sur le portfolio JCD Dev."
-              >
-                <div class="real-media">
-                  <span class="real-tag">Réservation</span>
-                  <img
-                    class="real-cover"
-                    src="/realisations/logo-univac.png"
-                    alt="Univac"
-                    loading="lazy"
-                    decoding="async"
-                  />
-                </div>
-                <div class="real-body">
-                  <h3 class="real-title">Univac</h3>
-                  <p class="real-desc">
-                    Réservation de chambres d'hôtel en ligne et présentation des
-                    établissements.
-                  </p>
-                  <ul class="real-tech" aria-label="Technologies">
-                    <li>WooCommerce</li>
-                  </ul>
-                  <div class="real-foot">
-                    <span class="real-foot-label">Voir le projet</span>
-                    <span class="real-arrow" aria-hidden="true"
-                      ><svg
-                        viewBox="0 0 16 16"
-                        fill="none"
-                        stroke="currentColor"
-                        stroke-width="1.6"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        ><path d="M3 8h10M9 4l4 4-4 4"></path></svg
-                      ></span
-                    >
-                  </div>
-                </div>
-              </a>
-            </article>
-
-            <!-- 9. Viessmann • Solution de prescriptions -->
-            <article
-              class="real-card"
-              data-cat="app vitrine"
-              data-project="viessmann"
-            >
-              <a
-                class="real-card-link"
-                href="https://portfolio.jcddev.fr/realisations/"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="Viessmann Solution de prescriptions, application sur-mesure. Voir sur le portfolio JCD Dev."
-              >
-                <div class="real-media">
-                  <span class="real-tag">Application sur-mesure</span>
-                  <img
-                    class="real-cover"
-                    src="/realisations/logo-viessmann.png"
-                    alt="Viessmann Solution de prescriptions"
-                    loading="lazy"
-                    decoding="async"
-                  />
-                </div>
-                <div class="real-body">
-                  <h3 class="real-title">
-                    Viessmann <em>•</em> Prescriptions
-                  </h3>
-                  <p class="real-desc">
-                    Catalogue produit documenté et algorithme de calcul de la
-                    production d'eau chaude sanitaire.
-                  </p>
-                  <ul class="real-tech" aria-label="Technologies">
-                    <li>WordPress</li><li>PHP</li>
-                  </ul>
-                  <div class="real-foot">
-                    <span class="real-foot-label">Voir le projet</span>
-                    <span class="real-arrow" aria-hidden="true"
-                      ><svg
-                        viewBox="0 0 16 16"
-                        fill="none"
-                        stroke="currentColor"
-                        stroke-width="1.6"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        ><path d="M3 8h10M9 4l4 4-4 4"></path></svg
-                      ></span
-                    >
-                  </div>
-                </div>
-              </a>
-            </article>
-
-            <!-- 10. Synapse Santé -->
-            <article class="real-card" data-cat="app" data-project="synapse">
-              <a
-                class="real-card-link"
-                href="https://portfolio.jcddev.fr/realisations/"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="Synapse Santé, application sur-mesure. Voir sur le portfolio JCD Dev."
-              >
-                <div class="real-media">
-                  <span class="real-tag">Application sur-mesure</span>
-                  <img
-                    class="real-cover"
-                    src="/realisations/logo-synapse.png"
-                    alt="Synapse Santé"
-                    loading="lazy"
-                    decoding="async"
-                  />
-                </div>
-                <div class="real-body">
-                  <h3 class="real-title">Synapse Santé</h3>
-                  <p class="real-desc">
-                    Extranet médical : centralisation des données patient,
-                    indicateurs visuels et signature de documents.
-                  </p>
-                  <ul class="real-tech" aria-label="Technologies">
-                    <li>Laravel</li><li>PHP</li><li>Angular</li><li>
-                      TypeScript
-                    </li><li class="real-tech-more">+2</li>
-                  </ul>
-                  <div class="real-foot">
-                    <span class="real-foot-label">Voir le projet</span>
-                    <span class="real-arrow" aria-hidden="true"
-                      ><svg
-                        viewBox="0 0 16 16"
-                        fill="none"
-                        stroke="currentColor"
-                        stroke-width="1.6"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        ><path d="M3 8h10M9 4l4 4-4 4"></path></svg
-                      ></span
-                    >
-                  </div>
-                </div>
-              </a>
-            </article>
-
-            <!-- 11. Tarte aux sucres -->
-            <article
-              class="real-card"
-              data-cat="ecommerce vitrine"
-              data-project="tarte-sucre"
-            >
-              <a
-                class="real-card-link"
-                href="https://portfolio.jcddev.fr/realisations/"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="Tarte aux sucres, e-commerce & vitrine. Voir sur le portfolio JCD Dev."
-              >
-                <div class="real-media">
-                  <span class="real-tag">E-commerce</span>
-                  <img
-                    class="real-cover"
-                    src="/realisations/logo-tarte-sucre.png"
-                    alt="Tarte aux sucres"
-                    loading="lazy"
-                    decoding="async"
-                  />
-                </div>
-                <div class="real-body">
-                  <h3 class="real-title">Tarte aux sucres</h3>
-                  <p class="real-desc">
-                    Click &amp; collect sur le catalogue et mise en avant de
-                    l'ensemble des produits en ligne.
-                  </p>
-                  <ul class="real-tech" aria-label="Technologies">
-                    <li>WooCommerce</li>
-                  </ul>
-                  <div class="real-foot">
-                    <span class="real-foot-label">Voir le projet</span>
-                    <span class="real-arrow" aria-hidden="true"
-                      ><svg
-                        viewBox="0 0 16 16"
-                        fill="none"
-                        stroke="currentColor"
-                        stroke-width="1.6"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        ><path d="M3 8h10M9 4l4 4-4 4"></path></svg
-                      ></span
-                    >
-                  </div>
-                </div>
-              </a>
-            </article>
-
-            <!-- 12. LiteYear • OAV -->
-            <article class="real-card" data-cat="app" data-project="liteyear">
-              <a
-                class="real-card-link"
-                href="https://portfolio.jcddev.fr/realisations/"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="LiteYear OAV, application sur-mesure. Voir sur le portfolio JCD Dev."
-              >
-                <div class="real-media">
-                  <span class="real-tag">Application sur-mesure</span>
-                  <img
-                    class="real-cover"
-                    src="/realisations/logo-liteyear.png"
-                    alt="LiteYear OAV"
-                    loading="lazy"
-                    decoding="async"
-                  />
-                </div>
-                <div class="real-body">
-                  <h3 class="real-title">
-                    LiteYear <em>•</em> OAV
-                  </h3>
-                  <p class="real-desc">
-                    Édition de contrats synchronisés avec les fournisseurs et
-                    suivi des performances commerciales.
-                  </p>
-                  <ul class="real-tech" aria-label="Technologies">
-                    <li>Laravel</li><li>PHP</li><li>API REST</li>
-                  </ul>
-                  <div class="real-foot">
-                    <span class="real-foot-label">Voir le projet</span>
-                    <span class="real-arrow" aria-hidden="true"
-                      ><svg
-                        viewBox="0 0 16 16"
-                        fill="none"
-                        stroke="currentColor"
-                        stroke-width="1.6"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        ><path d="M3 8h10M9 4l4 4-4 4"></path></svg
-                      ></span
-                    >
-                  </div>
-                </div>
-              </a>
-            </article>
+                      <div class="real-media">
+                        <span class="real-tag">{tagNames}</span>
+                        <img
+                          class="real-cover"
+                          src={`${import.meta.env.PUBLIC_DIRECTUS_URL}/assets/${real.image_titre}`}
+                          alt={real.titre}
+                          loading="lazy"
+                          decoding="async"
+                        />
+                      </div>
+                      <div class="real-body">
+                        <h3 class="real-title">{real.titre}</h3>
+                        <p class="real-desc">{real.sous_titre}</p>
+                        <ul class="real-tech" aria-label="Technologies">
+                          {tech.slice(0, 4).map((tech: any) => (
+                            <li>{tech.nom}</li>
+                          ))}
+                          {tech.length > 4 && (
+                            <li class="real-tech-more">+{tech.length - 4}</li>
+                          )}
+                        </ul>
+                        <div class="real-foot">
+                          <span class="real-foot-label">Voir le projet</span>
+                          <span class="real-arrow" aria-hidden="true">
+                            <svg
+                              viewBox="0 0 16 16"
+                              fill="none"
+                              stroke="currentColor"
+                              stroke-width="1.6"
+                              stroke-linecap="round"
+                              stroke-linejoin="round"
+                            >
+                              <path d="M3 8h10M9 4l4 4-4 4" />
+                            </svg>
+                          </span>
+                        </div>
+                      </div>
+                    </span>
+                  </article>
+                );
+              })
+            }
           </div>
 
           <div class="real-ctrl">
