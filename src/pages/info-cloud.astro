@@ -17,7 +17,10 @@ import Footer from "../components/Footer.astro";
       name="description"
       content="JCD Groupe · Pôle Informatique. Partenaire Tier 1 Microsoft : déploiement et optimisation de Microsoft 365, Azure, téléphonie Teams et gouvernance du cloud. 11 ans d'expertise, 200 000+ utilisateurs suivis."
     />
-    <link rel="canonical" href="https://jcd-groupe.fr/info-cloud" />
+    <link
+      rel="canonical"
+      href={`${import.meta.env.PUBLIC_DIRECTUS_URL}/info-cloud`}
+    />
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="JCD Groupe" />
     <meta property="og:locale" content="fr_FR" />
@@ -29,7 +32,10 @@ import Footer from "../components/Footer.astro";
       property="og:description"
       content="JCD Groupe · Pôle Informatique. Partenaire Tier 1 Microsoft : déploiement et optimisation de Microsoft 365, Azure, téléphonie Teams et gouvernance du cloud. 11 ans d'expertise, 200 000+ utilisateurs suivis."
     />
-    <meta property="og:url" content="https://jcd-groupe.fr/info-cloud" />
+    <meta
+      property="og:url"
+      content={`${import.meta.env.PUBLIC_DIRECTUS_URL}/info-cloud`}
+    />
     <meta name="twitter:card" content="summary" />
     <title>Cloud Microsoft 365 &amp; Azure · Informatique · JCD Groupe</title>
 

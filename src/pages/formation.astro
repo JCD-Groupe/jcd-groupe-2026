@@ -17,7 +17,10 @@ import Footer from "../components/Footer.astro";
       name="description"
       content="JCD Groupe · Pôle Formation. Formation professionnelle continue sur-mesure, coaching managérial, conseil RH, events d'entreprise. Certifié Qualiopi, centre TOSA. 21 ans d'expertise en Grand Est."
     />
-    <link rel="canonical" href="https://jcd-groupe.fr/formation" />
+    <link
+      rel="canonical"
+      href={`${import.meta.env.PUBLIC_DIRECTUS_URL}/formation`}
+    />
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="JCD Groupe" />
     <meta property="og:locale" content="fr_FR" />
@@ -29,7 +32,10 @@ import Footer from "../components/Footer.astro";
       property="og:description"
       content="JCD Groupe · Pôle Formation. Formation professionnelle continue sur-mesure, coaching managérial, conseil RH, events d'entreprise. Certifié Qualiopi, centre TOSA. 21 ans d'expertise en Grand Est."
     />
-    <meta property="og:url" content="https://jcd-groupe.fr/formation" />
+    <meta
+      property="og:url"
+      content={`${import.meta.env.PUBLIC_DIRECTUS_URL}/formation`}
+    />
     <meta name="twitter:card" content="summary" />
     <title>
       Formation · Développement des compétences sur-mesure · JCD Groupe

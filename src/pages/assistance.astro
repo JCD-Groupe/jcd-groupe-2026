@@ -17,7 +17,10 @@ import Footer from "../components/Footer.astro";
       name="description"
       content="Assistance JCD Groupe. Prise en main à distance par nos techniciens : LogMeIn Rescue, Assist ou TeamViewer. Service clients au 03 87 18 49 20, du lundi au vendredi de 8h30 à 18h."
     />
-    <link rel="canonical" href="https://jcd-groupe.fr/assistance" />
+    <link
+      rel="canonical"
+      href={`${import.meta.env.PUBLIC_DIRECTUS_URL}/assistance`}
+    />
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="JCD Groupe" />
     <meta property="og:locale" content="fr_FR" />
@@ -29,7 +32,10 @@ import Footer from "../components/Footer.astro";
       property="og:description"
       content="Un technicien JCD vous guide en direct : ouvrez l'outil de prise en main à distance qu'il vous indique — LogMeIn Rescue, Assist ou TeamViewer."
     />
-    <meta property="og:url" content="https://jcd-groupe.fr/assistance" />
+    <meta
+      property="og:url"
+      content={`${import.meta.env.PUBLIC_DIRECTUS_URL}/assistance`}
+    />
     <meta name="twitter:card" content="summary" />
     <title>Assistance · Prise en main à distance · JCD Groupe</title>
 

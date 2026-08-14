@@ -17,7 +17,10 @@ import Footer from "../components/Footer.astro";
       name="description"
       content="JCD Groupe · Pôle Agencement. Space planning, mobilier de bureau, conception 3D et installation clé en main d'espaces de travail sur-mesure en Grand Est, depuis 1996."
     />
-    <link rel="canonical" href="https://jcd-groupe.fr/agencement" />
+    <link
+      rel="canonical"
+      href={`${import.meta.env.PUBLIC_DIRECTUS_URL}/agencement`}
+    />
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="JCD Groupe" />
     <meta property="og:locale" content="fr_FR" />
@@ -29,7 +32,10 @@ import Footer from "../components/Footer.astro";
       property="og:description"
       content="JCD Groupe · Pôle Agencement. Space planning, mobilier de bureau, conception 3D et installation clé en main d'espaces de travail sur-mesure en Grand Est, depuis 1996."
     />
-    <meta property="og:url" content="https://jcd-groupe.fr/agencement" />
+    <meta
+      property="og:url"
+      content={`${import.meta.env.PUBLIC_DIRECTUS_URL}/agencement`}
+    />
     <meta name="twitter:card" content="summary" />
     <title>Agencement · Espaces de travail sur-mesure · JCD Groupe</title>
 

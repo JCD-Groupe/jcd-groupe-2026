@@ -17,7 +17,10 @@ import Footer from "../components/Footer.astro";
       name="description"
       content="JCD Groupe · Pôle Informatique. Solutions collaboratives & audiovisuelles : messagerie, visioconférence et salles équipées."
     />
-    <link rel="canonical" href="https://jcd-groupe.fr/info-collaboratif" />
+    <link
+      rel="canonical"
+      href={`${import.meta.env.PUBLIC_DIRECTUS_URL}/info-collaboratif`}
+    />
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="JCD Groupe" />
     <meta property="og:locale" content="fr_FR" />
@@ -29,7 +32,10 @@ import Footer from "../components/Footer.astro";
       property="og:description"
       content="JCD Groupe · Pôle Informatique. Solutions collaboratives & audiovisuelles : messagerie, visioconférence et salles équipées."
     />
-    <meta property="og:url" content="https://jcd-groupe.fr/info-collaboratif" />
+    <meta
+      property="og:url"
+      content={`${import.meta.env.PUBLIC_DIRECTUS_URL}/info-collaboratif`}
+    />
     <meta name="twitter:card" content="summary" />
     <title>
       Solutions collaboratives &amp; audiovisuelles · Informatique · JCD Groupe

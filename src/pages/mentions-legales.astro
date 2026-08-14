@@ -17,7 +17,10 @@ import Footer from "../components/Footer.astro";
       name="description"
       content="Mentions légales du site jcd-groupe.fr : éditeurs (JCD Communication, JCD & Co), responsable de publication, hébergeur, propriété intellectuelle, gestion des données personnelles, cookies et droit applicable."
     />
-    <link rel="canonical" href="https://jcd-groupe.fr/mentions-legales" />
+    <link
+      rel="canonical"
+      href={`${import.meta.env.PUBLIC_DIRECTUS_URL}/mentions-legales`}
+    />
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="JCD Groupe" />
     <meta property="og:locale" content="fr_FR" />
@@ -26,7 +29,10 @@ import Footer from "../components/Footer.astro";
       property="og:description"
       content="Mentions légales du site jcd-groupe.fr : éditeurs (JCD Communication, JCD & Co), responsable de publication, hébergeur, propriété intellectuelle, gestion des données personnelles, cookies et droit applicable."
     />
-    <meta property="og:url" content="https://jcd-groupe.fr/mentions-legales" />
+    <meta
+      property="og:url"
+      content={`${import.meta.env.PUBLIC_DIRECTUS_URL}/mentions-legales`}
+    />
     <meta name="twitter:card" content="summary" />
     <title>Mentions légales · JCD Groupe</title>
 

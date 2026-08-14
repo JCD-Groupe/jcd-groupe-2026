@@ -17,7 +17,10 @@ import Footer from "../components/Footer.astro";
       name="description"
       content="JCD Groupe · Pôle Informatique. Parc maîtrisé, supervisé par un interlocuteur dédié."
     />
-    <link rel="canonical" href="https://jcd-groupe.fr/informatique" />
+    <link
+      rel="canonical"
+      href={`${import.meta.env.PUBLIC_DIRECTUS_URL}/informatique`}
+    />
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="JCD Groupe" />
     <meta property="og:locale" content="fr_FR" />
@@ -26,7 +29,10 @@ import Footer from "../components/Footer.astro";
       property="og:description"
       content="JCD Groupe · Pôle Informatique. Parc maîtrisé, supervisé par un interlocuteur dédié."
     />
-    <meta property="og:url" content="https://jcd-groupe.fr/informatique" />
+    <meta
+      property="og:url"
+      content={`${import.meta.env.PUBLIC_DIRECTUS_URL}/informatique`}
+    />
     <meta name="twitter:card" content="summary" />
     <title>Informatique · JCD Groupe</title>
 

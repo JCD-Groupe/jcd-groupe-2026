@@ -19,7 +19,7 @@ import Footer from "../components/Footer.astro";
     />
     <link
       rel="canonical"
-      href="https://jcd-groupe.fr/politique-de-confidentialite"
+      href={`${import.meta.env.PUBLIC_DIRECTUS_URL}/politique-de-confidentialite`}
     />
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="JCD Groupe" />
@@ -34,7 +34,7 @@ import Footer from "../components/Footer.astro";
     />
     <meta
       property="og:url"
-      content="https://jcd-groupe.fr/politique-de-confidentialite"
+      content={`${import.meta.env.PUBLIC_DIRECTUS_URL}/politique-de-confidentialite`}
     />
     <meta name="twitter:card" content="summary" />
     <title>Politique de confidentialité · JCD Groupe</title>

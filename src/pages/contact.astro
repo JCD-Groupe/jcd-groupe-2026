@@ -17,7 +17,10 @@ import Footer from "../components/Footer.astro";
       name="description"
       content="Contactez JCD Groupe en une seule demande. Sélectionnez un ou plusieurs pôles — Informatique, Service, Développement, Print, Télécom, Formation, Agencement — votre besoin est transmis directement aux bonnes équipes à Metz et Nancy."
     />
-    <link rel="canonical" href="https://jcd-groupe.fr/contact" />
+    <link
+      rel="canonical"
+      href={`${import.meta.env.PUBLIC_DIRECTUS_URL}/contact`}
+    />
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="JCD Groupe" />
     <meta property="og:locale" content="fr_FR" />
@@ -29,7 +32,10 @@ import Footer from "../components/Footer.astro";
       property="og:description"
       content="Contactez JCD Groupe en une seule demande. Sélectionnez un ou plusieurs pôles — Informatique, Service, Développement, Print, Télécom, Formation, Agencement — votre besoin est transmis directement aux bonnes équipes à Metz et Nancy."
     />
-    <meta property="og:url" content="https://jcd-groupe.fr/contact" />
+    <meta
+      property="og:url"
+      content={`${import.meta.env.PUBLIC_DIRECTUS_URL}/contact`}
+    />
     <meta name="twitter:card" content="summary" />
     <title>Contact · JCD Groupe — Parlons de votre projet</title>
 
