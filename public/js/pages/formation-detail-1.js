@@ -122,6 +122,16 @@
     });
   })();
 
+  /* ---- Mention TOSA ----
+     Elle ne doit pas apparaitre sur les fiches Graphisme et Bureautique
+     (demande client 2026-08-17) : on retire alors le chip du hero, la
+     section Certification et son entree de sommaire. ---- */
+  var TOSA_EXCLUDED = ['bureautique', 'graphisme-pao'];
+  function applyTosaVisibility(catSlug) {
+    if (TOSA_EXCLUDED.indexOf(catSlug) === -1) return;
+    document.querySelectorAll('[data-tosa]').forEach(function (n) { n.remove(); });
+  }
+
   /* ---- Hydratation depuis le catalogue (?f=<slug>&cat=<slug>) ----
      Provisoire : renseigne titre, catégorie, teinte et liens depuis
      l'index embarqué. Le contenu détaillé (programme, tarifs…) sera
@@ -134,7 +144,9 @@
     var params = new URLSearchParams(window.location.search);
     var f = params.get('f');
     var cat = params.get('cat');
-    if (!f || !index[f]) return;
+    /* Sans parametre exploitable, la fiche reste sur son exemple type
+       « Excel initiation » — donc sur la categorie Bureautique. */
+    if (!f || !index[f]) { applyTosaVisibility(cat || 'bureautique'); return; }
     var entries = index[f];
     var e = null;
     for (var i = 0; i < entries.length; i++) {
@@ -161,6 +173,8 @@
         "href",
         "contact?pole=formation&formation=" + encodeURIComponent(f),
       );
+
+    applyTosaVisibility(e.s);
   })();
 
   /* ---- Navbar dropdown ---- */
