@@ -16,6 +16,13 @@ let developpement = await directus.request(
 );
 
 // Récupération des content svg
+const response = await fetch(
+  `${import.meta.env.PUBLIC_DIRECTUS_URL}/assets/${developpement.icone_cta}`,
+);
+const svgContent = await response.text();
+
+developpement.icone_cta_content = svgContent;
+
 developpement.prestations = await Promise.all(
   developpement.prestations.map(async (prestation: any) => {
     // 1. Utiliser prestation.icone au lieu de developpement.prestations[0].icone
@@ -837,55 +844,7 @@ let realisations = await directus.request(
         <div class="container">
           <div class="cta-frame">
             <div class="cta-inner">
-              <svg
-                class="cta-icon reveal"
-                viewBox="0 0 120 120"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-                aria-hidden="true"
-                focusable="false"
-              >
-                <g
-                  stroke="currentColor"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  fill="none"
-                >
-                  <rect
-                    x="22"
-                    y="30"
-                    width="76"
-                    height="58"
-                    rx="6"
-                    stroke-width="2"></rect>
-                  <path d="M22 44 H98" stroke-width="2" opacity="0.5"></path>
-                  <circle
-                    cx="31"
-                    cy="37"
-                    r="1.6"
-                    fill="currentColor"
-                    stroke="none"></circle>
-                  <circle
-                    cx="38"
-                    cy="37"
-                    r="1.6"
-                    fill="currentColor"
-                    stroke="none"
-                    opacity="0.6"></circle>
-                  <circle
-                    cx="45"
-                    cy="37"
-                    r="1.6"
-                    fill="currentColor"
-                    stroke="none"
-                    opacity="0.4"></circle>
-                  <path d="M34 58 L42 64 L34 70" stroke-width="2.4"></path>
-                  <g class="cta-icon-wave"
-                    ><path d="M50 70 H70" stroke-width="2.4"></path></g
-                  >
-                </g>
-              </svg>
-
+              <span set:html={developpement.icone_cta_content} />
               <div class="cta-body">
                 <h2
                   class="cta-title reveal delay-1"
