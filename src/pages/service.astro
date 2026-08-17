@@ -1,6 +1,49 @@
 ---
+import { directus } from "../lib/directus";
+import { readSingleton } from "@directus/sdk";
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
+
+let global = await directus.request(
+  readSingleton("Global", {
+    fields: ["*"],
+  }),
+);
+
+let service = await directus.request(
+  readSingleton("JCD_Service", {
+    fields: [
+      "*",
+      { prestations: ["*"] },
+      { processus: ["*"] },
+      { logos_confiance: ["*", { directus_files_id: ["*"] }] },
+    ],
+  }),
+);
+
+const fetchSvgContent = async (id: string) => {
+  if (!id) return null;
+  const response = await fetch(
+    `${import.meta.env.PUBLIC_DIRECTUS_URL}/assets/${id}`,
+  );
+  return response.text();
+};
+
+service.icone_cta_content = await fetchSvgContent(service.icone_cta);
+
+service.prestations = await Promise.all(
+  service.prestations.map(async (prestation: any) => ({
+    ...prestation,
+    icone_content: await fetchSvgContent(prestation.icone),
+  })),
+);
+
+service.processus = await Promise.all(
+  service.processus.map(async (processus: any) => ({
+    ...processus,
+    icone_content: await fetchSvgContent(processus.icone),
+  })),
+);
 ---
 
 <html lang="fr">
@@ -13,31 +56,22 @@ import Footer from "../components/Footer.astro";
     <meta name="color-scheme" content="dark" />
     <meta name="theme-color" content="#0a0a0a" />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
-    <meta
-      name="description"
-      content="JCD Groupe · Pôle Service. Services informatiques managés : support helpdesk, infogérance et supervision du SI, sauvegarde, audit et gouvernance. Un interlocuteur unique de confiance en Grand Est."
-    />
+    <meta name="description" content={service.meta_description} />
     <link
       rel="canonical"
       href={`${import.meta.env.PUBLIC_DIRECTUS_URL}/service`}
     />
     <meta property="og:type" content="website" />
-    <meta property="og:site_name" content="JCD Groupe" />
+    <meta property="og:site_name" content={global.nom_societe} />
     <meta property="og:locale" content="fr_FR" />
-    <meta
-      property="og:title"
-      content="Service · Infogérance & support managé du SI · JCD Groupe"
-    />
-    <meta
-      property="og:description"
-      content="JCD Groupe · Pôle Service. Services informatiques managés : support helpdesk, infogérance et supervision du SI, sauvegarde, audit et gouvernance. Un interlocuteur unique de confiance en Grand Est."
-    />
+    <meta property="og:title" content={service.meta_title} />
+    <meta property="og:description" content={service.meta_description} />
     <meta
       property="og:url"
       content={`${import.meta.env.PUBLIC_DIRECTUS_URL}/service`}
     />
     <meta name="twitter:card" content="summary" />
-    <title>Service · Infogérance &amp; support managé du SI · JCD Groupe</title>
+    <title>{global.nom_societe} • {service.nom_pole}</title>
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -88,22 +122,23 @@ import Footer from "../components/Footer.astro";
           <div class="hero-grain" aria-hidden="true"></div>
 
           <div class="container">
-            <h1 id="service-hero-title" class="hero-title reveal delay-1">
-              Un <em>guichet unique</em> pour vous accompagner au quotidien.
-            </h1>
+            <h1
+              id="service-hero-title"
+              class="hero-title reveal delay-1"
+              set:html={service.titre_hero}
+            />
 
-            <p class="hero-sub reveal delay-2">
-              Services informatiques managés : support utilisateurs,
-              exploitation, supervision et pilotage du SI, assurés au quotidien
-              par une équipe dédiée.
-            </p>
+            <p
+              class="hero-sub reveal delay-2"
+              set:html={service.sous_titre_hero}
+            />
 
             <div class="hero-actions reveal delay-3">
               <a
                 href="/contact?pole=service&step=2"
                 class="btn-cta btn-cta--ghost"
               >
-                Faire le point sur mon SI
+                {service.bouton_hero}
                 <span class="btn-cta-arrow"
                   ><svg
                     viewBox="0 0 16 16"
@@ -208,16 +243,12 @@ import Footer from "../components/Footer.astro";
                   class="manifesto-quote manifesto-rich reveal"
                   id="manifesto-title"
                 >
-                  <em>Nous assurons</em> le support, l'exploitation, la sécurisation
-                  et la gouvernance, jour après jour. <span class="q-soft"
-                    >De l'audit à la supervision, votre informatique reste en
-                    conditions opérationnelles.</span
-                  >
+                  <Fragment set:html={service.manifeste} />
                 </blockquote>
                 <aside class="mf-brand reveal delay-2">
                   <img
-                    src="/logo%20service/easi-support-white.png"
-                    alt="EASI Support - la marque support de JCD Groupe"
+                    src={`${import.meta.env.PUBLIC_DIRECTUS_URL}/assets/${service.logo_easy_support}`}
+                    alt={service.logo_marque_alt}
                     width="1100"
                     height="484"
                     decoding="async"
@@ -240,91 +271,47 @@ import Footer from "../components/Footer.astro";
         <div class="container">
           <div class="prest-layout">
             <aside class="prest-aside reveal">
-              <h2 class="prest-aside-title" id="prestations-title">
-                <em>Six savoir-faire</em>, un SI piloté de bout en bout.
-              </h2>
-              <p class="prest-aside-sub">
-                De l'audit à la gouvernance, la gestion opérationnelle de votre
-                SI au quotidien.
-              </p>
+              <h2
+                class="prest-aside-title"
+                id="prestations-title"
+                set:html={service.titre_prestations}
+              />
+              <p
+                class="prest-aside-sub"
+                set:html={service.sous_titre_prestations}
+              />
 
               <div class="prest-aside-partners">
                 <div class="prest-aside-partners-head">
-                  <span class="prest-aside-partners-label">Certifications</span>
+                  <span class="prest-aside-partners-label"
+                    >{service.titre_confiance}</span
+                  >
                   <span class="prest-aside-partners-rule" aria-hidden="true"
                   ></span>
-                  <span class="prest-aside-partners-count">06</span>
+                  <span class="prest-aside-partners-count"
+                    >{service.nombre_confiance}</span
+                  >
                 </div>
                 <div class="prest-aside-partners-grid">
-                  <div class="logo-tile logo-tile--mini" data-brand="itil">
-                    <img
-                      class="logo-tile-img"
-                      loading="lazy"
-                      decoding="async"
-                      src="/logo service/itil.png"
-                      alt="ITIL V4"
-                      decoding="async"
-                    />
-                    <span class="logo-tile-name">ITIL&nbsp;V4</span>
-                  </div>
-                  <div class="logo-tile logo-tile--mini" data-brand="microsoft">
-                    <img
-                      class="logo-tile-img"
-                      loading="lazy"
-                      decoding="async"
-                      src="/logo service/microsoft.png"
-                      alt="Microsoft"
-                      decoding="async"
-                    />
-                    <span class="logo-tile-name">Microsoft</span>
-                  </div>
-                  <div class="logo-tile logo-tile--mini" data-brand="veeam">
-                    <img
-                      class="logo-tile-img"
-                      loading="lazy"
-                      decoding="async"
-                      src="/logo service/veeam.png"
-                      alt="Veeam"
-                      decoding="async"
-                    />
-                    <span class="logo-tile-name">Veeam</span>
-                  </div>
-                  <div class="logo-tile logo-tile--mini" data-brand="vmware">
-                    <img
-                      class="logo-tile-img"
-                      loading="lazy"
-                      decoding="async"
-                      src="/logo service/vmware.png"
-                      alt="VMware"
-                      decoding="async"
-                    />
-                    <span class="logo-tile-name">VMware</span>
-                  </div>
-                  <div class="logo-tile logo-tile--mini" data-brand="eset">
-                    <img
-                      class="logo-tile-img"
-                      loading="lazy"
-                      decoding="async"
-                      src="/logo service/eset.png"
-                      alt="ESET"
-                      decoding="async"
-                    />
-                    <span class="logo-tile-name">ESET</span>
-                  </div>
-                  <div
-                    class="logo-tile logo-tile--mini"
-                    data-brand="microsoft365"
-                  >
-                    <img
-                      class="logo-tile-img"
-                      loading="lazy"
-                      decoding="async"
-                      src="/logo service/microsoft365.webp"
-                      alt="Microsoft 365"
-                      decoding="async"
-                    />
-                    <span class="logo-tile-name">Microsoft&nbsp;365</span>
-                  </div>
+                  {
+                    service.logos_confiance.map((logo: any) => (
+                      <div
+                        class="logo-tile logo-tile--mini"
+                        data-brand={logo.directus_files_id.title || ""}
+                      >
+                        <img
+                          class="logo-tile-img"
+                          loading="lazy"
+                          decoding="async"
+                          src={`${import.meta.env.PUBLIC_DIRECTUS_URL}/assets/${logo.directus_files_id.id}`}
+                          alt={logo.directus_files_id.title || ""}
+                        />
+                        <span class="logo-tile-name">
+                          {logo.directus_files_id.title}
+                        </span>
+                      </div>
+                    ))
+                  }
                 </div>
               </div>
             </aside>
@@ -333,201 +320,30 @@ import Footer from "../components/Footer.astro";
               <article class="prest-item">
                 <div class="prest-item-head">
                   <span class="prest-item-glyph" aria-hidden="true">
-                    <svg
-                      viewBox="0 0 40 40"
-                      fill="none"
-                      stroke="currentColor"
-                      stroke-width="1.2"
-                      stroke-linejoin="round"
-                      stroke-linecap="round"
-                    >
-                      <rect
-                        x="8"
-                        y="9"
-                        width="18"
-                        height="13"
-                        rx="2"
-                        opacity="0.5"></rect>
-                      <circle cx="21.5" cy="22.5" r="6.3"></circle>
-                      <line x1="26.2" y1="27.2" x2="31.5" y2="32.5"></line>
-                      <line
-                        x1="18.6"
-                        y1="22.5"
-                        x2="24.4"
-                        y2="22.5"
-                        opacity="0.55"></line>
-                      <line
-                        x1="21.5"
-                        y1="19.6"
-                        x2="21.5"
-                        y2="25.4"
-                        opacity="0.55"></line>
-                    </svg>
+                    <Fragment set:html={service.prestations[0].icone_content} />
                   </span>
                 </div>
-                <h3 class="prest-item-title">Audit informatique</h3>
+                <h3 class="prest-item-title">{service.prestations[0].titre}</h3>
                 <p class="prest-item-desc">
-                  La 1re étape : comprendre vos enjeux et cartographier votre SI
-                  afin d'être pleinement opérationnel pour vous apporter le
-                  niveau de services attendu.
+                  {service.prestations[0].description}
                 </p>
               </article>
 
-              <article class="prest-item">
-                <div class="prest-item-head">
-                  <span class="prest-item-glyph" aria-hidden="true">
-                    <svg
-                      viewBox="0 0 40 40"
-                      fill="none"
-                      stroke="currentColor"
-                      stroke-width="1.2"
-                      stroke-linejoin="round"
-                      stroke-linecap="round"
-                    >
-                      <rect x="7" y="9" width="26" height="17" rx="2"></rect>
-                      <path d="M11 18h3l2-4 3 8 2.5-5 1.7 3H29" opacity="0.65"
-                      ></path>
-                      <line x1="16" y1="31" x2="24" y2="31"></line>
-                      <line x1="20" y1="26" x2="20" y2="31" opacity="0.5"
-                      ></line>
-                    </svg>
-                  </span>
-                </div>
-                <h3 class="prest-item-title">Infogérance du SI</h3>
-                <p class="prest-item-desc">
-                  Maintien en conditions opérationnelles de votre SI :
-                  supervision, exploitation et amélioration continue de votre
-                  informatique.
-                </p>
-              </article>
-
-              <article class="prest-item">
-                <div class="prest-item-head">
-                  <span class="prest-item-glyph" aria-hidden="true">
-                    <svg
-                      viewBox="0 0 40 40"
-                      fill="none"
-                      stroke="currentColor"
-                      stroke-width="1.2"
-                      stroke-linejoin="round"
-                      stroke-linecap="round"
-                    >
-                      <path d="M9 22v-3a11 11 0 0 1 22 0v3"></path>
-                      <rect x="6.5" y="21.5" width="5.5" height="9" rx="2"
-                      ></rect>
-                      <rect x="28" y="21.5" width="5.5" height="9" rx="2"
-                      ></rect>
-                      <path d="M30.7 30.5v1a4 4 0 0 1-4 4h-4" opacity="0.55"
-                      ></path>
-                    </svg>
-                  </span>
-                </div>
-                <h3 class="prest-item-title">Support Helpdesk</h3>
-                <p class="prest-item-desc">
-                  Assistance utilisateur et administrateur via notre centre de
-                  services, pour la résolution de vos incidents et demandes sur
-                  un périmètre défini.
-                </p>
-              </article>
-
-              <article class="prest-item">
-                <div class="prest-item-head">
-                  <span class="prest-item-glyph" aria-hidden="true">
-                    <svg
-                      viewBox="0 0 40 40"
-                      fill="none"
-                      stroke="currentColor"
-                      stroke-width="1.2"
-                      stroke-linejoin="round"
-                      stroke-linecap="round"
-                    >
-                      <rect x="11" y="8.5" width="18" height="25" rx="2.5"
-                      ></rect>
-                      <rect
-                        x="15.5"
-                        y="6"
-                        width="9"
-                        height="5"
-                        rx="1.6"
-                        opacity="0.55"></rect>
-                      <path d="M15.5 21l3 3 6-6.5" opacity="0.7"></path>
-                      <line
-                        x1="15.5"
-                        y1="28.5"
-                        x2="24.5"
-                        y2="28.5"
-                        opacity="0.4"></line>
-                    </svg>
-                  </span>
-                </div>
-                <h3 class="prest-item-title">
-                  Gestion de projets &amp; conformité
-                </h3>
-                <p class="prest-item-desc">
-                  Pilotage de vos projets IT et accompagnement au respect des
-                  exigences réglementaires, de sécurité et des standards en
-                  vigueur.
-                </p>
-              </article>
-
-              <article class="prest-item">
-                <div class="prest-item-head">
-                  <span class="prest-item-glyph" aria-hidden="true">
-                    <svg
-                      viewBox="0 0 40 40"
-                      fill="none"
-                      stroke="currentColor"
-                      stroke-width="1.2"
-                      stroke-linejoin="round"
-                      stroke-linecap="round"
-                    >
-                      <ellipse cx="18" cy="11" rx="9" ry="3.4"></ellipse>
-                      <path
-                        d="M9 11v6c0 1.9 4 3.4 9 3.4s9-1.5 9-3.4v-6"
-                        opacity="0.6"></path>
-                      <path
-                        d="M9 17v6c0 1.9 4 3.4 9 3.4 .95 0 1.85-.05 2.7-.16"
-                        opacity="0.45"></path>
-                      <path d="M25.2 26.6a5 5 0 1 1-1.6-3.5" opacity="0.85"
-                      ></path>
-                      <path d="M25.6 22v3.2h-3.2" opacity="0.85"></path>
-                    </svg>
-                  </span>
-                </div>
-                <h3 class="prest-item-title">Infogérance de la sauvegarde</h3>
-                <p class="prest-item-desc">
-                  Contrôle quotidien et tests de restauration réguliers, avec un
-                  plan de reprise d'activité éprouvé pour assurer la protection
-                  de vos données.
-                </p>
-              </article>
-
-              <article class="prest-item">
-                <div class="prest-item-head">
-                  <span class="prest-item-glyph" aria-hidden="true">
-                    <svg
-                      viewBox="0 0 40 40"
-                      fill="none"
-                      stroke="currentColor"
-                      stroke-width="1.2"
-                      stroke-linejoin="round"
-                      stroke-linecap="round"
-                    >
-                      <path d="M20 6l12 5.5H8z"></path>
-                      <line x1="12.5" y1="12" x2="12.5" y2="27"></line>
-                      <line x1="20" y1="12" x2="20" y2="27"></line>
-                      <line x1="27.5" y1="12" x2="27.5" y2="27"></line>
-                      <line x1="8.5" y1="27" x2="31.5" y2="27"></line>
-                      <line x1="7" y1="31" x2="33" y2="31" opacity="0.6"></line>
-                    </svg>
-                  </span>
-                </div>
-                <h3 class="prest-item-title">Gouvernance du SI</h3>
-                <p class="prest-item-desc">
-                  Pilotage de votre SI et de vos prestataires pour l'aligner
-                  avec votre stratégie et vos enjeux métiers.
-                </p>
-              </article>
+              {
+                service.prestations.slice(1).map((prestation: any) => (
+                  <article class="prest-item">
+                    <div class="prest-item-head">
+                      <span
+                        class="prest-item-glyph"
+                        aria-hidden="true"
+                        set:html={prestation.icone_content}
+                      />
+                    </div>
+                    <h3 class="prest-item-title">{prestation.titre}</h3>
+                    <p class="prest-item-desc">{prestation.description}</p>
+                  </article>
+                ))
+              }
             </div>
           </div>
         </div>
@@ -549,11 +365,11 @@ import Footer from "../components/Footer.astro";
         <div class="container">
           <div class="section-head reveal">
             <h2 class="section-title" id="process-title">
-              Quatre expertises, <em>un seul interlocuteur</em>.
-              <span class="text-muted"
-                >Un point de contact unique d'où découlent l'audit, la
-                supervision, le support et la gouvernance de votre SI.</span
-              >
+              <span set:html={service.titre_processus} />
+              <span
+                class="text-muted"
+                set:html={service.sous_titre_processus}
+              />
             </h2>
           </div>
 
@@ -764,11 +580,8 @@ import Footer from "../components/Footer.astro";
                     </svg>
                   </span>
                 </div>
-                <h3 class="pf-vcard-title">Audit &amp; cartographie</h3>
-                <p class="pf-vcard-desc">
-                  Visite sur site : on cartographie votre SI, vos usages et vos
-                  enjeux avant tout engagement.
-                </p>
+                <h3 class="pf-vcard-title">{service.processus[0].titre}</h3>
+                <p class="pf-vcard-desc">{service.processus[0].description}</p>
                 <div class="pf-vcard-fade" aria-hidden="true"></div>
               </article>
 
@@ -796,12 +609,8 @@ import Footer from "../components/Footer.astro";
                     </svg>
                   </span>
                 </div>
-                <h3 class="pf-vcard-title">Helpdesk &amp; support</h3>
-                <p class="pf-vcard-desc">
-                  Le centre de services prend en charge incidents et demandes,
-                  vos utilisateurs restent opérationnels sur un périmètre
-                  défini.
-                </p>
+                <h3 class="pf-vcard-title">{service.processus[1].titre}</h3>
+                <p class="pf-vcard-desc">{service.processus[1].description}</p>
                 <div class="pf-vcard-fade" aria-hidden="true"></div>
               </article>
 
@@ -828,12 +637,8 @@ import Footer from "../components/Footer.astro";
                     </svg>
                   </span>
                 </div>
-                <h3 class="pf-vcard-title">Infogérance</h3>
-                <p class="pf-vcard-desc">
-                  Supervision et exploitation en continu : votre SI maintenu en
-                  conditions opérationnelles, l'anomalie traitée avant
-                  l'incident.
-                </p>
+                <h3 class="pf-vcard-title">{service.processus[2].titre}</h3>
+                <p class="pf-vcard-desc">{service.processus[2].description}</p>
                 <div class="pf-vcard-fade" aria-hidden="true"></div>
               </article>
 
@@ -861,11 +666,8 @@ import Footer from "../components/Footer.astro";
                     </svg>
                   </span>
                 </div>
-                <h3 class="pf-vcard-title">Gouvernance</h3>
-                <p class="pf-vcard-desc">
-                  Pilotage, reporting et amélioration continue pour aligner
-                  votre SI sur votre stratégie.
-                </p>
+                <h3 class="pf-vcard-title">{service.processus[3].titre}</h3>
+                <p class="pf-vcard-desc">{service.processus[3].description}</p>
                 <div class="pf-vcard-fade" aria-hidden="true"></div>
               </article>
             </div>
@@ -880,160 +682,23 @@ import Footer from "../components/Footer.astro";
         <div class="container">
           <div class="cta-frame">
             <div class="cta-inner">
-              <svg
-                class="cta-icon reveal"
-                viewBox="0 0 120 120"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-                aria-hidden="true"
-                focusable="false"
-              >
-                <defs>
-                  <linearGradient
-                    id="cta-sweep-fade"
-                    gradientUnits="userSpaceOnUse"
-                    x1="47.06"
-                    y1="11.70"
-                    x2="85"
-                    y2="16.70"
-                  >
-                    <stop offset="0" stop-color="#E51D29" stop-opacity="0"
-                    ></stop>
-                    <stop offset="1" stop-color="#E51D29" stop-opacity="0.13"
-                    ></stop>
-                  </linearGradient>
-                </defs>
-
-                <!-- Anneaux concentriques : externe fin / intermediaire pointille / interne discret -->
-                <circle
-                  cx="60"
-                  cy="60"
-                  r="50"
-                  stroke="#f4f4f4"
-                  stroke-width="1.1"
-                  opacity="0.20"></circle>
-                <circle
-                  cx="60"
-                  cy="60"
-                  r="38"
-                  stroke="#f4f4f4"
-                  stroke-width="0.9"
-                  opacity="0.10"
-                  stroke-dasharray="1.5 5"
-                  stroke-linecap="round"></circle>
-                <circle
-                  cx="60"
-                  cy="60"
-                  r="24"
-                  stroke="#f4f4f4"
-                  stroke-width="0.9"
-                  opacity="0.09"></circle>
-
-                <!-- Graduations cardinales -->
-                <g
-                  stroke="#f4f4f4"
-                  stroke-width="1.1"
-                  stroke-linecap="round"
-                  opacity="0.24"
-                >
-                  <line x1="60" y1="16" x2="60" y2="8"></line>
-                  <line x1="104" y1="60" x2="112" y2="60"></line>
-                  <line x1="60" y1="104" x2="60" y2="112"></line>
-                  <line x1="16" y1="60" x2="8" y2="60"></line>
-                </g>
-
-                <!-- Graduations mineures (la position 1 h accueille le point de vigilance) -->
-                <g
-                  stroke="#f4f4f4"
-                  stroke-width="1"
-                  stroke-linecap="round"
-                  opacity="0.11"
-                >
-                  <line x1="100.27" y1="36.75" x2="104.17" y2="34.50"></line>
-                  <line x1="100.27" y1="83.25" x2="104.17" y2="85.50"></line>
-                  <line x1="83.25" y1="100.27" x2="85.50" y2="104.17"></line>
-                  <line x1="36.75" y1="100.27" x2="34.50" y2="104.17"></line>
-                  <line x1="19.73" y1="83.25" x2="15.83" y2="85.50"></line>
-                  <line x1="19.73" y1="36.75" x2="15.83" y2="34.50"></line>
-                  <line x1="36.75" y1="19.73" x2="34.50" y2="15.83"></line>
-                </g>
-
-                <!-- Secteur de balayage : trainee en degrade derriere l'axe de veille -->
-                <path
-                  d="M60 60 L47.06 11.70 A50 50 0 0 1 85 16.70 Z"
-                  fill="url(#cta-sweep-fade)"></path>
-
-                <!-- Axe de veille -->
-                <line
-                  x1="60"
-                  y1="60"
-                  x2="85"
-                  y2="16.70"
-                  stroke="#f4f4f4"
-                  stroke-width="1.1"
-                  stroke-linecap="round"
-                  opacity="0.26"></line>
-
-                <!-- Echo de detection secondaire (contact deja traite, 8 h) -->
-                <circle cx="43" cy="82" r="1.6" fill="#f4f4f4" opacity="0.20"
-                ></circle>
-                <circle
-                  cx="43"
-                  cy="82"
-                  r="4.4"
-                  stroke="#f4f4f4"
-                  stroke-width="0.8"
-                  opacity="0.10"></circle>
-
-                <!-- Moyeu central : croix de visee + pivot -->
-                <g
-                  stroke="#f4f4f4"
-                  stroke-width="0.9"
-                  stroke-linecap="round"
-                  opacity="0.30"
-                >
-                  <line x1="60" y1="54.5" x2="60" y2="57"></line>
-                  <line x1="60" y1="63" x2="60" y2="65.5"></line>
-                  <line x1="54.5" y1="60" x2="57" y2="60"></line>
-                  <line x1="63" y1="60" x2="65.5" y2="60"></line>
-                </g>
-                <circle cx="60" cy="60" r="2" fill="#f4f4f4" opacity="0.6"
-                ></circle>
-
-                <!-- Point de vigilance : cible fine + pulsation douce -->
-                <circle
-                  class="cta-vig-ping"
-                  cx="85"
-                  cy="16.70"
-                  r="10.5"
-                  stroke="#E51D29"
-                  stroke-width="1"></circle>
-                <circle
-                  cx="85"
-                  cy="16.70"
-                  r="6.6"
-                  stroke="#E51D29"
-                  stroke-width="1.1"
-                  opacity="0.55"></circle>
-                <circle cx="85" cy="16.70" r="3" fill="#E51D29"></circle>
-              </svg>
+              <Fragment set:html={service.icone_cta_content} />
 
               <div class="cta-body">
-                <h2 class="cta-title reveal delay-1" id="cta-title">
-                  Et si quelqu'un veillait sur votre SI, <em>24/7&thinsp;?</em>
-                </h2>
+                <h2
+                  class="cta-title reveal delay-1"
+                  id="cta-title"
+                  set:html={service.titre_cta}
+                />
 
-                <p class="cta-sub reveal delay-2">
-                  Un interlocuteur unique qui veille, supervise et pilote votre
-                  informatique au quotidien, du support à la gouvernance.
-                </p>
+                <p class="cta-sub reveal delay-2">{service.sous_titre_cta}</p>
 
                 <div class="cta-actions reveal delay-3">
                   <a
                     href="/contact?pole=service&step=2"
                     class="btn-cta btn-cta--primary"
                   >
-                    Contacter le pôle Service
+                    {service.bouton_cta}
                     <span class="btn-cta-arrow"
                       ><svg
                         viewBox="0 0 16 16"
@@ -1061,9 +726,11 @@ import Footer from "../components/Footer.astro";
                         d="M2 3a1 1 0 011-1h3.28a1 1 0 01.95.68l1.07 3.21a1 1 0 01-.25 1L6.54 8.4a12.06 12.06 0 005.06 5.06l1.51-1.51a1 1 0 011-.25l3.21 1.07a1 1 0 01.68.95V17a1 1 0 01-1 1A15 15 0 012 3z"
                       ></path></svg
                     >
-                    <a href="tel:+33387184922" class="cta-phone-num"
-                      >03 87 18 49 22</a
-                    >
+                    <a
+                      href={`tel:${global.telephone}`}
+                      class="cta-phone-num"
+                      set:html={global.telephone_formatte}
+                    />
                   </span>
                 </div>
               </div>
@@ -1071,301 +738,305 @@ import Footer from "../components/Footer.astro";
           </div>
         </div>
       </section>
-    </main>
 
-    <!-- ================================
+      <!-- ================================
      FOOTER
      ================================ -->
-    <Footer />
+      <Footer />
 
-    <!-- ================================
+      <!-- ================================
      SCRIPTS
      ================================ -->
-    <script is:inline src="/js/shared/reveal-animations.js"></script>
-    <script is:inline src="/js/shared/menu-frost.js"></script>
-    <!-- jcd-mobile-nav (injected) -->
-    <button
-      class="jcd-burger"
-      id="jcdBurger"
-      type="button"
-      aria-label="Ouvrir le menu"
-      aria-expanded="false"
-      aria-controls="jcdMnav"
-    >
-      <span class="jcd-burger__box" aria-hidden="true"
-        ><i></i><i></i><i></i></span
+      <script is:inline src="/js/shared/reveal-animations.js"></script>
+      <script is:inline src="/js/shared/menu-frost.js"></script>
+      <!-- jcd-mobile-nav (injected) -->
+      <button
+        class="jcd-burger"
+        id="jcdBurger"
+        type="button"
+        aria-label="Ouvrir le menu"
+        aria-expanded="false"
+        aria-controls="jcdMnav"
       >
-    </button>
-    <div
-      class="jcd-mnav"
-      id="jcdMnav"
-      role="dialog"
-      aria-modal="true"
-      aria-label="Menu de navigation"
-      aria-hidden="true"
-    >
-      <div class="jcd-mnav__scroll">
-        <div class="jcd-mnav__inner">
-          <p
-            class="jcd-mnav__eyebrow jcd-mnav__reveal"
-            style="transition-delay:.04s"
-          >
-            Expertises
-          </p>
+        <span class="jcd-burger__box" aria-hidden="true"
+          ><i></i><i></i><i></i></span
+        >
+      </button>
+      <div
+        class="jcd-mnav"
+        id="jcdMnav"
+        role="dialog"
+        aria-modal="true"
+        aria-label="Menu de navigation"
+        aria-hidden="true"
+      >
+        <div class="jcd-mnav__scroll">
+          <div class="jcd-mnav__inner">
+            <p
+              class="jcd-mnav__eyebrow jcd-mnav__reveal"
+              style="transition-delay:.04s"
+            >
+              Expertises
+            </p>
 
-          <div class="jcd-mnav__reveal" style="transition-delay:.07s">
-            <div class="jcd-mnav__item" style="--mnav-c:#2E72BA">
-              <a class="jcd-mnav__link" href="/informatique"
-                ><span class="jcd-mnav__dot"></span><span
-                  class="jcd-mnav__label">Informatique</span
-                ></a
-              >
-              <button
-                class="jcd-acc__toggle"
-                type="button"
-                aria-expanded="false"
-                aria-controls="jcdAccInfo"
-                aria-label="Afficher les sous-pages Informatique"
-              >
-                <svg
-                  viewBox="0 0 14 14"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="1.6"
-                  stroke-linecap="round"><path d="M7 2v10M2 7h10"></path></svg
+            <div class="jcd-mnav__reveal" style="transition-delay:.07s">
+              <div class="jcd-mnav__item" style="--mnav-c:#2E72BA">
+                <a class="jcd-mnav__link" href="/informatique"
+                  ><span class="jcd-mnav__dot"></span><span
+                    class="jcd-mnav__label">Informatique</span
+                  ></a
                 >
-              </button>
-            </div>
-            <div class="jcd-acc__panel" id="jcdAccInfo">
-              <a class="jcd-mnav__sub" href="/info-cloud">Cloud Microsoft</a>
-              <a class="jcd-mnav__sub" href="/info-collaboratif"
-                >Solutions collaboratives &amp; audiovisuelles</a
-              >
-              <a class="jcd-mnav__sub" href="/info-reseaux"
-                >Architectures syst&egrave;mes &amp; r&eacute;seaux</a
-              >
-              <a class="jcd-mnav__sub" href="/info-integration"
-                >Int&eacute;gration &amp; Support PC</a
-              >
-            </div>
-          </div>
-
-          <a
-            class="jcd-mnav__item jcd-mnav__reveal"
-            style="--mnav-c:#E51D29;transition-delay:.10s"
-            href="/service"
-            ><span class="jcd-mnav__dot"></span><span class="jcd-mnav__label"
-              >Service</span
-            ></a
-          >
-          <a
-            class="jcd-mnav__item jcd-mnav__reveal"
-            style="--mnav-c:#F9D605;transition-delay:.13s"
-            href="/developpement"
-            ><span class="jcd-mnav__dot"></span><span class="jcd-mnav__label"
-              >D&eacute;veloppement</span
-            ></a
-          >
-          <a
-            class="jcd-mnav__item jcd-mnav__reveal"
-            style="--mnav-c:#F3941D;transition-delay:.16s"
-            href="/print"
-            ><span class="jcd-mnav__dot"></span><span class="jcd-mnav__label"
-              >Print</span
-            ></a
-          >
-          <a
-            class="jcd-mnav__item jcd-mnav__reveal"
-            style="--mnav-c:#B063AC;transition-delay:.19s"
-            href="/telecom"
-            ><span class="jcd-mnav__dot"></span><span class="jcd-mnav__label"
-              >T&eacute;l&eacute;com</span
-            ></a
-          >
-          <div class="jcd-mnav__reveal" style="transition-delay:.22s">
-            <div class="jcd-mnav__item" style="--mnav-c:#8EC041">
-              <a class="jcd-mnav__link" href="/formation"
-                ><span class="jcd-mnav__dot"></span><span
-                  class="jcd-mnav__label">Formation</span
-                ></a
-              >
-              <button
-                class="jcd-acc__toggle"
-                type="button"
-                aria-expanded="false"
-                aria-controls="jcdAccForm"
-                aria-label="Afficher les catégories de formation"
-              >
-                <svg
-                  viewBox="0 0 14 14"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="1.6"
-                  stroke-linecap="round"><path d="M7 2v10M2 7h10"></path></svg
+                <button
+                  class="jcd-acc__toggle"
+                  type="button"
+                  aria-expanded="false"
+                  aria-controls="jcdAccInfo"
+                  aria-label="Afficher les sous-pages Informatique"
                 >
-              </button>
+                  <svg
+                    viewBox="0 0 14 14"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="1.6"
+                    stroke-linecap="round"><path d="M7 2v10M2 7h10"></path></svg
+                  >
+                </button>
+              </div>
+              <div class="jcd-acc__panel" id="jcdAccInfo">
+                <a class="jcd-mnav__sub" href="/info-cloud">Cloud Microsoft</a>
+                <a class="jcd-mnav__sub" href="/info-collaboratif"
+                  >Solutions collaboratives &amp; audiovisuelles</a
+                >
+                <a class="jcd-mnav__sub" href="/info-reseaux"
+                  >Architectures syst&egrave;mes &amp; r&eacute;seaux</a
+                >
+                <a class="jcd-mnav__sub" href="/info-integration"
+                  >Int&eacute;gration &amp; Support PC</a
+                >
+              </div>
             </div>
-            <div class="jcd-acc__panel" id="jcdAccForm">
-              <a class="jcd-mnav__sub" href="/formation-bureautique"
-                >Bureautique</a
-              >
-              <a
-                class="jcd-mnav__sub"
-                href="/formation-intelligence-artificielle"
-                >Intelligence artificielle</a
-              >
-              <a class="jcd-mnav__sub" href="/formation-informatique"
-                >Informatique</a
-              >
-              <a class="jcd-mnav__sub" href="/formation-communication-marketing"
-                >Communication - Marketing</a
-              >
-              <a class="jcd-mnav__sub" href="/formation-management"
-                >Management</a
-              >
-              <a
-                class="jcd-mnav__sub"
-                href="/formation-commerce-relation-client"
-                >Commerce - Relation client</a
-              >
-              <a class="jcd-mnav__sub" href="/formation-comptabilite-gestion"
-                >Comptabilit&eacute; - Gestion</a
-              >
-              <a class="jcd-mnav__sub" href="/formation-ressources-humaines"
-                >Ressources humaines</a
-              >
-              <a class="jcd-mnav__sub" href="/formation-developpement-personnel"
-                >D&eacute;veloppement personnel</a
-              >
-              <a class="jcd-mnav__sub" href="/formation-graphisme-pao"
-                >Graphisme - PAO</a
-              >
-              <a
-                class="jcd-mnav__sub"
-                href="/formation-administratif-secretariat-accueil"
-                >Administratif - Secr&eacute;tariat</a
-              >
-              <a class="jcd-mnav__sub" href="/formation-securite"
-                >S&eacute;curit&eacute;</a
-              >
-              <a class="jcd-mnav__sub" href="/formation-langues">Langues</a>
-            </div>
-          </div>
-          <a
-            class="jcd-mnav__item jcd-mnav__reveal"
-            style="--mnav-c:#A78D75;transition-delay:.25s"
-            href="/agencement"
-            ><span class="jcd-mnav__dot"></span><span class="jcd-mnav__label"
-              >Agencement</span
-            ></a
-          >
 
-          <p
-            class="jcd-mnav__eyebrow jcd-mnav__sec2 jcd-mnav__reveal"
-            style="transition-delay:.30s"
-          >
-            D&eacute;couvrir
-          </p>
-          <a
-            class="jcd-mnav__item jcd-mnav__reveal"
-            style="--mnav-c:#9a9a9a;transition-delay:.33s"
-            href="/assistance"
-            ><span class="jcd-mnav__dot"></span><span
-              class="jcd-mnav__label"
-              style="font-size:19px">Assistance</span
-            ></a
-          >
-          <a
-            class="jcd-mnav__item jcd-mnav__reveal"
-            style="--mnav-c:#9a9a9a;transition-delay:.36s"
-            href="/carrieres"
-            ><span class="jcd-mnav__dot"></span><span
-              class="jcd-mnav__label"
-              style="font-size:19px">Carri&egrave;res</span
-            ></a
-          >
-
-          <div
-            class="jcd-mnav__cta jcd-mnav__reveal"
-            style="transition-delay:.40s"
-          >
-            <a class="jcd-mnav__btn jcd-mnav__btn--primary" href="/contact"
-              >Contacter un expert
-              <span class="jcd-mnav__btn-ic"
-                ><svg
-                  viewBox="0 0 16 16"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="1.7"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  ><path d="M3 8h10M9 4l4 4-4 4"></path></svg
-                ></span
+            <a
+              class="jcd-mnav__item jcd-mnav__reveal"
+              style="--mnav-c:#E51D29;transition-delay:.10s"
+              href="/service"
+              ><span class="jcd-mnav__dot"></span><span class="jcd-mnav__label"
+                >Service</span
               ></a
             >
             <a
-              class="jcd-mnav__btn jcd-mnav__btn--ghost"
-              href="tel:+33387184920"
-              >03 87 18 49 20
-              <span class="jcd-mnav__btn-ic"
-                ><svg
-                  viewBox="0 0 18 18"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="1.5"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  ><path
-                    d="M2.5 3.5a1 1 0 011-1h2.4a1 1 0 01.95.68l.86 2.4a1 1 0 01-.24 1l-1.2 1.2a11 11 0 004.6 4.6l1.2-1.2a1 1 0 011-.24l2.4.86a1 1 0 01.68.95V15a1 1 0 01-1 1A13.5 13.5 0 012.5 3.5z"
-                  ></path></svg
-                ></span
+              class="jcd-mnav__item jcd-mnav__reveal"
+              style="--mnav-c:#F9D605;transition-delay:.13s"
+              href="/developpement"
+              ><span class="jcd-mnav__dot"></span><span class="jcd-mnav__label"
+                >D&eacute;veloppement</span
               ></a
             >
+            <a
+              class="jcd-mnav__item jcd-mnav__reveal"
+              style="--mnav-c:#F3941D;transition-delay:.16s"
+              href="/print"
+              ><span class="jcd-mnav__dot"></span><span class="jcd-mnav__label"
+                >Print</span
+              ></a
+            >
+            <a
+              class="jcd-mnav__item jcd-mnav__reveal"
+              style="--mnav-c:#B063AC;transition-delay:.19s"
+              href="/telecom"
+              ><span class="jcd-mnav__dot"></span><span class="jcd-mnav__label"
+                >T&eacute;l&eacute;com</span
+              ></a
+            >
+            <div class="jcd-mnav__reveal" style="transition-delay:.22s">
+              <div class="jcd-mnav__item" style="--mnav-c:#8EC041">
+                <a class="jcd-mnav__link" href="/formation"
+                  ><span class="jcd-mnav__dot"></span><span
+                    class="jcd-mnav__label">Formation</span
+                  ></a
+                >
+                <button
+                  class="jcd-acc__toggle"
+                  type="button"
+                  aria-expanded="false"
+                  aria-controls="jcdAccForm"
+                  aria-label="Afficher les catégories de formation"
+                >
+                  <svg
+                    viewBox="0 0 14 14"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="1.6"
+                    stroke-linecap="round"><path d="M7 2v10M2 7h10"></path></svg
+                  >
+                </button>
+              </div>
+              <div class="jcd-acc__panel" id="jcdAccForm">
+                <a class="jcd-mnav__sub" href="/formation-bureautique"
+                  >Bureautique</a
+                >
+                <a
+                  class="jcd-mnav__sub"
+                  href="/formation-intelligence-artificielle"
+                  >Intelligence artificielle</a
+                >
+                <a class="jcd-mnav__sub" href="/formation-informatique"
+                  >Informatique</a
+                >
+                <a
+                  class="jcd-mnav__sub"
+                  href="/formation-communication-marketing"
+                  >Communication - Marketing</a
+                >
+                <a class="jcd-mnav__sub" href="/formation-management"
+                  >Management</a
+                >
+                <a
+                  class="jcd-mnav__sub"
+                  href="/formation-commerce-relation-client"
+                  >Commerce - Relation client</a
+                >
+                <a class="jcd-mnav__sub" href="/formation-comptabilite-gestion"
+                  >Comptabilit&eacute; - Gestion</a
+                >
+                <a class="jcd-mnav__sub" href="/formation-ressources-humaines"
+                  >Ressources humaines</a
+                >
+                <a
+                  class="jcd-mnav__sub"
+                  href="/formation-developpement-personnel"
+                  >D&eacute;veloppement personnel</a
+                >
+                <a class="jcd-mnav__sub" href="/formation-graphisme-pao"
+                  >Graphisme - PAO</a
+                >
+                <a
+                  class="jcd-mnav__sub"
+                  href="/formation-administratif-secretariat-accueil"
+                  >Administratif - Secr&eacute;tariat</a
+                >
+                <a class="jcd-mnav__sub" href="/formation-securite"
+                  >S&eacute;curit&eacute;</a
+                >
+                <a class="jcd-mnav__sub" href="/formation-langues">Langues</a>
+              </div>
+            </div>
+            <a
+              class="jcd-mnav__item jcd-mnav__reveal"
+              style="--mnav-c:#A78D75;transition-delay:.25s"
+              href="/agencement"
+              ><span class="jcd-mnav__dot"></span><span class="jcd-mnav__label"
+                >Agencement</span
+              ></a
+            >
+
+            <p
+              class="jcd-mnav__eyebrow jcd-mnav__sec2 jcd-mnav__reveal"
+              style="transition-delay:.30s"
+            >
+              D&eacute;couvrir
+            </p>
+            <a
+              class="jcd-mnav__item jcd-mnav__reveal"
+              style="--mnav-c:#9a9a9a;transition-delay:.33s"
+              href="/assistance"
+              ><span class="jcd-mnav__dot"></span><span
+                class="jcd-mnav__label"
+                style="font-size:19px">Assistance</span
+              ></a
+            >
+            <a
+              class="jcd-mnav__item jcd-mnav__reveal"
+              style="--mnav-c:#9a9a9a;transition-delay:.36s"
+              href="/carrieres"
+              ><span class="jcd-mnav__dot"></span><span
+                class="jcd-mnav__label"
+                style="font-size:19px">Carri&egrave;res</span
+              ></a
+            >
+
+            <div
+              class="jcd-mnav__cta jcd-mnav__reveal"
+              style="transition-delay:.40s"
+            >
+              <a class="jcd-mnav__btn jcd-mnav__btn--primary" href="/contact"
+                >Contacter un expert
+                <span class="jcd-mnav__btn-ic"
+                  ><svg
+                    viewBox="0 0 16 16"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="1.7"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    ><path d="M3 8h10M9 4l4 4-4 4"></path></svg
+                  ></span
+                ></a
+              >
+              <a
+                class="jcd-mnav__btn jcd-mnav__btn--ghost"
+                href="tel:+33387184920"
+                >03 87 18 49 20
+                <span class="jcd-mnav__btn-ic"
+                  ><svg
+                    viewBox="0 0 18 18"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="1.5"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    ><path
+                      d="M2.5 3.5a1 1 0 011-1h2.4a1 1 0 01.95.68l.86 2.4a1 1 0 01-.24 1l-1.2 1.2a11 11 0 004.6 4.6l1.2-1.2a1 1 0 011-.24l2.4.86a1 1 0 01.68.95V15a1 1 0 01-1 1A13.5 13.5 0 012.5 3.5z"
+                    ></path></svg
+                  ></span
+                ></a
+              >
+            </div>
           </div>
         </div>
       </div>
-    </div>
-    <script is:inline src="/js/shared/mobile-nav.js"></script>
-    <!-- jcd-a11y (Lot 5) -->
-    <div class="jcd-fab-wrap" id="jcd-fab">
-      <button
-        class="jcd-fab jcd-fab--top"
-        id="jcdToTop"
-        type="button"
-        aria-label="Remonter en haut"
-      >
-        <svg
-          viewBox="0 0 20 20"
-          fill="none"
-          stroke="currentColor"
-          stroke-width="1.8"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          aria-hidden="true"><path d="M10 16V5M5 10l5-5 5 5"></path></svg
+      <script is:inline src="/js/shared/mobile-nav.js"></script>
+      <!-- jcd-a11y (Lot 5) -->
+      <div class="jcd-fab-wrap" id="jcd-fab">
+        <button
+          class="jcd-fab jcd-fab--top"
+          id="jcdToTop"
+          type="button"
+          aria-label="Remonter en haut"
         >
-      </button>
-      <a
-        class="jcd-fab jcd-fab--contact"
-        id="jcdFabContact"
-        href="/contact"
-        aria-label="Nous contacter"
-      >
-        <svg
-          viewBox="0 0 20 20"
-          fill="none"
-          stroke="currentColor"
-          stroke-width="1.6"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          aria-hidden="true"
-          ><rect x="2.5" y="4.5" width="15" height="11" rx="2.3"></rect><path
-            d="M3 6.7 L10 10.7 L17 6.7"></path></svg
+          <svg
+            viewBox="0 0 20 20"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.8"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            aria-hidden="true"><path d="M10 16V5M5 10l5-5 5 5"></path></svg
+          >
+        </button>
+        <a
+          class="jcd-fab jcd-fab--contact"
+          id="jcdFabContact"
+          href="/contact"
+          aria-label="Nous contacter"
         >
-      </a>
-    </div>
-    <script is:inline src="/js/shared/a11y.js" id="jcd-a11y-js"></script>
-    <script is:inline src="/js/shared/micons.js" id="jcd-micons-js"></script>
-    <script is:inline src="/js/shared/mrefonte.js" id="jcd-mrefonte-js"
-    ></script>
+          <svg
+            viewBox="0 0 20 20"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.6"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            aria-hidden="true"
+            ><rect x="2.5" y="4.5" width="15" height="11" rx="2.3"></rect><path
+              d="M3 6.7 L10 10.7 L17 6.7"></path></svg
+          >
+        </a>
+      </div>
+      <script is:inline src="/js/shared/a11y.js" id="jcd-a11y-js"></script>
+      <script is:inline src="/js/shared/micons.js" id="jcd-micons-js"></script>
+      <script is:inline src="/js/shared/mrefonte.js" id="jcd-mrefonte-js"
+      ></script>
+    </main>
   </body>
 </html>
