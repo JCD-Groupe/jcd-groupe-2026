@@ -682,7 +682,11 @@ service.processus = await Promise.all(
         <div class="container">
           <div class="cta-frame">
             <div class="cta-inner">
-              <Fragment set:html={service.icone_cta_content} />
+              <span
+                class="cta-icon"
+                aria-hidden="true"
+                set:html={service.icone_cta_content}
+              />
 
               <div class="cta-body">
                 <h2

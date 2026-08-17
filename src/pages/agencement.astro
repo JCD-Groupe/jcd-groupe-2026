@@ -593,7 +593,11 @@ agencement.prestations = await Promise.all(
         <div class="container">
           <div class="cta-frame">
             <div class="cta-inner">
-              <Fragment set:html={agencement.icone_cta_content} />
+              <span
+                class="cta-icon"
+                aria-hidden="true"
+                set:html={agencement.icone_cta_content}
+              />
 
               <div class="cta-body">
                 <h2

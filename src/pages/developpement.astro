@@ -853,7 +853,11 @@ let realisations = await directus.request(
         <div class="container">
           <div class="cta-frame">
             <div class="cta-inner">
-              <span set:html={developpement.icone_cta_content} />
+              <span
+                class="cta-icon"
+                aria-hidden="true"
+                set:html={developpement.icone_cta_content}
+              />
               <div class="cta-body">
                 <h2
                   class="cta-title reveal delay-1"
