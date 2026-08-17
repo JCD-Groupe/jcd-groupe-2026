@@ -4,6 +4,12 @@ import { readSingleton } from "@directus/sdk";
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
 
+let global = await directus.request(
+  readSingleton("Global", {
+    fields: ["*"],
+  }),
+);
+
 let agencement = await directus.request(
   readSingleton("JCD_Agencement", {
     fields: [
@@ -43,7 +49,10 @@ agencement.prestations = await Promise.all(
     <meta name="color-scheme" content="dark" />
     <meta name="theme-color" content="#0a0a0a" />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
-    <meta name="description" content={agencement.meta_description} />
+    <meta
+      property="og:title"
+      content={`${global.nom_societe} • ${agencement.nom_pole}`}
+    />
     <link
       rel="canonical"
       href={`${import.meta.env.PUBLIC_DIRECTUS_URL}/agencement`}
@@ -58,7 +67,7 @@ agencement.prestations = await Promise.all(
       content={`${import.meta.env.PUBLIC_DIRECTUS_URL}/agencement`}
     />
     <meta name="twitter:card" content="summary" />
-    <title>{agencement.meta_title}</title>
+    <title>{global.nom_societe} • {agencement.nom_pole}</title>
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
