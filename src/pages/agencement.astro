@@ -1,6 +1,36 @@
 ---
+import { directus } from "../lib/directus";
+import { readSingleton } from "@directus/sdk";
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
+
+let agencement = await directus.request(
+  readSingleton("JCD_Agencement", {
+    fields: [
+      "*",
+      { prestations: ["*"] },
+      { processus: ["*"] },
+      { logos_confiance: ["*", { directus_files_id: ["*"] }] },
+    ],
+  }),
+);
+
+const fetchSvgContent = async (id: string) => {
+  if (!id) return null;
+  const response = await fetch(
+    `${import.meta.env.PUBLIC_DIRECTUS_URL}/assets/${id}`,
+  );
+  return response.text();
+};
+
+agencement.icone_cta_content = await fetchSvgContent(agencement.icone_cta);
+
+agencement.prestations = await Promise.all(
+  agencement.prestations.map(async (prestation: any) => ({
+    ...prestation,
+    icone_content: await fetchSvgContent(prestation.icone),
+  })),
+);
 ---
 
 <html lang="fr">
@@ -13,10 +43,7 @@ import Footer from "../components/Footer.astro";
     <meta name="color-scheme" content="dark" />
     <meta name="theme-color" content="#0a0a0a" />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
-    <meta
-      name="description"
-      content="JCD Groupe · Pôle Agencement. Space planning, mobilier de bureau, conception 3D et installation clé en main d'espaces de travail sur-mesure en Grand Est, depuis 1996."
-    />
+    <meta name="description" content={agencement.meta_description} />
     <link
       rel="canonical"
       href={`${import.meta.env.PUBLIC_DIRECTUS_URL}/agencement`}
@@ -24,20 +51,14 @@ import Footer from "../components/Footer.astro";
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="JCD Groupe" />
     <meta property="og:locale" content="fr_FR" />
-    <meta
-      property="og:title"
-      content="Agencement · Espaces de travail sur-mesure · JCD Groupe"
-    />
-    <meta
-      property="og:description"
-      content="JCD Groupe · Pôle Agencement. Space planning, mobilier de bureau, conception 3D et installation clé en main d'espaces de travail sur-mesure en Grand Est, depuis 1996."
-    />
+    <meta property="og:title" content={agencement.meta_title} />
+    <meta property="og:description" content={agencement.meta_description} />
     <meta
       property="og:url"
       content={`${import.meta.env.PUBLIC_DIRECTUS_URL}/agencement`}
     />
     <meta name="twitter:card" content="summary" />
-    <title>Agencement · Espaces de travail sur-mesure · JCD Groupe</title>
+    <title>{agencement.meta_title}</title>
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -85,19 +106,19 @@ import Footer from "../components/Footer.astro";
           <div class="hero-grain" aria-hidden="true"></div>
 
           <div class="container">
-            <h1 id="agc-hero-title" class="hero-title reveal delay-1">
-              L'espace de travail qui s'adapte à vous,<br />
-              <em>pas l'inverse.</em>
-            </h1>
+            <h1
+              id="agc-hero-title"
+              class="hero-title reveal delay-1"
+              set:html={agencement.titre_hero}
+            />
 
             <p class="hero-sub reveal delay-2">
-              De l'étude des flux à la pose du dernier meuble : des espaces de
-              travail sur-mesure, orchestrés par un space planner dédié.
+              {agencement.sous_titre_hero}
             </p>
 
             <div class="hero-actions reveal delay-3">
               <a href="#process" class="btn-cta btn-cta--ghost">
-                Contacter un expert
+                {agencement.bouton_hero}
                 <span class="btn-cta-arrow"
                   ><svg
                     viewBox="0 0 16 16"
@@ -141,25 +162,7 @@ import Footer from "../components/Footer.astro";
                 class="mf-quote manifesto-rich reveal delay-1"
                 id="manifesto-title"
               >
-                Aménager un espace, ce n'est pas seulement meubler une surface.
-                C'est optimiser les <span class="cote"
-                  >flux<span class="cote-sup" aria-hidden="true">01</span><span
-                    class="cote-uline"
-                    style="--cd:.34s"
-                    aria-hidden="true"
-                    ><span class="cote-uline-bar"></span></span
-                  ></span
-                >, les <span class="cote"
-                  >usages<span class="cote-sup" aria-hidden="true">02</span
-                  ><span class="cote-uline" style="--cd:.5s" aria-hidden="true"
-                    ><span class="cote-uline-bar"></span></span
-                  ></span
-                > et les <span class="cote"
-                  >silences<span class="cote-sup" aria-hidden="true">03</span
-                  ><span class="cote-uline" style="--cd:.66s" aria-hidden="true"
-                    ><span class="cote-uline-bar"></span></span
-                  ></span
-                > de vos équipes.
+                <Fragment set:html={agencement.manifeste} />
               </blockquote>
 
               <div class="mf-ruler reveal delay-2">
@@ -168,28 +171,31 @@ import Footer from "../components/Footer.astro";
                   <div class="mf-station" style="--sd:1.35s">
                     <span class="mf-station-tick" aria-hidden="true"></span>
                     <span class="mf-station-num">01</span>
-                    <span class="mf-station-term">Flux</span>
+                    <span class="mf-station-term"
+                      >{agencement.manifeste_item_1_titre}</span
+                    >
                     <span class="mf-station-gloss"
-                      >Comment on circule, on se croise, on se concentre, la
-                      chorégraphie d'une journée de travail.</span
+                      >{agencement.manifeste_item_1_description}</span
                     >
                   </div>
                   <div class="mf-station" style="--sd:1.5s">
                     <span class="mf-station-tick" aria-hidden="true"></span>
                     <span class="mf-station-num">02</span>
-                    <span class="mf-station-term">Usages</span>
+                    <span class="mf-station-term"
+                      >{agencement.manifeste_item_2_titre}</span
+                    >
                     <span class="mf-station-gloss"
-                      >Ce que chaque équipe fait réellement de l'espace, au-delà
-                      de l'organigramme.</span
+                      >{agencement.manifeste_item_2_description}</span
                     >
                   </div>
                   <div class="mf-station" style="--sd:1.65s">
                     <span class="mf-station-tick" aria-hidden="true"></span>
                     <span class="mf-station-num">03</span>
-                    <span class="mf-station-term">Silences</span>
+                    <span class="mf-station-term"
+                      >{agencement.manifeste_item_3_titre}</span
+                    >
                     <span class="mf-station-gloss"
-                      >Le calme, l'intime, la concentration&nbsp;: ce qui ne se
-                      dit pas mais doit se concevoir.</span
+                      >{agencement.manifeste_item_3_description}</span
                     >
                   </div>
                 </div>
@@ -210,286 +216,68 @@ import Footer from "../components/Footer.astro";
         <div class="container">
           <div class="prest-layout">
             <aside class="prest-aside reveal">
-              <h2 class="prest-aside-title" id="prestations-title">
-                <em>Six savoir-faire</em>, un projet mené d'un seul tenant.
-              </h2>
-              <p class="prest-aside-sub">
-                Du plan d'implantation à la pose du dernier meuble, un seul
-                interlocuteur porte chaque étape.
-              </p>
+              <h2
+                class="prest-aside-title"
+                id="prestations-title"
+                set:html={agencement.titre_prestations}
+              />
+              <p
+                class="prest-aside-sub"
+                set:html={agencement.sous_titre_prestations}
+              />
 
               <div class="prest-aside-partners">
                 <div class="prest-aside-partners-head">
-                  <span class="prest-aside-partners-label">Fournisseurs</span>
+                  <span class="prest-aside-partners-label"
+                    >{agencement.titre_confiance}</span
+                  >
                   <span class="prest-aside-partners-rule" aria-hidden="true"
                   ></span>
-                  <span class="prest-aside-partners-count">+100</span>
+                  <span class="prest-aside-partners-count"
+                    >{agencement.nombre_confiance}</span
+                  >
                 </div>
                 <div class="prest-aside-partners-grid">
-                  <div class="logo-tile" data-brand="sedus">
-                    <img
-                      class="logo-tile-img"
-                      loading="lazy"
-                      decoding="async"
-                      src="/logo%20agencement/sedus.png"
-                      alt=""
-                      aria-hidden="true"
-                    />
-                    <span class="logo-tile-name">Sedus</span>
-                  </div>
-                  <div class="logo-tile" data-brand="brunner">
-                    <img
-                      class="logo-tile-img"
-                      loading="lazy"
-                      decoding="async"
-                      src="/logo%20agencement/brunner.png"
-                      alt=""
-                      aria-hidden="true"
-                    />
-                    <span class="logo-tile-name">Brunner</span>
-                  </div>
-                  <div class="logo-tile" data-brand="forma5">
-                    <img
-                      class="logo-tile-img"
-                      loading="lazy"
-                      decoding="async"
-                      src="/logo%20agencement/forma5.png"
-                      alt=""
-                      aria-hidden="true"
-                    />
-                    <span class="logo-tile-name">Forma 5</span>
-                  </div>
-                  <div class="logo-tile" data-brand="buronomic">
-                    <img
-                      class="logo-tile-img"
-                      loading="lazy"
-                      decoding="async"
-                      src="/logo%20agencement/buronomic.png"
-                      alt=""
-                      aria-hidden="true"
-                    />
-                    <span class="logo-tile-name">Buronomic</span>
-                  </div>
-                  <div class="logo-tile" data-brand="bralco">
-                    <img
-                      class="logo-tile-img"
-                      loading="lazy"
-                      decoding="async"
-                      src="/logo%20agencement/bralco.png"
-                      alt=""
-                      aria-hidden="true"
-                    />
-                    <span class="logo-tile-name">Bralco</span>
-                  </div>
-                  <div class="logo-tile" data-brand="clen">
-                    <img
-                      class="logo-tile-img"
-                      loading="lazy"
-                      decoding="async"
-                      src="/logo%20agencement/clen.png"
-                      alt=""
-                      aria-hidden="true"
-                    />
-                    <span class="logo-tile-name">Clen</span>
-                  </div>
-                  <div class="logo-tile" data-brand="columbia">
-                    <img
-                      class="logo-tile-img"
-                      loading="lazy"
-                      decoding="async"
-                      src="/logo%20agencement/columbia.png"
-                      alt=""
-                      aria-hidden="true"
-                    />
-                    <span class="logo-tile-name">Columbia</span>
-                  </div>
-                  <div class="logo-tile" data-brand="espattio">
-                    <img
-                      class="logo-tile-img"
-                      loading="lazy"
-                      decoding="async"
-                      src="/logo%20agencement/espattio.png"
-                      alt=""
-                      aria-hidden="true"
-                    />
-                    <span class="logo-tile-name">esPattio</span>
-                  </div>
-                  <div class="logo-tile" data-brand="manade">
-                    <img
-                      class="logo-tile-img"
-                      loading="lazy"
-                      decoding="async"
-                      src="/logo%20agencement/manade.png"
-                      alt=""
-                      aria-hidden="true"
-                    />
-                    <span class="logo-tile-name">Manade</span>
-                  </div>
-                  <div class="logo-tile" data-brand="mobimetal">
-                    <img
-                      class="logo-tile-img"
-                      loading="lazy"
-                      decoding="async"
-                      src="/logo%20agencement/mobimetal.png"
-                      alt=""
-                      aria-hidden="true"
-                    />
-                    <span class="logo-tile-name">Mobimétal</span>
-                  </div>
+                  {
+                    agencement.logos_confiance.map((logo: any) => (
+                      <div
+                        class="logo-tile"
+                        data-brand={logo.directus_files_id.title || ""}
+                      >
+                        <img
+                          class="logo-tile-img"
+                          loading="lazy"
+                          decoding="async"
+                          src={`${import.meta.env.PUBLIC_DIRECTUS_URL}/assets/${logo.directus_files_id.id}`}
+                          alt={logo.directus_files_id.title || ""}
+                          aria-hidden="true"
+                        />
+                        <span class="logo-tile-name">
+                          {logo.directus_files_id.title}
+                        </span>
+                      </div>
+                    ))
+                  }
                 </div>
               </div>
             </aside>
 
             <div class="prest-menu reveal delay-1">
-              <article class="prest-item">
-                <div class="prest-item-head">
-                  <span class="prest-item-glyph" aria-hidden="true">
-                    <svg
-                      viewBox="0 0 40 40"
-                      fill="none"
-                      stroke="currentColor"
-                      stroke-width="1.25"
-                      stroke-linejoin="round"
-                      stroke-linecap="round"
-                    >
-                      <rect x="6" y="8" width="28" height="24" rx="1.5"></rect>
-                      <path d="M21 8 V32" opacity="0.5"></path>
-                      <path d="M21 21 H34" opacity="0.5"></path>
-                      <path d="M6 20 H13" opacity="0.85"></path>
-                    </svg>
-                  </span>
-                </div>
-                <h3 class="prest-item-title">Space planning</h3>
-                <p class="prest-item-desc">
-                  Étude des flux et plans d'implantation pour tirer le meilleur
-                  de chaque mètre carré.
-                </p>
-              </article>
-
-              <article class="prest-item">
-                <div class="prest-item-head">
-                  <span class="prest-item-glyph" aria-hidden="true">
-                    <svg
-                      viewBox="0 0 40 40"
-                      fill="none"
-                      stroke="currentColor"
-                      stroke-width="1.25"
-                      stroke-linejoin="round"
-                      stroke-linecap="round"
-                    >
-                      <rect x="6" y="14" width="20" height="4" rx="1.2"></rect>
-                      <path d="M9 18 V29 M23 18 V29"></path>
-                      <circle cx="32" cy="21" r="5.4" opacity="0.62"></circle>
-                      <path d="M32 26.4 V31" opacity="0.62"></path>
-                    </svg>
-                  </span>
-                </div>
-                <h3 class="prest-item-title">Mobilier de bureau</h3>
-                <p class="prest-item-desc">
-                  Sélection et fourniture de mobilier sur-mesure, des postes
-                  individuels aux espaces partagés.
-                </p>
-              </article>
-
-              <article class="prest-item">
-                <div class="prest-item-head">
-                  <span class="prest-item-glyph" aria-hidden="true">
-                    <svg
-                      viewBox="0 0 40 40"
-                      fill="none"
-                      stroke="currentColor"
-                      stroke-width="1.25"
-                      stroke-linejoin="round"
-                      stroke-linecap="round"
-                    >
-                      <path d="M11 8 V32 M19 8 V32"></path>
-                      <path d="M25 13 a8 8 0 0 1 0 14" opacity="0.55"></path>
-                      <path d="M28.5 16.5 a4 4 0 0 1 0 7" opacity="0.8"></path>
-                    </svg>
-                  </span>
-                </div>
-                <h3 class="prest-item-title">Acoustique et ergonomie</h3>
-                <p class="prest-item-desc">
-                  Traitement acoustique et postes ergonomiques, pour des espaces
-                  sains et confortables à vivre.
-                </p>
-              </article>
-
-              <article class="prest-item">
-                <div class="prest-item-head">
-                  <span class="prest-item-glyph" aria-hidden="true">
-                    <svg
-                      viewBox="0 0 40 40"
-                      fill="none"
-                      stroke="currentColor"
-                      stroke-width="1.25"
-                      stroke-linejoin="round"
-                      stroke-linecap="round"
-                    >
-                      <path d="M20 6 L33 13.5 L33 27.5 L20 35 L7 27.5 L7 13.5 Z"
-                      ></path>
-                      <path
-                        d="M20 6 V20 M20 20 L33 13.5 M20 20 L7 13.5"
-                        opacity="0.55"></path>
-                    </svg>
-                  </span>
-                </div>
-                <h3 class="prest-item-title">Modélisation 3D</h3>
-                <p class="prest-item-desc">
-                  Plans, maquettes et visuels 3D : visualiser l'espace fini
-                  avant la pose du premier meuble.
-                </p>
-              </article>
-
-              <article class="prest-item">
-                <div class="prest-item-head">
-                  <span class="prest-item-glyph" aria-hidden="true">
-                    <svg
-                      viewBox="0 0 40 40"
-                      fill="none"
-                      stroke="currentColor"
-                      stroke-width="1.25"
-                      stroke-linejoin="round"
-                      stroke-linecap="round"
-                    >
-                      <circle cx="20" cy="20" r="8"></circle>
-                      <circle cx="20" cy="7.6" r="2.4"></circle>
-                      <circle cx="20" cy="32.4" r="2.4"></circle>
-                      <circle cx="7.6" cy="20" r="2.4"></circle>
-                      <circle cx="32.4" cy="20" r="2.4"></circle>
-                    </svg>
-                  </span>
-                </div>
-                <h3 class="prest-item-title">Espaces collaboratifs</h3>
-                <p class="prest-item-desc">
-                  Salles de réunion, phone-box et espaces de convivialité,
-                  équipés et prêts à l'usage.
-                </p>
-              </article>
-
-              <article class="prest-item">
-                <div class="prest-item-head">
-                  <span class="prest-item-glyph" aria-hidden="true">
-                    <svg
-                      viewBox="0 0 40 40"
-                      fill="none"
-                      stroke="currentColor"
-                      stroke-width="1.25"
-                      stroke-linejoin="round"
-                      stroke-linecap="round"
-                    >
-                      <path d="M9 8 L9 31 L32 31 Z"></path>
-                      <path d="M9 24 L16 24 L16 31" opacity="0.5"></path>
-                      <path d="M9 13 H13 M9 18 H13" opacity="0.7"></path>
-                    </svg>
-                  </span>
-                </div>
-                <h3 class="prest-item-title">Accompagnement &amp; pose</h3>
-                <p class="prest-item-desc">
-                  Du devis à l'achat des matériaux jusqu'à la livraison : une
-                  installation clé en main.
-                </p>
-              </article>
+              {
+                agencement.prestations.map((prestation: any) => (
+                  <article class="prest-item">
+                    <div class="prest-item-head">
+                      <span
+                        class="prest-item-glyph"
+                        aria-hidden="true"
+                        set:html={prestation.icone_content}
+                      />
+                    </div>
+                    <h3 class="prest-item-title">{prestation.titre}</h3>
+                    <p class="prest-item-desc">{prestation.description}</p>
+                  </article>
+                ))
+              }
             </div>
           </div>
         </div>
@@ -511,11 +299,10 @@ import Footer from "../components/Footer.astro";
         <div class="container">
           <div class="section-head reveal">
             <h2 class="section-title" id="process-title">
-              Trois temps, <em>un espace maîtrisé de bout en bout.</em>
-              <span class="text-muted"
-                >De la première esquisse au jour où vos équipes prennent leurs
-                marques.</span
-              >
+              <span set:html={agencement.titre_processus} />
+              <span class="text-muted">
+                {agencement.sous_titre_processus}
+              </span>
             </h2>
           </div>
 
@@ -710,11 +497,10 @@ import Footer from "../components/Footer.astro";
                         stroke="none"></circle>
                     </svg>
                   </span>
-                </div>
-                <h3 class="pf-vcard-title">Réflexion</h3>
-                <p class="pf-vcard-desc">
-                  Analyse des besoins, des flux et des usages : nous lisons
-                  l'espace avant de le dessiner.
+                </div><h3 class="pf-vcard-title">
+                  {agencement.processus[0]?.titre}
+                </h3><p class="pf-vcard-desc">
+                  {agencement.processus[0]?.description}
                 </p>
                 <div class="pf-vcard-fade" aria-hidden="true"></div>
               </article>
@@ -744,11 +530,10 @@ import Footer from "../components/Footer.astro";
                         stroke="none"></path>
                     </svg>
                   </span>
-                </div>
-                <h3 class="pf-vcard-title">Conception</h3>
-                <p class="pf-vcard-desc">
-                  Plans, maquettes 3D et matériaux premium : votre futur lieu,
-                  validé avant les travaux.
+                </div><h3 class="pf-vcard-title">
+                  {agencement.processus[1]?.titre}
+                </h3><p class="pf-vcard-desc">
+                  {agencement.processus[1]?.description}
                 </p>
                 <div class="pf-vcard-fade" aria-hidden="true"></div>
               </article>
@@ -780,11 +565,10 @@ import Footer from "../components/Footer.astro";
                       ></path>
                     </svg>
                   </span>
-                </div>
-                <h3 class="pf-vcard-title">Installation</h3>
-                <p class="pf-vcard-desc">
-                  Livraison clé en main : métiers coordonnés, pose et
-                  déménagement orchestrés de bout en bout.
+                </div><h3 class="pf-vcard-title">
+                  {agencement.processus[2]?.titre}
+                </h3><p class="pf-vcard-desc">
+                  {agencement.processus[2]?.description}
                 </p>
                 <div class="pf-vcard-fade" aria-hidden="true"></div>
               </article>
@@ -800,80 +584,26 @@ import Footer from "../components/Footer.astro";
         <div class="container">
           <div class="cta-frame">
             <div class="cta-inner">
-              <svg
-                class="cta-icon reveal"
-                viewBox="0 0 120 120"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-                aria-hidden="true"
-                focusable="false"
-              >
-                <g
-                  stroke="currentColor"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                >
-                  <!-- Murs porteurs : contour avec ouverture de porte en bas a gauche -->
-                  <path
-                    d="M24 28 H96 V92 H60 M42 92 H26 Q24 92 24 90 V28"
-                    stroke-width="1.6"></path>
-                  <!-- Porte : battant + arc de debattement -->
-                  <line x1="42" y1="92" x2="42" y2="75" stroke-width="1.3"
-                  ></line>
-                  <path
-                    d="M42 75 A17 17 0 0 1 59 92"
-                    stroke-width="1"
-                    stroke-dasharray="2 3.5"
-                    opacity="0.55"></path>
-                  <!-- Cloison interieure avec passage -->
-                  <path
-                    d="M64 28 V52 M64 52 H76 M84 52 H96"
-                    stroke-width="1.2"
-                    opacity="0.6"></path>
-                  <!-- Mobilier esquisse : bureau (haut droite) + table ronde (zone gauche) -->
-                  <g stroke-width="1" opacity="0.38">
-                    <rect x="73" y="35" width="17" height="7" rx="1"></rect>
-                    <circle cx="42" cy="48" r="7"></circle>
-                    <line x1="42" y1="41" x2="42" y2="38"></line>
-                    <line x1="42" y1="55" x2="42" y2="58"></line>
-                  </g>
-                  <!-- Lignes de cote (convention archi : attaches + obliques, animees) -->
-                  <g class="cta-icon-wave" stroke-width="1">
-                    <path
-                      d="M24 24 V19 M96 24 V19 M24 21 H96 M21.5 23.5 L26.5 18.5 M93.5 23.5 L98.5 18.5"
-                    ></path>
-                    <path
-                      d="M20 28 H15 M20 92 H15 M17 28 V92 M14.5 30.5 L19.5 25.5 M14.5 94.5 L19.5 89.5"
-                    ></path>
-                  </g>
-                </g>
-                <!-- Point d'implantation -->
-                <circle
-                  cx="47"
-                  cy="72"
-                  r="7"
-                  stroke="currentColor"
-                  stroke-width="1"
-                  opacity="0.45"></circle>
-                <circle cx="47" cy="72" r="3.2" fill="currentColor"></circle>
-              </svg>
+              <Fragment set:html={agencement.icone_cta_content} />
 
               <div class="cta-body">
-                <h2 class="cta-title reveal delay-1" id="cta-title">
-                  Un projet <em>d'agencement&thinsp;?</em>
-                </h2>
+                <h2
+                  class="cta-title reveal delay-1"
+                  id="cta-title"
+                  set:html={agencement.titre_cta}
+                />
 
-                <p class="cta-sub reveal delay-2">
-                  Un space planner dédié, une étude sur site sans engagement :
-                  parlons de vos espaces.
-                </p>
+                <p
+                  class="cta-sub reveal delay-2"
+                  set:html={agencement.sous_titre_cta}
+                />
 
                 <div class="cta-actions reveal delay-3">
                   <a
                     href="/contact?pole=agencement&step=2"
                     class="btn-cta btn-cta--primary"
                   >
-                    Contacter le pôle Agencement
+                    {agencement.bouton_cta}
                     <span class="btn-cta-arrow"
                       ><svg
                         viewBox="0 0 16 16"
