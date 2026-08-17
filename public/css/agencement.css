@@ -917,13 +917,13 @@
   }
 
   /* Mot coté : underline-cote qui se trace + numéro de renvoi */
-  .cote {
+  .manifesto em {
     position: relative;
     display: inline-block;
     white-space: nowrap;
     color: var(--accent-hi);
   }
-  .cote-sup {
+  .manifesto sup {
     font-family: var(--font-mono);
     font-size: 0.32em;
     font-weight: 500;
@@ -932,14 +932,14 @@
     color: var(--accent);
     margin-left: 0.1em;
   }
-  .cote-uline {
+  .manifesto .cote-uline {
     position: absolute;
     left: 0; right: 0;
     bottom: -0.02em;
     height: 6px;
     pointer-events: none;
   }
-  .cote-uline-bar {
+  .manifesto .cote-uline-bar {
     position: absolute;
     left: 0; right: 0; top: 2px;
     height: 1.5px;
@@ -948,8 +948,8 @@
     transform-origin: left center;
     transition: transform 760ms var(--ease-expo) var(--cd, 0s);
   }
-  .cote-uline::before,
-  .cote-uline::after {
+  .manifesto .cote-uline::before,
+  .manifesto .cote-uline::after {
     content: "";
     position: absolute;
     top: 0;
@@ -958,8 +958,8 @@
     opacity: 0;
     transition: opacity 320ms ease var(--cd, 0s);
   }
-  .cote-uline::before { left: 0; }
-  .cote-uline::after  { right: 0; }
+  .manifesto .cote-uline::before { left: 0; }
+  .manifesto .cote-uline::after  { right: 0; }
   .manifesto.is-lit .cote-uline-bar { transform: scaleX(1); }
   .manifesto.is-lit .cote-uline::before,
   .manifesto.is-lit .cote-uline::after { opacity: 1; }

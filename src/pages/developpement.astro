@@ -4,13 +4,19 @@ import { readItems, readSingleton } from "@directus/sdk";
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
 
+let global = await directus.request(
+  readSingleton("Global", {
+    fields: ["*"],
+  }),
+);
+
 let developpement = await directus.request(
   readSingleton("JCD_Developpement", {
     fields: [
       "*",
       { prestations: ["*"] },
       { processus: ["*"] },
-      { logos_clients: ["*", { directus_files_id: ["*"] }] },
+      { logos_confiance: ["*", { directus_files_id: ["*"] }] },
     ],
   }),
 );
@@ -85,14 +91,17 @@ let realisations = await directus.request(
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="JCD Groupe" />
     <meta property="og:locale" content="fr_FR" />
-    <meta property="og:title" content={developpement.meta_title} />
+    <meta
+      property="og:title"
+      content={`${global.nom_societe} • ${developpement.nom_pole}`}
+    />
     <meta property="og:description" content={developpement.meta_description} />
     <meta
       property="og:url"
       content={`${import.meta.env.PUBLIC_DIRECTUS_URL}/developpement`}
     />
     <meta name="twitter:card" content="summary" />
-    <title>{developpement.meta_title}</title>
+    <title>{global.nom_societe} • {developpement.nom_pole}</title>
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -247,17 +256,17 @@ let realisations = await directus.request(
               <div class="prest-aside-clients">
                 <div class="prest-aside-clients-head">
                   <span class="prest-aside-clients-label"
-                    >{developpement.titre_clients}</span
+                    >{developpement.titre_confiance}</span
                   >
                   <span class="prest-aside-clients-rule" aria-hidden="true"
                   ></span>
                   <span class="prest-aside-clients-count"
-                    >{developpement.nombre_clients}</span
+                    >{developpement.nombre_confiance}</span
                   >
                 </div>
                 <div class="jcd-lcards" aria-label="Logos de nos clients">
                   {
-                    developpement.logos_clients.map((logo: any) => (
+                    developpement.logos_confiance.map((logo: any) => (
                       <div
                         class="jcd-lcard"
                         data-name={logo.directus_files_id.title || ""}
