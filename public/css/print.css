@@ -1006,10 +1006,14 @@
     font-style: italic;
     color: var(--ink);
   }
-  .manifesto-quote em {
-    color: var(--accent-paper-lg);
-    font-style: italic;
+  .manifesto-quote strong {
     font-weight: 400;
+    color: var(--accent-paper-lg);
+  }
+  
+  .manifesto-quote em strong,
+  .manifesto-quote strong em{
+    color: var(--accent);
   }
   .manifesto-quote .ink-muted {
     color: color-mix(in srgb, var(--accent) 65%, var(--ink));
@@ -2703,6 +2707,16 @@
     gap: clamp(20px, 3vw, 40px);
     max-width: 760px;
     margin: 0;
+  }
+
+  .cta-icon {
+    flex-shrink: 0;
+    width: clamp(106px, 13.5vw, 158px);
+    height: auto;
+    margin: 0;
+    color: var(--accent);
+    display: block;
+    overflow: visible;
   }
 
   .cta-amp {

@@ -2211,8 +2211,6 @@
   @media (prefers-reduced-motion: reduce) {
     .vl-bg { transition: none; }
   }
-     que l'ombre projetée de la card active glisse en arrière-plan,
-     pas par-dessus les voisines. */
   .valeurs-grid > .valeur {
     position: relative;
     z-index: 1;
