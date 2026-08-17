@@ -17,7 +17,10 @@ import Footer from "../components/Footer.astro";
       name="description"
       content="JCD Groupe · Pôle Informatique. Architectures systèmes & réseaux : serveurs, virtualisation, réseau et sécurité."
     />
-    <link rel="canonical" href="https://www.jcd-groupe.fr/info-reseaux" />
+    <link
+      rel="canonical"
+      href={`${import.meta.env.PUBLIC_DIRECTUS_URL}/info-reseaux`}
+    />
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="JCD Groupe" />
     <meta property="og:locale" content="fr_FR" />
@@ -29,7 +32,10 @@ import Footer from "../components/Footer.astro";
       property="og:description"
       content="JCD Groupe · Pôle Informatique. Architectures systèmes & réseaux : serveurs, virtualisation, réseau et sécurité."
     />
-    <meta property="og:url" content="https://www.jcd-groupe.fr/info-reseaux" />
+    <meta
+      property="og:url"
+      content={`${import.meta.env.PUBLIC_DIRECTUS_URL}/info-reseaux`}
+    />
     <meta name="twitter:card" content="summary" />
     <title>
       Architectures systèmes &amp; réseaux · Informatique · JCD Groupe
@@ -108,7 +114,10 @@ import Footer from "../components/Footer.astro";
         <span class="info-subnav__sep" aria-hidden="true"></span>
         <ul class="info-subnav__list">
           <li role="none">
-            <a href="/info-integration" class="info-subnav__link" role="menuitem"
+            <a
+              href="/info-integration"
+              class="info-subnav__link"
+              role="menuitem"
               ><span class="info-subnav__ic" aria-hidden="true"
                 ><svg
                   viewBox="0 0 24 24"
@@ -205,8 +214,7 @@ import Footer from "../components/Footer.astro";
 
           <div class="container">
             <h1 id="hero-title" class="hero-title reveal delay-1">
-              Des <span class="accent-grad">architectures</span> systèmes et réseaux
-              maintenues.
+              Des <em>architectures</em> systèmes et réseaux maintenues.
             </h1>
 
             <p class="hero-sub reveal delay-2">
@@ -264,8 +272,8 @@ import Footer from "../components/Footer.astro";
                 Nous concevons des architectures syst&egrave;mes et
                 r&eacute;seaux dimensionn&eacute;es pour votre
                 r&eacute;alit&eacute; (technique, organisationnelle et
-                budg&eacute;taire), puis nous les <span class="accent"
-                  >d&eacute;ployons, s&eacute;curisons et supervisons</span
+                budg&eacute;taire), puis nous les <em
+                  >d&eacute;ployons, s&eacute;curisons et supervisons</em
                 >.<span class="mf-cursor" aria-hidden="true"></span>
               </blockquote>
             </div>
@@ -991,9 +999,12 @@ import Footer from "../components/Footer.astro";
               <a class="jcd-mnav__sub" href="/formation-communication-marketing"
                 >Communication - Marketing</a
               >
-              <a class="jcd-mnav__sub" href="/formation-management">Management</a
+              <a class="jcd-mnav__sub" href="/formation-management"
+                >Management</a
               >
-              <a class="jcd-mnav__sub" href="/formation-commerce-relation-client"
+              <a
+                class="jcd-mnav__sub"
+                href="/formation-commerce-relation-client"
                 >Commerce - Relation client</a
               >
               <a class="jcd-mnav__sub" href="/formation-comptabilite-gestion"
@@ -1133,6 +1144,7 @@ import Footer from "../components/Footer.astro";
     </div>
     <script is:inline src="/js/shared/a11y.js" id="jcd-a11y-js"></script>
     <script is:inline src="/js/shared/micons.js" id="jcd-micons-js"></script>
-    <script is:inline src="/js/shared/mrefonte.js" id="jcd-mrefonte-js"></script>
+    <script is:inline src="/js/shared/mrefonte.js" id="jcd-mrefonte-js"
+    ></script>
   </body>
 </html>

@@ -17,7 +17,10 @@ import Footer from "../components/Footer.astro";
       name="description"
       content="JCD Groupe · Pôle Agencement. Space planning, mobilier de bureau, conception 3D et installation clé en main d'espaces de travail sur-mesure en Grand Est, depuis 1996."
     />
-    <link rel="canonical" href="https://www.jcd-groupe.fr/agencement" />
+    <link
+      rel="canonical"
+      href={`${import.meta.env.PUBLIC_DIRECTUS_URL}/agencement`}
+    />
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="JCD Groupe" />
     <meta property="og:locale" content="fr_FR" />
@@ -29,7 +32,10 @@ import Footer from "../components/Footer.astro";
       property="og:description"
       content="JCD Groupe · Pôle Agencement. Space planning, mobilier de bureau, conception 3D et installation clé en main d'espaces de travail sur-mesure en Grand Est, depuis 1996."
     />
-    <meta property="og:url" content="https://www.jcd-groupe.fr/agencement" />
+    <meta
+      property="og:url"
+      content={`${import.meta.env.PUBLIC_DIRECTUS_URL}/agencement`}
+    />
     <meta name="twitter:card" content="summary" />
     <title>Agencement · Espaces de travail sur-mesure · JCD Groupe</title>
 
@@ -81,7 +87,7 @@ import Footer from "../components/Footer.astro";
           <div class="container">
             <h1 id="agc-hero-title" class="hero-title reveal delay-1">
               L'espace de travail qui s'adapte à vous,<br />
-              <span class="accent-grad">pas l'inverse.</span>
+              <em>pas l'inverse.</em>
             </h1>
 
             <p class="hero-sub reveal delay-2">
@@ -131,7 +137,10 @@ import Footer from "../components/Footer.astro";
                 </span>
               </header>
 
-              <blockquote class="mf-quote manifesto-rich reveal delay-1" id="manifesto-title">
+              <blockquote
+                class="mf-quote manifesto-rich reveal delay-1"
+                id="manifesto-title"
+              >
                 Aménager un espace, ce n'est pas seulement meubler une surface.
                 C'est optimiser les <span class="cote"
                   >flux<span class="cote-sup" aria-hidden="true">01</span><span
@@ -202,8 +211,7 @@ import Footer from "../components/Footer.astro";
           <div class="prest-layout">
             <aside class="prest-aside reveal">
               <h2 class="prest-aside-title" id="prestations-title">
-                <span class="accent">Six savoir-faire</span>, un projet mené
-                d'un seul tenant.
+                <em>Six savoir-faire</em>, un projet mené d'un seul tenant.
               </h2>
               <p class="prest-aside-sub">
                 Du plan d'implantation à la pose du dernier meuble, un seul
@@ -503,9 +511,7 @@ import Footer from "../components/Footer.astro";
         <div class="container">
           <div class="section-head reveal">
             <h2 class="section-title" id="process-title">
-              Trois temps, <span class="accent"
-                >un espace maîtrisé de bout en bout.</span
-              >
+              Trois temps, <em>un espace maîtrisé de bout en bout.</em>
               <span class="text-muted"
                 >De la première esquisse au jour où vos équipes prennent leurs
                 marques.</span
@@ -1054,9 +1060,12 @@ import Footer from "../components/Footer.astro";
               <a class="jcd-mnav__sub" href="/formation-communication-marketing"
                 >Communication - Marketing</a
               >
-              <a class="jcd-mnav__sub" href="/formation-management">Management</a
+              <a class="jcd-mnav__sub" href="/formation-management"
+                >Management</a
               >
-              <a class="jcd-mnav__sub" href="/formation-commerce-relation-client"
+              <a
+                class="jcd-mnav__sub"
+                href="/formation-commerce-relation-client"
                 >Commerce - Relation client</a
               >
               <a class="jcd-mnav__sub" href="/formation-comptabilite-gestion"
@@ -1196,6 +1205,7 @@ import Footer from "../components/Footer.astro";
     </div>
     <script is:inline src="/js/shared/a11y.js" id="jcd-a11y-js"></script>
     <script is:inline src="/js/shared/micons.js" id="jcd-micons-js"></script>
-    <script is:inline src="/js/shared/mrefonte.js" id="jcd-mrefonte-js"></script>
+    <script is:inline src="/js/shared/mrefonte.js" id="jcd-mrefonte-js"
+    ></script>
   </body>
 </html>

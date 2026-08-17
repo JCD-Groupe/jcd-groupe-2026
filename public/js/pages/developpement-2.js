@@ -118,6 +118,24 @@
       rafUpdate();
     }
 
+    function updateFilterCounts() {
+      filters.forEach(function (btn) {
+        var filterValue = btn.getAttribute("data-filter");
+        var count =
+          filterValue === "all"
+            ? cards.length
+            : cards.filter(function (card) {
+                return (
+                  (card.getAttribute("data-cat") || "")
+                    .split(" ")
+                    .indexOf(filterValue) !== -1
+                );
+              }).length;
+        var countEl = btn.querySelector(".real-filter-count");
+        if (countEl) countEl.textContent = count;
+      });
+    }
+
     filters.forEach(function (btn) {
       btn.addEventListener('click', function () {
         filters.forEach(function (b) {
@@ -130,6 +148,7 @@
     });
 
     window.addEventListener('resize', rafUpdate, { passive: true });
+    updateFilterCounts();
     update();
   })();
 

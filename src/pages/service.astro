@@ -17,7 +17,10 @@ import Footer from "../components/Footer.astro";
       name="description"
       content="JCD Groupe · Pôle Service. Services informatiques managés : support helpdesk, infogérance et supervision du SI, sauvegarde, audit et gouvernance. Un interlocuteur unique de confiance en Grand Est."
     />
-    <link rel="canonical" href="https://www.jcd-groupe.fr/service" />
+    <link
+      rel="canonical"
+      href={`${import.meta.env.PUBLIC_DIRECTUS_URL}/service`}
+    />
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="JCD Groupe" />
     <meta property="og:locale" content="fr_FR" />
@@ -29,7 +32,10 @@ import Footer from "../components/Footer.astro";
       property="og:description"
       content="JCD Groupe · Pôle Service. Services informatiques managés : support helpdesk, infogérance et supervision du SI, sauvegarde, audit et gouvernance. Un interlocuteur unique de confiance en Grand Est."
     />
-    <meta property="og:url" content="https://www.jcd-groupe.fr/service" />
+    <meta
+      property="og:url"
+      content={`${import.meta.env.PUBLIC_DIRECTUS_URL}/service`}
+    />
     <meta name="twitter:card" content="summary" />
     <title>Service · Infogérance &amp; support managé du SI · JCD Groupe</title>
 
@@ -83,8 +89,7 @@ import Footer from "../components/Footer.astro";
 
           <div class="container">
             <h1 id="service-hero-title" class="hero-title reveal delay-1">
-              Un <span class="accent-grad">guichet unique</span> pour vous accompagner
-              au quotidien.
+              Un <em>guichet unique</em> pour vous accompagner au quotidien.
             </h1>
 
             <p class="hero-sub reveal delay-2">
@@ -94,7 +99,10 @@ import Footer from "../components/Footer.astro";
             </p>
 
             <div class="hero-actions reveal delay-3">
-              <a href="/contact?pole=service&step=2" class="btn-cta btn-cta--ghost">
+              <a
+                href="/contact?pole=service&step=2"
+                class="btn-cta btn-cta--ghost"
+              >
                 Faire le point sur mon SI
                 <span class="btn-cta-arrow"
                   ><svg
@@ -196,10 +204,12 @@ import Footer from "../components/Footer.astro";
               </header>
 
               <div class="mf-cols">
-                <blockquote class="manifesto-quote manifesto-rich reveal" id="manifesto-title">
-                  <span class="accent">Nous assurons</span> le support, l'exploitation,
-                  la sécurisation et la gouvernance, jour après jour. <span
-                    class="q-soft"
+                <blockquote
+                  class="manifesto-quote manifesto-rich reveal"
+                  id="manifesto-title"
+                >
+                  <em>Nous assurons</em> le support, l'exploitation, la sécurisation
+                  et la gouvernance, jour après jour. <span class="q-soft"
                     >De l'audit à la supervision, votre informatique reste en
                     conditions opérationnelles.</span
                   >
@@ -231,8 +241,7 @@ import Footer from "../components/Footer.astro";
           <div class="prest-layout">
             <aside class="prest-aside reveal">
               <h2 class="prest-aside-title" id="prestations-title">
-                <span class="accent">Six savoir-faire</span>, un SI piloté de
-                bout en bout.
+                <em>Six savoir-faire</em>, un SI piloté de bout en bout.
               </h2>
               <p class="prest-aside-sub">
                 De l'audit à la gouvernance, la gestion opérationnelle de votre
@@ -540,9 +549,7 @@ import Footer from "../components/Footer.astro";
         <div class="container">
           <div class="section-head reveal">
             <h2 class="section-title" id="process-title">
-              Quatre expertises, <span class="accent"
-                >un seul interlocuteur</span
-              >.
+              Quatre expertises, <em>un seul interlocuteur</em>.
               <span class="text-muted"
                 >Un point de contact unique d'où découlent l'audit, la
                 supervision, le support et la gouvernance de votre SI.</span
@@ -1213,9 +1220,12 @@ import Footer from "../components/Footer.astro";
               <a class="jcd-mnav__sub" href="/formation-communication-marketing"
                 >Communication - Marketing</a
               >
-              <a class="jcd-mnav__sub" href="/formation-management">Management</a
+              <a class="jcd-mnav__sub" href="/formation-management"
+                >Management</a
               >
-              <a class="jcd-mnav__sub" href="/formation-commerce-relation-client"
+              <a
+                class="jcd-mnav__sub"
+                href="/formation-commerce-relation-client"
                 >Commerce - Relation client</a
               >
               <a class="jcd-mnav__sub" href="/formation-comptabilite-gestion"
@@ -1355,6 +1365,7 @@ import Footer from "../components/Footer.astro";
     </div>
     <script is:inline src="/js/shared/a11y.js" id="jcd-a11y-js"></script>
     <script is:inline src="/js/shared/micons.js" id="jcd-micons-js"></script>
-    <script is:inline src="/js/shared/mrefonte.js" id="jcd-mrefonte-js"></script>
+    <script is:inline src="/js/shared/mrefonte.js" id="jcd-mrefonte-js"
+    ></script>
   </body>
 </html>

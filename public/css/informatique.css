@@ -676,7 +676,7 @@
     font-weight: 600; max-width: 18ch;
     color: var(--text-1);
   }
-  .hero-title .accent-grad {
+  .hero-title em {
     background: linear-gradient(120deg,
       rgba(82, 144, 203, 0.95) 0%,
       rgba(46, 114, 186, 0.92) 50%,
@@ -749,7 +749,7 @@
     letter-spacing: 0.18em;
     flex-wrap: wrap; justify-content: center;
   }
-  .cs-progress .accent { color: var(--accent-hi); }
+  .cs-progress em { color: var(--accent-hi); }
   .cs-actions {
     display: inline-flex; gap: 12px; flex-wrap: wrap;
     justify-content: center; margin-top: 4px;
@@ -1303,7 +1303,7 @@
   }
   .hub-intro > .container { position: relative; z-index: 1; }
   .hub-intro h1 { font-size: clamp(32px, 4.6vw, 56px); line-height: 1.04; letter-spacing: -0.035em; font-weight: 600; color: var(--text-1); max-width: 18ch; margin: 18px 0 18px; }
-  .hub-intro h1 .accent-grad { background: linear-gradient(120deg, rgba(82,144,203,0.95) 0%, rgba(46,114,186,0.92) 50%, rgba(30,90,148,0.85) 100%); -webkit-background-clip: text; background-clip: text; color: transparent; }
+  .hub-intro h1 em { background: linear-gradient(120deg, rgba(82,144,203,0.95) 0%, rgba(46,114,186,0.92) 50%, rgba(30,90,148,0.85) 100%); -webkit-background-clip: text; background-clip: text; color: transparent; }
   .hub-intro p { font-size: 16px; line-height: 1.55; color: var(--text-2); max-width: 580px; }
 
   /* --- Cards des 4 domaines (display home, tokens pôle, bleu unifié) --- */

@@ -114,7 +114,7 @@
   }
 
   .text-muted { color: var(--text-2); font-weight: 400; }
-  .accent { color: var(--accent); }
+  em { color: var(--accent); }
 
   .section-title {
     font-size: clamp(28px, 3vw, 40px);
@@ -732,7 +732,7 @@
     margin: 0 0 26px; font-weight: 600;
     max-width: 18ch; color: var(--text-1);
   }
-  .hero-title .accent-grad {
+  .hero-title em {
     background: linear-gradient(120deg,
       rgba(var(--mesh-c4), 1.00) 0%,
       rgba(var(--mesh-c2), 0.95) 50%,
@@ -832,7 +832,7 @@
   .cahier-sheet > .container { position: relative; z-index: 3; }
 
   /* Accent du manifeste : surligneur vert formation (#a4d05c) sur encre noire */
-  .cahier-sheet .manifesto-quote .accent {
+  .cahier-sheet .manifesto-quote em {
     color: var(--cahier-ink);
     font-style: normal; font-weight: 600;
     background: linear-gradient(180deg,
@@ -879,7 +879,7 @@
   .manifesto-quote strong {
     font-style: normal; font-weight: 600; color: var(--text-1);
   }
-  .manifesto-quote .accent {
+  .manifesto-quote em {
     color: var(--accent-hi); font-weight: 500; font-style: normal;
   }
   .manifesto-quote .q-soft { color: var(--text-3); }
@@ -912,7 +912,7 @@
   }
   .mf-stat + .mf-stat::before { content: "\00b7"; margin: 0 13px; color: var(--text-4); }
   .mf-signoff { font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--text-3); }
-  .mf-signoff .accent { color: var(--accent-hi); font-weight: 500; }
+  .mf-signoff em { color: var(--accent-hi); font-weight: 500; }
 
   /* Bloc certifications empilées (Qualiopi au-dessus, TOSA en dessous),
      centrées l'une sur l'autre, en face de la citation. */
@@ -971,7 +971,7 @@
     font-size: clamp(28px, 3vw, 40px); font-weight: 600;
     letter-spacing: -0.035em; line-height: 1.04; color: var(--text-1);
   }
-  .prest-aside-title .accent { color: var(--accent); }
+  .prest-aside-title em { color: var(--accent); }
   .prest-aside-sub {
     font-size: 14.5px; line-height: 1.6; color: var(--text-2);
     max-width: 360px; letter-spacing: -0.005em;
@@ -1111,7 +1111,7 @@
     font-family: var(--font-mono); font-size: 10.5px; color: var(--text-3);
     letter-spacing: 0.2em; text-transform: uppercase; font-weight: 500; line-height: 1;
   }
-  .prest-item-num .accent { color: var(--accent); }
+  .prest-item-num em { color: var(--accent); }
   .prest-item-title {
     font-size: clamp(18px, 1.7vw, 21px); font-weight: 600;
     letter-spacing: -0.022em; line-height: 1.22; color: var(--text-1); margin-top: auto;
@@ -1142,7 +1142,7 @@
     background: rgba(var(--ia-rgb),0.06);
     box-shadow: 0 0 18px -6px rgba(var(--ia-rgb),0.35), inset 0 1px 0 rgba(255,255,255,0.05);
   }
-  .prest-item--ia .prest-item-num .accent { color: var(--ia); }
+  .prest-item--ia .prest-item-num em { color: var(--ia); }
   .prest-ia-tag {
     display: inline-block; vertical-align: 3px; margin-left: 10px;
     font-family: var(--font-mono); font-size: 9.5px; font-weight: 500;

@@ -119,7 +119,7 @@
   }
 
   .text-muted { color: var(--text-2); font-weight: 400; }
-  .accent { color: var(--accent-hi); }
+  em { color: var(--accent-hi); }
 
   /* Titre de section unifié — aligné sur .prest-aside-title (parité inter-sections) */
   .section-title {
@@ -869,7 +869,7 @@
     max-width: 18ch;
     color: var(--text-1);
   }
-  .hero-title .accent-grad {
+  .hero-title em {
     background: linear-gradient(120deg,
       rgba(var(--mesh-c4), 1.00)  0%,
       rgba(var(--mesh-c2), 0.95) 50%,
@@ -998,7 +998,7 @@
     font-weight: 500;
     color: var(--text-1);
   }
-  .manifesto-quote .accent {
+  .manifesto-quote em {
     color: var(--accent-hi);
     font-weight: 500;
     font-style: normal;
@@ -1058,7 +1058,7 @@
     text-transform: uppercase;
     color: var(--text-3);
   }
-  .tx-signoff .accent { color: var(--accent-hi); font-weight: 500; }
+  .tx-signoff em { color: var(--accent-hi); font-weight: 500; }
 
   @media (max-width: 560px) {
     .manifesto-pull { flex-direction: column; align-items: flex-start; gap: 18px; }
@@ -1460,7 +1460,7 @@
     line-height: 1.04;
     color: var(--text-1);
   }
-  .prest-aside-title .accent { color: var(--accent-hi); }
+  .prest-aside-title em { color: var(--accent-hi); }
   .prest-aside-sub {
     font-size: 14.5px;
     line-height: 1.6;
@@ -1745,7 +1745,7 @@
     font-weight: 500;
     line-height: 1;
   }
-  .prest-item-num .accent { color: var(--accent-hi); }
+  .prest-item-num em { color: var(--accent-hi); }
 
   .prest-item-title {
     font-size: clamp(18px, 1.7vw, 21px);
@@ -1897,7 +1897,7 @@
     align-items: center;
     gap: 8px;
   }
-  .trust-block-count .accent { color: var(--accent-hi); }
+  .trust-block-count em { color: var(--accent-hi); }
   .trust-block-count-rule {
     width: 24px; height: 1px;
     background: var(--accent);
@@ -2119,7 +2119,7 @@
     flex-wrap: wrap;
     gap: 16px;
   }
-  .credentials-summary .accent { color: var(--accent-hi); }
+  .credentials-summary em { color: var(--accent-hi); }
 
   /* ============== CASE CARDS — sous-bloc 02 · "deployment records" tech ============== */
   .case-cards {
@@ -2222,7 +2222,7 @@
     align-items: center;
     gap: 8px;
   }
-  .case-card-mark .accent { color: var(--accent-hi); }
+  .case-card-mark em { color: var(--accent-hi); }
   .case-card-mark-sep {
     width: 10px; height: 1px;
     background: var(--line-3);

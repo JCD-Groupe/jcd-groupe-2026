@@ -17,7 +17,10 @@ import Footer from "../components/Footer.astro";
       name="description"
       content="JCD Groupe · Pôle Formation. Formation professionnelle continue sur-mesure, coaching managérial, conseil RH, events d'entreprise. Certifié Qualiopi, centre TOSA. 21 ans d'expertise en Grand Est."
     />
-    <link rel="canonical" href="https://www.jcd-groupe.fr/formation" />
+    <link
+      rel="canonical"
+      href={`${import.meta.env.PUBLIC_DIRECTUS_URL}/formation`}
+    />
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="JCD Groupe" />
     <meta property="og:locale" content="fr_FR" />
@@ -29,7 +32,10 @@ import Footer from "../components/Footer.astro";
       property="og:description"
       content="JCD Groupe · Pôle Formation. Formation professionnelle continue sur-mesure, coaching managérial, conseil RH, events d'entreprise. Certifié Qualiopi, centre TOSA. 21 ans d'expertise en Grand Est."
     />
-    <meta property="og:url" content="https://www.jcd-groupe.fr/formation" />
+    <meta
+      property="og:url"
+      content={`${import.meta.env.PUBLIC_DIRECTUS_URL}/formation`}
+    />
     <meta name="twitter:card" content="summary" />
     <title>
       Formation · Développement des compétences sur-mesure · JCD Groupe
@@ -644,9 +650,7 @@ import Footer from "../components/Footer.astro";
 
           <div class="container">
             <h1 id="formation-hero-title" class="hero-title reveal delay-1">
-              Des formations <span class="accent-grad"
-                >professionnalisantes</span
-              > adaptées à tous vos besoins.
+              Des formations <em>professionnalisantes</em> adaptées à tous vos besoins.
             </h1>
 
             <p class="hero-sub reveal delay-2">
@@ -655,7 +659,10 @@ import Footer from "../components/Footer.astro";
             </p>
 
             <div class="hero-actions reveal delay-3">
-              <a href="/contact?pole=formation&step=2" class="btn-cta btn-cta--ghost">
+              <a
+                href="/contact?pole=formation&step=2"
+                class="btn-cta btn-cta--ghost"
+              >
                 Contacter un conseiller
                 <span class="btn-cta-arrow"
                   ><svg
@@ -698,9 +705,7 @@ import Footer from "../components/Footer.astro";
               <div class="manifesto-top reveal delay-1">
                 <blockquote class="manifesto-quote manifesto-rich" id="manifesto-title">
                   <strong>Le catalogue est notre vitrine,</strong> le sur-mesure
-                  notre signature. Notre force&nbsp;: <span class="accent"
-                    >co-construire</span
-                  > un dispositif unique, aligné sur vos objectifs, vos métiers et
+                  notre signature. Notre force&nbsp;: <em>co-construire</em> un dispositif unique, aligné sur vos objectifs, vos métiers et
                   vos contraintes opérationnelles.
                 </blockquote>
                 <div class="mf-certs">
@@ -885,8 +890,8 @@ import Footer from "../components/Footer.astro";
           <div class="prest-layout">
             <aside class="prest-aside reveal">
               <h2 class="prest-aside-title" id="prestations-title">
-                <span class="accent">Six savoir-faire</span>, un seul
-                objectif&nbsp;: votre performance.
+                <em>Six savoir-faire</em>, un seul objectif&nbsp;: votre
+                performance.
               </h2>
               <p class="prest-aside-sub">
                 Du diagnostic au suivi post-formation, chaque dispositif est
@@ -1213,9 +1218,7 @@ import Footer from "../components/Footer.astro";
         <div class="container">
           <div class="section-head reveal">
             <h2 class="section-title" id="process-title">
-              Un parcours personnalisé, <span class="accent"
-                >étape par étape.</span
-              >
+              Un parcours personnalisé, <em>étape par étape.</em>
               <span class="text-muted"
                 >De l'écoute initiale au suivi post-formation, chaque étape est
                 co-construite avec vous.</span
@@ -1895,9 +1898,12 @@ import Footer from "../components/Footer.astro";
               <a class="jcd-mnav__sub" href="/formation-communication-marketing"
                 >Communication - Marketing</a
               >
-              <a class="jcd-mnav__sub" href="/formation-management">Management</a
+              <a class="jcd-mnav__sub" href="/formation-management"
+                >Management</a
               >
-              <a class="jcd-mnav__sub" href="/formation-commerce-relation-client"
+              <a
+                class="jcd-mnav__sub"
+                href="/formation-commerce-relation-client"
                 >Commerce - Relation client</a
               >
               <a class="jcd-mnav__sub" href="/formation-comptabilite-gestion"
@@ -2039,6 +2045,7 @@ import Footer from "../components/Footer.astro";
 
     <script is:inline src="/js/shared/logo-marquee.js"></script>
     <script is:inline src="/js/shared/micons.js" id="jcd-micons-js"></script>
-    <script is:inline src="/js/shared/mrefonte.js" id="jcd-mrefonte-js"></script>
+    <script is:inline src="/js/shared/mrefonte.js" id="jcd-mrefonte-js"
+    ></script>
   </body>
 </html>

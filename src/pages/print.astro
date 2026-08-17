@@ -17,7 +17,10 @@ import Footer from "../components/Footer.astro";
       name="description"
       content="JCD Groupe · Pôle Print. Fourniture, maintenance et gestion de vos solutions d'impression. Expertise terrain en Grand Est. Certifié PAPERCUT, HP, Toshiba."
     />
-    <link rel="canonical" href="https://www.jcd-groupe.fr/print" />
+    <link
+      rel="canonical"
+      href={`${import.meta.env.PUBLIC_DIRECTUS_URL}/print`}
+    />
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="JCD Groupe" />
     <meta property="og:locale" content="fr_FR" />
@@ -29,7 +32,10 @@ import Footer from "../components/Footer.astro";
       property="og:description"
       content="JCD Groupe · Pôle Print. Fourniture, maintenance et gestion de vos solutions d'impression. Expertise terrain en Grand Est. Certifié PAPERCUT, HP, Toshiba."
     />
-    <meta property="og:url" content="https://www.jcd-groupe.fr/print" />
+    <meta
+      property="og:url"
+      content={`${import.meta.env.PUBLIC_DIRECTUS_URL}/print`}
+    />
     <meta name="twitter:card" content="summary" />
     <title>Print · Impression &amp; gestion documentaire · JCD Groupe</title>
 
@@ -83,7 +89,7 @@ import Footer from "../components/Footer.astro";
 
           <div class="container">
             <h1 id="print-hero-title" class="hero-title reveal delay-1">
-              L'<span class="accent-grad">impression</span> au service de votre productivité.
+              L'<em>impression</em> au service de votre productivité.
             </h1>
 
             <p class="hero-sub reveal delay-2">
@@ -92,7 +98,10 @@ import Footer from "../components/Footer.astro";
             </p>
 
             <div class="hero-actions reveal delay-3">
-              <a href="/contact?pole=print&step=2" class="btn-cta btn-cta--ghost">
+              <a
+                href="/contact?pole=print&step=2"
+                class="btn-cta btn-cta--ghost"
+              >
                 Demander un devis
                 <span class="btn-cta-arrow"
                   ><svg
@@ -125,11 +134,13 @@ import Footer from "../components/Footer.astro";
                 <span>JCD Groupe &middot; Édition 04 / 2026</span>
               </header>
 
-              <blockquote class="manifesto-quote manifesto-rich reveal" id="manifesto-title">
+              <blockquote
+                class="manifesto-quote manifesto-rich reveal"
+                id="manifesto-title"
+              >
                 <em>Imprimer,</em> ce n'est pas <em>livrer une machine</em>.
-                C'est tenir une chaîne complète, du <span class="accent"
-                  >premier audit</span
-                > à la dernière feuille. <span class="ink-muted"
+                C'est tenir une chaîne complète, du <em>premier audit</em> à la dernière
+                feuille. <span class="ink-muted"
                   >Sans intermédiaire, sans surprise, sans dépendance.</span
                 >
               </blockquote>
@@ -160,8 +171,7 @@ import Footer from "../components/Footer.astro";
           <div class="prest-layout">
             <aside class="prest-aside reveal">
               <h2 class="prest-aside-title" id="prestations-title">
-                <span class="accent">Quatre savoir-faire</span>, une seule
-                chaîne de service.
+                <em>Quatre savoir-faire</em>, une seule chaîne de service.
               </h2>
               <p class="prest-aside-sub">
                 Équipements, maintenance et logiciels.
@@ -406,7 +416,7 @@ import Footer from "../components/Footer.astro";
         <div class="container">
           <div class="section-head reveal">
             <h2 class="section-title" id="process-title">
-              Quatre étapes, <span class="accent">un seul interlocuteur</span>.
+              Quatre étapes, <em>un seul interlocuteur</em>.
               <span class="text-muted"
                 >De la première visite à la supervision au quotidien.</span
               >
@@ -826,7 +836,10 @@ import Footer from "../components/Footer.astro";
                 </p>
 
                 <div class="cta-actions reveal delay-3">
-                  <a href="/contact?pole=print&step=2" class="btn-cta btn-cta--primary">
+                  <a
+                    href="/contact?pole=print&step=2"
+                    class="btn-cta btn-cta--primary"
+                  >
                     Contacter le pôle Print
                     <span class="btn-cta-arrow"
                       ><svg
@@ -1014,9 +1027,12 @@ import Footer from "../components/Footer.astro";
               <a class="jcd-mnav__sub" href="/formation-communication-marketing"
                 >Communication - Marketing</a
               >
-              <a class="jcd-mnav__sub" href="/formation-management">Management</a
+              <a class="jcd-mnav__sub" href="/formation-management"
+                >Management</a
               >
-              <a class="jcd-mnav__sub" href="/formation-commerce-relation-client"
+              <a
+                class="jcd-mnav__sub"
+                href="/formation-commerce-relation-client"
                 >Commerce - Relation client</a
               >
               <a class="jcd-mnav__sub" href="/formation-comptabilite-gestion"
@@ -1156,6 +1172,7 @@ import Footer from "../components/Footer.astro";
     </div>
     <script is:inline src="/js/shared/a11y.js" id="jcd-a11y-js"></script>
     <script is:inline src="/js/shared/micons.js" id="jcd-micons-js"></script>
-    <script is:inline src="/js/shared/mrefonte.js" id="jcd-mrefonte-js"></script>
+    <script is:inline src="/js/shared/mrefonte.js" id="jcd-mrefonte-js"
+    ></script>
   </body>
 </html>

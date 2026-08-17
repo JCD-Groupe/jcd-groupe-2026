@@ -238,8 +238,9 @@
     gl.uniform2f(uTC, 0.30, 0.62);
     gl.uniform2f(uTR, 0.28, 0.22);
     gl.uniform1f(uPx, Math.min(window.devicePixelRatio || 1, 1.5));
-    var titleEl = document.querySelector('#agc-hero-title .accent-grad')
-               || document.getElementById('agc-hero-title');
+    var titleEl =
+      document.querySelector("#agc-hero-title em") ||
+      document.getElementById("agc-hero-title");
     function updateTitleLens() {
       if (!titleEl) return;
       var cr = canvas.getBoundingClientRect();

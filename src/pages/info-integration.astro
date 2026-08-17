@@ -17,7 +17,10 @@ import Footer from "../components/Footer.astro";
       name="description"
       content="JCD Groupe · Pôle Informatique. Service Intégration & Support PC : déploiement, maintenance et support du parc utilisateur."
     />
-    <link rel="canonical" href="https://www.jcd-groupe.fr/info-integration" />
+    <link
+      rel="canonical"
+      href={`${import.meta.env.PUBLIC_DIRECTUS_URL}/info-integration`}
+    />
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="JCD Groupe" />
     <meta property="og:locale" content="fr_FR" />
@@ -31,7 +34,7 @@ import Footer from "../components/Footer.astro";
     />
     <meta
       property="og:url"
-      content="https://www.jcd-groupe.fr/info-integration"
+      content={`${import.meta.env.PUBLIC_DIRECTUS_URL}/info-integration`}
     />
     <meta name="twitter:card" content="summary" />
     <title>Intégration &amp; Support PC · Informatique · JCD Groupe</title>
@@ -206,7 +209,7 @@ import Footer from "../components/Footer.astro";
 
           <div class="container">
             <h1 id="hero-title" class="hero-title reveal delay-1">
-              Un parc informatique <span class="accent-grad">complet</span> et support&eacute;.
+              Un parc informatique <em>complet</em> et support&eacute;.
             </h1>
 
             <p class="hero-sub reveal delay-2">
@@ -261,9 +264,8 @@ import Footer from "../components/Footer.astro";
                 >
                   Un poste de travail, &ccedil;a n'est pas juste <em
                     >un ordinateur, un clavier et une souris</em
-                  > : il faut le composer selon vos besoins. Nous <span
-                    class="accent"
-                    >masterisons, d&eacute;ployons et supportons</span
+                  > : il faut le composer selon vos besoins. Nous <em
+                    >masterisons, d&eacute;ployons et supportons</em
                   > votre parc (de la fourniture du mat&eacute;riel au SAV) pour que
                   vos collaborateurs puissent <span class="q-soft"
                     >travailler dans des conditions optimales.</span
@@ -278,7 +280,7 @@ import Footer from "../components/Footer.astro";
                     decoding="async"
                   />
                   <figcaption>
-                    <span class="accent">//</span> Nous sommes certifi&eacute;s HP
+                    <em>//</em> Nous sommes certifi&eacute;s HP
                   </figcaption>
                 </figure>
               </div>
@@ -1070,9 +1072,12 @@ import Footer from "../components/Footer.astro";
               <a class="jcd-mnav__sub" href="/formation-communication-marketing"
                 >Communication - Marketing</a
               >
-              <a class="jcd-mnav__sub" href="/formation-management">Management</a
+              <a class="jcd-mnav__sub" href="/formation-management"
+                >Management</a
               >
-              <a class="jcd-mnav__sub" href="/formation-commerce-relation-client"
+              <a
+                class="jcd-mnav__sub"
+                href="/formation-commerce-relation-client"
                 >Commerce - Relation client</a
               >
               <a class="jcd-mnav__sub" href="/formation-comptabilite-gestion"
@@ -1212,6 +1217,7 @@ import Footer from "../components/Footer.astro";
     </div>
     <script is:inline src="/js/shared/a11y.js" id="jcd-a11y-js"></script>
     <script is:inline src="/js/shared/micons.js" id="jcd-micons-js"></script>
-    <script is:inline src="/js/shared/mrefonte.js" id="jcd-mrefonte-js"></script>
+    <script is:inline src="/js/shared/mrefonte.js" id="jcd-mrefonte-js"
+    ></script>
   </body>
 </html>

@@ -19,7 +19,7 @@ import Footer from "../components/Footer.astro";
     />
     <link
       rel="canonical"
-      href="https://www.jcd-groupe.fr/politique-de-confidentialite"
+      href={`${import.meta.env.PUBLIC_DIRECTUS_URL}/politique-de-confidentialite`}
     />
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="JCD Groupe" />
@@ -34,7 +34,7 @@ import Footer from "../components/Footer.astro";
     />
     <meta
       property="og:url"
-      content="https://www.jcd-groupe.fr/politique-de-confidentialite"
+      content={`${import.meta.env.PUBLIC_DIRECTUS_URL}/politique-de-confidentialite`}
     />
     <meta name="twitter:card" content="summary" />
     <title>Politique de confidentialité · JCD Groupe</title>
@@ -329,7 +329,8 @@ import Footer from "../components/Footer.astro";
 
     <Footer />
 
-    <script is:inline src="/js/pages/politique-de-confidentialite-1.js"></script>
+    <script is:inline src="/js/pages/politique-de-confidentialite-1.js"
+    ></script>
 
     <script is:inline src="/js/shared/menu-frost.js"></script>
     <!-- jcd-mobile-nav (injected) -->
@@ -469,9 +470,12 @@ import Footer from "../components/Footer.astro";
               <a class="jcd-mnav__sub" href="/formation-communication-marketing"
                 >Communication - Marketing</a
               >
-              <a class="jcd-mnav__sub" href="/formation-management">Management</a
+              <a class="jcd-mnav__sub" href="/formation-management"
+                >Management</a
               >
-              <a class="jcd-mnav__sub" href="/formation-commerce-relation-client"
+              <a
+                class="jcd-mnav__sub"
+                href="/formation-commerce-relation-client"
                 >Commerce - Relation client</a
               >
               <a class="jcd-mnav__sub" href="/formation-comptabilite-gestion"
@@ -611,6 +615,7 @@ import Footer from "../components/Footer.astro";
     </div>
     <script is:inline src="/js/shared/a11y.js" id="jcd-a11y-js"></script>
     <script is:inline src="/js/shared/micons.js" id="jcd-micons-js"></script>
-    <script is:inline src="/js/shared/mrefonte.js" id="jcd-mrefonte-js"></script>
+    <script is:inline src="/js/shared/mrefonte.js" id="jcd-mrefonte-js"
+    ></script>
   </body>
 </html>

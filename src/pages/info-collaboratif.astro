@@ -17,7 +17,10 @@ import Footer from "../components/Footer.astro";
       name="description"
       content="JCD Groupe · Pôle Informatique. Solutions collaboratives & audiovisuelles : messagerie, visioconférence et salles équipées."
     />
-    <link rel="canonical" href="https://www.jcd-groupe.fr/info-collaboratif" />
+    <link
+      rel="canonical"
+      href={`${import.meta.env.PUBLIC_DIRECTUS_URL}/info-collaboratif`}
+    />
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="JCD Groupe" />
     <meta property="og:locale" content="fr_FR" />
@@ -31,7 +34,7 @@ import Footer from "../components/Footer.astro";
     />
     <meta
       property="og:url"
-      content="https://www.jcd-groupe.fr/info-collaboratif"
+      content={`${import.meta.env.PUBLIC_DIRECTUS_URL}/info-collaboratif`}
     />
     <meta name="twitter:card" content="summary" />
     <title>
@@ -111,7 +114,10 @@ import Footer from "../components/Footer.astro";
         <span class="info-subnav__sep" aria-hidden="true"></span>
         <ul class="info-subnav__list">
           <li role="none">
-            <a href="/info-integration" class="info-subnav__link" role="menuitem"
+            <a
+              href="/info-integration"
+              class="info-subnav__link"
+              role="menuitem"
               ><span class="info-subnav__ic" aria-hidden="true"
                 ><svg
                   viewBox="0 0 24 24"
@@ -205,8 +211,7 @@ import Footer from "../components/Footer.astro";
 
           <div class="container">
             <h1 id="hero-title" class="hero-title reveal delay-1">
-              <span class="accent-grad">Collaborer</span> et communiquer &agrave;
-              distance
+              <em>Collaborer</em> et communiquer &agrave; distance
             </h1>
 
             <p class="hero-sub reveal delay-2">
@@ -262,8 +267,8 @@ import Footer from "../components/Footer.astro";
                 Une salle de r&eacute;union se doit d'&ecirc;tre <em
                   >optimis&eacute;e</em
                 > afin de travailler dans les meilleures conditions. Nous concevons,
-                int&eacute;grons et maintenons des <span class="accent"
-                  >solutions audiovisuelles et de visioconf&eacute;rence</span
+                int&eacute;grons et maintenons des <em
+                  >solutions audiovisuelles et de visioconf&eacute;rence</em
                 > pens&eacute;es pour vos usages et vos espaces.<span
                   class="mf-cursor"
                   aria-hidden="true"></span>
@@ -489,7 +494,7 @@ import Footer from "../components/Footer.astro";
               </div>
             </div>
             <div class="seclink-caption">
-              Communication <span class="accent">chiffrée</span>
+              Communication <em>chiffrée</em>
             </div>
           </div>
 
@@ -925,9 +930,12 @@ import Footer from "../components/Footer.astro";
               <a class="jcd-mnav__sub" href="/formation-communication-marketing"
                 >Communication - Marketing</a
               >
-              <a class="jcd-mnav__sub" href="/formation-management">Management</a
+              <a class="jcd-mnav__sub" href="/formation-management"
+                >Management</a
               >
-              <a class="jcd-mnav__sub" href="/formation-commerce-relation-client"
+              <a
+                class="jcd-mnav__sub"
+                href="/formation-commerce-relation-client"
                 >Commerce - Relation client</a
               >
               <a class="jcd-mnav__sub" href="/formation-comptabilite-gestion"
@@ -1067,6 +1075,7 @@ import Footer from "../components/Footer.astro";
     </div>
     <script is:inline src="/js/shared/a11y.js" id="jcd-a11y-js"></script>
     <script is:inline src="/js/shared/micons.js" id="jcd-micons-js"></script>
-    <script is:inline src="/js/shared/mrefonte.js" id="jcd-mrefonte-js"></script>
+    <script is:inline src="/js/shared/mrefonte.js" id="jcd-mrefonte-js"
+    ></script>
   </body>
 </html>

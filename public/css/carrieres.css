@@ -850,7 +850,7 @@
     font-style: italic; font-weight: 400;
     letter-spacing: -0.01em;
   }
-  .hero-title .accent-grad {
+  .hero-title em {
     background: linear-gradient(90deg, var(--accent) 0%, var(--accent-hi) 100%);
     -webkit-background-clip: text;
     background-clip: text;

@@ -746,7 +746,7 @@
     font-weight: 600; max-width: 18ch;
     color: var(--text-1);
   }
-  .hero-title .accent-grad {
+  .hero-title em {
     background: linear-gradient(120deg,
       rgba(252, 225, 72, 0.95) 0%,
       rgba(249, 214, 5, 0.92) 50%,
@@ -777,7 +777,7 @@
     text-transform: uppercase; letter-spacing: 0.18em;
   }
   .eyebrow::before { content: ""; width: 16px; height: 1px; background: var(--accent); }
-  .accent { color: var(--accent); }
+  em { color: var(--accent); }
   .text-muted { color: var(--text-2); font-weight: 400; }
 
   .section-head { margin-bottom: clamp(46px, 6vw, 80px); }
@@ -787,7 +787,7 @@
     line-height: 1.1; letter-spacing: -0.03em; color: var(--text-1);
     max-width: 22ch;
   }
-  .section-title .accent { color: var(--accent); }
+  .section-title em { color: var(--accent); }
   .section-title .text-muted {
     display: block; margin-top: 16px;
     font-size: clamp(15px, 1.3vw, 17px); font-weight: 400;
@@ -896,7 +896,7 @@
     max-width: 72ch; margin: 0;
   }
   .term-out strong { color: var(--text-1); font-weight: 600; }
-  .term-out .accent { color: var(--accent); font-weight: 500; }
+  .term-out em { color: var(--accent); font-weight: 500; }
   .term-cursor {
     display: inline-block; width: 0.55em; height: 1.05em;
     background: var(--accent); margin-left: 3px; vertical-align: -0.16em;
@@ -924,7 +924,7 @@
   }
   .mf-stat + .mf-stat::before { content: "\00b7"; margin: 0 13px; color: var(--text-4); }
   .mf-signoff { font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--text-3); }
-  .mf-signoff .accent { color: var(--accent-hi); font-weight: 500; }
+  .mf-signoff em { color: var(--accent-hi); font-weight: 500; }
 
   /* ========================================================================
      PRESTATIONS — aside (2 solutions + logos) + grille 2x3
@@ -948,7 +948,7 @@
     font-size: clamp(28px, 3vw, 40px); font-weight: 600;
     letter-spacing: -0.035em; line-height: 1.04; color: var(--text-1);
   }
-  .prest-aside-title .accent { color: var(--accent); }
+  .prest-aside-title em { color: var(--accent); }
   .prest-aside-sub {
     font-size: 14.5px; line-height: 1.6; color: var(--text-2);
     max-width: 360px; letter-spacing: -0.005em;
@@ -1048,7 +1048,7 @@
     font-family: var(--font-mono); font-size: 10.5px; color: var(--text-3);
     letter-spacing: 0.2em; text-transform: uppercase; font-weight: 500; line-height: 1;
   }
-  .prest-item-num .accent { color: var(--accent); }
+  .prest-item-num em { color: var(--accent); }
   .prest-item-title {
     font-size: clamp(18px, 1.7vw, 21px); font-weight: 600;
     letter-spacing: -0.022em; line-height: 1.22; color: var(--text-1); margin-top: auto;
@@ -1278,10 +1278,10 @@
     color: var(--text-2); background: rgba(0,0,0,0.45); border: 1px solid var(--line-2);
     padding: 5px 10px; border-radius: 999px; backdrop-filter: blur(6px);
   }
-  .testi-tag .accent { color: var(--accent); }
+  .testi-tag em { color: var(--accent); }
   .testi-body { padding: clamp(20px, 2.4vw, 30px); }
   .testi-quote { font-size: clamp(15px, 1.3vw, 17px); line-height: 1.6; color: var(--text-1); letter-spacing: -0.01em; }
-  .testi-quote .accent { color: var(--accent); }
+  .testi-quote em { color: var(--accent); }
   .testi-meta { margin-top: 18px; display: flex; align-items: center; gap: 12px; }
   .testi-name { color: var(--text-1); font-weight: 500; font-size: 13.5px; }
   .testi-role { color: var(--text-3); font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.06em; text-transform: uppercase; }
@@ -1397,7 +1397,7 @@
 
   .real-body { padding: clamp(16px, 1.8vw, 22px); display: flex; flex-direction: column; flex: 1; }
   .real-title { font-size: clamp(15px, 1.25vw, 17px); font-weight: 600; letter-spacing: -0.02em; color: var(--text-1); }
-  .real-title .accent { color: var(--accent); font-weight: 400; }
+  .real-title em { color: var(--accent); font-weight: 400; }
   .real-desc {
     margin-top: 8px; font-size: 13px; line-height: 1.55; color: var(--text-2);
     display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;
@@ -1510,7 +1510,7 @@
     color: var(--text-3); letter-spacing: 0.02em; white-space: nowrap;
     overflow: hidden; text-overflow: ellipsis;
   }
-  .rp-bar-title .accent { color: var(--accent); }
+  .rp-bar-title em { color: var(--accent); }
   .rp-close {
     flex: 0 0 auto; width: 30px; height: 30px; border-radius: 8px;
     display: inline-flex; align-items: center; justify-content: center;
@@ -1579,7 +1579,7 @@
     font-size: clamp(20px, 2.2vw, 27px); font-weight: 600; letter-spacing: -0.02em;
     color: var(--text-1); line-height: 1.15;
   }
-  .rp-title .accent { color: var(--accent); font-weight: 400; }
+  .rp-title em { color: var(--accent); font-weight: 400; }
   .rp-sub { margin-top: 10px; font-size: clamp(14px, 1.3vw, 16px); font-weight: 500; color: var(--text-1); }
   .rp-desc { margin-top: 10px; font-size: 14px; line-height: 1.66; color: var(--text-2); }
   .rp-tech { margin-top: 18px; display: flex; flex-wrap: wrap; gap: 7px; list-style: none; padding: 0; }
