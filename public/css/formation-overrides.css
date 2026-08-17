@@ -504,8 +504,11 @@
 
 /* ==================================================================
    ENGAGEMENTS & CERTIFICATIONS (2026-08-17)
-   Rubrique exigee par Qualiopi : indicateurs de resultats publies
-   + engagements de service. Reprend les tokens de formation.css.
+   Rubrique exigee par Qualiopi. Deux briques :
+   1. Indicateurs : cadrans a anneau SVG degrade, halo diffus, arc et
+      compteur animes a l'entree dans le viewport.
+   2. Engagements : registre de lignes (plus de cartes) separees par des
+      filets degrades qui s'eteignent sur les bords.
    ================================================================== */
 
   .fq-engage {
@@ -514,64 +517,175 @@
     background: var(--bg);
     border-top: 1px solid var(--line-1);
   }
+  /* Nappe lumineuse tres basse opacite : ancre la section sans la cadrer. */
+  .fq-engage::before {
+    content: ""; position: absolute; inset: 0; pointer-events: none;
+    background:
+      radial-gradient(90% 50% at 50% 0%, rgba(var(--accent-rgb), 0.055), transparent 70%),
+      linear-gradient(180deg, rgba(255, 255, 255, 0.018) 0%, transparent 42%);
+  }
+  .fq-engage > .container { position: relative; z-index: 1; }
 
-  /* --- Indicateurs : cadrans circulaires facon jcd-formation.fr --- */
+  /* Porte-degrade des anneaux : hors flux, jamais rendu. */
+  .fq-defs { position: absolute; width: 0; height: 0; overflow: hidden; }
+  /* Les teintes vivent ici : le degrade suit les tokens du pole. */
+  #fq-arc stop:nth-child(1) { stop-color: var(--accent-hi); }
+  #fq-arc stop:nth-child(2) { stop-color: var(--accent); }
+  #fq-arc stop:nth-child(3) { stop-color: var(--accent-deep); }
+
+  /* ------------------------------------------------------------------
+     1. Indicateurs
+     ------------------------------------------------------------------ */
   .fq-kpis {
-    list-style: none; margin: 0 0 clamp(48px, 6vw, 72px); padding: 0;
+    list-style: none; margin: 0 0 clamp(56px, 6.5vw, 88px); padding: 0;
     display: grid; grid-template-columns: repeat(4, minmax(0, 1fr));
     gap: clamp(20px, 3vw, 36px);
   }
   .fq-kpi { display: flex; flex-direction: column; align-items: center; text-align: center; }
+
   .fq-kpi-dial {
-    width: clamp(112px, 12vw, 148px); aspect-ratio: 1;
+    position: relative;
+    width: clamp(116px, 12vw, 152px); aspect-ratio: 1;
     display: flex; align-items: center; justify-content: center;
-    border: 2px solid var(--accent); border-radius: 50%;
-    background: var(--accent-soft);
-    margin-bottom: 18px;
+    margin-bottom: 20px;
   }
+  /* Halo : la lueur derriere le cadran, montee en douceur avec l'arc. */
+  .fq-kpi-halo {
+    position: absolute; inset: -14%;
+    border-radius: 50%;
+    background: radial-gradient(circle at 50% 50%, rgba(var(--accent-rgb), 0.20) 0%, rgba(var(--accent-rgb), 0.05) 45%, transparent 72%);
+    filter: blur(10px);
+    opacity: 0; transform: scale(0.9);
+    transition: opacity 1200ms var(--ease-out), transform 1200ms var(--ease-out);
+  }
+  /* Disque interne : degrade doux + lisere haut, pour donner de l'epaisseur. */
+  .fq-kpi-dial::after {
+    content: ""; position: absolute; inset: 9%;
+    border-radius: 50%;
+    background:
+      radial-gradient(circle at 50% 22%, rgba(255, 255, 255, 0.055), transparent 62%),
+      radial-gradient(circle at 50% 100%, rgba(var(--accent-rgb), 0.10), transparent 68%),
+      linear-gradient(180deg, var(--bg-2) 0%, var(--bg) 100%);
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.055),
+      inset 0 -12px 26px -18px rgba(var(--accent-rgb), 0.55),
+      0 18px 40px -26px rgba(0, 0, 0, 0.9);
+  }
+
+  .fq-kpi-ring { position: absolute; inset: 0; width: 100%; height: 100%; transform: rotate(-90deg); }
+  .fq-kpi-track { fill: none; stroke: rgba(255, 255, 255, 0.07); stroke-width: 3; }
+  .fq-kpi-arc {
+    fill: none; stroke-width: 3; stroke-linecap: round;
+    stroke-dasharray: 339.292;   /* 2 x PI x 54 */
+    stroke-dashoffset: 339.292;
+    transition: stroke-dashoffset 1700ms var(--ease-expo);
+  }
+  .fq-kpis.visible .fq-kpi-halo { opacity: 1; transform: scale(1); }
+  .fq-kpis.visible .fq-kpi-arc {
+    stroke-dashoffset: calc(339.292 - 339.292 * var(--ratio, 1));
+  }
+  /* Escalier d'entree : chaque cadran demarre apres le precedent. */
+  .fq-kpi:nth-child(1) .fq-kpi-arc, .fq-kpi:nth-child(1) .fq-kpi-halo { transition-delay: 60ms; }
+  .fq-kpi:nth-child(2) .fq-kpi-arc, .fq-kpi:nth-child(2) .fq-kpi-halo { transition-delay: 200ms; }
+  .fq-kpi:nth-child(3) .fq-kpi-arc, .fq-kpi:nth-child(3) .fq-kpi-halo { transition-delay: 340ms; }
+  .fq-kpi:nth-child(4) .fq-kpi-arc, .fq-kpi:nth-child(4) .fq-kpi-halo { transition-delay: 480ms; }
+
   .fq-kpi-v {
-    font-size: clamp(26px, 3.2vw, 38px); font-weight: 600;
-    letter-spacing: -0.04em; line-height: 1; color: var(--text-1);
+    position: relative; z-index: 1;
+    font-size: clamp(27px, 3.3vw, 39px); font-weight: 600;
+    letter-spacing: -0.045em; line-height: 1; color: var(--text-1);
     font-variant-numeric: tabular-nums;
+    background: linear-gradient(180deg, #ffffff 0%, #cfd6c4 118%);
+    -webkit-background-clip: text; background-clip: text;
+    -webkit-text-fill-color: transparent;
   }
-  .fq-kpi-v small { font-size: 0.62em; font-weight: 500; letter-spacing: -0.02em; }
+  .fq-kpi-v small {
+    font-size: 0.6em; font-weight: 500; letter-spacing: -0.02em;
+    -webkit-text-fill-color: var(--text-3);
+  }
   .fq-kpi-k {
     font-size: 14.5px; font-weight: 600; line-height: 1.35;
-    color: var(--text-1); letter-spacing: -0.01em; max-width: 220px;
+    color: var(--text-1); letter-spacing: -0.012em; max-width: 220px;
   }
   .fq-kpi-y {
-    margin-top: 4px; font-family: var(--font-mono); font-size: 11px;
-    letter-spacing: 0.08em; color: var(--text-3); max-width: 220px;
+    margin-top: 5px; font-family: var(--font-mono); font-size: 10.5px;
+    letter-spacing: 0.09em; color: var(--text-4); max-width: 220px;
   }
 
-  /* --- Engagements : cartes en grille coutue (meme trame que .prest-menu) --- */
-  .fq-cards {
-    list-style: none; margin: 0; padding: 0;
-    display: grid; grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 1px; background: var(--line-2);
-    border: 1px solid var(--line-2); border-radius: 4px; overflow: hidden;
+  /* ------------------------------------------------------------------
+     2. Engagements — registre de lignes
+     ------------------------------------------------------------------ */
+  .fq-ledger { position: relative; }
+  .fq-row {
+    position: relative;
+    display: grid;
+    grid-template-columns: 42px minmax(180px, 232px) minmax(0, 1fr) auto;
+    align-items: baseline;
+    gap: 0 clamp(18px, 2.4vw, 34px);
+    padding: clamp(22px, 2.6vw, 30px) clamp(10px, 1.4vw, 18px);
+    border-radius: 3px;
+    transition: background 520ms var(--ease-out);
   }
-  .fq-card {
-    background: var(--bg); padding: clamp(22px, 2.4vw, 30px);
-    display: flex; flex-direction: column; gap: 10px;
+  /* Filet superieur degrade : net au centre, eteint sur les bords. */
+  .fq-row::before {
+    content: ""; position: absolute; top: 0; left: 0; right: 0; height: 1px;
+    background: linear-gradient(90deg, transparent 0%, var(--line-2) 12%, var(--line-2) 88%, transparent 100%);
   }
-  .fq-card-title {
-    font-size: 15.5px; font-weight: 600; letter-spacing: -0.015em; color: var(--text-1);
+  .fq-row:last-child::after {
+    content: ""; position: absolute; bottom: 0; left: 0; right: 0; height: 1px;
+    background: linear-gradient(90deg, transparent 0%, var(--line-2) 12%, var(--line-2) 88%, transparent 100%);
   }
-  .fq-card-tx { font-size: 14px; line-height: 1.6; color: var(--text-2); margin: 0; }
-  .fq-card-link {
-    margin-top: auto; padding-top: 6px;
-    font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.08em;
-    text-transform: uppercase; color: var(--accent); text-decoration: none;
-    transition: color 260ms var(--ease-out, ease);
+  /* Au survol : lavis lateral, aucun cadre ajoute. */
+  .fq-row:hover {
+    background: linear-gradient(90deg, rgba(var(--accent-rgb), 0.045) 0%, rgba(var(--accent-rgb), 0.012) 38%, transparent 72%);
   }
-  .fq-card-link:hover { color: var(--accent-hi); }
-  .fq-card-link:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 2px; }
+  .fq-row:hover::before {
+    background: linear-gradient(90deg, transparent 0%, rgba(var(--accent-rgb), 0.42) 12%, var(--line-3) 62%, transparent 100%);
+  }
 
-  @media (max-width: 980px) {
-    .fq-cards { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .fq-row-n {
+    font-family: var(--font-mono); font-size: 11px; font-weight: 500;
+    letter-spacing: 0.08em; color: var(--text-4);
+    transition: color 420ms var(--ease-out);
+  }
+  .fq-row:hover .fq-row-n { color: var(--accent); }
+  .fq-row-k {
+    font-size: 15.5px; font-weight: 600; letter-spacing: -0.02em;
+    color: var(--text-1); line-height: 1.35;
+  }
+  .fq-row-tx {
+    margin: 0; font-size: 14px; line-height: 1.62;
+    color: var(--text-2); letter-spacing: -0.005em; max-width: 62ch;
+  }
+  .fq-row-link {
+    justify-self: end; white-space: nowrap;
+    display: inline-flex; align-items: center; gap: 7px;
+    font-family: var(--font-mono); font-size: 10.5px; letter-spacing: 0.09em;
+    text-transform: uppercase; color: var(--text-3); text-decoration: none;
+    transition: color 380ms var(--ease-out);
+  }
+  .fq-row:hover .fq-row-link { color: var(--accent); }
+  .fq-row-arrow { display: inline-block; transition: transform 420ms var(--ease-out); }
+  .fq-row:hover .fq-row-arrow { transform: translate(2px, -2px); }
+  .fq-row-link:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; border-radius: 2px; }
+
+  /* ------------------------------------------------------------------
+     Adaptatif
+     ------------------------------------------------------------------ */
+  @media (max-width: 1080px) {
+    .fq-row {
+      grid-template-columns: 34px minmax(0, 1fr);
+      gap: 6px clamp(14px, 2vw, 20px);
+    }
+    .fq-row-k, .fq-row-tx, .fq-row-link { grid-column: 2; }
+    .fq-row-link { justify-self: start; margin-top: 10px; }
   }
   @media (max-width: 720px) {
-    .fq-kpis { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 28px 16px; }
-    .fq-cards { grid-template-columns: minmax(0, 1fr); }
+    .fq-kpis { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 34px 16px; }
+    .fq-kpi-dial { margin-bottom: 16px; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .fq-kpi-halo { opacity: 1; transform: none; transition: none; }
+    .fq-kpi-arc { transition: none; }
+    .fq-row, .fq-row-n, .fq-row-link, .fq-row-arrow { transition: none; }
   }

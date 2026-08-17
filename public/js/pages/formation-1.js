@@ -27,6 +27,68 @@
     });
   })();
 
+  /* ---- Indicateurs Qualiopi : comptage a l'entree dans le viewport ----
+     L'arc SVG et le halo sont animes en CSS via .fq-kpis.visible ; ici on
+     ne fait monter que la valeur, sur la meme duree, pour que le chiffre
+     et l'anneau arrivent ensemble. Le suffixe (<small>) est preserve :
+     on ne touche qu'au premier noeud texte. ---- */
+  (function setupKpiCounters() {
+    var list = document.querySelector('.fq-kpis');
+    if (!list) return;
+    var vals = [].slice.call(list.querySelectorAll('.fq-kpi-v[data-count]'));
+    if (!vals.length) return;
+
+    var reduced = window.matchMedia
+      && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (reduced || !('IntersectionObserver' in window)) return;
+
+    /* Valeur cible telle qu'ecrite dans le HTML : « 97 », « 8,7 »… */
+    var items = vals.map(function (el, i) {
+      var raw = el.getAttribute('data-count');
+      var dec = raw.indexOf(',') > -1 ? raw.split(',')[1].length : 0;
+      return {
+        node: el.firstChild,
+        target: parseFloat(raw.replace(',', '.')),
+        dec: dec,
+        delay: 60 + i * 140            /* meme escalier que les arcs en CSS */
+      };
+    });
+    items.forEach(function (it) { it.node.nodeValue = it.dec ? '0,0' : '0'; });
+
+    function format(v, dec) {
+      return dec ? v.toFixed(dec).replace('.', ',') : String(Math.round(v));
+    }
+
+    function run() {
+      var DUR = 1700;                  /* aligne sur la transition de l'arc */
+      var t0 = null;
+      function frame(ts) {
+        if (t0 === null) t0 = ts;
+        var done = true;
+        items.forEach(function (it) {
+          var p = (ts - t0 - it.delay) / DUR;
+          if (p < 0) { done = false; return; }
+          if (p >= 1) { it.node.nodeValue = format(it.target, it.dec); return; }
+          done = false;
+          var eased = 1 - Math.pow(1 - p, 4);   /* ease-out quart, comme --ease-expo */
+          it.node.nodeValue = format(it.target * eased, it.dec);
+        });
+        if (!done) window.requestAnimationFrame(frame);
+      }
+      window.requestAnimationFrame(frame);
+    }
+
+    /* Meme declencheur que l'arc CSS (.fq-kpis.visible, pose par
+       setupRevealAnimations) : le chiffre et l'anneau partent ensemble. */
+    if (list.classList.contains('visible')) { run(); return; }
+    var mo = new MutationObserver(function () {
+      if (!list.classList.contains('visible')) return;
+      mo.disconnect();
+      run();
+    });
+    mo.observe(list, { attributes: true, attributeFilter: ['class'] });
+  })();
+
   /* ---- Navbar scroll class ---- */
   (function () {
     var nb = document.getElementById('navbar');
