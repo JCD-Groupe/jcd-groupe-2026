@@ -1,6 +1,42 @@
 ---
+import { directus } from "../lib/directus";
+import { readSingleton } from "@directus/sdk";
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
+
+let global = await directus.request(
+  readSingleton("Global", {
+    fields: ["*"],
+  }),
+);
+
+let info_reseaux = await directus.request(
+  readSingleton("architectures_systemes_reseaux", {
+    fields: [
+      "*",
+      { prestations: ["*"] },
+      { processus_cybersecurite: ["*"] },
+      { processus: ["*"] },
+    ],
+  }),
+);
+
+const fetchSvgContent = async (id: string) => {
+  if (!id) return null;
+  const response = await fetch(
+    `${import.meta.env.PUBLIC_DIRECTUS_URL}/assets/${id}`,
+  );
+  return response.text();
+};
+
+info_reseaux.prestations = await Promise.all(
+  info_reseaux.prestations.map(async (prestation: any) => ({
+    ...prestation,
+    icone_content: await fetchSvgContent(prestation.icone),
+  })),
+);
+
+info_reseaux.icone_cta_content = await fetchSvgContent(info_reseaux.icone_cta);
 ---
 
 <html lang="fr">
@@ -13,33 +49,25 @@ import Footer from "../components/Footer.astro";
     <meta name="color-scheme" content="dark" />
     <meta name="theme-color" content="#0a0a0a" />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
-    <meta
-      name="description"
-      content="JCD Groupe · Pôle Informatique. Architectures systèmes & réseaux : serveurs, virtualisation, réseau et sécurité."
-    />
+    <meta name="description" content={info_reseaux.meta_description} />
     <link
       rel="canonical"
       href={`${import.meta.env.PUBLIC_DIRECTUS_URL}/info-reseaux`}
     />
     <meta property="og:type" content="website" />
-    <meta property="og:site_name" content="JCD Groupe" />
+    <meta property="og:site_name" content={global.nom_societe} />
     <meta property="og:locale" content="fr_FR" />
     <meta
       property="og:title"
-      content="Architectures systèmes & réseaux · Informatique · JCD Groupe"
+      content={`${global.nom_societe} • ${info_reseaux.nom_service}`}
     />
-    <meta
-      property="og:description"
-      content="JCD Groupe · Pôle Informatique. Architectures systèmes & réseaux : serveurs, virtualisation, réseau et sécurité."
-    />
+    <meta property="og:description" content={info_reseaux.meta_description} />
     <meta
       property="og:url"
       content={`${import.meta.env.PUBLIC_DIRECTUS_URL}/info-reseaux`}
     />
     <meta name="twitter:card" content="summary" />
-    <title>
-      Architectures systèmes &amp; réseaux · Informatique · JCD Groupe
-    </title>
+    <title>{global.nom_societe} • {info_reseaux.nom_service}</title>
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -214,13 +242,11 @@ import Footer from "../components/Footer.astro";
 
           <div class="container">
             <h1 id="hero-title" class="hero-title reveal delay-1">
-              Des <em>architectures</em> systèmes et réseaux maintenues.
+              <Fragment set:html={info_reseaux.titre_hero} />
             </h1>
 
             <p class="hero-sub reveal delay-2">
-              Serveurs, virtualisation, réseau et sécurité. Une infrastructure
-              dimensionnée, supervisée et résiliente, étudiée, déployée et
-              maintenue.
+              {info_reseaux.sous_titre_hero}
             </p>
 
             <div class="hero-actions reveal delay-3">
@@ -228,7 +254,7 @@ import Footer from "../components/Footer.astro";
                 href="/contact?pole=informatique&step=2"
                 class="btn-cta btn-cta--ghost"
               >
-                Échanger avec nos experts
+                {info_reseaux.bouton_hero}
                 <span class="btn-cta-arrow"
                   ><svg
                     viewBox="0 0 16 16"
@@ -255,7 +281,7 @@ import Footer from "../components/Footer.astro";
               <header class="mf-head reveal">
                 <span class="mf-head-side">
                   <span class="mf-caret" aria-hidden="true">&#9656;</span>
-                  <span class="mf-id">INFRA&middot;02</span>
+                  <span class="mf-id">{info_reseaux.manifeste_id}</span>
                   <span class="mf-rule" aria-hidden="true"></span>
                   <span>Manifeste</span>
                 </span>
@@ -267,15 +293,8 @@ import Footer from "../components/Footer.astro";
               <blockquote
                 class="manifesto-quote manifesto-rich reveal delay-1"
                 id="manifesto-title"
-              >
-                Une infrastructure doit &ecirc;tre <em>solide et durable</em>.
-                Nous concevons des architectures syst&egrave;mes et
-                r&eacute;seaux dimensionn&eacute;es pour votre
-                r&eacute;alit&eacute; (technique, organisationnelle et
-                budg&eacute;taire), puis nous les <em
-                  >d&eacute;ployons, s&eacute;curisons et supervisons</em
-                >.<span class="mf-cursor" aria-hidden="true"></span>
-              </blockquote>
+                set:html={info_reseaux.manifeste}
+              />
             </div>
           </div>
         </section>
@@ -291,95 +310,26 @@ import Footer from "../components/Footer.astro";
       >
         <div class="container">
           <div class="sec-head reveal">
-            <h2 id="prest-title">
-              De la <em>conception</em> à la mise en œuvre.
-            </h2>
-            <p>
-              Serveurs, virtualisation, stockage, sauvegarde, r&eacute;seau et
-              s&eacute;curit&eacute;.
-            </p>
+            <h2 id="prest-title" set:html={info_reseaux.titre_prestations} />
+            <p set:html={info_reseaux.sous_titre_prestations} />
           </div>
 
           <div class="prest-grid reveal delay-1">
-            <article class="prest-item">
-              <div class="prest-item-head">
-                <span class="prest-item-glyph" aria-hidden="true">
-                  <svg
-                    viewBox="0 0 40 40"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="1.3"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    ><rect x="7" y="7" width="12" height="12" rx="1.5"
-                    ></rect><rect x="21" y="21" width="12" height="12" rx="1.5"
-                    ></rect><path d="M19 13h4a2 2 0 0 1 2 2v4"></path></svg
-                  >
-                </span>
-              </div>
-              <h3 class="prest-item-title">
-                Études, conseils &amp; conception d'architectures
-              </h3>
-              <p class="prest-item-desc">
-                Analyse de l'existant et conception des architectures robustes,
-                s&eacute;curis&eacute;es et &eacute;volutives, adapt&eacute;es
-                &agrave; vos besoins techniques et strat&eacute;giques,
-                jusqu'&agrave; la valorisation des phases de mise en
-                &oelig;uvre.
-              </p>
-            </article>
-
-            <article class="prest-item">
-              <div class="prest-item-head">
-                <span class="prest-item-glyph" aria-hidden="true">
-                  <svg
-                    viewBox="0 0 40 40"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="1.3"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    ><rect x="8" y="7" width="24" height="9" rx="1.6"
-                    ></rect><rect x="8" y="20" width="24" height="9" rx="1.6"
-                    ></rect><path
-                      d="M13 11.5h.01M13 24.5h.01M27 11.5h2M27 24.5h2"
-                    ></path></svg
-                  >
-                </span>
-              </div>
-              <h3 class="prest-item-title">Mise en œuvre d'infrastructures</h3>
-              <p class="prest-item-desc">
-                Déploiement opérationnel des infrastructures serveurs, stockage,
-                sauvegarde, réseau et sécurité&nbsp;: intégration,
-                configuration, sécurisation et accompagnement de vos équipes à
-                la prise en main.
-              </p>
-            </article>
-
-            <article class="prest-item">
-              <div class="prest-item-head">
-                <span class="prest-item-glyph" aria-hidden="true">
-                  <svg
-                    viewBox="0 0 40 40"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="1.3"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    ><path d="M9 15h18l-5-5M31 25H13l5 5"></path></svg
-                  >
-                </span>
-              </div>
-              <h3 class="prest-item-title">
-                Migration d'environnements systèmes
-              </h3>
-              <p class="prest-item-desc">
-                Plan de migration tenant compte des contraintes et
-                pr&eacute;requis &eacute;diteurs, puis ex&eacute;cution
-                ma&icirc;tris&eacute;e&nbsp;: POC, tests, migration et
-                validation.
-              </p>
-            </article>
+            {
+              info_reseaux.prestations.map((prestation: any) => (
+                <article class="prest-item">
+                  <div class="prest-item-head">
+                    <span
+                      class="prest-item-glyph"
+                      aria-hidden="true"
+                      set:html={prestation.icone_content}
+                    />
+                  </div>
+                  <h3 class="prest-item-title">{prestation.titre}</h3>
+                  <p class="prest-item-desc">{prestation.description}</p>
+                </article>
+              ))
+            }
           </div>
         </div>
       </section>
@@ -390,16 +340,13 @@ import Footer from "../components/Footer.astro";
       <section class="secblock" aria-labelledby="sec-title">
         <div class="container">
           <div class="secblock-head secblock-head--center reveal">
-            <h2 id="sec-title">
-              La s&eacute;curit&eacute; <em>int&eacute;gr&eacute;e</em> &agrave; l'architecture
-            </h2>
-            <p>
-              Une infrastructure performante n'a de valeur que si elle est
-              prot&eacute;g&eacute;e. Chaque conception embarque la
-              s&eacute;curit&eacute;.
-            </p>
+            <h2
+              id="sec-title"
+              set:html={info_reseaux.titre_processus_cybersecurite}
+            />
+            <p set:html={info_reseaux.sous_titre_processus_cybersecurite} />
             <a href="/informatique#cybersecurite" class="secblock-link">
-              Découvrir notre expertise Cybersécurité
+              {info_reseaux.bouton_processus_cybersecurite}
               <svg
                 viewBox="0 0 16 16"
                 width="15"
@@ -532,7 +479,9 @@ import Footer from "../components/Footer.astro";
                     stroke-linecap="round"
                     stroke-dasharray="15 85"
                     transform="rotate(-28 260 260)"></circle>
-                  <text x="260" y="27" class="df-lab">POSTURE</text>
+                  <text x="260" y="27" class="df-lab"
+                    >{info_reseaux.processus_cybersecurite_label_01}</text
+                  >
                 </g>
 
                 <!-- anneau 02 — réseau -->
@@ -556,7 +505,9 @@ import Footer from "../components/Footer.astro";
                     stroke-linecap="round"
                     stroke-dasharray="19 81"
                     transform="rotate(108 260 260)"></circle>
-                  <text x="260" y="89" class="df-lab">RÉSEAU</text>
+                  <text x="260" y="89" class="df-lab"
+                    >{info_reseaux.processus_cybersecurite_label_02}</text
+                  >
                 </g>
 
                 <!-- anneau 01 — données -->
@@ -580,7 +531,9 @@ import Footer from "../components/Footer.astro";
                     stroke-linecap="round"
                     stroke-dasharray="22 78"
                     transform="rotate(-118 260 260)"></circle>
-                  <text x="260" y="149" class="df-lab">DONNÉES</text>
+                  <text x="260" y="149" class="df-lab">
+                    {info_reseaux.processus_cybersecurite_label_03}
+                  </text>
                 </g>
 
                 <!-- point d'ancrage des connecteurs, au bas de l'anneau externe -->
@@ -645,32 +598,17 @@ import Footer from "../components/Footer.astro";
             </svg>
 
             <div class="defense-grid">
-              <div class="defpoint" data-ring="1">
-                <span class="df-node" aria-hidden="true"></span>
-                <h4>Sauvegarde à 3 niveaux &amp; PRA</h4>
-                <p>
-                  Stratégie de sauvegarde à 3 niveaux et plan de reprise&nbsp;:
-                  vos données restent récupérables, même en cas d'incident
-                  majeur.
-                </p>
-              </div>
-              <div class="defpoint" data-ring="2">
-                <span class="df-node" aria-hidden="true"></span>
-                <h4>Sécurité réseau &amp; segmentation</h4>
-                <p>
-                  Pare-feu, segmentation et filtrage pour cloisonner les flux et
-                  réduire la surface d'attaque.
-                </p>
-              </div>
-              <div class="defpoint" data-ring="3">
-                <span class="df-node" aria-hidden="true"></span>
-                <h4>Résilience &amp; posture NIS2-ready</h4>
-                <p>
-                  Bonnes pratiques et durcissement&nbsp;: une infrastructure
-                  auditable, résiliente et prête pour les exigences
-                  réglementaires.
-                </p>
-              </div>
+              {
+                info_reseaux.processus_cybersecurite.map(
+                  (item: any, index: number) => (
+                    <div class="defpoint" data-ring={index + 1}>
+                      <span class="df-node" aria-hidden="true" />
+                      <h4>{item.titre}</h4>
+                      <p>{item.description}</p>
+                    </div>
+                  ),
+                )
+              }
             </div>
           </div>
         </div>
@@ -682,48 +620,31 @@ import Footer from "../components/Footer.astro";
       <section class="process" id="process" aria-labelledby="process-title">
         <div class="container">
           <div class="sec-head reveal">
-            <h2 id="process-title">
-              Un accompagnement <em>de bout en bout</em>.
-            </h2>
-            <p>
-              De la compréhension du besoin à l'évolution de l'environnement,
-              une démarche structurée et maîtrisée.
-            </p>
+            <h2 id="process-title" set:html={info_reseaux.titre_processus} />
+            <p set:html={info_reseaux.sous_titre_processus} />
           </div>
 
           <div class="blueprint reveal delay-1">
             <div class="bp-frame" aria-hidden="true"></div>
 
             <div class="bp-step bp-step--l bp-step--1">
-              <h3>Écoute &amp; cadrage</h3>
-              <p>
-                Compréhension du besoin sur les aspects techniques,
-                organisationnels et budgétaires.
-              </p>
+              <h3>{info_reseaux.processus[0]?.titre}</h3>
+              <p>{info_reseaux.processus[0]?.description}</p>
             </div>
 
             <div class="bp-step bp-step--r bp-step--2">
-              <h3>Architecture cible</h3>
-              <p>
-                Conception d'une architecture robuste, sécurisée et évolutive,
-                avec phases de mise en œuvre valorisées.
-              </p>
+              <h3>{info_reseaux.processus[1]?.titre}</h3>
+              <p>{info_reseaux.processus[1]?.description}</p>
             </div>
 
             <div class="bp-step bp-step--l bp-step--3">
-              <h3>Mise en œuvre</h3>
-              <p>
-                Intégration, configuration et sécurisation des équipements dans
-                le respect des bonnes pratiques.
-              </p>
+              <h3>{info_reseaux.processus[2]?.titre}</h3>
+              <p>{info_reseaux.processus[2]?.description}</p>
             </div>
 
             <div class="bp-step bp-step--r bp-step--4 bp-step--svc">
-              <h3>Supervision &amp; évolution</h3>
-              <p>
-                Accompagnement à la prise en main, supervision et évolution de
-                l'environnement dans le temps.
-              </p>
+              <h3>{info_reseaux.processus[3]?.titre}</h3>
+              <p>{info_reseaux.processus[3]?.description}</p>
               <div class="bp-svc">
                 <span class="bp-svc-note"
                   >Pour aller plus loin, confiez-nous la supervision de votre
@@ -747,78 +668,28 @@ import Footer from "../components/Footer.astro";
         <div class="container">
           <div class="cta-frame">
             <div class="cta-inner">
-              <svg
+              <span
                 class="cta-icon reveal"
-                viewBox="0 0 120 120"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
                 aria-hidden="true"
-                focusable="false"
-              >
-                <g
-                  stroke="currentColor"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                >
-                  <path
-                    d="M53 44V30H36M67 44V30H84M53 76V90H36M67 76V90H84"
-                    stroke-width="1.5"
-                    opacity="0.45"></path>
-                  <circle
-                    cx="25"
-                    cy="30"
-                    r="9.5"
-                    stroke-width="1.2"
-                    opacity="0.25"></circle>
-                  <circle
-                    cx="95"
-                    cy="30"
-                    r="9.5"
-                    stroke-width="1.2"
-                    opacity="0.25"></circle>
-                  <circle
-                    cx="25"
-                    cy="90"
-                    r="9.5"
-                    stroke-width="1.2"
-                    opacity="0.25"></circle>
-                  <circle
-                    cx="95"
-                    cy="90"
-                    r="9.5"
-                    stroke-width="1.2"
-                    opacity="0.25"></circle>
-                  <circle cx="25" cy="30" r="5" stroke-width="2"></circle>
-                  <circle cx="95" cy="30" r="5" stroke-width="2"></circle>
-                  <circle cx="25" cy="90" r="5" stroke-width="2"></circle>
-                  <circle cx="95" cy="90" r="5" stroke-width="2"></circle>
-                  <rect
-                    x="44"
-                    y="44"
-                    width="32"
-                    height="32"
-                    rx="7"
-                    stroke-width="2"></rect>
-                  <path d="M52 55h16M52 61h11" stroke-width="1.3" opacity="0.5"
-                  ></path>
-                </g>
-                <circle cx="68.5" cy="69" r="2" fill="currentColor"></circle>
-              </svg>
+                set:html={info_reseaux.icone_cta_content}
+              />
 
               <div class="cta-body">
-                <h2 class="cta-title reveal delay-1" id="cta-title">
-                  Un projet <em>d'infrastructure&thinsp;?</em>
-                </h2>
-                <p class="cta-sub reveal delay-2">
-                  Transformez vos enjeux IT en infrastructures performantes,
-                  sécurisées et évolutives.
-                </p>
+                <h2
+                  class="cta-title reveal delay-1"
+                  id="cta-title"
+                  set:html={info_reseaux.titre_cta}
+                />
+                <p
+                  class="cta-sub reveal delay-2"
+                  set:html={info_reseaux.sous_titre_cta}
+                />
                 <div class="cta-actions reveal delay-3">
                   <a
                     href="/contact?pole=informatique&step=2"
                     class="btn-cta btn-cta--primary"
                   >
-                    Échanger avec nos experts
+                    {info_reseaux.bouton_cta}
                     <span class="btn-cta-arrow"
                       ><svg
                         viewBox="0 0 16 16"
