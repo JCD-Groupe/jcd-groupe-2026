@@ -1,6 +1,45 @@
 ---
+import { directus } from "../lib/directus";
+import { readSingleton } from "@directus/sdk";
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
+
+let global = await directus.request(
+  readSingleton("Global", {
+    fields: ["*"],
+  }),
+);
+
+let info_integration = await directus.request(
+  readSingleton("integration_support_pc", {
+    fields: [
+      "*",
+      { prestations: ["*"] },
+      { processus_cybersecurite: ["*"] },
+      { processus: ["*"] },
+      { logo_manifeste: ["*"] },
+    ],
+  }),
+);
+
+const fetchSvgContent = async (id: string) => {
+  if (!id) return null;
+  const response = await fetch(
+    `${import.meta.env.PUBLIC_DIRECTUS_URL}/assets/${id}`,
+  );
+  return response.text();
+};
+
+info_integration.prestations = await Promise.all(
+  info_integration.prestations.map(async (prestation: any) => ({
+    ...prestation,
+    icone_content: await fetchSvgContent(prestation.icone),
+  })),
+);
+
+info_integration.icone_cta_content = await fetchSvgContent(
+  info_integration.icone_cta,
+);
 ---
 
 <html lang="fr">
@@ -13,31 +52,28 @@ import Footer from "../components/Footer.astro";
     <meta name="color-scheme" content="dark" />
     <meta name="theme-color" content="#0a0a0a" />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
-    <meta
-      name="description"
-      content="JCD Groupe · Pôle Informatique. Service Intégration & Support PC : déploiement, maintenance et support du parc utilisateur."
-    />
+    <meta name="description" content={info_integration.meta_description} />
     <link
       rel="canonical"
       href={`${import.meta.env.PUBLIC_DIRECTUS_URL}/info-integration`}
     />
     <meta property="og:type" content="website" />
-    <meta property="og:site_name" content="JCD Groupe" />
+    <meta property="og:site_name" content={global.nom_societe} />
     <meta property="og:locale" content="fr_FR" />
     <meta
       property="og:title"
-      content="Intégration & Support PC · Informatique · JCD Groupe"
+      content={`${global.nom_societe} • ${info_integration.nom_service}`}
     />
     <meta
       property="og:description"
-      content="JCD Groupe · Pôle Informatique. Service Intégration & Support PC : déploiement, maintenance et support du parc utilisateur."
+      content={info_integration.meta_description}
     />
     <meta
       property="og:url"
       content={`${import.meta.env.PUBLIC_DIRECTUS_URL}/info-integration`}
     />
     <meta name="twitter:card" content="summary" />
-    <title>Intégration &amp; Support PC · Informatique · JCD Groupe</title>
+    <title>{global.nom_societe} • {info_integration.nom_service}</title>
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -208,12 +244,14 @@ import Footer from "../components/Footer.astro";
           <div class="hero-grain" aria-hidden="true"></div>
 
           <div class="container">
-            <h1 id="hero-title" class="hero-title reveal delay-1">
-              Un parc informatique <em>complet</em> et support&eacute;.
-            </h1>
+            <h1
+              id="hero-title"
+              class="hero-title reveal delay-1"
+              set:html={info_integration.titre_hero}
+            />
 
             <p class="hero-sub reveal delay-2">
-              Préparation, déploiement et support de votre parc utilisateur.
+              {info_integration.sous_titre_hero}
             </p>
 
             <div class="hero-actions reveal delay-3">
@@ -221,7 +259,7 @@ import Footer from "../components/Footer.astro";
                 href="/contact?pole=informatique&step=2"
                 class="btn-cta btn-cta--ghost"
               >
-                Demander un diagnostic
+                {info_integration.bouton_hero}
                 <span class="btn-cta-arrow"
                   ><svg
                     viewBox="0 0 16 16"
@@ -248,7 +286,7 @@ import Footer from "../components/Footer.astro";
               <header class="mf-head reveal">
                 <span class="mf-head-side">
                   <span class="mf-caret" aria-hidden="true">&#9656;</span>
-                  <span class="mf-id">PARC&middot;01</span>
+                  <span class="mf-id">{info_integration.manifeste_id}</span>
                   <span class="mf-rule" aria-hidden="true"></span>
                   <span>Manifeste</span>
                 </span>
@@ -261,27 +299,16 @@ import Footer from "../components/Footer.astro";
                 <blockquote
                   class="manifesto-quote manifesto-rich reveal delay-1"
                   id="manifesto-title"
-                >
-                  Un poste de travail, &ccedil;a n'est pas juste <em
-                    >un ordinateur, un clavier et une souris</em
-                  > : il faut le composer selon vos besoins. Nous <em
-                    >masterisons, d&eacute;ployons et supportons</em
-                  > votre parc (de la fourniture du mat&eacute;riel au SAV) pour que
-                  vos collaborateurs puissent <span class="q-soft"
-                    >travailler dans des conditions optimales.</span
-                  ><span class="mf-cursor" aria-hidden="true"></span>
-                </blockquote>
+                  set:html={info_integration.manifeste}
+                />
                 <figure class="mf-brand reveal delay-2">
                   <img
-                    src="/logos%20INFORMATIQUE/hp.png"
-                    alt="HP"
+                    src={`${import.meta.env.PUBLIC_DIRECTUS_URL}/assets/${info_integration.logo_manifeste.id}`}
+                    alt={info_integration.logo_manifeste.title}
                     width="840"
                     height="840"
                     decoding="async"
                   />
-                  <figcaption>
-                    <em>//</em> Nous sommes certifi&eacute;s HP
-                  </figcaption>
                 </figure>
               </div>
             </div>
@@ -299,106 +326,29 @@ import Footer from "../components/Footer.astro";
       >
         <div class="container">
           <div class="sec-head reveal">
-            <h2 id="prest-title">Le poste de travail, <em>de A à Z</em>.</h2>
-            <p>
-              De la préparation en atelier au support quotidien, en passant par
-              le déploiement.
-            </p>
+            <h2
+              id="prest-title"
+              set:html={info_integration.titre_prestations}
+            />
+            <p set:html={info_integration.sous_titre_prestations} />
           </div>
 
           <div class="prest-grid reveal delay-1">
-            <article class="prest-item">
-              <div class="prest-item-head">
-                <span class="prest-item-glyph" aria-hidden="true"
-                  ><svg
-                    viewBox="0 0 40 40"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="1.3"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    ><rect x="8" y="8" width="24" height="17" rx="2"
-                    ></rect><path d="M15 30h10M20 25v5"></path><path
-                      d="M13 14h14M13 18h9"></path></svg
-                  ></span
-                >
-              </div>
-              <h3 class="prest-item-title">Préparation &amp; intégration</h3>
-              <p class="prest-item-desc">
-                Masterisation et image système, installation, configuration et
-                mise en conformité des équipements avant livraison.
-              </p>
-            </article>
-
-            <article class="prest-item">
-              <div class="prest-item-head">
-                <span class="prest-item-glyph" aria-hidden="true"
-                  ><svg
-                    viewBox="0 0 40 40"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="1.3"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    ><rect x="9" y="18" width="22" height="14" rx="2"
-                    ></rect><path d="M20 14V5M15 10l5-5 5 5"></path><path
-                      d="M14 25h12"></path></svg
-                  ></span
-                >
-              </div>
-              <h3 class="prest-item-title">Déploiement</h3>
-              <p class="prest-item-desc">
-                Déploiement de masse et industrialisation des projets
-                multi-sites ou grands volumes. Mise en service sur site ou à
-                distance.
-              </p>
-            </article>
-
-            <article class="prest-item">
-              <div class="prest-item-head">
-                <span class="prest-item-glyph" aria-hidden="true"
-                  ><svg
-                    viewBox="0 0 40 40"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="1.3"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    ><path
-                      d="M27 11a5 5 0 01-6.5 6.5L11 27l-2 2-3-3 2-2 9.5-9.5A5 5 0 0124 8l-3 3 3 3 3-3z"
-                    ></path></svg
-                  ></span
-                >
-              </div>
-              <h3 class="prest-item-title">Support &amp; SAV</h3>
-              <p class="prest-item-desc">
-                Diagnostic et dépannage, gestion des retours SAV, prise en
-                charge des équipements défectueux et suivi des réparations.
-              </p>
-            </article>
-
-            <article class="prest-item">
-              <div class="prest-item-head">
-                <span class="prest-item-glyph" aria-hidden="true"
-                  ><svg
-                    viewBox="0 0 40 40"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="1.3"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    ><path d="M31 20a11 11 0 11-3.2-7.8"></path><path
-                      d="M28 6v6h-6"></path><path d="M16 19l3 3 6-6"
-                    ></path></svg
-                  ></span
-                >
-              </div>
-              <h3 class="prest-item-title">Services complémentaires</h3>
-              <p class="prest-item-desc">
-                Enrôlement MDM, effacement sécurisé certifié des données et
-                reconditionnement de postes pour une réutilisation interne.
-              </p>
-            </article>
+            {
+              info_integration.prestations.map((prestation: any) => (
+                <article class="prest-item">
+                  <div class="prest-item-head">
+                    <span
+                      class="prest-item-glyph"
+                      aria-hidden="true"
+                      set:html={prestation.icone_content}
+                    />
+                  </div>
+                  <h3 class="prest-item-title">{prestation.titre}</h3>
+                  <p class="prest-item-desc">{prestation.description}</p>
+                </article>
+              ))
+            }
           </div>
         </div>
       </section>
@@ -502,17 +452,35 @@ import Footer from "../components/Footer.astro";
                 <span class="cycle-dot cycle-dot--3"></span>
                 <span class="cycle-dot cycle-dot--4"></span>
                 <span class="cycle-lab cycle-lab--1"
-                  ><span class="cycle-num">01</span><b>Préparation durcie</b
+                  ><span class="cycle-num">01</span><b
+                    >{
+                      info_integration.processus_cybersecurite
+                        .processus_cybersecurite_label_01
+                    }</b
                   ></span
                 >
                 <span class="cycle-lab cycle-lab--2"
-                  ><span class="cycle-num">02</span><b>Déploiement</b></span
+                  ><span class="cycle-num">02</span><b
+                    >{
+                      info_integration.processus_cybersecurite
+                        .processus_cybersecurite_label_02
+                    }</b
+                  ></span
                 >
                 <span class="cycle-lab cycle-lab--3"
-                  ><span class="cycle-num">03</span><b>Gestion MDM</b></span
+                  ><span class="cycle-num">03</span><b
+                    >{
+                      info_integration.processus_cybersecurite
+                        .processus_cybersecurite_label_03
+                    }</b
+                  ></span
                 >
                 <span class="cycle-lab cycle-lab--4"
-                  ><span class="cycle-num">04</span><b>Effacement certifié</b
+                  ><span class="cycle-num">04</span><b
+                    >{
+                      info_integration.processus_cybersecurite
+                        .processus_cybersecurite_label_04
+                    }</b
                   ></span
                 >
               </div>
@@ -520,16 +488,15 @@ import Footer from "../components/Footer.astro";
 
             <div class="seclife-copy">
               <div class="secblock-head reveal">
-                <h2 id="sec-title">
-                  Le poste, <em>sécurisé</em> dès la préparation.
-                </h2>
-                <p>
-                  La sécurité du parc commence à l'atelier et ne s'arrête jamais
-                  : durcissement, conformité et maîtrise sur tout le cycle de
-                  vie, jusqu'à l'effacement certifié.
-                </p>
+                <h2
+                  id="sec-title"
+                  set:html={info_integration.titre_processus_cybersecurite}
+                />
+                <p
+                  set:html={info_integration.sous_titre_processus_cybersecurite}
+                />
                 <a href="/informatique#cybersecurite" class="secblock-link">
-                  Découvrir notre expertise Cybersécurité
+                  {info_integration.bouton_processus_cybersecurite}
                   <svg
                     viewBox="0 0 16 16"
                     width="15"
@@ -546,30 +513,16 @@ import Footer from "../components/Footer.astro";
               </div>
 
               <div class="seclife-points reveal delay-1">
-                <div class="lifepoint">
-                  <div>
-                    <h4>Postes durcis &amp; conformes</h4>
-                    <p>Masters durcis et chiffrés, prêts à l'emploi.</p>
-                  </div>
-                </div>
-                <div class="lifepoint">
-                  <div>
-                    <h4>Déploiement maîtrisé</h4>
-                    <p>Mise en service sur site et raccordement au SI.</p>
-                  </div>
-                </div>
-                <div class="lifepoint">
-                  <div>
-                    <h4>Gestion moderne (MDM)</h4>
-                    <p>Enrôlement MDM et administration centralisée du parc.</p>
-                  </div>
-                </div>
-                <div class="lifepoint">
-                  <div>
-                    <h4>Effacement sécurisé certifié</h4>
-                    <p>Effacement certifié des données, sans résidu.</p>
-                  </div>
-                </div>
+                {
+                  info_integration.processus_cybersecurite.map((point: any) => (
+                    <div class="lifepoint">
+                      <div>
+                        <h4>{point.titre}</h4>
+                        <p>{point.description}</p>
+                      </div>
+                    </div>
+                  ))
+                }
               </div>
             </div>
           </div>
@@ -582,12 +535,11 @@ import Footer from "../components/Footer.astro";
       <section class="process" id="process" aria-labelledby="process-title">
         <div class="container">
           <div class="sec-head reveal">
-            <h2 id="process-title">Un service <em>de bout en bout</em>.</h2>
-            <p>
-              De l'atelier au cycle de vie du poste, une cha&icirc;ne
-              ma&icirc;tris&eacute;e et industrialis&eacute;e gr&acirc;ce
-              &agrave; nos experts.
-            </p>
+            <h2
+              id="process-title"
+              set:html={info_integration.titre_processus}
+            />
+            <p set:html={info_integration.sous_titre_processus} />
           </div>
 
           <div class="atelier reveal delay-1">
@@ -650,11 +602,8 @@ import Footer from "../components/Footer.astro";
                   </svg>
                 </div>
                 <div class="station-tag">
-                  <h3>Atelier</h3>
-                  <p>
-                    Masterisation, installation et mise en conformité avant
-                    livraison.
-                  </p>
+                  <h3>{info_integration.processus[0]?.titre}</h3>
+                  <p>{info_integration.processus[0]?.description}</p>
                 </div>
               </div>
 
@@ -707,11 +656,8 @@ import Footer from "../components/Footer.astro";
                   </svg>
                 </div>
                 <div class="station-tag">
-                  <h3>Mise en service</h3>
-                  <p>
-                    Sur site ou à distance, industrialisée pour les grands
-                    volumes et le multi-sites.
-                  </p>
+                  <h3>{info_integration.processus[1]?.titre}</h3>
+                  <p>{info_integration.processus[1]?.description}</p>
                 </div>
               </div>
 
@@ -759,11 +705,8 @@ import Footer from "../components/Footer.astro";
                   </svg>
                 </div>
                 <div class="station-tag">
-                  <h3>SAV &amp; dépannage</h3>
-                  <p>
-                    Diagnostic, réparations et gestion des retours : un parc qui
-                    reste opérationnel.
-                  </p>
+                  <h3>{info_integration.processus[2]?.titre}</h3>
+                  <p>{info_integration.processus[2]?.description}</p>
                 </div>
               </div>
 
@@ -828,11 +771,8 @@ import Footer from "../components/Footer.astro";
                   </svg>
                 </div>
                 <div class="station-tag">
-                  <h3>Cycle de vie</h3>
-                  <p>
-                    Gestion moderne (MDM), effacement sécurisé et
-                    reconditionnement en fin de vie.
-                  </p>
+                  <h3>{info_integration.processus[3]?.titre}</h3>
+                  <p>{info_integration.processus[3]?.description}</p>
                 </div>
               </div>
             </div>
@@ -847,51 +787,28 @@ import Footer from "../components/Footer.astro";
         <div class="container">
           <div class="cta-frame">
             <div class="cta-inner">
-              <svg
+              <span
                 class="cta-icon reveal"
-                viewBox="0 0 120 120"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
                 aria-hidden="true"
-                focusable="false"
-              >
-                <g
-                  stroke="currentColor"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                >
-                  <rect
-                    x="18"
-                    y="26"
-                    width="84"
-                    height="54"
-                    rx="5"
-                    stroke-width="2"></rect>
-                  <path d="M46 92h28M60 80v12" stroke-width="2"></path>
-                  <path
-                    d="M32 42h40M32 52h28M32 62h34"
-                    stroke-width="1.5"
-                    opacity="0.45"></path>
-                </g>
-                <circle cx="60" cy="53" r="5" fill="currentColor"></circle>
-              </svg>
+                set:html={info_integration.icone_cta_content}
+              />
 
               <div class="cta-body">
-                <h2 class="cta-title reveal delay-1" id="cta-title">
-                  Un besoin <em
-                    >li&eacute; &agrave; vos installations&thinsp;?</em
-                  >
-                </h2>
-                <p class="cta-sub reveal delay-2">
-                  Préparation, déploiement, support : un seul service pour tout
-                  gérer. Diagnostic et devis gratuit.
-                </p>
+                <h2
+                  class="cta-title reveal delay-1"
+                  id="cta-title"
+                  set:html={info_integration.titre_cta}
+                />
+                <p
+                  class="cta-sub reveal delay-2"
+                  set:html={info_integration.sous_titre_cta}
+                />
                 <div class="cta-actions reveal delay-3">
                   <a
                     href="/contact?pole=informatique&step=2"
                     class="btn-cta btn-cta--primary"
                   >
-                    Contacter le pôle Informatique
+                    {info_integration.bouton_cta}
                     <span class="btn-cta-arrow"
                       ><svg
                         viewBox="0 0 16 16"
