@@ -1,6 +1,62 @@
 ---
+import { directus } from "../lib/directus";
+import { readSingleton } from "@directus/sdk";
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
+
+let global = await directus.request(
+  readSingleton("Global", {
+    fields: ["*"],
+  }),
+);
+
+let informatique = await directus.request(
+  readSingleton("JCD_Informatique", {
+    fields: [
+      "*",
+      { prestations_cybersecurite: ["*"] },
+      { processus: ["*"] },
+      {
+        logos_technologies_collaboratif_et_audiovisuel: [
+          "*",
+          { directus_files_id: ["*"] },
+        ],
+      },
+      {
+        logos_technologies_cloud: ["*", { directus_files_id: ["*"] }],
+      },
+      {
+        logos_technologies_postes_et_materiel: [
+          "*",
+          { directus_files_id: ["*"] },
+        ],
+      },
+      {
+        logos_technologies_infrastructure_et_securite: [
+          "*",
+          { directus_files_id: ["*"] },
+        ],
+      },
+    ],
+  }),
+);
+
+const fetchSvgContent = async (id: string) => {
+  if (!id) return null;
+  const response = await fetch(
+    `${import.meta.env.PUBLIC_DIRECTUS_URL}/assets/${id}`,
+  );
+  return response.text();
+};
+
+informatique.icone_cta_content = await fetchSvgContent(informatique.icone_cta);
+
+informatique.prestations_cybersecurite = await Promise.all(
+  informatique.prestations_cybersecurite.map(async (prestation: any) => ({
+    ...prestation,
+    icone_content: await fetchSvgContent(prestation.icone),
+  })),
+);
 ---
 
 <html lang="fr">
@@ -13,28 +69,25 @@ import Footer from "../components/Footer.astro";
     <meta name="color-scheme" content="dark" />
     <meta name="theme-color" content="#0a0a0a" />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
-    <meta
-      name="description"
-      content="JCD Groupe · Pôle Informatique. Parc maîtrisé, supervisé par un interlocuteur dédié."
-    />
+    <meta name="description" content={informatique.meta_description} />
     <link
       rel="canonical"
       href={`${import.meta.env.PUBLIC_DIRECTUS_URL}/informatique`}
     />
     <meta property="og:type" content="website" />
-    <meta property="og:site_name" content="JCD Groupe" />
+    <meta property="og:site_name" content={global.nom_societe} />
     <meta property="og:locale" content="fr_FR" />
-    <meta property="og:title" content="Informatique · JCD Groupe" />
     <meta
-      property="og:description"
-      content="JCD Groupe · Pôle Informatique. Parc maîtrisé, supervisé par un interlocuteur dédié."
+      property="og:title"
+      content={`${informatique.nom_pole} · ${global.nom_societe}`}
     />
+    <meta property="og:description" content={informatique.meta_description} />
     <meta
       property="og:url"
       content={`${import.meta.env.PUBLIC_DIRECTUS_URL}/informatique`}
     />
     <meta name="twitter:card" content="summary" />
-    <title>Informatique · JCD Groupe</title>
+    <title>{informatique.nom_pole} · {global.nom_societe}</title>
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -195,11 +248,13 @@ import Footer from "../components/Footer.astro";
      ==================================================================== -->
       <section class="hub-intro" aria-labelledby="hub-title">
         <div class="container">
-          <h1 id="hub-title" class="reveal delay-1">
-            Votre informatique <em>de proximité</em>
-          </h1>
+          <h1
+            id="hub-title"
+            class="reveal delay-1"
+            set:html={informatique.titre_hero}
+          />
           <p class="reveal delay-2">
-            &nbsp;Du hardware au cloud, en passant par la cybersécurité.
+            {informatique.sous_titre_hero}
           </p>
         </div>
       </section>
@@ -331,11 +386,12 @@ import Footer from "../components/Footer.astro";
       <section class="cyber" id="cybersecurite" aria-labelledby="cyber-title">
         <div class="container">
           <div class="hub-sechead reveal">
-            <h2 id="cyber-title">
-              La cybersécurité, <em>à tous les étages</em>.
-            </h2>
+            <h2
+              id="cyber-title"
+              set:html={informatique.titre_prestations_cybersecurite}
+            />
             <p>
-              Renforcer durablement la cybersécurité de vos infrastructures.
+              {informatique.sous_titre_prestations_cybersecurite}
             </p>
           </div>
 
@@ -452,96 +508,41 @@ import Footer from "../components/Footer.astro";
 
             <!-- 3 piliers reliés (contenu existant réutilisé) -->
             <div class="cyber-piliers">
-              <div class="cyber-pilier">
-                <span class="cyber-node" aria-hidden="true"></span>
-                <span class="cyber-pilier-ic" aria-hidden="true"
-                  ><svg
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="1.6"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    ><path
-                      d="M12 2 4 5v6c0 5 3.4 8.5 8 10 4.6-1.5 8-5 8-10V5l-8-3z"
-                    ></path><path d="M9 12l2 2 4-4"></path></svg
-                  ></span
-                >
-                <h3>Gouvernance &amp; Audit · NIS2</h3>
-                <p>
-                  Des audits pour identifier les faiblesses techniques,
-                  administratives ou de processus, avec recommandations et une
-                  feuille de route NIS 2 adaptée à votre structure.
-                </p>
-              </div>
-              <div class="cyber-pilier">
-                <span class="cyber-node" aria-hidden="true"></span>
-                <span class="cyber-pilier-ic" aria-hidden="true"
-                  ><svg
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="1.6"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    ><circle cx="12" cy="12" r="9"></circle><circle
-                      cx="12"
-                      cy="12"
-                      r="3.5"></circle><path d="M12 12 18 8.5"></path></svg
-                  ></span
-                >
-                <h3>SOC &amp; MicroSOC</h3>
-                <p>
-                  Détection et réponse aux menaces 24/7 : on vous conseille, on
-                  vous rassure et on vous défend, en continu.
-                </p>
-              </div>
-              <div class="cyber-pilier">
-                <span class="cyber-node" aria-hidden="true"></span>
-                <span class="cyber-pilier-ic" aria-hidden="true"
-                  ><svg
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="1.6"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    ><path d="M22 10 12 5 2 10l10 5 10-5z"></path><path
-                      d="M6 12v5c2 2 4 3 6 3s4-1 6-3v-5"></path></svg
-                  ></span
-                >
-                <h3>Formation &amp; sensibilisation</h3>
-                <p>
-                  On teste vos défenses, on vérifie que vos protections sont
-                  correctes et on maintient le niveau de compétence de vos
-                  équipes.
-                </p>
-                <a class="cyber-pilier-link" href="/formation-informatique"
-                  >Nos formations cybers&eacute;curit&eacute;<svg
-                    viewBox="0 0 16 16"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="1.6"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    aria-hidden="true"
-                    ><path d="M3 8h10M9 4l4 4-4 4"></path></svg
-                  ></a
-                >
-              </div>
+              {
+                informatique.prestations_cybersecurite.map(
+                  (prestation: any) => (
+                    <div class="cyber-pilier">
+                      <span class="cyber-node" aria-hidden="true" />
+                      <span
+                        class="cyber-pilier-ic"
+                        aria-hidden="true"
+                        set:html={prestation.icone_content}
+                      />
+                      <h3>{prestation.nom_prestation}</h3>
+                      <p>{prestation.description}</p>
+                    </div>
+                  ),
+                )
+              }
             </div>
           </div>
 
           <div class="cyber-band reveal delay-2">
             <span class="cyber-stats">
               <span class="cyber-stat"
-                ><span class="cyber-stat-num">400</span> clients</span
+                ><span class="cyber-stat-num"
+                  >{informatique.nombre_clients}</span
+                > clients</span
               >
               <span class="cyber-stat"
-                ><span class="cyber-stat-num">100</span> interventions/an</span
+                ><span class="cyber-stat-num"
+                  >{informatique.nombre_interventions_an}</span
+                > interventions/an</span
               >
               <span class="cyber-stat"
-                ><span class="cyber-stat-num">10</span> ans d'expertise</span
+                ><span class="cyber-stat-num"
+                  >{informatique.nombre_annees_expertise}</span
+                > ans d'expertise</span
               >
             </span>
             <span class="cyber-partner">
@@ -561,9 +562,9 @@ import Footer from "../components/Footer.astro";
               class="cyber-audit"
               href="/contact?pole=informatique&step=2"
               aria-label="Contacter un expert cybersécurité"
-              >Audit cyber <strong
-                >co-financé par la Région Grand Est jusqu'à 50 %</strong
-              >.<span class="cyber-audit-path" aria-hidden="true"
+              ><strong>{informatique.label_cta_cybersecurite}</strong>.<span
+                class="cyber-audit-path"
+                aria-hidden="true"
                 >info &rsaquo; cybers&eacute;curit&eacute;</span
               ></a
             >
@@ -577,9 +578,10 @@ import Footer from "../components/Footer.astro";
       <section class="partners" aria-labelledby="partners-title">
         <div class="container">
           <div class="hub-sechead reveal">
-            <h2 id="partners-title">
-              Les meilleures technologies, <em>intégrées</em>.
-            </h2>
+            <h2
+              id="partners-title"
+              set:html={informatique.titre_technologies}
+            />
           </div>
           <div class="eco-net reveal delay-1">
             <!-- Séparateurs « réseau » : tracés bleus fondus + nœuds de jonction pulsants -->
@@ -599,60 +601,29 @@ import Footer from "../components/Footer.astro";
                 ></span>Collaboratif &amp; audiovisuel</span
               >
               <div class="eco-quad-grid g-3x2">
-                <div class="eco-tile has-logo" data-brand="maxhub">
-                  <img
-                    class="eco-tile-img"
-                    src="/logos%20INFORMATIQUE/maxhub.png"
-                    alt="Maxhub"
-                    loading="lazy"
-                    decoding="async"
-                  /><span class="eco-tile-name">Maxhub</span>
-                </div>
-                <div class="eco-tile has-logo" data-brand="aver">
-                  <img
-                    class="eco-tile-img"
-                    src="/logos%20INFORMATIQUE/aver.png"
-                    alt="AVer"
-                    loading="lazy"
-                    decoding="async"
-                  /><span class="eco-tile-name">AVer</span>
-                </div>
-                <div class="eco-tile has-logo" data-brand="bose">
-                  <img
-                    class="eco-tile-img"
-                    src="/logos%20INFORMATIQUE/bose.png"
-                    alt="Bose"
-                    loading="lazy"
-                    decoding="async"
-                  /><span class="eco-tile-name">Bose</span>
-                </div>
-                <div class="eco-tile has-logo" data-brand="shure">
-                  <img
-                    class="eco-tile-img"
-                    src="/logos%20INFORMATIQUE/shure.png"
-                    alt="Shure"
-                    loading="lazy"
-                    decoding="async"
-                  /><span class="eco-tile-name">Shure</span>
-                </div>
-                <div class="eco-tile has-logo" data-brand="sennheiser">
-                  <img
-                    class="eco-tile-img"
-                    src="/logos%20INFORMATIQUE/sennheiser.png"
-                    alt="Sennheiser"
-                    loading="lazy"
-                    decoding="async"
-                  /><span class="eco-tile-name">Sennheiser</span>
-                </div>
-                <div class="eco-tile has-logo" data-brand="yealink">
-                  <img
-                    class="eco-tile-img"
-                    src="/logos%20INFORMATIQUE/yealink.png"
-                    alt="Yealink"
-                    loading="lazy"
-                    decoding="async"
-                  /><span class="eco-tile-name">Yealink</span>
-                </div>
+                {
+                  informatique.logos_technologies_collaboratif_et_audiovisuel.map(
+                    (logo: any) => (
+                      <div
+                        class="eco-tile has-logo"
+                        data-brand={logo.directus_files_id.title}
+                      >
+                        <>
+                          <img
+                            class="eco-tile-img"
+                            src={`${import.meta.env.PUBLIC_DIRECTUS_URL}/assets/${logo.directus_files_id.id}`}
+                            alt={logo.directus_files_id.title}
+                            loading="lazy"
+                            decoding="async"
+                          />
+                          <span class="eco-tile-name">
+                            {logo.directus_files_id.title}
+                          </span>
+                        </>
+                      </div>
+                    ),
+                  )
+                }
               </div>
             </section>
 
@@ -663,24 +634,27 @@ import Footer from "../components/Footer.astro";
                 ></span>Cloud</span
               >
               <div class="eco-quad-grid g-1x2">
-                <div class="eco-tile has-logo" data-brand="m365">
-                  <img
-                    class="eco-tile-img"
-                    src="/logos%20INFORMATIQUE/microsoft365.webp"
-                    alt="Microsoft 365"
-                    loading="lazy"
-                    decoding="async"
-                  /><span class="eco-tile-name">Microsoft 365</span>
-                </div>
-                <div class="eco-tile has-logo" data-brand="azure">
-                  <img
-                    class="eco-tile-img"
-                    src="/logos%20INFORMATIQUE/azure.png"
-                    alt="Microsoft Azure"
-                    loading="lazy"
-                    decoding="async"
-                  /><span class="eco-tile-name">Azure</span>
-                </div>
+                {
+                  informatique.logos_technologies_cloud.map((logo: any) => (
+                    <div
+                      class="eco-tile has-logo"
+                      data-brand={logo.directus_files_id.title}
+                    >
+                      <>
+                        <img
+                          class="eco-tile-img"
+                          src={`${import.meta.env.PUBLIC_DIRECTUS_URL}/assets/${logo.directus_files_id.id}`}
+                          alt={logo.directus_files_id.title}
+                          loading="lazy"
+                          decoding="async"
+                        />
+                        <span class="eco-tile-name">
+                          {logo.directus_files_id.title}
+                        </span>
+                      </>
+                    </div>
+                  ))
+                }
               </div>
             </section>
 
@@ -691,42 +665,29 @@ import Footer from "../components/Footer.astro";
                 &amp; matériel</span
               >
               <div class="eco-quad-grid g-2x2">
-                <div class="eco-tile has-logo" data-brand="hp">
-                  <img
-                    class="eco-tile-img"
-                    src="/logos%20INFORMATIQUE/hp.png"
-                    alt="HP"
-                    loading="lazy"
-                    decoding="async"
-                  /><span class="eco-tile-name">HP</span>
-                </div>
-                <div class="eco-tile has-logo" data-brand="hpe">
-                  <img
-                    class="eco-tile-img"
-                    src="/logos%20INFORMATIQUE/hpe.png"
-                    alt="HPE"
-                    loading="lazy"
-                    decoding="async"
-                  /><span class="eco-tile-name">HPE</span>
-                </div>
-                <div class="eco-tile has-logo" data-brand="lenovo">
-                  <img
-                    class="eco-tile-img"
-                    src="/logos%20INFORMATIQUE/lenovo.png"
-                    alt="Lenovo"
-                    loading="lazy"
-                    decoding="async"
-                  /><span class="eco-tile-name">Lenovo</span>
-                </div>
-                <div class="eco-tile has-logo" data-brand="terra">
-                  <img
-                    class="eco-tile-img"
-                    src="/logos%20INFORMATIQUE/terra.png"
-                    alt="Terra"
-                    loading="lazy"
-                    decoding="async"
-                  /><span class="eco-tile-name">Terra</span>
-                </div>
+                {
+                  informatique.logos_technologies_postes_et_materiel.map(
+                    (logo: any) => (
+                      <div
+                        class="eco-tile has-logo"
+                        data-brand={logo.directus_files_id.title}
+                      >
+                        <>
+                          <img
+                            class="eco-tile-img"
+                            src={`${import.meta.env.PUBLIC_DIRECTUS_URL}/assets/${logo.directus_files_id.id}`}
+                            alt={logo.directus_files_id.title}
+                            loading="lazy"
+                            decoding="async"
+                          />
+                          <span class="eco-tile-name">
+                            {logo.directus_files_id.title}
+                          </span>
+                        </>
+                      </div>
+                    ),
+                  )
+                }
               </div>
             </section>
 
@@ -740,36 +701,29 @@ import Footer from "../components/Footer.astro";
                 ></span>Infrastructure &amp; sécurité</span
               >
               <div class="eco-quad-grid g-2x2">
-                <div class="eco-tile eco-tile--ph" data-brand="hpe-silver">
-                  <span class="eco-tile-name">HPE Silver Partner</span>
-                </div>
-                <div class="eco-tile has-logo" data-brand="microsoft">
-                  <img
-                    class="eco-tile-img"
-                    src="/logos%20INFORMATIQUE/microsoft.png"
-                    alt="Microsoft"
-                    loading="lazy"
-                    decoding="async"
-                  /><span class="eco-tile-name">Microsoft</span>
-                </div>
-                <div class="eco-tile has-logo" data-brand="veeam">
-                  <img
-                    class="eco-tile-img"
-                    src="/logos%20INFORMATIQUE/veeam.png"
-                    alt="Veeam"
-                    loading="lazy"
-                    decoding="async"
-                  /><span class="eco-tile-name">Veeam</span>
-                </div>
-                <div class="eco-tile has-logo" data-brand="watchguard">
-                  <img
-                    class="eco-tile-img"
-                    src="/logos%20INFORMATIQUE/watchguard.png"
-                    alt="WatchGuard"
-                    loading="lazy"
-                    decoding="async"
-                  /><span class="eco-tile-name">WatchGuard</span>
-                </div>
+                {
+                  informatique.logos_technologies_infrastructure_et_securite.map(
+                    (logo: any) => (
+                      <div
+                        class="eco-tile has-logo"
+                        data-brand={logo.directus_files_id.title}
+                      >
+                        <>
+                          <img
+                            class="eco-tile-img"
+                            src={`${import.meta.env.PUBLIC_DIRECTUS_URL}/assets/${logo.directus_files_id.id}`}
+                            alt={logo.directus_files_id.title}
+                            loading="lazy"
+                            decoding="async"
+                          />
+                          <span class="eco-tile-name">
+                            {logo.directus_files_id.title}
+                          </span>
+                        </>
+                      </div>
+                    ),
+                  )
+                }
               </div>
             </section>
           </div>
@@ -789,10 +743,7 @@ import Footer from "../components/Footer.astro";
               <span class="wt-elbow-v" aria-hidden="true"></span>
               <span class="wt-trunk-node" aria-hidden="true"></span>
               <div class="hub-sechead">
-                <h2 id="why-title">
-                  Plus qu'un prestataire, <em>un v&eacute;ritable partenaire</em
-                  >.
-                </h2>
+                <h2 id="why-title" set:html={informatique.titre_processus} />
               </div>
             </div>
 
@@ -800,44 +751,18 @@ import Footer from "../components/Footer.astro";
             <div class="wt-body">
               <span class="wt-dist" aria-hidden="true"></span>
               <ol class="wt-items">
-                <li class="wt-item">
-                  <span class="wt-branch" aria-hidden="true"></span>
-                  <span class="wt-node" aria-hidden="true"></span>
-                  <div class="wt-card-box">
-                    <h3>Interlocuteur unique</h3>
-                    <p>Un seul partenaire pour tout votre IT.</p>
-                  </div>
-                </li>
-                <li class="wt-item">
-                  <span class="wt-branch" aria-hidden="true"></span>
-                  <span class="wt-node" aria-hidden="true"></span>
-                  <div class="wt-card-box">
-                    <h3>Service de proximit&eacute;</h3>
-                    <p>
-                      Proche de vous depuis 1996 sur les territoires de Metz et
-                      de Nancy.
-                    </p>
-                  </div>
-                </li>
-                <li class="wt-item">
-                  <span class="wt-branch" aria-hidden="true"></span>
-                  <span class="wt-node" aria-hidden="true"></span>
-                  <div class="wt-card-box">
-                    <h3>Internalisation compl&egrave;te</h3>
-                    <p>Préparation, déploiement, support, sécurité.</p>
-                  </div>
-                </li>
-                <li class="wt-item">
-                  <span class="wt-branch" aria-hidden="true"></span>
-                  <span class="wt-node" aria-hidden="true"></span>
-                  <div class="wt-card-box">
-                    <h3>La sécurité par défaut</h3>
-                    <p>
-                      La cybers&eacute;curit&eacute; int&eacute;gr&eacute;e dans
-                      toutes nos solutions.
-                    </p>
-                  </div>
-                </li>
+                {
+                  informatique.processus.map((etape_processus: any) => (
+                    <li class="wt-item">
+                      <span class="wt-branch" aria-hidden="true" />
+                      <span class="wt-node" aria-hidden="true" />
+                      <div class="wt-card-box">
+                        <h3>{etape_processus.titre}</h3>
+                        <p>{etape_processus.description}</p>
+                      </div>
+                    </li>
+                  ))
+                }
               </ol>
             </div>
           </div>
@@ -851,47 +776,23 @@ import Footer from "../components/Footer.astro";
         <div class="container">
           <div class="cta-frame">
             <div class="cta-inner">
-              <svg
-                class="cta-icon reveal"
-                viewBox="0 0 120 120"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-                aria-hidden="true"
-                focusable="false"
-              >
-                <g
-                  stroke="currentColor"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                >
-                  <rect x="20" y="20" width="34" height="34" rx="7"></rect>
-                  <rect x="66" y="20" width="34" height="34" rx="7"></rect>
-                  <rect x="20" y="66" width="34" height="34" rx="7"></rect>
-                  <rect x="66" y="66" width="34" height="34" rx="7"></rect>
-                </g>
-                <path
-                  d="M54 37h12M54 83h12M37 54v12M83 54v12"
-                  stroke="currentColor"
-                  stroke-width="1.5"
-                  opacity="0.45"
-                  stroke-linecap="round"></path>
-              </svg>
+              <Fragment set:html={informatique.icone_cta_content} />
 
               <div class="cta-body">
-                <h2 class="cta-title reveal delay-1" id="cta-title">
-                  Un projet <em>informatique&thinsp;?</em>
-                </h2>
+                <h2
+                  class="cta-title reveal delay-1"
+                  id="cta-title"
+                  set:html={informatique.titre_cta}
+                />
                 <p class="cta-sub reveal delay-2">
-                  Notre &eacute;quipe se tient &agrave; votre disposition pour
-                  toute demande.
+                  {informatique.sous_titre_cta}
                 </p>
                 <div class="cta-actions reveal delay-3">
                   <a
                     href="/contact?pole=informatique&step=2"
                     class="btn-cta btn-cta--primary"
                   >
-                    Contacter le pôle Informatique
+                    {informatique.bouton_cta}
                     <span class="btn-cta-arrow"
                       ><svg
                         viewBox="0 0 16 16"
