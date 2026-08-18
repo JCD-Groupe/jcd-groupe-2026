@@ -654,7 +654,8 @@ import Footer from "../components/Footer.astro";
             </h1>
 
             <p class="hero-sub reveal delay-2">
-              Le centre de formation JCD est certifié Qualiopi et TOSA.
+              Le centre de formation JCD est certifié Qualiopi et habilité en
+              tant que centre d'examen pour la certification TOSA.
             </p>
 
             <div class="hero-actions reveal delay-3">
@@ -702,13 +703,10 @@ import Footer from "../components/Footer.astro";
               </header>
 
               <div class="manifesto-top reveal delay-1">
-                <blockquote
-                  class="manifesto-quote manifesto-rich"
-                  id="manifesto-title"
-                >
-                  <strong>Former,</strong> ce n'est pas dérouler un catalogue. C'est
-                  <em>co-construire</em> un dispositif unique, aligné sur vos objectifs,
-                  vos métiers et vos contraintes opérationnelles.
+                <blockquote class="manifesto-quote manifesto-rich" id="manifesto-title">
+                  <strong>Le catalogue est notre vitrine,</strong> le sur-mesure
+                  notre signature. Notre force&nbsp;: <em>co-construire</em> un dispositif unique, aligné sur vos objectifs, vos métiers et
+                  vos contraintes opérationnelles.
                 </blockquote>
                 <div class="mf-certs">
                   <a
@@ -909,36 +907,111 @@ import Footer from "../components/Footer.astro";
                   ></span>
                   <span class="prest-aside-clients-count">15+</span>
                 </div>
-                <div class="jcd-lcards" aria-label="Logos de nos clients">
-                  <div class="jcd-lcard" data-name="CPAM">
-                    <img src="/logos%20FORMATION/CPAM.webp" alt="CPAM" />
+                <!-- Marquee 2 colonnes : chaque colonne contient son set puis
+                     son clone (couture -50%), logo-marquee.js densifie si besoin. -->
+                <div class="logo-marquee" aria-label="Logos de nos clients">
+                  <div class="logo-marquee-col">
+                    <div class="logo-marquee-item" data-name="CPAM">
+                      <img src="/logos%20FORMATION/CPAM.webp" alt="CPAM" loading="lazy" decoding="async" />
+                    </div>
+                    <div class="logo-marquee-item" data-name="Carrefour">
+                      <img src="/logos%20FORMATION/carrefour.png" alt="Carrefour" loading="lazy" decoding="async" />
+                    </div>
+                    <div class="logo-marquee-item" data-name="Harmonie Mutuelle">
+                      <img src="/logos%20FORMATION/harmonie%20mutuelle.png" alt="Harmonie Mutuelle" loading="lazy" decoding="async" />
+                    </div>
+                    <div class="logo-marquee-item" data-name="Moselle — CD 57">
+                      <img src="/logos%20FORMATION/cd57.png" alt="Moselle — CD 57" loading="lazy" decoding="async" />
+                    </div>
+                    <div class="logo-marquee-item" data-name="Concentrix">
+                      <img src="/logos%20FORMATION/CONCETRIX.png" alt="Concentrix" loading="lazy" decoding="async" />
+                    </div>
+                    <div class="logo-marquee-item" data-name="CMSEA">
+                      <img src="/logos%20FORMATION/cmsea.png" alt="CMSEA" loading="lazy" decoding="async" />
+                    </div>
+                    <div class="logo-marquee-item" data-name="AGCO">
+                      <img src="/logos%20FORMATION/AGCO.webp" alt="AGCO" loading="lazy" decoding="async" />
+                    </div>
+                    <div class="logo-marquee-item" data-name="Altrans">
+                      <img src="/logos%20FORMATION/altrans.png" alt="Altrans" loading="lazy" decoding="async" />
+                    </div>
+
+                    <div class="logo-marquee-item" data-name="CPAM" aria-hidden="true">
+                      <img src="/logos%20FORMATION/CPAM.webp" alt="" loading="lazy" decoding="async" />
+                    </div>
+                    <div class="logo-marquee-item" data-name="Carrefour" aria-hidden="true">
+                      <img src="/logos%20FORMATION/carrefour.png" alt="" loading="lazy" decoding="async" />
+                    </div>
+                    <div class="logo-marquee-item" data-name="Harmonie Mutuelle" aria-hidden="true">
+                      <img src="/logos%20FORMATION/harmonie%20mutuelle.png" alt="" loading="lazy" decoding="async" />
+                    </div>
+                    <div class="logo-marquee-item" data-name="Moselle — CD 57" aria-hidden="true">
+                      <img src="/logos%20FORMATION/cd57.png" alt="" loading="lazy" decoding="async" />
+                    </div>
+                    <div class="logo-marquee-item" data-name="Concentrix" aria-hidden="true">
+                      <img src="/logos%20FORMATION/CONCETRIX.png" alt="" loading="lazy" decoding="async" />
+                    </div>
+                    <div class="logo-marquee-item" data-name="CMSEA" aria-hidden="true">
+                      <img src="/logos%20FORMATION/cmsea.png" alt="" loading="lazy" decoding="async" />
+                    </div>
+                    <div class="logo-marquee-item" data-name="AGCO" aria-hidden="true">
+                      <img src="/logos%20FORMATION/AGCO.webp" alt="" loading="lazy" decoding="async" />
+                    </div>
+                    <div class="logo-marquee-item" data-name="Altrans" aria-hidden="true">
+                      <img src="/logos%20FORMATION/altrans.png" alt="" loading="lazy" decoding="async" />
+                    </div>
                   </div>
-                  <div class="jcd-lcard" data-name="Harmonie Mutuelle">
-                    <img
-                      src="/logos%20FORMATION/harmonie%20mutuelle.png"
-                      alt="Harmonie Mutuelle"
-                    />
-                  </div>
-                  <div class="jcd-lcard" data-name="Eurométropole de Metz">
-                    <img
-                      src="/logos%20FORMATION/EUROMETROPOLE%20DE%20METZ.png"
-                      alt="Eurométropole de Metz"
-                    />
-                  </div>
-                  <div class="jcd-lcard" data-name="Concentrix">
-                    <img
-                      src="/logos%20FORMATION/CONCETRIX.png"
-                      alt="Concentrix"
-                    />
-                  </div>
-                  <div class="jcd-lcard" data-name="AGCO">
-                    <img src="/logos%20FORMATION/AGCO.webp" alt="AGCO" />
-                  </div>
-                  <div class="jcd-lcard" data-name="France Pare-Brise">
-                    <img
-                      src="/logos%20FORMATION/FRANCE%20PARE%20BRISE.png"
-                      alt="France Pare-Brise"
-                    />
+
+                  <div class="logo-marquee-col">
+                    <div class="logo-marquee-item" data-name="Eurométropole de Metz">
+                      <img src="/logos%20FORMATION/EUROMETROPOLE%20DE%20METZ.png" alt="Eurométropole de Metz" loading="lazy" decoding="async" />
+                    </div>
+                    <div class="logo-marquee-item" data-name="Soneo">
+                      <img src="/logos%20FORMATION/soneo.png" alt="Soneo" loading="lazy" decoding="async" />
+                    </div>
+                    <div class="logo-marquee-item" data-name="France Pare-Brise">
+                      <img src="/logos%20FORMATION/FRANCE%20PARE%20BRISE.png" alt="France Pare-Brise" loading="lazy" decoding="async" />
+                    </div>
+                    <div class="logo-marquee-item" data-name="Tessi">
+                      <img src="/logos%20FORMATION/tessi.png" alt="Tessi" loading="lazy" decoding="async" />
+                    </div>
+                    <div class="logo-marquee-item" data-name="Cometz">
+                      <img src="/logos%20FORMATION/cometz.png" alt="Cometz" loading="lazy" decoding="async" />
+                    </div>
+                    <div class="logo-marquee-item" data-name="Treffert">
+                      <img src="/logos%20FORMATION/treffert.png" alt="Treffert" loading="lazy" decoding="async" />
+                    </div>
+                    <div class="logo-marquee-item" data-name="Omega Énergies &amp; Services">
+                      <img src="/logos%20FORMATION/omega-energies.png" alt="Omega Énergies &amp; Services" loading="lazy" decoding="async" />
+                    </div>
+                    <div class="logo-marquee-item" data-name="SnowWorld">
+                      <img src="/logos%20FORMATION/snowworld.png" alt="SnowWorld" loading="lazy" decoding="async" />
+                    </div>
+
+                    <div class="logo-marquee-item" data-name="Eurométropole de Metz" aria-hidden="true">
+                      <img src="/logos%20FORMATION/EUROMETROPOLE%20DE%20METZ.png" alt="" loading="lazy" decoding="async" />
+                    </div>
+                    <div class="logo-marquee-item" data-name="Soneo" aria-hidden="true">
+                      <img src="/logos%20FORMATION/soneo.png" alt="" loading="lazy" decoding="async" />
+                    </div>
+                    <div class="logo-marquee-item" data-name="France Pare-Brise" aria-hidden="true">
+                      <img src="/logos%20FORMATION/FRANCE%20PARE%20BRISE.png" alt="" loading="lazy" decoding="async" />
+                    </div>
+                    <div class="logo-marquee-item" data-name="Tessi" aria-hidden="true">
+                      <img src="/logos%20FORMATION/tessi.png" alt="" loading="lazy" decoding="async" />
+                    </div>
+                    <div class="logo-marquee-item" data-name="Cometz" aria-hidden="true">
+                      <img src="/logos%20FORMATION/cometz.png" alt="" loading="lazy" decoding="async" />
+                    </div>
+                    <div class="logo-marquee-item" data-name="Treffert" aria-hidden="true">
+                      <img src="/logos%20FORMATION/treffert.png" alt="" loading="lazy" decoding="async" />
+                    </div>
+                    <div class="logo-marquee-item" data-name="Omega Énergies &amp; Services" aria-hidden="true">
+                      <img src="/logos%20FORMATION/omega-energies.png" alt="" loading="lazy" decoding="async" />
+                    </div>
+                    <div class="logo-marquee-item" data-name="SnowWorld" aria-hidden="true">
+                      <img src="/logos%20FORMATION/snowworld.png" alt="" loading="lazy" decoding="async" />
+                    </div>
                   </div>
                 </div>
               </div>
@@ -1447,6 +1520,218 @@ import Footer from "../components/Footer.astro";
                 </p>
               </article>
             </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================================
+     ENGAGEMENTS & CERTIFICATIONS — rubrique exigée par Qualiopi :
+     publication des indicateurs de résultats + engagements de l'organisme.
+     ================================ -->
+      <section
+        class="fq-engage"
+        id="engagements"
+        aria-labelledby="fq-engage-title"
+      >
+        <div class="container">
+          <div class="section-head reveal">
+            <span class="eyebrow">Qualité</span>
+            <h2 class="section-title" id="fq-engage-title">
+              Engagements &amp; <span class="accent">certifications.</span>
+              <span class="text-muted"
+                >Organisme certifié Qualiopi, JCD Formation publie ses
+                indicateurs de résultats et ses engagements de service.</span
+              >
+            </h2>
+          </div>
+
+          <!-- Dégradé d'anneau, partagé par les quatre cadrans. -->
+          <svg class="fq-defs" aria-hidden="true" focusable="false">
+            <defs>
+              <!-- Teintes reprises en CSS (#fq-arc stop) ; les valeurs
+                   litterales servent de repli si var() n'est pas resolu
+                   dans un attribut de presentation. -->
+              <linearGradient id="fq-arc" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0%" stop-color="#a4d05c"></stop>
+                <stop offset="52%" stop-color="#8ec041"></stop>
+                <stop offset="100%" stop-color="#6c9430"></stop>
+              </linearGradient>
+            </defs>
+          </svg>
+
+          <!-- Indicateurs de résultats — obligation Qualiopi (indicateur 2) -->
+          <ul class="fq-kpis reveal delay-1">
+            <li class="fq-kpi" style="--ratio: 0.97">
+              <span class="fq-kpi-dial">
+                <span class="fq-kpi-halo" aria-hidden="true"></span>
+                <svg
+                  class="fq-kpi-ring"
+                  viewBox="0 0 120 120"
+                  aria-hidden="true"
+                  focusable="false"
+                >
+                  <circle class="fq-kpi-track" cx="60" cy="60" r="54"></circle>
+                  <circle
+                    class="fq-kpi-arc"
+                    cx="60"
+                    cy="60"
+                    r="54"
+                    stroke="url(#fq-arc)"></circle>
+                </svg>
+                <span class="fq-kpi-v" data-count="97"
+                  >97<small>&nbsp;%</small></span
+                >
+              </span>
+              <span class="fq-kpi-k">Taux de satisfaction annuel</span>
+              <span class="fq-kpi-y">en 2025</span>
+            </li>
+            <li class="fq-kpi" style="--ratio: 1">
+              <span class="fq-kpi-dial">
+                <span class="fq-kpi-halo" aria-hidden="true"></span>
+                <svg
+                  class="fq-kpi-ring"
+                  viewBox="0 0 120 120"
+                  aria-hidden="true"
+                  focusable="false"
+                >
+                  <circle class="fq-kpi-track" cx="60" cy="60" r="54"></circle>
+                  <circle
+                    class="fq-kpi-arc"
+                    cx="60"
+                    cy="60"
+                    r="54"
+                    stroke="url(#fq-arc)"></circle>
+                </svg>
+                <span class="fq-kpi-v" data-count="556">556</span>
+              </span>
+              <span class="fq-kpi-k">Nombre de stagiaires</span>
+              <span class="fq-kpi-y">sur l'année 2025</span>
+            </li>
+            <li class="fq-kpi" style="--ratio: 0.81">
+              <span class="fq-kpi-dial">
+                <span class="fq-kpi-halo" aria-hidden="true"></span>
+                <svg
+                  class="fq-kpi-ring"
+                  viewBox="0 0 120 120"
+                  aria-hidden="true"
+                  focusable="false"
+                >
+                  <circle class="fq-kpi-track" cx="60" cy="60" r="54"></circle>
+                  <circle
+                    class="fq-kpi-arc"
+                    cx="60"
+                    cy="60"
+                    r="54"
+                    stroke="url(#fq-arc)"></circle>
+                </svg>
+                <span class="fq-kpi-v" data-count="81"
+                  >81<small>&nbsp;%</small></span
+                >
+              </span>
+              <span class="fq-kpi-k">Taux d'insertion dans l'emploi</span>
+              <span class="fq-kpi-y">pour les demandeurs d'emploi en 2025</span>
+            </li>
+            <li class="fq-kpi" style="--ratio: 0.87">
+              <span class="fq-kpi-dial">
+                <span class="fq-kpi-halo" aria-hidden="true"></span>
+                <svg
+                  class="fq-kpi-ring"
+                  viewBox="0 0 120 120"
+                  aria-hidden="true"
+                  focusable="false"
+                >
+                  <circle class="fq-kpi-track" cx="60" cy="60" r="54"></circle>
+                  <circle
+                    class="fq-kpi-arc"
+                    cx="60"
+                    cy="60"
+                    r="54"
+                    stroke="url(#fq-arc)"></circle>
+                </svg>
+                <span class="fq-kpi-v" data-count="8,7"
+                  >8,7<small>/10</small></span
+                >
+              </span>
+              <span class="fq-kpi-k">Atteinte des objectifs pédagogiques</span>
+              <span class="fq-kpi-y">en 2025</span>
+            </li>
+          </ul>
+
+          <!-- Engagements publiés — registre en lignes, pas de cartes :
+               un filet dégradé par ligne, la lecture reste verticale. -->
+          <div class="fq-ledger reveal delay-2">
+            <article class="fq-row">
+              <span class="fq-row-n" aria-hidden="true">01</span>
+              <h3 class="fq-row-k">Certification Qualiopi</h3>
+              <p class="fq-row-tx">
+                La certification qualité a été délivrée au titre de la catégorie
+                d'action suivante&nbsp;: actions de formation.
+              </p>
+              <a
+                class="fq-row-link"
+                href="https://travail-emploi.gouv.fr/qualiopi-marque-de-certification-qualite-des-prestataires-de-formation"
+                target="_blank"
+                rel="noopener"
+                >En savoir plus<span class="fq-row-arrow" aria-hidden="true"
+                  >&#8599;</span
+                ></a
+              >
+            </article>
+            <article class="fq-row">
+              <span class="fq-row-n" aria-hidden="true">02</span>
+              <h3 class="fq-row-k">Centre d'examen TOSA</h3>
+              <p class="fq-row-tx">
+                JCD Formation est habilité en tant que centre d'examen pour la
+                certification TOSA. Score reconnu par les entreprises, éligible
+                aux financements.
+              </p>
+              <a
+                class="fq-row-link"
+                href="https://www.tosa.org/"
+                target="_blank"
+                rel="noopener"
+                >Découvrir TOSA<span class="fq-row-arrow" aria-hidden="true"
+                  >&#8599;</span
+                ></a
+              >
+            </article>
+            <article class="fq-row">
+              <span class="fq-row-n" aria-hidden="true">03</span>
+              <h3 class="fq-row-k">INTER &amp; INTRA entreprise</h3>
+              <p class="fq-row-tx">
+                Toutes nos formations sont proposées en inter-entreprises
+                (sessions ouvertes à Metz et Nancy) comme en intra-entreprise et
+                sur-mesure, dans vos locaux ou à distance.
+              </p>
+              <a class="fq-row-link" href="/contact?pole=formation&step=2"
+                >Demander un devis<span class="fq-row-arrow" aria-hidden="true"
+                  >&#8594;</span
+                ></a
+              >
+            </article>
+            <article class="fq-row">
+              <span class="fq-row-n" aria-hidden="true">04</span>
+              <h3 class="fq-row-k">Accessibilité &amp; handicap</h3>
+              <p class="fq-row-tx">
+                Locaux accessibles aux personnes à mobilité réduite. Adaptations
+                possibles sur demande auprès de notre référent handicap.
+              </p>
+              <a class="fq-row-link" href="/contact?pole=formation"
+                >Contacter le référent<span
+                  class="fq-row-arrow"
+                  aria-hidden="true">&#8594;</span
+                ></a
+              >
+            </article>
+            <article class="fq-row">
+              <span class="fq-row-n" aria-hidden="true">05</span>
+              <h3 class="fq-row-k">Évaluation &amp; suivi</h3>
+              <p class="fq-row-tx">
+                Évaluation des acquis, mesure de la satisfaction stagiaires et
+                de l'atteinte des objectifs, bilan et ajustements après chaque
+                dispositif.
+              </p>
+            </article>
           </div>
         </div>
       </section>

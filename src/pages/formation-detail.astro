@@ -121,7 +121,7 @@ import Footer from "../components/Footer.astro";
               <strong data-field="tarif">490&nbsp;€&nbsp;HT</strong>&nbsp;/
               participant
             </span>
-            <span class="chip">
+            <span class="chip" data-tosa>
               <svg
                 viewBox="0 0 24 24"
                 fill="none"
@@ -677,11 +677,63 @@ import Footer from "../components/Footer.astro";
                 </div>
               </section>
 
+              <!-- Tarifs — INTER / INTRA sur-mesure -->
+              <section id="fd-s-tarifs" aria-labelledby="fd-tarifs-title">
+                <div class="fd-section-head reveal">
+                  <span class="fd-section-num">05</span>
+                  <h2 class="fd-section-title" id="fd-tarifs-title">
+                    Tarifs &amp; modalités d'inscription
+                  </h2>
+                </div>
+                <div class="fd-tarifs reveal delay-1">
+                  <div class="fd-tarif" data-mode="inter">
+                    <div class="fd-tarif-head">
+                      <span class="fd-tarif-tag">Inter-entreprises</span>
+                      <span class="fd-tarif-dur" data-field="duree"
+                        >2 jours · 14 heures</span
+                      >
+                    </div>
+                    <p class="fd-tarif-price">
+                      <strong data-field="tarif">490&nbsp;€&nbsp;HT</strong>
+                      <small>/ participant</small>
+                    </p>
+                    <p class="fd-tarif-tx">
+                      Session ouverte en petit groupe, dans nos centres de Metz
+                      et Nancy ou à distance. Support pédagogique et évaluation
+                      des acquis inclus.
+                    </p>
+                    <a
+                      class="fd-tarif-cta fd-tarif-cta--solid"
+                      href="/contact?pole=formation&step=2"
+                      >S'inscrire à une session</a
+                    >
+                  </div>
+                  <div class="fd-tarif" data-mode="intra">
+                    <div class="fd-tarif-head">
+                      <span class="fd-tarif-tag">Intra &amp; sur-mesure</span>
+                      <span class="fd-tarif-dur">Durée adaptée</span>
+                    </div>
+                    <p class="fd-tarif-price"><strong>Sur devis</strong></p>
+                    <p class="fd-tarif-tx">
+                      Formation dans vos locaux, dans nos centres ou à distance.
+                      Programme, rythme et cas pratiques co-construits à partir
+                      de votre contexte métier.
+                    </p>
+                    <a
+                      class="fd-tarif-cta"
+                      href="/contact?pole=formation&step=2"
+                      >Demander un devis</a
+                    >
+                  </div>
+                </div>
+              </section>
+
               <!-- Certification -->
               <section
                 id="fd-s-certif"
                 aria-label="Certification"
                 data-field="certification"
+                data-tosa
               >
                 <div class="fd-certif reveal">
                   <span class="fd-certif-ic" aria-hidden="true">
@@ -744,10 +796,17 @@ import Footer from "../components/Footer.astro";
                       ><span class="fd-toc-n">04</span>Modalités</a
                     >
                     <a
+                      href="#fd-s-tarifs"
+                      class="fd-toc-item"
+                      data-spy="fd-s-tarifs"
+                      ><span class="fd-toc-n">05</span>Tarifs</a
+                    >
+                    <a
                       href="#fd-s-certif"
                       class="fd-toc-item"
                       data-spy="fd-s-certif"
-                      ><span class="fd-toc-n">05</span>Certification</a
+                      data-tosa
+                      ><span class="fd-toc-n">06</span>Certification</a
                     >
                   </nav>
                   <span class="fd-aside-label">Informations pratiques</span>
@@ -1961,7 +2020,7 @@ import Footer from "../components/Footer.astro";
         ],
         "les-achats-responsables-dans-le-code-de-la-commande-publique-2": [
           {
-            "t": "REPONDRE A UN APPEL D’OFFRE EN INTEGRANT LES CRITERES ESG D’UN CAHIER DES CHARGES",
+            "t": "Répondre à un appel d’offre en intégrant les critères ESG d’un cahier des charges",
             "c": "Commerce - Relation client - Achat",
             "s": "commerce-relation-client",
             "p": "formation-commerce-relation-client",
@@ -1970,7 +2029,7 @@ import Footer from "../components/Footer.astro";
         ],
         "les-achats-responsables-dans-le-code-de-la-commande-publique": [
           {
-            "t": "LES ACHATS RESPONSABLES DANS LE CODE DE LA COMMANDE PUBLIQUE",
+            "t": "Les achats responsables dans le code de la commande publique",
             "c": "Commerce - Relation client - Achat",
             "s": "commerce-relation-client",
             "p": "formation-commerce-relation-client",
