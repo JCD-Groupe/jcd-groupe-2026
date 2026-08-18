@@ -993,17 +993,17 @@
     font-weight: 400;
     max-width: 800px;
   }
-  .manifesto-quote em {
+  .manifesto-quote strong {
     font-style: normal;
     font-weight: 500;
     color: var(--text-1);
   }
-  .manifesto-quote em {
+  .manifesto-quote strong {
     color: var(--accent-hi);
     font-weight: 500;
     font-style: normal;
   }
-  .manifesto-quote .q-soft {
+  .manifesto-quote em {
     color: color-mix(in srgb, var(--accent-hi) 65%, white);
   }
   /* Curseur de réception clignotant en fin de citation */
