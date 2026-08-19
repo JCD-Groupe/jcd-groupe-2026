@@ -1,6 +1,44 @@
 ---
+import { directus } from "../lib/directus";
+import { readSingleton } from "@directus/sdk";
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
+
+let global = await directus.request(
+  readSingleton("Global", {
+    fields: ["*"],
+  }),
+);
+
+let info_collaboratif = await directus.request(
+  readSingleton("solutions_collaboratives_audiovisuelles", {
+    fields: [
+      "*",
+      { prestations: ["*"] },
+      { processus_cybersecurite: ["*"] },
+      { processus: ["*"] },
+    ],
+  }),
+);
+
+const fetchSvgContent = async (id: string) => {
+  if (!id) return null;
+  const response = await fetch(
+    `${import.meta.env.PUBLIC_DIRECTUS_URL}/assets/${id}`,
+  );
+  return response.text();
+};
+
+info_collaboratif.prestations = await Promise.all(
+  info_collaboratif.prestations.map(async (prestation: any) => ({
+    ...prestation,
+    icone_content: await fetchSvgContent(prestation.icone),
+  })),
+);
+
+info_collaboratif.icone_cta_content = await fetchSvgContent(
+  info_collaboratif.icone_cta,
+);
 ---
 
 <html lang="fr">
@@ -13,33 +51,28 @@ import Footer from "../components/Footer.astro";
     <meta name="color-scheme" content="dark" />
     <meta name="theme-color" content="#0a0a0a" />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
-    <meta
-      name="description"
-      content="JCD Groupe · Pôle Informatique. Solutions collaboratives & audiovisuelles : messagerie, visioconférence et salles équipées."
-    />
+    <meta name="description" content={info_collaboratif.meta_description} />
     <link
       rel="canonical"
       href={`${import.meta.env.PUBLIC_DIRECTUS_URL}/info-collaboratif`}
     />
     <meta property="og:type" content="website" />
-    <meta property="og:site_name" content="JCD Groupe" />
+    <meta property="og:site_name" content={global.nom_societe} />
     <meta property="og:locale" content="fr_FR" />
     <meta
       property="og:title"
-      content="Solutions collaboratives & audiovisuelles · Informatique · JCD Groupe"
+      content={`${global.nom_societe} • ${info_collaboratif.nom_service}`}
     />
     <meta
       property="og:description"
-      content="JCD Groupe · Pôle Informatique. Solutions collaboratives & audiovisuelles : messagerie, visioconférence et salles équipées."
+      content={info_collaboratif.meta_description}
     />
     <meta
       property="og:url"
-      content={`${import.meta.env.PUBLIC_DIRECTUS_URL}/info-collaboratif`}
+      content={`${import.meta.env.PUBLIC_DIRECTUS_URL}/info-collaboratif}`}
     />
     <meta name="twitter:card" content="summary" />
-    <title>
-      Solutions collaboratives &amp; audiovisuelles · Informatique · JCD Groupe
-    </title>
+    <title>{global.nom_societe} • {info_collaboratif.nom_service}</title>
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -210,15 +243,15 @@ import Footer from "../components/Footer.astro";
           <div class="hero-grain" aria-hidden="true"></div>
 
           <div class="container">
-            <h1 id="hero-title" class="hero-title reveal delay-1">
-              <em>Collaborer</em> et communiquer &agrave; distance
-            </h1>
+            <h1
+              id="hero-title"
+              class="hero-title reveal delay-1"
+              set:html={info_collaboratif.titre_hero}
+            />
 
             <p class="hero-sub reveal delay-2">
-              Visioconférence, audiovisuel et salles équipées. Des outils qui
-              rapprochent vos équipes, conçus et intégrés sur mesure.
+              {info_collaboratif.sous_titre_hero}
             </p>
-
             <div class="hero-actions reveal delay-3">
               <a
                 href="/contact?pole=informatique&step=2"
@@ -251,7 +284,7 @@ import Footer from "../components/Footer.astro";
               <header class="mf-head reveal">
                 <span class="mf-head-side">
                   <span class="mf-caret" aria-hidden="true">&#9656;</span>
-                  <span class="mf-id">AV&middot;03</span>
+                  <span class="mf-id">{info_collaboratif.manifeste_id}</span>
                   <span class="mf-rule" aria-hidden="true"></span>
                   <span>Manifeste</span>
                 </span>
@@ -259,20 +292,11 @@ import Footer from "../components/Footer.astro";
                   <span>Pôle Informatique</span>
                 </span>
               </header>
-
               <blockquote
                 class="manifesto-quote manifesto-rich reveal delay-1"
                 id="manifesto-title"
-              >
-                Une salle de r&eacute;union se doit d'&ecirc;tre <em
-                  >optimis&eacute;e</em
-                > afin de travailler dans les meilleures conditions. Nous concevons,
-                int&eacute;grons et maintenons des <em
-                  >solutions audiovisuelles et de visioconf&eacute;rence</em
-                > pens&eacute;es pour vos usages et vos espaces.<span
-                  class="mf-cursor"
-                  aria-hidden="true"></span>
-              </blockquote>
+                set:html={info_collaboratif.manifeste}
+              />
             </div>
           </div>
         </section>
@@ -288,85 +312,28 @@ import Footer from "../components/Footer.astro";
       >
         <div class="container">
           <div class="sec-head reveal">
-            <h2 id="prest-title">Des espaces <em>sur-mesure</em>.</h2>
-            <p>
-              Visioconférence, affichage et audio : une solution adaptée à vos
-              usages et à vos espaces.
-            </p>
+            <h2
+              id="prest-title"
+              set:html={info_collaboratif.titre_prestations}
+            />
+            <p set:html={info_collaboratif.sous_titre_prestations} />
           </div>
-
           <div class="prest-grid reveal delay-1">
-            <article class="prest-item">
-              <div class="prest-item-head">
-                <span class="prest-item-glyph" aria-hidden="true"
-                  ><svg
-                    viewBox="0 0 40 40"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="1.3"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    ><rect x="10" y="6" width="20" height="28" rx="2"
-                    ></rect><path d="M16 6V4h8v2"></path><circle
-                      cx="18.5"
-                      cy="19"
-                      r="4"></circle><path d="M21.5 22l3.5 3.5"></path></svg
-                  ></span
-                >
-              </div>
-              <h3 class="prest-item-title">Analyse du besoin</h3>
-              <p class="prest-item-desc">
-                Analyse des usages, des espaces et des contraintes techniques
-                pour définir une solution adaptée, évolutive et interopérable.
-              </p>
-            </article>
-
-            <article class="prest-item">
-              <div class="prest-item-head">
-                <span class="prest-item-glyph" aria-hidden="true"
-                  ><svg
-                    viewBox="0 0 40 40"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="1.3"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    ><path d="M20 6l12 6.5v15L20 34 8 27.5v-15z"></path><path
-                      d="M20 6v28M8 12.5l12 6.5 12-6.5"></path></svg
-                  ></span
-                >
-              </div>
-              <h3 class="prest-item-title">Conception &amp; qualification</h3>
-              <p class="prest-item-desc">
-                Conception de l'architecture et sélection des équipements,
-                suivies de tests et validation : performance, compatibilité,
-                pérennité.
-              </p>
-            </article>
-
-            <article class="prest-item">
-              <div class="prest-item-head">
-                <span class="prest-item-glyph" aria-hidden="true"
-                  ><svg
-                    viewBox="0 0 40 40"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="1.3"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    ><rect x="7" y="9" width="26" height="16" rx="2"
-                    ></rect><path d="M20 25v5M14 32h12"></path><path
-                      d="M16 17l3 3 5-5"></path></svg
-                  ></span
-                >
-              </div>
-              <h3 class="prest-item-title">Installation &amp; prise en main</h3>
-              <p class="prest-item-desc">
-                Installation soignée et conforme, intégrée à votre
-                environnement, avec formation des utilisateurs pour une adoption
-                durable.
-              </p>
-            </article>
+            {
+              info_collaboratif.prestations.map((prestation: any) => (
+                <article class="prest-item">
+                  <div class="prest-item-head">
+                    <span
+                      class="prest-item-glyph"
+                      aria-hidden="true"
+                      set:html={prestation.icone_content}
+                    />
+                  </div>
+                  <h3 class="prest-item-title">{prestation.titre}</h3>
+                  <p class="prest-item-desc">{prestation.description}</p>
+                </article>
+              ))
+            }
           </div>
         </div>
       </section>
@@ -377,13 +344,13 @@ import Footer from "../components/Footer.astro";
       <section class="secblock" aria-labelledby="sec-title">
         <div class="container">
           <div class="secblock-head secblock-head--center reveal">
-            <h2 id="sec-title">Tous vos échanges <em>sécurisés</em></h2>
-            <p>
-              Réunions sensibles, contenus partagés : la sécurité et la maîtrise
-              des salles font partie de l'intégration.
-            </p>
+            <h2
+              id="sec-title"
+              set:html={info_collaboratif.titre_processus_cybersecurite}
+            />
+            <p>{info_collaboratif.sous_titre_processus_cybersecurite}</p>
             <a href="/informatique#cybersecurite" class="secblock-link">
-              Découvrir notre expertise Cybersécurité
+              {info_collaboratif.bouton_processus_cybersecurite}
               <svg
                 viewBox="0 0 16 16"
                 width="15"
@@ -413,8 +380,10 @@ import Footer from "../components/Footer.astro";
                     ></rect><path d="M8 21h8M12 17v4"></path><path
                       d="M8.5 10.5h.01M12 10.5h.01M15.5 10.5h.01"></path></svg
                   ></span
-                >
-                <span class="seclink-end-lab">Salle<br />équipée</span>
+                ><span
+                  class="seclink-end-lab"
+                  set:html={info_collaboratif.processus_cybersecurite_label_01}
+                />
               </div>
 
               <div class="seclink-wave">
@@ -489,15 +458,17 @@ import Footer from "../components/Footer.astro";
                       d="M22 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"
                     ></path></svg
                   ></span
-                >
-                <span class="seclink-end-lab">Participants<br />distants</span>
+                ><span
+                  class="seclink-end-lab"
+                  set:html={info_collaboratif.processus_cybersecurite_label_03}
+                />
               </div>
             </div>
-            <div class="seclink-caption">
-              Communication <em>chiffrée</em>
-            </div>
+            <div
+              class="seclink-caption"
+              set:html={info_collaboratif.processus_cybersecurite_label_02}
+            />
           </div>
-
           <div class="seclink-points reveal delay-2">
             <div class="seclink-point">
               <h4>
@@ -514,11 +485,10 @@ import Footer from "../components/Footer.astro";
                   ></path><rect x="9.3" y="11" width="5.4" height="4" rx="0.8"
                   ></rect><path d="M10.5 11v-1a1.5 1.5 0 013 0v1"></path></svg
                 >
-                Confidentialité des échanges
+                {info_collaboratif.processus_cybersecurite[0]?.titre}
               </h4>
               <p>
-                Visioconférence et partages protégés : vos réunions sensibles
-                restent privées.
+                {info_collaboratif.processus_cybersecurite[0]?.description}
               </p>
             </div>
 
@@ -536,11 +506,10 @@ import Footer from "../components/Footer.astro";
                   ></rect><path d="M8 21h8M12 17v4"></path><path
                     d="M9.5 10.5l2 2 3.5-3.5"></path></svg
                 >
-                Salles maîtrisées
+                {info_collaboratif.processus_cybersecurite[1]?.titre}
               </h4>
               <p>
-                Équipements administrés et cloisonnés du réseau pour limiter les
-                risques.
+                {info_collaboratif.processus_cybersecurite[1]?.description}
               </p>
             </div>
 
@@ -557,11 +526,10 @@ import Footer from "../components/Footer.astro";
                   ><path d="M20 12a8 8 0 11-2.3-5.6"></path><path d="M20 4v4h-4"
                   ></path><path d="M12 9v3l2 2"></path></svg
                 >
-                Mises à jour &amp; supervision
+                {info_collaboratif.processus_cybersecurite[2]?.titre}
               </h4>
               <p>
-                Maintenance et mises à jour suivies : des salles fiables et à
-                jour dans le temps.
+                {info_collaboratif.processus_cybersecurite[2]?.description}
               </p>
             </div>
           </div>
@@ -574,13 +542,12 @@ import Footer from "../components/Footer.astro";
       <section class="process" id="process" aria-labelledby="process-title">
         <div class="container">
           <div class="sec-head reveal">
-            <h2 id="process-title">Une intégration <em>soignée</em>.</h2>
-            <p>
-              De l'écoute du besoin à la prise en main, en lien avec tous les
-              acteurs du projet.
-            </p>
+            <h2
+              id="process-title"
+              set:html={info_collaboratif.titre_processus}
+            />
+            <p>{info_collaboratif.sous_titre_processus}</p>
           </div>
-
           <div class="regie-track reveal delay-1" aria-hidden="true">
             <span class="regie-tc regie-tc--1">00:00</span>
             <span class="regie-tc regie-tc--2">00:45</span>
@@ -594,34 +561,15 @@ import Footer from "../components/Footer.astro";
             <span class="regie-marker regie-marker--4"></span>
             <span class="regie-playhead"></span>
           </div>
-
           <div class="regie-steps reveal delay-2">
-            <div class="clip">
-              <h3>Écoute &amp; usages</h3>
-              <p>
-                Analyse des usages, des espaces et des contraintes techniques.
-              </p>
-            </div>
-            <div class="clip">
-              <h3>Architecture &amp; matériel</h3>
-              <p>
-                Sélection des équipements, tests et validation de la solution.
-              </p>
-            </div>
-            <div class="clip">
-              <h3>Intégration</h3>
-              <p>
-                Installation soignée et conforme, intégrée à votre
-                environnement.
-              </p>
-            </div>
-            <div class="clip">
-              <h3>Prise en main</h3>
-              <p>
-                Formation des utilisateurs et maintenance pour une utilisation
-                durable.
-              </p>
-            </div>
+            {
+              info_collaboratif.processus.map((clip: any) => (
+                <div class="clip">
+                  <h3>{clip.titre}</h3>
+                  <p>{clip.description}</p>
+                </div>
+              ))
+            }
           </div>
         </div>
       </section>
@@ -737,19 +685,21 @@ import Footer from "../components/Footer.astro";
               </svg>
 
               <div class="cta-body">
-                <h2 class="cta-title reveal delay-1" id="cta-title">
-                  Un projet <em>audiovisuel&thinsp;?</em>
-                </h2>
-                <p class="cta-sub reveal delay-2">
-                  Visioconférence, affichage, salles hybrides… Et si on vous le
-                  montrait ? Demandez une démonstration.
-                </p>
+                <h2
+                  class="cta-title reveal delay-1"
+                  id="cta-title"
+                  set:html={info_collaboratif.titre_cta}
+                />
+                <p
+                  class="cta-sub reveal delay-2"
+                  set:html={info_collaboratif.sous_titre_cta}
+                />
                 <div class="cta-actions reveal delay-3">
                   <a
                     href="/contact?pole=informatique&step=2"
                     class="btn-cta btn-cta--primary"
                   >
-                    Contacter le pôle Informatique
+                    {info_collaboratif.bouton_cta}
                     <span class="btn-cta-arrow"
                       ><svg
                         viewBox="0 0 16 16"
