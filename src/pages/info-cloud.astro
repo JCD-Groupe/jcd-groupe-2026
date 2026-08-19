@@ -1,6 +1,61 @@
 ---
+import { directus } from "../lib/directus";
+import { readSingleton } from "@directus/sdk";
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
+
+let global = await directus.request(
+  readSingleton("Global", {
+    fields: ["*"],
+  }),
+);
+
+let info_cloud = await directus.request(
+  readSingleton("cloud_microsoft", {
+    fields: [
+      "*",
+      { prestations: ["*"] },
+      { processus_cybersecurite: ["*"] },
+      { processus: ["*"] },
+    ],
+  }),
+);
+
+const fetchSvgContent = async (id: string) => {
+  if (!id) return null;
+  const response = await fetch(
+    `${import.meta.env.PUBLIC_DIRECTUS_URL}/assets/${id}`,
+  );
+  return response.text();
+};
+
+function contient(cherche: string, str: string) {
+  // Normalise un texte (supprime les accents et passe en minuscules)
+  const normaliser = (s: string) =>
+    s
+      .normalize("NFD")
+      .replace(/[\u0300-\u036f]/g, "")
+      .toLowerCase();
+
+  const texte = normaliser(str);
+
+  // Si "cherche" est un tableau de mots (ex: ["telephonie", "mobile", "internet"])
+  if (Array.isArray(cherche)) {
+    return cherche.some((mot) => texte.includes(normaliser(mot)));
+  }
+
+  // Si "cherche" est une simple chaîne de caractères
+  return texte.includes(normaliser(cherche));
+}
+
+info_cloud.prestations = await Promise.all(
+  info_cloud.prestations.map(async (prestation: any) => ({
+    ...prestation,
+    icone_content: await fetchSvgContent(prestation.icone),
+  })),
+);
+
+info_cloud.icone_cta_content = await fetchSvgContent(info_cloud.icone_cta);
 ---
 
 <html lang="fr">
@@ -13,31 +68,27 @@ import Footer from "../components/Footer.astro";
     <meta name="color-scheme" content="dark" />
     <meta name="theme-color" content="#0a0a0a" />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
-    <meta
-      name="description"
-      content="JCD Groupe · Pôle Informatique. Partenaire Tier 1 Microsoft : déploiement et optimisation de Microsoft 365, Azure, téléphonie Teams et gouvernance du cloud. 11 ans d'expertise, 200 000+ utilisateurs suivis."
-    />
+    <meta name="description" content={info_cloud.meta_description} />
     <link
       rel="canonical"
       href={`${import.meta.env.PUBLIC_DIRECTUS_URL}/info-cloud`}
     />
     <meta property="og:type" content="website" />
-    <meta property="og:site_name" content="JCD Groupe" />
+    <meta property="og:site_name" content={global.nom_societe} />
     <meta property="og:locale" content="fr_FR" />
     <meta
       property="og:title"
-      content="Cloud Microsoft 365 & Azure · Informatique · JCD Groupe"
+      content={`${info_cloud.nom_service} · Informatique · ${global.nom_societe}`}
     />
-    <meta
-      property="og:description"
-      content="JCD Groupe · Pôle Informatique. Partenaire Tier 1 Microsoft : déploiement et optimisation de Microsoft 365, Azure, téléphonie Teams et gouvernance du cloud. 11 ans d'expertise, 200 000+ utilisateurs suivis."
-    />
+    <meta property="og:description" content={info_cloud.meta_description} />
     <meta
       property="og:url"
       content={`${import.meta.env.PUBLIC_DIRECTUS_URL}/info-cloud`}
     />
     <meta name="twitter:card" content="summary" />
-    <title>Cloud Microsoft 365 &amp; Azure · Informatique · JCD Groupe</title>
+    <title>
+      {info_cloud.nom_service} · Informatique · {global.nom_societe}
+    </title>
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -211,24 +262,23 @@ import Footer from "../components/Footer.astro";
           <div class="hero-grain" aria-hidden="true"></div>
 
           <div class="container">
-            <h1 id="hero-title" class="hero-title reveal delay-1">
-              Le <em>Cloud Microsoft</em>, déployé et maîtrisé.
-            </h1>
+            <h1
+              id="hero-title"
+              class="hero-title reveal delay-1"
+              set:html={info_cloud.titre_hero}
+            />
 
-            <p class="hero-sub reveal delay-2">
-              Microsoft 365, Azure et Teams. Nous accompagnons tout type de
-              structure dans la modernisation de son informatique en tirant
-              parti de la puissance du Cloud — en partenaire <strong
-                >Tier&nbsp;1 Microsoft</strong
-              >.
-            </p>
+            <p
+              class="hero-sub reveal delay-2"
+              set:html={info_cloud.sous_titre_hero}
+            />
 
             <div class="hero-actions reveal delay-3">
               <a
                 href="/contact?pole=informatique&step=2"
                 class="btn-cta btn-cta--ghost"
               >
-                Échanger avec un expert Microsoft
+                {info_cloud.bouton_hero}
                 <span class="btn-cta-arrow"
                   ><svg
                     viewBox="0 0 16 16"
@@ -255,7 +305,7 @@ import Footer from "../components/Footer.astro";
               <header class="mf-head reveal">
                 <span class="mf-head-side">
                   <span class="mf-caret" aria-hidden="true">&#9656;</span>
-                  <span class="mf-id">CLOUD&middot;04</span>
+                  <span class="mf-id">{info_cloud.manifeste_id}</span>
                   <span class="mf-rule" aria-hidden="true"></span>
                   <span>Manifeste</span>
                 </span>
@@ -268,12 +318,9 @@ import Footer from "../components/Footer.astro";
                 <blockquote
                   class="manifesto-quote manifesto-rich reveal delay-1"
                   id="manifesto-title"
+                  set:html={info_cloud.manifeste}
                 >
-                  Depuis plus de <em>10 ans</em>, nous déployons et optimisons
-                  les environnements Microsoft&nbsp;365 et Azure. <span
-                    class="q-soft"
-                    >Vous gagnez en puissance, tout en gardant la maîtrise.</span
-                  ><span class="mf-cursor" aria-hidden="true"></span>
+                  <span class="mf-cursor" aria-hidden="true"></span>
                 </blockquote>
               </div>
             </div>
@@ -291,159 +338,47 @@ import Footer from "../components/Footer.astro";
       >
         <div class="container">
           <div class="sec-head reveal">
-            <h2 id="prest-title">
-              Tout l'écosystème <em>Microsoft</em>, opéré pour vous.
-            </h2>
-            <p>
-              De Microsoft&nbsp;365 à Azure, de la téléphonie Teams aux
-              signatures de mail&nbsp;: un accompagnement complet, de l'étude de
-              l'existant à l'exploitation au quotidien.
-            </p>
+            <h2 id="prest-title" set:html={info_cloud.titre_prestations} />
+            <p set:html={info_cloud.sous_titre_prestations} />
           </div>
 
           <div class="prest-grid reveal delay-1">
-            <article class="prest-item">
-              <div class="prest-item-head">
-                <span class="prest-item-glyph" aria-hidden="true">
-                  <svg
-                    viewBox="0 0 40 40"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="1.3"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    ><path
-                      d="M27.5 26.5H13a6 6 0 1 1 1.6-11.8A8.5 8.5 0 0 1 31 13.8a5.5 5.5 0 0 1 2 10.4"
-                    ></path><path d="M20 33V21.5"></path><path
-                      d="m15.5 26 4.5-4.5L24.5 26"></path></svg
-                  >
-                </span>
-              </div>
-              <h3 class="prest-item-title">
-                Migration &amp; optimisation Microsoft&nbsp;365
-              </h3>
-              <p class="prest-item-desc">
-                Étude de votre existant, identification des plus fortes valeurs
-                ajoutées du cloud Microsoft, puis accompagnement complet dans la
-                mise en œuvre.
-              </p>
-            </article>
-
-            <article class="prest-item">
-              <div class="prest-item-head">
-                <span class="prest-item-glyph" aria-hidden="true">
-                  <svg
-                    viewBox="0 0 40 40"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="1.3"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    ><path d="M20 6.5l11.5 6.3v12.4L20 31.5 8.5 25.2V12.8z"
-                    ></path><path d="M8.7 13l11.3 6.4L31.3 13"></path><path
-                      d="M20 19.4V31.5"></path></svg
-                  >
-                </span>
-              </div>
-              <h3 class="prest-item-title">Environnements Microsoft Azure</h3>
-              <p class="prest-item-desc">
-                Mise en œuvre d'environnements Azure pour améliorer la
-                disponibilité et la sécurité de vos applicatifs métier, en
-                tirant parti de la puissance et de la résilience du cloud.
-              </p>
-            </article>
-
-            <article class="prest-item">
-              <div class="prest-item-head">
-                <span class="prest-item-glyph" aria-hidden="true">
-                  <svg
-                    viewBox="0 0 40 40"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="1.3"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    ><path
-                      d="M20 5.5l12 4.2v8.8c0 7.2-5.1 12.2-12 14.5-6.9-2.3-12-7.3-12-14.5V9.7z"
-                    ></path><path d="m14.8 19.6 3.4 3.4 7-7.4"></path></svg
-                  >
-                </span>
-              </div>
-              <h3 class="prest-item-title">
-                Gouvernance &amp; sécurité du cloud
-              </h3>
-              <p class="prest-item-desc">
-                Suivi des évolutions, sauvegardes et conseil de proximité&nbsp;:
-                vous gardez la maîtrise de votre environnement, en alliant
-                sécurité et ergonomie.
-              </p>
-            </article>
-
-            <article class="prest-item prest-item--wide">
-              <div class="prest-item-head">
-                <span class="prest-item-glyph" aria-hidden="true">
-                  <svg
-                    viewBox="0 0 40 40"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="1.3"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    ><path d="M11 20.5v-1a9 9 0 0 1 18 0v1"></path><path
-                      d="M8.5 20.5h3.2v7.8H9.7a1.2 1.2 0 0 1-1.2-1.2z"
-                    ></path><path
-                      d="M31.5 20.5h-3.2v7.8h2a1.2 1.2 0 0 0 1.2-1.2z"
-                    ></path><path d="M28.3 28.3v1a3 3 0 0 1-3 3H20.8"
-                    ></path></svg
-                  >
-                </span>
-              </div>
-              <h3 class="prest-item-title">Téléphonie Teams</h3>
-              <p class="prest-item-desc">
-                Migration de votre téléphonie existante vers Microsoft Teams
-                pour accroître la mobilité et la sécurité de vos utilisateurs,
-                où qu'ils travaillent.
-              </p>
-              <a class="prest-cta" href="/telecom">
-                Découvrez nos offres télécom
-                <svg
-                  viewBox="0 0 16 16"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="1.6"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4"></path></svg
+            {
+              info_cloud.prestations.map((prestation: any, index: number) => (
+                <article
+                  class:list={["prest-item", { "prest-item--wide": index > 2 }]}
                 >
-              </a>
-            </article>
-
-            <article class="prest-item prest-item--wide">
-              <div class="prest-item-head">
-                <span class="prest-item-glyph" aria-hidden="true">
-                  <svg
-                    viewBox="0 0 40 40"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="1.3"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    ><rect x="7" y="11.5" width="26" height="17" rx="2.5"
-                    ></rect><path d="M8 13.5l12 8 12-8"></path><path
-                      d="M13 33c2-1.6 3.5-1.6 5 0s3.5 1.6 5 0 3.5-1.6 5 0"
-                    ></path></svg
-                  >
-                </span>
-              </div>
-              <h3 class="prest-item-title">
-                Signatures de mail &amp; bannières
-              </h3>
-              <p class="prest-item-desc">
-                Déploiement de signatures de mail et de bannières dynamiques
-                pour améliorer votre communication interne et externe, sur
-                l'ensemble de vos collaborateurs.
-              </p>
-            </article>
+                  <div class="prest-item-head">
+                    <span
+                      class="prest-item-glyph"
+                      aria-hidden="true"
+                      set:html={prestation.icone_content}
+                    />
+                  </div>
+                  <h3 class="prest-item-title" set:html={prestation.titre} />
+                  <p
+                    class="prest-item-desc"
+                    set:html={prestation.description}
+                  />
+                  {contient("telephonie", prestation.titre) && (
+                    <a class="prest-cta" href="/telecom">
+                      Découvrez nos offres télécom
+                      <svg
+                        viewBox="0 0 16 16"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="1.6"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        aria-hidden="true"
+                      >
+                        <path d="M3 8h10M9 4l4 4-4 4" />
+                      </svg>
+                    </a>
+                  )}
+                </article>
+              ))
+            }
           </div>
         </div>
       </section>
@@ -454,16 +389,13 @@ import Footer from "../components/Footer.astro";
       <section class="secblock" aria-labelledby="sec-title">
         <div class="container">
           <div class="secblock-head secblock-head--center reveal">
-            <h2 id="sec-title">
-              Vos environnements Microsoft, <em>sous bonne garde.</em>
-            </h2>
-            <p>
-              Moderniser son informatique, c'est aussi en garder la maîtrise.
-              Nos équipes assurent le suivi, la sauvegarde et la sécurisation de
-              vos environnements Microsoft&nbsp;365 et Azure.
-            </p>
+            <h2
+              id="sec-title"
+              set:html={info_cloud.titre_processus_cybersecurite}
+            />
+            <p set:html={info_cloud.sous_titre_processus_cybersecurite} />
             <a href="/informatique#cybersecurite" class="secblock-link">
-              Découvrir notre expertise Cybersécurité
+              {info_cloud.bouton_processus_cybersecurite}
               <svg
                 viewBox="0 0 16 16"
                 width="15"
@@ -545,19 +477,25 @@ import Footer from "../components/Footer.astro";
                   <path
                     class="sk-sector"
                     d="M380 360 L60 360 A320 320 0 0 1 220 82.9 Z"></path>
-                  <text x="79" y="186" class="sk-lab">01 · AUDITER</text>
+                  <text x="79" y="186" class="sk-lab"
+                    >01 · {info_cloud.processus_cybersecurite_label_01}</text
+                  >
                 </g>
                 <g class="sk-s2">
                   <path
                     class="sk-sector"
                     d="M380 360 L220 82.9 A320 320 0 0 1 540 82.9 Z"></path>
-                  <text x="380" y="24" class="sk-lab">02 · DÉTECTER</text>
+                  <text x="380" y="24" class="sk-lab"
+                    >02 · {info_cloud.processus_cybersecurite_label_02}</text
+                  >
                 </g>
                 <g class="sk-s3">
                   <path
                     class="sk-sector"
                     d="M380 360 L540 82.9 A320 320 0 0 1 700 360 Z"></path>
-                  <text x="681" y="186" class="sk-lab">03 · FORMER</text>
+                  <text x="681" y="186" class="sk-lab"
+                    >03 · {info_cloud.processus_cybersecurite_label_03}</text
+                  >
                 </g>
 
                 <!-- grille du dôme : arcs de portée hiérarchisés (extérieur affirmé,
@@ -807,47 +745,31 @@ import Footer from "../components/Footer.astro";
             </svg>
 
             <div class="sky-grid">
-              <div class="skypoint" data-sector="1">
-                <span class="sk-node" aria-hidden="true"></span>
-                <h4>Gouvernance &amp; audit&nbsp;: Cyber et NIS2</h4>
-                <p>
-                  Des audits qui identifient les faiblesses techniques,
-                  administratives ou de processus, des recommandations face aux
-                  référentiels comme NIS&nbsp;2, et une planification réaliste,
-                  adaptée à votre structure.
-                </p>
-              </div>
-              <div class="skypoint" data-sector="2">
-                <span class="sk-node" aria-hidden="true"></span>
-                <h4>SOC &amp; MicroSOC, 24/7</h4>
-                <p>
-                  Réagir rapidement aux menaces, vous conseiller, vous rassurer
-                  et vous défendre, en continu, du SI local jusqu'à vos
-                  environnements cloud.
-                </p>
-              </div>
-              <div class="skypoint" data-sector="3">
-                <span class="sk-node" aria-hidden="true"></span>
-                <h4>Formation &amp; sensibilisation</h4>
-                <p>
-                  Tester vos équipes, vérifier que vos protections sont
-                  correctes et maintenir votre niveau de compétences à la
-                  hauteur de vos besoins.
-                </p>
-                <a class="skypoint-cta" href="/formation-informatique">
-                  Découvrez nos formations cybersécurité
-                  <svg
-                    viewBox="0 0 16 16"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="1.6"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    aria-hidden="true"
-                    ><path d="M3 8h10M9 4l4 4-4 4"></path></svg
-                  >
-                </a>
-              </div>
+              {
+                info_cloud.processus_cybersecurite.map((etapes: any) => (
+                  <div class="skypoint" data-sector="3">
+                    <span class="sk-node" aria-hidden="true" />
+                    <h4 set:html={etapes.titre} />
+                    <p set:html={etapes.description} />
+                    {contient("formation", etapes.titre) && (
+                      <a class="skypoint-cta" href="/formation-informatique">
+                        Découvrez nos formations cybersécurité
+                        <svg
+                          viewBox="0 0 16 16"
+                          fill="none"
+                          stroke="currentColor"
+                          stroke-width="1.6"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          aria-hidden="true"
+                        >
+                          <path d="M3 8h10M9 4l4 4-4 4" />
+                        </svg>
+                      </a>
+                    )}
+                  </div>
+                ))
+              }
             </div>
 
             <div class="sky-offer reveal delay-2">
@@ -901,11 +823,8 @@ import Footer from "../components/Footer.astro";
       <section class="process" id="process" aria-labelledby="process-title">
         <div class="container">
           <div class="sec-head reveal">
-            <h2 id="process-title">Une modernisation <em>par paliers</em>.</h2>
-            <p>
-              Une trajectoire progressive vers le cloud Microsoft, validée
-              palier après palier, de l'étude de l'existant à l'exploitation.
-            </p>
+            <h2 id="process-title" set:html={info_cloud.titre_processus} />
+            <p set:html={info_cloud.sous_titre_processus} />
           </div>
 
           <div class="flightpath reveal delay-1">
@@ -928,12 +847,14 @@ import Footer from "../components/Footer.astro";
                 </defs>
 
                 <!-- repères : départ au sol (votre SI) → arrivée en altitude (cloud) -->
-                <text x="14" y="243" class="fp-tag">ON-PREM</text>
+                <text x="14" y="243" class="fp-tag"
+                  >{info_cloud.processus_label_debut}</text
+                >
                 <text
                   x="986"
                   y="22"
                   class="fp-tag fp-tag-cloud"
-                  text-anchor="end">CLOUD</text
+                  text-anchor="end">{info_cloud.processus_label_fin}</text
                 >
                 <g
                   class="fp-cloud-ic"
@@ -1017,36 +938,14 @@ import Footer from "../components/Footer.astro";
             </div>
 
             <ol class="fp-steps">
-              <li class="fp-step">
-                <h3>Étude de l'existant</h3>
-                <p>
-                  Analyse de votre informatique actuelle, de vos usages et de
-                  vos contraintes pour cibler la plus forte valeur ajoutée du
-                  cloud Microsoft.
-                </p>
-              </li>
-              <li class="fp-step">
-                <h3>Socle Microsoft sécurisé</h3>
-                <p>
-                  Préparation des fondations&nbsp;: identités, sécurité et
-                  configuration de votre environnement Microsoft&nbsp;365 et
-                  Azure.
-                </p>
-              </li>
-              <li class="fp-step">
-                <h3>Mise en œuvre par vagues</h3>
-                <p>
-                  Déploiement et migration progressifs, testés et maîtrisés,
-                  vague après vague, sans interruption d'activité.
-                </p>
-              </li>
-              <li class="fp-step">
-                <h3>Gouvernance &amp; optimisation</h3>
-                <p>
-                  Suivi régulier, sauvegardes et optimisation continue&nbsp;:
-                  vous gardez la maîtrise de votre environnement dans le temps.
-                </p>
-              </li>
+              {
+                info_cloud.processus.map((etapes: any) => (
+                  <li class="fp-step">
+                    <h3 set:html={etapes.titre} />
+                    <p set:html={etapes.description} />
+                  </li>
+                ))
+              }
             </ol>
           </div>
         </div>
@@ -1059,80 +958,28 @@ import Footer from "../components/Footer.astro";
         <div class="container">
           <div class="cta-frame">
             <div class="cta-inner">
-              <svg
+              <span
                 class="cta-icon reveal"
-                viewBox="0 0 120 120"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
                 aria-hidden="true"
-                focusable="false"
-              >
-                <!-- Nappe cloud — contour accent, épuré -->
-                <path
-                  d="M77 41.8H58.2a15.4 15.4 0 1 1 14.76-19.8h3.94a9.9 9.9 0 1 1 .1 19.8Z"
-                  stroke="currentColor"
-                  stroke-width="1.3"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  opacity="0.80"></path>
-
-                <!-- Hub de distribution -->
-                <circle
-                  cx="60"
-                  cy="60"
-                  r="8.5"
-                  stroke="#f4f4f4"
-                  stroke-width="1.1"
-                  opacity="0.35"></circle>
-                <circle cx="60" cy="60" r="2.4" fill="currentColor"></circle>
-                <circle
-                  class="cta-vig-ping"
-                  cx="60"
-                  cy="60"
-                  r="8.5"
-                  stroke="currentColor"
-                  stroke-width="1"></circle>
-
-                <!-- Liaisons douces : cloud → hub → sites -->
-                <g
-                  stroke="#f4f4f4"
-                  stroke-width="1.1"
-                  stroke-linecap="round"
-                  fill="none"
-                  opacity="0.26"
-                >
-                  <line x1="60" y1="44" x2="60" y2="51.5"></line>
-                  <path d="M54 66.5 C 47 74, 41 76.5, 34.5 83"></path>
-                  <path d="M66 66.5 C 73 74, 79 76.5, 85.5 83"></path>
-                </g>
-
-                <!-- Sites / serveurs locaux : baies épurées -->
-                <g
-                  stroke="#f4f4f4"
-                  stroke-width="1.2"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  opacity="0.32"
-                >
-                  <rect x="20" y="85" width="26" height="17" rx="4"></rect>
-                  <rect x="74" y="85" width="26" height="17" rx="4"></rect>
-                </g>
-              </svg>
+                set:html={info_cloud.icone_cta_content}
+              />
 
               <div class="cta-body">
-                <h2 class="cta-title reveal delay-1" id="cta-title">
-                  Un projet <em>Cloud Microsoft&thinsp;?</em>
-                </h2>
-                <p class="cta-sub reveal delay-2">
-                  Contactez nos experts pour une première réunion de
-                  qualification rapide et gratuite.
-                </p>
+                <h2
+                  class="cta-title reveal delay-1"
+                  id="cta-title"
+                  set:html={info_cloud.titre_cta}
+                />
+                <p
+                  class="cta-sub reveal delay-2"
+                  set:html={info_cloud.sous_titre_cta}
+                />
                 <div class="cta-actions reveal delay-3">
                   <a
                     href="/contact?pole=informatique&step=2"
                     class="btn-cta btn-cta--primary"
                   >
-                    Contacter le pôle Informatique
+                    {info_cloud.bouton_cta}
                     <span class="btn-cta-arrow"
                       ><svg
                         viewBox="0 0 16 16"
