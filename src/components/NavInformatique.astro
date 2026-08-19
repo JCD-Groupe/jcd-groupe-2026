@@ -1,0 +1,138 @@
+---
+import { readSingleton } from "@directus/sdk";
+import { directus } from "../lib/directus";
+import { undefined } from "astro:schema";
+
+const { current = null } = Astro.props;
+
+const fetchSvgContent = async (id: string) => {
+  if (!id) return null;
+  const response = await fetch(
+    `${import.meta.env.PUBLIC_DIRECTUS_URL}/assets/${id}`,
+  );
+  return response.text();
+};
+
+let info_cloud = await directus.request(
+  readSingleton("cloud_microsoft", {
+    fields: ["nom_service", "icone_service"],
+  }),
+);
+let info_collaboratif = await directus.request(
+  readSingleton("solutions_collaboratives_audiovisuelles", {
+    fields: ["nom_service", "icone_service"],
+  }),
+);
+let info_integration = await directus.request(
+  readSingleton("integration_support_pc", {
+    fields: ["nom_service", "icone_service"],
+  }),
+);
+let info_reseaux = await directus.request(
+  readSingleton("architectures_systemes_reseaux", {
+    fields: ["nom_service", "icone_service"],
+  }),
+);
+
+info_cloud.icone_service = await fetchSvgContent(info_cloud.icone_service);
+info_collaboratif.icone_service = await fetchSvgContent(
+  info_collaboratif.icone_service,
+);
+info_integration.icone_service = await fetchSvgContent(
+  info_integration.icone_service,
+);
+info_reseaux.icone_service = await fetchSvgContent(info_reseaux.icone_service);
+---
+
+<nav
+  class="info-subnav"
+  aria-label="Navigation du pôle Informatique"
+  role="menubar"
+>
+  <div class="info-subnav__inner">
+    <a
+      href="/informatique"
+      class={"info-subnav__home" +
+        (current === "info-general" ? " is-active" : "")}
+      role="menuitem"
+      aria-label="Vue d'ensemble, Pôle Informatique"
+      title="Vue d'ensemble"
+    >
+      <svg
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="1.7"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        aria-hidden="true"
+        ><rect x="3" y="3" width="7" height="7" rx="1.6"></rect><rect
+          x="14"
+          y="3"
+          width="7"
+          height="7"
+          rx="1.6"></rect><rect x="3" y="14" width="7" height="7" rx="1.6"
+        ></rect><rect x="14" y="14" width="7" height="7" rx="1.6"></rect></svg
+      >
+    </a>
+    <span class="info-subnav__sep" aria-hidden="true"></span>
+    <ul class="info-subnav__list">
+      <li role="none">
+        <a
+          href="/info-integration"
+          class={"info-subnav__link" +
+            (current === "info-integration" ? " is-active" : "")}
+          role="menuitem"
+          ><span
+            class="info-subnav__ic"
+            aria-hidden="true"
+            set:html={info_integration.icone_service}
+          />
+          {info_integration.nom_service}</a
+        >
+      </li>
+      <li role="none">
+        <a
+          href="/info-reseaux"
+          class={"info-subnav__link" +
+            (current === "info-reseaux" ? " is-active" : "")}
+          role="menuitem"
+          ><span
+            class="info-subnav__ic"
+            aria-hidden="true"
+            set:html={info_reseaux.icone_service}
+          />
+          {info_reseaux.nom_service}</a
+        >
+      </li>
+      <li role="none">
+        <a
+          href="/info-collaboratif"
+          class={"info-subnav__link" +
+            (current === "info-collaboratif" ? " is-active" : "")}
+          role="menuitem"
+          ><span
+            class="info-subnav__ic"
+            aria-hidden="true"
+            set:html={info_collaboratif.icone_service}
+          />
+          {info_collaboratif.nom_service}</a
+        >
+      </li>
+      <li role="none">
+        <a
+          href="/info-cloud"
+          class={"info-subnav__link" +
+            (current === "info-cloud" ? " is-active" : "")}
+          role="menuitem"
+          ><span
+            class="info-subnav__ic"
+            aria-hidden="true"
+            set:html={info_cloud.icone_service}
+          />
+          {info_cloud.nom_service}</a
+        >
+      </li>
+    </ul>
+  </div>
+</nav>

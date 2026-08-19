@@ -3,6 +3,7 @@ import { directus } from "../lib/directus";
 import { readSingleton } from "@directus/sdk";
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
+import NavInformatique from "../components/NavInformatique.astro";
 
 let global = await directus.request(
   readSingleton("Global", {
@@ -41,6 +42,27 @@ let informatique = await directus.request(
   }),
 );
 
+let info_cloud = await directus.request(
+  readSingleton("cloud_microsoft", {
+    fields: ["nom_service", "icone_service", "description_page_informatique"],
+  }),
+);
+let info_collaboratif = await directus.request(
+  readSingleton("solutions_collaboratives_audiovisuelles", {
+    fields: ["nom_service", "icone_service", "description_page_informatique"],
+  }),
+);
+let info_integration = await directus.request(
+  readSingleton("integration_support_pc", {
+    fields: ["nom_service", "icone_service", "description_page_informatique"],
+  }),
+);
+let info_reseaux = await directus.request(
+  readSingleton("architectures_systemes_reseaux", {
+    fields: ["nom_service", "icone_service", "description_page_informatique"],
+  }),
+);
+
 const fetchSvgContent = async (id: string) => {
   if (!id) return null;
   const response = await fetch(
@@ -57,6 +79,15 @@ informatique.prestations_cybersecurite = await Promise.all(
     icone_content: await fetchSvgContent(prestation.icone),
   })),
 );
+
+info_cloud.icone_service = await fetchSvgContent(info_cloud.icone_service);
+info_collaboratif.icone_service = await fetchSvgContent(
+  info_collaboratif.icone_service,
+);
+info_integration.icone_service = await fetchSvgContent(
+  info_integration.icone_service,
+);
+info_reseaux.icone_service = await fetchSvgContent(info_reseaux.icone_service);
 ---
 
 <html lang="fr">
@@ -120,127 +151,12 @@ informatique.prestations_cybersecurite = await Promise.all(
     <Header />
 
     <!-- ====================================================================
-     RAIL DE SOUS-NAVIGATION — écosystème Informatique
-     Ancré en permanence sous le navbar. Libellés complets, page active
-     en bleu JCD. Permet de naviguer entre la vue d'ensemble et les 4
-     domaines du pôle.
-     ==================================================================== -->
-    <nav
-      class="info-subnav"
-      aria-label="Navigation du pôle Informatique"
-      role="menubar"
-    >
-      <div class="info-subnav__inner">
-        <a
-          href="/informatique"
-          class="info-subnav__home is-active"
-          aria-current="page"
-          role="menuitem"
-          aria-label="Vue d'ensemble, Pôle Informatique"
-          title="Vue d'ensemble"
-        >
-          <svg
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="1.7"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            aria-hidden="true"
-            ><rect x="3" y="3" width="7" height="7" rx="1.6"></rect><rect
-              x="14"
-              y="3"
-              width="7"
-              height="7"
-              rx="1.6"></rect><rect x="3" y="14" width="7" height="7" rx="1.6"
-            ></rect><rect x="14" y="14" width="7" height="7" rx="1.6"
-            ></rect></svg
-          >
-        </a>
-        <span class="info-subnav__sep" aria-hidden="true"></span>
-        <ul class="info-subnav__list">
-          <li role="none">
-            <a
-              href="/info-integration"
-              class="info-subnav__link"
-              role="menuitem"
-              ><span class="info-subnav__ic" aria-hidden="true"
-                ><svg
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="1.7"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  ><path
-                    d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"
-                  ></path></svg
-                ></span
-              >Service Intégration &amp; Support PC</a
-            >
-          </li>
-          <li role="none">
-            <a href="/info-reseaux" class="info-subnav__link" role="menuitem"
-              ><span class="info-subnav__ic" aria-hidden="true"
-                ><svg
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="1.7"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  ><rect x="2" y="3" width="20" height="8" rx="2"></rect><rect
-                    x="2"
-                    y="13"
-                    width="20"
-                    height="8"
-                    rx="2"></rect><path d="M6 7h.01M6 17h.01"></path></svg
-                ></span
-              >Architectures systèmes &amp; réseaux</a
-            >
-          </li>
-          <li role="none">
-            <a
-              href="/info-collaboratif"
-              class="info-subnav__link"
-              role="menuitem"
-              ><span class="info-subnav__ic" aria-hidden="true"
-                ><svg
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="1.7"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  ><path d="m22 8-6 4 6 4V8Z"></path><rect
-                    x="2"
-                    y="6"
-                    width="14"
-                    height="12"
-                    rx="2"></rect></svg
-                ></span
-              >Solutions collaboratives &amp; audiovisuelles</a
-            >
-          </li>
-          <li role="none">
-            <a href="/info-cloud" class="info-subnav__link" role="menuitem"
-              ><span class="info-subnav__ic" aria-hidden="true"
-                ><svg
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="1.7"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  ><path d="M17.5 19H9a7 7 0 1 1 6.71-9h1.79a4.5 4.5 0 1 1 0 9Z"
-                  ></path></svg
-                ></span
-              >Cloud Microsoft</a
-            >
-          </li>
-        </ul>
-      </div>
-    </nav>
+    RAIL DE SOUS-NAVIGATION — écosystème Informatique
+    Ancré en permanence sous le navbar. Libellés complets, page active
+    en bleu JCD. Permet de naviguer entre la vue d'ensemble et les 4
+    domaines du pôle.
+    ==================================================================== -->
+    <NavInformatique current="info-general" />
 
     <main id="contenu">
       <!-- ====================================================================
@@ -265,116 +181,75 @@ informatique.prestations_cybersecurite = await Promise.all(
             <a
               class="pole-card"
               href="/info-integration"
-              aria-label="Service Intégration & Support PC"
+              aria-label={info_integration.nom_service}
             >
               <div class="pole-card-top">
-                <span class="pole-card-icon" aria-hidden="true"
-                  ><svg
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="1.6"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    ><path
-                      d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"
-                    ></path></svg
-                  ></span
-                >
+                <span
+                  class="pole-card-icon"
+                  aria-hidden="true"
+                  set:html={info_integration.icone_service}
+                />
                 <span class="pole-card-num">01 / 04</span>
               </div>
-              <h3>Service Intégration &amp; Support PC</h3>
+              <h3>{info_integration.nom_service}</h3>
               <p>
-                Postes prêts à l'emploi : préparation, déploiement et support de
-                votre parc utilisateur.
+                {info_integration.description_page_informatique}
               </p>
             </a>
 
             <a
               class="pole-card"
               href="/info-reseaux"
-              aria-label="Architectures systèmes & réseaux"
+              aria-label={info_reseaux.nom_service}
             >
               <div class="pole-card-top">
-                <span class="pole-card-icon" aria-hidden="true"
-                  ><svg
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="1.6"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    ><rect x="2" y="3" width="20" height="8" rx="2"></rect><rect
-                      x="2"
-                      y="13"
-                      width="20"
-                      height="8"
-                      rx="2"></rect><path d="M6 7h.01M6 17h.01"></path></svg
-                  ></span
-                >
+                <span
+                  class="pole-card-icon"
+                  aria-hidden="true"
+                  set:html={info_reseaux.icone_service}
+                />
                 <span class="pole-card-num">02 / 04</span>
               </div>
-              <h3>Architectures systèmes &amp; réseaux</h3>
+              <h3>{info_reseaux.nom_service}</h3>
               <p>
-                Serveurs, virtualisation, réseau et sécurité : une
-                infrastructure solide.
+                {info_reseaux.description_page_informatique}
               </p>
             </a>
 
             <a
               class="pole-card"
               href="/info-collaboratif"
-              aria-label="Solutions collaboratives & audiovisuelles"
+              aria-label={info_collaboratif.nom_service}
             >
               <div class="pole-card-top">
-                <span class="pole-card-icon" aria-hidden="true"
-                  ><svg
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="1.6"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    ><path d="m22 8-6 4 6 4V8Z"></path><rect
-                      x="2"
-                      y="6"
-                      width="14"
-                      height="12"
-                      rx="2"></rect></svg
-                  ></span
-                >
+                <span
+                  class="pole-card-icon"
+                  aria-hidden="true"
+                  set:html={info_collaboratif.icone_service}
+                />
                 <span class="pole-card-num">03 / 04</span>
               </div>
-              <h3>Solutions collaboratives &amp; audiovisuelles</h3>
+              <h3>{info_collaboratif.nom_service}</h3>
               <p>
-                Visioconférence et salles équipées, conçues et intégrées sur
-                mesure.
+                {info_collaboratif.description_page_informatique}
               </p>
             </a>
 
             <a
               class="pole-card"
               href="/info-cloud"
-              aria-label="Cloud Microsoft"
+              aria-label={info_cloud.nom_service}
             >
               <div class="pole-card-top">
-                <span class="pole-card-icon" aria-hidden="true"
-                  ><svg
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="1.6"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    ><path
-                      d="M17.5 19H9a7 7 0 1 1 6.71-9h1.79a4.5 4.5 0 1 1 0 9Z"
-                    ></path></svg
-                  ></span
-                >
+                <span
+                  class="pole-card-icon"
+                  aria-hidden="true"
+                  set:html={info_cloud.icone_service}
+                />
                 <span class="pole-card-num">04 / 04</span>
               </div>
-              <h3>Cloud Microsoft</h3>
-              <p>Microsoft 365, Azure, infrastructures hybrides.</p>
+              <h3>{info_cloud.nom_service}</h3>
+              <p>{info_cloud.description_page_informatique}</p>
             </a>
           </div>
         </div>
