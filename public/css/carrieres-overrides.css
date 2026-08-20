@@ -393,3 +393,24 @@
     .footer-eco-link img, .footer-eco-arrow { transition: none; }
     .footer-eco-link:hover img { transform: none; }
   }
+
+/* ==================================================================
+   HERO — double CTA (2026-08-20)
+   « Decouvrir nos opportunites » (primaire, ancre #offres) devant
+   « Postuler » (ghost, ancre #postuler, candidature spontanee).
+   La variante ghost reprend la grammaire de .btn-cta--ghost.
+   ================================================================== */
+
+  .hero-ctas {
+    display: flex; align-items: center; flex-wrap: wrap;
+    gap: 12px;
+  }
+  .hero-apply--ghost {
+    background: transparent; color: var(--text-1);
+    border-color: var(--line-3);
+  }
+  .hero-apply--ghost:hover {
+    background: rgba(255, 255, 255, 0.05);
+    border-color: var(--text-3);
+    box-shadow: none;
+  }

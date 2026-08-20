@@ -115,20 +115,38 @@ import Footer from "../components/Footer.astro";
               <h1 class="hero-h1" id="hero-title">
                 Rejoignez un groupe qui <em>avance</em>
               </h1>
-              <a href="#postuler" class="hero-apply">
-                <span>Postuler</span>
-                <span class="hero-apply-ic" aria-hidden="true">
-                  <svg
-                    viewBox="0 0 16 16"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="1.7"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    ><path d="M3 8h10M9 4l4 4-4 4"></path></svg
-                  >
-                </span>
-              </a>
+              <!-- Découvrir d'abord les offres (primaire) ; « Postuler »
+                   reste en second pour la candidature spontanée. -->
+              <div class="hero-ctas">
+                <a href="#offres" class="hero-apply">
+                  <span>Découvrir nos opportunités</span>
+                  <span class="hero-apply-ic" aria-hidden="true">
+                    <svg
+                      viewBox="0 0 16 16"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="1.7"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      ><path d="M3 8h10M9 4l4 4-4 4"></path></svg
+                    >
+                  </span>
+                </a>
+                <a href="#postuler" class="hero-apply hero-apply--ghost">
+                  <span>Postuler</span>
+                  <span class="hero-apply-ic" aria-hidden="true">
+                    <svg
+                      viewBox="0 0 16 16"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="1.7"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      ><path d="M3 8h10M9 4l4 4-4 4"></path></svg
+                    >
+                  </span>
+                </a>
+              </div>
             </div>
             <p class="hero-lead reveal delay-2">
               JCD Groupe réunit sept pôles d'expertise, de l'informatique à
