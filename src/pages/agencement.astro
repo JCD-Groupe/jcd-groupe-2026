@@ -16,6 +16,7 @@ let agencement = await directus.request(
       "*",
       { prestations: ["*"] },
       { processus: ["*"] },
+      { definitions: ["*"] },
       { logos_confiance: ["*", { directus_files_id: ["*"] }] },
     ],
   }),
@@ -177,36 +178,23 @@ agencement.prestations = await Promise.all(
               <div class="mf-ruler reveal delay-2">
                 <span class="mf-ruler-line" aria-hidden="true"></span>
                 <div class="mf-ruler-stations">
-                  <div class="mf-station" style="--sd:1.35s">
-                    <span class="mf-station-tick" aria-hidden="true"></span>
-                    <span class="mf-station-num">01</span>
-                    <span class="mf-station-term"
-                      >{agencement.manifeste_item_1_titre}</span
-                    >
-                    <span class="mf-station-gloss"
-                      >{agencement.manifeste_item_1_description}</span
-                    >
-                  </div>
-                  <div class="mf-station" style="--sd:1.5s">
-                    <span class="mf-station-tick" aria-hidden="true"></span>
-                    <span class="mf-station-num">02</span>
-                    <span class="mf-station-term"
-                      >{agencement.manifeste_item_2_titre}</span
-                    >
-                    <span class="mf-station-gloss"
-                      >{agencement.manifeste_item_2_description}</span
-                    >
-                  </div>
-                  <div class="mf-station" style="--sd:1.65s">
-                    <span class="mf-station-tick" aria-hidden="true"></span>
-                    <span class="mf-station-num">03</span>
-                    <span class="mf-station-term"
-                      >{agencement.manifeste_item_3_titre}</span
-                    >
-                    <span class="mf-station-gloss"
-                      >{agencement.manifeste_item_3_description}</span
-                    >
-                  </div>
+                  {
+                    agencement.definitions.map(
+                      (definition: any, index: number) => (
+                        <div
+                          class="mf-station"
+                          style={`--sd:${1.35 + index * 0.15}s`}
+                        >
+                          <span class="mf-station-tick" aria-hidden="true" />
+                          <span class="mf-station-num">0{index + 1}</span>
+                          <span class="mf-station-term">{definition.nom}</span>
+                          <span class="mf-station-gloss">
+                            {definition.definition}
+                          </span>
+                        </div>
+                      ),
+                    )
+                  }
                 </div>
               </div>
             </div>
