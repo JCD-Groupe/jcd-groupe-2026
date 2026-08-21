@@ -1,5 +1,5 @@
 ---
-import { readItems } from "@directus/sdk";
+import { readItems, readSingleton } from "@directus/sdk";
 import Footer from "../../../../components/Footer.astro";
 import Header from "../../../../components/Header.astro";
 import { directus } from "../../../../lib/directus";
@@ -7,7 +7,7 @@ import { directus } from "../../../../lib/directus";
 export async function getStaticPaths() {
   const formations = await directus.request(
     readItems("formations", {
-      fields: ["*", { thematique: ["slug"] }],
+      fields: ["*", { thematique: ["*"] }, { objectifs: ["*"] }],
     }),
   );
 
@@ -20,7 +20,19 @@ export async function getStaticPaths() {
   }));
 }
 
-let formation = Astro.props;
+let formation = Astro.props.data;
+
+let global = await directus.request(
+  readSingleton("Global", {
+    fields: ["*"],
+  }),
+);
+
+let pageFormation = await directus.request(
+  readSingleton("JCD_Formation", {
+    fields: ["*"],
+  }),
+);
 ---
 
 <html lang="fr">
@@ -39,12 +51,15 @@ let formation = Astro.props;
     />
     <link
       rel="canonical"
-      href={`${import.meta.env.PUBLIC_DIRECTUS_URL}/formation-detail`}
+      href={`${import.meta.env.PUBLIC_DIRECTUS_URL}/formations/${formation.slug}`}
     />
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="JCD Groupe" />
     <meta property="og:locale" content="fr_FR" />
-    <meta property="og:title" content="Formation · JCD Groupe" />
+    <meta
+      property="og:title"
+      content={`${formation.titre_de_la_formation} · ${global.nom_societe}`}
+    />
     <meta
       property="og:description"
       content="Fiche formation JCD Groupe : objectifs, programme détaillé, modalités et certification. Organisme certifié Qualiopi, centre d'examen TOSA, Metz & Nancy."
@@ -54,7 +69,7 @@ let formation = Astro.props;
       content={`${import.meta.env.PUBLIC_DIRECTUS_URL}/formation-detail`}
     />
     <meta name="twitter:card" content="summary" />
-    <title>Formation · JCD Groupe</title>
+    <title>{formation.titre_de_la_formation} · {global.nom_societe}</title>
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -91,23 +106,25 @@ let formation = Astro.props;
             <a href="/formation">Formation</a>
             <span class="crumbs-sep" aria-hidden="true">/</span>
             <a
-              href="/formation-bureautique"
+              href={`/formations/${formation.thematique.slug}`}
               id="fd-crumb-cat"
-              data-field="categorie">Bureautique</a
+              data-field="categorie"
+              >{formation.thematique.titre_de_la_thematique_de_formations}</a
             >
             <span class="crumbs-sep" aria-hidden="true">/</span>
-            <span aria-current="page" data-field="title">Excel initiation</span>
+            <span aria-current="page" data-field="title"
+              >{formation.titre_de_la_formation}</span
+            >
           </nav>
 
           <h1 class="fd-title reveal delay-1" id="fd-title">
-            <span data-field="title">Excel initiation</span><span
-              class="cat-dot">.</span
-            >
+            <span data-field="title">{formation.titre_de_la_formation}</span
+            ><span class="cat-dot">.</span>
           </h1>
 
           <div class="fd-hero-meta reveal delay-2">
             <span class="chip chip--cat" data-field="categorie"
-              >Bureautique</span
+              >{formation.thematique.titre_de_la_thematique_de_formations}</span
             >
             <span class="chip">
               <svg
@@ -122,7 +139,9 @@ let formation = Astro.props;
                 ><circle cx="12" cy="12" r="9"></circle><path d="M12 7v5l3 2"
                 ></path></svg
               >
-              <span data-field="duree">2 jours · 14 heures</span>
+              <span data-field="duree"
+                >{formation.duree_en_jours} jours · {formation.duree_en_heures} heures</span
+              >
             </span>
             <span class="chip">
               <svg
@@ -138,8 +157,9 @@ let formation = Astro.props;
                   d="M14.8 9.2a3 3 0 0 0-5.6 1.3c0 3 5.6 2 5.6 5a3 3 0 0 1-5.6 1.3M12 6v2M12 16v2"
                 ></path></svg
               >
-              <strong data-field="tarif">490&nbsp;€&nbsp;HT</strong>&nbsp;/
-              participant
+              <strong data-field="tarif"
+                >{formation.tarif_par_participant}&nbsp;€&nbsp;HT</strong
+              >&nbsp;/ participant
             </span>
             <span class="chip" data-tosa>
               <svg
@@ -185,49 +205,25 @@ let formation = Astro.props;
                   </div>
                 </div>
                 <ul class="fd-goals reveal delay-1">
-                  <li class="fd-goal">
-                    <span class="fd-goal-ic" aria-hidden="true"
-                      ><svg
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        stroke-width="2.2"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        ><path d="M5 12.5l4.5 4.5L19 7.5"></path></svg
-                      ></span
-                    >
-                    Construire et mettre en forme des tableaux avec des formules de
-                    calcul
-                  </li>
-                  <li class="fd-goal">
-                    <span class="fd-goal-ic" aria-hidden="true"
-                      ><svg
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        stroke-width="2.2"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        ><path d="M5 12.5l4.5 4.5L19 7.5"></path></svg
-                      ></span
-                    >
-                    Mettre en page et imprimer ses documents
-                  </li>
-                  <li class="fd-goal">
-                    <span class="fd-goal-ic" aria-hidden="true"
-                      ><svg
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        stroke-width="2.2"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        ><path d="M5 12.5l4.5 4.5L19 7.5"></path></svg
-                      ></span
-                    >
-                    Créer et personnaliser un graphique
-                  </li>
+                  {
+                    formation.objectifs.map((objectif: any) => (
+                      <li class="fd-goal">
+                        <span class="fd-goal-ic" aria-hidden="true">
+                          <svg
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="2.2"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                          >
+                            <path d="M5 12.5l4.5 4.5L19 7.5" />
+                          </svg>
+                        </span>
+                        {objectif.objectif}
+                      </li>
+                    ))
+                  }
                 </ul>
               </section>
 
@@ -271,264 +267,49 @@ let formation = Astro.props;
                   </button>
                 </div>
                 <div class="fd-acc reveal delay-1">
-                  <article class="fd-mod" data-open="true">
-                    <button
-                      type="button"
-                      class="fd-mod-btn"
-                      aria-expanded="true"
-                    >
-                      <span class="fd-mod-num">M·01</span>
-                      <span class="fd-mod-title">Présentation d'Excel</span>
-                      <span class="fd-mod-chev" aria-hidden="true"
-                        ><svg viewBox="0 0 10 10" fill="none"
-                          ><path
-                            d="M2.5 4l2.5 2.5L7.5 4"
-                            stroke="currentColor"
-                            stroke-width="1.4"
-                            stroke-linecap="round"
-                            stroke-linejoin="round"></path></svg
-                        ></span
-                      >
-                    </button>
-                    <div class="fd-mod-body">
-                      <div class="fd-mod-wrap">
-                        <ul class="fd-mod-list">
-                          <li>
-                            Découverte de l'interface : ruban, barre d'outils,
-                            zone de travail
-                          </li>
-                          <li>
-                            Notions de classeur, feuille, cellule et plage
-                          </li>
-                          <li>Se déplacer et sélectionner efficacement</li>
-                        </ul>
-                      </div>
-                    </div>
-                  </article>
-
-                  <article class="fd-mod" data-open="false">
-                    <button
-                      type="button"
-                      class="fd-mod-btn"
-                      aria-expanded="false"
-                    >
-                      <span class="fd-mod-num">M·02</span>
-                      <span class="fd-mod-title">Gestion des documents</span>
-                      <span class="fd-mod-chev" aria-hidden="true"
-                        ><svg viewBox="0 0 10 10" fill="none"
-                          ><path
-                            d="M2.5 4l2.5 2.5L7.5 4"
-                            stroke="currentColor"
-                            stroke-width="1.4"
-                            stroke-linecap="round"
-                            stroke-linejoin="round"></path></svg
-                        ></span
-                      >
-                    </button>
-                    <div class="fd-mod-body">
-                      <div class="fd-mod-wrap">
-                        <ul class="fd-mod-list">
-                          <li>Créer, ouvrir et enregistrer un classeur</li>
-                          <li>Organiser ses fichiers et ses versions</li>
-                        </ul>
-                      </div>
-                    </div>
-                  </article>
-
-                  <article class="fd-mod" data-open="false">
-                    <button
-                      type="button"
-                      class="fd-mod-btn"
-                      aria-expanded="false"
-                    >
-                      <span class="fd-mod-num">M·03</span>
-                      <span class="fd-mod-title"
-                        >Saisir des données et des formules de calcul</span
-                      >
-                      <span class="fd-mod-chev" aria-hidden="true"
-                        ><svg viewBox="0 0 10 10" fill="none"
-                          ><path
-                            d="M2.5 4l2.5 2.5L7.5 4"
-                            stroke="currentColor"
-                            stroke-width="1.4"
-                            stroke-linecap="round"
-                            stroke-linejoin="round"></path></svg
-                        ></span
-                      >
-                    </button>
-                    <div class="fd-mod-body">
-                      <div class="fd-mod-wrap">
-                        <ul class="fd-mod-list">
-                          <li>
-                            Saisir, modifier, copier et déplacer des données
-                          </li>
-                          <li>
-                            Construire des formules simples : opérateurs,
-                            références
-                          </li>
-                          <li>
-                            Fonctions essentielles : SOMME, MOYENNE, MIN, MAX
-                          </li>
-                        </ul>
-                      </div>
-                    </div>
-                  </article>
-
-                  <article class="fd-mod" data-open="false">
-                    <button
-                      type="button"
-                      class="fd-mod-btn"
-                      aria-expanded="false"
-                    >
-                      <span class="fd-mod-num">M·04</span>
-                      <span class="fd-mod-title">Mise en forme</span>
-                      <span class="fd-mod-chev" aria-hidden="true"
-                        ><svg viewBox="0 0 10 10" fill="none"
-                          ><path
-                            d="M2.5 4l2.5 2.5L7.5 4"
-                            stroke="currentColor"
-                            stroke-width="1.4"
-                            stroke-linecap="round"
-                            stroke-linejoin="round"></path></svg
-                        ></span
-                      >
-                    </button>
-                    <div class="fd-mod-body">
-                      <div class="fd-mod-wrap">
-                        <ul class="fd-mod-list">
-                          <li>
-                            Formats de cellules : nombres, dates, pourcentages
-                          </li>
-                          <li>Bordures, couleurs et styles de tableaux</li>
-                        </ul>
-                      </div>
-                    </div>
-                  </article>
-
-                  <article class="fd-mod" data-open="false">
-                    <button
-                      type="button"
-                      class="fd-mod-btn"
-                      aria-expanded="false"
-                    >
-                      <span class="fd-mod-num">M·05</span>
-                      <span class="fd-mod-title">Impression des documents</span>
-                      <span class="fd-mod-chev" aria-hidden="true"
-                        ><svg viewBox="0 0 10 10" fill="none"
-                          ><path
-                            d="M2.5 4l2.5 2.5L7.5 4"
-                            stroke="currentColor"
-                            stroke-width="1.4"
-                            stroke-linecap="round"
-                            stroke-linejoin="round"></path></svg
-                        ></span
-                      >
-                    </button>
-                    <div class="fd-mod-body">
-                      <div class="fd-mod-wrap">
-                        <ul class="fd-mod-list">
-                          <li>
-                            Mise en page : marges, orientation, en-têtes et
-                            pieds de page
-                          </li>
-                          <li>Zone d'impression et aperçu avant impression</li>
-                        </ul>
-                      </div>
-                    </div>
-                  </article>
-
-                  <article class="fd-mod" data-open="false">
-                    <button
-                      type="button"
-                      class="fd-mod-btn"
-                      aria-expanded="false"
-                    >
-                      <span class="fd-mod-num">M·06</span>
-                      <span class="fd-mod-title">Les graphiques</span>
-                      <span class="fd-mod-chev" aria-hidden="true"
-                        ><svg viewBox="0 0 10 10" fill="none"
-                          ><path
-                            d="M2.5 4l2.5 2.5L7.5 4"
-                            stroke="currentColor"
-                            stroke-width="1.4"
-                            stroke-linecap="round"
-                            stroke-linejoin="round"></path></svg
-                        ></span
-                      >
-                    </button>
-                    <div class="fd-mod-body">
-                      <div class="fd-mod-wrap">
-                        <ul class="fd-mod-list">
-                          <li>Choisir le bon type de graphique</li>
-                          <li>
-                            Créer, mettre en forme et imprimer un graphique
-                          </li>
-                        </ul>
-                      </div>
-                    </div>
-                  </article>
-
-                  <article class="fd-mod" data-open="false">
-                    <button
-                      type="button"
-                      class="fd-mod-btn"
-                      aria-expanded="false"
-                    >
-                      <span class="fd-mod-num">M·07</span>
-                      <span class="fd-mod-title">Gestion du classeur</span>
-                      <span class="fd-mod-chev" aria-hidden="true"
-                        ><svg viewBox="0 0 10 10" fill="none"
-                          ><path
-                            d="M2.5 4l2.5 2.5L7.5 4"
-                            stroke="currentColor"
-                            stroke-width="1.4"
-                            stroke-linecap="round"
-                            stroke-linejoin="round"></path></svg
-                        ></span
-                      >
-                    </button>
-                    <div class="fd-mod-body">
-                      <div class="fd-mod-wrap">
-                        <ul class="fd-mod-list">
-                          <li>Insérer, déplacer et renommer des feuilles</li>
-                          <li>
-                            Travailler sur plusieurs feuilles simultanément
-                          </li>
-                        </ul>
-                      </div>
-                    </div>
-                  </article>
-
-                  <article class="fd-mod" data-open="false">
-                    <button
-                      type="button"
-                      class="fd-mod-btn"
-                      aria-expanded="false"
-                    >
-                      <span class="fd-mod-num">M·08</span>
-                      <span class="fd-mod-title">L'analyse de données</span>
-                      <span class="fd-mod-chev" aria-hidden="true"
-                        ><svg viewBox="0 0 10 10" fill="none"
-                          ><path
-                            d="M2.5 4l2.5 2.5L7.5 4"
-                            stroke="currentColor"
-                            stroke-width="1.4"
-                            stroke-linecap="round"
-                            stroke-linejoin="round"></path></svg
-                        ></span
-                      >
-                    </button>
-                    <div class="fd-mod-body">
-                      <div class="fd-mod-wrap">
-                        <ul class="fd-mod-list">
-                          <li>Trier et filtrer des listes de données</li>
-                          <li>
-                            Premiers pas vers les tableaux croisés dynamiques
-                          </li>
-                        </ul>
-                      </div>
-                    </div>
-                  </article>
+                  {
+                    formation.programme.map((ligne: any, index: number) => {
+                      let detail = ligne.detail.replace(
+                        "<ul>",
+                        '<ul class="fd-mod-list">',
+                      );
+                      return (
+                        <article
+                          class="fd-mod"
+                          data-open={index == 0 ? true : false}
+                        >
+                          <button
+                            type="button"
+                            class="fd-mod-btn"
+                            aria-expanded={index == 0 ? true : false}
+                          >
+                            <span class="fd-mod-num">
+                              M·
+                              {index < 10 ? "0" : ""}
+                              {index + 1}
+                            </span>
+                            <span class="fd-mod-title">{ligne.titre}</span>
+                            <span class="fd-mod-chev" aria-hidden="true">
+                              <svg viewBox="0 0 10 10" fill="none">
+                                <path
+                                  d="M2.5 4l2.5 2.5L7.5 4"
+                                  stroke="currentColor"
+                                  stroke-width="1.4"
+                                  stroke-linecap="round"
+                                  stroke-linejoin="round"
+                                />
+                              </svg>
+                            </span>
+                          </button>
+                          <div class="fd-mod-body">
+                            <div class="fd-mod-wrap">
+                              <Fragment set:html={detail} />
+                            </div>
+                          </div>
+                        </article>
+                      );
+                    })
+                  }
                 </div>
               </section>
 
@@ -563,8 +344,7 @@ let formation = Astro.props;
                       <h3 class="fd-card-title">Public visé</h3>
                     </div>
                     <p class="fd-card-tx">
-                      Toute personne souhaitant connaître les fonctionnalités de
-                      base d'Excel.
+                      {formation.public}
                     </p>
                   </div>
                   <div class="fd-card" data-field="prerequis">
@@ -586,8 +366,7 @@ let formation = Astro.props;
                       <h3 class="fd-card-title">Prérequis</h3>
                     </div>
                     <p class="fd-card-tx">
-                      Pratique de l'environnement Windows requise. Aucune
-                      connaissance préalable d'Excel n'est nécessaire.
+                      {formation.prerequis}
                     </p>
                   </div>
                 </div>
@@ -619,10 +398,7 @@ let formation = Astro.props;
                       <h3 class="fd-card-title">Modalités pédagogiques</h3>
                     </div>
                     <p class="fd-card-tx">
-                      Alternance continue entre apports de connaissances et
-                      manipulation des outils. Salles équipées :
-                      vidéoprojecteur, un ordinateur par stagiaire, support
-                      papier et électronique.
+                      {formation.methodes_pedagogiques}
                     </p>
                   </div>
                   <div class="fd-card" data-field="modalites_evaluation">
@@ -643,9 +419,10 @@ let formation = Astro.props;
                       <h3 class="fd-card-title">Modalités d'évaluation</h3>
                     </div>
                     <p class="fd-card-tx">
-                      Évaluation continue des acquis pendant le stage.
-                      Attestation de stage remise au participant et
-                      questionnaire d'évaluation de la formation.
+                      {
+                        formation.suivi_et_evaluation_de_l_action ??
+                          "Compte rendu de fin de formation et analyse interne. Questionnaire « évaluation de la formation » rempli par le stagiaire."
+                      }
                     </p>
                   </div>
                   <div class="fd-card" data-field="intervenant">
@@ -666,9 +443,10 @@ let formation = Astro.props;
                       <h3 class="fd-card-title">Intervenant</h3>
                     </div>
                     <p class="fd-card-tx">
-                      Professionnel de l'informatique, expert en bureautique,
-                      sélectionné et présenté avant le démarrage de la
-                      formation.
+                      {
+                        formation.profils_intervenants ??
+                          formation.thematique.profils_intervenants
+                      }
                     </p>
                   </div>
                   <div class="fd-card" data-field="accessibilite">
@@ -710,11 +488,17 @@ let formation = Astro.props;
                     <div class="fd-tarif-head">
                       <span class="fd-tarif-tag">Inter-entreprises</span>
                       <span class="fd-tarif-dur" data-field="duree"
-                        >2 jours · 14 heures</span
+                        >{formation.duree_en_jours} jours · {
+                          formation.duree_en_heures
+                        } heures</span
                       >
                     </div>
                     <p class="fd-tarif-price">
-                      <strong data-field="tarif">490&nbsp;€&nbsp;HT</strong>
+                      <strong data-field="tarif"
+                        >{
+                          formation.tarif_par_participant
+                        }&nbsp;€&nbsp;HT</strong
+                      >
                       <small>/ participant</small>
                     </p>
                     <p class="fd-tarif-tx">
@@ -845,7 +629,9 @@ let formation = Astro.props;
                       <span class="fd-fact-tx">
                         <span class="fd-fact-k">Durée</span>
                         <span class="fd-fact-v" data-field="duree"
-                          >2 jours · 14 heures</span
+                          >{formation.duree_en_jours} jours · {
+                            formation.duree_en_heures
+                          } heures</span
                         >
                       </span>
                     </li>
@@ -866,7 +652,11 @@ let formation = Astro.props;
                       <span class="fd-fact-tx">
                         <span class="fd-fact-k">Tarif</span>
                         <span class="fd-fact-v"
-                          ><span data-field="tarif">490&nbsp;€&nbsp;HT</span>
+                          ><span data-field="tarif"
+                            >{
+                              formation.tarif_par_participant
+                            }&nbsp;€&nbsp;HT</span
+                          >
                           <small>/ participant</small></span
                         >
                       </span>
@@ -889,7 +679,7 @@ let formation = Astro.props;
                       <span class="fd-fact-tx">
                         <span class="fd-fact-k">Référence</span>
                         <span class="fd-fact-v" data-field="reference"
-                          >EXLINI</span
+                          >{formation.reference}</span
                         >
                       </span>
                     </li>
@@ -910,8 +700,15 @@ let formation = Astro.props;
                       <span class="fd-fact-tx">
                         <span class="fd-fact-k">Lieux</span>
                         <span class="fd-fact-v" data-field="lieux"
-                          >Metz · Nancy · vos locaux</span
+                          >Metz · Nancy · Vos locaux</span
                         >
+                        {
+                          formation.accessible_a_distance && (
+                            <span class="fd-fact-v" data-field="lieux">
+                              A distance
+                            </span>
+                          )
+                        }
                       </span>
                     </li>
                     <li class="fd-fact">
@@ -1116,1243 +913,6 @@ let formation = Astro.props;
     </main>
 
     <Footer />
-
-    <script is:inline id="jcd-catalogue-index" type="application/json">
-      {
-        "pack-essentiel-utilisation-de-microsoft-365": [
-          {
-            "t": "Pack essentiel Utilisation de Microsoft 365",
-            "c": "Bureautique",
-            "s": "bureautique",
-            "p": "formation-bureautique",
-            "rgb": "85,160,94"
-          }
-        ],
-        "copilot-pour-microsoft-365": [
-          {
-            "t": "Copilot pour Microsoft 365",
-            "c": "Bureautique",
-            "s": "bureautique",
-            "p": "formation-bureautique",
-            "rgb": "85,160,94"
-          },
-          {
-            "t": "Copilot pour Microsoft 365",
-            "c": "Intelligence artificielle",
-            "s": "intelligence-artificielle",
-            "p": "formation-intelligence-artificielle",
-            "rgb": "118,184,63"
-          },
-          {
-            "t": "Copilot pour Microsoft 365",
-            "c": "Informatique",
-            "s": "informatique",
-            "p": "formation-informatique",
-            "rgb": "142,192,65"
-          }
-        ],
-        "copilot-pour-microsoft-365-avance": [
-          {
-            "t": "Copilot pour Microsoft 365 avancé",
-            "c": "Bureautique",
-            "s": "bureautique",
-            "p": "formation-bureautique",
-            "rgb": "85,160,94"
-          },
-          {
-            "t": "Copilot pour Microsoft 365 avancé",
-            "c": "Intelligence artificielle",
-            "s": "intelligence-artificielle",
-            "p": "formation-intelligence-artificielle",
-            "rgb": "118,184,63"
-          },
-          {
-            "t": "Copilot pour Microsoft 365 avancé",
-            "c": "Informatique",
-            "s": "informatique",
-            "p": "formation-informatique",
-            "rgb": "142,192,65"
-          }
-        ],
-        "powerpoint-initiation": [
-          {
-            "t": "PowerPoint Initiation",
-            "c": "Bureautique",
-            "s": "bureautique",
-            "p": "formation-bureautique",
-            "rgb": "85,160,94"
-          }
-        ],
-        "excel-macro-vba-expert": [
-          {
-            "t": "Excel Macro VBA expert",
-            "c": "Bureautique",
-            "s": "bureautique",
-            "p": "formation-bureautique",
-            "rgb": "85,160,94"
-          }
-        ],
-        "excel-macro-vba-base": [
-          {
-            "t": "Excel Macro VBA base",
-            "c": "Bureautique",
-            "s": "bureautique",
-            "p": "formation-bureautique",
-            "rgb": "85,160,94"
-          }
-        ],
-        "excel-macro-vba-avance": [
-          {
-            "t": "Excel Macro VBA avancé",
-            "c": "Bureautique",
-            "s": "bureautique",
-            "p": "formation-bureautique",
-            "rgb": "85,160,94"
-          }
-        ],
-        "analyser-et-visualiser-des-donnees-avec-microsoft-power-bi": [
-          {
-            "t": "Analyser et visualiser des données avec Microsoft Power BI",
-            "c": "Bureautique",
-            "s": "bureautique",
-            "p": "formation-bureautique",
-            "rgb": "85,160,94"
-          },
-          {
-            "t": "Analyser et visualiser des données avec Microsoft Power BI",
-            "c": "Informatique",
-            "s": "informatique",
-            "p": "formation-informatique",
-            "rgb": "142,192,65"
-          }
-        ],
-        "power-bi-desktop-power-pivot-power-query": [
-          {
-            "t": "Power Bi Desktop – Power Pivot – Power Query",
-            "c": "Bureautique",
-            "s": "bureautique",
-            "p": "formation-bureautique",
-            "rgb": "85,160,94"
-          }
-        ],
-        "sharepoint-utilisateurs": [
-          {
-            "t": "SharePoint Online – Utilisateur",
-            "c": "Bureautique",
-            "s": "bureautique",
-            "p": "formation-bureautique",
-            "rgb": "85,160,94"
-          }
-        ],
-        "teams-utilisateurs": [
-          {
-            "t": "Teams – Utilisateur",
-            "c": "Bureautique",
-            "s": "bureautique",
-            "p": "formation-bureautique",
-            "rgb": "85,160,94"
-          }
-        ],
-        "excel-initiation": [
-          {
-            "t": "Excel initiation",
-            "c": "Bureautique",
-            "s": "bureautique",
-            "p": "formation-bureautique",
-            "rgb": "85,160,94"
-          }
-        ],
-        "excel-intermediaire": [
-          {
-            "t": "Excel Intermédiaire",
-            "c": "Bureautique",
-            "s": "bureautique",
-            "p": "formation-bureautique",
-            "rgb": "85,160,94"
-          }
-        ],
-        "excel-perfectionnement": [
-          {
-            "t": "Excel Perfectionnement",
-            "c": "Bureautique",
-            "s": "bureautique",
-            "p": "formation-bureautique",
-            "rgb": "85,160,94"
-          }
-        ],
-        "atelier-excel-base-de-donnees-et-tableaux-croises-dynamiques": [
-          {
-            "t": "Excel, base de données et tableaux croisés dynamiques",
-            "c": "Bureautique",
-            "s": "bureautique",
-            "p": "formation-bureautique",
-            "rgb": "85,160,94"
-          }
-        ],
-        "optimiser-lutilisation-de-la-messagerie-outlook": [
-          {
-            "t": "Optimiser l’utilisation de la messagerie Outlook",
-            "c": "Bureautique",
-            "s": "bureautique",
-            "p": "formation-bureautique",
-            "rgb": "85,160,94"
-          }
-        ],
-        "word-initiation": [
-          {
-            "t": "Word Initiation",
-            "c": "Bureautique",
-            "s": "bureautique",
-            "p": "formation-bureautique",
-            "rgb": "85,160,94"
-          }
-        ],
-        "word-intermediaire-2": [
-          {
-            "t": "Word Intermédiaire",
-            "c": "Bureautique",
-            "s": "bureautique",
-            "p": "formation-bureautique",
-            "rgb": "85,160,94"
-          }
-        ],
-        "initiation-a-copilot-pour-microsoft-365": [
-          {
-            "t": "Initiation à Copilot pour Microsoft 365",
-            "c": "Bureautique",
-            "s": "bureautique",
-            "p": "formation-bureautique",
-            "rgb": "85,160,94"
-          },
-          {
-            "t": "Initiation à Copilot pour Microsoft 365",
-            "c": "Intelligence artificielle",
-            "s": "intelligence-artificielle",
-            "p": "formation-intelligence-artificielle",
-            "rgb": "118,184,63"
-          },
-          {
-            "t": "Initiation à Copilot pour Microsoft 365",
-            "c": "Informatique",
-            "s": "informatique",
-            "p": "formation-informatique",
-            "rgb": "142,192,65"
-          }
-        ],
-        "powerpoint-perfectionnement": [
-          {
-            "t": "PowerPoint Perfectionnement",
-            "c": "Bureautique",
-            "s": "bureautique",
-            "p": "formation-bureautique",
-            "rgb": "85,160,94"
-          }
-        ],
-        "word-perfectionnement": [
-          {
-            "t": "Word Perfectionnement",
-            "c": "Bureautique",
-            "s": "bureautique",
-            "p": "formation-bureautique",
-            "rgb": "85,160,94"
-          }
-        ],
-        "access-initiation": [
-          {
-            "t": "Access Initiation",
-            "c": "Bureautique",
-            "s": "bureautique",
-            "p": "formation-bureautique",
-            "rgb": "85,160,94"
-          }
-        ],
-        "access-perfectionnement": [
-          {
-            "t": "Access Perfectionnement",
-            "c": "Bureautique",
-            "s": "bureautique",
-            "p": "formation-bureautique",
-            "rgb": "85,160,94"
-          }
-        ],
-        "prompt-engineering-communiquer-efficacement-avec-les-intelligences-artificielles": [
-          {
-            "t": "Prompt engineering, communiquer efficacement avec les intelligences artificielles",
-            "c": "Intelligence artificielle",
-            "s": "intelligence-artificielle",
-            "p": "formation-intelligence-artificielle",
-            "rgb": "118,184,63"
-          },
-          {
-            "t": "Prompt engineering, communiquer efficacement avec les intelligences artificielles",
-            "c": "Informatique",
-            "s": "informatique",
-            "p": "formation-informatique",
-            "rgb": "142,192,65"
-          },
-          {
-            "t": "Prompt engineering, communiquer efficacement avec les intelligences artificielles",
-            "c": "Administratif - Secrétariat - Accueil",
-            "s": "administratif-secretariat-accueil",
-            "p": "formation-administratif-secretariat-accueil",
-            "rgb": "113,73,156"
-          }
-        ],
-        "utiliser-lia-pour-developper-son-efficacite-et-sa-productivite-au-travail-comment-integrer-lia-dans-son-travail-au-quotidien": [
-          {
-            "t": "Utiliser l’IA pour développer son efficacité et sa productivité au travail – Comment intégrer l’IA dans son travail au quotidien",
-            "c": "Intelligence artificielle",
-            "s": "intelligence-artificielle",
-            "p": "formation-intelligence-artificielle",
-            "rgb": "118,184,63"
-          },
-          {
-            "t": "Utiliser l’IA pour développer son efficacité et sa productivité au travail – Comment intégrer l’IA dans son travail au quotidien",
-            "c": "Informatique",
-            "s": "informatique",
-            "p": "formation-informatique",
-            "rgb": "142,192,65"
-          },
-          {
-            "t": "Utiliser l’IA pour développer son efficacité et sa productivité au travail – Comment intégrer l’IA dans son travail au quotidien",
-            "c": "Administratif - Secrétariat - Accueil",
-            "s": "administratif-secretariat-accueil",
-            "p": "formation-administratif-secretariat-accueil",
-            "rgb": "113,73,156"
-          }
-        ],
-        "optimiser-ses-ecrits-professionnels-grace-a-lia": [
-          {
-            "t": "Optimiser ses écrits professionnels grâce à l’IA",
-            "c": "Intelligence artificielle",
-            "s": "intelligence-artificielle",
-            "p": "formation-intelligence-artificielle",
-            "rgb": "118,184,63"
-          },
-          {
-            "t": "Optimiser ses écrits professionnels grâce à l’IA",
-            "c": "Administratif - Secrétariat - Accueil",
-            "s": "administratif-secretariat-accueil",
-            "p": "formation-administratif-secretariat-accueil",
-            "rgb": "113,73,156"
-          }
-        ],
-        "lintelligence-artificielle-au-service-du-manager": [
-          {
-            "t": "L’intelligence artificielle au service du manager",
-            "c": "Intelligence artificielle",
-            "s": "intelligence-artificielle",
-            "p": "formation-intelligence-artificielle",
-            "rgb": "118,184,63"
-          },
-          {
-            "t": "L’intelligence artificielle au service du manager",
-            "c": "Management",
-            "s": "management",
-            "p": "formation-management",
-            "rgb": "243,148,29"
-          }
-        ],
-        "booster-sa-prospection-commerciale-avec-lintelligence-artificielle": [
-          {
-            "t": "Booster sa prospection commerciale avec l’intelligence artificielle",
-            "c": "Intelligence artificielle",
-            "s": "intelligence-artificielle",
-            "p": "formation-intelligence-artificielle",
-            "rgb": "118,184,63"
-          },
-          {
-            "t": "Booster sa prospection commerciale avec l’intelligence artificielle",
-            "c": "Commerce - Relation client - Achat",
-            "s": "commerce-relation-client",
-            "p": "formation-commerce-relation-client",
-            "rgb": "230,110,50"
-          }
-        ],
-        "sinitier-a-la-creation-de-visuels-avec-midjourney": [
-          {
-            "t": "S’initier à la création de visuels avec MidJourney",
-            "c": "Intelligence artificielle",
-            "s": "intelligence-artificielle",
-            "p": "formation-intelligence-artificielle",
-            "rgb": "118,184,63"
-          },
-          {
-            "t": "S’initier à la création de visuels avec MidJourney",
-            "c": "Communication - Marketing",
-            "s": "communication-marketing",
-            "p": "formation-communication-marketing",
-            "rgb": "229,196,53"
-          }
-        ],
-        "intelligence-artificielle-generative-les-solutions-du-marche-et-leurs": [
-          {
-            "t": "Intelligence Artificielle Générative : les solutions du marché et leurs usages",
-            "c": "Intelligence artificielle",
-            "s": "intelligence-artificielle",
-            "p": "formation-intelligence-artificielle",
-            "rgb": "118,184,63"
-          },
-          {
-            "t": "Intelligence Artificielle Générative : les solutions du marché et leurs usages",
-            "c": "Informatique",
-            "s": "informatique",
-            "p": "formation-informatique",
-            "rgb": "142,192,65"
-          }
-        ],
-        "claude-pour-les-dirigeants-ia-souveraine-fiable-et-strategique": [
-          {
-            "t": "Claude pour les dirigeants – IA souveraine, fiable et stratégique",
-            "c": "Intelligence artificielle",
-            "s": "intelligence-artificielle",
-            "p": "formation-intelligence-artificielle",
-            "rgb": "118,184,63"
-          },
-          {
-            "t": "Claude pour les dirigeants – IA souveraine, fiable et stratégique",
-            "c": "Informatique",
-            "s": "informatique",
-            "p": "formation-informatique",
-            "rgb": "142,192,65"
-          }
-        ],
-        "claude-vs-chatgpt-choisir-et-combiner-les-bons-outils-ia-selon-les-usages": [
-          {
-            "t": "Claude vs ChatGPT – Choisir et combiner les bons outils IA selon les usages",
-            "c": "Intelligence artificielle",
-            "s": "intelligence-artificielle",
-            "p": "formation-intelligence-artificielle",
-            "rgb": "118,184,63"
-          },
-          {
-            "t": "Claude vs ChatGPT – Choisir et combiner les bons outils IA selon les usages",
-            "c": "Informatique",
-            "s": "informatique",
-            "p": "formation-informatique",
-            "rgb": "142,192,65"
-          }
-        ],
-        "decouvrir-les-agents-ia-avec-claude-et-n8n-automatiser-sans-developpeur": [
-          {
-            "t": "Découvrir les agents IA avec Claude et N8N – Automatiser sans développeur",
-            "c": "Intelligence artificielle",
-            "s": "intelligence-artificielle",
-            "p": "formation-intelligence-artificielle",
-            "rgb": "118,184,63"
-          },
-          {
-            "t": "Découvrir les agents IA avec Claude et N8N – Automatiser sans développeur",
-            "c": "Informatique",
-            "s": "informatique",
-            "p": "formation-informatique",
-            "rgb": "142,192,65"
-          }
-        ],
-        "claude-et-la-gestion-documentaire-analyser-contrats-bilans-et-dossiers-complets-en-quelques-minutes": [
-          {
-            "t": "Claude et la gestion documentaire – Analyser contrats, bilans et dossiers complets en quelques minutes",
-            "c": "Intelligence artificielle",
-            "s": "intelligence-artificielle",
-            "p": "formation-intelligence-artificielle",
-            "rgb": "118,184,63"
-          },
-          {
-            "t": "Claude et la gestion documentaire – Analyser contrats, bilans et dossiers complets en quelques minutes",
-            "c": "Informatique",
-            "s": "informatique",
-            "p": "formation-informatique",
-            "rgb": "142,192,65"
-          }
-        ],
-        "claude-ai-assistant-ia-le-plus-fiable-pour-les-professionnels": [
-          {
-            "t": "Claude AI au travail – L’assistant IA le plus fiable pour les professionnels",
-            "c": "Intelligence artificielle",
-            "s": "intelligence-artificielle",
-            "p": "formation-intelligence-artificielle",
-            "rgb": "118,184,63"
-          },
-          {
-            "t": "Claude AI au travail – L’assistant IA le plus fiable pour les professionnels",
-            "c": "Informatique",
-            "s": "informatique",
-            "p": "formation-informatique",
-            "rgb": "142,192,65"
-          }
-        ],
-        "iagraphistes": [
-          {
-            "t": "Les fondamentaux de l’IA générative pour les graphistes",
-            "c": "Intelligence artificielle",
-            "s": "intelligence-artificielle",
-            "p": "formation-intelligence-artificielle",
-            "rgb": "118,184,63"
-          },
-          {
-            "t": "Les fondamentaux de l’IA générative pour les graphistes",
-            "c": "Graphisme - PAO",
-            "s": "graphisme-pao",
-            "p": "formation-graphisme-pao",
-            "rgb": "156,95,181"
-          }
-        ],
-        "lintelligence-artificielle-au-service-du-recrutement": [
-          {
-            "t": "L’Intelligence Artificielle au service du recrutement",
-            "c": "Intelligence artificielle",
-            "s": "intelligence-artificielle",
-            "p": "formation-intelligence-artificielle",
-            "rgb": "118,184,63"
-          },
-          {
-            "t": "L’Intelligence Artificielle au service du recrutement",
-            "c": "Gestion des Ressources humaines",
-            "s": "ressources-humaines",
-            "p": "formation-ressources-humaines",
-            "rgb": "217,83,127"
-          }
-        ],
-        "pack-efficacite-microsoft-365-utilisateurs": [
-          {
-            "t": "PACK EFFICACITE Microsoft 365 Utilisateurs",
-            "c": "Informatique",
-            "s": "informatique",
-            "p": "formation-informatique",
-            "rgb": "142,192,65"
-          }
-        ],
-        "sharepoint-online-creer-des-applications-avec-powerapps-et-power-automate-flow": [
-          {
-            "t": "SharePoint Online, créer des applications avec PowerApps et Power Automate (Flow)",
-            "c": "Informatique",
-            "s": "informatique",
-            "p": "formation-informatique",
-            "rgb": "142,192,65"
-          }
-        ],
-        "powershell-perfectionnement": [
-          {
-            "t": "PowerShell perfectionnement",
-            "c": "Informatique",
-            "s": "informatique",
-            "p": "formation-informatique",
-            "rgb": "142,192,65"
-          }
-        ],
-        "powershell-gerer-automatisation-de-windows": [
-          {
-            "t": "PowerShell, gérer l’automatisation de Windows",
-            "c": "Informatique",
-            "s": "informatique",
-            "p": "formation-informatique",
-            "rgb": "142,192,65"
-          }
-        ],
-        "pack-essentiel-administration-microsoft-365": [
-          {
-            "t": "PACK ESSENTIEL – Administration Microsoft 365",
-            "c": "Informatique",
-            "s": "informatique",
-            "p": "formation-informatique",
-            "rgb": "142,192,65"
-          }
-        ],
-        "pack-performance-administrative-microsoft-365-utilisateurs": [
-          {
-            "t": "PACK PERFORMANCE ADMINISTRATIVE Microsoft 365 Utilisateurs",
-            "c": "Informatique",
-            "s": "informatique",
-            "p": "formation-informatique",
-            "rgb": "142,192,65"
-          }
-        ],
-        "microsoft-azure-les-fondamentaux": [
-          {
-            "t": "Microsoft Azure – Les fondamentaux",
-            "c": "Informatique",
-            "s": "informatique",
-            "p": "formation-informatique",
-            "rgb": "142,192,65"
-          }
-        ],
-        "pack-avance-administration-microsoft-365": [
-          {
-            "t": "PACK AVANCÉ – Administration Microsoft 365",
-            "c": "Informatique",
-            "s": "informatique",
-            "p": "formation-informatique",
-            "rgb": "142,192,65"
-          }
-        ],
-        "les-fondamentaux-de-la-securite-des-si": [
-          {
-            "t": "Les fondamentaux de la sécurité des SI",
-            "c": "Informatique",
-            "s": "informatique",
-            "p": "formation-informatique",
-            "rgb": "142,192,65"
-          }
-        ],
-        "gestion-de-microsoft-teams": [
-          {
-            "t": "Gestion de Microsoft Teams",
-            "c": "Informatique",
-            "s": "informatique",
-            "p": "formation-informatique",
-            "rgb": "142,192,65"
-          }
-        ],
-        "microsoft-azure-developpement-de-solutions": [
-          {
-            "t": "Microsoft Azure – Développement de solutions",
-            "c": "Informatique",
-            "s": "informatique",
-            "p": "formation-informatique",
-            "rgb": "142,192,65"
-          }
-        ],
-        "administrateur-didentite-et-dacces-microsoft": [
-          {
-            "t": "Administrateur d’identité et d’accès Microsoft",
-            "c": "Informatique",
-            "s": "informatique",
-            "p": "formation-informatique",
-            "rgb": "142,192,65"
-          }
-        ],
-        "microsoft-azure-administrateur": [
-          {
-            "t": "Microsoft Azure – Administrateur",
-            "c": "Informatique",
-            "s": "informatique",
-            "p": "formation-informatique",
-            "rgb": "142,192,65"
-          }
-        ],
-        "linux-administration-avancee": [
-          {
-            "t": "Linux – Administration avancée",
-            "c": "Informatique",
-            "s": "informatique",
-            "p": "formation-informatique",
-            "rgb": "142,192,65"
-          }
-        ],
-        "linux-administration": [
-          {
-            "t": "Linux – Administration",
-            "c": "Informatique",
-            "s": "informatique",
-            "p": "formation-informatique",
-            "rgb": "142,192,65"
-          }
-        ],
-        "itil-v4-foundation": [
-          {
-            "t": "ITIL V4 Foundation avec certification",
-            "c": "Informatique",
-            "s": "informatique",
-            "p": "formation-informatique",
-            "rgb": "142,192,65"
-          }
-        ],
-        "conduite-de-projet-informatique": [
-          {
-            "t": "Conduite de projet informatique",
-            "c": "Informatique",
-            "s": "informatique",
-            "p": "formation-informatique",
-            "rgb": "142,192,65"
-          }
-        ],
-        "sharepoint-online-concepteur": [
-          {
-            "t": "Sharepoint Online – Concepteur",
-            "c": "Informatique",
-            "s": "informatique",
-            "p": "formation-informatique",
-            "rgb": "142,192,65"
-          }
-        ],
-        "sharepoint-2019-administrateur": [
-          {
-            "t": "SharePoint – Administrateur",
-            "c": "Informatique",
-            "s": "informatique",
-            "p": "formation-informatique",
-            "rgb": "142,192,65"
-          }
-        ],
-        "microsoft-hyper-v-deploiement-et-administration": [
-          {
-            "t": "Microsoft Hyper-V – Déploiement et administration",
-            "c": "Informatique",
-            "s": "informatique",
-            "p": "formation-informatique",
-            "rgb": "142,192,65"
-          }
-        ],
-        "veeam-backup-replication-v12-configure-manage-recover": [
-          {
-            "t": "Veeam Backup & Replication v12 – Configure, Manage and Recover",
-            "c": "Informatique",
-            "s": "informatique",
-            "p": "formation-informatique",
-            "rgb": "142,192,65"
-          }
-        ],
-        "windows-server-2022-active-directory": [
-          {
-            "t": "Windows Server 2022 – Active Directory",
-            "c": "Informatique",
-            "s": "informatique",
-            "p": "formation-informatique",
-            "rgb": "142,192,65"
-          }
-        ],
-        "windows-server-2022-mise-en-oeuvre-et-administration": [
-          {
-            "t": "Windows Server 2022 – Mise en œuvre et Administration",
-            "c": "Informatique",
-            "s": "informatique",
-            "p": "formation-informatique",
-            "rgb": "142,192,65"
-          }
-        ],
-        "vmware-vsphere-8-install-configure-manage": [
-          {
-            "t": "VMware vsphere 8 – Install, Configure, Manage",
-            "c": "Informatique",
-            "s": "informatique",
-            "p": "formation-informatique",
-            "rgb": "142,192,65"
-          }
-        ],
-        "ethical-hacking": [
-          {
-            "t": "Ethical Hacking",
-            "c": "Informatique",
-            "s": "informatique",
-            "p": "formation-informatique",
-            "rgb": "142,192,65"
-          }
-        ],
-        "rgpd": [
-          {
-            "t": "RGPD : principes et mise en conformité",
-            "c": "Informatique",
-            "s": "informatique",
-            "p": "formation-informatique",
-            "rgb": "142,192,65"
-          }
-        ],
-        "sensibilisation-utilisateurs-cybersecurite": [
-          {
-            "t": "Cybersécurité réseaux/Internet, synthèse",
-            "c": "Informatique",
-            "s": "informatique",
-            "p": "formation-informatique",
-            "rgb": "142,192,65"
-          }
-        ],
-        "cybersecurite-sensibilisation-des-utilisateurs": [
-          {
-            "t": "Cybersécurité, sensibilisation des utilisateurs",
-            "c": "Informatique",
-            "s": "informatique",
-            "p": "formation-informatique",
-            "rgb": "142,192,65"
-          }
-        ],
-        "wordpress-perfectionnement": [
-          {
-            "t": "WordPress Perfectionnement",
-            "c": "Communication - Marketing",
-            "s": "communication-marketing",
-            "p": "formation-communication-marketing",
-            "rgb": "229,196,53"
-          }
-        ],
-        "wordpress-initiation": [
-          {
-            "t": "WordPress Initiation",
-            "c": "Communication - Marketing",
-            "s": "communication-marketing",
-            "p": "formation-communication-marketing",
-            "rgb": "229,196,53"
-          }
-        ],
-        "communication-digitale-elaborer-et-piloter-sa-strategie": [
-          {
-            "t": "Communication digitale : élaborer et piloter sa stratégie",
-            "c": "Communication - Marketing",
-            "s": "communication-marketing",
-            "p": "formation-communication-marketing",
-            "rgb": "229,196,53"
-          }
-        ],
-        "reseaux-sociaux": [
-          {
-            "t": "Utiliser les réseaux sociaux dans votre stratégie de communication",
-            "c": "Communication - Marketing",
-            "s": "communication-marketing",
-            "p": "formation-communication-marketing",
-            "rgb": "229,196,53"
-          }
-        ],
-        "communiquer-efficacement-grace-au-modele-disc": [
-          {
-            "t": "Communiquer efficacement grâce au modèle DISC",
-            "c": "Communication - Marketing",
-            "s": "communication-marketing",
-            "p": "formation-communication-marketing",
-            "rgb": "229,196,53"
-          }
-        ],
-        "campagne-de-mailing": [
-          {
-            "t": "Gérer sa campagne d’e-mailing",
-            "c": "Communication - Marketing",
-            "s": "communication-marketing",
-            "p": "formation-communication-marketing",
-            "rgb": "229,196,53"
-          }
-        ],
-        "gagner-en-assurance-avec-les-techniques-theatrales": [
-          {
-            "t": "Gagner en assurance avec les techniques théâtrales",
-            "c": "Communication - Marketing",
-            "s": "communication-marketing",
-            "p": "formation-communication-marketing",
-            "rgb": "229,196,53"
-          }
-        ],
-        "devenez-un-orateur-talentueux": [
-          {
-            "t": "Devenez un orateur talentueux !",
-            "c": "Communication - Marketing",
-            "s": "communication-marketing",
-            "p": "formation-communication-marketing",
-            "rgb": "229,196,53"
-          }
-        ],
-        "prevention-et-gestion-des-conflits": [
-          {
-            "t": "Prévention et gestion des conflits",
-            "c": "Communication - Marketing",
-            "s": "communication-marketing",
-            "p": "formation-communication-marketing",
-            "rgb": "229,196,53"
-          }
-        ],
-        "communication-relationnelle-adaptez-vous-a-vos-interlocuteurs-grace-a-loutil-processcom": [
-          {
-            "t": "Communication relationnelle – Adaptez-vous à vos interlocuteurs grâce à l’outil ProcessCom®",
-            "c": "Communication - Marketing",
-            "s": "communication-marketing",
-            "p": "formation-communication-marketing",
-            "rgb": "229,196,53"
-          }
-        ],
-        "management-a-distance": [
-          {
-            "t": "Management à distance",
-            "c": "Management",
-            "s": "management",
-            "p": "formation-management",
-            "rgb": "243,148,29"
-          }
-        ],
-        "la-boite-a-outils-du-manager": [
-          {
-            "t": "La boîte à outils du manager",
-            "c": "Management",
-            "s": "management",
-            "p": "formation-management",
-            "rgb": "243,148,29"
-          }
-        ],
-        "devenir-un-manager-agile-2": [
-          {
-            "t": "Devenir un manager agile",
-            "c": "Management",
-            "s": "management",
-            "p": "formation-management",
-            "rgb": "243,148,29"
-          }
-        ],
-        "nouvellesgenerations": [
-          {
-            "t": "Mobiliser les nouvelles générations et comprendre leurs valeurs au travail",
-            "c": "Management",
-            "s": "management",
-            "p": "formation-management",
-            "rgb": "243,148,29"
-          }
-        ],
-        "commmanagerialedisc": [
-          {
-            "t": "Adapter sa communication managériale grâce au modèle DISC",
-            "c": "Management",
-            "s": "management",
-            "p": "formation-management",
-            "rgb": "243,148,29"
-          }
-        ],
-        "formation-tuteurs": [
-          {
-            "t": "Formation des tuteurs",
-            "c": "Management",
-            "s": "management",
-            "p": "formation-management",
-            "rgb": "243,148,29"
-          }
-        ],
-        "formation-de-formateurs-occasionnels": [
-          {
-            "t": "Formation de formateurs occasionnels",
-            "c": "Management",
-            "s": "management",
-            "p": "formation-management",
-            "rgb": "243,148,29"
-          }
-        ],
-        "lintelligence-artificielle-au-service-de-la-relation-client": [
-          {
-            "t": "L’intelligence artificielle au service de la relation client",
-            "c": "Commerce - Relation client - Achat",
-            "s": "commerce-relation-client",
-            "p": "formation-commerce-relation-client",
-            "rgb": "230,110,50"
-          }
-        ],
-        "relation-client-a-distance": [
-          {
-            "t": "La relation client à distance : développez la qualité de vos appels",
-            "c": "Commerce - Relation client - Achat",
-            "s": "commerce-relation-client",
-            "p": "formation-commerce-relation-client",
-            "rgb": "230,110,50"
-          }
-        ],
-        "les-achats-responsables-dans-le-code-de-la-commande-publique-2": [
-          {
-            "t": "Répondre à un appel d’offre en intégrant les critères ESG d’un cahier des charges",
-            "c": "Commerce - Relation client - Achat",
-            "s": "commerce-relation-client",
-            "p": "formation-commerce-relation-client",
-            "rgb": "230,110,50"
-          }
-        ],
-        "les-achats-responsables-dans-le-code-de-la-commande-publique": [
-          {
-            "t": "Les achats responsables dans le code de la commande publique",
-            "c": "Commerce - Relation client - Achat",
-            "s": "commerce-relation-client",
-            "p": "formation-commerce-relation-client",
-            "rgb": "230,110,50"
-          }
-        ],
-        "les-techniques-de-vente-training-intensif": [
-          {
-            "t": "Les techniques de vente : training intensif",
-            "c": "Commerce - Relation client - Achat",
-            "s": "commerce-relation-client",
-            "p": "formation-commerce-relation-client",
-            "rgb": "230,110,50"
-          }
-        ],
-        "votre-bilan-ou-votre-resultat-ont-ils-bonne-mine": [
-          {
-            "t": "Votre Bilan ou Votre Résultat ont-ils bonne mine ?",
-            "c": "Comptabilité - Gestion",
-            "s": "comptabilite-gestion",
-            "p": "formation-comptabilite-gestion",
-            "rgb": "225,79,70"
-          }
-        ],
-        "comptabilite-pour-non-comptable": [
-          {
-            "t": "Comptabilité pour non-comptables",
-            "c": "Comptabilité - Gestion",
-            "s": "comptabilite-gestion",
-            "p": "formation-comptabilite-gestion",
-            "rgb": "225,79,70"
-          }
-        ],
-        "referent-prevention-contre-le-sexisme-et-le-harcelement-sexuel": [
-          {
-            "t": "Référent prévention contre le sexisme et le harcèlement sexuel",
-            "c": "Gestion des Ressources humaines",
-            "s": "ressources-humaines",
-            "p": "formation-ressources-humaines",
-            "rgb": "217,83,127"
-          }
-        ],
-        "atelier-droit-local-et-droit-du-travail": [
-          {
-            "t": "Atelier : Droit local et droit du travail",
-            "c": "Gestion des Ressources humaines",
-            "s": "ressources-humaines",
-            "p": "formation-ressources-humaines",
-            "rgb": "217,83,127"
-          }
-        ],
-        "les-fondamentaux-de-la-paie": [
-          {
-            "t": "Les fondamentaux de la paie",
-            "c": "Gestion des Ressources humaines",
-            "s": "ressources-humaines",
-            "p": "formation-ressources-humaines",
-            "rgb": "217,83,127"
-          }
-        ],
-        "prevenir-le-harcelement-et-sensibiliser-ses-collaborateurs": [
-          {
-            "t": "Prévenir le harcèlement et sensibiliser ses collaborateurs",
-            "c": "Gestion des Ressources humaines",
-            "s": "ressources-humaines",
-            "p": "formation-ressources-humaines",
-            "rgb": "217,83,127"
-          }
-        ],
-        "preparer-sa-retraite": [
-          {
-            "t": "Préparer sa retraite",
-            "c": "Développement Personnel",
-            "s": "developpement-personnel",
-            "p": "formation-developpement-personnel",
-            "rgb": "199,107,180"
-          }
-        ],
-        "developper-son-assertivite-et-sa-confiance-en-soi": [
-          {
-            "t": "Développer son assertivité et sa confiance en soi",
-            "c": "Développement Personnel",
-            "s": "developpement-personnel",
-            "p": "formation-developpement-personnel",
-            "rgb": "199,107,180"
-          }
-        ],
-        "mieux-se-connaitre-neurosciences-pnl-et-outils-de-personnalite": [
-          {
-            "t": "Mieux se connaître : neurosciences, PNL et outils de personnalité",
-            "c": "Développement Personnel",
-            "s": "developpement-personnel",
-            "p": "formation-developpement-personnel",
-            "rgb": "199,107,180"
-          }
-        ],
-        "optimiser-son-organisation-pour-gagner-du-temps": [
-          {
-            "t": "Optimiser son organisation pour gagner du temps",
-            "c": "Développement Personnel",
-            "s": "developpement-personnel",
-            "p": "formation-developpement-personnel",
-            "rgb": "199,107,180"
-          }
-        ],
-        "adopter-une-demarche-eco-citoyenne-en-entreprise": [
-          {
-            "t": "Adopter une démarche éco-citoyenne en entreprise",
-            "c": "Développement Personnel",
-            "s": "developpement-personnel",
-            "p": "formation-developpement-personnel",
-            "rgb": "199,107,180"
-          }
-        ],
-        "gerer-son-stress-au-quotidien-transformer-son-stress-en-energie-positive": [
-          {
-            "t": "Gérer son stress au quotidien : transformer son stress en énergie positive",
-            "c": "Développement Personnel",
-            "s": "developpement-personnel",
-            "p": "formation-developpement-personnel",
-            "rgb": "199,107,180"
-          }
-        ],
-        "faire-face-au-risque-de-burn-out-des-collaborateurs": [
-          {
-            "t": "Faire face au risque de burn-out des collaborateurs",
-            "c": "Développement Personnel",
-            "s": "developpement-personnel",
-            "p": "formation-developpement-personnel",
-            "rgb": "199,107,180"
-          }
-        ],
-        "illustrator-perfectionnement-2": [
-          {
-            "t": "Illustrator Perfectionnement",
-            "c": "Graphisme - PAO",
-            "s": "graphisme-pao",
-            "p": "formation-graphisme-pao",
-            "rgb": "156,95,181"
-          }
-        ],
-        "indesign-perfectionnement-preparer-ses-documents-pour-limpression": [
-          {
-            "t": "InDesign Perfectionnement",
-            "c": "Graphisme - PAO",
-            "s": "graphisme-pao",
-            "p": "formation-graphisme-pao",
-            "rgb": "156,95,181"
-          }
-        ],
-        "initiation-pao": [
-          {
-            "t": "Initiation à la PAO",
-            "c": "Graphisme - PAO",
-            "s": "graphisme-pao",
-            "p": "formation-graphisme-pao",
-            "rgb": "156,95,181"
-          }
-        ],
-        "photoshop-perfectionnement-2": [
-          {
-            "t": "Photoshop Perfectionnement",
-            "c": "Graphisme - PAO",
-            "s": "graphisme-pao",
-            "p": "formation-graphisme-pao",
-            "rgb": "156,95,181"
-          }
-        ],
-        "photoshop-pao": [
-          {
-            "t": "Photoshop Initiation",
-            "c": "Graphisme - PAO",
-            "s": "graphisme-pao",
-            "p": "formation-graphisme-pao",
-            "rgb": "156,95,181"
-          }
-        ],
-        "in-design-initiation-mise-en-page": [
-          {
-            "t": "InDesign – Initiation",
-            "c": "Graphisme - PAO",
-            "s": "graphisme-pao",
-            "p": "formation-graphisme-pao",
-            "rgb": "156,95,181"
-          }
-        ],
-        "illustrator-initiation": [
-          {
-            "t": "Illustrator Initiation",
-            "c": "Graphisme - PAO",
-            "s": "graphisme-pao",
-            "p": "formation-graphisme-pao",
-            "rgb": "156,95,181"
-          }
-        ],
-        "gerer-les-situations-difficiles-a-laccueil": [
-          {
-            "t": "Gérer les situations difficiles à l’accueil",
-            "c": "Administratif - Secrétariat - Accueil",
-            "s": "administratif-secretariat-accueil",
-            "p": "formation-administratif-secretariat-accueil",
-            "rgb": "113,73,156"
-          }
-        ],
-        "gagner-du-temps-dans-la-gestion-et-la-redaction-de-ses-e-mails": [
-          {
-            "t": "Gagner du temps dans la gestion et la rédaction de ses e-mails",
-            "c": "Administratif - Secrétariat - Accueil",
-            "s": "administratif-secretariat-accueil",
-            "p": "formation-administratif-secretariat-accueil",
-            "rgb": "113,73,156"
-          }
-        ],
-        "rediger-des-ecrits-professionnels-efficaces": [
-          {
-            "t": "Rédiger des écrits professionnels efficaces",
-            "c": "Administratif - Secrétariat - Accueil",
-            "s": "administratif-secretariat-accueil",
-            "p": "formation-administratif-secretariat-accueil",
-            "rgb": "113,73,156"
-          }
-        ],
-        "accueil-telephonique-developper-limage-de-marque-de-lentreprise": [
-          {
-            "t": "Accueil téléphonique : développer l’image de marque de l’entreprise",
-            "c": "Administratif - Secrétariat - Accueil",
-            "s": "administratif-secretariat-accueil",
-            "p": "formation-administratif-secretariat-accueil",
-            "rgb": "113,73,156"
-          }
-        ],
-        "risqueincendie": [
-          {
-            "t": "COMPRENDRE ET MANAGER LE RISQUE INCENDIE EN ENTREPRISE",
-            "c": "Sécurité",
-            "s": "securite",
-            "p": "formation-securite",
-            "rgb": "92,132,177"
-          }
-        ],
-        "ecovadis": [
-          {
-            "t": "METTRE EN PLACE L’EVALUATION ECOVADIS DANS MON ENTREPRISE",
-            "c": "Sécurité",
-            "s": "securite",
-            "p": "formation-securite",
-            "rgb": "92,132,177"
-          }
-        ],
-        "sauveteur-secouriste-du-travail-sst": [
-          {
-            "t": "Sauveteur Secouriste du Travail (SST)",
-            "c": "Sécurité",
-            "s": "securite",
-            "p": "formation-securite",
-            "rgb": "92,132,177"
-          }
-        ],
-        "rse": [
-          {
-            "t": "COMPRENDRE ET INTEGRER LES FONDAMENTAUX DE LA RSE DANS MA STRATEGIE D’ENTREPRISE",
-            "c": "Sécurité",
-            "s": "securite",
-            "p": "formation-securite",
-            "rgb": "92,132,177"
-          }
-        ],
-        "mac-sst-maintien-et-actualisation-des-competences-sst": [
-          {
-            "t": "MAC (SST) : Maintien et Actualisation des Compétences SST",
-            "c": "Sécurité",
-            "s": "securite",
-            "p": "formation-securite",
-            "rgb": "92,132,177"
-          }
-        ],
-        "gestes-et-postures": [
-          {
-            "t": "Gestes et Postures",
-            "c": "Sécurité",
-            "s": "securite",
-            "p": "formation-securite",
-            "rgb": "92,132,177"
-          }
-        ],
-        "initiation-au-maniement-des-extincteurs": [
-          {
-            "t": "Initiation au maniement des extincteurs",
-            "c": "Sécurité",
-            "s": "securite",
-            "p": "formation-securite",
-            "rgb": "92,132,177"
-          }
-        ],
-        "cursus-de-langues-sur-mesure": [
-          {
-            "t": "Cursus de langues sur mesure",
-            "c": "Langues",
-            "s": "langues",
-            "p": "formation-langues",
-            "rgb": "60,184,169"
-          }
-        ]
-      }
-    </script>
 
     <script is:inline src="/js/pages/formation-detail-1.js"></script>
 
