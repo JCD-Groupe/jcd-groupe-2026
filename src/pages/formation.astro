@@ -1,6 +1,76 @@
 ---
+import { directus } from "../lib/directus";
+import { readSingleton } from "@directus/sdk";
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
+
+let global = await directus.request(
+  readSingleton("Global", {
+    fields: ["*"],
+  }),
+);
+
+let formation = await directus.request(
+  readSingleton("JCD_Formation", {
+    fields: [
+      "*",
+      { logo_manifeste_1: ["*"] },
+      { logo_manifeste_2: ["*"] },
+      { prestations: ["*"] },
+      { processus: ["*"] },
+      { logos_confiance: ["*", { directus_files_id: ["*"] }] },
+      { compteurs: ["*"] },
+      { infos_supplementaires: ["*"] },
+    ],
+  }),
+);
+
+const fetchSvgContent = async (id: string) => {
+  if (!id) return null;
+  const response = await fetch(
+    `${import.meta.env.PUBLIC_DIRECTUS_URL}/assets/${id}`,
+  );
+  return response.text();
+};
+
+formation.icone_cta_content = await fetchSvgContent(formation.icone_cta);
+
+formation.prestations = await Promise.all(
+  formation.prestations.map(async (prestation: any) => ({
+    ...prestation,
+    icone_content: await fetchSvgContent(prestation.icone),
+  })),
+);
+
+formation.compteurs = formation.compteurs.map((compteur: any) => {
+  let ratio = 1;
+
+  if (compteur.suffixe_valeur) {
+    if (compteur.suffixe_valeur == "%") {
+      ratio = compteur.valeur / 100;
+    } else if (
+      compteur.suffixe_valeur &&
+      /^\/\s*\d+/.test(compteur.suffixe_valeur)
+    ) {
+      // Suffixe de type "/10", "/20", etc.
+      const max = compteur.suffixe_valeur.replace("/", "");
+      if (max > 0) ratio = compteur.valeur / max;
+    }
+  }
+
+  return {
+    ...compteur,
+    valeur: `${compteur.valeur}`.replace(".", ","),
+    ratio: ratio,
+  };
+});
+
+const logos = formation.logos_confiance || [];
+const totalLogos = logos.length;
+const half = Math.ceil(totalLogos / 2);
+
+const logos1 = logos.slice(0, half);
+const logos2 = logos.slice(half);
 ---
 
 <html lang="fr">
@@ -13,33 +83,25 @@ import Footer from "../components/Footer.astro";
     <meta name="color-scheme" content="dark" />
     <meta name="theme-color" content="#0a0a0a" />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
-    <meta
-      name="description"
-      content="JCD Groupe · Pôle Formation. Formation professionnelle continue sur-mesure, coaching managérial, conseil RH, events d'entreprise. Certifié Qualiopi, centre TOSA. 21 ans d'expertise en Grand Est."
-    />
+    <meta name="description" content={formation.meta_description} />
     <link
       rel="canonical"
       href={`${import.meta.env.PUBLIC_DIRECTUS_URL}/formation`}
     />
     <meta property="og:type" content="website" />
-    <meta property="og:site_name" content="JCD Groupe" />
+    <meta property="og:site_name" content={global.nom_societe} />
     <meta property="og:locale" content="fr_FR" />
     <meta
       property="og:title"
-      content="Formation · Développement des compétences sur-mesure · JCD Groupe"
+      content={`${global.nom_societe} • ${formation.nom_pole}`}
     />
-    <meta
-      property="og:description"
-      content="JCD Groupe · Pôle Formation. Formation professionnelle continue sur-mesure, coaching managérial, conseil RH, events d'entreprise. Certifié Qualiopi, centre TOSA. 21 ans d'expertise en Grand Est."
-    />
+    <meta property="og:description" content={formation.meta_description} />
     <meta
       property="og:url"
       content={`${import.meta.env.PUBLIC_DIRECTUS_URL}/formation`}
     />
     <meta name="twitter:card" content="summary" />
-    <title>
-      Formation · Développement des compétences sur-mesure · JCD Groupe
-    </title>
+    <title>{global.nom_societe} • {formation.nom_pole}</title>
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -649,21 +711,23 @@ import Footer from "../components/Footer.astro";
           <div class="hero-grain" aria-hidden="true"></div>
 
           <div class="container">
-            <h1 id="formation-hero-title" class="hero-title reveal delay-1">
-              Des formations <em>professionnalisantes</em> adaptées à tous vos besoins.
-            </h1>
+            <h1
+              id="formation-hero-title"
+              class="hero-title reveal delay-1"
+              set:html={formation.titre_hero}
+            />
 
-            <p class="hero-sub reveal delay-2">
-              Le centre de formation JCD est certifié Qualiopi et habilité en
-              tant que centre d'examen pour la certification TOSA.
-            </p>
+            <p
+              class="hero-sub reveal delay-2"
+              set:html={formation.sous_titre_hero}
+            />
 
             <div class="hero-actions reveal delay-3">
               <a
                 href="/contact?pole=formation&step=2"
                 class="btn-cta btn-cta--ghost"
               >
-                Contacter un conseiller
+                {formation.bouton_hero}
                 <span class="btn-cta-arrow"
                   ><svg
                     viewBox="0 0 16 16"
@@ -703,11 +767,11 @@ import Footer from "../components/Footer.astro";
               </header>
 
               <div class="manifesto-top reveal delay-1">
-                <blockquote class="manifesto-quote manifesto-rich" id="manifesto-title">
-                  <strong>Le catalogue est notre vitrine,</strong> le sur-mesure
-                  notre signature. Notre force&nbsp;: <em>co-construire</em> un dispositif unique, aligné sur vos objectifs, vos métiers et
-                  vos contraintes opérationnelles.
-                </blockquote>
+                <blockquote
+                  class="manifesto-quote manifesto-rich"
+                  id="manifesto-title"
+                  set:html={formation.manifeste}
+                />
                 <div class="mf-certs">
                   <a
                     class="mf-cert mf-cert--qualiopi"
@@ -717,8 +781,8 @@ import Footer from "../components/Footer.astro";
                     aria-label="Certifié Qualiopi — Processus certifié — Action de formation"
                   >
                     <img
-                      src="/assets/qualiopi.png"
-                      alt="Certifié Qualiopi — Processus certifié — Action de formation"
+                      src={`${import.meta.env.PUBLIC_DIRECTUS_URL}/assets/${formation.logo_manifeste_1.id}`}
+                      alt={formation.logo_manifeste_1.title}
                       width="980"
                       height="825"
                       loading="lazy"
@@ -733,8 +797,8 @@ import Footer from "../components/Footer.astro";
                     aria-label="Centre d'examen TOSA — certification des compétences digitales"
                   >
                     <img
-                      src="/assets/tosa.png"
-                      alt="Centre d'examen TOSA"
+                      src={`${import.meta.env.PUBLIC_DIRECTUS_URL}/assets/${formation.logo_manifeste_2.id}`}
+                      alt={formation.logo_manifeste_2.title}
                       width="2121"
                       height="529"
                       loading="lazy"
@@ -889,313 +953,88 @@ import Footer from "../components/Footer.astro";
         <div class="container">
           <div class="prest-layout">
             <aside class="prest-aside reveal">
-              <h2 class="prest-aside-title" id="prestations-title">
-                <em>Six savoir-faire</em>, un seul objectif&nbsp;: votre
-                performance.
-              </h2>
-              <p class="prest-aside-sub">
-                Du diagnostic au suivi post-formation, chaque dispositif est
-                aligné sur votre stratégie et vos contraintes terrain.
-              </p>
+              <h2
+                class="prest-aside-title"
+                id="prestations-title"
+                set:html={formation.titre_prestations}
+              />
+              <p
+                class="prest-aside-sub"
+                set:html={formation.sous_titre_prestations}
+              />
 
               <div class="prest-aside-clients">
                 <div class="prest-aside-clients-head">
                   <span class="prest-aside-clients-label"
-                    >Ils nous font confiance</span
+                    >{formation.titre_confiance}</span
                   >
                   <span class="prest-aside-clients-rule" aria-hidden="true"
                   ></span>
-                  <span class="prest-aside-clients-count">15+</span>
+                  <span class="prest-aside-clients-count"
+                    >{formation.nombre_confiance}</span
+                  >
                 </div>
                 <!-- Marquee 2 colonnes : chaque colonne contient son set puis
                      son clone (couture -50%), logo-marquee.js densifie si besoin. -->
                 <div class="logo-marquee" aria-label="Logos de nos clients">
                   <div class="logo-marquee-col">
-                    <div class="logo-marquee-item" data-name="CPAM">
-                      <img src="/logos%20FORMATION/CPAM.webp" alt="CPAM" loading="lazy" decoding="async" />
-                    </div>
-                    <div class="logo-marquee-item" data-name="Carrefour">
-                      <img src="/logos%20FORMATION/carrefour.png" alt="Carrefour" loading="lazy" decoding="async" />
-                    </div>
-                    <div class="logo-marquee-item" data-name="Harmonie Mutuelle">
-                      <img src="/logos%20FORMATION/harmonie%20mutuelle.png" alt="Harmonie Mutuelle" loading="lazy" decoding="async" />
-                    </div>
-                    <div class="logo-marquee-item" data-name="Moselle — CD 57">
-                      <img src="/logos%20FORMATION/cd57.png" alt="Moselle — CD 57" loading="lazy" decoding="async" />
-                    </div>
-                    <div class="logo-marquee-item" data-name="Concentrix">
-                      <img src="/logos%20FORMATION/CONCETRIX.png" alt="Concentrix" loading="lazy" decoding="async" />
-                    </div>
-                    <div class="logo-marquee-item" data-name="CMSEA">
-                      <img src="/logos%20FORMATION/cmsea.png" alt="CMSEA" loading="lazy" decoding="async" />
-                    </div>
-                    <div class="logo-marquee-item" data-name="AGCO">
-                      <img src="/logos%20FORMATION/AGCO.webp" alt="AGCO" loading="lazy" decoding="async" />
-                    </div>
-                    <div class="logo-marquee-item" data-name="Altrans">
-                      <img src="/logos%20FORMATION/altrans.png" alt="Altrans" loading="lazy" decoding="async" />
-                    </div>
-
-                    <div class="logo-marquee-item" data-name="CPAM" aria-hidden="true">
-                      <img src="/logos%20FORMATION/CPAM.webp" alt="" loading="lazy" decoding="async" />
-                    </div>
-                    <div class="logo-marquee-item" data-name="Carrefour" aria-hidden="true">
-                      <img src="/logos%20FORMATION/carrefour.png" alt="" loading="lazy" decoding="async" />
-                    </div>
-                    <div class="logo-marquee-item" data-name="Harmonie Mutuelle" aria-hidden="true">
-                      <img src="/logos%20FORMATION/harmonie%20mutuelle.png" alt="" loading="lazy" decoding="async" />
-                    </div>
-                    <div class="logo-marquee-item" data-name="Moselle — CD 57" aria-hidden="true">
-                      <img src="/logos%20FORMATION/cd57.png" alt="" loading="lazy" decoding="async" />
-                    </div>
-                    <div class="logo-marquee-item" data-name="Concentrix" aria-hidden="true">
-                      <img src="/logos%20FORMATION/CONCETRIX.png" alt="" loading="lazy" decoding="async" />
-                    </div>
-                    <div class="logo-marquee-item" data-name="CMSEA" aria-hidden="true">
-                      <img src="/logos%20FORMATION/cmsea.png" alt="" loading="lazy" decoding="async" />
-                    </div>
-                    <div class="logo-marquee-item" data-name="AGCO" aria-hidden="true">
-                      <img src="/logos%20FORMATION/AGCO.webp" alt="" loading="lazy" decoding="async" />
-                    </div>
-                    <div class="logo-marquee-item" data-name="Altrans" aria-hidden="true">
-                      <img src="/logos%20FORMATION/altrans.png" alt="" loading="lazy" decoding="async" />
-                    </div>
+                    {
+                      logos1.map((logo: any) => (
+                        <div
+                          class="logo-marquee-item"
+                          data-name={logo.directus_files_id.title}
+                        >
+                          <img
+                            src={`${import.meta.env.PUBLIC_DIRECTUS_URL}/assets/${logo.directus_files_id.id}`}
+                            alt={logo.directus_files_id.title}
+                            loading="lazy"
+                            decoding="async"
+                          />
+                        </div>
+                      ))
+                    }
                   </div>
-
                   <div class="logo-marquee-col">
-                    <div class="logo-marquee-item" data-name="Eurométropole de Metz">
-                      <img src="/logos%20FORMATION/EUROMETROPOLE%20DE%20METZ.png" alt="Eurométropole de Metz" loading="lazy" decoding="async" />
-                    </div>
-                    <div class="logo-marquee-item" data-name="Soneo">
-                      <img src="/logos%20FORMATION/soneo.png" alt="Soneo" loading="lazy" decoding="async" />
-                    </div>
-                    <div class="logo-marquee-item" data-name="France Pare-Brise">
-                      <img src="/logos%20FORMATION/FRANCE%20PARE%20BRISE.png" alt="France Pare-Brise" loading="lazy" decoding="async" />
-                    </div>
-                    <div class="logo-marquee-item" data-name="Tessi">
-                      <img src="/logos%20FORMATION/tessi.png" alt="Tessi" loading="lazy" decoding="async" />
-                    </div>
-                    <div class="logo-marquee-item" data-name="Cometz">
-                      <img src="/logos%20FORMATION/cometz.png" alt="Cometz" loading="lazy" decoding="async" />
-                    </div>
-                    <div class="logo-marquee-item" data-name="Treffert">
-                      <img src="/logos%20FORMATION/treffert.png" alt="Treffert" loading="lazy" decoding="async" />
-                    </div>
-                    <div class="logo-marquee-item" data-name="Omega Énergies &amp; Services">
-                      <img src="/logos%20FORMATION/omega-energies.png" alt="Omega Énergies &amp; Services" loading="lazy" decoding="async" />
-                    </div>
-                    <div class="logo-marquee-item" data-name="SnowWorld">
-                      <img src="/logos%20FORMATION/snowworld.png" alt="SnowWorld" loading="lazy" decoding="async" />
-                    </div>
-
-                    <div class="logo-marquee-item" data-name="Eurométropole de Metz" aria-hidden="true">
-                      <img src="/logos%20FORMATION/EUROMETROPOLE%20DE%20METZ.png" alt="" loading="lazy" decoding="async" />
-                    </div>
-                    <div class="logo-marquee-item" data-name="Soneo" aria-hidden="true">
-                      <img src="/logos%20FORMATION/soneo.png" alt="" loading="lazy" decoding="async" />
-                    </div>
-                    <div class="logo-marquee-item" data-name="France Pare-Brise" aria-hidden="true">
-                      <img src="/logos%20FORMATION/FRANCE%20PARE%20BRISE.png" alt="" loading="lazy" decoding="async" />
-                    </div>
-                    <div class="logo-marquee-item" data-name="Tessi" aria-hidden="true">
-                      <img src="/logos%20FORMATION/tessi.png" alt="" loading="lazy" decoding="async" />
-                    </div>
-                    <div class="logo-marquee-item" data-name="Cometz" aria-hidden="true">
-                      <img src="/logos%20FORMATION/cometz.png" alt="" loading="lazy" decoding="async" />
-                    </div>
-                    <div class="logo-marquee-item" data-name="Treffert" aria-hidden="true">
-                      <img src="/logos%20FORMATION/treffert.png" alt="" loading="lazy" decoding="async" />
-                    </div>
-                    <div class="logo-marquee-item" data-name="Omega Énergies &amp; Services" aria-hidden="true">
-                      <img src="/logos%20FORMATION/omega-energies.png" alt="" loading="lazy" decoding="async" />
-                    </div>
-                    <div class="logo-marquee-item" data-name="SnowWorld" aria-hidden="true">
-                      <img src="/logos%20FORMATION/snowworld.png" alt="" loading="lazy" decoding="async" />
-                    </div>
+                    {
+                      logos2.map((logo: any) => (
+                        <div
+                          class="logo-marquee-item"
+                          data-name={logo.directus_files_id.title}
+                        >
+                          <img
+                            src={`${import.meta.env.PUBLIC_DIRECTUS_URL}/assets/${logo.directus_files_id.id}`}
+                            alt={logo.directus_files_id.title}
+                            loading="lazy"
+                            decoding="async"
+                          />
+                        </div>
+                      ))
+                    }
                   </div>
                 </div>
               </div>
             </aside>
 
             <div class="prest-menu reveal delay-1">
-              <article class="prest-item prest-item--ia">
-                <div class="prest-item-head">
-                  <span class="prest-item-glyph" aria-hidden="true">
-                    <svg
-                      viewBox="0 0 40 40"
-                      fill="none"
-                      stroke="currentColor"
-                      stroke-width="1.25"
-                      stroke-linejoin="round"
-                      stroke-linecap="round"
-                    >
-                      <rect x="8" y="10" width="24" height="18" rx="2"></rect>
-                      <path d="M14 10 V8 M26 10 V8" opacity="0.5"></path>
-                      <circle cx="20" cy="19" r="4"></circle>
-                      <path d="M20 15 V19 L23 21" opacity="0.7"></path>
-                    </svg>
-                  </span>
-                </div>
-                <h3 class="prest-item-title">Formations IA</h3>
-                <p class="prest-item-desc">
-                  Programmes d'intelligence artificielle adapt&eacute;s &agrave;
-                  vos postes et vos m&eacute;tiers. Pour des PME pr&ecirc;tes
-                  &agrave; se transformer.
-                </p>
-              </article>
-
-              <article class="prest-item">
-                <div class="prest-item-head">
-                  <span class="prest-item-glyph" aria-hidden="true">
-                    <svg
-                      viewBox="0 0 40 40"
-                      fill="none"
-                      stroke="currentColor"
-                      stroke-width="1.25"
-                      stroke-linejoin="round"
-                      stroke-linecap="round"
-                    >
-                      <circle cx="20" cy="14" r="6"></circle>
-                      <path d="M8 34 C8 26 14 22 20 22 C26 22 32 26 32 34"
-                      ></path>
-                      <path d="M26 12 L30 8 M30 8 L34 12" opacity="0.6"></path>
-                    </svg>
-                  </span>
-                </div>
-                <h3 class="prest-item-title">Conseil RH</h3>
-                <p class="prest-item-desc">
-                  Intégration de nouveaux collaborateurs, outils RH,
-                  accompagnement des transformations, AFEST.
-                </p>
-              </article>
-
-              <article class="prest-item">
-                <div class="prest-item-head">
-                  <span class="prest-item-glyph" aria-hidden="true">
-                    <svg
-                      viewBox="0 0 40 40"
-                      fill="none"
-                      stroke="currentColor"
-                      stroke-width="1.25"
-                      stroke-linejoin="round"
-                      stroke-linecap="round"
-                    >
-                      <circle cx="20" cy="20" r="10"></circle>
-                      <circle
-                        cx="20"
-                        cy="20"
-                        r="3.5"
-                        fill="currentColor"
-                        stroke="none"
-                        opacity="0.55"></circle>
-                      <path
-                        d="M20 6 V10 M20 30 V34 M6 20 H10 M30 20 H34"
-                        opacity="0.5"></path>
-                    </svg>
-                  </span>
-                </div>
-                <h3 class="prest-item-title">Coaching managérial</h3>
-                <p class="prest-item-desc">
-                  Analyse en situation, prise de recul stratégique, fixation
-                  d'objectifs et transmission du savoir.
-                </p>
-              </article>
-
-              <article class="prest-item">
-                <div class="prest-item-head">
-                  <span class="prest-item-glyph" aria-hidden="true">
-                    <svg
-                      viewBox="0 0 40 40"
-                      fill="none"
-                      stroke="currentColor"
-                      stroke-width="1.25"
-                      stroke-linejoin="round"
-                      stroke-linecap="round"
-                    >
-                      <path d="M6 28 L14 18 L22 24 L34 10"></path>
-                      <path d="M28 10 H34 V16" opacity="0.7"></path>
-                      <circle
-                        cx="14"
-                        cy="18"
-                        r="2"
-                        fill="currentColor"
-                        stroke="none"
-                        opacity="0.5"></circle>
-                      <circle
-                        cx="22"
-                        cy="24"
-                        r="2"
-                        fill="currentColor"
-                        stroke="none"
-                        opacity="0.5"></circle>
-                    </svg>
-                  </span>
-                </div>
-                <h3 class="prest-item-title">Events &amp; teambuilding</h3>
-                <p class="prest-item-desc">
-                  Séminaires, teambuilding, événements sportifs et location
-                  d'espaces.
-                </p>
-              </article>
-
-              <article class="prest-item">
-                <div class="prest-item-head">
-                  <span class="prest-item-glyph" aria-hidden="true">
-                    <svg
-                      viewBox="0 0 40 40"
-                      fill="none"
-                      stroke="currentColor"
-                      stroke-width="1.25"
-                      stroke-linejoin="round"
-                      stroke-linecap="round"
-                    >
-                      <path d="M20 8 L32 16 V28 L20 36 L8 28 V16 Z"></path>
-                      <path
-                        d="M20 8 V20 M20 20 L32 16 M20 20 L8 16"
-                        opacity="0.45"></path>
-                      <circle
-                        cx="20"
-                        cy="20"
-                        r="2.5"
-                        fill="currentColor"
-                        stroke="none"
-                        opacity="0.6"></circle>
-                    </svg>
-                  </span>
-                </div>
-                <h3 class="prest-item-title">Formations longues</h3>
-                <p class="prest-item-desc">
-                  POE Conseiller Relation Client à Distance, parcours de
-                  remobilisation softskills et compétences digitales.
-                </p>
-              </article>
-
-              <article class="prest-item">
-                <div class="prest-item-head">
-                  <span class="prest-item-glyph" aria-hidden="true">
-                    <svg
-                      viewBox="0 0 40 40"
-                      fill="none"
-                      stroke="currentColor"
-                      stroke-width="1.25"
-                      stroke-linejoin="round"
-                      stroke-linecap="round"
-                    >
-                      <rect x="8" y="6" width="24" height="28" rx="1.5"></rect>
-                      <path d="M13 14h14 M13 19h10 M13 24h12" opacity="0.65"
-                      ></path>
-                      <path d="M8 11h24" opacity="0.3"></path>
-                    </svg>
-                  </span>
-                </div>
-                <h3 class="prest-item-title">
-                  Formation professionnelle continue
-                </h3>
-                <p class="prest-item-desc">
-                  Sessions tertiaires en intra sur mesure ou inter-entreprises
-                  dans nos locaux &agrave; Metz.
-                </p>
-              </article>
+              {
+                formation.prestations.map((prestation: any, index: number) => (
+                  <article
+                    class={
+                      "prest-item" + (index === 0 ? " prest-item--ia" : "")
+                    }
+                  >
+                    <div class="prest-item-head">
+                      <span
+                        class="prest-item-glyph"
+                        aria-hidden="true"
+                        set:html={prestation.icone_content}
+                      />
+                    </div>
+                    <h3 class="prest-item-title">{prestation.titre}</h3>
+                    <p class="prest-item-desc">{prestation.description}</p>
+                  </article>
+                ))
+              }
             </div>
           </div>
         </div>
@@ -1217,12 +1056,15 @@ import Footer from "../components/Footer.astro";
       <section class="process" id="process" aria-labelledby="process-title">
         <div class="container">
           <div class="section-head reveal">
-            <h2 class="section-title" id="process-title">
-              Un parcours personnalisé, <em>étape par étape.</em>
-              <span class="text-muted"
-                >De l'écoute initiale au suivi post-formation, chaque étape est
-                co-construite avec vous.</span
-              >
+            <h2
+              class="section-title"
+              id="process-title"
+              set:html={formation.titre_processus}
+            >
+              <span
+                class="text-muted"
+                set:html={formation.sous_titre_processus}
+              />
             </h2>
           </div>
 
@@ -1351,10 +1193,10 @@ import Footer from "../components/Footer.astro";
 
               <!-- Étiquettes bookend : chacune posée au-dessus de son jalon -->
               <text class="pf-label" x="135" y="262" text-anchor="start"
-                >Niveau initial</text
+                >{formation.label_debut_processus}</text
               >
               <text class="pf-label" x="850" y="20" text-anchor="end"
-                >Compétence acquise</text
+                >{formation.label_fin_processus}</text
               >
 
               <!-- Courbe d'apprentissage : 3 couches superposées.
@@ -1473,60 +1315,26 @@ import Footer from "../components/Footer.astro";
             </svg>
 
             <div class="pf-vcards">
-              <article
-                class="pf-vcard"
-                style="--c:#bfe17b; --c-rgb:191, 225, 123;"
-              >
-                <span class="pf-vcard-land" aria-hidden="true"></span>
-                <h3 class="pf-vcard-title">Diagnostiquer</h3>
-                <p class="pf-vcard-desc">
-                  Analyse de vos besoins, contexte, stratégie.
-                </p>
-              </article>
-
-              <article
-                class="pf-vcard"
-                style="--c:#9ecf52; --c-rgb:158, 207, 82;"
-              >
-                <span class="pf-vcard-land" aria-hidden="true"></span>
-                <h3 class="pf-vcard-title">Concevoir</h3>
-                <p class="pf-vcard-desc">
-                  Co-construction du dispositif : objectifs, méthodes, rythme,
-                  indicateurs de réussite.
-                </p>
-              </article>
-
-              <article
-                class="pf-vcard"
-                style="--c:#8EC041; --c-rgb:142, 192, 65;"
-              >
-                <span class="pf-vcard-land" aria-hidden="true"></span>
-                <h3 class="pf-vcard-title">Former</h3>
-                <p class="pf-vcard-desc">
-                  Intervenants experts, présentiel ou distanciel. Pédagogie
-                  active, mises en situation, cas réels.
-                </p>
-              </article>
-
-              <article
-                class="pf-vcard"
-                style="--c:#6e9c2c; --c-rgb:110, 156, 44;"
-              >
-                <span class="pf-vcard-land" aria-hidden="true"></span>
-                <h3 class="pf-vcard-title">Mesurer</h3>
-                <p class="pf-vcard-desc">
-                  Évaluation des acquis, satisfaction stagiaires, atteinte des
-                  objectifs. Bilan et ajustements.
-                </p>
-              </article>
+              {
+                formation.processus.map((etape: any) => (
+                  <article
+                    class="pf-vcard"
+                    style="--c:#bfe17b; --c-rgb:191, 225, 123;"
+                  >
+                    <span class="pf-vcard-land" aria-hidden="true" />
+                    <h3 class="pf-vcard-title">{etape.titre}</h3>
+                    <p class="pf-vcard-desc">{etape.description}</p>
+                  </article>
+                ))
+              }
             </div>
           </div>
         </div>
       </section>
 
       <!-- ================================
-     ENGAGEMENTS & CERTIFICATIONS — rubrique exigée par Qualiopi :
-     publication des indicateurs de résultats + engagements de l'organisme.
+     ENGAGEMENTS & CERTIFICATIONS — rubrique Qualiopi :
+     indicateurs de résultats + engagements.
      ================================ -->
       <section
         class="fq-engage"
@@ -1535,13 +1343,16 @@ import Footer from "../components/Footer.astro";
       >
         <div class="container">
           <div class="section-head reveal">
-            <span class="eyebrow">Qualité</span>
-            <h2 class="section-title" id="fq-engage-title">
-              Engagements &amp; <span class="accent">certifications.</span>
-              <span class="text-muted"
-                >Organisme certifié Qualiopi, JCD Formation publie ses
-                indicateurs de résultats et ses engagements de service.</span
-              >
+            <span class="eyebrow">{formation.sur_titre_preuves}</span>
+            <h2
+              class="section-title"
+              id="fq-engage-title"
+              set:html={formation.titre_preuves}
+            >
+              <span
+                class="text-muted"
+                set:html={formation.sous_titre_preuves}
+              />
             </h2>
           </div>
 
@@ -1561,588 +1372,447 @@ import Footer from "../components/Footer.astro";
 
           <!-- Indicateurs de résultats — obligation Qualiopi (indicateur 2) -->
           <ul class="fq-kpis reveal delay-1">
-            <li class="fq-kpi" style="--ratio: 0.97">
-              <span class="fq-kpi-dial">
-                <span class="fq-kpi-halo" aria-hidden="true"></span>
-                <svg
-                  class="fq-kpi-ring"
-                  viewBox="0 0 120 120"
-                  aria-hidden="true"
-                  focusable="false"
-                >
-                  <circle class="fq-kpi-track" cx="60" cy="60" r="54"></circle>
-                  <circle
-                    class="fq-kpi-arc"
-                    cx="60"
-                    cy="60"
-                    r="54"
-                    stroke="url(#fq-arc)"></circle>
-                </svg>
-                <span class="fq-kpi-v" data-count="97"
-                  >97<small>&nbsp;%</small></span
-                >
-              </span>
-              <span class="fq-kpi-k">Taux de satisfaction annuel</span>
-              <span class="fq-kpi-y">en 2025</span>
-            </li>
-            <li class="fq-kpi" style="--ratio: 1">
-              <span class="fq-kpi-dial">
-                <span class="fq-kpi-halo" aria-hidden="true"></span>
-                <svg
-                  class="fq-kpi-ring"
-                  viewBox="0 0 120 120"
-                  aria-hidden="true"
-                  focusable="false"
-                >
-                  <circle class="fq-kpi-track" cx="60" cy="60" r="54"></circle>
-                  <circle
-                    class="fq-kpi-arc"
-                    cx="60"
-                    cy="60"
-                    r="54"
-                    stroke="url(#fq-arc)"></circle>
-                </svg>
-                <span class="fq-kpi-v" data-count="556">556</span>
-              </span>
-              <span class="fq-kpi-k">Nombre de stagiaires</span>
-              <span class="fq-kpi-y">sur l'année 2025</span>
-            </li>
-            <li class="fq-kpi" style="--ratio: 0.81">
-              <span class="fq-kpi-dial">
-                <span class="fq-kpi-halo" aria-hidden="true"></span>
-                <svg
-                  class="fq-kpi-ring"
-                  viewBox="0 0 120 120"
-                  aria-hidden="true"
-                  focusable="false"
-                >
-                  <circle class="fq-kpi-track" cx="60" cy="60" r="54"></circle>
-                  <circle
-                    class="fq-kpi-arc"
-                    cx="60"
-                    cy="60"
-                    r="54"
-                    stroke="url(#fq-arc)"></circle>
-                </svg>
-                <span class="fq-kpi-v" data-count="81"
-                  >81<small>&nbsp;%</small></span
-                >
-              </span>
-              <span class="fq-kpi-k">Taux d'insertion dans l'emploi</span>
-              <span class="fq-kpi-y">pour les demandeurs d'emploi en 2025</span>
-            </li>
-            <li class="fq-kpi" style="--ratio: 0.87">
-              <span class="fq-kpi-dial">
-                <span class="fq-kpi-halo" aria-hidden="true"></span>
-                <svg
-                  class="fq-kpi-ring"
-                  viewBox="0 0 120 120"
-                  aria-hidden="true"
-                  focusable="false"
-                >
-                  <circle class="fq-kpi-track" cx="60" cy="60" r="54"></circle>
-                  <circle
-                    class="fq-kpi-arc"
-                    cx="60"
-                    cy="60"
-                    r="54"
-                    stroke="url(#fq-arc)"></circle>
-                </svg>
-                <span class="fq-kpi-v" data-count="8,7"
-                  >8,7<small>/10</small></span
-                >
-              </span>
-              <span class="fq-kpi-k">Atteinte des objectifs pédagogiques</span>
-              <span class="fq-kpi-y">en 2025</span>
-            </li>
+            {
+              formation.compteurs.map((compteur: any) => (
+                <li class="fq-kpi" style={`--ratio: ${compteur.ratio}`}>
+                  <span class="fq-kpi-dial">
+                    <span class="fq-kpi-halo" aria-hidden="true" />
+                    <svg
+                      class="fq-kpi-ring"
+                      viewBox="0 0 120 120"
+                      aria-hidden="true"
+                      focusable="false"
+                    >
+                      <circle class="fq-kpi-track" cx="60" cy="60" r="54" />
+                      <circle
+                        class="fq-kpi-arc"
+                        cx="60"
+                        cy="60"
+                        r="54"
+                        stroke="url(#fq-arc)"
+                      />
+                    </svg>
+                    <span class="fq-kpi-v" data-count={compteur.valeur}>
+                      {compteur.valeur}
+                      <small>{compteur.suffixe_valeur}</small>
+                    </span>
+                  </span>
+                  <span class="fq-kpi-k">{compteur.titre}</span>
+                  <span class="fq-kpi-y">{compteur.sous_titre}</span>
+                </li>
+              ))
+            }
           </ul>
 
           <!-- Engagements publiés — registre en lignes, pas de cartes :
                un filet dégradé par ligne, la lecture reste verticale. -->
           <div class="fq-ledger reveal delay-2">
-            <article class="fq-row">
-              <span class="fq-row-n" aria-hidden="true">01</span>
-              <h3 class="fq-row-k">Certification Qualiopi</h3>
-              <p class="fq-row-tx">
-                La certification qualité a été délivrée au titre de la catégorie
-                d'action suivante&nbsp;: actions de formation.
-              </p>
-              <a
-                class="fq-row-link"
-                href="https://travail-emploi.gouv.fr/qualiopi-marque-de-certification-qualite-des-prestataires-de-formation"
-                target="_blank"
-                rel="noopener"
-                >En savoir plus<span class="fq-row-arrow" aria-hidden="true"
-                  >&#8599;</span
-                ></a
-              >
-            </article>
-            <article class="fq-row">
-              <span class="fq-row-n" aria-hidden="true">02</span>
-              <h3 class="fq-row-k">Centre d'examen TOSA</h3>
-              <p class="fq-row-tx">
-                JCD Formation est habilité en tant que centre d'examen pour la
-                certification TOSA. Score reconnu par les entreprises, éligible
-                aux financements.
-              </p>
-              <a
-                class="fq-row-link"
-                href="https://www.tosa.org/"
-                target="_blank"
-                rel="noopener"
-                >Découvrir TOSA<span class="fq-row-arrow" aria-hidden="true"
-                  >&#8599;</span
-                ></a
-              >
-            </article>
-            <article class="fq-row">
-              <span class="fq-row-n" aria-hidden="true">03</span>
-              <h3 class="fq-row-k">INTER &amp; INTRA entreprise</h3>
-              <p class="fq-row-tx">
-                Toutes nos formations sont proposées en inter-entreprises
-                (sessions ouvertes à Metz et Nancy) comme en intra-entreprise et
-                sur-mesure, dans vos locaux ou à distance.
-              </p>
-              <a class="fq-row-link" href="/contact?pole=formation&step=2"
-                >Demander un devis<span class="fq-row-arrow" aria-hidden="true"
-                  >&#8594;</span
-                ></a
-              >
-            </article>
-            <article class="fq-row">
-              <span class="fq-row-n" aria-hidden="true">04</span>
-              <h3 class="fq-row-k">Accessibilité &amp; handicap</h3>
-              <p class="fq-row-tx">
-                Locaux accessibles aux personnes à mobilité réduite. Adaptations
-                possibles sur demande auprès de notre référent handicap.
-              </p>
-              <a class="fq-row-link" href="/contact?pole=formation"
-                >Contacter le référent<span
-                  class="fq-row-arrow"
-                  aria-hidden="true">&#8594;</span
-                ></a
-              >
-            </article>
-            <article class="fq-row">
-              <span class="fq-row-n" aria-hidden="true">05</span>
-              <h3 class="fq-row-k">Évaluation &amp; suivi</h3>
-              <p class="fq-row-tx">
-                Évaluation des acquis, mesure de la satisfaction stagiaires et
-                de l'atteinte des objectifs, bilan et ajustements après chaque
-                dispositif.
-              </p>
-            </article>
+            {
+              formation.infos_supplementaires.map(
+                (info_supplementaires: any, index: number) => (
+                  <article class="fq-row">
+                    <span class="fq-row-n" aria-hidden="true">
+                      0{index + 1}
+                    </span>
+                    <h3 class="fq-row-k">{info_supplementaires.titre}</h3>
+                    <p class="fq-row-tx">{info_supplementaires.description}</p>
+                    {info_supplementaires.lien_cta && (
+                      <a
+                        class="fq-row-link"
+                        href={info_supplementaires.lien_cta}
+                        target={
+                          info_supplementaires.lien_cta.includes("http")
+                            ? "_blank"
+                            : "_self"
+                        }
+                        rel={
+                          info_supplementaires.lien_cta.includes("http")
+                            ? "noopener"
+                            : ""
+                        }
+                      >
+                        {info_supplementaires.texte_cta}
+                        {info_supplementaires.lien_cta.includes("http") ? (
+                          <span class="fq-row-arrow" aria-hidden="true">
+                            &#8599;
+                          </span>
+                        ) : (
+                          <span class="fq-row-arrow" aria-hidden="true">
+                            &#8594;
+                          </span>
+                        )}
+                      </a>
+                    )}
+                  </article>
+                ),
+              )
+            }
           </div>
         </div>
-      </section>
 
-      <!-- ================================
+        <!-- ================================
      CTA — Bandeau compact
      ================================ -->
-      <section class="cta-section" id="contact" aria-labelledby="cta-title">
-        <div class="container">
-          <div class="cta-frame">
-            <div class="cta-inner">
-              <svg
-                class="cta-icon reveal"
-                viewBox="0 0 120 120"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-                aria-hidden="true"
-                focusable="false"
-              >
-                <g
-                  stroke="currentColor"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                >
-                  <!-- Chapeau de promotion — plateau (losange symétrique sur x=60) -->
-                  <path d="M60 30 L103 49 L60 68 L17 49 Z" stroke-width="2"
-                  ></path>
-                  <!-- Coiffe arrondie sous le plateau (montants logés sous les bords du losange) -->
-                  <path
-                    d="M45 62 L45 71 Q60 80 75 71 L75 62"
-                    stroke-width="2"
-                    opacity="0.4"></path>
-                  <!-- Pampille : cordon plat jusqu'au coin droit puis chute verticale -->
-                  <path
-                    d="M60 49 L103 49 L103 83"
-                    stroke-width="2"
-                    opacity="0.62"></path>
-                  <!-- Mèches du gland -->
-                  <path
-                    d="M103 86 L99.6 92.5 M103 86 L103 94 M103 86 L106.4 92.5"
-                    stroke-width="1.5"
-                    opacity="0.62"></path>
-                  <!-- Onde discrète, contenue dans le plateau -->
-                  <g class="cta-icon-wave">
-                    <circle
-                      cx="60"
-                      cy="49"
-                      r="8"
-                      stroke-width="1.5"
-                      opacity="0.5"></circle>
-                    <circle
-                      cx="60"
-                      cy="49"
-                      r="14"
-                      stroke-width="1"
-                      opacity="0.2"></circle>
-                  </g>
-                </g>
-                <!-- Bouton central -->
-                <circle cx="60" cy="49" r="3.6" fill="currentColor"></circle>
-                <!-- Nœud de la pampille -->
-                <circle cx="103" cy="84" r="2.6" fill="currentColor"></circle>
-              </svg>
+        <section class="cta-section" id="contact" aria-labelledby="cta-title">
+          <div class="container">
+            <div class="cta-frame">
+              <div class="cta-inner">
+                <Fragment set:html={formation.icone_cta_content} />
 
-              <div class="cta-body">
-                <h2 class="cta-title reveal delay-1" id="cta-title">
-                  Un projet de <em>formation&thinsp;?</em>
-                </h2>
+                <div class="cta-body">
+                  <h2
+                    class="cta-title reveal delay-1"
+                    id="cta-title"
+                    set:html={formation.titre_cta}
+                  />
 
-                <p class="cta-sub reveal delay-2">
-                  Premier rendez-vous gratuit, chez vous ou en distanciel, avec
-                  présentation de l'intervenant.
-                </p>
+                  <p
+                    class="cta-sub reveal delay-2"
+                    set:html={formation.sous_titre_cta}
+                  />
 
-                <div class="cta-actions reveal delay-3">
-                  <a
-                    href="/contact?pole=formation&step=2"
-                    class="btn-cta btn-cta--primary"
-                  >
-                    Contacter le pôle Formation
-                    <span class="btn-cta-arrow"
-                      ><svg
-                        viewBox="0 0 16 16"
+                  <div class="cta-actions reveal delay-3">
+                    <a
+                      href="/contact?pole=formation&step=2"
+                      class="btn-cta btn-cta--primary"
+                    >
+                      {formation.bouton_cta}
+                      <span class="btn-cta-arrow"
+                        ><svg
+                          viewBox="0 0 16 16"
+                          fill="none"
+                          stroke="currentColor"
+                          stroke-width="1.6"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          ><path d="M3 8h10M9 4l4 4-4 4"></path></svg
+                        ></span
+                      >
+                    </a>
+                    <span class="cta-actions-divider" aria-hidden="true"></span>
+                    <span class="cta-phone">
+                      <svg
+                        viewBox="0 0 20 20"
                         fill="none"
                         stroke="currentColor"
-                        stroke-width="1.6"
+                        stroke-width="1.4"
                         stroke-linecap="round"
                         stroke-linejoin="round"
-                        ><path d="M3 8h10M9 4l4 4-4 4"></path></svg
-                      ></span
-                    >
-                  </a>
-                  <span class="cta-actions-divider" aria-hidden="true"></span>
-                  <span class="cta-phone">
-                    <svg
-                      viewBox="0 0 20 20"
-                      fill="none"
-                      stroke="currentColor"
-                      stroke-width="1.4"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      width="14"
-                      height="14"
-                      ><path
-                        d="M2 3a1 1 0 011-1h3.28a1 1 0 01.95.68l1.07 3.21a1 1 0 01-.25 1L6.54 8.4a12.06 12.06 0 005.06 5.06l1.51-1.51a1 1 0 011-.25l3.21 1.07a1 1 0 01.68.95V17a1 1 0 01-1 1A15 15 0 012 3z"
-                      ></path></svg
-                    >
-                    <a href="tel:+33387184920" class="cta-phone-num"
-                      >03 87 18 49 20</a
-                    >
-                  </span>
+                        width="14"
+                        height="14"
+                        ><path
+                          d="M2 3a1 1 0 011-1h3.28a1 1 0 01.95.68l1.07 3.21a1 1 0 01-.25 1L6.54 8.4a12.06 12.06 0 005.06 5.06l1.51-1.51a1 1 0 011-.25l3.21 1.07a1 1 0 01.68.95V17a1 1 0 01-1 1A15 15 0 012 3z"
+                        ></path></svg
+                      >
+                      <a href="tel:+33387184920" class="cta-phone-num"
+                        >03 87 18 49 20</a
+                      >
+                    </span>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
-        </div>
+        </section>
       </section>
-    </main>
 
-    <!-- ================================
+      <!-- ================================
      FOOTER
      ================================ -->
-    <Footer />
+      <Footer />
 
-    <script is:inline src="/js/pages/formation-1.js"></script>
-    <script is:inline src="/js/shared/menu-frost.js"></script>
-    <!-- jcd-mobile-nav (injected) -->
-    <button
-      class="jcd-burger"
-      id="jcdBurger"
-      type="button"
-      aria-label="Ouvrir le menu"
-      aria-expanded="false"
-      aria-controls="jcdMnav"
-    >
-      <span class="jcd-burger__box" aria-hidden="true"
-        ><i></i><i></i><i></i></span
+      <script is:inline src="/js/pages/formation-1.js"></script>
+      <script is:inline src="/js/shared/menu-frost.js"></script>
+      <!-- jcd-mobile-nav (injected) -->
+      <button
+        class="jcd-burger"
+        id="jcdBurger"
+        type="button"
+        aria-label="Ouvrir le menu"
+        aria-expanded="false"
+        aria-controls="jcdMnav"
       >
-    </button>
-    <div
-      class="jcd-mnav"
-      id="jcdMnav"
-      role="dialog"
-      aria-modal="true"
-      aria-label="Menu de navigation"
-      aria-hidden="true"
-    >
-      <div class="jcd-mnav__scroll">
-        <div class="jcd-mnav__inner">
-          <p
-            class="jcd-mnav__eyebrow jcd-mnav__reveal"
-            style="transition-delay:.04s"
-          >
-            Expertises
-          </p>
+        <span class="jcd-burger__box" aria-hidden="true"
+          ><i></i><i></i><i></i></span
+        >
+      </button>
+      <div
+        class="jcd-mnav"
+        id="jcdMnav"
+        role="dialog"
+        aria-modal="true"
+        aria-label="Menu de navigation"
+        aria-hidden="true"
+      >
+        <div class="jcd-mnav__scroll">
+          <div class="jcd-mnav__inner">
+            <p
+              class="jcd-mnav__eyebrow jcd-mnav__reveal"
+              style="transition-delay:.04s"
+            >
+              Expertises
+            </p>
 
-          <div class="jcd-mnav__reveal" style="transition-delay:.07s">
-            <div class="jcd-mnav__item" style="--mnav-c:#2E72BA">
-              <a class="jcd-mnav__link" href="/informatique"
-                ><span class="jcd-mnav__dot"></span><span
-                  class="jcd-mnav__label">Informatique</span
-                ></a
-              >
-              <button
-                class="jcd-acc__toggle"
-                type="button"
-                aria-expanded="false"
-                aria-controls="jcdAccInfo"
-                aria-label="Afficher les sous-pages Informatique"
-              >
-                <svg
-                  viewBox="0 0 14 14"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="1.6"
-                  stroke-linecap="round"><path d="M7 2v10M2 7h10"></path></svg
+            <div class="jcd-mnav__reveal" style="transition-delay:.07s">
+              <div class="jcd-mnav__item" style="--mnav-c:#2E72BA">
+                <a class="jcd-mnav__link" href="/informatique"
+                  ><span class="jcd-mnav__dot"></span><span
+                    class="jcd-mnav__label">Informatique</span
+                  ></a
                 >
-              </button>
-            </div>
-            <div class="jcd-acc__panel" id="jcdAccInfo">
-              <a class="jcd-mnav__sub" href="/info-cloud">Cloud Microsoft</a>
-              <a class="jcd-mnav__sub" href="/info-collaboratif"
-                >Solutions collaboratives &amp; audiovisuelles</a
-              >
-              <a class="jcd-mnav__sub" href="/info-reseaux"
-                >Architectures syst&egrave;mes &amp; r&eacute;seaux</a
-              >
-              <a class="jcd-mnav__sub" href="/info-integration"
-                >Int&eacute;gration &amp; Support PC</a
-              >
-            </div>
-          </div>
-
-          <a
-            class="jcd-mnav__item jcd-mnav__reveal"
-            style="--mnav-c:#E51D29;transition-delay:.10s"
-            href="/service"
-            ><span class="jcd-mnav__dot"></span><span class="jcd-mnav__label"
-              >Service</span
-            ></a
-          >
-          <a
-            class="jcd-mnav__item jcd-mnav__reveal"
-            style="--mnav-c:#F9D605;transition-delay:.13s"
-            href="/developpement"
-            ><span class="jcd-mnav__dot"></span><span class="jcd-mnav__label"
-              >D&eacute;veloppement</span
-            ></a
-          >
-          <a
-            class="jcd-mnav__item jcd-mnav__reveal"
-            style="--mnav-c:#F3941D;transition-delay:.16s"
-            href="/print"
-            ><span class="jcd-mnav__dot"></span><span class="jcd-mnav__label"
-              >Print</span
-            ></a
-          >
-          <a
-            class="jcd-mnav__item jcd-mnav__reveal"
-            style="--mnav-c:#B063AC;transition-delay:.19s"
-            href="/telecom"
-            ><span class="jcd-mnav__dot"></span><span class="jcd-mnav__label"
-              >T&eacute;l&eacute;com</span
-            ></a
-          >
-          <div class="jcd-mnav__reveal" style="transition-delay:.22s">
-            <div class="jcd-mnav__item" style="--mnav-c:#8EC041">
-              <a class="jcd-mnav__link" href="/formation"
-                ><span class="jcd-mnav__dot"></span><span
-                  class="jcd-mnav__label">Formation</span
-                ></a
-              >
-              <button
-                class="jcd-acc__toggle"
-                type="button"
-                aria-expanded="false"
-                aria-controls="jcdAccForm"
-                aria-label="Afficher les catégories de formation"
-              >
-                <svg
-                  viewBox="0 0 14 14"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="1.6"
-                  stroke-linecap="round"><path d="M7 2v10M2 7h10"></path></svg
+                <button
+                  class="jcd-acc__toggle"
+                  type="button"
+                  aria-expanded="false"
+                  aria-controls="jcdAccInfo"
+                  aria-label="Afficher les sous-pages Informatique"
                 >
-              </button>
+                  <svg
+                    viewBox="0 0 14 14"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="1.6"
+                    stroke-linecap="round"><path d="M7 2v10M2 7h10"></path></svg
+                  >
+                </button>
+              </div>
+              <div class="jcd-acc__panel" id="jcdAccInfo">
+                <a class="jcd-mnav__sub" href="/info-cloud">Cloud Microsoft</a>
+                <a class="jcd-mnav__sub" href="/info-collaboratif"
+                  >Solutions collaboratives &amp; audiovisuelles</a
+                >
+                <a class="jcd-mnav__sub" href="/info-reseaux"
+                  >Architectures syst&egrave;mes &amp; r&eacute;seaux</a
+                >
+                <a class="jcd-mnav__sub" href="/info-integration"
+                  >Int&eacute;gration &amp; Support PC</a
+                >
+              </div>
             </div>
-            <div class="jcd-acc__panel" id="jcdAccForm">
-              <a class="jcd-mnav__sub" href="/formation-bureautique"
-                >Bureautique</a
-              >
-              <a
-                class="jcd-mnav__sub"
-                href="/formation-intelligence-artificielle"
-                >Intelligence artificielle</a
-              >
-              <a class="jcd-mnav__sub" href="/formation-informatique"
-                >Informatique</a
-              >
-              <a class="jcd-mnav__sub" href="/formation-communication-marketing"
-                >Communication - Marketing</a
-              >
-              <a class="jcd-mnav__sub" href="/formation-management"
-                >Management</a
-              >
-              <a
-                class="jcd-mnav__sub"
-                href="/formation-commerce-relation-client"
-                >Commerce - Relation client</a
-              >
-              <a class="jcd-mnav__sub" href="/formation-comptabilite-gestion"
-                >Comptabilit&eacute; - Gestion</a
-              >
-              <a class="jcd-mnav__sub" href="/formation-ressources-humaines"
-                >Ressources humaines</a
-              >
-              <a class="jcd-mnav__sub" href="/formation-developpement-personnel"
-                >D&eacute;veloppement personnel</a
-              >
-              <a class="jcd-mnav__sub" href="/formation-graphisme-pao"
-                >Graphisme - PAO</a
-              >
-              <a
-                class="jcd-mnav__sub"
-                href="/formation-administratif-secretariat-accueil"
-                >Administratif - Secr&eacute;tariat</a
-              >
-              <a class="jcd-mnav__sub" href="/formation-securite"
-                >S&eacute;curit&eacute;</a
-              >
-              <a class="jcd-mnav__sub" href="/formation-langues">Langues</a>
-            </div>
-          </div>
-          <a
-            class="jcd-mnav__item jcd-mnav__reveal"
-            style="--mnav-c:#A78D75;transition-delay:.25s"
-            href="/agencement"
-            ><span class="jcd-mnav__dot"></span><span class="jcd-mnav__label"
-              >Agencement</span
-            ></a
-          >
 
-          <p
-            class="jcd-mnav__eyebrow jcd-mnav__sec2 jcd-mnav__reveal"
-            style="transition-delay:.30s"
-          >
-            D&eacute;couvrir
-          </p>
-          <a
-            class="jcd-mnav__item jcd-mnav__reveal"
-            style="--mnav-c:#9a9a9a;transition-delay:.33s"
-            href="/assistance"
-            ><span class="jcd-mnav__dot"></span><span
-              class="jcd-mnav__label"
-              style="font-size:19px">Assistance</span
-            ></a
-          >
-          <a
-            class="jcd-mnav__item jcd-mnav__reveal"
-            style="--mnav-c:#9a9a9a;transition-delay:.36s"
-            href="/carrieres"
-            ><span class="jcd-mnav__dot"></span><span
-              class="jcd-mnav__label"
-              style="font-size:19px">Carri&egrave;res</span
-            ></a
-          >
-
-          <div
-            class="jcd-mnav__cta jcd-mnav__reveal"
-            style="transition-delay:.40s"
-          >
-            <a class="jcd-mnav__btn jcd-mnav__btn--primary" href="/contact"
-              >Contacter un expert
-              <span class="jcd-mnav__btn-ic"
-                ><svg
-                  viewBox="0 0 16 16"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="1.7"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  ><path d="M3 8h10M9 4l4 4-4 4"></path></svg
-                ></span
+            <a
+              class="jcd-mnav__item jcd-mnav__reveal"
+              style="--mnav-c:#E51D29;transition-delay:.10s"
+              href="/service"
+              ><span class="jcd-mnav__dot"></span><span class="jcd-mnav__label"
+                >Service</span
               ></a
             >
             <a
-              class="jcd-mnav__btn jcd-mnav__btn--ghost"
-              href="tel:+33387184920"
-              >03 87 18 49 20
-              <span class="jcd-mnav__btn-ic"
-                ><svg
-                  viewBox="0 0 18 18"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="1.5"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  ><path
-                    d="M2.5 3.5a1 1 0 011-1h2.4a1 1 0 01.95.68l.86 2.4a1 1 0 01-.24 1l-1.2 1.2a11 11 0 004.6 4.6l1.2-1.2a1 1 0 011-.24l2.4.86a1 1 0 01.68.95V15a1 1 0 01-1 1A13.5 13.5 0 012.5 3.5z"
-                  ></path></svg
-                ></span
+              class="jcd-mnav__item jcd-mnav__reveal"
+              style="--mnav-c:#F9D605;transition-delay:.13s"
+              href="/developpement"
+              ><span class="jcd-mnav__dot"></span><span class="jcd-mnav__label"
+                >D&eacute;veloppement</span
               ></a
             >
+            <a
+              class="jcd-mnav__item jcd-mnav__reveal"
+              style="--mnav-c:#F3941D;transition-delay:.16s"
+              href="/print"
+              ><span class="jcd-mnav__dot"></span><span class="jcd-mnav__label"
+                >Print</span
+              ></a
+            >
+            <a
+              class="jcd-mnav__item jcd-mnav__reveal"
+              style="--mnav-c:#B063AC;transition-delay:.19s"
+              href="/telecom"
+              ><span class="jcd-mnav__dot"></span><span class="jcd-mnav__label"
+                >T&eacute;l&eacute;com</span
+              ></a
+            >
+            <div class="jcd-mnav__reveal" style="transition-delay:.22s">
+              <div class="jcd-mnav__item" style="--mnav-c:#8EC041">
+                <a class="jcd-mnav__link" href="/formation"
+                  ><span class="jcd-mnav__dot"></span><span
+                    class="jcd-mnav__label">Formation</span
+                  ></a
+                >
+                <button
+                  class="jcd-acc__toggle"
+                  type="button"
+                  aria-expanded="false"
+                  aria-controls="jcdAccForm"
+                  aria-label="Afficher les catégories de formation"
+                >
+                  <svg
+                    viewBox="0 0 14 14"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="1.6"
+                    stroke-linecap="round"><path d="M7 2v10M2 7h10"></path></svg
+                  >
+                </button>
+              </div>
+              <div class="jcd-acc__panel" id="jcdAccForm">
+                <a class="jcd-mnav__sub" href="/formation-bureautique"
+                  >Bureautique</a
+                >
+                <a
+                  class="jcd-mnav__sub"
+                  href="/formation-intelligence-artificielle"
+                  >Intelligence artificielle</a
+                >
+                <a class="jcd-mnav__sub" href="/formation-informatique"
+                  >Informatique</a
+                >
+                <a
+                  class="jcd-mnav__sub"
+                  href="/formation-communication-marketing"
+                  >Communication - Marketing</a
+                >
+                <a class="jcd-mnav__sub" href="/formation-management"
+                  >Management</a
+                >
+                <a
+                  class="jcd-mnav__sub"
+                  href="/formation-commerce-relation-client"
+                  >Commerce - Relation client</a
+                >
+                <a class="jcd-mnav__sub" href="/formation-comptabilite-gestion"
+                  >Comptabilit&eacute; - Gestion</a
+                >
+                <a class="jcd-mnav__sub" href="/formation-ressources-humaines"
+                  >Ressources humaines</a
+                >
+                <a
+                  class="jcd-mnav__sub"
+                  href="/formation-developpement-personnel"
+                  >D&eacute;veloppement personnel</a
+                >
+                <a class="jcd-mnav__sub" href="/formation-graphisme-pao"
+                  >Graphisme - PAO</a
+                >
+                <a
+                  class="jcd-mnav__sub"
+                  href="/formation-administratif-secretariat-accueil"
+                  >Administratif - Secr&eacute;tariat</a
+                >
+                <a class="jcd-mnav__sub" href="/formation-securite"
+                  >S&eacute;curit&eacute;</a
+                >
+                <a class="jcd-mnav__sub" href="/formation-langues">Langues</a>
+              </div>
+            </div>
+            <a
+              class="jcd-mnav__item jcd-mnav__reveal"
+              style="--mnav-c:#A78D75;transition-delay:.25s"
+              href="/agencement"
+              ><span class="jcd-mnav__dot"></span><span class="jcd-mnav__label"
+                >Agencement</span
+              ></a
+            >
+
+            <p
+              class="jcd-mnav__eyebrow jcd-mnav__sec2 jcd-mnav__reveal"
+              style="transition-delay:.30s"
+            >
+              D&eacute;couvrir
+            </p>
+            <a
+              class="jcd-mnav__item jcd-mnav__reveal"
+              style="--mnav-c:#9a9a9a;transition-delay:.33s"
+              href="/assistance"
+              ><span class="jcd-mnav__dot"></span><span
+                class="jcd-mnav__label"
+                style="font-size:19px">Assistance</span
+              ></a
+            >
+            <a
+              class="jcd-mnav__item jcd-mnav__reveal"
+              style="--mnav-c:#9a9a9a;transition-delay:.36s"
+              href="/carrieres"
+              ><span class="jcd-mnav__dot"></span><span
+                class="jcd-mnav__label"
+                style="font-size:19px">Carri&egrave;res</span
+              ></a
+            >
+
+            <div
+              class="jcd-mnav__cta jcd-mnav__reveal"
+              style="transition-delay:.40s"
+            >
+              <a class="jcd-mnav__btn jcd-mnav__btn--primary" href="/contact"
+                >Contacter un expert
+                <span class="jcd-mnav__btn-ic"
+                  ><svg
+                    viewBox="0 0 16 16"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="1.7"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    ><path d="M3 8h10M9 4l4 4-4 4"></path></svg
+                  ></span
+                ></a
+              >
+              <a
+                class="jcd-mnav__btn jcd-mnav__btn--ghost"
+                href="tel:+33387184920"
+                >03 87 18 49 20
+                <span class="jcd-mnav__btn-ic"
+                  ><svg
+                    viewBox="0 0 18 18"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="1.5"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    ><path
+                      d="M2.5 3.5a1 1 0 011-1h2.4a1 1 0 01.95.68l.86 2.4a1 1 0 01-.24 1l-1.2 1.2a11 11 0 004.6 4.6l1.2-1.2a1 1 0 011-.24l2.4.86a1 1 0 01.68.95V15a1 1 0 01-1 1A13.5 13.5 0 012.5 3.5z"
+                    ></path></svg
+                  ></span
+                ></a
+              >
+            </div>
           </div>
         </div>
       </div>
-    </div>
-    <script is:inline src="/js/shared/mobile-nav.js"></script>
-    <!-- jcd-a11y (Lot 5) -->
-    <div class="jcd-fab-wrap" id="jcd-fab">
-      <button
-        class="jcd-fab jcd-fab--top"
-        id="jcdToTop"
-        type="button"
-        aria-label="Remonter en haut"
-      >
-        <svg
-          viewBox="0 0 20 20"
-          fill="none"
-          stroke="currentColor"
-          stroke-width="1.8"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          aria-hidden="true"><path d="M10 16V5M5 10l5-5 5 5"></path></svg
+      <script is:inline src="/js/shared/mobile-nav.js"></script>
+      <!-- jcd-a11y (Lot 5) -->
+      <div class="jcd-fab-wrap" id="jcd-fab">
+        <button
+          class="jcd-fab jcd-fab--top"
+          id="jcdToTop"
+          type="button"
+          aria-label="Remonter en haut"
         >
-      </button>
-      <a
-        class="jcd-fab jcd-fab--contact"
-        id="jcdFabContact"
-        href="/contact"
-        aria-label="Nous contacter"
-      >
-        <svg
-          viewBox="0 0 20 20"
-          fill="none"
-          stroke="currentColor"
-          stroke-width="1.6"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          aria-hidden="true"
-          ><rect x="2.5" y="4.5" width="15" height="11" rx="2.3"></rect><path
-            d="M3 6.7 L10 10.7 L17 6.7"></path></svg
+          <svg
+            viewBox="0 0 20 20"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.8"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            aria-hidden="true"><path d="M10 16V5M5 10l5-5 5 5"></path></svg
+          >
+        </button>
+        <a
+          class="jcd-fab jcd-fab--contact"
+          id="jcdFabContact"
+          href="/contact"
+          aria-label="Nous contacter"
         >
-      </a>
-    </div>
-    <script is:inline src="/js/shared/a11y.js" id="jcd-a11y-js"></script>
+          <svg
+            viewBox="0 0 20 20"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.6"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            aria-hidden="true"
+            ><rect x="2.5" y="4.5" width="15" height="11" rx="2.3"></rect><path
+              d="M3 6.7 L10 10.7 L17 6.7"></path></svg
+          >
+        </a>
+      </div>
+      <script is:inline src="/js/shared/a11y.js" id="jcd-a11y-js"></script>
 
-    <script is:inline src="/js/shared/logo-marquee.js"></script>
-    <script is:inline src="/js/shared/micons.js" id="jcd-micons-js"></script>
-    <script is:inline src="/js/shared/mrefonte.js" id="jcd-mrefonte-js"
-    ></script>
+      <script is:inline src="/js/shared/logo-marquee.js"></script>
+      <script is:inline src="/js/shared/micons.js" id="jcd-micons-js"></script>
+      <script is:inline src="/js/shared/mrefonte.js" id="jcd-mrefonte-js"
+      ></script>
+    </main>
   </body>
 </html>
