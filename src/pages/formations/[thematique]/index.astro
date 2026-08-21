@@ -45,11 +45,6 @@ let thematiques = await directus.request(
 let formation = await directus.request(
   readSingleton("JCD_Formation", {
     fields: ["*"],
-    filter: {
-      slug: {
-        _neq: thematique.slug,
-      },
-    },
   }),
 );
 
@@ -430,7 +425,7 @@ thematique.couleur_rgb = hexToRgbChannels(thematique.couleur);
                       href="/contact?pole=formation&step=2"
                       class="btn-cta btn-cta--primary"
                     >
-                      {formation.bouton_formation}
+                      {formation.bouton_cta}
                       <span class="btn-cta-arrow"
                         ><svg
                           viewBox="0 0 16 16"
