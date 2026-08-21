@@ -1,6 +1,35 @@
 ---
-import Header from "../components/Header.astro";
-import Footer from "../components/Footer.astro";
+import { readItems } from "@directus/sdk";
+import Footer from "../../../components/Footer.astro";
+import Header from "../../../components/Header.astro";
+import { directus } from "../../../lib/directus";
+
+export async function getStaticPaths() {
+  const thematiques = await directus.request(
+    readItems("thematiques_formation"),
+  );
+
+  return thematiques.map((thematique) => ({
+    params: { thematique: thematique.slug },
+    props: { data: thematique },
+  }));
+}
+
+function hexToRgbChannels(hex: string) {
+  if (!hex) return "0, 0, 0";
+  let cleanHex = hex.replace("#", "");
+  if (cleanHex.length === 3) {
+    cleanHex = cleanHex
+      .split("")
+      .map((c) => c + c)
+      .join("");
+  }
+  const num = parseInt(cleanHex, 16);
+  return `${(num >> 16) & 255}, ${(num >> 8) & 255}, ${num & 255}`;
+}
+
+let thematique = Astro.props.data;
+thematique.couleur_rgb = hexToRgbChannels(thematique.couleur);
 ---
 
 <html lang="fr">
@@ -15,29 +44,32 @@ import Footer from "../components/Footer.astro";
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <meta
       name="description"
-      content="Formations Graphisme - PAO · 8 formations · JCD Groupe, organisme certifié Qualiopi à Metz et Nancy. Photoshop, Illustrator, InDesign : la création maîtrisée."
+      content="Formations Administratif - Secrétariat - Accueil · 7 formations · JCD Groupe, organisme certifié Qualiopi à Metz et Nancy. Écrits professionnels et accueil de qualité."
     />
     <link
       rel="canonical"
-      href={`${import.meta.env.PUBLIC_DIRECTUS_URL}/formation-graphisme-pao`}
+      href={`${import.meta.env.PUBLIC_DIRECTUS_URL}/formations/${thematique.slug}`}
     />
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="JCD Groupe" />
     <meta property="og:locale" content="fr_FR" />
     <meta
       property="og:title"
-      content="Graphisme - PAO · Catalogue des formations · JCD Groupe"
+      content="Administratif - Secrétariat - Accueil · Catalogue des formations · JCD Groupe"
     />
     <meta
       property="og:description"
-      content="Formations Graphisme - PAO · 8 formations · JCD Groupe, organisme certifié Qualiopi à Metz et Nancy. Photoshop, Illustrator, InDesign : la création maîtrisée."
+      content="Formations Administratif - Secrétariat - Accueil · 7 formations · JCD Groupe, organisme certifié Qualiopi à Metz et Nancy. Écrits professionnels et accueil de qualité."
     />
     <meta
       property="og:url"
-      content={`${import.meta.env.PUBLIC_DIRECTUS_URL}/formation-graphisme-pao`}
+      content={`${import.meta.env.PUBLIC_DIRECTUS_URL}/formation-administratif-secretariat-accueil`}
     />
     <meta name="twitter:card" content="summary" />
-    <title>Graphisme - PAO · Catalogue des formations · JCD Groupe</title>
+    <title>
+      {thematique.titre_de_la_thematique_de_formations} · Catalogue des formations
+      · JCD Groupe
+    </title>
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -46,9 +78,9 @@ import Footer from "../components/Footer.astro";
       rel="stylesheet"
     />
 
-    <link rel="stylesheet" href="/css/formation-graphisme-pao.css" />
+    <link rel="stylesheet" href="/css/thematique-formation.css" />
     <link rel="stylesheet" href="/css/global.css" />
-    <link rel="stylesheet" href="/css/formation-graphisme-pao-overrides.css" />
+    <link rel="stylesheet" href="/css/thematique-formation-overrides.css" />
     <link rel="stylesheet" href="/css/transition.css" />
     <script is:inline src="/js/shared/transition.js"></script>
     <script is:inline src="/js/shared/mpolish.js" id="jcd-mpolish-js"></script>
@@ -56,7 +88,7 @@ import Footer from "../components/Footer.astro";
     <script is:inline src="/js/shared/mrefonte-shim.js" id="jcd-mrefonte-shim"
     ></script>
   </head>
-  <body>
+  <body style={`--cat: ${thematique.couleur_rgb};`}>
     <a class="jcd-skip" href="#contenu">Aller au contenu</a>
 
     <div class="scroll-progress" aria-hidden="true"></div>
@@ -83,17 +115,21 @@ import Footer from "../components/Footer.astro";
             <span class="crumbs-sep" aria-hidden="true">/</span>
             <span>Catalogue</span>
             <span class="crumbs-sep" aria-hidden="true">/</span>
-            <span aria-current="page">Graphisme - PAO</span>
+            <span aria-current="page"
+              >{thematique.titre_de_la_thematique_de_formations}</span
+            >
           </nav>
 
           <h1 class="cat-hero-title reveal delay-1" id="cat-hero-title">
-            Graphisme - PAO<span class="cat-dot">.</span>
+            {thematique.titre_de_la_thematique_de_formations}<span
+              class="cat-dot">.</span
+            >
           </h1>
 
           <p class="cat-hero-sub reveal delay-2">
-            Photoshop, Illustrator, InDesign : la création maîtrisée. Des
-            parcours animés par des formateurs experts, en intra ou
-            inter-entreprises, au rythme de vos équipes.
+            Écrits professionnels et accueil de qualité. Des parcours animés par
+            des formateurs experts, en intra ou inter-entreprises, au rythme de
+            vos équipes.
           </p>
 
           <div class="cat-hero-actions reveal delay-3">
@@ -197,7 +233,7 @@ import Footer from "../components/Footer.astro";
                 >
               </div>
               <span class="ct-count"
-                ><strong id="ct-n">8</strong> / 8 affichées</span
+                ><strong id="ct-n">7</strong> / 7 affichées</span
               >
             </div>
           </div>
@@ -205,29 +241,30 @@ import Footer from "../components/Footer.astro";
           <ol class="fcat-grid" id="fcat-grid">
             <li
               class="fcat-card reveal"
-              id="f-iagraphistes"
-              data-level="initiation"
+              id="f-prompt-engineering-communiquer-efficacement-avec-les-intelligences-artificielles"
+              data-level="tous"
               style="--i:0"
             >
               <a
                 class="fcat-card-link"
-                href="/formation-detail?f=iagraphistes&cat=graphisme-pao"
+                href="/formation-detail?f=prompt-engineering-communiquer-efficacement-avec-les-intelligences-artificielles&cat=administratif-secretariat-accueil"
               >
                 <div class="fcat-card-top">
                   <span class="fcat-num">01</span>
                   <span
                     class="fcat-level"
-                    data-level="initiation"
-                    aria-label="Niveau : Initiation"
+                    data-level="tous"
+                    aria-label="Niveau : Tous niveaux"
                   >
                     <span class="fcat-level-bars" aria-hidden="true"
                       ><i></i><i></i><i></i></span
                     >
-                    Initiation
+                    Tous niveaux
                   </span>
                 </div>
                 <h3 class="fcat-title">
-                  Les fondamentaux de l’IA générative pour les graphistes
+                  Prompt engineering, communiquer efficacement avec les
+                  intelligences artificielles
                 </h3>
                 <div class="fcat-card-foot">
                   <span class="fcat-cta">Voir la formation</span>
@@ -249,28 +286,32 @@ import Footer from "../components/Footer.astro";
             </li>
             <li
               class="fcat-card reveal"
-              id="f-illustrator-perfectionnement-2"
-              data-level="perfectionnement"
+              id="f-utiliser-lia-pour-developper-son-efficacite-et-sa-productivite-au-travail-comment-integrer-lia-dans-son-travail-au-quotidien"
+              data-level="tous"
               style="--i:1"
             >
               <a
                 class="fcat-card-link"
-                href="/formation-detail?f=illustrator-perfectionnement-2&cat=graphisme-pao"
+                href="/formation-detail?f=utiliser-lia-pour-developper-son-efficacite-et-sa-productivite-au-travail-comment-integrer-lia-dans-son-travail-au-quotidien&cat=administratif-secretariat-accueil"
               >
                 <div class="fcat-card-top">
                   <span class="fcat-num">02</span>
                   <span
                     class="fcat-level"
-                    data-level="perfectionnement"
-                    aria-label="Niveau : Perfectionnement"
+                    data-level="tous"
+                    aria-label="Niveau : Tous niveaux"
                   >
                     <span class="fcat-level-bars" aria-hidden="true"
                       ><i></i><i></i><i></i></span
                     >
-                    Perfectionnement
+                    Tous niveaux
                   </span>
                 </div>
-                <h3 class="fcat-title">Illustrator Perfectionnement</h3>
+                <h3 class="fcat-title">
+                  Utiliser l’IA pour développer son efficacité et sa
+                  productivité au travail – Comment intégrer l’IA dans son
+                  travail au quotidien
+                </h3>
                 <div class="fcat-card-foot">
                   <span class="fcat-cta">Voir la formation</span>
                   <span class="fcat-arrow" aria-hidden="true"
@@ -291,28 +332,30 @@ import Footer from "../components/Footer.astro";
             </li>
             <li
               class="fcat-card reveal"
-              id="f-indesign-perfectionnement-preparer-ses-documents-pour-limpression"
-              data-level="perfectionnement"
+              id="f-optimiser-ses-ecrits-professionnels-grace-a-lia"
+              data-level="tous"
               style="--i:2"
             >
               <a
                 class="fcat-card-link"
-                href="/formation-detail?f=indesign-perfectionnement-preparer-ses-documents-pour-limpression&cat=graphisme-pao"
+                href="/formation-detail?f=optimiser-ses-ecrits-professionnels-grace-a-lia&cat=administratif-secretariat-accueil"
               >
                 <div class="fcat-card-top">
                   <span class="fcat-num">03</span>
                   <span
                     class="fcat-level"
-                    data-level="perfectionnement"
-                    aria-label="Niveau : Perfectionnement"
+                    data-level="tous"
+                    aria-label="Niveau : Tous niveaux"
                   >
                     <span class="fcat-level-bars" aria-hidden="true"
                       ><i></i><i></i><i></i></span
                     >
-                    Perfectionnement
+                    Tous niveaux
                   </span>
                 </div>
-                <h3 class="fcat-title">InDesign Perfectionnement</h3>
+                <h3 class="fcat-title">
+                  Optimiser ses écrits professionnels grâce à l’IA
+                </h3>
                 <div class="fcat-card-foot">
                   <span class="fcat-cta">Voir la formation</span>
                   <span class="fcat-arrow" aria-hidden="true"
@@ -333,28 +376,30 @@ import Footer from "../components/Footer.astro";
             </li>
             <li
               class="fcat-card reveal"
-              id="f-initiation-pao"
-              data-level="initiation"
+              id="f-gerer-les-situations-difficiles-a-laccueil"
+              data-level="tous"
               style="--i:3"
             >
               <a
                 class="fcat-card-link"
-                href="/formation-detail?f=initiation-pao&cat=graphisme-pao"
+                href="/formation-detail?f=gerer-les-situations-difficiles-a-laccueil&cat=administratif-secretariat-accueil"
               >
                 <div class="fcat-card-top">
                   <span class="fcat-num">04</span>
                   <span
                     class="fcat-level"
-                    data-level="initiation"
-                    aria-label="Niveau : Initiation"
+                    data-level="tous"
+                    aria-label="Niveau : Tous niveaux"
                   >
                     <span class="fcat-level-bars" aria-hidden="true"
                       ><i></i><i></i><i></i></span
                     >
-                    Initiation
+                    Tous niveaux
                   </span>
                 </div>
-                <h3 class="fcat-title">Initiation à la PAO</h3>
+                <h3 class="fcat-title">
+                  Gérer les situations difficiles à l’accueil
+                </h3>
                 <div class="fcat-card-foot">
                   <span class="fcat-cta">Voir la formation</span>
                   <span class="fcat-arrow" aria-hidden="true"
@@ -375,28 +420,30 @@ import Footer from "../components/Footer.astro";
             </li>
             <li
               class="fcat-card reveal"
-              id="f-photoshop-perfectionnement-2"
-              data-level="perfectionnement"
+              id="f-gagner-du-temps-dans-la-gestion-et-la-redaction-de-ses-e-mails"
+              data-level="tous"
               style="--i:4"
             >
               <a
                 class="fcat-card-link"
-                href="/formation-detail?f=photoshop-perfectionnement-2&cat=graphisme-pao"
+                href="/formation-detail?f=gagner-du-temps-dans-la-gestion-et-la-redaction-de-ses-e-mails&cat=administratif-secretariat-accueil"
               >
                 <div class="fcat-card-top">
                   <span class="fcat-num">05</span>
                   <span
                     class="fcat-level"
-                    data-level="perfectionnement"
-                    aria-label="Niveau : Perfectionnement"
+                    data-level="tous"
+                    aria-label="Niveau : Tous niveaux"
                   >
                     <span class="fcat-level-bars" aria-hidden="true"
                       ><i></i><i></i><i></i></span
                     >
-                    Perfectionnement
+                    Tous niveaux
                   </span>
                 </div>
-                <h3 class="fcat-title">Photoshop Perfectionnement</h3>
+                <h3 class="fcat-title">
+                  Gagner du temps dans la gestion et la rédaction de ses e-mails
+                </h3>
                 <div class="fcat-card-foot">
                   <span class="fcat-cta">Voir la formation</span>
                   <span class="fcat-arrow" aria-hidden="true"
@@ -417,28 +464,30 @@ import Footer from "../components/Footer.astro";
             </li>
             <li
               class="fcat-card reveal"
-              id="f-photoshop-pao"
-              data-level="initiation"
+              id="f-rediger-des-ecrits-professionnels-efficaces"
+              data-level="tous"
               style="--i:5"
             >
               <a
                 class="fcat-card-link"
-                href="/formation-detail?f=photoshop-pao&cat=graphisme-pao"
+                href="/formation-detail?f=rediger-des-ecrits-professionnels-efficaces&cat=administratif-secretariat-accueil"
               >
                 <div class="fcat-card-top">
                   <span class="fcat-num">06</span>
                   <span
                     class="fcat-level"
-                    data-level="initiation"
-                    aria-label="Niveau : Initiation"
+                    data-level="tous"
+                    aria-label="Niveau : Tous niveaux"
                   >
                     <span class="fcat-level-bars" aria-hidden="true"
                       ><i></i><i></i><i></i></span
                     >
-                    Initiation
+                    Tous niveaux
                   </span>
                 </div>
-                <h3 class="fcat-title">Photoshop Initiation</h3>
+                <h3 class="fcat-title">
+                  Rédiger des écrits professionnels efficaces
+                </h3>
                 <div class="fcat-card-foot">
                   <span class="fcat-cta">Voir la formation</span>
                   <span class="fcat-arrow" aria-hidden="true"
@@ -459,70 +508,31 @@ import Footer from "../components/Footer.astro";
             </li>
             <li
               class="fcat-card reveal"
-              id="f-in-design-initiation-mise-en-page"
-              data-level="initiation"
+              id="f-accueil-telephonique-developper-limage-de-marque-de-lentreprise"
+              data-level="tous"
               style="--i:6"
             >
               <a
                 class="fcat-card-link"
-                href="/formation-detail?f=in-design-initiation-mise-en-page&cat=graphisme-pao"
+                href="/formation-detail?f=accueil-telephonique-developper-limage-de-marque-de-lentreprise&cat=administratif-secretariat-accueil"
               >
                 <div class="fcat-card-top">
                   <span class="fcat-num">07</span>
                   <span
                     class="fcat-level"
-                    data-level="initiation"
-                    aria-label="Niveau : Initiation"
+                    data-level="tous"
+                    aria-label="Niveau : Tous niveaux"
                   >
                     <span class="fcat-level-bars" aria-hidden="true"
                       ><i></i><i></i><i></i></span
                     >
-                    Initiation
+                    Tous niveaux
                   </span>
                 </div>
-                <h3 class="fcat-title">InDesign – Initiation</h3>
-                <div class="fcat-card-foot">
-                  <span class="fcat-cta">Voir la formation</span>
-                  <span class="fcat-arrow" aria-hidden="true"
-                    ><svg
-                      viewBox="0 0 16 16"
-                      fill="none"
-                      stroke="currentColor"
-                      stroke-width="1.6"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      aria-hidden="true"
-                      focusable="false"
-                      ><path d="M3 8h10M9 4l4 4-4 4"></path></svg
-                    ></span
-                  >
-                </div>
-              </a>
-            </li>
-            <li
-              class="fcat-card reveal"
-              id="f-illustrator-initiation"
-              data-level="initiation"
-              style="--i:7"
-            >
-              <a
-                class="fcat-card-link"
-                href="/formation-detail?f=illustrator-initiation&cat=graphisme-pao"
-              >
-                <div class="fcat-card-top">
-                  <span class="fcat-num">08</span>
-                  <span
-                    class="fcat-level"
-                    data-level="initiation"
-                    aria-label="Niveau : Initiation"
-                  >
-                    <span class="fcat-level-bars" aria-hidden="true"
-                      ><i></i><i></i><i></i></span
-                    >
-                    Initiation
-                  </span>
-                </div>
-                <h3 class="fcat-title">Illustrator Initiation</h3>
+                <h3 class="fcat-title">
+                  Accueil téléphonique : développer l’image de marque de
+                  l’entreprise
+                </h3>
                 <div class="fcat-card-foot">
                   <span class="fcat-cta">Voir la formation</span>
                   <span class="fcat-arrow" aria-hidden="true"
@@ -794,8 +804,8 @@ import Footer from "../components/Footer.astro";
             <li>
               <a
                 class="ocat-chip"
-                href="/formation-administratif-secretariat-accueil"
-                style="--cc:113,73,156"
+                href="/formation-graphisme-pao"
+                style="--cc:156,95,181"
                 ><span class="ocat-ic" aria-hidden="true"
                   ><svg
                     viewBox="0 0 24 24"
@@ -806,14 +816,15 @@ import Footer from "../components/Footer.astro";
                     stroke-linejoin="round"
                     aria-hidden="true"
                     focusable="false"
-                    ><path
-                      d="M9 5H7a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-2"
-                    ></path><rect x="9" y="3" width="6" height="4" rx="1"
-                    ></rect><path d="M9 12h6M9 16h4"></path></svg
+                    ><path d="M12 19l7-7 3 3-7 7-3-3z"></path><path
+                      d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z"></path><circle
+                      cx="11"
+                      cy="11"
+                      r="2"></circle></svg
                   ></span
-                ><span class="ocat-tx"
-                  >Administratif - Secrétariat - Accueil</span
-                ><span class="ocat-n">7</span></a
+                ><span class="ocat-tx">Graphisme - PAO</span><span
+                  class="ocat-n">8</span
+                ></a
               >
             </li>
             <li>

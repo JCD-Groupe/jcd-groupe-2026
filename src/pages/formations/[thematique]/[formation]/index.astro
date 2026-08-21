@@ -1,6 +1,26 @@
 ---
-import Header from "../components/Header.astro";
-import Footer from "../components/Footer.astro";
+import { readItems } from "@directus/sdk";
+import Footer from "../../../../components/Footer.astro";
+import Header from "../../../../components/Header.astro";
+import { directus } from "../../../../lib/directus";
+
+export async function getStaticPaths() {
+  const formations = await directus.request(
+    readItems("formations", {
+      fields: ["*", { thematique: ["slug"] }],
+    }),
+  );
+
+  return formations.map((formation) => ({
+    params: {
+      thematique: formation.thematique.slug,
+      formation: formation.slug,
+    },
+    props: { data: formation },
+  }));
+}
+
+let formation = Astro.props;
 ---
 
 <html lang="fr">
@@ -721,8 +741,7 @@ import Footer from "../components/Footer.astro";
                     </p>
                     <a
                       class="fd-tarif-cta"
-                      href="/contact?pole=formation&step=2"
-                      >Demander un devis</a
+                      href="/contact?pole=formation&step=2">Demander un devis</a
                     >
                   </div>
                 </div>
@@ -805,8 +824,7 @@ import Footer from "../components/Footer.astro";
                       href="#fd-s-certif"
                       class="fd-toc-item"
                       data-spy="fd-s-certif"
-                      data-tosa
-                      ><span class="fd-toc-n">06</span>Certification</a
+                      data-tosa><span class="fd-toc-n">06</span>Certification</a
                     >
                   </nav>
                   <span class="fd-aside-label">Informations pratiques</span>
