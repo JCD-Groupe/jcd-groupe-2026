@@ -1449,370 +1449,366 @@ const logos2 = logos.slice(half);
             }
           </div>
         </div>
+      </section>
 
-        <!-- ================================
+      <!-- ================================
      CTA — Bandeau compact
      ================================ -->
-        <section class="cta-section" id="contact" aria-labelledby="cta-title">
-          <div class="container">
-            <div class="cta-frame">
-              <div class="cta-inner">
-                <Fragment set:html={formation.icone_cta_content} />
+      <section class="cta-section" id="contact" aria-labelledby="cta-title">
+        <div class="container">
+          <div class="cta-frame">
+            <div class="cta-inner">
+              <Fragment set:html={formation.icone_cta_content} />
 
-                <div class="cta-body">
-                  <h2
-                    class="cta-title reveal delay-1"
-                    id="cta-title"
-                    set:html={formation.titre_cta}
-                  />
+              <div class="cta-body">
+                <h2
+                  class="cta-title reveal delay-1"
+                  id="cta-title"
+                  set:html={formation.titre_cta}
+                />
 
-                  <p
-                    class="cta-sub reveal delay-2"
-                    set:html={formation.sous_titre_cta}
-                  />
+                <p
+                  class="cta-sub reveal delay-2"
+                  set:html={formation.sous_titre_cta}
+                />
 
-                  <div class="cta-actions reveal delay-3">
-                    <a
-                      href="/contact?pole=formation&step=2"
-                      class="btn-cta btn-cta--primary"
-                    >
-                      {formation.bouton_cta}
-                      <span class="btn-cta-arrow"
-                        ><svg
-                          viewBox="0 0 16 16"
-                          fill="none"
-                          stroke="currentColor"
-                          stroke-width="1.6"
-                          stroke-linecap="round"
-                          stroke-linejoin="round"
-                          ><path d="M3 8h10M9 4l4 4-4 4"></path></svg
-                        ></span
-                      >
-                    </a>
-                    <span class="cta-actions-divider" aria-hidden="true"></span>
-                    <span class="cta-phone">
-                      <svg
-                        viewBox="0 0 20 20"
+                <div class="cta-actions reveal delay-3">
+                  <a
+                    href="/contact?pole=formation&step=2"
+                    class="btn-cta btn-cta--primary"
+                  >
+                    {formation.bouton_cta}
+                    <span class="btn-cta-arrow"
+                      ><svg
+                        viewBox="0 0 16 16"
                         fill="none"
                         stroke="currentColor"
-                        stroke-width="1.4"
+                        stroke-width="1.6"
                         stroke-linecap="round"
                         stroke-linejoin="round"
-                        width="14"
-                        height="14"
-                        ><path
-                          d="M2 3a1 1 0 011-1h3.28a1 1 0 01.95.68l1.07 3.21a1 1 0 01-.25 1L6.54 8.4a12.06 12.06 0 005.06 5.06l1.51-1.51a1 1 0 011-.25l3.21 1.07a1 1 0 01.68.95V17a1 1 0 01-1 1A15 15 0 012 3z"
-                        ></path></svg
-                      >
-                      <a href="tel:+33387184920" class="cta-phone-num"
-                        >03 87 18 49 20</a
-                      >
-                    </span>
-                  </div>
+                        ><path d="M3 8h10M9 4l4 4-4 4"></path></svg
+                      ></span
+                    >
+                  </a>
+                  <span class="cta-actions-divider" aria-hidden="true"></span>
+                  <span class="cta-phone">
+                    <svg
+                      viewBox="0 0 20 20"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="1.4"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      width="14"
+                      height="14"
+                      ><path
+                        d="M2 3a1 1 0 011-1h3.28a1 1 0 01.95.68l1.07 3.21a1 1 0 01-.25 1L6.54 8.4a12.06 12.06 0 005.06 5.06l1.51-1.51a1 1 0 011-.25l3.21 1.07a1 1 0 01.68.95V17a1 1 0 01-1 1A15 15 0 012 3z"
+                      ></path></svg
+                    >
+                    <a href="tel:+33387184920" class="cta-phone-num"
+                      >03 87 18 49 20</a
+                    >
+                  </span>
                 </div>
               </div>
             </div>
           </div>
-        </section>
+        </div>
       </section>
+    </main>
 
-      <!-- ================================
+    <!-- ================================
      FOOTER
      ================================ -->
-      <Footer />
+    <Footer />
 
-      <script is:inline src="/js/pages/formation-1.js"></script>
-      <script is:inline src="/js/shared/menu-frost.js"></script>
-      <!-- jcd-mobile-nav (injected) -->
-      <button
-        class="jcd-burger"
-        id="jcdBurger"
-        type="button"
-        aria-label="Ouvrir le menu"
-        aria-expanded="false"
-        aria-controls="jcdMnav"
+    <script is:inline src="/js/pages/formation-1.js"></script>
+    <script is:inline src="/js/shared/menu-frost.js"></script>
+    <!-- jcd-mobile-nav (injected) -->
+    <button
+      class="jcd-burger"
+      id="jcdBurger"
+      type="button"
+      aria-label="Ouvrir le menu"
+      aria-expanded="false"
+      aria-controls="jcdMnav"
+    >
+      <span class="jcd-burger__box" aria-hidden="true"
+        ><i></i><i></i><i></i></span
       >
-        <span class="jcd-burger__box" aria-hidden="true"
-          ><i></i><i></i><i></i></span
-        >
-      </button>
-      <div
-        class="jcd-mnav"
-        id="jcdMnav"
-        role="dialog"
-        aria-modal="true"
-        aria-label="Menu de navigation"
-        aria-hidden="true"
-      >
-        <div class="jcd-mnav__scroll">
-          <div class="jcd-mnav__inner">
-            <p
-              class="jcd-mnav__eyebrow jcd-mnav__reveal"
-              style="transition-delay:.04s"
-            >
-              Expertises
-            </p>
+    </button>
+    <div
+      class="jcd-mnav"
+      id="jcdMnav"
+      role="dialog"
+      aria-modal="true"
+      aria-label="Menu de navigation"
+      aria-hidden="true"
+    >
+      <div class="jcd-mnav__scroll">
+        <div class="jcd-mnav__inner">
+          <p
+            class="jcd-mnav__eyebrow jcd-mnav__reveal"
+            style="transition-delay:.04s"
+          >
+            Expertises
+          </p>
 
-            <div class="jcd-mnav__reveal" style="transition-delay:.07s">
-              <div class="jcd-mnav__item" style="--mnav-c:#2E72BA">
-                <a class="jcd-mnav__link" href="/informatique"
-                  ><span class="jcd-mnav__dot"></span><span
-                    class="jcd-mnav__label">Informatique</span
-                  ></a
-                >
-                <button
-                  class="jcd-acc__toggle"
-                  type="button"
-                  aria-expanded="false"
-                  aria-controls="jcdAccInfo"
-                  aria-label="Afficher les sous-pages Informatique"
-                >
-                  <svg
-                    viewBox="0 0 14 14"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="1.6"
-                    stroke-linecap="round"><path d="M7 2v10M2 7h10"></path></svg
-                  >
-                </button>
-              </div>
-              <div class="jcd-acc__panel" id="jcdAccInfo">
-                <a class="jcd-mnav__sub" href="/info-cloud">Cloud Microsoft</a>
-                <a class="jcd-mnav__sub" href="/info-collaboratif"
-                  >Solutions collaboratives &amp; audiovisuelles</a
-                >
-                <a class="jcd-mnav__sub" href="/info-reseaux"
-                  >Architectures syst&egrave;mes &amp; r&eacute;seaux</a
-                >
-                <a class="jcd-mnav__sub" href="/info-integration"
-                  >Int&eacute;gration &amp; Support PC</a
-                >
-              </div>
-            </div>
-
-            <a
-              class="jcd-mnav__item jcd-mnav__reveal"
-              style="--mnav-c:#E51D29;transition-delay:.10s"
-              href="/service"
-              ><span class="jcd-mnav__dot"></span><span class="jcd-mnav__label"
-                >Service</span
-              ></a
-            >
-            <a
-              class="jcd-mnav__item jcd-mnav__reveal"
-              style="--mnav-c:#F9D605;transition-delay:.13s"
-              href="/developpement"
-              ><span class="jcd-mnav__dot"></span><span class="jcd-mnav__label"
-                >D&eacute;veloppement</span
-              ></a
-            >
-            <a
-              class="jcd-mnav__item jcd-mnav__reveal"
-              style="--mnav-c:#F3941D;transition-delay:.16s"
-              href="/print"
-              ><span class="jcd-mnav__dot"></span><span class="jcd-mnav__label"
-                >Print</span
-              ></a
-            >
-            <a
-              class="jcd-mnav__item jcd-mnav__reveal"
-              style="--mnav-c:#B063AC;transition-delay:.19s"
-              href="/telecom"
-              ><span class="jcd-mnav__dot"></span><span class="jcd-mnav__label"
-                >T&eacute;l&eacute;com</span
-              ></a
-            >
-            <div class="jcd-mnav__reveal" style="transition-delay:.22s">
-              <div class="jcd-mnav__item" style="--mnav-c:#8EC041">
-                <a class="jcd-mnav__link" href="/formation"
-                  ><span class="jcd-mnav__dot"></span><span
-                    class="jcd-mnav__label">Formation</span
-                  ></a
-                >
-                <button
-                  class="jcd-acc__toggle"
-                  type="button"
-                  aria-expanded="false"
-                  aria-controls="jcdAccForm"
-                  aria-label="Afficher les catégories de formation"
-                >
-                  <svg
-                    viewBox="0 0 14 14"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="1.6"
-                    stroke-linecap="round"><path d="M7 2v10M2 7h10"></path></svg
-                  >
-                </button>
-              </div>
-              <div class="jcd-acc__panel" id="jcdAccForm">
-                <a class="jcd-mnav__sub" href="/formation-bureautique"
-                  >Bureautique</a
-                >
-                <a
-                  class="jcd-mnav__sub"
-                  href="/formation-intelligence-artificielle"
-                  >Intelligence artificielle</a
-                >
-                <a class="jcd-mnav__sub" href="/formation-informatique"
-                  >Informatique</a
-                >
-                <a
-                  class="jcd-mnav__sub"
-                  href="/formation-communication-marketing"
-                  >Communication - Marketing</a
-                >
-                <a class="jcd-mnav__sub" href="/formation-management"
-                  >Management</a
-                >
-                <a
-                  class="jcd-mnav__sub"
-                  href="/formation-commerce-relation-client"
-                  >Commerce - Relation client</a
-                >
-                <a class="jcd-mnav__sub" href="/formation-comptabilite-gestion"
-                  >Comptabilit&eacute; - Gestion</a
-                >
-                <a class="jcd-mnav__sub" href="/formation-ressources-humaines"
-                  >Ressources humaines</a
-                >
-                <a
-                  class="jcd-mnav__sub"
-                  href="/formation-developpement-personnel"
-                  >D&eacute;veloppement personnel</a
-                >
-                <a class="jcd-mnav__sub" href="/formation-graphisme-pao"
-                  >Graphisme - PAO</a
-                >
-                <a
-                  class="jcd-mnav__sub"
-                  href="/formation-administratif-secretariat-accueil"
-                  >Administratif - Secr&eacute;tariat</a
-                >
-                <a class="jcd-mnav__sub" href="/formation-securite"
-                  >S&eacute;curit&eacute;</a
-                >
-                <a class="jcd-mnav__sub" href="/formation-langues">Langues</a>
-              </div>
-            </div>
-            <a
-              class="jcd-mnav__item jcd-mnav__reveal"
-              style="--mnav-c:#A78D75;transition-delay:.25s"
-              href="/agencement"
-              ><span class="jcd-mnav__dot"></span><span class="jcd-mnav__label"
-                >Agencement</span
-              ></a
-            >
-
-            <p
-              class="jcd-mnav__eyebrow jcd-mnav__sec2 jcd-mnav__reveal"
-              style="transition-delay:.30s"
-            >
-              D&eacute;couvrir
-            </p>
-            <a
-              class="jcd-mnav__item jcd-mnav__reveal"
-              style="--mnav-c:#9a9a9a;transition-delay:.33s"
-              href="/assistance"
-              ><span class="jcd-mnav__dot"></span><span
-                class="jcd-mnav__label"
-                style="font-size:19px">Assistance</span
-              ></a
-            >
-            <a
-              class="jcd-mnav__item jcd-mnav__reveal"
-              style="--mnav-c:#9a9a9a;transition-delay:.36s"
-              href="/carrieres"
-              ><span class="jcd-mnav__dot"></span><span
-                class="jcd-mnav__label"
-                style="font-size:19px">Carri&egrave;res</span
-              ></a
-            >
-
-            <div
-              class="jcd-mnav__cta jcd-mnav__reveal"
-              style="transition-delay:.40s"
-            >
-              <a class="jcd-mnav__btn jcd-mnav__btn--primary" href="/contact"
-                >Contacter un expert
-                <span class="jcd-mnav__btn-ic"
-                  ><svg
-                    viewBox="0 0 16 16"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="1.7"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    ><path d="M3 8h10M9 4l4 4-4 4"></path></svg
-                  ></span
+          <div class="jcd-mnav__reveal" style="transition-delay:.07s">
+            <div class="jcd-mnav__item" style="--mnav-c:#2E72BA">
+              <a class="jcd-mnav__link" href="/informatique"
+                ><span class="jcd-mnav__dot"></span><span
+                  class="jcd-mnav__label">Informatique</span
                 ></a
               >
-              <a
-                class="jcd-mnav__btn jcd-mnav__btn--ghost"
-                href="tel:+33387184920"
-                >03 87 18 49 20
-                <span class="jcd-mnav__btn-ic"
-                  ><svg
-                    viewBox="0 0 18 18"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="1.5"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    ><path
-                      d="M2.5 3.5a1 1 0 011-1h2.4a1 1 0 01.95.68l.86 2.4a1 1 0 01-.24 1l-1.2 1.2a11 11 0 004.6 4.6l1.2-1.2a1 1 0 011-.24l2.4.86a1 1 0 01.68.95V15a1 1 0 01-1 1A13.5 13.5 0 012.5 3.5z"
-                    ></path></svg
-                  ></span
-                ></a
+              <button
+                class="jcd-acc__toggle"
+                type="button"
+                aria-expanded="false"
+                aria-controls="jcdAccInfo"
+                aria-label="Afficher les sous-pages Informatique"
+              >
+                <svg
+                  viewBox="0 0 14 14"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.6"
+                  stroke-linecap="round"><path d="M7 2v10M2 7h10"></path></svg
+                >
+              </button>
+            </div>
+            <div class="jcd-acc__panel" id="jcdAccInfo">
+              <a class="jcd-mnav__sub" href="/info-cloud">Cloud Microsoft</a>
+              <a class="jcd-mnav__sub" href="/info-collaboratif"
+                >Solutions collaboratives &amp; audiovisuelles</a
+              >
+              <a class="jcd-mnav__sub" href="/info-reseaux"
+                >Architectures syst&egrave;mes &amp; r&eacute;seaux</a
+              >
+              <a class="jcd-mnav__sub" href="/info-integration"
+                >Int&eacute;gration &amp; Support PC</a
               >
             </div>
           </div>
+
+          <a
+            class="jcd-mnav__item jcd-mnav__reveal"
+            style="--mnav-c:#E51D29;transition-delay:.10s"
+            href="/service"
+            ><span class="jcd-mnav__dot"></span><span class="jcd-mnav__label"
+              >Service</span
+            ></a
+          >
+          <a
+            class="jcd-mnav__item jcd-mnav__reveal"
+            style="--mnav-c:#F9D605;transition-delay:.13s"
+            href="/developpement"
+            ><span class="jcd-mnav__dot"></span><span class="jcd-mnav__label"
+              >D&eacute;veloppement</span
+            ></a
+          >
+          <a
+            class="jcd-mnav__item jcd-mnav__reveal"
+            style="--mnav-c:#F3941D;transition-delay:.16s"
+            href="/print"
+            ><span class="jcd-mnav__dot"></span><span class="jcd-mnav__label"
+              >Print</span
+            ></a
+          >
+          <a
+            class="jcd-mnav__item jcd-mnav__reveal"
+            style="--mnav-c:#B063AC;transition-delay:.19s"
+            href="/telecom"
+            ><span class="jcd-mnav__dot"></span><span class="jcd-mnav__label"
+              >T&eacute;l&eacute;com</span
+            ></a
+          >
+          <div class="jcd-mnav__reveal" style="transition-delay:.22s">
+            <div class="jcd-mnav__item" style="--mnav-c:#8EC041">
+              <a class="jcd-mnav__link" href="/formation"
+                ><span class="jcd-mnav__dot"></span><span
+                  class="jcd-mnav__label">Formation</span
+                ></a
+              >
+              <button
+                class="jcd-acc__toggle"
+                type="button"
+                aria-expanded="false"
+                aria-controls="jcdAccForm"
+                aria-label="Afficher les catégories de formation"
+              >
+                <svg
+                  viewBox="0 0 14 14"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.6"
+                  stroke-linecap="round"><path d="M7 2v10M2 7h10"></path></svg
+                >
+              </button>
+            </div>
+            <div class="jcd-acc__panel" id="jcdAccForm">
+              <a class="jcd-mnav__sub" href="/formation-bureautique"
+                >Bureautique</a
+              >
+              <a
+                class="jcd-mnav__sub"
+                href="/formation-intelligence-artificielle"
+                >Intelligence artificielle</a
+              >
+              <a class="jcd-mnav__sub" href="/formation-informatique"
+                >Informatique</a
+              >
+              <a class="jcd-mnav__sub" href="/formation-communication-marketing"
+                >Communication - Marketing</a
+              >
+              <a class="jcd-mnav__sub" href="/formation-management"
+                >Management</a
+              >
+              <a
+                class="jcd-mnav__sub"
+                href="/formation-commerce-relation-client"
+                >Commerce - Relation client</a
+              >
+              <a class="jcd-mnav__sub" href="/formation-comptabilite-gestion"
+                >Comptabilit&eacute; - Gestion</a
+              >
+              <a class="jcd-mnav__sub" href="/formation-ressources-humaines"
+                >Ressources humaines</a
+              >
+              <a class="jcd-mnav__sub" href="/formation-developpement-personnel"
+                >D&eacute;veloppement personnel</a
+              >
+              <a class="jcd-mnav__sub" href="/formation-graphisme-pao"
+                >Graphisme - PAO</a
+              >
+              <a
+                class="jcd-mnav__sub"
+                href="/formation-administratif-secretariat-accueil"
+                >Administratif - Secr&eacute;tariat</a
+              >
+              <a class="jcd-mnav__sub" href="/formation-securite"
+                >S&eacute;curit&eacute;</a
+              >
+              <a class="jcd-mnav__sub" href="/formation-langues">Langues</a>
+            </div>
+          </div>
+          <a
+            class="jcd-mnav__item jcd-mnav__reveal"
+            style="--mnav-c:#A78D75;transition-delay:.25s"
+            href="/agencement"
+            ><span class="jcd-mnav__dot"></span><span class="jcd-mnav__label"
+              >Agencement</span
+            ></a
+          >
+
+          <p
+            class="jcd-mnav__eyebrow jcd-mnav__sec2 jcd-mnav__reveal"
+            style="transition-delay:.30s"
+          >
+            D&eacute;couvrir
+          </p>
+          <a
+            class="jcd-mnav__item jcd-mnav__reveal"
+            style="--mnav-c:#9a9a9a;transition-delay:.33s"
+            href="/assistance"
+            ><span class="jcd-mnav__dot"></span><span
+              class="jcd-mnav__label"
+              style="font-size:19px">Assistance</span
+            ></a
+          >
+          <a
+            class="jcd-mnav__item jcd-mnav__reveal"
+            style="--mnav-c:#9a9a9a;transition-delay:.36s"
+            href="/carrieres"
+            ><span class="jcd-mnav__dot"></span><span
+              class="jcd-mnav__label"
+              style="font-size:19px">Carri&egrave;res</span
+            ></a
+          >
+
+          <div
+            class="jcd-mnav__cta jcd-mnav__reveal"
+            style="transition-delay:.40s"
+          >
+            <a class="jcd-mnav__btn jcd-mnav__btn--primary" href="/contact"
+              >Contacter un expert
+              <span class="jcd-mnav__btn-ic"
+                ><svg
+                  viewBox="0 0 16 16"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.7"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  ><path d="M3 8h10M9 4l4 4-4 4"></path></svg
+                ></span
+              ></a
+            >
+            <a
+              class="jcd-mnav__btn jcd-mnav__btn--ghost"
+              href="tel:+33387184920"
+              >03 87 18 49 20
+              <span class="jcd-mnav__btn-ic"
+                ><svg
+                  viewBox="0 0 18 18"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.5"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  ><path
+                    d="M2.5 3.5a1 1 0 011-1h2.4a1 1 0 01.95.68l.86 2.4a1 1 0 01-.24 1l-1.2 1.2a11 11 0 004.6 4.6l1.2-1.2a1 1 0 011-.24l2.4.86a1 1 0 01.68.95V15a1 1 0 01-1 1A13.5 13.5 0 012.5 3.5z"
+                  ></path></svg
+                ></span
+              ></a
+            >
+          </div>
         </div>
       </div>
-      <script is:inline src="/js/shared/mobile-nav.js"></script>
-      <!-- jcd-a11y (Lot 5) -->
-      <div class="jcd-fab-wrap" id="jcd-fab">
-        <button
-          class="jcd-fab jcd-fab--top"
-          id="jcdToTop"
-          type="button"
-          aria-label="Remonter en haut"
+    </div>
+    <script is:inline src="/js/shared/mobile-nav.js"></script>
+    <!-- jcd-a11y (Lot 5) -->
+    <div class="jcd-fab-wrap" id="jcd-fab">
+      <button
+        class="jcd-fab jcd-fab--top"
+        id="jcdToTop"
+        type="button"
+        aria-label="Remonter en haut"
+      >
+        <svg
+          viewBox="0 0 20 20"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="1.8"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          aria-hidden="true"><path d="M10 16V5M5 10l5-5 5 5"></path></svg
         >
-          <svg
-            viewBox="0 0 20 20"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="1.8"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            aria-hidden="true"><path d="M10 16V5M5 10l5-5 5 5"></path></svg
-          >
-        </button>
-        <a
-          class="jcd-fab jcd-fab--contact"
-          id="jcdFabContact"
-          href="/contact"
-          aria-label="Nous contacter"
+      </button>
+      <a
+        class="jcd-fab jcd-fab--contact"
+        id="jcdFabContact"
+        href="/contact"
+        aria-label="Nous contacter"
+      >
+        <svg
+          viewBox="0 0 20 20"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="1.6"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          aria-hidden="true"
+          ><rect x="2.5" y="4.5" width="15" height="11" rx="2.3"></rect><path
+            d="M3 6.7 L10 10.7 L17 6.7"></path></svg
         >
-          <svg
-            viewBox="0 0 20 20"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="1.6"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            aria-hidden="true"
-            ><rect x="2.5" y="4.5" width="15" height="11" rx="2.3"></rect><path
-              d="M3 6.7 L10 10.7 L17 6.7"></path></svg
-          >
-        </a>
-      </div>
-      <script is:inline src="/js/shared/a11y.js" id="jcd-a11y-js"></script>
+      </a>
+    </div>
+    <script is:inline src="/js/shared/a11y.js" id="jcd-a11y-js"></script>
 
-      <script is:inline src="/js/shared/logo-marquee.js"></script>
-      <script is:inline src="/js/shared/micons.js" id="jcd-micons-js"></script>
-      <script is:inline src="/js/shared/mrefonte.js" id="jcd-mrefonte-js"
-      ></script>
-    </main>
+    <script is:inline src="/js/shared/logo-marquee.js"></script>
+    <script is:inline src="/js/shared/micons.js" id="jcd-micons-js"></script>
+    <script is:inline src="/js/shared/mrefonte.js" id="jcd-mrefonte-js"
+    ></script>
   </body>
 </html>
