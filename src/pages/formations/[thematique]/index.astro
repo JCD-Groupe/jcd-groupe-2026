@@ -27,18 +27,36 @@ let formations = await directus.request(
   readItems("formations", {
     fields: ["*", { thematique: ["slug"] }],
     filter: {
-      thematique: {
-        slug: {
-          _eq: thematique.slug,
+      _or: [
+        {
+          thematique: {
+            slug: {
+              _eq: thematique.slug,
+            },
+          },
         },
-      },
+        {
+          thematiques_secondaires: {
+            thematiques_formation_id: {
+              slug: {
+                _eq: thematique.slug,
+              },
+            },
+          },
+        },
+      ],
     },
   }),
 );
 
 let thematiques = await directus.request(
   readItems("thematiques_formation", {
-    fields: ["*", { formations: ["id"] }],
+    fields: ["*", { formations: ["id"] }, { formations_bis: ["id"] }],
+    filter: {
+      slug: {
+        _neq: thematique.slug,
+      },
+    },
   }),
 );
 
@@ -291,7 +309,7 @@ thematique.couleur_rgb = hexToRgbChannels(thematique.couleur);
                 >
                   <a
                     class="fcat-card-link"
-                    href={`${formation.thematique.slug}/${formation.slug}`}
+                    href={`/formations/${formation.thematique.slug}/${formation.slug}`}
                   >
                     <div class="fcat-card-top">
                       <span class="fcat-num">
@@ -395,7 +413,8 @@ thematique.couleur_rgb = hexToRgbChannels(thematique.couleur);
                           {thematique.titre_de_la_thematique_de_formations}
                         </span>
                         <span class="ocat-n">
-                          {thematique.formations.length}
+                          {thematique.formations.length +
+                            thematique.formations_bis.length}
                         </span>
                       </>
                     </a>

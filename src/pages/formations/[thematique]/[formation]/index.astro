@@ -7,7 +7,12 @@ import { directus } from "../../../../lib/directus";
 export async function getStaticPaths() {
   const formations = await directus.request(
     readItems("formations", {
-      fields: ["*", { thematique: ["*"] }, { objectifs: ["*"] }],
+      fields: [
+        "*",
+        { thematique: ["*"] },
+        { objectifs: ["*"] },
+        { validation: ["*"] },
+      ],
     }),
   );
 
@@ -33,6 +38,18 @@ let pageFormation = await directus.request(
     fields: ["*"],
   }),
 );
+
+const fetchSvgContent = async (id: string) => {
+  if (!id) return null;
+  const response = await fetch(
+    `${import.meta.env.PUBLIC_DIRECTUS_URL}/assets/${id}`,
+  );
+  return response.text();
+};
+
+pageFormation.icone_cta_content = await fetchSvgContent(
+  pageFormation.icone_cta,
+);
 ---
 
 <html lang="fr">
@@ -47,7 +64,7 @@ let pageFormation = await directus.request(
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <meta
       name="description"
-      content="Fiche formation JCD Groupe : objectifs, programme détaillé, modalités et certification. Organisme certifié Qualiopi, centre d'examen TOSA, Metz & Nancy."
+      content="Fiche formation JCD Groupe : objectifs, programme détaillé, modalités et certification. Organisme certifié Qualiopi, centre d'examen TOSA, Metz."
     />
     <link
       rel="canonical"
@@ -62,7 +79,7 @@ let pageFormation = await directus.request(
     />
     <meta
       property="og:description"
-      content="Fiche formation JCD Groupe : objectifs, programme détaillé, modalités et certification. Organisme certifié Qualiopi, centre d'examen TOSA, Metz & Nancy."
+      content="Fiche formation JCD Groupe : objectifs, programme détaillé, modalités et certification. Organisme certifié Qualiopi, centre d'examen TOSA, Metz"
     />
     <meta
       property="og:url"
@@ -174,7 +191,10 @@ let pageFormation = await directus.request(
                 ><path d="M12 3l8 3v5c0 5-3.4 8.4-8 10-4.6-1.6-8-5-8-10V6l8-3z"
                 ></path><path d="M9 11.5l2 2 4-4"></path></svg
               >
-              Certification TOSA en option
+              Attestation de stage{
+                formation.certification_tosa &&
+                  " • Certification TOSA en option"
+              }
             </span>
           </div>
         </div>
@@ -284,7 +304,6 @@ let pageFormation = await directus.request(
                             aria-expanded={index == 0 ? true : false}
                           >
                             <span class="fd-mod-num">
-                              M·
                               {index < 10 ? "0" : ""}
                               {index + 1}
                             </span>
@@ -440,7 +459,7 @@ let pageFormation = await directus.request(
                           ></path></svg
                         ></span
                       >
-                      <h3 class="fd-card-title">Intervenant</h3>
+                      <h3 class="fd-card-title">Profil intervenant</h3>
                     </div>
                     <p class="fd-card-tx">
                       {
@@ -467,9 +486,10 @@ let pageFormation = await directus.request(
                       <h3 class="fd-card-title">Accessibilité handicap</h3>
                     </div>
                     <p class="fd-card-tx">
-                      Locaux accessibles aux personnes à mobilité réduite.
-                      Adaptations possibles sur demande auprès de notre référent
-                      handicap.
+                      La formation est accessible aux personnes à mobilité
+                      réduite et toute demande d’adaptation peut être étudiée en
+                      amont de la formation en fonction du besoin des personnes.
+                      Nous contacter pour plus d’informations.
                     </p>
                   </div>
                 </div>
@@ -503,8 +523,8 @@ let pageFormation = await directus.request(
                     </p>
                     <p class="fd-tarif-tx">
                       Session ouverte en petit groupe, dans nos centres de Metz
-                      et Nancy ou à distance. Support pédagogique et évaluation
-                      des acquis inclus.
+                      ou à distance. Support pédagogique et évaluation des
+                      acquis inclus.
                     </p>
                     <a
                       class="fd-tarif-cta fd-tarif-cta--solid"
@@ -554,13 +574,21 @@ let pageFormation = await directus.request(
                   </span>
                   <div class="fd-certif-tx">
                     <h2 class="fd-certif-title">
-                      Certification TOSA en option
+                      Attestation de stage {
+                        formation.certification_tosa &&
+                          " • Certification TOSA en option"
+                      }
                     </h2>
-                    <p class="fd-certif-sub">
-                      Validez officiellement votre niveau à l'issue du stage :
-                      JCD Formation est centre d'examen TOSA agréé. Score
-                      reconnu par les entreprises, éligible aux financements.
-                    </p>
+                    {
+                      formation.certification_tosa && (
+                        <p class="fd-certif-sub">
+                          Validez officiellement votre niveau à l'issue du stage
+                          : JCD Formation est centre d'examen TOSA agréé. Score
+                          reconnu par les entreprises, éligible aux
+                          financements.
+                        </p>
+                      )
+                    }
                   </div>
                 </div>
               </section>
@@ -700,15 +728,9 @@ let pageFormation = await directus.request(
                       <span class="fd-fact-tx">
                         <span class="fd-fact-k">Lieux</span>
                         <span class="fd-fact-v" data-field="lieux"
-                          >Metz · Nancy · Vos locaux</span
-                        >
-                        {
-                          formation.accessible_a_distance && (
-                            <span class="fd-fact-v" data-field="lieux">
-                              A distance
-                            </span>
-                          )
-                        }
+                          >Metz · Vos locaux
+                          {formation.accessible_a_distance && " • A distance"}
+                        </span>
                       </span>
                     </li>
                     <li class="fd-fact">
@@ -804,67 +826,17 @@ let pageFormation = await directus.request(
         <div class="container">
           <div class="cta-frame">
             <div class="cta-inner">
-              <svg
-                class="cta-icon reveal"
-                viewBox="0 0 120 120"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-                aria-hidden="true"
-                focusable="false"
-              >
-                <g
-                  stroke="currentColor"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                >
-                  <!-- Chapeau de promotion — plateau (losange symétrique sur x=60) -->
-                  <path d="M60 30 L103 49 L60 68 L17 49 Z" stroke-width="2"
-                  ></path>
-                  <!-- Coiffe arrondie sous le plateau (montants logés sous les bords du losange) -->
-                  <path
-                    d="M45 62 L45 71 Q60 80 75 71 L75 62"
-                    stroke-width="2"
-                    opacity="0.4"></path>
-                  <!-- Pampille : cordon plat jusqu'au coin droit puis chute verticale -->
-                  <path
-                    d="M60 49 L103 49 L103 83"
-                    stroke-width="2"
-                    opacity="0.62"></path>
-                  <!-- Mèches du gland -->
-                  <path
-                    d="M103 86 L99.6 92.5 M103 86 L103 94 M103 86 L106.4 92.5"
-                    stroke-width="1.5"
-                    opacity="0.62"></path>
-                  <!-- Onde discrète, contenue dans le plateau -->
-                  <g class="cta-icon-wave">
-                    <circle
-                      cx="60"
-                      cy="49"
-                      r="8"
-                      stroke-width="1.5"
-                      opacity="0.5"></circle>
-                    <circle
-                      cx="60"
-                      cy="49"
-                      r="14"
-                      stroke-width="1"
-                      opacity="0.2"></circle>
-                  </g>
-                </g>
-                <!-- Bouton central -->
-                <circle cx="60" cy="49" r="3.6" fill="currentColor"></circle>
-                <!-- Nœud de la pampille -->
-                <circle cx="103" cy="84" r="2.6" fill="currentColor"></circle>
-              </svg>
+              <Fragment set:html={pageFormation.icone_cta_content} />
 
               <div class="cta-body">
-                <h2 class="cta-title reveal delay-1" id="cta-title">
-                  Un projet de <em>formation&thinsp;?</em>
-                </h2>
+                <h2
+                  class="cta-title reveal delay-1"
+                  id="cta-title"
+                  set:html={pageFormation.titre_cta}
+                />
 
                 <p class="cta-sub reveal delay-2">
-                  Premier rendez-vous gratuit, chez vous ou en distanciel, avec
-                  présentation de l'intervenant.
+                  {pageFormation.sous_titre_cta}
                 </p>
 
                 <div class="cta-actions reveal delay-3">
@@ -872,7 +844,7 @@ let pageFormation = await directus.request(
                     href="/contact?pole=formation&step=2"
                     class="btn-cta btn-cta--primary"
                   >
-                    Contacter le pôle Formation
+                    {pageFormation.bouton_cta}
                     <span class="btn-cta-arrow"
                       ><svg
                         viewBox="0 0 16 16"
