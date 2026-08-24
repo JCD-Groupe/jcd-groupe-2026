@@ -143,41 +143,78 @@ pageFormation.icone_cta_content = await fetchSvgContent(
             <span class="chip chip--cat" data-field="categorie"
               >{formation.thematique.titre_de_la_thematique_de_formations}</span
             >
-            <span class="chip">
-              <svg
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="1.7"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                aria-hidden="true"
-                focusable="false"
-                ><circle cx="12" cy="12" r="9"></circle><path d="M12 7v5l3 2"
-                ></path></svg
-              >
-              <span data-field="duree"
-                >{formation.duree_en_jours} jours · {formation.duree_en_heures} heures</span
-              >
-            </span>
-            <span class="chip">
-              <svg
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="1.7"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                aria-hidden="true"
-                focusable="false"
-                ><circle cx="12" cy="12" r="9"></circle><path
-                  d="M14.8 9.2a3 3 0 0 0-5.6 1.3c0 3 5.6 2 5.6 5a3 3 0 0 1-5.6 1.3M12 6v2M12 16v2"
-                ></path></svg
-              >
-              <strong data-field="tarif"
-                >{formation.tarif_par_participant}&nbsp;€&nbsp;HT</strong
-              >&nbsp;/ participant
-            </span>
+            {
+              (formation.duree_en_jours || formation.duree_en_heures) && (
+                <span class="chip">
+                  <svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="1.7"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    aria-hidden="true"
+                    focusable="false"
+                  >
+                      <circle cx="12" cy="12" r="9" />
+                      <path d="M12 7v5l3 2" />
+                  </svg>
+                  <span data-field="duree">
+                    {formation.duree_en_jours &&
+                      `${formation.duree_en_jours} jour${formation.duree_en_jours >= 2 ? "s" : ""}`}
+                    {formation.duree_en_jours &&
+                      formation.duree_en_heures &&
+                      " · "}
+                    {formation.duree_en_heures &&
+                      `${formation.duree_en_heures} heure${formation.duree_en_heures >= 2 ? "s" : ""}`}
+                  </span>
+                </span>
+              )
+            }
+            {
+              formation.tarif_par_participant ? (
+                <span class="chip">
+                  <svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="1.7"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    aria-hidden="true"
+                    focusable="false"
+                  >
+                    <>
+                      <circle cx="12" cy="12" r="9" />
+                      <path d="M14.8 9.2a3 3 0 0 0-5.6 1.3c0 3 5.6 2 5.6 5a3 3 0 0 1-5.6 1.3M12 6v2M12 16v2" />
+                    </>
+                  </svg>
+                  <strong data-field="tarif">
+                    {formation.tarif_par_participant}&nbsp;€&nbsp;HT
+                  </strong>
+                  &nbsp;/ participant
+                </span>
+              ) : (
+                <span class="chip">
+                  <svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="1.7"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    aria-hidden="true"
+                    focusable="false"
+                  >
+                    <>
+                      <circle cx="12" cy="12" r="9" />
+                      <path d="M14.8 9.2a3 3 0 0 0-5.6 1.3c0 3 5.6 2 5.6 5a3 3 0 0 1-5.6 1.3M12 6v2M12 16v2" />
+                    </>
+                  </svg>
+                  Tarification sur mesure
+                </span>
+              )
+            }
             <span class="chip" data-tosa>
               <svg
                 viewBox="0 0 24 24"
@@ -192,10 +229,16 @@ pageFormation.icone_cta_content = await fetchSvgContent(
                 ></path><path d="M9 11.5l2 2 4-4"></path></svg
               >
               Attestation de stage{
-                formation.certification_tosa &&
-                  " • Certification TOSA en option"
+                formation.certification_tosa ?
+                  " • Certification TOSA en option" :
+                  formation.certification_sur_demande && ' • Certification possible sur demande'
               }
             </span>
+            { formation.pastille &&
+              <span class="chip" data-tosa>
+                {formation.pastille == 'les-essentiels' ? 'Les essentiels' : formation.pastille == 'innovant' ? 'Innovant' : ''}
+              </span>
+            }
           </div>
         </div>
       </section>
@@ -385,7 +428,7 @@ pageFormation.icone_cta_content = await fetchSvgContent(
                       <h3 class="fd-card-title">Prérequis</h3>
                     </div>
                     <p class="fd-card-tx">
-                      {formation.prerequis}
+                      {formation.prerequis ?? 'Pas de prérequis.'}
                     </p>
                   </div>
                 </div>
@@ -507,20 +550,35 @@ pageFormation.icone_cta_content = await fetchSvgContent(
                   <div class="fd-tarif" data-mode="inter">
                     <div class="fd-tarif-head">
                       <span class="fd-tarif-tag">Inter-entreprises</span>
-                      <span class="fd-tarif-dur" data-field="duree"
-                        >{formation.duree_en_jours} jours · {
-                          formation.duree_en_heures
-                        } heures</span
-                      >
+                      {
+                        (formation.duree_en_jours ||
+                          formation.duree_en_heures) && (
+                          <span class="fd-tarif-dur" data-field="duree">
+                            {formation.duree_en_jours &&
+                              `${formation.duree_en_jours} jour${formation.duree_en_jours >= 2 ? "s" : ""}`}
+                            {formation.duree_en_jours &&
+                              formation.duree_en_heures &&
+                              " · "}
+                            {formation.duree_en_heures &&
+                              `${formation.duree_en_heures} heure${formation.duree_en_heures >= 2 ? "s" : ""}`}
+                          </span>
+                        )
+                      }
                     </div>
-                    <p class="fd-tarif-price">
-                      <strong data-field="tarif"
-                        >{
-                          formation.tarif_par_participant
-                        }&nbsp;€&nbsp;HT</strong
-                      >
-                      <small>/ participant</small>
-                    </p>
+                    {
+                      formation.tarif_par_participant ? (
+                        <p class="fd-tarif-price">
+                          <strong data-field="tarif">
+                            {formation.tarif_par_participant}&nbsp;€&nbsp;HT
+                          </strong>
+                          <small>/ participant</small>
+                        </p>
+                      ) : (
+                        <p class="fd-tarif-price">
+                          <strong data-field="tarif">Tarif sur mesure</strong>
+                        </p>
+                      )
+                    }
                     <p class="fd-tarif-tx">
                       Session ouverte en petit groupe, dans nos centres de Metz
                       ou à distance. Support pédagogique et évaluation des
@@ -575,8 +633,9 @@ pageFormation.icone_cta_content = await fetchSvgContent(
                   <div class="fd-certif-tx">
                     <h2 class="fd-certif-title">
                       Attestation de stage {
-                        formation.certification_tosa &&
+                        formation.certification_tosa ?
                           " • Certification TOSA en option"
+                          : formation.certification_sur_demande && ' • Certification possible sur demande'
                       }
                     </h2>
                     {
@@ -641,28 +700,38 @@ pageFormation.icone_cta_content = await fetchSvgContent(
                   </nav>
                   <span class="fd-aside-label">Informations pratiques</span>
                   <ul class="fd-facts">
-                    <li class="fd-fact">
-                      <span class="fd-fact-ic" aria-hidden="true"
-                        ><svg
-                          viewBox="0 0 24 24"
-                          fill="none"
-                          stroke="currentColor"
-                          stroke-width="1.7"
-                          stroke-linecap="round"
-                          stroke-linejoin="round"
-                          ><circle cx="12" cy="12" r="9"></circle><path
-                            d="M12 7v5l3 2"></path></svg
-                        ></span
-                      >
-                      <span class="fd-fact-tx">
-                        <span class="fd-fact-k">Durée</span>
-                        <span class="fd-fact-v" data-field="duree"
-                          >{formation.duree_en_jours} jours · {
-                            formation.duree_en_heures
-                          } heures</span
-                        >
-                      </span>
-                    </li>
+                    {
+                      (formation.duree_en_jours ||
+                        formation.duree_en_heures) && (
+                        <li class="fd-fact">
+                          <span class="fd-fact-ic" aria-hidden="true">
+                            <svg
+                              viewBox="0 0 24 24"
+                              fill="none"
+                              stroke="currentColor"
+                              stroke-width="1.7"
+                              stroke-linecap="round"
+                              stroke-linejoin="round"
+                            >
+                              <circle cx="12" cy="12" r="9" />
+                              <path d="M12 7v5l3 2" />
+                            </svg>
+                          </span>
+                          <span class="fd-fact-tx">
+                            <span class="fd-fact-k">Durée</span>
+                            <span class="fd-fact-v" data-field="duree">
+                              {formation.duree_en_jours &&
+                                `${formation.duree_en_jours} jour${formation.duree_en_jours >= 2 ? "s" : ""}`}
+                              {formation.duree_en_jours &&
+                                formation.duree_en_heures &&
+                                " · "}
+                              {formation.duree_en_heures &&
+                                `${formation.duree_en_heures} heure${formation.duree_en_heures >= 2 ? "s" : ""}`}
+                            </span>
+                          </span>
+                        </li>
+                      )
+                    }
                     <li class="fd-fact">
                       <span class="fd-fact-ic" aria-hidden="true"
                         ><svg
@@ -679,14 +748,17 @@ pageFormation.icone_cta_content = await fetchSvgContent(
                       >
                       <span class="fd-fact-tx">
                         <span class="fd-fact-k">Tarif</span>
-                        <span class="fd-fact-v"
-                          ><span data-field="tarif"
-                            >{
-                              formation.tarif_par_participant
-                            }&nbsp;€&nbsp;HT</span
-                          >
-                          <small>/ participant</small></span
-                        >
+                        <span class="fd-fact-v">
+                          {formation.tarif_par_participant ? (
+                      <span data-field="tarif">
+                        {formation.tarif_par_participant
+                            }&nbsp;€&nbsp;HT</span>
+                          <small>/ participant</small>
+                        ) : (  
+                          <span data-field="tarif"
+                          >Sur mesure</span>
+                        )}
+                        </span>
                       </span>
                     </li>
                     <li class="fd-fact">
