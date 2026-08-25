@@ -11,6 +11,12 @@ let global = await directus.request(
   }),
 );
 
+let informatique = await directus.request(
+  readSingleton("JCD_Informatique", {
+    fields: ["nom_pole"],
+  }),
+);
+
 let info_cloud = await directus.request(
   readSingleton("cloud_microsoft", {
     fields: [
@@ -79,7 +85,7 @@ info_cloud.icone_cta_content = await fetchSvgContent(info_cloud.icone_cta);
     <meta property="og:locale" content="fr_FR" />
     <meta
       property="og:title"
-      content={`${info_cloud.nom_service} · Informatique · ${global.nom_societe}`}
+      content={`${info_cloud.nom_service} · ${informatique.nom_pole} · ${global.nom_societe}`}
     />
     <meta property="og:description" content={info_cloud.meta_description} />
     <meta
@@ -88,7 +94,7 @@ info_cloud.icone_cta_content = await fetchSvgContent(info_cloud.icone_cta);
     />
     <meta name="twitter:card" content="summary" />
     <title>
-      {info_cloud.nom_service} · Informatique · {global.nom_societe}
+      {info_cloud.nom_service} · {informatique.nom_pole} · {global.nom_societe}
     </title>
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />

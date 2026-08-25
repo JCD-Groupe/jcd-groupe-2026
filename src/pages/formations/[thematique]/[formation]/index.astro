@@ -72,7 +72,7 @@ pageFormation.icone_cta_content = await fetchSvgContent(
       href={`${import.meta.env.PUBLIC_DIRECTUS_URL}/formations/${formation.slug}`}
     />
     <meta property="og:type" content="website" />
-    <meta property="og:site_name" content="JCD Groupe" />
+    <meta property="og:site_name" content={global.nom_societe} />
     <meta property="og:locale" content="fr_FR" />
     <meta
       property="og:title"

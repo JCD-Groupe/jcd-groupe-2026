@@ -12,6 +12,12 @@ accueil = await directus.request(
   }),
 );
 
+let global = await directus.request(
+  readSingleton("Global", {
+    fields: ["*"],
+  }),
+);
+
 const logos = accueil.logos_clients || [];
 const totalLogos = logos.length;
 const third = Math.ceil(totalLogos / 3);
@@ -92,25 +98,19 @@ agencement.icone_pole_content = await fetchSvgContent(agencement.icone_pole);
     <meta name="color-scheme" content="dark" />
     <meta name="theme-color" content="#0a0a0a" />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
-    <meta
-      name="description"
-      content="JCD Groupe · Votre expert informatique de proximité depuis 1996. Sept pôles métiers complémentaires : informatique, cybersécurité, développement, impression, télécom, formation, agencement. Metz · Nancy."
-    />
-    <link rel="canonical" href="https://jcd-groupe.fr/" />
+    <meta name="description" content={global.meta_description_societe} />
+    <link rel="canonical" href={import.meta.env.PUBLIC_DIRECTUS_URL} />
     <meta property="og:type" content="website" />
-    <meta property="og:site_name" content="JCD Groupe" />
+    <meta property="og:site_name" content={global.nom_societe} />
     <meta property="og:locale" content="fr_FR" />
     <meta
       property="og:title"
-      content="JCD Groupe · Votre expert informatique de proximité"
+      content={`${global.nom_societe} · ${global.slogan_societe}`}
     />
-    <meta
-      property="og:description"
-      content="JCD Groupe · Votre expert informatique de proximité depuis 1996. Sept pôles métiers complémentaires : informatique, cybersécurité, développement, impression, télécom, formation, agencement. Metz · Nancy."
-    />
-    <meta property="og:url" content="https://jcd-groupe.fr/" />
+    <meta property="og:description" content={global.meta_description_societe} />
+    <meta property="og:url" content={import.meta.env.PUBLIC_DIRECTUS_URL} />
     <meta name="twitter:card" content="summary" />
-    <title>JCD Groupe · Votre expert informatique de proximité</title>
+    <title>{global.nom_societe} · {global.slogan_societe}</title>
 
     <!--
   ====================================================================
@@ -1149,7 +1149,7 @@ agencement.icone_pole_content = await fetchSvgContent(agencement.icone_pole);
                     stroke-linecap="round"
                     stroke-linejoin="round"></polyline>
                 </svg>
-                <span>{accueil.diag_methode_besoin}</span>
+                <span>{accueil.titre_methode_valeurs}</span>
               </div>
               <div class="vd-mobile-stem"></div>
               <div class="vd-mobile-hub">

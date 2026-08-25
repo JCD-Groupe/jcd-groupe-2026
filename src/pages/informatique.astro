@@ -15,6 +15,7 @@ let informatique = await directus.request(
   readSingleton("JCD_Informatique", {
     fields: [
       "*",
+      { logo_partenaire_cybersecurite: ["*"] },
       { prestations_cybersecurite: ["*"] },
       { processus: ["*"] },
       {
@@ -393,7 +394,7 @@ info_reseaux.icone_service = await fetchSvgContent(info_reseaux.icone_service);
                         aria-hidden="true"
                         set:html={prestation.icone_content}
                       />
-                      <h3>{prestation.nom_prestation}</h3>
+                      <h3>{prestation.titre}</h3>
                       <p>{prestation.description}</p>
                     </div>
                   ),
@@ -406,17 +407,17 @@ info_reseaux.icone_service = await fetchSvgContent(info_reseaux.icone_service);
             <span class="cyber-stats">
               <span class="cyber-stat"
                 ><span class="cyber-stat-num"
-                  >{informatique.nombre_clients}</span
+                  >{informatique.nombre_client_cybersecurite}</span
                 > clients</span
               >
               <span class="cyber-stat"
                 ><span class="cyber-stat-num"
-                  >{informatique.nombre_interventions_an}</span
+                  >{informatique.nombre_interventions_an_cybersecurite}</span
                 > interventions/an</span
               >
               <span class="cyber-stat"
                 ><span class="cyber-stat-num"
-                  >{informatique.nombre_annees_expertise}</span
+                  >{informatique.nombre_annees_expertises_cybersecurite}</span
                 > ans d'expertise</span
               >
             </span>
@@ -425,8 +426,8 @@ info_reseaux.icone_service = await fetchSvgContent(info_reseaux.icone_service);
                 ><span class="cyber-partner-slash">//</span> Partenaire cybers&eacute;curit&eacute;</span
               >
               <img
-                src="/logos%20INFORMATIQUE/rsecure-white.png"
-                alt="Rsecure France"
+                src={`${import.meta.env.PUBLIC_DIRECTUS_URL}/assets/${informatique.logo_partenaire_cybersecurite.id}`}
+                alt={informatique.logo_partenaire_cybersecurite.title}
                 width="1000"
                 height="290"
                 loading="lazy"

@@ -64,14 +64,17 @@ service.processus = await Promise.all(
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content={global.nom_societe} />
     <meta property="og:locale" content="fr_FR" />
-    <meta property="og:title" content={service.meta_title} />
+    <meta
+      property="og:title"
+      content={`${service.nom_pole} • ${global.nom_societe}`}
+    />
     <meta property="og:description" content={service.meta_description} />
     <meta
       property="og:url"
       content={`${import.meta.env.PUBLIC_DIRECTUS_URL}/service`}
     />
     <meta name="twitter:card" content="summary" />
-    <title>{global.nom_societe} • {service.nom_pole}</title>
+    <title>{service.nom_pole} • {global.nom_societe}</title>
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />

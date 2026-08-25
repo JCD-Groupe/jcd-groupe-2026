@@ -11,6 +11,12 @@ let global = await directus.request(
   }),
 );
 
+let informatique = await directus.request(
+  readSingleton("JCD_Informatique", {
+    fields: ["nom_pole"],
+  }),
+);
+
 let info_reseaux = await directus.request(
   readSingleton("architectures_systemes_reseaux", {
     fields: [
@@ -60,7 +66,7 @@ info_reseaux.icone_cta_content = await fetchSvgContent(info_reseaux.icone_cta);
     <meta property="og:locale" content="fr_FR" />
     <meta
       property="og:title"
-      content={`${global.nom_societe} • ${info_reseaux.nom_service}`}
+      content={`${info_reseaux.nom_service} • ${informatique.nom_pole} • ${global.nom_societe}`}
     />
     <meta property="og:description" content={info_reseaux.meta_description} />
     <meta
@@ -68,7 +74,11 @@ info_reseaux.icone_cta_content = await fetchSvgContent(info_reseaux.icone_cta);
       content={`${import.meta.env.PUBLIC_DIRECTUS_URL}/info-reseaux`}
     />
     <meta name="twitter:card" content="summary" />
-    <title>{global.nom_societe} • {info_reseaux.nom_service}</title>
+    <title>
+      {info_reseaux.nom_service} • {informatique.nom_pole} • {
+        global.nom_societe
+      }
+    </title>
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />

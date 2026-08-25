@@ -89,11 +89,11 @@ let realisations = await directus.request(
       href={`${import.meta.env.PUBLIC_DIRECTUS_URL}/developpement`}
     />
     <meta property="og:type" content="website" />
-    <meta property="og:site_name" content="JCD Groupe" />
+    <meta property="og:site_name" content={global.nom_societe} />
     <meta property="og:locale" content="fr_FR" />
     <meta
       property="og:title"
-      content={`${global.nom_societe} • ${developpement.nom_pole}`}
+      content={`${developpement.nom_pole} • ${global.nom_societe}`}
     />
     <meta property="og:description" content={developpement.meta_description} />
     <meta
@@ -101,7 +101,7 @@ let realisations = await directus.request(
       content={`${import.meta.env.PUBLIC_DIRECTUS_URL}/developpement`}
     />
     <meta name="twitter:card" content="summary" />
-    <title>{global.nom_societe} • {developpement.nom_pole}</title>
+    <title>{developpement.nom_pole} • {global.nom_societe}</title>
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />

@@ -1,7 +1,6 @@
 ---
 import { readSingleton } from "@directus/sdk";
 import { directus } from "../lib/directus";
-import { undefined } from "astro:schema";
 
 const { current = null } = Astro.props;
 
@@ -13,6 +12,11 @@ const fetchSvgContent = async (id: string) => {
   return response.text();
 };
 
+let informatique = await directus.request(
+  readSingleton("JCD_Informatique", {
+    fields: ["nom_pole"],
+  }),
+);
 let info_cloud = await directus.request(
   readSingleton("cloud_microsoft", {
     fields: ["nom_service", "icone_service"],
@@ -46,7 +50,7 @@ info_reseaux.icone_service = await fetchSvgContent(info_reseaux.icone_service);
 
 <nav
   class="info-subnav"
-  aria-label="Navigation du pôle Informatique"
+  aria-label={`Navigation du pôle ${informatique.nom_pole}`}
   role="menubar"
 >
   <div class="info-subnav__inner">
@@ -55,7 +59,7 @@ info_reseaux.icone_service = await fetchSvgContent(info_reseaux.icone_service);
       class={"info-subnav__home" +
         (current === "info-general" ? " is-active" : "")}
       role="menuitem"
-      aria-label="Vue d'ensemble, Pôle Informatique"
+      aria-label={`Vue d'ensemble, Pôle ${informatique.nom_pole}`}
       title="Vue d'ensemble"
     >
       <svg
