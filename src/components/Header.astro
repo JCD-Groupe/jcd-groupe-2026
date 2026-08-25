@@ -14,15 +14,99 @@ let global = await directus.request(
   }),
 );
 
-const L = {
-  informatique: "Parc, cloud et collaboration",
-  service: "Support et proximité",
-  developpement: "Logiciels sur mesure",
-  print: "Impression et reprographie",
-  telecom: "Téléphonie d'entreprise",
-  formation: "Faire grandir vos équipes",
-  agencement: "Espaces de travail",
+const fetchSvgContent = async (id: string) => {
+  if (!id) return null;
+  const response = await fetch(
+    `${import.meta.env.PUBLIC_DIRECTUS_URL}/assets/${id}`,
+  );
+  return response.text();
 };
+
+let informatique = await directus.request(
+  readSingleton("JCD_Informatique", {
+    fields: ["nom_pole", "icone_pole", "description_navigation"],
+  }),
+);
+informatique.icone_pole_content = await fetchSvgContent(
+  informatique.icone_pole,
+);
+
+let info_cloud = await directus.request(
+  readSingleton("cloud_microsoft", {
+    fields: ["nom_service", "icone_service"],
+  }),
+);
+info_cloud.icone_service_content = await fetchSvgContent(
+  info_cloud.icone_service,
+);
+let info_collaboratif = await directus.request(
+  readSingleton("solutions_collaboratives_audiovisuelles", {
+    fields: ["nom_service", "icone_service"],
+  }),
+);
+info_collaboratif.icone_service_content = await fetchSvgContent(
+  info_collaboratif.icone_service,
+);
+let info_integration = await directus.request(
+  readSingleton("integration_support_pc", {
+    fields: ["nom_service", "icone_service"],
+  }),
+);
+info_integration.icone_service_content = await fetchSvgContent(
+  info_integration.icone_service,
+);
+let info_reseaux = await directus.request(
+  readSingleton("architectures_systemes_reseaux", {
+    fields: ["nom_service", "icone_service"],
+  }),
+);
+info_reseaux.icone_service_content = await fetchSvgContent(
+  info_reseaux.icone_service,
+);
+
+let developpement = await directus.request(
+  readSingleton("JCD_Developpement", {
+    fields: ["nom_pole", "icone_pole", "description_navigation"],
+  }),
+);
+developpement.icone_pole_content = await fetchSvgContent(
+  developpement.icone_pole,
+);
+
+let print = await directus.request(
+  readSingleton("JCD_Print", {
+    fields: ["nom_pole", "icone_pole", "description_navigation"],
+  }),
+);
+print.icone_pole_content = await fetchSvgContent(print.icone_pole);
+
+let service = await directus.request(
+  readSingleton("JCD_Service", {
+    fields: ["nom_pole", "icone_pole", "description_navigation"],
+  }),
+);
+service.icone_pole_content = await fetchSvgContent(service.icone_pole);
+
+let telecom = await directus.request(
+  readSingleton("JCD_Telecom", {
+    fields: ["nom_pole", "icone_pole", "description_navigation"],
+  }),
+);
+telecom.icone_pole_content = await fetchSvgContent(telecom.icone_pole);
+
+let formation = await directus.request(
+  readSingleton("JCD_Formation", {
+    fields: ["nom_pole", "icone_pole", "description_navigation"],
+  }),
+);
+formation.icone_pole_content = await fetchSvgContent(formation.icone_pole);
+
+let agencement = await directus.request(
+  readSingleton("JCD_Agencement", {
+    fields: ["nom_pole", "icone_pole", "description_navigation"],
+  }),
+);
+agencement.icone_pole_content = await fetchSvgContent(agencement.icone_pole);
 ---
 
 <header class="navbar" id="navbar" role="banner">
@@ -179,20 +263,13 @@ const L = {
                 tabindex="-1"
               >
                 <span class="nm-icon" aria-hidden="true">
-                  <svg
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="1.7"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    ><rect x="3" y="4" width="18" height="12" rx="2"
-                    ></rect><path d="M8 20h8M12 16v4"></path></svg
-                  >
+                  <Fragment set:html={informatique.icone_pole_content} />
                 </span>
                 <span class="nm-text">
-                  <span class="nm-title">Informatique</span>
-                  <span class="nm-sub-label">{L.informatique}</span>
+                  <span class="nm-title">{informatique.nom_pole}</span>
+                  <span class="nm-sub-label">
+                    {informatique.description_navigation}
+                  </span>
                 </span>
               </a>
               <div class="nm-sub">
@@ -204,22 +281,15 @@ const L = {
                         class="nm-sub-item"
                         role="menuitem"
                         tabindex="-1"
-                        ><span class="nm-sub-ic" aria-hidden="true"
-                          ><svg
-                            viewBox="0 0 24 24"
-                            fill="none"
-                            stroke="currentColor"
-                            stroke-width="1.6"
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                            ><path
-                              d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"
-                            ></path></svg
-                          ></span
-                        ><span class="nm-sub-tx"
-                          >Service Intégration &amp; Support PC</span
-                        ></a
-                      >
+                        ><span class="nm-sub-ic" aria-hidden="true">
+                          <Fragment
+                            set:html={info_integration.icone_service_content}
+                          />
+                        </span>
+                        <span class="nm-sub-tx"
+                          >{info_integration.nom_service}</span
+                        >
+                      </a>
                     </li>
                     <li role="none">
                       <a
@@ -227,25 +297,12 @@ const L = {
                         class="nm-sub-item"
                         role="menuitem"
                         tabindex="-1"
-                        ><span class="nm-sub-ic" aria-hidden="true"
-                          ><svg
-                            viewBox="0 0 24 24"
-                            fill="none"
-                            stroke="currentColor"
-                            stroke-width="1.6"
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                            ><rect x="2" y="3" width="20" height="8" rx="2"
-                            ></rect><rect
-                              x="2"
-                              y="13"
-                              width="20"
-                              height="8"
-                              rx="2"></rect><path d="M6 7h.01M6 17h.01"
-                            ></path></svg
-                          ></span
-                        ><span class="nm-sub-tx"
-                          >Architectures systèmes &amp; réseaux</span
+                        ><span class="nm-sub-ic" aria-hidden="true">
+                          <Fragment
+                            set:html={info_reseaux.icone_service_content}
+                          />
+                        </span><span class="nm-sub-tx"
+                          >{info_reseaux.nom_service}</span
                         ></a
                       >
                     </li>
@@ -255,23 +312,12 @@ const L = {
                         class="nm-sub-item"
                         role="menuitem"
                         tabindex="-1"
-                        ><span class="nm-sub-ic" aria-hidden="true"
-                          ><svg
-                            viewBox="0 0 24 24"
-                            fill="none"
-                            stroke="currentColor"
-                            stroke-width="1.6"
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                            ><path d="m22 8-6 4 6 4V8Z"></path><rect
-                              x="2"
-                              y="6"
-                              width="14"
-                              height="12"
-                              rx="2"></rect></svg
-                          ></span
-                        ><span class="nm-sub-tx"
-                          >Solutions collaboratives &amp; audiovisuelles</span
+                        ><span class="nm-sub-ic" aria-hidden="true">
+                          <Fragment
+                            set:html={info_collaboratif.icone_service_content}
+                          />
+                        </span><span class="nm-sub-tx"
+                          >{info_collaboratif.nom_service}</span
                         ></a
                       >
                     </li>
@@ -281,19 +327,13 @@ const L = {
                         class="nm-sub-item"
                         role="menuitem"
                         tabindex="-1"
-                        ><span class="nm-sub-ic" aria-hidden="true"
-                          ><svg
-                            viewBox="0 0 24 24"
-                            fill="none"
-                            stroke="currentColor"
-                            stroke-width="1.6"
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                            ><path
-                              d="M17.5 19H9a7 7 0 1 1 6.71-9h1.79a4.5 4.5 0 1 1 0 9Z"
-                            ></path></svg
-                          ></span
-                        ><span class="nm-sub-tx">Cloud Microsoft</span></a
+                        ><span class="nm-sub-ic" aria-hidden="true">
+                          <Fragment
+                            set:html={info_cloud.icone_service_content}
+                          />
+                        </span><span class="nm-sub-tx"
+                          >{info_cloud.nom_service}</span
+                        ></a
                       >
                     </li>
                   </ul>
@@ -310,21 +350,13 @@ const L = {
                 tabindex="-1"
               >
                 <span class="nm-icon" aria-hidden="true">
-                  <svg
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="1.7"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    ><path d="M3 14v-2a9 9 0 0 1 18 0v2"></path><path
-                      d="M21 14v3a2 2 0 0 1-2 2h-1v-7h1a2 2 0 0 1 2 2zM3 14v3a2 2 0 0 0 2 2h1v-7H5a2 2 0 0 0-2 2z"
-                    ></path></svg
-                  >
+                  <Fragment set:html={service.icone_pole_content} />
                 </span>
                 <span class="nm-text">
-                  <span class="nm-title">Service</span>
-                  <span class="nm-sub-label">{L.service}</span>
+                  <span class="nm-title">{service.nom_pole}</span>
+                  <span class="nm-sub-label">
+                    {service.description_navigation}
+                  </span>
                 </span>
               </a>
             </li>
@@ -338,19 +370,13 @@ const L = {
                 tabindex="-1"
               >
                 <span class="nm-icon" aria-hidden="true">
-                  <svg
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="1.7"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    ><path d="m8 6-6 6 6 6M16 6l6 6-6 6M14 4l-4 16"></path></svg
-                  >
+                  <Fragment set:html={developpement.icone_pole_content} />
                 </span>
                 <span class="nm-text">
-                  <span class="nm-title">Développement</span>
-                  <span class="nm-sub-label">{L.developpement}</span>
+                  <span class="nm-title">{developpement.nom_pole}</span>
+                  <span class="nm-sub-label">
+                    {developpement.description_navigation}
+                  </span>
                 </span>
               </a>
             </li>
@@ -366,28 +392,13 @@ const L = {
                 tabindex="-1"
               >
                 <span class="nm-icon" aria-hidden="true">
-                  <svg
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="1.7"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    ><path d="M6 9V3h12v6"></path><rect
-                      x="3"
-                      y="9"
-                      width="18"
-                      height="8"
-                      rx="2"></rect><path d="M7 17h10v4H7z"></path><circle
-                      cx="17"
-                      cy="13"
-                      r="0.8"
-                      fill="currentColor"></circle></svg
-                  >
+                  <Fragment set:html={print.icone_pole_content} />
                 </span>
                 <span class="nm-text">
-                  <span class="nm-title">Print</span>
-                  <span class="nm-sub-label">{L.print}</span>
+                  <span class="nm-title">{print.nom_pole}</span>
+                  <span class="nm-sub-label">
+                    {print.description_navigation}
+                  </span>
                 </span>
               </a>
             </li>
@@ -401,21 +412,13 @@ const L = {
                 tabindex="-1"
               >
                 <span class="nm-icon" aria-hidden="true">
-                  <svg
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="1.7"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    ><path
-                      d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.37 1.9.72 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.29a2 2 0 0 1 2.11-.45c.91.35 1.85.59 2.81.72A2 2 0 0 1 22 16.92z"
-                    ></path></svg
-                  >
+                  <Fragment set:html={telecom.icone_pole_content} />
                 </span>
                 <span class="nm-text">
-                  <span class="nm-title">Télécom</span>
-                  <span class="nm-sub-label">{L.telecom}</span>
+                  <span class="nm-title">{telecom.nom_pole}</span>
+                  <span class="nm-sub-label">
+                    {telecom.description_navigation}
+                  </span>
                 </span>
               </a>
             </li>
@@ -429,20 +432,13 @@ const L = {
                 tabindex="-1"
               >
                 <span class="nm-icon" aria-hidden="true">
-                  <svg
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="1.7"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    ><path d="M22 10 12 5 2 10l10 5 10-5z"></path><path
-                      d="M6 12v5c2 2 4 3 6 3s4-1 6-3v-5"></path></svg
-                  >
+                  <Fragment set:html={formation.icone_pole_content} />
                 </span>
                 <span class="nm-text">
-                  <span class="nm-title">Formation</span>
-                  <span class="nm-sub-label">{L.formation}</span>
+                  <span class="nm-title">{formation.nom_pole}</span>
+                  <span class="nm-sub-label">
+                    {formation.description_navigation}
+                  </span>
                 </span>
               </a>
             </li>
@@ -456,21 +452,13 @@ const L = {
                 tabindex="-1"
               >
                 <span class="nm-icon" aria-hidden="true">
-                  <svg
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="1.7"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    ><path
-                      d="M4 18v3M20 18v3M3 8h18v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2zM6 8V5a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v3"
-                    ></path></svg
-                  >
+                  <Fragment set:html={agencement.icone_pole_content} />
                 </span>
                 <span class="nm-text">
-                  <span class="nm-title">Agencement</span>
-                  <span class="nm-sub-label">{L.agencement}</span>
+                  <span class="nm-title">{agencement.nom_pole}</span>
+                  <span class="nm-sub-label">
+                    {agencement.description_navigation}
+                  </span>
                 </span>
               </a>
             </li>
