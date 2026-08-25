@@ -1,9 +1,71 @@
 ---
+import { readSingleton } from "@directus/sdk";
+import { directus } from "../lib/directus";
+import { globalRegistry } from "astro:schema";
+
 // Pied de page commun (toutes pages sauf 404, qui garde le sien).
 // Props :
 //   current 'carrieres' | null -> aria-current sur "Nous rejoindre"
 //   home    true sur index     -> ancres nues (#histoire) au lieu de index#histoire
 const { current = null, home = false } = Astro.props;
+
+const currentYear = new Date().getFullYear();
+
+let global = await directus.request(
+  readSingleton("Global", {
+    fields: [
+      "*",
+      {
+        adresses: ["*"],
+      },
+      {
+        entreprises_groupe: ["*"],
+      },
+    ],
+  }),
+);
+
+let informatique = await directus.request(
+  readSingleton("JCD_Informatique", {
+    fields: ["nom_pole"],
+  }),
+);
+
+let developpement = await directus.request(
+  readSingleton("JCD_Developpement", {
+    fields: ["nom_pole"],
+  }),
+);
+
+let print = await directus.request(
+  readSingleton("JCD_Print", {
+    fields: ["nom_pole"],
+  }),
+);
+
+let service = await directus.request(
+  readSingleton("JCD_Service", {
+    fields: ["nom_pole"],
+  }),
+);
+
+let telecom = await directus.request(
+  readSingleton("JCD_Telecom", {
+    fields: ["nom_pole"],
+  }),
+);
+
+let formation = await directus.request(
+  readSingleton("JCD_Formation", {
+    fields: ["nom_pole"],
+  }),
+);
+
+let agencement = await directus.request(
+  readSingleton("JCD_Agencement", {
+    fields: ["nom_pole"],
+  }),
+);
 ---
 
 <footer role="contentinfo">
@@ -16,17 +78,28 @@ const { current = null, home = false } = Astro.props;
           <h4 class="fcard-title">Pôles</h4>
           <ul class="footer-links footer-links--cols">
             <li>
-              <a class="footer-link" href="/informatique">Informatique</a>
+              <a class="footer-link" href="/informatique"
+                >{informatique.nom_pole}</a
+              >
             </li>
-            <li><a class="footer-link" href="/service">Service</a></li>
             <li>
-              <a class="footer-link" href="/developpement">Développement</a>
+              <a class="footer-link" href="/service">{service.nom_pole}</a>
             </li>
-            <li><a class="footer-link" href="/print">Print</a></li>
-            <li><a class="footer-link" href="/telecom">Télécom</a></li>
-            <li><a class="footer-link" href="/formation">Formation</a></li>
             <li>
-              <a class="footer-link" href="/agencement">Agencement</a>
+              <a class="footer-link" href="/developpement"
+                >{developpement.nom_pole}</a
+              >
+            </li>
+            <li><a class="footer-link" href="/print">{print.nom_pole}</a></li>
+            <li>
+              <a class="footer-link" href="/telecom">{telecom.nom_pole}</a>
+            </li>
+            <li>
+              <a class="footer-link" href="/formation">{formation.nom_pole}</a>
+            </li>
+            <li>
+              <a class="footer-link" href="/agencement">{agencement.nom_pole}</a
+              >
             </li>
           </ul>
         </div>
@@ -71,20 +144,27 @@ const { current = null, home = false } = Astro.props;
         <div class="fcard-inner">
           <h4 class="fcard-title">Nous trouver</h4>
           <div class="footer-contacts">
-            <div class="footer-contact-block">
-              <span class="fc-city">Metz</span>
-              <span class="fc-role">Siège social</span>
-              <address>193 rue du Général Metman<br />57070 Metz</address>
-              <a class="footer-link" href="tel:+33387184920">03 87 18 49 20</a>
-              <span class="fc-hours">Lun–Ven · 8h30–18h30</span>
-            </div>
-            <div class="footer-contact-block">
-              <span class="fc-city">Nancy</span>
-              <span class="fc-role">Agence</span>
-              <address>96 boulevard d'Austrasie<br />54000 Nancy</address>
-              <a class="footer-link" href="tel:+33387184920">03 87 18 49 20</a>
-              <span class="fc-hours">Lun–Ven · 8h30–18h30</span>
-            </div>
+            {
+              global.adresses.map((adresse: any) => (
+                <div class="footer-contact-block">
+                  <span class="fc-city">{adresse.titre}</span>
+                  <span class="fc-role">{adresse.sous_titre}</span>
+                  <address>
+                    {adresse.adresse_rue}
+                    {adresse.adresse_complement && <br />}
+                    {adresse.adresse_complement}
+                    <br />
+                    {adresse.code_postal_ville}
+                  </address>
+                  <a class="footer-link" href="tel:+33387184920">
+                    03 87 18 49 20
+                  </a>
+                  {adresse.horaires.map((horaires: any) => (
+                    <span class="fc-hours">{horaires.horaires}</span>
+                  ))}
+                </div>
+              ))
+            }
           </div>
         </div>
       </div>
@@ -92,7 +172,8 @@ const { current = null, home = false } = Astro.props;
 
     <div class="footer-bottom reveal delay-3">
       <span class="footer-copyright"
-        >&copy; <span id="year">2026</span> JCD Groupe &middot; Tous droits réservés.</span
+        >&copy; <span id="year">{currentYear}</span>
+        &nbsp;{global.nom_societe} &middot; Tous droits réservés.</span
       >
 
       <!-- Le groupe : societes soeurs de la holding, signature centrale de
@@ -100,90 +181,40 @@ const { current = null, home = false } = Astro.props;
            avec "JCD Groupe", jamais enoncee. (inject_footer_eco.py) -->
       <div class="footer-eco">
         <span class="footer-eco-label">Le groupe</span>
-        <a
-          class="footer-eco-link"
-          href="https://www.pclease.lu/"
-          target="_blank"
-          rel="noopener noreferrer"
-          aria-label="PC Lease — ingénierie informatique (nouvel onglet)"
-        >
-          <img
-            src="/assets/pclease-blanc.svg"
-            alt="PC Lease"
-            height="14"
-            decoding="async"
-          />
-          <svg
-            class="footer-eco-arrow"
-            width="9"
-            height="9"
-            viewBox="0 0 9 9"
-            fill="none"
-            aria-hidden="true"
-            ><path
-              d="M1.5 7.5 7.5 1.5M7.5 1.5H2.9M7.5 1.5v4.6"
-              stroke="currentColor"
-              stroke-width="1.2"
-              stroke-linecap="round"
-              stroke-linejoin="round"></path></svg
-          >
-        </a>
-        <a
-          class="footer-eco-link"
-          href="https://www.rsecure.lu/"
-          target="_blank"
-          rel="noopener noreferrer"
-          aria-label="Rsecure — cybersécurité (nouvel onglet)"
-        >
-          <img
-            src="/assets/rsecure-blanc.svg"
-            alt="Rsecure"
-            height="17"
-            decoding="async"
-          />
-          <svg
-            class="footer-eco-arrow"
-            width="9"
-            height="9"
-            viewBox="0 0 9 9"
-            fill="none"
-            aria-hidden="true"
-            ><path
-              d="M1.5 7.5 7.5 1.5M7.5 1.5H2.9M7.5 1.5v4.6"
-              stroke="currentColor"
-              stroke-width="1.2"
-              stroke-linecap="round"
-              stroke-linejoin="round"></path></svg
-          >
-        </a>
-        <a
-          class="footer-eco-link"
-          href="https://digidocservices.com/"
-          target="_blank"
-          rel="noopener noreferrer"
-          aria-label="Digidoc Services — gestion documentaire (nouvel onglet)"
-        >
-          <img
-            src="/assets/digidoc-blanc.svg"
-            alt="Digidoc Services"
-            height="13"
-            decoding="async"
-          />
-          <svg
-            class="footer-eco-arrow"
-            width="9"
-            height="9"
-            viewBox="0 0 9 9"
-            fill="none"
-            aria-hidden="true"
-            ><path
-              d="M1.5 7.5 7.5 1.5M7.5 1.5H2.9M7.5 1.5v4.6"
-              stroke="currentColor"
-              stroke-width="1.2"
-              stroke-linecap="round"
-              stroke-linejoin="round"></path></svg
-          >
-        </a>
+        {
+          global.entreprises_groupe.map((entreprise: any) => (
+            <a
+              class="footer-eco-link"
+              href={entreprise.lien}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label={`${entreprise.nom} — ${entreprise.sous_titre} (nouvel onglet)`}
+            >
+              <img
+                src={`${import.meta.env.PUBLIC_DIRECTUS_URL}/assets/${entreprise.logo}`}
+                alt={entreprise.nom}
+                height="14"
+                decoding="async"
+              />
+              <svg
+                class="footer-eco-arrow"
+                width="9"
+                height="9"
+                viewBox="0 0 9 9"
+                fill="none"
+                aria-hidden="true"
+              >
+                <path
+                  d="M1.5 7.5 7.5 1.5M7.5 1.5H2.9M7.5 1.5v4.6"
+                  stroke="currentColor"
+                  stroke-width="1.2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+            </a>
+          ))
+        }
       </div>
 
       <div class="footer-bottom-right">
@@ -195,10 +226,10 @@ const { current = null, home = false } = Astro.props;
         >
         <a
           class="footer-linkedin"
-          href="https://www.linkedin.com/company/jcd-groupe/"
+          href={global.lien_linkedin}
           target="_blank"
           rel="noopener noreferrer"
-          aria-label="JCD Groupe sur LinkedIn"
+          aria-label={`${global.nom_societe} sur LinkedIn`}
         >
           <svg
             width="16"
