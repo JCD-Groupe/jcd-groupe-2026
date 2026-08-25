@@ -7,6 +7,7 @@ import { directus } from "../../../../lib/directus";
 export async function getStaticPaths() {
   const formations = await directus.request(
     readItems("formations", {
+      limit: -1,
       fields: [
         "*",
         { thematique: ["*"] },
