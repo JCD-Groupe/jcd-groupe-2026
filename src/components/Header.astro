@@ -2,18 +2,18 @@
 // Barre de navigation commune (32 pages sauf 404).
 // Props :
 //   current   'carrieres' | 'contact' | null  -> aria-current sur le lien vise
-//   logo      'v2' (defaut) | 'blanc'         -> assets/logo_V2.svg / assets/logo_blanc.svg (carrieres)
 //   catalogue true sur les 15 pages formation -> pill + mega-menu Catalogue
-//   labels    surcharges des sous-libelles du menu Expertises
-//             (index et service portent des libelles plus recents que les
-//              autres pages ; drift conserve tel quel, voir rapport migration)
+import { readSingleton } from "@directus/sdk";
 import CatalogueMenu from "./CatalogueMenu.astro";
-const {
-  current = null,
-  logo = "v2",
-  catalogue = false,
-  labels = {},
-} = Astro.props;
+import { directus } from "../lib/directus";
+const { current = null, catalogue = false } = Astro.props;
+
+let global = await directus.request(
+  readSingleton("Global", {
+    fields: ["*"],
+  }),
+);
+
 const L = {
   informatique: "Parc, cloud et collaboration",
   service: "Support et proximité",
@@ -22,10 +22,7 @@ const L = {
   telecom: "Téléphonie d'entreprise",
   formation: "Faire grandir vos équipes",
   agencement: "Espaces de travail",
-  ...labels,
 };
-const logoSrc =
-  logo === "blanc" ? "/assets/logo_blanc.svg" : "/assets/logo_V2.svg";
 ---
 
 <header class="navbar" id="navbar" role="banner">
@@ -33,13 +30,12 @@ const logoSrc =
     <a href="/" class="logo" aria-label="JCD Groupe · Accueil">
       <img
         class="logo-img"
-        src={logoSrc}
-        alt="JCD Groupe"
+        src={`${import.meta.env.PUBLIC_DIRECTUS_URL}/assets/${global.logo_societe}`}
+        alt={global.nom_societe}
         width="1530"
         height="482"
         decoding="async"
         loading="eager"
-        fetchpriority={logo === "blanc" ? undefined : "high"}
       />
     </a>
 

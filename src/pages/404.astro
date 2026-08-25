@@ -79,7 +79,7 @@ let agencement = await directus.request(
     <header class="site-header">
       <a href="/" aria-label={`${global.nom_societe} · Accueil`}>
         <img
-          src="/assets/logo_V2.svg"
+          src={`${import.meta.env.PUBLIC_DIRECTUS_URL}/assets/${global.logo_societe}`}
           alt={global.nom_societe}
           width="120"
           height="30"
