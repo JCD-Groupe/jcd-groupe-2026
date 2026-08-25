@@ -97,7 +97,11 @@ agencement.icone_pole_content = await fetchSvgContent(agencement.icone_pole);
     />
     <meta name="color-scheme" content="dark" />
     <meta name="theme-color" content="#0a0a0a" />
-    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link
+      rel="icon"
+      href={`${import.meta.env.PUBLIC_DIRECTUS_URL}/assets/${global.favicon}`}
+      type="image/svg+xml"
+    />
     <meta name="description" content={global.meta_description_societe} />
     <link rel="canonical" href={import.meta.env.PUBLIC_DIRECTUS_URL} />
     <meta property="og:type" content="website" />

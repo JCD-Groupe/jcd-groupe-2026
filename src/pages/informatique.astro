@@ -100,7 +100,11 @@ info_reseaux.icone_service = await fetchSvgContent(info_reseaux.icone_service);
     />
     <meta name="color-scheme" content="dark" />
     <meta name="theme-color" content="#0a0a0a" />
-    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link
+      rel="icon"
+      href={`${import.meta.env.PUBLIC_DIRECTUS_URL}/assets/${global.favicon}`}
+      type="image/svg+xml"
+    />
     <meta name="description" content={informatique.meta_description} />
     <link
       rel="canonical"

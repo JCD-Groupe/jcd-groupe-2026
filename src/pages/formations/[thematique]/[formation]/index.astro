@@ -62,7 +62,11 @@ pageFormation.icone_cta_content = await fetchSvgContent(
     />
     <meta name="color-scheme" content="dark" />
     <meta name="theme-color" content="#0a0a0a" />
-    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link
+      rel="icon"
+      href={`${import.meta.env.PUBLIC_DIRECTUS_URL}/assets/${global.favicon}`}
+      type="image/svg+xml"
+    />
     <meta
       name="description"
       content="Fiche formation JCD Groupe : objectifs, programme détaillé, modalités et certification. Organisme certifié Qualiopi, centre d'examen TOSA, Metz."

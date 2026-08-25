@@ -74,7 +74,11 @@ info_cloud.icone_cta_content = await fetchSvgContent(info_cloud.icone_cta);
     />
     <meta name="color-scheme" content="dark" />
     <meta name="theme-color" content="#0a0a0a" />
-    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link
+      rel="icon"
+      href={`${import.meta.env.PUBLIC_DIRECTUS_URL}/assets/${global.favicon}`}
+      type="image/svg+xml"
+    />
     <meta name="description" content={info_cloud.meta_description} />
     <link
       rel="canonical"
