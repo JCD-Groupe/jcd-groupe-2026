@@ -154,7 +154,7 @@ thematiques = await Promise.all(
     <div class="ncat-body">
       <ul class="ncat-rail" role="none">
         {
-          thematiques.map(async (thematique: any) => (
+          thematiques.map(async (thematique: any, index: number) => (
             <li role="none">
               <a
                 href={`/formations/${thematique.slug}`}
@@ -162,7 +162,7 @@ thematiques = await Promise.all(
                 data-cat={thematique.slug}
                 role="menuitem"
                 tabindex="-1"
-                aria-selected="true"
+                aria-selected={index == 0 ? "true" : "false"}
                 style={`--cc:${thematique.couleur_rgb}`}
               >
                 <span class="ncat-cat-ic" aria-hidden="true">
@@ -197,9 +197,9 @@ thematiques = await Promise.all(
       <div class="ncat-stage">
         <div class="ncat-scroll">
           {
-            thematiques.map((thematique: any) => (
+            thematiques.map((thematique: any, index: number) => (
               <section
-                class="ncat-group is-active"
+                class={"ncat-group" + (index == 0 ? " is-active" : "")}
                 data-cat={thematique.slug}
                 style={`--cc:${thematique.couleur_rgb}`}
                 aria-label={`Formations ${thematique.titre_de_la_thematique_de_formations}`}
