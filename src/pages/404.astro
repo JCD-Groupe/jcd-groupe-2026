@@ -1,15 +1,72 @@
+---
+import { readSingleton } from "@directus/sdk";
+import { directus } from "../lib/directus";
+
+let global = await directus.request(
+  readSingleton("Global", {
+    fields: ["*"],
+  }),
+);
+
+let informatique = await directus.request(
+  readSingleton("JCD_Informatique", {
+    fields: ["nom_pole"],
+  }),
+);
+
+let developpement = await directus.request(
+  readSingleton("JCD_Developpement", {
+    fields: ["nom_pole"],
+  }),
+);
+
+let print = await directus.request(
+  readSingleton("JCD_Print", {
+    fields: ["nom_pole"],
+  }),
+);
+
+let service = await directus.request(
+  readSingleton("JCD_Service", {
+    fields: ["nom_pole"],
+  }),
+);
+
+let telecom = await directus.request(
+  readSingleton("JCD_Telecom", {
+    fields: ["nom_pole"],
+  }),
+);
+
+let formation = await directus.request(
+  readSingleton("JCD_Formation", {
+    fields: ["nom_pole"],
+  }),
+);
+
+let agencement = await directus.request(
+  readSingleton("JCD_Agencement", {
+    fields: ["nom_pole"],
+  }),
+);
+---
+
 <html lang="fr">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Page introuvable · JCD Groupe</title>
+    <title>Page introuvable · {global.nom_societe}</title>
     <meta
       name="description"
-      content="Erreur 404 — la page demandée n'existe pas ou a été déplacée. Retrouvez les sept pôles d'expertise de JCD Groupe depuis l'accueil."
+      content={`Erreur 404 — la page demandée n'existe pas ou a été déplacée. Retrouvez les pôles d'expertise de ${global.nom_societe} depuis l'accueil.`}
     />
     <meta name="robots" content="noindex, follow" />
     <meta name="theme-color" content="#0a0a0a" />
-    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link
+      rel="icon"
+      href={`${import.meta.env.PUBLIC_DIRECTUS_URL}/assets/${global.favicon}`}
+      type="image/svg+xml"
+    />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -20,10 +77,10 @@
   </head>
   <body>
     <header class="site-header">
-      <a href="/" aria-label="JCD Groupe · Accueil">
+      <a href="/" aria-label={`${global.nom_societe} · Accueil`}>
         <img
           src="/assets/logo_V2.svg"
-          alt="JCD Groupe"
+          alt={global.nom_societe}
           width="120"
           height="30"
         />
@@ -60,43 +117,43 @@
               <a
                 class="nf-pole"
                 style="--dot: var(--c-informatique)"
-                href="/informatique">Informatique</a
+                href="/informatique">{informatique.nom_pole}</a
               >
             </li>
             <li>
               <a
                 class="nf-pole"
                 style="--dot: var(--c-developpement)"
-                href="/developpement">Développement</a
+                href="/developpement">{developpement.nom_pole}</a
               >
             </li>
             <li>
               <a class="nf-pole" style="--dot: var(--c-print)" href="/print"
-                >Print</a
+                >{print.nom_pole}</a
               >
             </li>
             <li>
               <a class="nf-pole" style="--dot: var(--c-service)" href="/service"
-                >Service</a
+                >{service.nom_pole}</a
               >
             </li>
             <li>
               <a class="nf-pole" style="--dot: var(--c-telecom)" href="/telecom"
-                >Télécom</a
+                >{telecom.nom_pole}</a
               >
             </li>
             <li>
               <a
                 class="nf-pole"
                 style="--dot: var(--c-formation)"
-                href="/formation">Formation</a
+                href="/formation">{formation.nom_pole}</a
               >
             </li>
             <li>
               <a
                 class="nf-pole"
                 style="--dot: var(--c-agencement)"
-                href="/agencement">Agencement</a
+                href="/agencement">{agencement.nom_pole}</a
               >
             </li>
           </ul>
@@ -106,9 +163,8 @@
 
     <footer class="site-footer">
       <p>
-        JCD Groupe — <a href="/">jcd-groupe.fr</a> · <a href="/mentions-legales"
-          >Mentions légales</a
-        >
+        {global.nom_societe} — <a href="/">{import.meta.env.PUBLIC_FRONT_URL}</a
+        > · <a href="/mentions-legales">Mentions légales</a>
       </p>
     </footer>
   </body>
