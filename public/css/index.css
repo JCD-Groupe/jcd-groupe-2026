@@ -1662,6 +1662,9 @@
     border-color: rgba(var(--card-color-rgb), 0.22);
     background: rgba(var(--card-color-rgb), 0.06);
   }
+  .pole-card-icon svg {
+    width: 20px;
+  }
   /* Cards a mask (desktop) : le lisere vit sur ::after pour suivre le fade. */
   @media (min-width: 1101px) {
     .pole-card.pole-center::after,
