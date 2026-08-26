@@ -1803,11 +1803,13 @@
   .value-slide.is-active .value-visual { transform: scale(1); }
   .value-visual svg { width: 42%; height: 42%; }
   /* Une couleur de marque JCD par valeur (icône + halo) */
-  .value-slide:nth-child(1) .value-visual { --vc: #2E72BA; } /* bleu   · Proximité */
-  .value-slide:nth-child(2) .value-visual { --vc: #F9D605; } /* jaune  · Expertise */
-  .value-slide:nth-child(3) .value-visual { --vc: #F3941D; } /* orange · Esprit d'équipe */
-  .value-slide:nth-child(4) .value-visual { --vc: #E51D29; } /* rouge  · Fiabilité */
-  .value-slide:nth-child(5) .value-visual { --vc: #B063AC; } /* violet · Engagement */
+  .value-slide:nth-child(7n+1) .value-visual { --vc: #2E72BA; } 
+  .value-slide:nth-child(7n+2) .value-visual { --vc: #F9D605; } 
+  .value-slide:nth-child(7n+3) .value-visual { --vc: #F3941D; } 
+  .value-slide:nth-child(7n+4) .value-visual { --vc: #E51D29; } 
+  .value-slide:nth-child(7n+5) .value-visual { --vc: #B063AC; } 
+  .value-slide:nth-child(7n+6) .value-visual { --vc: #8EC041; } 
+  .value-slide:nth-child(7n) .value-visual { --vc: #A78D75; } 
   .value-name { font-size: clamp(19px, 2vw, 23px); font-weight: 600; letter-spacing: -0.02em; color: var(--text-1); margin-bottom: 12px; }
   .value-text { font-size: 15px; line-height: 1.65; color: var(--text-2); max-width: 44ch; }
   .values-foot {

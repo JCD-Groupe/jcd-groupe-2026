@@ -9,6 +9,39 @@ let global = await directus.request(
     fields: ["*"],
   }),
 );
+
+let carriere = await directus.request(
+  readSingleton("carriere", {
+    fields: [
+      "*",
+      { valeurs: ["*"] },
+      { avantages: ["*"] },
+      { processus: ["*"] },
+      { informations_supplementaires_formulaire: ["*"] },
+    ],
+  }),
+);
+
+let offres = await directus.request(
+  readSingleton("Offres", {
+    fields: ["*"],
+  }),
+);
+
+const fetchSvgContent = async (id: string) => {
+  if (!id) return null;
+  const response = await fetch(
+    `${import.meta.env.PUBLIC_DIRECTUS_URL}/assets/${id}`,
+  );
+  return response.text();
+};
+
+carriere.valeurs = await Promise.all(
+  carriere.valeurs.map(async (valeur: any) => ({
+    ...valeur,
+    icone_content: await fetchSvgContent(valeur.icone),
+  })),
+);
 ---
 
 <html lang="fr">
@@ -25,25 +58,16 @@ let global = await directus.request(
       href={`${import.meta.env.PUBLIC_DIRECTUS_URL}/assets/${global.favicon}`}
       type="image/svg+xml"
     />
-    <meta
-      name="description"
-      content="Rejoignez JCD Groupe — 83 collaborateurs, 7 pôles d'expertise, 2 agences à Metz et Nancy. Découvrez nos offres d'emploi, la vie chez JCD (locaux, sport, team building, avantages) et envoyez votre candidature spontanée."
-    />
+    <meta name="description" content={carriere.meta_description} />
     <link
       rel="canonical"
       href={`${import.meta.env.PUBLIC_DIRECTUS_URL}/carrieres`}
     />
     <meta property="og:type" content="website" />
-    <meta property="og:site_name" content="JCD Groupe" />
+    <meta property="og:site_name" content={global.nom_societe} />
     <meta property="og:locale" content="fr_FR" />
-    <meta
-      property="og:title"
-      content="Carrières · JCD Groupe — Rejoignez un groupe qui avance"
-    />
-    <meta
-      property="og:description"
-      content="Rejoignez JCD Groupe — 83 collaborateurs, 7 pôles d'expertise, 2 agences à Metz et Nancy. Découvrez nos offres d'emploi, la vie chez JCD (locaux, sport, team building, avantages) et envoyez votre candidature spontanée."
-    />
+    <meta property="og:title" content={`Carrières · ${global.nom_societe}`} />
+    <meta property="og:description" content={carriere.meta_description} />
     <meta
       property="og:url"
       content={`${import.meta.env.PUBLIC_DIRECTUS_URL}/carrieres`}
@@ -107,12 +131,12 @@ let global = await directus.request(
                 loop
                 playsinline
                 preload="auto"
-                poster="assets/poster-carrieres.jpg"
+                poster={`${import.meta.env.PUBLIC_DIRECTUS_URL}/assets/${carriere.image_backup_video}`}
                 aria-hidden="true"
                 tabindex="-1"
               >
                 <source
-                  src="/assets/JCD_interne_V2.mp4"
+                  src={`${import.meta.env.PUBLIC_DIRECTUS_URL}/assets/${carriere.video}`}
                   type="video/mp4"
                   media="(min-width: 821px)"
                 />
@@ -124,14 +148,16 @@ let global = await directus.request(
           <!-- Sous la vidéo : titre + CTA (gauche) · paragraphe (droite) -->
           <div class="hero-row">
             <div class="hero-headcol reveal delay-1">
-              <h1 class="hero-h1" id="hero-title">
-                Rejoignez un groupe qui <em>avance</em>
-              </h1>
+              <h1
+                class="hero-h1"
+                id="hero-title"
+                set:html={carriere.titre_hero}
+              />
               <!-- Découvrir d'abord les offres (primaire) ; « Postuler »
                    reste en second pour la candidature spontanée. -->
               <div class="hero-ctas">
                 <a href="#offres" class="hero-apply">
-                  <span>Découvrir nos opportunités</span>
+                  <span>{carriere.bouton_blanc}</span>
                   <span class="hero-apply-ic" aria-hidden="true">
                     <svg
                       viewBox="0 0 16 16"
@@ -145,7 +171,7 @@ let global = await directus.request(
                   </span>
                 </a>
                 <a href="#postuler" class="hero-apply hero-apply--ghost">
-                  <span>Postuler</span>
+                  <span>{carriere.bouton_noir}</span>
                   <span class="hero-apply-ic" aria-hidden="true">
                     <svg
                       viewBox="0 0 16 16"
@@ -161,10 +187,7 @@ let global = await directus.request(
               </div>
             </div>
             <p class="hero-lead reveal delay-2">
-              JCD Groupe réunit sept pôles d'expertise, de l'informatique à
-              l'agencement. Si vous aimez comprendre les enjeux de vos clients
-              et mettre votre expertise à leur service pour apporter des
-              réponses concrètes à leurs problématiques, alors c'est ici&nbsp;!
+              {carriere.texte_hero}
             </p>
           </div>
         </div>
@@ -181,145 +204,38 @@ let global = await directus.request(
         <div class="container">
           <div class="values-panel reveal">
             <div class="values-head">
-              <h2 class="values-title" id="values-title">
-                Les valeurs qui nous guident, en interne comme avec nos clients
-              </h2>
+              <h2
+                class="values-title"
+                id="values-title"
+                set:html={carriere.titre_valeur}
+              />
             </div>
 
             <div class="values-stage" data-values>
               <div class="values-viewport">
                 <ul class="values-track" id="values-track">
-                  <li class="value-slide is-active">
-                    <span class="value-visual" aria-hidden="true">
-                      <svg
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        stroke-width="1.5"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        ><path
-                          d="M12 21s-7-5.6-7-11a7 7 0 0 1 14 0c0 5.4-7 11-7 11z"
-                        ></path><circle cx="12" cy="10" r="2.5"></circle></svg
-                      >
-                    </span>
-                    <div class="value-body">
-                      <h3 class="value-name">Proximité</h3>
-                      <p class="value-text">
-                        On travaille au plus près du terrain et de nos clients.
-                        Un seul interlocuteur, des décisions rapides, pas de
-                        strates inutiles entre vous et l'action, pour nos
-                        clients comme pour nos équipes.
-                      </p>
-                    </div>
-                  </li>
-
-                  <li class="value-slide">
-                    <span class="value-visual" aria-hidden="true">
-                      <svg
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        stroke-width="1.5"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        ><circle cx="12" cy="12" r="9"></circle><circle
-                          cx="12"
-                          cy="12"
-                          r="5"></circle><circle cx="12" cy="12" r="1.4"
-                        ></circle></svg
-                      >
-                    </span>
-                    <div class="value-body">
-                      <h3 class="value-name">Expertise</h3>
-                      <p class="value-text">
-                        Sept pôles, des spécialistes dans chacun. On forme, on
-                        certifie, on reste à la pointe, parce que c'est la
-                        maîtrise du métier qui fait la différence chez nos
-                        clients.
-                      </p>
-                    </div>
-                  </li>
-
-                  <li class="value-slide">
-                    <span class="value-visual" aria-hidden="true">
-                      <svg
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        stroke-width="1.5"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        ><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"
-                        ></path><circle cx="9" cy="7" r="4"></circle><path
-                          d="M22 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"
-                        ></path></svg
-                      >
-                    </span>
-                    <div class="value-body">
-                      <h3 class="value-name">Esprit d'équipe</h3>
-                      <p class="value-text">
-                        On avance ensemble. Entraide entre pôles, transmission
-                        du savoir-faire, et des moments qui comptent hors du
-                        travail. Personne ne reste seul devant un problème.
-                      </p>
-                    </div>
-                  </li>
-
-                  <li class="value-slide">
-                    <span class="value-visual" aria-hidden="true">
-                      <svg
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        stroke-width="1.5"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        ><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"
-                        ></path><path d="m9 12 2 2 4-4"></path></svg
-                      >
-                    </span>
-                    <div class="value-body">
-                      <h3 class="value-name">Fiabilité</h3>
-                      <p class="value-text">
-                        On tient ce qu'on promet. Nos clients nous confient leur
-                        informatique, leur télécom et leurs espaces de travail :
-                        la confiance se mérite, et elle se reconduit chaque
-                        jour.
-                      </p>
-                    </div>
-                  </li>
-
-                  <li class="value-slide">
-                    <span class="value-visual" aria-hidden="true">
-                      <svg
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        stroke-width="1.5"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        ><path
-                          d="M19 14c1.5-1.5 3-3.2 3-5.5A4.5 4.5 0 0 0 17.5 4c-1.8 0-3 .9-4 2.2L12 7.7l-1.5-1.5C9.5 4.9 8.3 4 6.5 4A4.5 4.5 0 0 0 2 8.5c0 2.3 1.5 4 3 5.5l7 7Z"
-                        ></path></svg
-                      >
-                    </span>
-                    <div class="value-body">
-                      <h3 class="value-name">Engagement</h3>
-                      <p class="value-text">
-                        On s'investit pour nos clients, nos collaborateurs et
-                        notre région. Le travail bien fait, durablement, et la
-                        fierté d'un métier utile, au service du quotidien des
-                        entreprises.
-                      </p>
-                    </div>
-                  </li>
+                  {
+                    carriere.valeurs.map((valeur: any, index: number) => (
+                      <li class="value-slide is-active">
+                        <span
+                          class="value-visual"
+                          aria-hidden="true"
+                          set:html={valeur.icone_content}
+                        />
+                        <div class="value-body">
+                          <h3 class="value-name">{valeur.titre}</h3>
+                          <p class="value-text">{valeur.description}</p>
+                        </div>
+                      </li>
+                    ))
+                  }
                 </ul>
               </div>
 
               <div class="values-foot">
                 <span class="values-count"
-                  ><b id="values-cur">01</b><span>&thinsp;/&thinsp;05</span
+                  ><b id="values-cur">01</b><span
+                    >&thinsp;/&thinsp;0{carriere.valeurs.length}</span
                   ></span
                 >
                 <div class="values-nav">
@@ -374,107 +290,30 @@ let global = await directus.request(
           <div class="acc-grid">
             <div class="acc-intro reveal">
               <h2 class="acc-title" id="support-title">
-                On prend soin des équipes, au travail comme en dehors
+                {carriere.titre_avantages}
               </h2>
               <p class="acc-text">
-                Le bien-être de nos salariés au premier plan : une rémunération
-                juste, des avantages concrets et un cadre pensé pour nos
-                équipes.
+                {carriere.sous_titre_avantages}
               </p>
             </div>
             <div class="acc-list reveal delay-1">
-              <div class="acc-item">
-                <h3 class="acc-h">
-                  <button type="button" class="acc-q" aria-expanded="false">
-                    <span class="acc-q-tx"
-                      >Rémunération &amp; titres-restaurant</span
-                    >
-                    <span class="acc-icon" aria-hidden="true"></span>
-                  </button>
-                </h3>
-                <div class="acc-a">
-                  <div class="acc-a-in">
-                    <p>
-                      Un salaire à la hauteur de votre expertise, revu chaque
-                      année, et des titres-restaurant versés dès le 1ᵉʳ jour de
-                      travail, sans condition d'ancienneté, qui prennent en
-                      charge une partie de chaque déjeuner travaillé.
-                    </p>
+              {
+                carriere.avantages.map((avantage: any) => (
+                  <div class="acc-item">
+                    <h3 class="acc-h">
+                      <button type="button" class="acc-q" aria-expanded="false">
+                        <span class="acc-q-tx">{avantage.titre}</span>
+                        <span class="acc-icon" aria-hidden="true" />
+                      </button>
+                    </h3>
+                    <div class="acc-a">
+                      <div class="acc-a-in">
+                        <p>{avantage.description}</p>
+                      </div>
+                    </div>
                   </div>
-                </div>
-              </div>
-
-              <div class="acc-item">
-                <h3 class="acc-h">
-                  <button type="button" class="acc-q" aria-expanded="false">
-                    <span class="acc-q-tx">Mutuelle &amp; prévoyance</span>
-                    <span class="acc-icon" aria-hidden="true"></span>
-                  </button>
-                </h3>
-                <div class="acc-a">
-                  <div class="acc-a-in">
-                    <p>
-                      60&nbsp;% de la cotisation mutuelle prise en charge par le
-                      groupe, pour vous et votre famille, avec une prévoyance
-                      pour les coups durs.
-                    </p>
-                  </div>
-                </div>
-              </div>
-
-              <div class="acc-item">
-                <h3 class="acc-h">
-                  <button type="button" class="acc-q" aria-expanded="false">
-                    <span class="acc-q-tx">Sport &amp; bien-être</span>
-                    <span class="acc-icon" aria-hidden="true"></span>
-                  </button>
-                </h3>
-                <div class="acc-a">
-                  <div class="acc-a-in">
-                    <p>
-                      Un gymnase et des créneaux sportifs réguliers entre
-                      collègues, sur le temps de travail. On s'y dépense, on
-                      décompresse, on se croise autrement.
-                    </p>
-                  </div>
-                </div>
-              </div>
-
-              <div class="acc-item">
-                <h3 class="acc-h">
-                  <button type="button" class="acc-q" aria-expanded="false">
-                    <span class="acc-q-tx">Vie d'équipe &amp; rendez-vous</span>
-                    <span class="acc-icon" aria-hidden="true"></span>
-                  </button>
-                </h3>
-                <div class="acc-a">
-                  <div class="acc-a-in">
-                    <p>
-                      JCD Day, fête de Noël, Beaujolais nouveau, afterworks,
-                      défis inter-pôles : des rendez-vous qui rythment l'année
-                      et soudent les équipes.
-                    </p>
-                  </div>
-                </div>
-              </div>
-
-              <div class="acc-item">
-                <h3 class="acc-h">
-                  <button type="button" class="acc-q" aria-expanded="false">
-                    <span class="acc-q-tx">Cadre &amp; locaux</span>
-                    <span class="acc-icon" aria-hidden="true"></span>
-                  </button>
-                </h3>
-                <div class="acc-a">
-                  <div class="acc-a-in">
-                    <p>
-                      3&nbsp;000&nbsp;m² à Metz et une agence à Nancy, équipés
-                      par nos propres pôles Agencement et Informatique :
-                      lumineux, et pensés pour bien travailler.
-                    </p>
-                  </div>
-                </div>
-              </div>
+                ))
+              }
             </div>
           </div>
         </div>
@@ -492,105 +331,30 @@ let global = await directus.request(
           <div class="acc-grid">
             <div class="acc-intro reveal">
               <h2 class="acc-title" id="hire-title">
-                Un processus simple, humain et rapide
+                {carriere.titre_processus}
               </h2>
               <p class="acc-text">
-                On cherche des personnes curieuses et fiables, plus que des CV
-                parfaits. Voici à quoi vous attendre quand vous postulez chez
-                JCD.
+                {carriere.sous_titre_processus}
               </p>
             </div>
             <div class="acc-list reveal delay-1">
-              <div class="acc-item">
-                <h3 class="acc-h">
-                  <button type="button" class="acc-q" aria-expanded="false">
-                    <span class="acc-q-tx">Ce qu'on regarde</span>
-                    <span class="acc-icon" aria-hidden="true"></span>
-                  </button>
-                </h3>
-                <div class="acc-a">
-                  <div class="acc-a-in">
-                    <p>
-                      Votre savoir-faire, bien sûr, mais surtout votre envie
-                      d'apprendre et votre sens du service. La personnalité
-                      compte autant que le diplôme.
-                    </p>
+              {
+                carriere.processus.map((etape: any) => (
+                  <div class="acc-item">
+                    <h3 class="acc-h">
+                      <button type="button" class="acc-q" aria-expanded="false">
+                        <span class="acc-q-tx">{etape.titre}</span>
+                        <span class="acc-icon" aria-hidden="true" />
+                      </button>
+                    </h3>
+                    <div class="acc-a">
+                      <div class="acc-a-in">
+                        <p>{etape.description}</p>
+                      </div>
+                    </div>
                   </div>
-                </div>
-              </div>
-
-              <div class="acc-item">
-                <h3 class="acc-h">
-                  <button type="button" class="acc-q" aria-expanded="false">
-                    <span class="acc-q-tx">Les étapes</span>
-                    <span class="acc-icon" aria-hidden="true"></span>
-                  </button>
-                </h3>
-                <div class="acc-a">
-                  <div class="acc-a-in">
-                    <p>
-                      Un premier échange téléphonique, un entretien avec
-                      l'équipe et le pôle concerné, parfois un cas pratique. Si
-                      votre profil est retenu, nous revenons vers vous
-                      rapidement.
-                    </p>
-                  </div>
-                </div>
-              </div>
-
-              <div class="acc-item">
-                <h3 class="acc-h">
-                  <button type="button" class="acc-q" aria-expanded="false">
-                    <span class="acc-q-tx">Un seul interlocuteur</span>
-                    <span class="acc-icon" aria-hidden="true"></span>
-                  </button>
-                </h3>
-                <div class="acc-a">
-                  <div class="acc-a-in">
-                    <p>
-                      Une personne vous suit de la candidature jusqu'à la
-                      réponse. Vous n'êtes jamais un numéro de dossier perdu
-                      dans une file d'attente.
-                    </p>
-                  </div>
-                </div>
-              </div>
-
-              <div class="acc-item">
-                <h3 class="acc-h">
-                  <button type="button" class="acc-q" aria-expanded="false">
-                    <span class="acc-q-tx">Confidentialité de vos données</span>
-                    <span class="acc-icon" aria-hidden="true"></span>
-                  </button>
-                </h3>
-                <div class="acc-a">
-                  <div class="acc-a-in">
-                    <p>
-                      Vos données ne servent qu'à votre candidature et restent
-                      confidentielles (RGPD). Les CV non retenus ne sont pas
-                      conservés au-delà du délai légal.
-                    </p>
-                  </div>
-                </div>
-              </div>
-
-              <div class="acc-item">
-                <h3 class="acc-h">
-                  <button type="button" class="acc-q" aria-expanded="false">
-                    <span class="acc-q-tx">Égalité des chances</span>
-                    <span class="acc-icon" aria-hidden="true"></span>
-                  </button>
-                </h3>
-                <div class="acc-a">
-                  <div class="acc-a-in">
-                    <p>
-                      On recrute sur les compétences et l'état d'esprit. Tous
-                      les profils sont les bienvenus, et des aménagements sont
-                      possibles : dites-le-nous.
-                    </p>
-                  </div>
-                </div>
-              </div>
+                ))
+              }
             </div>
           </div>
         </div>
@@ -608,9 +372,11 @@ let global = await directus.request(
         <div class="container">
           <div class="offers-head reveal">
             <div>
-              <h2 class="sec-title" id="offres-title">
-                Nos offres du <em>moment</em>
-              </h2>
+              <h2
+                class="sec-title"
+                id="offres-title"
+                set:html={carriere.titre_offres}
+              />
               <p class="offers-count" id="offres-count" aria-live="polite"></p>
             </div>
             <div class="offers-ctrl">
@@ -669,33 +435,27 @@ let global = await directus.request(
         <div class="container">
           <div class="apply-grid">
             <aside class="apply-aside reveal">
-              <h2 class="sec-title" id="postuler-title">
-                Et si c'était <em>vous</em>&nbsp;?
-              </h2>
+              <h2
+                class="sec-title"
+                id="postuler-title"
+                set:html={carriere.titre_formulaire}
+              />
               <p class="sec-text">
-                Répondez à une offre ou tentez votre chance spontanément&nbsp;:
-                dans les deux cas, votre CV arrive directement à la bonne
-                équipe.
+                {carriere.sous_titre_formulaire}
               </p>
               <ul class="apply-points">
-                <li class="apply-point">
-                  <span class="apply-point-tx"
-                    ><strong>Chaque dossier est lu</strong>Par l'équipe
-                    concernée, pas par un robot de tri.</span
-                  >
-                </li>
-                <li class="apply-point">
-                  <span class="apply-point-tx"
-                    ><strong>Un seul interlocuteur</strong>De votre candidature
-                    jusqu'à la réponse.</span
-                  >
-                </li>
-                <li class="apply-point">
-                  <span class="apply-point-tx"
-                    ><strong>Vos données restent confidentielles</strong>Elles
-                    ne servent qu'à votre candidature (RGPD).</span
-                  >
-                </li>
+                {
+                  carriere.informations_supplementaires_formulaire.map(
+                    (info: any) => (
+                      <li class="apply-point">
+                        <span class="apply-point-tx">
+                          <strong>{info.titre}</strong>
+                          {info.description}
+                        </span>
+                      </li>
+                    ),
+                  )
+                }
               </ul>
             </aside>
 
