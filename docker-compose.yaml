@@ -8,10 +8,9 @@ services:
     ports:
       - "127.0.0.1:4321:4321"
     volumes:
-      # Permet de synchroniser votre code source sans reconstruire l'image
       - .:/app
-      # Évite de surécrire les node_modules du conteneur avec ceux de l'hôte
       - /app/node_modules
+
   directus:
     container_name: jcd-groupe-api
     image: directus/directus:latest
@@ -26,15 +25,26 @@ services:
       SECRET: "${DIRECTUS_SECRET}"
       DB_CLIENT: "sqlite3"
       DB_FILENAME: "/directus/database/data.db"
-      
       PUBLIC_URL: "${PUBLIC_DIRECTUS_URL}"
-      
       ADMIN_EMAIL: "${DIRECTUS_ADMIN_EMAIL}"
       ADMIN_PASSWORD: "${DIRECTUS_ADMIN_PASSWORD}"
-      
       CORS_ENABLED: "true"
       CORS_ORIGIN: "${PUBLIC_FRONT_URL}"
       CORS_METHODS: "GET,POST,PUT,PATCH,DELETE,OPTIONS"
       CORS_ALLOWED_HEADERS: "Content-Type,Authorization"
       CORS_CREDENTIALS: "true"
     restart: unless-stopped
+
+  contact-api:
+    build: ./contact-backend
+    container_name: jcd-groupe-contact
+    restart: always
+    ports:
+      - "127.0.0.1:5000:5000"
+    environment:
+      SMTP_HOST: "${SMTP_HOST}"
+      SMTP_PORT: "${SMTP_PORT}"
+      SMTP_USER: "${SMTP_USER}"
+      SMTP_PASS: "${SMTP_PASS}"
+      TO_EMAIL: "${CONTACT_TO_EMAIL}"
+      ALLOWED_ORIGIN: "${PUBLIC_FRONT_URL}"

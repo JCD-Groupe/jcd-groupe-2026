@@ -71,12 +71,6 @@ let global = await directus.request(
   <body>
     <a class="jcd-skip" href="#contenu">Aller au contenu</a>
 
-    <!-- ====================================================================
-     NAVBAR v2 — Modal-like
-     Logo (g) · capsule centrale {Expertises ▾ · Contact · Carrières}
-     · CTA Assistance (d). Bande pleine largeur, fade gauche/droite,
-     dropdown "Expertises" avec 7 SVG 3D isométriques colorés.
-     ==================================================================== -->
     <Header current="contact" />
 
     <main id="contenu">
@@ -86,7 +80,7 @@ let global = await directus.request(
         <div class="container">
           <form id="contact-form" class="q-shell reveal" novalidate>
             <div class="q-shell-inner">
-              <!-- Barre de progression (3 étapes) -->
+              <!-- Barre de progression (2 étapes) -->
               <div class="q-progress" aria-hidden="true">
                 <div class="q-progress-track">
                   <div class="q-progress-fill" id="q-progress-fill"></div>
@@ -287,37 +281,10 @@ let global = await directus.request(
                   </button>
                 </div>
               </section>
-
-              <!-- Champs cachés Web3Forms — REMPLACER la clé ci-dessous par votre
-             clé d'accès gratuite (https://web3forms.com → email destinataire
-             = contact@jcd-groupe.fr). Tant que la clé n'est pas renseignée,
-             l'envoi échoue volontairement (message d'erreur affiché). -->
-              <input
-                type="hidden"
-                name="access_key"
-                id="f-access-key"
-                value="VOTRE_CLE_WEB3FORMS_ICI"
-              />
-              <input
-                type="hidden"
-                name="subject"
-                id="f-subject"
-                value="Nouvelle demande de contact — JCD Groupe"
-              />
-              <input type="hidden" name="from_name" value="Site JCD Groupe" />
-              <input
-                type="checkbox"
-                name="botcheck"
-                id="f-botcheck"
-                class="visually-hidden"
-                tabindex="-1"
-                autocomplete="off"
-                aria-hidden="true"
-              />
             </div>
           </form>
 
-          <!-- Écran de confirmation (affiché après envoi réussi) -->
+          <!-- Écran de confirmation -->
           <div
             class="q-success"
             id="q-success"
@@ -370,9 +337,82 @@ let global = await directus.request(
     <Footer />
 
     <script is:inline src="/js/pages/contact-1.js"></script>
-
     <script is:inline src="/js/pages/contact-2.js"></script>
     <script is:inline src="/js/shared/menu-frost.js"></script>
+
+    <!-- Script de soumission vers l'API Python Docker -->
+    <script>
+      const form = document.getElementById("contact-form") as HTMLFormElement;
+      const errorEl = document.getElementById("q-error") as HTMLElement;
+      const successEl = document.getElementById("q-success") as HTMLElement;
+      const submitBtn = document.getElementById(
+        "q-submit",
+      ) as HTMLButtonElement;
+
+      form?.addEventListener("submit", async (e) => {
+        e.preventDefault();
+
+        if (errorEl) {
+          errorEl.hidden = true;
+          errorEl.textContent = "";
+        }
+
+        const formData = new FormData(form);
+        const name = formData.get("name")?.toString() || "";
+        const company = formData.get("company")?.toString() || "";
+        const email = formData.get("email")?.toString() || "";
+        const phone = formData.get("phone")?.toString() || "";
+        const messageContent = formData.get("message")?.toString() || "";
+
+        const fullMessage = `
+Entreprise: ${company || "Non renseignée"}
+Téléphone: ${phone || "Non renseigné"}
+
+Message:
+${messageContent}
+        `.trim();
+
+        const payload = {
+          name,
+          email,
+          message: fullMessage,
+        };
+
+        try {
+          if (submitBtn) submitBtn.disabled = true;
+
+          // Appel au conteneur Docker "jcd-groupe-contact" sur le port 5000
+          const response = await fetch("http://127.0.0.1:5000/api/contact", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(payload),
+          });
+
+          if (response.ok) {
+            form.hidden = true;
+            if (successEl) successEl.hidden = false;
+          } else {
+            const result = await response.json();
+            if (errorEl) {
+              errorEl.textContent =
+                result.error || "Une erreur s'est produite lors de l'envoi.";
+              errorEl.hidden = false;
+            }
+          }
+        } catch (err) {
+          if (errorEl) {
+            errorEl.textContent =
+              "Impossible de contacter le serveur d'envoi. Veuillez réessayer.";
+            errorEl.hidden = false;
+          }
+        } finally {
+          if (submitBtn) submitBtn.disabled = false;
+        }
+      });
+    </script>
+
     <!-- jcd-mobile-nav (injected) -->
     <button
       class="jcd-burger"
@@ -616,6 +656,7 @@ let global = await directus.request(
       </div>
     </div>
     <script is:inline src="/js/shared/mobile-nav.js"></script>
+
     <!-- jcd-a11y (Lot 5) -->
     <div class="jcd-fab-wrap" id="jcd-fab">
       <button
