@@ -8,6 +8,7 @@
 //             (index et service portent des libelles plus recents que les
 //              autres pages ; drift conserve tel quel, voir rapport migration)
 import CatalogueMenu from "./CatalogueMenu.astro";
+import MobileNav from "./MobileNav.astro";
 const {
   current = null,
   logo = "v2",
@@ -492,3 +493,5 @@ const logoSrc =
        ============================================================ -->
   {catalogue && <CatalogueMenu />}
 </header>
+
+<MobileNav />
