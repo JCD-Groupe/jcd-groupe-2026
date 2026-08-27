@@ -1,0 +1,4 @@
+# Les PDF sont binaires : jamais de conversion de fins de ligne
+# (les placeholders de public/docs/ sont en ASCII pur et seraient
+# corrompus par autocrlf au checkout).
+*.pdf -text

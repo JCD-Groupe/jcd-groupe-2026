@@ -689,3 +689,42 @@
     .fq-kpi-arc { transition: none; }
     .fq-row, .fq-row-n, .fq-row-link, .fq-row-arrow { transition: none; }
   }
+
+/* ==================================================================
+   Manifeste - bouton calendrier des formations (2026-08-27)
+   Fichier telecharge : public/docs/calendrier-formations.pdf
+   ================================================================== */
+
+  .mf-calendrier {
+    margin-top: clamp(26px, 3.4vw, 42px);
+    padding-top: clamp(18px, 2.2vw, 26px);
+    border-top: 1px solid var(--line-2);
+  }
+  .mf-cal-btn {
+    display: inline-flex; align-items: center; gap: 12px;
+    padding: 13px 22px 13px 17px;
+    background: var(--cahier-ink, #141414);
+    color: var(--cahier-paper-1, #efe9da);
+    text-decoration: none; border-radius: 999px;
+    font-family: var(--font-mono); font-size: 11.5px; line-height: 1;
+    letter-spacing: 0.08em; text-transform: uppercase;
+    transition: background 320ms var(--ease-out), transform 320ms var(--ease-out);
+  }
+  .mf-cal-btn:hover {
+    background: var(--cahier-margin-red, #c43a3a);
+    transform: translateY(-1px);
+  }
+  .mf-cal-btn:focus-visible {
+    outline: 2px solid var(--cahier-margin-red, #c43a3a);
+    outline-offset: 3px;
+  }
+  .mf-cal-ic { display: inline-flex; }
+  .mf-cal-ic svg { width: 15px; height: 15px; }
+  .mf-cal-tag {
+    padding: 4px 7px; border: 1px solid currentColor; border-radius: 4px;
+    font-size: 9px; opacity: 0.75;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .mf-cal-btn { transition: none; }
+    .mf-cal-btn:hover { transform: none; }
+  }

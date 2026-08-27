@@ -46,6 +46,7 @@ import Footer from "../components/Footer.astro";
     <link rel="stylesheet" href="/css/formation-detail.css" />
     <link rel="stylesheet" href="/css/global.css" />
     <link rel="stylesheet" href="/css/formation-detail-overrides.css" />
+    <link rel="stylesheet" href="/css/formation-detail-print.css" />
     <link rel="stylesheet" href="/css/transition.css" />
     <script is:inline src="/js/shared/transition.js"></script>
     <script is:inline src="/js/shared/mpolish.js" id="jcd-mpolish-js"></script>
@@ -941,10 +942,35 @@ import Footer from "../components/Footer.astro";
                         ></span
                       >
                     </a>
+                    <!-- PLACEHOLDER FICHIER : déposer le formulaire de
+                         pré-inscription dans
+                         public/docs/formulaire-preinscription.pdf -->
                     <a
-                      href="/contact?pole=formation&intent=rappel&step=2"
-                      class="btn-cta btn-cta--ghost">Être rappelé</a
+                      href="/docs/formulaire-preinscription.pdf"
+                      download="formulaire-preinscription-jcd.pdf"
+                      class="btn-cta btn-cta--ghost">Pré-inscription</a
                     >
+                    <button
+                      type="button"
+                      class="fd-print-btn"
+                      id="fd-print-btn"
+                    >
+                      <svg
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="1.7"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        aria-hidden="true"
+                        focusable="false"
+                        ><path d="M6 9V3h12v6"></path><path
+                          d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"
+                        ></path><rect x="6" y="14" width="12" height="7" rx="1"
+                        ></rect></svg
+                      >
+                      Imprimer la fiche
+                    </button>
                   </div>
                   <p class="fd-aside-note">
                     <svg
@@ -1098,6 +1124,87 @@ import Footer from "../components/Footer.astro";
     </main>
 
     <Footer />
+
+    <!-- ================================
+     FICHE IMPRIMABLE — modèle A4 fond blanc, masqué à l'écran.
+     Rempli au clic sur #fd-print-btn depuis les zones data-field de la
+     page (catalogue aujourd'hui, Directus demain) : chaque formation
+     produit donc sa propre fiche. Voir /js/pages/formation-detail-1.js
+     et /css/formation-detail-print.css.
+     ================================ -->
+    <div id="fd-print" aria-hidden="true">
+      <header class="fdp-head">
+        <div class="fdp-brand">
+          <strong>JCD Formation</strong>
+          <span>Organisme certifié Qualiopi · Centre d'examen TOSA agréé</span>
+        </div>
+        <div class="fdp-ref">
+          Réf. <span data-print-field="reference">—</span>
+        </div>
+      </header>
+
+      <div class="fdp-title-row">
+        <span class="fdp-cat" data-print-field="categorie">Bureautique</span>
+        <h1 class="fdp-title" data-print-field="title">Excel initiation</h1>
+      </div>
+
+      <ul class="fdp-facts">
+        <li>
+          <strong>Durée</strong><span data-print-field="duree">—</span>
+        </li>
+        <li>
+          <strong>Tarif</strong><span
+            ><span data-print-field="tarif">—</span> / participant</span
+          >
+        </li>
+        <li>
+          <strong>Lieux</strong><span data-print-field="lieux">—</span>
+        </li>
+        <li>
+          <strong>Format</strong><span data-print-field="format">—</span>
+        </li>
+      </ul>
+
+      <section class="fdp-sec">
+        <h2>Objectifs pédagogiques</h2>
+        <ul class="fdp-list" data-print-list="objectifs"></ul>
+      </section>
+
+      <section class="fdp-sec">
+        <h2>Programme</h2>
+        <ul class="fdp-prog" data-print-list="programme"></ul>
+      </section>
+
+      <div class="fdp-cols">
+        <section class="fdp-sec">
+          <h2>Public visé</h2>
+          <p data-print-field="public">—</p>
+        </section>
+        <section class="fdp-sec">
+          <h2>Prérequis</h2>
+          <p data-print-field="prerequis">—</p>
+        </section>
+        <section class="fdp-sec">
+          <h2>Modalités pédagogiques</h2>
+          <p data-print-field="modalites_pedagogiques">—</p>
+        </section>
+        <section class="fdp-sec">
+          <h2>Suivi &amp; évaluation</h2>
+          <p data-print-field="modalites_evaluation">—</p>
+        </section>
+      </div>
+
+      <p class="fdp-tosa" data-print-tosa>
+        Certification TOSA en option : validez officiellement votre niveau à
+        l'issue du stage — score reconnu par les entreprises, éligible aux
+        financements.
+      </p>
+
+      <footer class="fdp-foot">
+        <span>JCD Formation · 03&nbsp;87&nbsp;18&nbsp;49&nbsp;20 · Metz &amp; Nancy</span>
+        <span>Premier rendez-vous gratuit · Réponse sous 24&nbsp;h ouvrées</span>
+      </footer>
+    </div>
 
     <script is:inline id="jcd-catalogue-index" type="application/json">
       {
