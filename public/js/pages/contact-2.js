@@ -11,42 +11,16 @@
     if (!form) return;
 
     var ARROW = '<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h10M9 4l4 4-4 4"/></svg>';
-    var ECH_DEFAULT = ['Urgent', 'Ce mois-ci', 'Ce trimestre', 'À planifier'];
-
-    var POLES = [
-      { id: 'informatique', name: 'Informatique', sub: 'Parc, cloud & collaboration',
-        icon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="12" rx="2"/><path d="M8 20h8M12 16v4"/></svg>',
-        types: ['Parc & matériel', 'Cloud & hébergement', 'Collaboration & audiovisuel', 'Cybersécurité'],
-        echeances: ECH_DEFAULT },
-      { id: 'service', name: 'Service', sub: 'Support & proximité',
-        icon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 14v-2a9 9 0 0 1 18 0v2"/><path d="M21 14v3a2 2 0 0 1-2 2h-1v-7h1a2 2 0 0 1 2 2zM3 14v3a2 2 0 0 0 2 2h1v-7H5a2 2 0 0 0-2 2z"/></svg>',
-        types: ['Incident en cours', 'Maintenance / contrat', 'Infogérance', 'Question'],
-        echeances: ['Bloquant (à l’arrêt)', 'Gênant', 'Non urgent'] },
-      { id: 'developpement', name: 'Développement', sub: 'Logiciels sur mesure',
-        icon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="m8 6-6 6 6 6M16 6l6 6-6 6M14 4l-4 16"/></svg>',
-        types: ['Application métier', 'Site / web app', 'Intégration & API', 'Refonte d’existant'],
-        echeances: ECH_DEFAULT },
-      { id: 'print', name: 'Print', sub: 'Impression & reprographie',
-        icon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9V3h12v6"/><rect x="3" y="9" width="18" height="8" rx="2"/><path d="M7 17h10v4H7z"/><circle cx="17" cy="13" r="0.8" fill="currentColor"/></svg>',
-        types: ['Parc d’impression', 'Copieurs / MFP', 'Contrat & consommables', 'GED'],
-        echeances: ECH_DEFAULT },
-      { id: 'telecom', name: 'Télécom', sub: 'Téléphonie d’entreprise',
-        icon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.37 1.9.72 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.29a2 2 0 0 1 2.11-.45c.91.35 1.85.59 2.81.72A2 2 0 0 1 22 16.92z"/></svg>',
-        types: ['Téléphonie IP', 'Mobile & forfaits', 'Standard / ToIP', 'Connectivité fibre'],
-        echeances: ECH_DEFAULT },
-      { id: 'formation', name: 'Formation', sub: 'Monter en compétences',
-        icon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10 12 5 2 10l10 5 10-5z"/><path d="M6 12v5c2 2 4 3 6 3s4-1 6-3v-5"/></svg>',
-        types: ['Bureautique', 'Logiciels métier', 'Cybersécurité & sensibilisation', 'Sur mesure'],
-        echeances: ECH_DEFAULT },
-      { id: 'agencement', name: 'Agencement', sub: 'Espaces de travail',
-        icon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 18v3M20 18v3M3 8h18v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2zM6 8V5a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v3"/></svg>',
-        types: ['Poste de travail', 'Salle de réunion & visio', 'Câblage / infra', 'Espace complet'],
-        echeances: ECH_DEFAULT },
-      { id: 'servicesgeneraux', name: 'Services généraux', sub: 'Communication, direction, RH…', light: true,
-        icon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18"/><path d="M5 21V5a2 2 0 0 1 2-2h7a2 2 0 0 1 2 2v16"/><path d="M16 21V9h3a2 2 0 0 1 2 2v10"/><path d="M9 7h2M9 11h2M9 15h2"/></svg>',
-        types: ['Communication', 'Direction', 'Ressources humaines', 'Autre service'],
-        echeances: ECH_DEFAULT }
-    ];
+    /* ---- Source de données des pôles ----
+       Le bloc JSON #jcd-poles-data (contact.astro) est la source
+       unique — c'est lui qui sera rempli depuis Directus. Champs
+       consommés : id, name, sub, icon (SVG inline), light. ---- */
+    var POLES = [];
+    try {
+      POLES = JSON.parse(document.getElementById('jcd-poles-data').textContent);
+    } catch (e) {
+      console.error('[contact] Données pôles introuvables ou invalides (#jcd-poles-data)', e);
+    }
 
     var POLE_BY_ID = {};
     POLES.forEach(function (p) { POLE_BY_ID[p.id] = p; });
