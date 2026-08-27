@@ -1016,6 +1016,73 @@ import Footer from "../components/Footer.astro";
 
     <Footer current="carrieres" />
 
+    <!-- ================================
+     DONNÉES OFFRES D'EMPLOI — source unique du carrousel « Nos offres
+     du moment », du compteur du hero et du sélecteur « Offre concernée »
+     du formulaire (rendu : /js/pages/carrieres-2.js).
+     À câbler sur Directus : remplir ce bloc JSON depuis la collection
+     des offres — une entrée = une carte, dupliquable / éditable /
+     supprimable ligne à ligne. Champs : id (slug unique), titre,
+     pole (slug couleur : informatique, service, developpement, print,
+     telecom, formation, agencement), poleName (libellé affiché), lieu,
+     contrat, temps, desc. Un bloc vide [] affiche l'état « aucune
+     offre ouverte », les candidatures spontanées restent actives.
+     ================================ -->
+    <script is:inline id="jcd-offres-data" type="application/json">
+      [
+        {
+          "id": "technicien-support-informatique",
+          "titre": "Technicien support informatique N1/N2",
+          "pole": "informatique",
+          "poleName": "Informatique",
+          "lieu": "Metz",
+          "contrat": "CDI",
+          "temps": "Temps plein",
+          "desc": "Au sein de l’équipe support, vous prenez en charge les demandes de nos clients PME et collectivités : diagnostic, dépannage à distance ou sur site, suivi des tickets jusqu’à la résolution. Vous êtes leur premier contact — votre sens du service compte autant que votre technique."
+        },
+        {
+          "id": "ingenieur-systemes-reseaux",
+          "titre": "Ingénieur systèmes & réseaux",
+          "pole": "informatique",
+          "poleName": "Informatique",
+          "lieu": "Metz",
+          "contrat": "CDI",
+          "temps": "Temps plein",
+          "desc": "Vous concevez, déployez et faites évoluer les infrastructures de nos clients : serveurs, virtualisation, réseau, sauvegarde et sécurité. Des projets variés, menés en autonomie, avec l’appui d’une équipe expérimentée."
+        },
+        {
+          "id": "developpeur-fullstack",
+          "titre": "Développeur full-stack",
+          "pole": "developpement",
+          "poleName": "Développement",
+          "lieu": "Metz",
+          "contrat": "CDI",
+          "temps": "Temps plein",
+          "desc": "Vous développez des applications métier sur mesure pour nos clients, du cahier des charges à la mise en production. Des projets courts et concrets, une stack moderne et un contact direct avec les utilisateurs."
+        },
+        {
+          "id": "technicien-telecom-toip",
+          "titre": "Technicien télécom & ToIP",
+          "pole": "telecom",
+          "poleName": "Télécom",
+          "lieu": "Nancy",
+          "contrat": "CDI",
+          "temps": "Temps plein",
+          "desc": "Vous installez et maintenez les solutions de téléphonie d’entreprise de nos clients : ToIP, Centrex, liens opérateurs. Des interventions sur site dans toute la Lorraine et une formation continue sur les solutions de nos partenaires."
+        },
+        {
+          "id": "commercial-print",
+          "titre": "Commercial solutions d’impression",
+          "pole": "print",
+          "poleName": "Print",
+          "lieu": "Metz / Nancy",
+          "contrat": "CDI",
+          "temps": "Temps plein",
+          "desc": "Vous développez et fidélisez un portefeuille de clients professionnels autour de nos solutions d’impression et de gestion documentaire. Prospection terrain, accompagnement d’un parc existant et une vraie culture du service."
+        }
+      ]
+    </script>
+
     <script is:inline src="/js/pages/carrieres-4.js"></script>
     <script is:inline src="/js/pages/carrieres-2.js"></script>
     <script is:inline src="/js/pages/carrieres-3.js"></script>

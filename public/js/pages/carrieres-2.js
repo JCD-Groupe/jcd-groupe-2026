@@ -13,34 +13,16 @@
     var form = document.getElementById('apply-form');
     if (!form) return;
 
-    /* ---- OFFRES — À ÉDITER : remplacez par vos offres réelles ------- */
-    var OFFRES = [
-      { id: 'technicien-support-informatique',
-        titre: 'Technicien support informatique N1/N2',
-        pole: 'informatique', poleName: 'Informatique',
-        lieu: 'Metz', contrat: 'CDI', temps: 'Temps plein',
-        desc: 'Au sein de l’équipe support, vous prenez en charge les demandes de nos clients PME et collectivités : diagnostic, dépannage à distance ou sur site, suivi des tickets jusqu’à la résolution. Vous êtes leur premier contact — votre sens du service compte autant que votre technique.' },
-      { id: 'ingenieur-systemes-reseaux',
-        titre: 'Ingénieur systèmes & réseaux',
-        pole: 'informatique', poleName: 'Informatique',
-        lieu: 'Metz', contrat: 'CDI', temps: 'Temps plein',
-        desc: 'Vous concevez, déployez et faites évoluer les infrastructures de nos clients : serveurs, virtualisation, réseau, sauvegarde et sécurité. Des projets variés, menés en autonomie, avec l’appui d’une équipe expérimentée.' },
-      { id: 'developpeur-fullstack',
-        titre: 'Développeur full-stack',
-        pole: 'developpement', poleName: 'Développement',
-        lieu: 'Metz', contrat: 'CDI', temps: 'Temps plein',
-        desc: 'Vous développez des applications métier sur mesure pour nos clients, du cahier des charges à la mise en production. Des projets courts et concrets, une stack moderne et un contact direct avec les utilisateurs.' },
-      { id: 'technicien-telecom-toip',
-        titre: 'Technicien télécom & ToIP',
-        pole: 'telecom', poleName: 'Télécom',
-        lieu: 'Nancy', contrat: 'CDI', temps: 'Temps plein',
-        desc: 'Vous installez et maintenez les solutions de téléphonie d’entreprise de nos clients : ToIP, Centrex, liens opérateurs. Des interventions sur site dans toute la Lorraine et une formation continue sur les solutions de nos partenaires.' },
-      { id: 'commercial-print',
-        titre: 'Commercial solutions d’impression',
-        pole: 'print', poleName: 'Print',
-        lieu: 'Metz / Nancy', contrat: 'CDI', temps: 'Temps plein',
-        desc: 'Vous développez et fidélisez un portefeuille de clients professionnels autour de nos solutions d’impression et de gestion documentaire. Prospection terrain, accompagnement d’un parc existant et une vraie culture du service.' }
-    ];
+    /* ---- Source de données des offres ----
+       Le bloc JSON #jcd-offres-data (carrieres.astro) est la source
+       unique — c'est lui qui sera rempli depuis Directus. Champs :
+       id, titre, pole, poleName, lieu, contrat, temps, desc. ---- */
+    var OFFRES = [];
+    try {
+      OFFRES = JSON.parse(document.getElementById('jcd-offres-data').textContent);
+    } catch (e) {
+      console.error('[carrieres] Données offres introuvables ou invalides (#jcd-offres-data)', e);
+    }
     /* Couleurs par pôle — mêmes tokens que le méga-menu. */
     var POLE_COLORS = {
       informatique: '#2E72BA', service: '#E51D29', developpement: '#F9D605',
