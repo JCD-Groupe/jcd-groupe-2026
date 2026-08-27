@@ -1,0 +1,135 @@
+@charset "UTF-8";
+
+/* ==================================================================
+   Fiche formation - impression (2026-08-27)
+   Écran : bouton "Imprimer la fiche" (aside) ; le modèle #fd-print
+           reste masqué.
+   Print : seul #fd-print est rendu - A4, fond blanc, encre noire.
+   ================================================================== */
+
+  #fd-print { display: none; }
+
+  .fd-print-btn {
+    display: inline-flex; align-items: center; justify-content: center;
+    gap: 9px; width: 100%; margin-top: 2px;
+    padding: 11px 16px;
+    background: transparent; border: none; cursor: pointer;
+    color: var(--text-3);
+    font-family: var(--font-mono); font-size: 10.5px; line-height: 1;
+    letter-spacing: 0.09em; text-transform: uppercase;
+    transition: color 280ms ease;
+  }
+  .fd-print-btn svg { width: 14px; height: 14px; }
+  .fd-print-btn:hover { color: var(--text-1); }
+  .fd-print-btn:focus-visible {
+    color: var(--text-1);
+    outline: 2px solid currentColor; outline-offset: 3px; border-radius: 4px;
+  }
+
+@media print {
+  @page { size: A4; margin: 12mm 14mm; }
+
+  html, body { background: #fff !important; }
+
+  /* Seule la fiche imprimable est rendue. */
+  body > :not(#fd-print) { display: none !important; }
+
+  #fd-print {
+    display: block;
+    background: #fff; color: #16181c;
+    font-family: "Inter", system-ui, -apple-system, sans-serif;
+    font-size: 9.5pt; line-height: 1.45;
+    -webkit-print-color-adjust: exact; print-color-adjust: exact;
+  }
+
+  /* --- En-tête --- */
+  .fdp-head {
+    display: flex; justify-content: space-between; align-items: baseline;
+    gap: 8mm; padding-bottom: 3mm; margin-bottom: 5mm;
+    border-bottom: 0.6mm solid #16181c;
+  }
+  .fdp-brand { display: flex; flex-direction: column; gap: 1mm; }
+  .fdp-brand strong {
+    font-size: 12pt; font-weight: 700; letter-spacing: -0.01em;
+  }
+  .fdp-brand span { font-size: 7.5pt; color: #5a5f68; }
+  .fdp-ref {
+    font-family: "JetBrains Mono", monospace; font-size: 8pt;
+    color: #5a5f68; white-space: nowrap;
+  }
+
+  /* --- Titre --- */
+  .fdp-title-row { margin-bottom: 5mm; }
+  .fdp-cat {
+    display: inline-block; margin-bottom: 1.5mm;
+    font-family: "JetBrains Mono", monospace; font-size: 7.5pt;
+    letter-spacing: 0.09em; text-transform: uppercase; color: #5a5f68;
+  }
+  .fdp-title {
+    margin: 0; font-size: 19pt; font-weight: 700;
+    letter-spacing: -0.02em; line-height: 1.12;
+  }
+
+  /* --- Infos clés --- */
+  .fdp-facts {
+    display: flex; flex-wrap: wrap; gap: 0 8mm;
+    margin: 0 0 5mm; padding: 2.5mm 4mm; list-style: none;
+    border: 0.3mm solid #c9ccd2; border-radius: 1.5mm;
+  }
+  .fdp-facts li { display: flex; flex-direction: column; gap: 0.5mm; }
+  .fdp-facts strong {
+    font-size: 6.8pt; font-weight: 600; letter-spacing: 0.08em;
+    text-transform: uppercase; color: #5a5f68;
+  }
+  .fdp-facts span { font-size: 9pt; }
+
+  /* --- Sections --- */
+  .fdp-sec { margin-bottom: 4.5mm; break-inside: avoid; }
+  .fdp-sec h2 {
+    margin: 0 0 1.8mm; font-size: 8pt; font-weight: 700;
+    letter-spacing: 0.09em; text-transform: uppercase; color: #16181c;
+    border-bottom: 0.3mm solid #c9ccd2; padding-bottom: 1mm;
+  }
+  .fdp-sec p { margin: 0; color: #2c2f35; }
+
+  .fdp-list, .fdp-prog {
+    margin: 0; padding: 0; list-style: none;
+  }
+  .fdp-list li {
+    position: relative; padding-left: 4mm; margin-bottom: 0.8mm;
+  }
+  .fdp-list li::before {
+    content: "—"; position: absolute; left: 0; color: #5a5f68;
+  }
+
+  /* Programme : modules sur 2 colonnes pour tenir la page unique. */
+  .fdp-prog { column-count: 2; column-gap: 8mm; }
+  .fdp-prog li {
+    margin-bottom: 1mm; break-inside: avoid;
+  }
+  .fdp-prog .fdp-prog-num {
+    font-family: "JetBrains Mono", monospace; font-size: 7pt;
+    color: #5a5f68; margin-right: 1.5mm;
+  }
+
+  /* --- Public / prérequis / modalités sur 2 colonnes --- */
+  .fdp-cols {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 0 8mm;
+  }
+
+  /* --- TOSA --- */
+  .fdp-tosa {
+    margin: 1mm 0 4mm; padding: 2.5mm 4mm;
+    border: 0.3mm solid #c9ccd2; border-left: 1mm solid #16181c;
+    border-radius: 1mm; font-size: 8.5pt; color: #2c2f35;
+    break-inside: avoid;
+  }
+
+  /* --- Pied de page --- */
+  .fdp-foot {
+    display: flex; justify-content: space-between; gap: 8mm;
+    margin-top: 2mm; padding-top: 2.5mm;
+    border-top: 0.6mm solid #16181c;
+    font-size: 7.5pt; color: #5a5f68;
+  }
+}

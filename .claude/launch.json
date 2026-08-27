@@ -6,6 +6,12 @@
       "runtimeExecutable": "npm",
       "runtimeArgs": ["run", "dev"],
       "port": 4321
+    },
+    {
+      "name": "astro-dev-wasi",
+      "runtimeExecutable": "cmd",
+      "runtimeArgs": ["/c", "set NAPI_RS_FORCE_WASI=1&& npm run dev"],
+      "port": 4321
     }
   ]
 }

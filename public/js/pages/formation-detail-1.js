@@ -636,3 +636,76 @@
       }
     });
   })();
+
+  /* ---- Fiche imprimable (#fd-print) ----
+     Le modèle A4 est rempli au moment du clic en recopiant les zones
+     data-field de la page : il reflète donc toujours la formation
+     affichée, que l'hydratation vienne du catalogue embarqué ou,
+     demain, de Directus. ---- */
+  (function setupPrintSheet() {
+    var btn = document.getElementById('fd-print-btn');
+    var sheet = document.getElementById('fd-print');
+    if (!btn || !sheet) return;
+
+    /* Champs dont la valeur vit dans le texte d'une carte .fd-card. */
+    var CARD_FIELDS = ['public', 'prerequis', 'modalites_pedagogiques', 'modalites_evaluation'];
+
+    function clean(s) { return (s || '').replace(/\s+/g, ' ').trim(); }
+
+    function sourceText(field) {
+      var sel = CARD_FIELDS.indexOf(field) !== -1
+        ? 'main [data-field="' + field + '"] .fd-card-tx'
+        : 'main [data-field="' + field + '"]';
+      var n = document.querySelector(sel);
+      return n ? clean(n.textContent) : '';
+    }
+
+    function fill() {
+      sheet.querySelectorAll('[data-print-field]').forEach(function (n) {
+        var v = sourceText(n.getAttribute('data-print-field'));
+        if (v) n.textContent = v;
+      });
+
+      /* Objectifs pédagogiques : une entrée par .fd-goal. */
+      var goals = sheet.querySelector('[data-print-list="objectifs"]');
+      if (goals) {
+        goals.innerHTML = '';
+        document.querySelectorAll('main .fd-goals .fd-goal').forEach(function (g) {
+          var li = document.createElement('li');
+          li.textContent = clean(g.textContent);
+          goals.appendChild(li);
+        });
+      }
+
+      /* Programme : numéro + intitulé de chaque module. */
+      var prog = sheet.querySelector('[data-print-list="programme"]');
+      if (prog) {
+        prog.innerHTML = '';
+        document.querySelectorAll('main .fd-acc .fd-mod').forEach(function (mod) {
+          var num = mod.querySelector('.fd-mod-num');
+          var title = mod.querySelector('.fd-mod-title');
+          var li = document.createElement('li');
+          if (num) {
+            var s = document.createElement('span');
+            s.className = 'fdp-prog-num';
+            s.textContent = clean(num.textContent);
+            li.appendChild(s);
+          }
+          li.appendChild(document.createTextNode(title ? clean(title.textContent) : ''));
+          prog.appendChild(li);
+        });
+      }
+
+      /* TOSA : suit la visibilité de la page (retirée sur Bureautique
+         et Graphisme par applyTosaVisibility). */
+      var tosaGone = !document.querySelector('main [data-tosa]');
+      sheet.querySelectorAll('[data-print-tosa]').forEach(function (n) {
+        n.style.display = tosaGone ? 'none' : '';
+      });
+    }
+
+    btn.addEventListener('click', function () {
+      fill();
+      window.print();
+    });
+  })();

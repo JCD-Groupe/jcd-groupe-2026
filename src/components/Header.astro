@@ -5,6 +5,7 @@
 //   catalogue true sur les 15 pages formation -> pill + mega-menu Catalogue
 import { readSingleton } from "@directus/sdk";
 import CatalogueMenu from "./CatalogueMenu.astro";
+import MobileNav from "./MobileNav.astro";
 import { directus } from "../lib/directus";
 const { current = null, catalogue = false } = Astro.props;
 
@@ -476,3 +477,5 @@ agencement.icone_pole_content = await fetchSvgContent(agencement.icone_pole);
        ============================================================ -->
   {catalogue && <CatalogueMenu />}
 </header>
+
+<MobileNav />
