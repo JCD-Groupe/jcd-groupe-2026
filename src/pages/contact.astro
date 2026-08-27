@@ -9,6 +9,73 @@ let global = await directus.request(
     fields: ["*"],
   }),
 );
+
+let contact = await directus.request(
+  readSingleton("contact", {
+    fields: ["*"],
+  }),
+);
+
+const fetchSvgContent = async (id: string) => {
+  if (!id) return null;
+  const response = await fetch(
+    `${import.meta.env.PUBLIC_DIRECTUS_URL}/assets/${id}`,
+  );
+  return response.text();
+};
+
+let informatique = await directus.request(
+  readSingleton("JCD_Informatique", {
+    fields: ["nom_pole", "icone_pole", "description_navigation"],
+  }),
+);
+informatique.icone_pole_content = await fetchSvgContent(
+  informatique.icone_pole,
+);
+
+let developpement = await directus.request(
+  readSingleton("JCD_Developpement", {
+    fields: ["nom_pole", "icone_pole", "description_navigation"],
+  }),
+);
+developpement.icone_pole_content = await fetchSvgContent(
+  developpement.icone_pole,
+);
+
+let print = await directus.request(
+  readSingleton("JCD_Print", {
+    fields: ["nom_pole", "icone_pole", "description_navigation"],
+  }),
+);
+print.icone_pole_content = await fetchSvgContent(print.icone_pole);
+
+let service = await directus.request(
+  readSingleton("JCD_Service", {
+    fields: ["nom_pole", "icone_pole", "description_navigation"],
+  }),
+);
+service.icone_pole_content = await fetchSvgContent(service.icone_pole);
+
+let telecom = await directus.request(
+  readSingleton("JCD_Telecom", {
+    fields: ["nom_pole", "icone_pole", "description_navigation"],
+  }),
+);
+telecom.icone_pole_content = await fetchSvgContent(telecom.icone_pole);
+
+let formation = await directus.request(
+  readSingleton("JCD_Formation", {
+    fields: ["nom_pole", "icone_pole", "description_navigation"],
+  }),
+);
+formation.icone_pole_content = await fetchSvgContent(formation.icone_pole);
+
+let agencement = await directus.request(
+  readSingleton("JCD_Agencement", {
+    fields: ["nom_pole", "icone_pole", "description_navigation"],
+  }),
+);
+agencement.icone_pole_content = await fetchSvgContent(agencement.icone_pole);
 ---
 
 <html lang="fr">
@@ -25,31 +92,22 @@ let global = await directus.request(
       href={`${import.meta.env.PUBLIC_DIRECTUS_URL}/assets/${global.favicon}`}
       type="image/svg+xml"
     />
-    <meta
-      name="description"
-      content="Contactez JCD Groupe en une seule demande. Sélectionnez un ou plusieurs pôles — Informatique, Service, Développement, Print, Télécom, Formation, Agencement — votre besoin est transmis directement aux bonnes équipes à Metz et Nancy."
-    />
+    <meta name="description" content={contact.meta_description} />
     <link
       rel="canonical"
       href={`${import.meta.env.PUBLIC_DIRECTUS_URL}/contact`}
     />
     <meta property="og:type" content="website" />
-    <meta property="og:site_name" content="JCD Groupe" />
+    <meta property="og:site_name" content={global.nom_societe} />
     <meta property="og:locale" content="fr_FR" />
-    <meta
-      property="og:title"
-      content="Contact · JCD Groupe — Parlons de votre projet"
-    />
-    <meta
-      property="og:description"
-      content="Contactez JCD Groupe en une seule demande. Sélectionnez un ou plusieurs pôles — Informatique, Service, Développement, Print, Télécom, Formation, Agencement — votre besoin est transmis directement aux bonnes équipes à Metz et Nancy."
-    />
+    <meta property="og:title" content={`Contact · ${global.nom_societe}`} />
+    <meta property="og:description" content={contact.meta_description} />
     <meta
       property="og:url"
       content={`${import.meta.env.PUBLIC_DIRECTUS_URL}/contact`}
     />
     <meta name="twitter:card" content="summary" />
-    <title>Contact · JCD Groupe — Parlons de votre projet</title>
+    <title>Contact · {global.nom_societe}</title>
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -74,7 +132,7 @@ let global = await directus.request(
     <Header current="contact" />
 
     <main id="contenu">
-      <h1 class="visually-hidden">Contact — JCD Groupe</h1>
+      <h1 class="visually-hidden">Contact — {global.nom_societe}</h1>
 
       <section class="q-section" aria-label="Formulaire de contact">
         <div class="container">
@@ -105,7 +163,7 @@ let global = await directus.request(
                 id="q-step-1"
                 aria-labelledby="q-step1-title"
               >
-                <div
+                <!-- <div
                   class="q-intent"
                   role="radiogroup"
                   aria-label="Type de demande"
@@ -125,7 +183,7 @@ let global = await directus.request(
                     aria-checked="false">Assistance client</button
                   >
                   <span class="q-intent-glider" aria-hidden="true"></span>
-                </div>
+                </div> -->
 
                 <h2 id="q-step1-title" class="q-step-title" tabindex="-1">
                   Quels pôles souhaitez-vous solliciter&nbsp;?
