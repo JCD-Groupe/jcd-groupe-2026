@@ -24,6 +24,8 @@ const fetchSvgContent = async (id: string) => {
   return response.text();
 };
 
+contact.icone_general_content = await fetchSvgContent(contact.icone_general);
+
 let informatique = await directus.request(
   readSingleton("JCD_Informatique", {
     fields: ["nom_pole", "icone_pole", "description_navigation"],
@@ -197,7 +199,204 @@ agencement.icone_pole_content = await fetchSvgContent(agencement.icone_pole);
 
                 <fieldset class="pole-fieldset">
                   <legend class="visually-hidden">Pôles d'expertise JCD</legend>
-                  <div class="pole-grid" id="pole-grid"></div>
+                  <div class="pole-grid" id="pole-grid">
+                    <label class="pole-card" style="--pc: var(--c-informatique)"
+                      ><input
+                        type="checkbox"
+                        name="pole"
+                        value="informatique"
+                        aria-label={`${informatique.nom_pole} — ${informatique.description_navigation}`}
+                      /><span class="pole-ico" aria-hidden="true">
+                        <Fragment set:html={informatique.icone_pole_content} />
+                      </span><span class="pole-tx"
+                        ><span class="pole-name">{informatique.nom_pole}</span
+                        ><span class="pole-sub"
+                          >{informatique.description_navigation}</span
+                        ></span
+                      ><span class="pole-check" aria-hidden="true"
+                        ><svg
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          stroke="currentColor"
+                          stroke-width="3"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          ><path d="M20 6 9 17l-5-5"></path></svg
+                        ></span
+                      ></label
+                    ><label class="pole-card" style="--pc: var(--c-service)"
+                      ><input
+                        type="checkbox"
+                        name="pole"
+                        value="service"
+                        aria-label={`${service.nom_pole} — ${service.description_navigation}`}
+                      /><span class="pole-ico" aria-hidden="true">
+                        <Fragment set:html={service.icone_pole_content} />
+                      </span><span class="pole-tx"
+                        ><span class="pole-name">{service.nom_pole}</span><span
+                          class="pole-sub"
+                          >{service.description_navigation}</span
+                        ></span
+                      ><span class="pole-check" aria-hidden="true"
+                        ><svg
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          stroke="currentColor"
+                          stroke-width="3"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          ><path d="M20 6 9 17l-5-5"></path></svg
+                        ></span
+                      ></label
+                    ><label
+                      class="pole-card"
+                      style="--pc: var(--c-developpement)"
+                      ><input
+                        type="checkbox"
+                        name="pole"
+                        value="developpement"
+                        aria-label={`${developpement.nom_pole} — ${developpement.description_navigation}`}
+                      /><span class="pole-ico" aria-hidden="true">
+                        <Fragment set:html={developpement.icone_pole_content} />
+                      </span><span class="pole-tx"
+                        ><span class="pole-name">{developpement.nom_pole}</span
+                        ><span class="pole-sub"
+                          >{developpement.description_navigation}</span
+                        ></span
+                      ><span class="pole-check" aria-hidden="true"
+                        ><svg
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          stroke="currentColor"
+                          stroke-width="3"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          ><path d="M20 6 9 17l-5-5"></path></svg
+                        ></span
+                      ></label
+                    ><label class="pole-card" style="--pc: var(--c-print)"
+                      ><input
+                        type="checkbox"
+                        name="pole"
+                        value="print"
+                        aria-label={`${print.nom_pole} — ${print.description_navigation}`}
+                      /><span class="pole-ico" aria-hidden="true">
+                        <Fragment set:html={print.icone_pole_content} />
+                      </span><span class="pole-tx"
+                        ><span class="pole-name">{print.nom_pole}</span><span
+                          class="pole-sub">{print.description_navigation}</span
+                        ></span
+                      ><span class="pole-check" aria-hidden="true"
+                        ><svg
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          stroke="currentColor"
+                          stroke-width="3"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          ><path d="M20 6 9 17l-5-5"></path></svg
+                        ></span
+                      ></label
+                    ><label class="pole-card" style="--pc: var(--c-telecom)"
+                      ><input
+                        type="checkbox"
+                        name="pole"
+                        value="telecom"
+                        aria-label={`${telecom.nom_pole} — ${telecom.description_navigation}`}
+                      /><span class="pole-ico" aria-hidden="true">
+                        <Fragment set:html={telecom.icone_pole_content} />
+                      </span><span class="pole-tx"
+                        ><span class="pole-name">{telecom.nom_pole}</span><span
+                          class="pole-sub"
+                          >{telecom.description_navigation}</span
+                        ></span
+                      ><span class="pole-check" aria-hidden="true"
+                        ><svg
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          stroke="currentColor"
+                          stroke-width="3"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          ><path d="M20 6 9 17l-5-5"></path></svg
+                        ></span
+                      ></label
+                    ><label class="pole-card" style="--pc: var(--c-formation)"
+                      ><input
+                        type="checkbox"
+                        name="pole"
+                        value="formation"
+                        aria-label={`${formation.nom_pole} — ${formation.description_navigation}`}
+                      /><span class="pole-ico" aria-hidden="true">
+                        <Fragment set:html={formation.icone_pole_content} />
+                      </span><span class="pole-tx"
+                        ><span class="pole-name">{formation.nom_pole}</span
+                        ><span class="pole-sub"
+                          >{formation.description_navigation}</span
+                        ></span
+                      ><span class="pole-check" aria-hidden="true"
+                        ><svg
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          stroke="currentColor"
+                          stroke-width="3"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          ><path d="M20 6 9 17l-5-5"></path></svg
+                        ></span
+                      ></label
+                    ><label class="pole-card" style="--pc: var(--c-agencement)"
+                      ><input
+                        type="checkbox"
+                        name="pole"
+                        value="agencement"
+                        aria-label={`${agencement.nom_pole} — ${agencement.description_navigation}`}
+                      /><span class="pole-ico" aria-hidden="true">
+                        <Fragment set:html={agencement.icone_pole_content} />
+                      </span><span class="pole-tx"
+                        ><span class="pole-name">{agencement.nom_pole}</span
+                        ><span class="pole-sub"
+                          >{agencement.description_navigation}</span
+                        ></span
+                      ><span class="pole-check" aria-hidden="true"
+                        ><svg
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          stroke="currentColor"
+                          stroke-width="3"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          ><path d="M20 6 9 17l-5-5"></path></svg
+                        ></span
+                      ></label
+                    ><label
+                      class="pole-card pole-card--light"
+                      style="--pc: var(--c-servicesgeneraux)"
+                      ><input
+                        type="checkbox"
+                        name="pole"
+                        value="servicesgeneraux"
+                        aria-label={`${contact.titre_general} — ${contact.sous_titre_general}`}
+                      /><span class="pole-ico" aria-hidden="true">
+                        <Fragment set:html={contact.icone_general_content} />
+                      </span><span class="pole-tx"
+                        ><span class="pole-name">{contact.titre_general}</span
+                        ><span class="pole-sub"
+                          >{contact.sous_titre_general}</span
+                        ></span
+                      ><span class="pole-check" aria-hidden="true"
+                        ><svg
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          stroke="currentColor"
+                          stroke-width="3"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          ><path d="M20 6 9 17l-5-5"></path></svg
+                        ></span
+                      ></label
+                    >
+                  </div>
                 </fieldset>
 
                 <div class="q-actions">
@@ -532,7 +731,6 @@ ${messageContent}
         }
       });
     </script>
-
 
     <!-- jcd-a11y (Lot 5) -->
     <div class="jcd-fab-wrap" id="jcd-fab">

@@ -53,19 +53,6 @@
       });
     }
 
-    /* ---- 1. Rendu des cartes-pôles ---- */
-    function renderPoleCards() {
-      grid.innerHTML = POLES.map(function (p) {
-        return '<label class="pole-card' + (p.light ? ' pole-card--light' : '') + '" style="--pc: var(--c-' + p.id + ')">' +
-          '<input type="checkbox" name="pole" value="' + p.id + '" aria-label="' + esc(p.name) + ' — ' + esc(p.sub) + '">' +
-          '<span class="pole-ico" aria-hidden="true">' + p.icon + '</span>' +
-          '<span class="pole-tx"><span class="pole-name">' + esc(p.name) + '</span>' +
-          '<span class="pole-sub">' + esc(p.sub) + '</span></span>' +
-          '<span class="pole-check" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span>' +
-          '</label>';
-      }).join('');
-    }
-
     function selectedPoleIds() {
       return Array.prototype.slice
         .call(grid.querySelectorAll('input[name="pole"]:checked'))
