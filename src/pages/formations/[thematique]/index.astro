@@ -108,7 +108,9 @@ thematique.couleur_rgb = hexToRgbChannels(thematique.couleur);
     />
     <meta
       name="description"
-      content="Formations Administratif - Secrétariat - Accueil · 7 formations · JCD Groupe, organisme certifié Qualiopi à Metz et Nancy. Écrits professionnels et accueil de qualité."
+      content={`Formations Administratif - Secrétariat - Accueil · ${
+        thematique.formations.length + thematique.formations_bis.length
+      } formations · ${formation.meta_description}`}
     />
     <link
       rel="canonical"
@@ -123,7 +125,9 @@ thematique.couleur_rgb = hexToRgbChannels(thematique.couleur);
     />
     <meta
       property="og:description"
-      content="Formations Administratif - Secrétariat - Accueil · 7 formations · JCD Groupe, organisme certifié Qualiopi à Metz et Nancy. Écrits professionnels et accueil de qualité."
+      content={`Formations Administratif - Secrétariat - Accueil · ${
+        thematique.formations.length + thematique.formations_bis.length
+      } formations · ${formation.meta_description}`}
     />
     <meta
       property="og:url"

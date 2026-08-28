@@ -84,7 +84,7 @@ formation.thematique.couleur_rgb = hexToRgbChannels(formation.thematique.couleur
     />
     <meta
       name="description"
-      content="Fiche formation JCD Groupe : objectifs, programme détaillé, modalités et certification. Organisme certifié Qualiopi, centre d'examen TOSA, Metz."
+      content={`Fiche formation ${global.nom_societe} • ${formation.titre_de_la_formation} : ${formation.objectifs.map((objectif :any) => (objectif.objectif)).join(' ')}`}
     />
     <link
       rel="canonical"
@@ -99,7 +99,7 @@ formation.thematique.couleur_rgb = hexToRgbChannels(formation.thematique.couleur
     />
     <meta
       property="og:description"
-      content="Fiche formation JCD Groupe : objectifs, programme détaillé, modalités et certification. Organisme certifié Qualiopi, centre d'examen TOSA, Metz"
+      content={`Fiche formation ${global.nom_societe} • ${formation.titre_de_la_formation} : ${formation.objectifs.map((objectif :any) => (objectif.objectif)).join(' ')}`}
     />
     <meta
       property="og:url"
