@@ -113,14 +113,17 @@ let agencement = await directus.request(
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content={global.nom_societe} />
     <meta property="og:locale" content="fr_FR" />
-    <meta property="og:title" content={`Carrières · ${global.nom_societe}`} />
+    <meta
+      property="og:title"
+      content={`${carriere.titre} · ${global.nom_societe}`}
+    />
     <meta property="og:description" content={carriere.meta_description} />
     <meta
       property="og:url"
       content={`${import.meta.env.PUBLIC_DIRECTUS_URL}/carrieres`}
     />
     <meta name="twitter:card" content="summary" />
-    <title>Carrières · JCD Groupe — Rejoignez un groupe qui avance</title>
+    <title>{carriere.titre} · {global.nom_societe}</title>
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
