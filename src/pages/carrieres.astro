@@ -2,7 +2,7 @@
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
 import { directus } from "../lib/directus";
-import { readSingleton } from "@directus/sdk";
+import { readItems, readSingleton } from "@directus/sdk";
 
 let global = await directus.request(
   readSingleton("Global", {
@@ -23,8 +23,13 @@ let carriere = await directus.request(
 );
 
 let offres = await directus.request(
-  readSingleton("Offres", {
-    fields: ["*"],
+  readItems("Offres", {
+    fields: [
+      "*",
+      {
+        pole_concerne: ["*"],
+      },
+    ],
   }),
 );
 
@@ -41,6 +46,48 @@ carriere.valeurs = await Promise.all(
     ...valeur,
     icone_content: await fetchSvgContent(valeur.icone),
   })),
+);
+
+let informatique = await directus.request(
+  readSingleton("JCD_Informatique", {
+    fields: ["nom_pole"],
+  }),
+);
+
+let developpement = await directus.request(
+  readSingleton("JCD_Developpement", {
+    fields: ["nom_pole"],
+  }),
+);
+
+let print = await directus.request(
+  readSingleton("JCD_Print", {
+    fields: ["nom_pole"],
+  }),
+);
+
+let service = await directus.request(
+  readSingleton("JCD_Service", {
+    fields: ["nom_pole"],
+  }),
+);
+
+let telecom = await directus.request(
+  readSingleton("JCD_Telecom", {
+    fields: ["nom_pole"],
+  }),
+);
+
+let formation = await directus.request(
+  readSingleton("JCD_Formation", {
+    fields: ["nom_pole"],
+  }),
+);
+
+let agencement = await directus.request(
+  readSingleton("JCD_Agencement", {
+    fields: ["nom_pole"],
+  }),
 );
 ---
 
@@ -420,6 +467,124 @@ carriere.valeurs = await Promise.all(
             role="list"
             aria-label="Offres d'emploi ouvertes"
           >
+            {
+              offres.length == 0 ? (
+                <div class="offers-empty" role="listitem">
+                  Aucune offre ouverte pour le moment, les candidatures
+                  spontanées restent les bienvenues.
+                </div>
+              ) : (
+                offres.map((offre: any) => {
+                  let pole =
+                    offre.pole_concerne == "informatique"
+                      ? informatique
+                      : offre.pole_concerne == "developpement"
+                        ? developpement
+                        : offre.pole_concerne == "print"
+                          ? print
+                          : offre.pole_concerne == "service"
+                            ? service
+                            : offre.pole_concerne == "telecom"
+                              ? telecom
+                              : offre.pole_concerne == "formation"
+                                ? formation
+                                : agencement;
+                  let couleur =
+                    offre.pole_concerne == "informatique"
+                      ? "#2E72BA"
+                      : offre.pole_concerne == "developpement"
+                        ? "#F9D605"
+                        : offre.pole_concerne == "print"
+                          ? "#F4941D"
+                          : offre.pole_concerne == "service"
+                            ? "#ED1B25"
+                            : offre.pole_concerne == "telecom"
+                              ? "#91258E"
+                              : offre.pole_concerne == "formation"
+                                ? "#8CC63E"
+                                : "#A78E76";
+
+                  return (
+                    <article
+                      class="offer-card"
+                      role="listitem"
+                      style={`--pc: ${couleur}`}
+                    >
+                      <span class="offer-pole">{pole.nom_pole}</span>
+                      <h3 class="offer-title">{offre.titre}</h3>
+                      <span class="offer-meta">
+                        <span>
+                          <svg
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="1.7"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            aria-hidden="true"
+                          >
+                            <>
+                              <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z" />
+                              <circle cx="12" cy="10" r="3" />
+                            </>
+                          </svg>
+                          {offre.site.join(" / ")}
+                        </span>
+                        <span class="meta-sep" aria-hidden="true" />
+                        <span>{offre.type_de_contrat}</span>
+                        <span class="meta-sep" aria-hidden="true" />
+                        <span>{offre.type_de_poste}</span>
+                      </span>
+                      <button
+                        type="button"
+                        class="offer-toggle"
+                        aria-expanded="false"
+                      >
+                        Le poste en détail
+                        <svg
+                          viewBox="0 0 10 10"
+                          fill="none"
+                          stroke="currentColor"
+                          stroke-width="1.4"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          aria-hidden="true"
+                        >
+                          <path d="M2.5 4l2.5 2.5L7.5 4" />
+                        </svg>
+                      </button>
+                      <div class="offer-desc">
+                        <div>
+                          <p>{offre.description}</p>
+                        </div>
+                      </div>
+                      <div class="offer-foot">
+                        <a
+                          class="offer-apply"
+                          href="#postuler"
+                          data-offre={offre.id}
+                          aria-label={`Postuler — ${offre.titre}, ${offre.site.join(" / ")}, ${offre.type_de_contrat}`}
+                        >
+                          Postuler
+                          <span class="offer-apply-arrow" aria-hidden="true">
+                            <svg
+                              viewBox="0 0 16 16"
+                              fill="none"
+                              stroke="currentColor"
+                              stroke-width="1.7"
+                              stroke-linecap="round"
+                              stroke-linejoin="round"
+                            >
+                              <path d="M3 8h10M9 4l4 4-4 4" />
+                            </svg>
+                          </span>
+                        </a>
+                      </div>
+                    </article>
+                  );
+                })
+              )
+            }
           </div>
         </div>
       </section>
@@ -560,6 +725,17 @@ carriere.valeurs = await Promise.all(
                       <select id="f-offre" name="offre" required>
                         <option value="" disabled selected
                           >Choisissez une offre…</option
+                        >
+                        {
+                          offres.map((offre: any) => (
+                            <option value={offre.id}>
+                              {offre.titre}, {offre.site.join("/")} (
+                              {offre.type_de_contrat})
+                            </option>
+                          ))
+                        }
+                        <option value="__autre__"
+                          >Autre / offre non listée</option
                         >
                       </select>
                     </div>
