@@ -21,6 +21,18 @@ let developpement = await directus.request(
   }),
 );
 
+const fetchSvgContent = async (id: string) => {
+  if (!id) return null;
+  const response = await fetch(
+    `${import.meta.env.PUBLIC_DIRECTUS_URL}/assets/${id}`,
+  );
+  return response.text();
+};
+
+developpement.icone_cta_content = await fetchSvgContent(
+  developpement.icone_cta,
+);
+
 // Récupération des content svg
 const response = await fetch(
   `${import.meta.env.PUBLIC_DIRECTUS_URL}/assets/${developpement.icone_cta}`,
@@ -30,21 +42,10 @@ const svgContent = await response.text();
 developpement.icone_cta_content = svgContent;
 
 developpement.prestations = await Promise.all(
-  developpement.prestations.map(async (prestation: any) => {
-    // 1. Utiliser prestation.icone au lieu de developpement.prestations[0].icone
-    if (!prestation.icone) return prestation;
-
-    const response = await fetch(
-      `${import.meta.env.PUBLIC_DIRECTUS_URL}/assets/${prestation.icone}`,
-    );
-    const svgContent = await response.text();
-
-    // 2. Retourner l'objet mis à jour
-    return {
-      ...prestation,
-      icone_content: svgContent,
-    };
-  }),
+  developpement.prestations.map(async (prestation: any) => ({
+    ...prestation,
+    icone_content: await fetchSvgContent(prestation.icone),
+  })),
 );
 
 let tagsRealisations = await directus.request(
