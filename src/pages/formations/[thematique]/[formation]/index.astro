@@ -34,6 +34,12 @@ let global = await directus.request(
   }),
 );
 
+let formations_commun = await directus.request(
+  readSingleton("formations_commun", {
+    fields: ["*"],
+  }),
+);
+
 let pageFormation = await directus.request(
   readSingleton("JCD_Formation", {
     fields: ["*"],
@@ -445,7 +451,7 @@ formation.thematique.couleur_rgb = hexToRgbChannels(formation.thematique.couleur
                       <h3 class="fd-card-title">Prérequis</h3>
                     </div>
                     <p class="fd-card-tx">
-                      {formation.prerequis ?? 'Pas de prérequis.'}
+                      {formation.prerequis ?? formations_commun.prerequis}
                     </p>
                   </div>
                 </div>
@@ -500,7 +506,7 @@ formation.thematique.couleur_rgb = hexToRgbChannels(formation.thematique.couleur
                     <p class="fd-card-tx">
                       {
                         formation.suivi_et_evaluation_de_l_action ??
-                          "Compte rendu de fin de formation et analyse interne. Questionnaire « évaluation de la formation » rempli par le stagiaire."
+                          formations_commun.suivi_et_evaluation_de_l_action
                       }
                     </p>
                   </div>
