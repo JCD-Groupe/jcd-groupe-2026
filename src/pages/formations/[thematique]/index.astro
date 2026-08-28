@@ -51,7 +51,7 @@ let formations = await directus.request(
 
 let thematiques = await directus.request(
   readItems("thematiques_formation", {
-    fields: ["*", { formations: ["id"] }, { formations_bis: ["id"] }],
+    fields: ["*"],
     filter: {
       slug: {
         _neq: thematique.slug,

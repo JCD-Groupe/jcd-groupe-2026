@@ -1,6 +1,6 @@
 ---
 import { directus } from "../lib/directus";
-import { readSingleton } from "@directus/sdk";
+import { readItems, readSingleton } from "@directus/sdk";
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
 
@@ -64,6 +64,12 @@ formation.compteurs = formation.compteurs.map((compteur: any) => {
     ratio: ratio,
   };
 });
+
+let thematiques = await directus.request(
+  readItems("thematiques_formation", {
+    fields: ["*"],
+  }),
+);
 
 const logos = formation.logos_confiance || [];
 const totalLogos = logos.length;
@@ -876,120 +882,29 @@ const logos2 = logos.slice(half);
             <h2 id="jcd-fcat-title">Nos domaines de formation.</h2>
           </div>
           <div class="jcd-fcat-grid">
-            <a
-              class="jcd-fcat-card"
-              style="--cc:85,160,94"
-              href="/formation-bureautique"
-              aria-label="Bureautique, 23 formations"
-              ><span class="jcd-fcat-name">Bureautique</span><span
-                class="jcd-fcat-n">23</span
-              ></a
-            >
-            <a
-              class="jcd-fcat-card"
-              style="--cc:118,184,63"
-              href="/formation-intelligence-artificielle"
-              aria-label="Intelligence artificielle, 17 formations"
-              ><span class="jcd-fcat-name">Intelligence artificielle</span><span
-                class="jcd-fcat-n">17</span
-              ></a
-            >
-            <a
-              class="jcd-fcat-card"
-              style="--cc:142,192,65"
-              href="/formation-informatique"
-              aria-label="Informatique, 40 formations"
-              ><span class="jcd-fcat-name">Informatique</span><span
-                class="jcd-fcat-n">40</span
-              ></a
-            >
-            <a
-              class="jcd-fcat-card"
-              style="--cc:229,196,53"
-              href="/formation-communication-marketing"
-              aria-label="Communication - Marketing, 11 formations"
-              ><span class="jcd-fcat-name">Communication - Marketing</span><span
-                class="jcd-fcat-n">11</span
-              ></a
-            >
-            <a
-              class="jcd-fcat-card"
-              style="--cc:243,148,29"
-              href="/formation-management"
-              aria-label="Management, 8 formations"
-              ><span class="jcd-fcat-name">Management</span><span
-                class="jcd-fcat-n">8</span
-              ></a
-            >
-            <a
-              class="jcd-fcat-card"
-              style="--cc:230,110,50"
-              href="/formation-commerce-relation-client"
-              aria-label="Commerce - Relation client, 6 formations"
-              ><span class="jcd-fcat-name">Commerce - Relation client</span
-              ><span class="jcd-fcat-n">6</span></a
-            >
-            <a
-              class="jcd-fcat-card"
-              style="--cc:225,79,70"
-              href="/formation-comptabilite-gestion"
-              aria-label="Comptabilité - Gestion, 2 formations"
-              ><span class="jcd-fcat-name">Comptabilit&eacute; - Gestion</span
-              ><span class="jcd-fcat-n">2</span></a
-            >
-            <a
-              class="jcd-fcat-card"
-              style="--cc:217,83,127"
-              href="/formation-ressources-humaines"
-              aria-label="Ressources humaines, 5 formations"
-              ><span class="jcd-fcat-name">Ressources humaines</span><span
-                class="jcd-fcat-n">5</span
-              ></a
-            >
-            <a
-              class="jcd-fcat-card"
-              style="--cc:199,107,180"
-              href="/formation-developpement-personnel"
-              aria-label="Développement personnel, 7 formations"
-              ><span class="jcd-fcat-name">D&eacute;veloppement personnel</span
-              ><span class="jcd-fcat-n">7</span></a
-            >
-            <a
-              class="jcd-fcat-card"
-              style="--cc:156,95,181"
-              href="/formation-graphisme-pao"
-              aria-label="Graphisme - PAO, 8 formations"
-              ><span class="jcd-fcat-name">Graphisme - PAO</span><span
-                class="jcd-fcat-n">8</span
-              ></a
-            >
-            <a
-              class="jcd-fcat-card"
-              style="--cc:113,73,156"
-              href="/formation-administratif-secretariat-accueil"
-              aria-label="Administratif - Secrétariat, 7 formations"
-              ><span class="jcd-fcat-name"
-                >Administratif - Secr&eacute;tariat</span
-              ><span class="jcd-fcat-n">7</span></a
-            >
-            <a
-              class="jcd-fcat-card"
-              style="--cc:92,132,177"
-              href="/formation-securite"
-              aria-label="Sécurité, 7 formations"
-              ><span class="jcd-fcat-name">S&eacute;curit&eacute;</span><span
-                class="jcd-fcat-n">7</span
-              ></a
-            >
-            <a
-              class="jcd-fcat-card"
-              style="--cc:60,184,169"
-              href="/formation-langues"
-              aria-label="Langues, 1 formation"
-              ><span class="jcd-fcat-name">Langues</span><span
-                class="jcd-fcat-n">1</span
-              ></a
-            >
+            {
+              thematiques.map((thematique: any) => (
+                <a
+                  class="jcd-fcat-card"
+                  style="--cc:85,160,94"
+                  href={`/formations/${thematique.slug}`}
+                  aria-label={`${thematique.titre_de_la_thematique_de_formations}, ${
+                    thematique.formations.length +
+                    thematique.formations_bis.length
+                  } formations`}
+                >
+                  <>
+                    <span class="jcd-fcat-name">
+                      {thematique.titre_de_la_thematique_de_formations}
+                    </span>
+                    <span class="jcd-fcat-n">
+                      {thematique.formations.length +
+                        thematique.formations_bis.length}
+                    </span>
+                  </>
+                </a>
+              ))
+            }
           </div>
         </div>
       </section>
