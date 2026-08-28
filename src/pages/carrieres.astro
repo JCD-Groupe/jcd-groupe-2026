@@ -134,7 +134,7 @@ let agencement = await directus.request(
     <link
       rel="preload"
       as="image"
-      href="/assets/poster-carrieres.jpg"
+      href={`${import.meta.env.PUBLIC_DIRECTUS_URL}/assets/${carriere.image_backup_video}`}
       fetchpriority="high"
     />
 
