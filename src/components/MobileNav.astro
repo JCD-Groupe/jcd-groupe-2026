@@ -1,9 +1,106 @@
 ---
-// Navigation mobile commune (burger + panneau plein écran + script).
-// Rendue par Header.astro sur toutes les pages qui ont la navbar (31,
-// toutes sauf 404). Burger et panneau sont en position:fixed
-// (global.css) : leur position dans le DOM est sans effet visuel.
-// Comportement : /js/shared/mobile-nav.js (autonome, ids jcdBurger/jcdMnav).
+import { readItems, readSingleton } from "@directus/sdk";
+import { directus } from "../lib/directus";
+
+const fetchSvgContent = async (id: string) => {
+  if (!id) return null;
+  const response = await fetch(
+    `${import.meta.env.PUBLIC_DIRECTUS_URL}/assets/${id}`,
+  );
+  return response.text();
+};
+
+let informatique = await directus.request(
+  readSingleton("JCD_Informatique", {
+    fields: ["nom_pole", "icone_pole"],
+  }),
+);
+informatique.icone_pole_content = await fetchSvgContent(
+  informatique.icone_pole,
+);
+
+let info_cloud = await directus.request(
+  readSingleton("cloud_microsoft", {
+    fields: ["nom_service"],
+  }),
+);
+let info_collaboratif = await directus.request(
+  readSingleton("solutions_collaboratives_audiovisuelles", {
+    fields: ["nom_service"],
+  }),
+);
+let info_integration = await directus.request(
+  readSingleton("integration_support_pc", {
+    fields: ["nom_service"],
+  }),
+);
+let info_reseaux = await directus.request(
+  readSingleton("architectures_systemes_reseaux", {
+    fields: ["nom_service"],
+  }),
+);
+
+let developpement = await directus.request(
+  readSingleton("JCD_Developpement", {
+    fields: ["nom_pole", "icone_pole"],
+  }),
+);
+developpement.icone_pole_content = await fetchSvgContent(
+  developpement.icone_pole,
+);
+
+let print = await directus.request(
+  readSingleton("JCD_Print", {
+    fields: ["nom_pole", "icone_pole"],
+  }),
+);
+print.icone_pole_content = await fetchSvgContent(print.icone_pole);
+
+let service = await directus.request(
+  readSingleton("JCD_Service", {
+    fields: ["nom_pole", "icone_pole"],
+  }),
+);
+service.icone_pole_content = await fetchSvgContent(service.icone_pole);
+
+let telecom = await directus.request(
+  readSingleton("JCD_Telecom", {
+    fields: ["nom_pole", "icone_pole"],
+  }),
+);
+telecom.icone_pole_content = await fetchSvgContent(telecom.icone_pole);
+
+let formation = await directus.request(
+  readSingleton("JCD_Formation", {
+    fields: ["nom_pole", "icone_pole"],
+  }),
+);
+formation.icone_pole_content = await fetchSvgContent(formation.icone_pole);
+
+let thematiques = await directus.request(
+  readItems("thematiques_formation", {
+    fields: ["*"],
+  }),
+);
+
+let agencement = await directus.request(
+  readSingleton("JCD_Agencement", {
+    fields: ["nom_pole", "icone_pole"],
+  }),
+);
+agencement.icone_pole_content = await fetchSvgContent(agencement.icone_pole);
+
+let assistance = await directus.request(
+  readSingleton("assistance", {
+    fields: ["titre"],
+  }),
+);
+
+let carriere = await directus.request(
+  readSingleton("carriere", {
+    fields: ["titre"],
+  }),
+);
 ---
 
 <!-- jcd-mobile-nav (injected) -->
@@ -15,9 +112,7 @@
   aria-expanded="false"
   aria-controls="jcdMnav"
 >
-  <span class="jcd-burger__box" aria-hidden="true"
-    ><i></i><i></i><i></i></span
-  >
+  <span class="jcd-burger__box" aria-hidden="true"><i></i><i></i><i></i></span>
 </button>
 <div
   class="jcd-mnav"
@@ -38,17 +133,20 @@
 
       <div class="jcd-mnav__reveal" style="transition-delay:.07s">
         <div class="jcd-mnav__item" style="--mnav-c:#2E72BA">
-          <a class="jcd-mnav__link" href="/informatique"
-            ><span class="jcd-mnav__dot"></span><span
-              class="jcd-mnav__label">Informatique</span
-            ></a
-          >
+          <a class="jcd-mnav__link" href="/informatique">
+            <span class="jcd-mnav__ico" aria-hidden="true">
+              <Fragment set:html={informatique.icone_pole_content} />
+            </span>
+            <span class="jcd-mnav__dot"></span><span class="jcd-mnav__label">
+              {informatique.nom_pole}
+            </span>
+          </a>
           <button
             class="jcd-acc__toggle"
             type="button"
             aria-expanded="false"
             aria-controls="jcdAccInfo"
-            aria-label="Afficher les sous-pages Informatique"
+            aria-label={`Afficher les sous-pages ${informatique.nom_pole}`}
           >
             <svg
               viewBox="0 0 14 14"
@@ -60,56 +158,71 @@
           </button>
         </div>
         <div class="jcd-acc__panel" id="jcdAccInfo">
-          <a class="jcd-mnav__sub" href="/info-cloud">Cloud Microsoft</a>
-          <a class="jcd-mnav__sub" href="/info-collaboratif"
-            >Solutions collaboratives &amp; audiovisuelles</a
+          <a class="jcd-mnav__sub" href="/info-integration"
+            >{info_integration.nom_service}</a
           >
           <a class="jcd-mnav__sub" href="/info-reseaux"
-            >Architectures syst&egrave;mes &amp; r&eacute;seaux</a
+            >{info_reseaux.nom_service}</a
           >
-          <a class="jcd-mnav__sub" href="/info-integration"
-            >Int&eacute;gration &amp; Support PC</a
+          <a class="jcd-mnav__sub" href="/info-collaboratif"
+            >{info_collaboratif.nom_service}</a
+          >
+          <a class="jcd-mnav__sub" href="/info-cloud"
+            >{info_cloud.nom_service}</a
           >
         </div>
       </div>
-
       <a
         class="jcd-mnav__item jcd-mnav__reveal"
         style="--mnav-c:#E51D29;transition-delay:.10s"
         href="/service"
-        ><span class="jcd-mnav__dot"></span><span class="jcd-mnav__label"
-          >Service</span
+      >
+        <span class="jcd-mnav__ico" aria-hidden="true">
+          <Fragment set:html={service.icone_pole_content} />
+        </span><span class="jcd-mnav__dot"></span><span class="jcd-mnav__label"
+          >{service.nom_pole}</span
         ></a
       >
       <a
         class="jcd-mnav__item jcd-mnav__reveal"
         style="--mnav-c:#F9D605;transition-delay:.13s"
         href="/developpement"
-        ><span class="jcd-mnav__dot"></span><span class="jcd-mnav__label"
-          >D&eacute;veloppement</span
+      >
+        <span class="jcd-mnav__ico" aria-hidden="true">
+          <Fragment set:html={developpement.icone_pole_content} />
+        </span><span class="jcd-mnav__dot"></span><span class="jcd-mnav__label"
+          >{developpement.nom_pole}</span
         ></a
       >
       <a
         class="jcd-mnav__item jcd-mnav__reveal"
         style="--mnav-c:#F3941D;transition-delay:.16s"
         href="/print"
-        ><span class="jcd-mnav__dot"></span><span class="jcd-mnav__label"
-          >Print</span
+      >
+        <span class="jcd-mnav__ico" aria-hidden="true">
+          <Fragment set:html={print.icone_pole_content} />
+        </span><span class="jcd-mnav__dot"></span><span class="jcd-mnav__label"
+          >{print.nom_pole}</span
         ></a
       >
       <a
         class="jcd-mnav__item jcd-mnav__reveal"
         style="--mnav-c:#B063AC;transition-delay:.19s"
         href="/telecom"
-        ><span class="jcd-mnav__dot"></span><span class="jcd-mnav__label"
-          >T&eacute;l&eacute;com</span
+      >
+        <span class="jcd-mnav__ico" aria-hidden="true">
+          <Fragment set:html={telecom.icone_pole_content} />
+        </span><span class="jcd-mnav__dot"></span><span class="jcd-mnav__label"
+          >{telecom.nom_pole}</span
         ></a
       >
       <div class="jcd-mnav__reveal" style="transition-delay:.22s">
         <div class="jcd-mnav__item" style="--mnav-c:#8EC041">
-          <a class="jcd-mnav__link" href="/formation"
-            ><span class="jcd-mnav__dot"></span><span
-              class="jcd-mnav__label">Formation</span
+          <a class="jcd-mnav__link" href="/formation">
+            <span class="jcd-mnav__ico" aria-hidden="true">
+              <Fragment set:html={formation.icone_pole_content} />
+            </span><span class="jcd-mnav__dot"></span><span
+              class="jcd-mnav__label">{formation.nom_pole}</span
             ></a
           >
           <button
@@ -129,57 +242,24 @@
           </button>
         </div>
         <div class="jcd-acc__panel" id="jcdAccForm">
-          <a class="jcd-mnav__sub" href="/formation-bureautique"
-            >Bureautique</a
-          >
-          <a
-            class="jcd-mnav__sub"
-            href="/formation-intelligence-artificielle"
-            >Intelligence artificielle</a
-          >
-          <a class="jcd-mnav__sub" href="/formation-informatique"
-            >Informatique</a
-          >
-          <a class="jcd-mnav__sub" href="/formation-communication-marketing"
-            >Communication - Marketing</a
-          >
-          <a class="jcd-mnav__sub" href="/formation-management"
-            >Management</a
-          >
-          <a
-            class="jcd-mnav__sub"
-            href="/formation-commerce-relation-client"
-            >Commerce - Relation client</a
-          >
-          <a class="jcd-mnav__sub" href="/formation-comptabilite-gestion"
-            >Comptabilit&eacute; - Gestion</a
-          >
-          <a class="jcd-mnav__sub" href="/formation-ressources-humaines"
-            >Ressources humaines</a
-          >
-          <a class="jcd-mnav__sub" href="/formation-developpement-personnel"
-            >D&eacute;veloppement personnel</a
-          >
-          <a class="jcd-mnav__sub" href="/formation-graphisme-pao"
-            >Graphisme - PAO</a
-          >
-          <a
-            class="jcd-mnav__sub"
-            href="/formation-administratif-secretariat-accueil"
-            >Administratif - Secr&eacute;tariat</a
-          >
-          <a class="jcd-mnav__sub" href="/formation-securite"
-            >S&eacute;curit&eacute;</a
-          >
-          <a class="jcd-mnav__sub" href="/formation-langues">Langues</a>
+          {
+            thematiques.map((thematique: any) => (
+              <a class="jcd-mnav__sub" href={`/formations/${thematique.slug}`}>
+                {thematique.titre_de_la_thematique_de_formations}
+              </a>
+            ))
+          }
         </div>
       </div>
       <a
         class="jcd-mnav__item jcd-mnav__reveal"
         style="--mnav-c:#A78D75;transition-delay:.25s"
         href="/agencement"
-        ><span class="jcd-mnav__dot"></span><span class="jcd-mnav__label"
-          >Agencement</span
+      >
+        <span class="jcd-mnav__ico" aria-hidden="true">
+          <Fragment set:html={agencement.icone_pole_content} />
+        </span><span class="jcd-mnav__dot"></span><span class="jcd-mnav__label"
+          >{agencement.nom_pole}</span
         ></a
       >
 
@@ -195,7 +275,7 @@
         href="/assistance"
         ><span class="jcd-mnav__dot"></span><span
           class="jcd-mnav__label"
-          style="font-size:19px">Assistance</span
+          style="font-size:19px">{assistance.titre}</span
         ></a
       >
       <a
@@ -204,14 +284,11 @@
         href="/carrieres"
         ><span class="jcd-mnav__dot"></span><span
           class="jcd-mnav__label"
-          style="font-size:19px">Carri&egrave;res</span
+          style="font-size:19px">{carriere.titre}</span
         ></a
       >
 
-      <div
-        class="jcd-mnav__cta jcd-mnav__reveal"
-        style="transition-delay:.40s"
-      >
+      <div class="jcd-mnav__cta jcd-mnav__reveal" style="transition-delay:.40s">
         <a class="jcd-mnav__btn jcd-mnav__btn--primary" href="/contact"
           >Contacter un expert
           <span class="jcd-mnav__btn-ic"
@@ -221,14 +298,11 @@
               stroke="currentColor"
               stroke-width="1.7"
               stroke-linecap="round"
-              stroke-linejoin="round"
-              ><path d="M3 8h10M9 4l4 4-4 4"></path></svg
+              stroke-linejoin="round"><path d="M3 8h10M9 4l4 4-4 4"></path></svg
             ></span
           ></a
         >
-        <a
-          class="jcd-mnav__btn jcd-mnav__btn--ghost"
-          href="tel:+33387184920"
+        <a class="jcd-mnav__btn jcd-mnav__btn--ghost" href="tel:+33387184920"
           >03 87 18 49 20
           <span class="jcd-mnav__btn-ic"
             ><svg
