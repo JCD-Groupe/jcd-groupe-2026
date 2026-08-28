@@ -6,25 +6,12 @@
            reste masqué.
    Print : seul #fd-print est rendu - A4, fond blanc, encre noire.
    ================================================================== */
+#fd-print-btn{
+      cursor: pointer;
+}
 
-  #fd-print { display: none; }
+#fd-print { display: none; }
 
-  .fd-print-btn {
-    display: inline-flex; align-items: center; justify-content: center;
-    gap: 9px; width: 100%; margin-top: 2px;
-    padding: 11px 16px;
-    background: transparent; border: none; cursor: pointer;
-    color: var(--text-3);
-    font-family: var(--font-mono); font-size: 10.5px; line-height: 1;
-    letter-spacing: 0.09em; text-transform: uppercase;
-    transition: color 280ms ease;
-  }
-  .fd-print-btn svg { width: 14px; height: 14px; }
-  .fd-print-btn:hover { color: var(--text-1); }
-  .fd-print-btn:focus-visible {
-    color: var(--text-1);
-    outline: 2px solid currentColor; outline-offset: 3px; border-radius: 4px;
-  }
 
 @media print {
   @page { size: A4; margin: 12mm 14mm; }

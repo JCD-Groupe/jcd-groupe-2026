@@ -48,9 +48,24 @@ const fetchSvgContent = async (id: string) => {
   return response.text();
 };
 
+function hexToRgbChannels(hex: string) {
+  if (!hex) return "0, 0, 0";
+  let cleanHex = hex.replace("#", "");
+  if (cleanHex.length === 3) {
+    cleanHex = cleanHex
+      .split("")
+      .map((c) => c + c)
+      .join("");
+  }
+  const num = parseInt(cleanHex, 16);
+  return `${(num >> 16) & 255}, ${(num >> 8) & 255}, ${num & 255}`;
+}
+
 pageFormation.icone_cta_content = await fetchSvgContent(
   pageFormation.icone_cta,
 );
+
+formation.thematique.couleur_rgb = hexToRgbChannels(formation.thematique.couleur);
 ---
 
 <html lang="fr">
@@ -111,7 +126,7 @@ pageFormation.icone_cta_content = await fetchSvgContent(
     <script is:inline src="/js/shared/mrefonte-shim.js" id="jcd-mrefonte-shim"
     ></script>
   </head>
-  <body>
+  <body style={`--cat: ${formation.thematique.couleur_rgb};`}>
     <a class="jcd-skip" href="#contenu">Aller au contenu</a>
 
     <div class="scroll-progress" aria-hidden="true"></div>
@@ -588,8 +603,9 @@ pageFormation.icone_cta_content = await fetchSvgContent(
                     </p>
                     <a
                       class="fd-tarif-cta fd-tarif-cta--solid"
-                      href="/contact?pole=formation&step=2"
-                      >S'inscrire à une session</a
+                      href={`${import.meta.env.PUBLIC_DIRECTUS_URL}/assets/${pageFormation.bulletin_d_inscription}?download`}
+                      download="formulaire-inscription-jcd.pdf"
+                      >Télécharger le formulaire d'inscription</a
                     >
                   </div>
                   <div class="fd-tarif" data-mode="intra">
@@ -839,7 +855,7 @@ pageFormation.icone_cta_content = await fetchSvgContent(
                       class="btn-cta btn-cta--primary"
                       id="fd-cta-devis"
                     >
-                      Demander un devis
+                      Prendre contact
                       <span class="btn-cta-arrow"
                         ><svg
                           viewBox="0 0 16 16"
@@ -856,31 +872,27 @@ pageFormation.icone_cta_content = await fetchSvgContent(
                          pré-inscription dans
                          public/docs/formulaire-preinscription.pdf -->
                     <a
-                      href="/docs/formulaire-preinscription.pdf"
-                      download="formulaire-preinscription-jcd.pdf"
-                      class="btn-cta btn-cta--ghost">Pré-inscription</a
-                    >
-                    <button
-                      type="button"
-                      class="fd-print-btn"
-                      id="fd-print-btn"
-                    >
-                      <svg
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        stroke-width="1.7"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        aria-hidden="true"
-                        focusable="false"
-                        ><path d="M6 9V3h12v6"></path><path
-                          d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"
-                        ></path><rect x="6" y="14" width="12" height="7" rx="1"
-                        ></rect></svg
-                      >
+                      class="btn-cta btn-cta--ghost"                      id="fd-print-btn"
+>
+                      
                       Imprimer la fiche
-                    </button>
+                      <span class="btn-cta-arrow">
+                        <svg
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          stroke="currentColor"
+                          stroke-width="1.7"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          aria-hidden="true"
+                          focusable="false"
+                          ><path d="M6 9V3h12v6"></path><path
+                            d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"
+                          ></path><rect x="6" y="14" width="12" height="7" rx="1"
+                          ></rect></svg
+                        >
+                      </span>
+                    </a>
                   </div>
                   <p class="fd-aside-note">
                     <svg

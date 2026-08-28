@@ -817,8 +817,8 @@ const logos2 = logos.slice(half);
                      dans public/docs/calendrier-formations.pdf -->
                 <a
                   class="mf-cal-btn"
-                  href="/docs/calendrier-formations.pdf"
-                  download="calendrier-formations-jcd.pdf"
+                  href={`${import.meta.env.PUBLIC_DIRECTUS_URL}/assets/${formation.calendrier_general}`}
+                  target="_blank"
                 >
                   <span class="mf-cal-ic" aria-hidden="true"
                     ><svg
@@ -832,7 +832,27 @@ const logos2 = logos.slice(half);
                       ></rect><path d="M8 3v4M16 3v4M4 11h16"></path></svg
                     ></span
                   >
-                  Télécharger le calendrier des formations
+                  Calendrier général
+                  <span class="mf-cal-tag" aria-hidden="true">PDF</span>
+                </a>
+                <a
+                  class="mf-cal-btn"
+                  href={`${import.meta.env.PUBLIC_DIRECTUS_URL}/assets/${formation.calendrier_informatique_technique}`}
+                  target="_blank"
+                >
+                  <span class="mf-cal-ic" aria-hidden="true"
+                    ><svg
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="1.7"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      ><rect x="4" y="5" width="16" height="16" rx="2"
+                      ></rect><path d="M8 3v4M16 3v4M4 11h16"></path></svg
+                    ></span
+                  >
+                  Calendrier informatique technique
                   <span class="mf-cal-tag" aria-hidden="true">PDF</span>
                 </a>
               </div>
