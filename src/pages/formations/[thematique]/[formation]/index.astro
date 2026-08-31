@@ -79,7 +79,7 @@ formation.thematique.couleur_rgb = hexToRgbChannels(formation.thematique.couleur
     />
     <meta
       name="description"
-      content={`Fiche formation ${global.nom_societe} • ${formation.titre_de_la_formation} : ${formation.objectifs.map((objectif :any) => (objectif.objectif)).join(' ')}`}
+      content={`Fiche formation ${global.nom_societe} · ${formation.titre_de_la_formation} : ${formation.objectifs.map((objectif :any) => (objectif.objectif)).join(' ')}`}
     />
     <link
       rel="canonical"
@@ -94,7 +94,7 @@ formation.thematique.couleur_rgb = hexToRgbChannels(formation.thematique.couleur
     />
     <meta
       property="og:description"
-      content={`Fiche formation ${global.nom_societe} • ${formation.titre_de_la_formation} : ${formation.objectifs.map((objectif :any) => (objectif.objectif)).join(' ')}`}
+      content={`Fiche formation ${global.nom_societe} · ${formation.titre_de_la_formation} : ${formation.objectifs.map((objectif :any) => (objectif.objectif)).join(' ')}`}
     />
     <meta
       property="og:url"
@@ -246,8 +246,8 @@ formation.thematique.couleur_rgb = hexToRgbChannels(formation.thematique.couleur
               >
               Attestation de stage{
                 formation.certification_tosa ?
-                  " • Certification TOSA en option" :
-                  formation.certification_sur_demande && ' • Certification possible sur demande'
+                  " · Certification TOSA en option" :
+                  formation.certification_sur_demande && ' · Certification possible sur demande'
               }
             </span>
             { formation.pastille &&
@@ -647,8 +647,8 @@ formation.thematique.couleur_rgb = hexToRgbChannels(formation.thematique.couleur
                     <h2 class="fd-certif-title">
                       Attestation de stage {
                         formation.certification_tosa ?
-                          " • Certification TOSA en option"
-                          : formation.certification_sur_demande && ' • Certification possible sur demande'
+                          " · Certification TOSA en option"
+                          : formation.certification_sur_demande && ' · Certification possible sur demande'
                       }
                     </h2>
                     {
@@ -814,7 +814,7 @@ formation.thematique.couleur_rgb = hexToRgbChannels(formation.thematique.couleur
                         <span class="fd-fact-k">Lieux</span>
                         <span class="fd-fact-v" data-field="lieux"
                           >Metz · Vos locaux
-                          {formation.accessible_a_distance && " • A distance"}
+                          {formation.accessible_a_distance && " · A distance"}
                         </span>
                       </span>
                     </li>
@@ -1032,7 +1032,7 @@ formation.thematique.couleur_rgb = hexToRgbChannels(formation.thematique.couleur
         </li>
         <li>
           <strong>Lieux</strong>
-          <span>Metz · Vos locaux {formation.accessible_a_distance && "• A distance"}</span>
+          <span>Metz · Vos locaux {formation.accessible_a_distance && "· A distance"}</span>
         </li>
         <li>
           <strong>Format</strong>
@@ -1082,8 +1082,8 @@ formation.thematique.couleur_rgb = hexToRgbChannels(formation.thematique.couleur
             <h2>
               Attestation de stage
               {formation.certification_tosa
-                ? " • Certification TOSA en option"
-                : " • Certification possible sur demande"}
+                ? " · Certification TOSA en option"
+                : " · Certification possible sur demande"}
             </h2>
             {formation.certification_tosa && (
               <p>
