@@ -1719,6 +1719,7 @@
   }
 
   /* — État vide des filtres — */
+  #fcat-empty[hidden]{display: none;}
   .fcat-empty {
     display: flex; flex-direction: column; align-items: center; gap: 12px;
     padding: 64px 20px;

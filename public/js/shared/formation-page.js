@@ -71,76 +71,101 @@
 
   /* ---- Recherche + filtres de niveau in-page ---- */
   (function setupCategoryFilters() {
-    var input = document.getElementById('ct-search');
-    var grid = document.getElementById('fcat-grid');
-    var empty = document.getElementById('fcat-empty');
-    var countEl = document.getElementById('ct-n');
-    var levelsBox = document.getElementById('ct-levels');
+    var input = document.getElementById("ct-search");
+    var grid = document.getElementById("fcat-grid");
+    var empty = document.getElementById("fcat-empty");
+    var countEl = document.getElementById("ct-n");
+    var levelsBox = document.getElementById("ct-levels");
     if (!input || !grid) return;
 
-    var cards = Array.prototype.slice.call(grid.querySelectorAll('.fcat-card'));
-    var levelBtns = Array.prototype.slice.call(levelsBox.querySelectorAll('.ct-level'));
-    var activeLevel = 'all';
+    var cards = Array.prototype.slice.call(grid.querySelectorAll(".fcat-card"));
+    var levelBtns = Array.prototype.slice.call(
+      levelsBox.querySelectorAll(".ct-level"),
+    );
+    var activeLevel = "all";
 
     function fold(s) {
-      return (s || '').toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '');
+      return (s || "").toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g, "");
     }
     cards.forEach(function (c) {
-      c.setAttribute('data-q', fold(c.querySelector('.fcat-title').textContent));
+      c.setAttribute(
+        "data-q",
+        fold(c.querySelector(".fcat-title").textContent),
+      );
     });
 
     /* Masque les niveaux absents de la catégorie, affiche les compteurs. */
     levelBtns.forEach(function (btn) {
-      var lv = btn.getAttribute('data-level');
-      if (lv === 'all') return;
-      var n = cards.filter(function (c) { return c.getAttribute('data-level') === lv; }).length;
-      var badge = btn.querySelector('.ct-level-n');
+      var lv = btn.getAttribute("data-level");
+      if (lv === "all") return;
+      var n = cards.filter(function (c) {
+        return c.getAttribute("data-level") === lv;
+      }).length;
+      var badge = btn.querySelector(".ct-level-n");
       if (badge) badge.textContent = String(n);
       if (n === 0) btn.hidden = true;
     });
-    var visibleLevelBtns = levelBtns.filter(function (b) { return !b.hidden && b.getAttribute('data-level') !== 'all'; });
+    var visibleLevelBtns = levelBtns.filter(function (b) {
+      return !b.hidden && b.getAttribute("data-level") !== "all";
+    });
     if (visibleLevelBtns.length < 2) levelsBox.hidden = true;
 
     function apply() {
       var terms = fold(input.value.trim()).split(/\s+/).filter(Boolean);
       var shown = 0;
       cards.forEach(function (c) {
-        var okLevel = activeLevel === 'all' || c.getAttribute('data-level') === activeLevel;
-        var hay = c.getAttribute('data-q') || '';
-        var okText = terms.every(function (t) { return hay.indexOf(t) !== -1; });
+        var okLevel =
+          activeLevel === "all" || c.getAttribute("data-level") === activeLevel;
+        var hay = c.getAttribute("data-q") || "";
+        var okText = terms.every(function (t) {
+          return hay.indexOf(t) !== -1;
+        });
         var ok = okLevel && okText;
-        if (ok) { c.removeAttribute('hidden'); shown++; }
-        else { c.setAttribute('hidden', ''); }
+        if (ok) {
+          c.removeAttribute("hidden");
+          shown++;
+        } else {
+          c.setAttribute("hidden", "");
+        }
       });
       if (countEl) countEl.textContent = String(shown);
       if (empty) empty.hidden = shown !== 0;
     }
 
-    input.addEventListener('input', apply);
-    input.addEventListener('keydown', function (e) {
-      if (e.key === 'Escape' && input.value) {
+    input.addEventListener("input", apply);
+    input.addEventListener("keydown", function (e) {
+      if (e.key === "Escape" && input.value) {
         e.stopPropagation();
-        input.value = '';
+        input.value = "";
         apply();
       }
     });
     levelBtns.forEach(function (btn) {
-      btn.addEventListener('click', function () {
-        activeLevel = btn.getAttribute('data-level');
-        levelBtns.forEach(function (b) { b.setAttribute('aria-pressed', String(b === btn)); });
+      btn.addEventListener("click", function () {
+        activeLevel = btn.getAttribute("data-level");
+        levelBtns.forEach(function (b) {
+          b.setAttribute("aria-pressed", String(b === btn));
+        });
         apply();
       });
     });
-    var reset = document.getElementById('fcat-empty-reset');
+    var reset = document.getElementById("fcat-empty-reset");
     if (reset) {
-      reset.addEventListener('click', function () {
-        input.value = '';
-        activeLevel = 'all';
-        levelBtns.forEach(function (b) { b.setAttribute('aria-pressed', String(b.getAttribute('data-level') === 'all')); });
+      reset.addEventListener("click", function () {
+        input.value = "";
+        activeLevel = "all";
+        levelBtns.forEach(function (b) {
+          b.setAttribute(
+            "aria-pressed",
+            String(b.getAttribute("data-level") === "all"),
+          );
+        });
         apply();
         input.focus();
       });
     }
+
+    apply();
   })();
 
   /* ---- Navbar dropdown ---- */
