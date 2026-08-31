@@ -50,8 +50,15 @@ info_reseaux.icone_cta_content = await fetchSvgContent(info_reseaux.icone_cta);
     <meta name="theme-color" content="#0a0a0a" />
     <link
       rel="icon"
-      href={`${import.meta.env.PUBLIC_DIRECTUS_URL}/assets/${global.favicon}`}
+      href={`${import.meta.env.PUBLIC_DIRECTUS_URL}/assets/${global.favicon_claire}`}
       type="image/svg+xml"
+      media="(prefers-color-scheme: dark)"
+    />
+    <link
+      rel="icon"
+      href={`${import.meta.env.PUBLIC_DIRECTUS_URL}/assets/${global.favicon_sombre}`}
+      type="image/svg+xml"
+      media="(prefers-color-scheme: light)"
     />
     <meta name="description" content={info_reseaux.meta_description} />
     <link
