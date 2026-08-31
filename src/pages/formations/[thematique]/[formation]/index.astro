@@ -359,7 +359,7 @@ formation.thematique.couleur_rgb = hexToRgbChannels(formation.thematique.couleur
                             aria-expanded={index == 0 ? true : false}
                           >
                             <span class="fd-mod-num">
-                              {index < 10 ? "0" : ""}
+                              {index + 1 < 10 ? "0" : ""}
                               {index + 1}
                             </span>
                             <span class="fd-mod-title">{ligne.titre}</span>
@@ -1105,7 +1105,7 @@ formation.thematique.couleur_rgb = hexToRgbChannels(formation.thematique.couleur
                 <div class="fdp-prog-item">
                   <div class="fdp-prog-title-row">
                     <span class="fdp-prog-num">
-                      {index < 10 ? "0" : ""}{index + 1}.
+                      {index + 1 < 10 ? "0" : ""}{index + 1}.
                     </span>
                     <strong>{ligne.titre}</strong>
                   </div>
