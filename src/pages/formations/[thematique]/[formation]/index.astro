@@ -31,7 +31,9 @@ let formation = Astro.props.data;
 
 let global = await directus.request(
   readSingleton("Global", {
-    fields: ["*"],
+    fields: ["*", {
+      adresses: ["*"]
+    }],
   }),
 );
 
@@ -1004,70 +1006,149 @@ formation.thematique.couleur_rgb = hexToRgbChannels(formation.thematique.couleur
           <span>Organisme certifié Qualiopi · Centre d'examen TOSA agréé</span>
         </div>
         <div class="fdp-ref">
-          Réf. <span data-print-field="reference">—</span>
+          Réf. <span>{formation.reference}</span>
         </div>
       </header>
 
       <div class="fdp-title-row">
-        <span class="fdp-cat" data-print-field="categorie">Bureautique</span>
-        <h1 class="fdp-title" data-print-field="title">Excel initiation</h1>
+        <span class="fdp-cat">{formation.thematique.titre_de_la_thematique_de_formations}</span>
+        <h1 class="fdp-title">{formation.titre_de_la_formation}</h1>
       </div>
 
       <ul class="fdp-facts">
         <li>
-          <strong>Durée</strong><span data-print-field="duree">—</span>
+          <strong>Durée</strong>
+          <span>
+            {formation.duree_en_jours && `${formation.duree_en_jours} jour${formation.duree_en_jours >= 2 ? "s" : ""}`}
+            {formation.duree_en_jours && formation.duree_en_heures && " · "}
+            {formation.duree_en_heures && `${formation.duree_en_heures} heure${formation.duree_en_heures >= 2 ? "s" : ""}`}
+          </span>
         </li>
         <li>
-          <strong>Tarif</strong><span
-            ><span data-print-field="tarif">—</span> / participant</span
-          >
+          <strong>Tarif</strong>
+          <span>
+            {formation.tarif_par_participant ? `${formation.tarif_par_participant} € HT` : "Sur mesure"} / participant
+          </span>
         </li>
         <li>
-          <strong>Lieux</strong><span data-print-field="lieux">—</span>
+          <strong>Lieux</strong>
+          <span>Metz · Vos locaux {formation.accessible_a_distance && "• A distance"}</span>
         </li>
         <li>
-          <strong>Format</strong><span data-print-field="format">—</span>
+          <strong>Format</strong>
+          <span>Intra &amp; inter-entreprises</span>
         </li>
       </ul>
 
       <section class="fdp-sec">
         <h2>Objectifs pédagogiques</h2>
-        <ul class="fdp-list" data-print-list="objectifs"></ul>
-      </section>
-
-      <section class="fdp-sec">
-        <h2>Programme</h2>
-        <ul class="fdp-prog" data-print-list="programme"></ul>
+        <ul class="fdp-list">
+          {formation.objectifs.map((objectif: any) => (
+            <li>{objectif.objectif}</li>
+          ))}
+        </ul>
       </section>
 
       <div class="fdp-cols">
         <section class="fdp-sec">
           <h2>Public visé</h2>
-          <p data-print-field="public">—</p>
+          <p>{formation.public}</p>
         </section>
         <section class="fdp-sec">
           <h2>Prérequis</h2>
-          <p data-print-field="prerequis">—</p>
+          <p>{formation.prerequis ?? formations_commun.prerequis}</p>
         </section>
         <section class="fdp-sec">
           <h2>Modalités pédagogiques</h2>
-          <p data-print-field="modalites_pedagogiques">—</p>
+          <p>{formation.methodes_pedagogiques}</p>
         </section>
         <section class="fdp-sec">
-          <h2>Suivi &amp; évaluation</h2>
-          <p data-print-field="modalites_evaluation">—</p>
+          <h2>Modalités d'évaluation</h2>
+          <p>{formation.suivi_et_evaluation_de_l_action ?? formations_commun.suivi_et_evaluation_de_l_action}</p>
+        </section>
+        <section class="fdp-sec">
+          <h2>Profil intervenant</h2>
+          <p>{formation.profils_intervenants ?? formation.thematique.profils_intervenants}</p>
+        </section>
+        <section class="fdp-sec">
+          <h2>Accessibilité handicap</h2>
+          <p>La formation est accessible aux personnes à mobilité réduite et toute demande d’adaptation peut être étudiée en amont de la formation en fonction du besoin des personnes. Nous contacter pour plus d’informations.</p>
         </section>
       </div>
 
-      <p class="fdp-tosa" data-print-tosa>
-        Certification TOSA en option : validez officiellement votre niveau à
-        l'issue du stage — score reconnu par les entreprises, éligible aux
-        financements.
-      </p>
+      {
+        (formation.certification_tosa || formation.certification_sur_demande) && (
+          <div class="fdp-sec fdp-tosa" data-print-tosa>
+            <h2>
+              Attestation de stage
+              {formation.certification_tosa
+                ? " • Certification TOSA en option"
+                : " • Certification possible sur demande"}
+            </h2>
+            {formation.certification_tosa && (
+              <p>
+                Validez officiellement votre niveau à l'issue du stage : JCD Formation est centre d'examen TOSA agréé. Score reconnu par les entreprises, éligible aux financements.
+              </p>
+            )}
+          </div>
+        )
+      }
+
+      <!-- Programme détaillé rejeté sur la page 2 -->
+      <section class="fdp-sec fdp-page-break">
+        <h2>Programme détaillé</h2>
+        <div class="fdp-prog-container">
+          {
+            formation.programme.map((ligne: any, index: number) => {
+              let detail = ligne.detail ? ligne.detail.replace("<ul>", '<ul class="fdp-mod-list">') : '';
+              return (
+                <div class="fdp-prog-item">
+                  <div class="fdp-prog-title-row">
+                    <span class="fdp-prog-num">
+                      {index < 10 ? "0" : ""}{index + 1}.
+                    </span>
+                    <strong>{ligne.titre}</strong>
+                  </div>
+                  {detail && (
+                    <div class="fdp-prog-detail">
+                      <Fragment set:html={detail} />
+                    </div>
+                  )}
+                </div>
+              );
+            })
+          }
+        </div>
+      </section>
 
       <footer class="fdp-foot">
-        <span>JCD Formation · 03&nbsp;87&nbsp;18&nbsp;49&nbsp;20 · Metz &amp; Nancy</span>
-        <span>Premier rendez-vous gratuit · Réponse sous 24&nbsp;h ouvrées</span>
+        <div class="fdp-foot-top">
+          <div class="fdp-foot-brand">
+            <p><strong>{global.nom_societe}</strong></p>
+            <p>Organisme certifié Qualiopi · Centre d'examen TOSA agréé</p>
+          </div>
+          <div class="fdp-foot-phone">
+            Tél. : <strong>03 87 18 49 20</strong>
+          </div>
+        </div>
+
+        <div class="fdp-foot-addresses">
+          {
+            global.adresses.map((adresse: any) => (
+              <div class="fdp-foot-addr">
+                <p class="fdp-addr-city">{adresse.titre}</p>
+                <p class="fdp-addr-text">
+                  {adresse.adresse_rue}{adresse.adresse_complement ? `, ${adresse.adresse_complement}` : ''}, {adresse.code_postal_ville}
+                </p>
+              </div>
+            ))
+          }
+        </div>
+
+        <div class="fdp-foot-bottom">
+          <p>Premier rendez-vous gratuit · Réponse sous 24&nbsp;h ouvrées</p>
+          <p>{global.nom_societe} &middot; Tous droits réservés</p>
+        </div>
       </footer>
     </div>
 

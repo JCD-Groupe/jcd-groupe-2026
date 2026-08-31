@@ -53,6 +53,7 @@
     letter-spacing: 0.09em; text-transform: uppercase; color: #5a5f68;
   }
   .fdp-title {
+    color: inherit;
     margin: 0; font-size: 19pt; font-weight: 700;
     letter-spacing: -0.02em; line-height: 1.12;
   }
@@ -113,10 +114,112 @@
   }
 
   /* --- Pied de page --- */
+  /* --- Pied de page structuré et soigné --- */
   .fdp-foot {
-    display: flex; justify-content: space-between; gap: 8mm;
-    margin-top: 2mm; padding-top: 2.5mm;
-    border-top: 0.6mm solid #16181c;
-    font-size: 7.5pt; color: #5a5f68;
+    background-color: #f8f9fa !important;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+    border-top: 0.5mm solid #cbd5e1;
+    padding: 4mm 5mm;
+    margin-top: 6mm;
+    border-radius: 1mm;
+    font-size: 7.5pt;
+    color: #334155;
+    break-inside: avoid;
   }
+
+  .fdp-foot-content {
+    display: flex;
+    flex-direction: column;
+    gap: 2.5mm;
+  }
+
+  .fdp-foot-main {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 0.2mm solid #e2e8f0;
+    padding-bottom: 2mm;
+  }
+
+  .fdp-foot-main strong {
+    font-size: 8.5pt;
+    color: #0f172a;
+  }
+
+  .fdp-foot-tagline {
+    color: #64748b;
+    font-size: 7pt;
+  }
+  .fdp-foot-phone{
+    margin-top: 6px;
+  }
+
+  .fdp-foot-addresses {
+    display: flex;
+    justify-content: stretch;
+    gap: 4mm;
+    color: #475569;
+    margin: 6px 0;
+  }
+  .fdp-foot-addr{
+    flex-grow: 1;
+  }
+
+  .fdp-addr-label {
+    font-weight: 600;
+    color: #1e293b;
+  }
+
+  .fdp-foot-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 0.2mm solid #e2e8f0;
+    padding-top: 2.5mm;
+    font-size: 7pt;
+    color: #64748b;
+  }
+
+  .fdp-foot-slogan {
+    margin-right: auto;
+  }
+
+  .fdp-foot-tel {
+    margin-left: 6mm;
+    margin-right: 6mm;
+    white-space: nowrap;
+  }
+
+  /* Force le bloc programme à basculer sur la page 2 */
+  .fdp-page-break {
+    break-before: page;
+    page-break-before: always;
+    padding-top: 5mm; /* Petite marge de sécurité en haut de la page 2 */
+  }
+
+  /* Style des éléments du programme détaillé sur la page 2 */
+  .fdp-prog-item {
+    margin-bottom: 3mm;
+    break-inside: avoid;
+  }
+
+  .fdp-prog-title-row {
+    font-size: 9.5pt;
+    margin-bottom: 1mm;
+  }
+
+  .fdp-prog-detail {
+    font-size: 9pt;
+    color: #4a4f58;
+    padding-left: 5mm;
+    margin-bottom: 2mm;
+  }
+  
+  .fdp-prog-detail ul {
+    margin: 1mm 0;
+    padding-left: 4mm;
+    list-style-type: disc;
+  }
+
 }
