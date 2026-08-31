@@ -1,6 +1,7 @@
 ---
 import { readItems } from "@directus/sdk";
 import { directus } from "../lib/directus";
+import { fetchSvgContent, hexToRgbChannels } from "../utils/formatters";
 
 let thematiques = await directus.request(
   readItems("thematiques_formation", {
@@ -39,27 +40,6 @@ let formations = await directus.request(
     fields: ["id"],
   }),
 );
-
-const fetchSvgContent = async (id: string) => {
-  if (!id) return null;
-  const response = await fetch(
-    `${import.meta.env.PUBLIC_DIRECTUS_URL}/assets/${id}`,
-  );
-  return response.text();
-};
-
-function hexToRgbChannels(hex: string) {
-  if (!hex) return "0, 0, 0";
-  let cleanHex = hex.replace("#", "");
-  if (cleanHex.length === 3) {
-    cleanHex = cleanHex
-      .split("")
-      .map((c) => c + c)
-      .join("");
-  }
-  const num = parseInt(cleanHex, 16);
-  return `${(num >> 16) & 255}, ${(num >> 8) & 255}, ${num & 255}`;
-}
 
 thematiques = await Promise.all(
   thematiques.map(async (thematique) => {

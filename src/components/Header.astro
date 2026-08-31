@@ -7,6 +7,7 @@ import { readSingleton } from "@directus/sdk";
 import CatalogueMenu from "./CatalogueMenu.astro";
 import MobileNav from "./MobileNav.astro";
 import { directus } from "../lib/directus";
+import { fetchSvgContent } from "../utils/formatters";
 const { current = null, catalogue = false } = Astro.props;
 
 let global = await directus.request(
@@ -14,14 +15,6 @@ let global = await directus.request(
     fields: ["*"],
   }),
 );
-
-const fetchSvgContent = async (id: string) => {
-  if (!id) return null;
-  const response = await fetch(
-    `${import.meta.env.PUBLIC_DIRECTUS_URL}/assets/${id}`,
-  );
-  return response.text();
-};
 
 let informatique = await directus.request(
   readSingleton("JCD_Informatique", {

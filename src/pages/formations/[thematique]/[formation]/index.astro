@@ -3,6 +3,7 @@ import { readItems, readSingleton } from "@directus/sdk";
 import Footer from "../../../../components/Footer.astro";
 import Header from "../../../../components/Header.astro";
 import { directus } from "../../../../lib/directus";
+import { fetchSvgContent, hexToRgbChannels } from "../../../../utils/formatters";
 
 export async function getStaticPaths() {
   const formations = await directus.request(
@@ -45,27 +46,6 @@ let pageFormation = await directus.request(
     fields: ["*"],
   }),
 );
-
-const fetchSvgContent = async (id: string) => {
-  if (!id) return null;
-  const response = await fetch(
-    `${import.meta.env.PUBLIC_DIRECTUS_URL}/assets/${id}`,
-  );
-  return response.text();
-};
-
-function hexToRgbChannels(hex: string) {
-  if (!hex) return "0, 0, 0";
-  let cleanHex = hex.replace("#", "");
-  if (cleanHex.length === 3) {
-    cleanHex = cleanHex
-      .split("")
-      .map((c) => c + c)
-      .join("");
-  }
-  const num = parseInt(cleanHex, 16);
-  return `${(num >> 16) & 255}, ${(num >> 8) & 255}, ${num & 255}`;
-}
 
 pageFormation.icone_cta_content = await fetchSvgContent(
   pageFormation.icone_cta,

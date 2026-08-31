@@ -3,6 +3,7 @@ import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
 import { directus } from "../lib/directus";
 import { readItems, readSingleton } from "@directus/sdk";
+import { fetchSvgContent } from "../utils/formatters";
 
 let global = await directus.request(
   readSingleton("Global", {
@@ -32,14 +33,6 @@ let offres = await directus.request(
     ],
   }),
 );
-
-const fetchSvgContent = async (id: string) => {
-  if (!id) return null;
-  const response = await fetch(
-    `${import.meta.env.PUBLIC_DIRECTUS_URL}/assets/${id}`,
-  );
-  return response.text();
-};
 
 carriere.valeurs = await Promise.all(
   carriere.valeurs.map(async (valeur: any) => ({

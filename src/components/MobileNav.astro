@@ -1,14 +1,7 @@
 ---
 import { readItems, readSingleton } from "@directus/sdk";
 import { directus } from "../lib/directus";
-
-const fetchSvgContent = async (id: string) => {
-  if (!id) return null;
-  const response = await fetch(
-    `${import.meta.env.PUBLIC_DIRECTUS_URL}/assets/${id}`,
-  );
-  return response.text();
-};
+import { fetchSvgContent } from "../utils/formatters";
 
 let informatique = await directus.request(
   readSingleton("JCD_Informatique", {

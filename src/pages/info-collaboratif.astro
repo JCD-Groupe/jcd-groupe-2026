@@ -4,6 +4,7 @@ import { readSingleton } from "@directus/sdk";
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
 import NavInformatique from "../components/NavInformatique.astro";
+import { fetchSvgContent } from "../utils/formatters";
 
 let global = await directus.request(
   readSingleton("Global", {
@@ -27,14 +28,6 @@ let info_collaboratif = await directus.request(
     ],
   }),
 );
-
-const fetchSvgContent = async (id: string) => {
-  if (!id) return null;
-  const response = await fetch(
-    `${import.meta.env.PUBLIC_DIRECTUS_URL}/assets/${id}`,
-  );
-  return response.text();
-};
 
 info_collaboratif.prestations = await Promise.all(
   info_collaboratif.prestations.map(async (prestation: any) => ({

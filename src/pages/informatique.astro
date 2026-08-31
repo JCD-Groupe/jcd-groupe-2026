@@ -4,6 +4,7 @@ import { readSingleton } from "@directus/sdk";
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
 import NavInformatique from "../components/NavInformatique.astro";
+import { fetchSvgContent } from "../utils/formatters";
 
 let global = await directus.request(
   readSingleton("Global", {
@@ -63,14 +64,6 @@ let info_reseaux = await directus.request(
     fields: ["nom_service", "icone_service", "description_page_informatique"],
   }),
 );
-
-const fetchSvgContent = async (id: string) => {
-  if (!id) return null;
-  const response = await fetch(
-    `${import.meta.env.PUBLIC_DIRECTUS_URL}/assets/${id}`,
-  );
-  return response.text();
-};
 
 informatique.icone_cta_content = await fetchSvgContent(informatique.icone_cta);
 
