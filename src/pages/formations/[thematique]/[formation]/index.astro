@@ -903,7 +903,7 @@ formation.thematique.couleur_rgb = hexToRgbChannels(formation.thematique.couleur
                         d="M12 3l8 3v5c0 5-3.4 8.4-8 10-4.6-1.6-8-5-8-10V6l8-3z"
                       ></path><path d="M9 11.5l2 2 4-4"></path></svg
                     >
-                    Premier rendez-vous gratuit · Réponse sous 24&nbsp;h ouvrées
+                    Réponse sous 24&nbsp;h ouvrées
                   </p>
                   <div class="fd-aside-phone">
                     <svg
@@ -1002,7 +1002,7 @@ formation.thematique.couleur_rgb = hexToRgbChannels(formation.thematique.couleur
     <div id="fd-print" aria-hidden="true">
       <header class="fdp-head">
         <div class="fdp-brand">
-          <strong>JCD Formation</strong>
+          <strong>JCD {pageFormation.nom_pole}</strong>
           <span>Organisme certifié Qualiopi · Centre d'examen TOSA agréé</span>
         </div>
         <div class="fdp-ref">
@@ -1124,29 +1124,27 @@ formation.thematique.couleur_rgb = hexToRgbChannels(formation.thematique.couleur
       <footer class="fdp-foot">
         <div class="fdp-foot-top">
           <div class="fdp-foot-brand">
-            <p><strong>{global.nom_societe}</strong></p>
+            <p><strong>JCD {pageFormation.nom_pole}</strong></p>
             <p>Organisme certifié Qualiopi · Centre d'examen TOSA agréé</p>
           </div>
           <div class="fdp-foot-phone">
-            Tél. : <strong>03 87 18 49 20</strong>
+            Tél. : <strong>03 87 37 97 70</strong>
           </div>
         </div>
 
         <div class="fdp-foot-addresses">
           {
-            global.adresses.map((adresse: any) => (
               <div class="fdp-foot-addr">
-                <p class="fdp-addr-city">{adresse.titre}</p>
+                <p class="fdp-addr-city">{global.adresses[0].titre}</p>
                 <p class="fdp-addr-text">
-                  {adresse.adresse_rue}{adresse.adresse_complement ? `, ${adresse.adresse_complement}` : ''}, {adresse.code_postal_ville}
+                  {global.adresses[0].adresse_rue}{global.adresses[0].adresse_complement ? `, ${global.adresses[0].adresse_complement}` : ''}, {global.adresses[0].code_postal_ville}
                 </p>
               </div>
-            ))
           }
         </div>
 
         <div class="fdp-foot-bottom">
-          <p>Premier rendez-vous gratuit · Réponse sous 24&nbsp;h ouvrées</p>
+          <p>Réponse sous 24&nbsp;h ouvrées</p>
           <p>{global.nom_societe} &middot; Tous droits réservés</p>
         </div>
       </footer>
