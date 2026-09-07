@@ -335,7 +335,7 @@ formation.thematique.couleur_rgb = hexToRgbChannels(formation.thematique.couleur
                 <div class="fd-acc reveal delay-1">
                   {
                     formation.programme.map((ligne: any, index: number) => {
-                      let detail = ligne.detail.replace(
+                      let detail = ligne.detail?.replace(
                         "<ul>",
                         '<ul class="fd-mod-list">',
                       );
