@@ -963,12 +963,14 @@ let agencement = await directus.request(
     </main>
 
     <Footer current="carrieres" />
-    <script is:inline>
+    <script>
       document.addEventListener("DOMContentLoaded", () => {
-        const form = document.getElementById("apply-form");
+        const form = document.getElementById("apply-form") as HTMLFormElement;
         const successEl = document.getElementById("q-success");
         const errorEl = document.getElementById("q-error");
-        const submitBtn = document.getElementById("q-submit");
+        const submitBtn = document.getElementById(
+          "q-submit",
+        ) as HTMLButtonElement;
 
         if (!form) return;
 
@@ -992,7 +994,9 @@ let agencement = await directus.request(
             const sendData = new FormData();
 
             // Récupération du titre de l'offre ou du poste recherché
-            const offreSelect = document.getElementById("f-offre");
+            const offreSelect = document.getElementById(
+              "f-offre",
+            ) as HTMLSelectElement;
             const selectedOfferText =
               offreSelect && offreSelect.selectedIndex >= 0
                 ? offreSelect.options[offreSelect.selectedIndex].text
@@ -1005,20 +1009,31 @@ let agencement = await directus.request(
                 : selectedOfferText;
 
             // Préparation des champs pour l'envoi Python
-            sendData.append("prenom", rawFormData.get("prenom"));
-            sendData.append("nom", rawFormData.get("nom"));
-            sendData.append("telephone", rawFormData.get("telephone"));
-            sendData.append("email", rawFormData.get("email"));
+            sendData.append(
+              "prenom",
+              (rawFormData.get("prenom") as string) || "",
+            );
+            sendData.append("nom", (rawFormData.get("nom") as string) || "");
+            sendData.append(
+              "telephone",
+              (rawFormData.get("telephone") as string) || "",
+            );
+            sendData.append(
+              "email",
+              (rawFormData.get("email") as string) || "",
+            );
             sendData.append("offre_titre", offreTitre || "Non renseigné");
             sendData.append("offre_id", rawFormData.get("offre") || "N/A");
 
-            const fileInput = document.getElementById("f-cv");
-            if (fileInput && fileInput.files[0]) {
+            const fileInput = document.getElementById(
+              "f-cv",
+            ) as HTMLInputElement;
+            if (fileInput && fileInput.files && fileInput.files[0]) {
               sendData.append("cv", fileInput.files[0]);
             }
 
             const response = await fetch(
-              "http://127.0.0.1:5000/api/contact-recrutement",
+              `${import.meta.env.PUBLIC_MAIL_API_URL}/api/contact-recrutement`,
               {
                 method: "POST",
                 body: sendData, // On envoie FormData directement (ne pas définir Content-Type à la main)

@@ -18,27 +18,6 @@
        unique — c'est lui qui sera rempli depuis Directus. Champs :
        id, titre, pole, poleName, lieu, contrat, temps, desc. ---- */
     var OFFRES = [];
-    try {
-      OFFRES = JSON.parse(
-        document.getElementById("jcd-offres-data").textContent,
-      );
-    } catch (e) {
-      console.error(
-        "[carrieres] Données offres introuvables ou invalides (#jcd-offres-data)",
-        e,
-      );
-    }
-    /* Couleurs par pôle — mêmes tokens que le méga-menu. */
-    var POLE_COLORS = {
-      informatique: "#2E72BA",
-      service: "#E51D29",
-      developpement: "#F9D605",
-      print: "#F3941D",
-      telecom: "#B063AC",
-      formation: "#8EC041",
-      agencement: "#A78D75",
-    };
-    /* ------------------------------------------------------------------ */
 
     var OFFRE_BY_ID = {};
     OFFRES.forEach(function (o) {
@@ -91,63 +70,6 @@
     /* ---- 1. Rendu des offres (cartes du carrousel) + compteur ---- */
     function renderOffers() {
       if (!listEl) return;
-      if (OFFRES.length === 0) {
-        listEl.innerHTML =
-          '<div class="offers-empty" role="listitem">Aucune offre ouverte pour le moment, ' +
-          "les candidatures spontanées restent les bienvenues.</div>";
-        return;
-      }
-      // listEl.innerHTML = OFFRES.map(function (o) {
-      //   return (
-      //     '<article class="offer-card" role="listitem"' +
-      //     ' style="--pc: ' +
-      //     (POLE_COLORS[o.pole] || "var(--accent)") +
-      //     '">' +
-      //     '<span class="offer-pole">' +
-      //     esc(o.poleName) +
-      //     "</span>" +
-      //     '<h3 class="offer-title">' +
-      //     esc(o.titre) +
-      //     "</h3>" +
-      //     '<span class="offer-meta">' +
-      //     '<span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>' +
-      //     esc(o.lieu) +
-      //     "</span>" +
-      //     '<span class="meta-sep" aria-hidden="true"></span>' +
-      //     "<span>" +
-      //     esc(o.contrat) +
-      //     "</span>" +
-      //     '<span class="meta-sep" aria-hidden="true"></span>' +
-      //     "<span>" +
-      //     esc(o.temps) +
-      //     "</span>" +
-      //     "</span>" +
-      //     '<button type="button" class="offer-toggle" aria-expanded="false">Le poste en détail' +
-      //     '<svg viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2.5 4l2.5 2.5L7.5 4"/></svg>' +
-      //     "</button>" +
-      //     '<div class="offer-desc"><div><p>' +
-      //     esc(o.desc || "") +
-      //     "</p></div></div>" +
-      //     '<div class="offer-foot">' +
-      //     '<a class="offer-apply" href="#postuler" data-offre="' +
-      //     esc(o.id) +
-      //     '"' +
-      //     ' aria-label="Postuler — ' +
-      //     esc(o.titre) +
-      //     ", " +
-      //     esc(o.lieu) +
-      //     ", " +
-      //     esc(o.contrat) +
-      //     '">Postuler' +
-      //     '<span class="offer-apply-arrow" aria-hidden="true">' +
-      //     ARROW +
-      //     "</span>" +
-      //     "</a>" +
-      //     "</div>" +
-      //     "</article>"
-      //   );
-      // }).join("");
-
       /* Clic "Postuler" : pré-sélectionne l'offre dans le formulaire. */
       listEl.querySelectorAll(".offer-apply").forEach(function (link) {
         link.addEventListener("click", function () {

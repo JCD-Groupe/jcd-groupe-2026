@@ -694,14 +694,16 @@ agencement.icone_pole_content = await fetchSvgContent(agencement.icone_pole);
         try {
           if (submitBtn) submitBtn.disabled = true;
 
-          // Appel au conteneur Docker "jcd-groupe-contact" sur le port 5000
-          const response = await fetch("http://127.0.0.1:5000/api/contact", {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
+          const response = await fetch(
+            `${import.meta.env.PUBLIC_MAIL_API_URL}/api/contact`,
+            {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify(payload),
             },
-            body: JSON.stringify(payload),
-          });
+          );
 
           if (response.ok) {
             form.hidden = true;
