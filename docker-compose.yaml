@@ -42,9 +42,12 @@ services:
     ports:
       - "127.0.0.1:5000:5000"
     environment:
+      PUBLIC_DIRECTUS_URL: "${PUBLIC_DIRECTUS_URL}"
       SMTP_HOST: "${SMTP_HOST}"
       SMTP_PORT: "${SMTP_PORT}"
       SMTP_USER: "${SMTP_USER}"
       SMTP_PASS: "${SMTP_PASS}"
-      TO_EMAIL: "${CONTACT_TO_EMAIL}"
+      SMTP_SSL: "${SMTP_SSL}"
+      FROM_EMAIL: "${FROM_EMAIL}"
+      RECRUTEMENT_EMAIL: "${RECRUTEMENT_EMAIL}"
       ALLOWED_ORIGIN: "${PUBLIC_FRONT_URL}"

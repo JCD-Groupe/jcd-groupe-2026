@@ -681,20 +681,14 @@ agencement.icone_pole_content = await fetchSvgContent(agencement.icone_pole);
         const company = formData.get("company")?.toString() || "";
         const email = formData.get("email")?.toString() || "";
         const phone = formData.get("phone")?.toString() || "";
-        const messageContent = formData.get("message")?.toString() || "";
-
-        const fullMessage = `
-Entreprise: ${company || "Non renseignée"}
-Téléphone: ${phone || "Non renseigné"}
-
-Message:
-${messageContent}
-        `.trim();
+        const message = formData.get("message")?.toString() || "";
 
         const payload = {
           name,
           email,
-          message: fullMessage,
+          company,
+          phone,
+          message,
         };
 
         try {
