@@ -1033,7 +1033,7 @@ let agencement = await directus.request(
             }
 
             const response = await fetch(
-              `${import.meta.env.PUBLIC_MAIL_API_URL}/api/contact-recrutement`,
+              `${import.meta.env.PUBLIC_MAIL_API_URL}/api/mail/contact-recrutement`,
               {
                 method: "POST",
                 body: sendData, // On envoie FormData directement (ne pas définir Content-Type à la main)

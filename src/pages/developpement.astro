@@ -26,13 +26,9 @@ developpement.icone_cta_content = await fetchSvgContent(
   developpement.icone_cta,
 );
 
-// Récupération des content svg
-const response = await fetch(
-  `${import.meta.env.PUBLIC_DIRECTUS_URL}/assets/${developpement.icone_cta}`,
+developpement.icone_cta_content = await fetchSvgContent(
+  developpement.icone_cta,
 );
-const svgContent = await response.text();
-
-developpement.icone_cta_content = svgContent;
 
 developpement.prestations = await Promise.all(
   developpement.prestations.map(async (prestation: any) => ({

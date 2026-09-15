@@ -1,7 +1,7 @@
 version: '3.8'
 
 services:
-  astro-app:
+  front:
     build: .
     container_name: jcd-groupe-front
     restart: always
@@ -11,8 +11,8 @@ services:
       - .:/app
       - /app/node_modules
 
-  directus:
-    container_name: jcd-groupe-api
+  admin:
+    container_name: jcd-groupe-admin
     image: directus/directus:latest
     ports:
       - "127.0.0.1:8055:8055"
@@ -35,12 +35,14 @@ services:
       CORS_CREDENTIALS: "true"
     restart: unless-stopped
 
-  contact-api:
-    build: ./contact-backend
-    container_name: jcd-groupe-contact
+  back:
+    build: ./backend
+    container_name: jcd-groupe-back
     restart: always
     ports:
       - "127.0.0.1:5000:5000"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
     environment:
       PUBLIC_DIRECTUS_URL: "${PUBLIC_DIRECTUS_URL}"
       SMTP_HOST: "${SMTP_HOST}"

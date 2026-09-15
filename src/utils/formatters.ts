@@ -4,7 +4,7 @@ export const fetchSvgContent = async (id: string): Promise<string | null> => {
   if (!id) return null;
   try {
     const response = await fetch(
-      `${import.meta.env.PUBLIC_DIRECTUS_URL}/assets/${id}`,
+      `${import.meta.env.LOCAL_DIRECTUS_URL}/assets/${id}`,
     );
     if (!response.ok) return null;
     return await response.text();

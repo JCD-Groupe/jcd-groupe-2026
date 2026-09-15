@@ -1,4 +1,5 @@
 import os
+import docker
 import smtplib
 import base64
 import mimetypes
@@ -42,7 +43,28 @@ def send_email_message(msg):
                 server.login(SMTP_USER, SMTP_PASS)
             server.send_message(msg)
 
-@app.route('/api/contact', methods=['POST'])
+@app.route('/refresh', methods=['GET', 'POST'])
+def refresh():
+  try:
+    # Connexion au socket Docker
+    client = docker.from_env()
+
+    # Récupération du conteneur front et exécution de la commande
+    container = client.containers.get('jcd-groupe-front')
+    exec_result = container.exec_run('npm run build')
+
+    return (
+        jsonify({
+            'status': 'success',
+            'exit_code': exec_result.exit_code,
+            'output': exec_result.output.decode('utf-8'),
+        }),
+        200,
+    )
+  except Exception as e:
+    return jsonify({'status': 'error', 'message': str(e)}), 500
+
+@app.route('/api/mail/contact', methods=['POST'])
 def contact():
     data = request.get_json() or {}
     name = data.get('name')
@@ -76,7 +98,7 @@ def contact():
         print(f"Erreur SMTP: {e}")
         return jsonify({'error': f"Échec lors de l'envoi: {e}"}), 500
 
-@app.route('/api/contact-recrutement', methods=['POST'])
+@app.route('/api/mail/contact-recrutement', methods=['POST'])
 def contact_recrutement():
     # Envoi au format Multipart/Form-Data
     prenom = request.form.get('prenom')
@@ -133,4 +155,4 @@ def contact_recrutement():
         return jsonify({'error': f"Échec lors de l'envoi: {e}"}), 500
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=5000)
+    app.run(host='0.0.0.0', port=5000, debug=True)

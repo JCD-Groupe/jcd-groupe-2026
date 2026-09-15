@@ -695,7 +695,7 @@ agencement.icone_pole_content = await fetchSvgContent(agencement.icone_pole);
           if (submitBtn) submitBtn.disabled = true;
 
           const response = await fetch(
-            `${import.meta.env.PUBLIC_MAIL_API_URL}/api/contact`,
+            `${import.meta.env.PUBLIC_MAIL_API_URL}/api/mail/contact`,
             {
               method: "POST",
               headers: {
