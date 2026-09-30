@@ -78,7 +78,7 @@ def contact():
 
     msg = MIMEMultipart()
     msg['From'] = FROM_EMAIL
-    msg['To'] = 'cyprien.cotinaut@jcd-groupe.fr' #TODO
+    msg['To'] = 'support@jcd-groupe.fr' #TODO
     msg['Reply-To'] = email
     msg['Subject'] = "Message via jcd-groupe.fr"
 
