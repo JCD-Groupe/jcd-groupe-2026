@@ -3,7 +3,7 @@ version: '3.8'
 services:
   front:
     build: .
-    container_name: jcd-groupe-front
+    container_name: jcd-groupe-2026-front
     restart: unless-stopped
     ports:
       - "127.0.0.1:4321:4321"
@@ -12,7 +12,7 @@ services:
       - /app/node_modules
 
   admin:
-    container_name: jcd-groupe-admin
+    container_name: jcd-groupe-2026-admin
     image: directus/directus:latest
     ports:
       - "127.0.0.1:8055:8055"
@@ -37,7 +37,7 @@ services:
 
   back:
     build: ./backend
-    container_name: jcd-groupe-back
+    container_name: jcd-groupe-2026-back
     restart: unless-stopped
     ports:
       - "127.0.0.1:5000:5000"
